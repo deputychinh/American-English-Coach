@@ -1,0 +1,45 @@
+id	symbol	us	group	example	contrast	pattern	tip	note
+v01	iː	iː	vowel	see	sit	IY	Đưa lưỡi lên cao và về trước, môi hơi kéo ngang. Giữ âm đều; nghe see rồi so với sit.	Ký hiệu độ dài giúp học; khác biệt iː/ɪ còn ở chất lượng nguyên âm.
+v02	ɪ	ɪ	vowel	sit	seat	IH	Lưỡi ở phía trước nhưng thấp và thả lỏng hơn /iː/. Môi thư giãn, không kéo âm thành /iː/.	Giọng Mỹ giữ đối lập như sit/seat.
+v03	e	ɛ	vowel	bed	bad	EH	Mở hàm vừa, lưỡi phía trước. Với bed, mở ít hơn /æ/ trong bad.	Bảng 44 thường ghi /e/; app dùng /ɛ/ cho cách ký âm Mỹ này.
+v04	æ	æ	vowel	cat	cut	AE	Mở hàm khá rộng, lưỡi thấp và trước, môi không tròn. Nghe cat và so với cut.	Có biến thể theo vùng và trước âm mũi; không dùng một vị trí tuyệt đối cho mọi từ.
+v05	ɑː	ɑ	vowel	father	further	AA	Mở miệng, lưỡi thấp và lùi, môi thả lỏng. Nghe âm nhấn trong father.	Mỹ thường ký âm /ɑ/; nhóm từ cụ thể có thể khác Anh–Anh.
+v06	ɒ	ɑ	vowel	hot	hat	AA	Luyện cách Mỹ của hot: mở hàm, môi thả lỏng, lưỡi thấp và lùi.	/ɒ/ thuộc bảng Anh–Anh. Ở nhiều giọng Mỹ, hot dùng /ɑ/. Danh sách lọc là âm tương ứng Mỹ, có thể trùng mục /ɑː/.
+v07	ɔː	ɔ	vowel	law	low	AO	Lưỡi lùi, môi hơi tròn. Nghe law và phân biệt với low có chuyển động /oʊ/.	Nhiều giọng Mỹ nhập /ɔ/ và /ɑ/; không coi sự nhập âm hợp lệ là lỗi.
+v08	ʊ	ʊ	vowel	book	boot	UH	Môi hơi tròn, lưỡi cao nhưng thả lỏng hơn /uː/. Đọc book, không kéo thành boot.	Chú ý chất lượng âm, không chỉ đọc ngắn đi.
+v09	uː	uː	vowel	food	foot	UW	Đưa lưỡi lên cao, môi tròn vừa. Nghe food và so với foot; vị trí thực tế thay đổi theo người nói.	Mỹ có nhiều biến thể /u/; không cần chu môi quá mức.
+v10	ʌ	ʌ	vowel	cup	cap	AH1,AH2	Thả lỏng môi, lưỡi ở khoảng giữa và hơi thấp. Đọc âm nhấn trong cup.	Khác schwa chủ yếu trong hệ thống trọng âm/ngữ cảnh; không thêm /ɑ/ quá rộng.
+v11	ɜː	ɝ	vowel	bird	bed	ER1,ER2	Luyện âm có màu r trong bird. Lưỡi có thể cuộn nhẹ hoặc gom lên, không chạm lợi; môi hơi tròn.	Bảng 44 ghi /ɜː/ không r. Giọng Mỹ thường dùng /ɝ/ khi có trọng âm.
+v12	ə	ə	vowel	about	cup	AH0	Đọc nhẹ âm đầu about, môi và lưỡi thư giãn. Không nhấn mạnh mọi âm tiết.	Schwa ở âm tiết không nhấn; với r không nhấn, Mỹ còn có /ɚ/.
+d01	eɪ	eɪ	diphthong	day	die	EY	Bắt đầu khoảng /e/ rồi lướt về /ɪ/. Chuyển động liên tục trong một âm tiết.	Nghe cả từ day để giữ đúng điểm đầu/cuối.
+d02	aɪ	aɪ	diphthong	my	may	AY	Bắt đầu mở, lưỡi thấp, rồi lướt lên phía trước về /ɪ/. Không tách thành hai âm tiết.	Ví dụ my, time, right.
+d03	ɔɪ	ɔɪ	diphthong	boy	buy	OY	Bắt đầu với môi tròn, lưỡi lùi, rồi lướt về phía trước /ɪ/ và thả môi.	Ví dụ boy, voice, choice.
+d04	əʊ	oʊ	diphthong	go	got	OW	Với giọng Mỹ, bắt đầu khoảng /o/ rồi lướt lên /ʊ/. Môi tròn dần.	Bảng Anh–Anh thường ghi /əʊ/, giọng Mỹ thường ghi /oʊ/.
+d05	aʊ	aʊ	diphthong	now	no	AW	Bắt đầu mở, rồi lướt lên và lùi, tròn môi ở cuối. Giữ một âm tiết.	Ví dụ now, house, about.
+d06	ɪə	ɪɹ	diphthong	near	knee	IH R	Với giọng Mỹ, nối nguyên âm trong near vào /ɹ/; không bỏ r cuối.	/ɪə/ là cách ghi Anh–Anh. Lọc từ chứa chuỗi Mỹ IH R, không khẳng định một nguyên âm đôi Mỹ độc lập.
+d07	eə	ɛɹ	diphthong	chair	chain	EH R	Bắt đầu với nguyên âm trước rồi chuyển vào r trong chair; lưỡi không gõ vào lợi.	Bảng 44 ghi /eə/; Mỹ có /ɛɹ/ và các biến thể/nhập âm trước r.
+d08	ʊə	ʊɹ	diphthong	pure	poor	UH R	Nghe pure theo giọng Mỹ và giữ phần r. Một số từ của nhóm này dùng /ɔɹ/ tùy từ/người nói.	Đối chiếu truyền thống /ʊə/ với chuỗi Mỹ UH R; không áp một cách đọc cho mọi từ như poor/sure.
+c01	p	p	consonant	pen	ben	P	Khép hai môi rồi bật hơi. Không rung thanh quản; đầu âm tiết nhấn thường có bật hơi.	Đừng thêm nguyên âm sau /p/ cuối từ.
+c02	b	b	consonant	bad	pad	B	Khép môi rồi mở, phối hợp rung thanh quản. So bad với pad.	Hữu thanh không có nghĩa phải kéo dài âm cuối quá mức.
+c03	t	t	consonant	ten	den	T	Đầu lưỡi chạm vùng lợi sau răng trên rồi nhả. Không thêm âm ơ.	Mỹ có flap [ɾ] trong một số vị trí như water; không đổi mọi /t/ thành flap.
+c04	d	d	consonant	day	tay	D	Đầu lưỡi chạm lợi rồi nhả, có rung thanh quản. So day với âm đầu của ten.	Có thể biến thể thành flap trong lời nói Mỹ ở vị trí phù hợp.
+c05	k	k	consonant	cat	gat	K	Phần sau lưỡi chạm ngạc mềm rồi nhả hơi; không rung thanh quản.	Chú ý giữ âm /k/ cuối như back.
+c06	ɡ	ɡ	consonant	go	coat	G	Phần sau lưỡi chạm ngạc mềm rồi nhả, phối hợp rung thanh quản.	Không thêm nguyên âm sau /ɡ/ cuối như bag.
+c07	f	f	consonant	fan	van	F	Răng trên chạm nhẹ môi dưới, thổi hơi liên tục, không rung thanh quản.	Không cắn chặt môi; thử fan/van.
+c08	v	v	consonant	van	fan	V	Giữ vị trí răng trên–môi dưới như /f/, thêm rung thanh quản.	Thử đặt tay nhẹ lên cổ để cảm nhận rung.
+c09	θ	θ	consonant	thin	tin	TH	Đầu lưỡi nhẹ giữa hoặc sát răng, thổi hơi, không rung thanh quản.	Không thay bằng /t/ hoặc /s/; không cắn chặt lưỡi.
+c10	ð	ð	consonant	this	dis	DH	Giữ đầu lưỡi gần răng như /θ/ nhưng có rung thanh quản.	Luyện trong this, they, mother; chữ th không luôn cùng một âm.
+c11	s	s	consonant	see	she	S	Lưỡi tạo khe hẹp gần lợi, luồng hơi đi giữa, không rung thanh quản.	Giữ /s/ cuối trong cats; không thêm âm tiết.
+c12	z	z	consonant	zoo	sue	Z	Giữ vị trí gần /s/ và thêm rung thanh quản. Đừng nhầm mọi chữ s là /s/.	Ví dụ zoo và đuôi dogs.
+c13	ʃ	ʃ	consonant	she	see	SH	Lưỡi lùi hơn /s/, môi hơi tròn, thổi hơi liên tục không rung thanh quản.	Luyện ship/she, tránh đọc thành /s/.
+c14	ʒ	ʒ	consonant	vision	mission	ZH	Giữ vị trí như /ʃ/ và thêm rung thanh quản. Nghe âm giữa trong vision.	Âm thường ở giữa từ, ví dụ measure, vision.
+c15	h	h	consonant	hat	at	HH	Thở ra nhẹ qua thanh môn, miệng chuẩn bị cho nguyên âm theo sau.	Không siết cổ hoặc tạo âm x mạnh.
+c16	tʃ	tʃ	consonant	cheap	jeep	CH	Chặn hơi ở vùng lợi sau rồi nhả thành âm xát /ʃ/ liên tục trong một âm.	Đừng tách thành một âm tiết t rồi một âm tiết sh.
+c17	dʒ	dʒ	consonant	jeep	cheap	JH	Bắt đầu như âm tắc rồi nhả thành xát, có rung thanh quản.	Nghe jeep/cheap và giữ sự khác biệt hữu thanh.
+c18	m	m	consonant	my	nigh	M	Khép hai môi, để âm đi qua mũi, có rung thanh quản.	Giữ môi khép ở cuối như room, không thêm âm ơ.
+c19	n	n	consonant	no	low	N	Đầu lưỡi chạm lợi, âm đi qua mũi; hai môi không cần khép.	So /n/ với /ŋ/ ở nơi lưỡi chạm.
+c20	ŋ	ŋ	consonant	sing	sin	NG	Phần sau lưỡi nâng lên ngạc mềm, âm qua mũi; đầu lưỡi không chạm lợi.	Sing thường kết thúc /ŋ/, không tự thêm /ɡ/; finger có thể có /ŋɡ/.
+c21	l	l	consonant	light	right	L	Đầu lưỡi chạm lợi, hơi đi hai bên lưỡi. Giữ khác biệt với /ɹ/.	L cuối trong giọng Mỹ thường là dark l [ɫ].
+c22	r	ɹ	consonant	right	light	R	Lưỡi có thể gom lên hoặc cong nhẹ; không chạm lợi và không rung đầu lưỡi.	Bảng học ghi /r/; IPA chính xác hơn cho nhiều giọng Mỹ là /ɹ/. Giọng Mỹ thường giữ r cuối.
+c23	j	j	consonant	yes	less	Y	Đưa lưỡi gần vị trí /i/ rồi lướt nhanh sang nguyên âm sau; không chặn hơi.	Ký hiệu /j/ là âm đầu yes, không phải chữ j trong jeep.
+c24	w	w	consonant	we	vee	W	Tròn môi, lưỡi cao/lùi rồi lướt sang nguyên âm sau. Răng không chạm môi dưới.	Phân biệt /w/ với /v/ trong we/voice.

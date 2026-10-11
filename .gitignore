@@ -1,0 +1,10 @@
+data/
+vendor/lexicon.sqlite3
+vendor/*.building
+vendor/*.building-*
+__pycache__/
+*.pyc
+.coverage
+htmlcov/
+.venv/
+.DS_Store
