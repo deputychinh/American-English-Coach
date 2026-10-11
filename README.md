@@ -4,6 +4,50 @@ An offline-first pronunciation and vocabulary trainer for Vietnamese learners of
 
 The app runs on your computer. It requires no account, API key, paid service, or runtime internet connection. Its interface and pronunciation guidance are in Vietnamese.
 
+## Screenshots
+
+| 44-sound IPA chart | Guided sound practice |
+| --- | --- |
+| ![The IPA chart with American sound notes and 466,550 indexed words](docs/images/ipa-chart.jpg) | ![A sound lesson with mouth guidance, example audio, recording, and full-word IPA](docs/images/ipa-practice.jpg) |
+
+![Dictionary lookup showing the American IPA and Vietnamese meaning for “geese”](docs/images/dictionary-example.jpg)
+
+## Architecture
+
+Everything used while studying runs on the same computer. The browser talks only to the loopback Python server. The pronunciation index is built locally from the bundled data; speech uses macOS `say`; learning state, recordings, and generated audio stay in local files.
+
+```mermaid
+flowchart LR
+    learner["Learner"] <--> browser["Browser UI<br/>HTML · CSS · JavaScript"]
+
+    subgraph computer["Your computer · offline at runtime"]
+        browser <-->|"HTTP · 127.0.0.1:8765"| server["Python local server<br/>coach/server.py"]
+        server --> store["Learning store<br/>coach/store.py · SQLite"]
+        store --> progress[("data/coach.sqlite3<br/>progress · reviews · settings")]
+
+        server --> lexicon["Dictionary & IPA index<br/>coach/lexicon.py · SQLite"]
+        lexicon --> index[("vendor/lexicon.sqlite3<br/>built on first launch")]
+
+        server -->|"speech on demand"| say["macOS say<br/>American English voices"]
+        say --> audio[("data/audio/<br/>cached WAV files")]
+        audio --> browser
+
+        browser -->|"microphone recording · localhost"| server
+        server --> recordings[("data/recordings/<br/>local recordings")]
+    end
+
+    subgraph bundled["Bundled sources · no download during study"]
+        words["dwyl English word list"] --> builder["Local index builder"]
+        ipa["ipa-dict · US IPA"] --> builder
+        cmu["CMUdict · pronunciations"] --> builder
+        vi["thichhoc-dict · EN–VI"] --> builder
+        lessons["Authored lessons · Vietnamese"] --> store
+        builder --> lexicon
+    end
+```
+
+The project does not send audio, search queries, or learning progress to a cloud service.
+
 ## Features
 
 - **44 IPA sounds:** Vietnamese articulation tips, American English mappings, example words, and related vocabulary.
