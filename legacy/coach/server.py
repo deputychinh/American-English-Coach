@@ -5,6 +5,7 @@ import logging
 import mimetypes
 import re
 import secrets
+from pathlib import Path
 import uuid
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from urllib.parse import parse_qs, unquote, urlsplit
@@ -15,7 +16,7 @@ from .store import Store, now
 from .lexicon import load_phonemes
 
 LOGGER = logging.getLogger("coach")
-STATIC = ROOT / "static"
+STATIC = Path(__file__).resolve().parent.parent / "static"
 MAX_JSON = 5 * 1024 * 1024
 MAX_AUDIO = 12 * 1024 * 1024
 CSP = "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; media-src 'self' blob:; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'"
