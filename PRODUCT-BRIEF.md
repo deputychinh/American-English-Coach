@@ -2,7 +2,7 @@
 
 Phiên bản 3 · 2026-10-11 · Đã có bản local chạy được; xem README.md và docs/VERIFICATION.md.
 
-Tài liệu liên quan: [so sánh repo và công nghệ giọng nói](docs/REPOSITORY-RESEARCH.md). Các số lượng nội dung, ngưỡng và cấu hình dưới đây là **đề xuất**, chưa phải kết quả đã đạt.
+Tài liệu liên quan: [so sánh repo và công nghệ giọng nói](docs/REPOSITORY-RESEARCH.md), [kế hoạch AI hội thoại + khẩu hình realtime](docs/REALTIME-AV-COACH-PLAN.md). Các số lượng nội dung, ngưỡng và cấu hình dưới đây là **đề xuất**, chưa phải kết quả đã đạt.
 
 ## Phạm vi bản đã triển khai
 
