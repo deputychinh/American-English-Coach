@@ -6,6 +6,10 @@ export interface MouthFeatures {
   jaw: number;
   lipClosed: number;
   lowerLipTuck: number;
+  /** Share of the inner-mouth pixels that look like teeth (bright, unsaturated). Experimental. */
+  teethVisible: number;
+  /** Share of the inner-mouth pixels that look like tongue (red, saturated). Experimental. */
+  tongueVisible: number;
 }
 
 export type MouthFeatureName = keyof MouthFeatures;
@@ -43,10 +47,32 @@ export interface HeadPose {
   pitchDegrees: number;
 }
 
+export interface MouthPixelRatios {
+  teeth: number;
+  tongue: number;
+  pixels: number;
+}
+
 export interface RawFaceObservation {
   landmarks: Point3[];
   blendshapes: Record<string, number>;
   pose: HeadPose | null;
+  pixels?: MouthPixelRatios;
+}
+
+export interface PixelPolygonOptions {
+  data: Uint8ClampedArray;
+  width: number;
+  height: number;
+  /** Polygon in pixel coordinates of `data`. */
+  polygon: Point2[];
+}
+
+export interface MouthSampleOptions {
+  canvas: HTMLCanvasElement;
+  video: HTMLVideoElement;
+  /** Inner-lip polygon in normalised video coordinates. */
+  polygon: Point2[];
 }
 
 export interface TargetRange {

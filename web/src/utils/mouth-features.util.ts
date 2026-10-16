@@ -46,6 +46,7 @@ export const poseQuality = (pose: HeadPose | null): number => {
 export const rawMouthFeatures = ({
   landmarks,
   blendshapes,
+  pixels,
 }: RawFaceObservation): MouthFeatures | null => {
   const upper = landmarks[UPPER_INNER_LIP];
   const lower = landmarks[LOWER_INNER_LIP];
@@ -66,5 +67,7 @@ export const rawMouthFeatures = ({
     jaw: clamp01(blendshapes.jawOpen ?? 0),
     lipClosed: clamp01(blendshapes.mouthClose ?? 0),
     lowerLipTuck: clamp01(blendshapes.mouthRollLower ?? 0),
+    teethVisible: clamp01(pixels?.teeth ?? 0),
+    tongueVisible: clamp01(pixels?.tongue ?? 0),
   };
 };

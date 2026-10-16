@@ -67,7 +67,8 @@ export const COPY = {
     playback: 'Nghe lại bản ghi',
     cameraOn: 'Bật camera',
     cameraOff: 'Tắt camera',
-    cameraHint: 'Camera giúp nhận xét khẩu hình (môi, hàm). Camera không nhìn thấy lưỡi.',
+    cameraHint:
+      'Camera nhận xét môi, hàm và ước lượng răng/lưỡi lộ ra (thử nghiệm). Camera không thấy lưỡi bên trong miệng.',
     micDenied:
       'Trình duyệt chưa cho phép dùng micro. Vào cài đặt trang web (biểu tượng ổ khóa cạnh địa chỉ) và cho phép Micro, rồi tải lại trang.',
     cameraDenied:
@@ -110,7 +111,8 @@ export const COPY = {
   mirror: {
     title: 'Gương khẩu hình',
     pickSound: 'Chọn âm',
-    audioOnly: 'Camera không nhìn thấy lưỡi với âm này; luyện bằng tai và hình minh họa.',
+    audioOnly:
+      'Với âm này lưỡi nằm trong miệng nên camera không thấy; luyện bằng tai và hình minh họa.',
     loadingModel: 'Đang tải bộ nhận diện khuôn mặt…',
     noFace: 'Không thấy khuôn mặt. Ngồi thẳng, đủ sáng, cách camera khoảng 50 cm.',
     turnStraight: 'Quay mặt thẳng vào camera.',
@@ -129,6 +131,8 @@ export const COPY = {
       jaw: 'Độ mở hàm',
       lipClosed: 'Môi khép',
       lowerLipTuck: 'Môi dưới chạm răng',
+      teethVisible: 'Thấy răng',
+      tongueVisible: 'Thấy lưỡi',
     },
     startCamera: 'Bật camera',
     stopCamera: 'Tắt camera',

@@ -28,4 +28,15 @@ export const FEATURE_NAMES = [
   'jaw',
   'lipClosed',
   'lowerLipTuck',
+  'teethVisible',
+  'tongueVisible',
 ] as const;
+/** Inner-mouth pixel analysis (teeth/tongue estimate). */
+export const MOUTH_CROP_WIDTH = 160;
+export const MOUTH_CROP_PADDING = 0.1;
+export const MOUTH_MIN_CROP_PX = 4;
+export const TEETH_MIN_VALUE = 150;
+export const TEETH_MAX_SATURATION = 0.28;
+export const TONGUE_MIN_VALUE = 70;
+export const TONGUE_MIN_SATURATION = 0.3;
+export const TONGUE_RED_MARGIN = 20;

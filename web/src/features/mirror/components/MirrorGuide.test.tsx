@@ -17,8 +17,26 @@ const target = {
 
 const sample = (roundness: number, width: number): TrackedSample => ({
   t: 1,
-  raw: { aperture: 0.3, width, roundness, jaw: 0.2, lipClosed: 0, lowerLipTuck: 0 },
-  features: { aperture: 0.3, width, roundness, jaw: 0.2, lipClosed: 0, lowerLipTuck: 0 },
+  raw: {
+    aperture: 0.3,
+    width,
+    roundness,
+    jaw: 0.2,
+    lipClosed: 0,
+    lowerLipTuck: 0,
+    teethVisible: 0,
+    tongueVisible: 0,
+  },
+  features: {
+    aperture: 0.3,
+    width,
+    roundness,
+    jaw: 0.2,
+    lipClosed: 0,
+    lowerLipTuck: 0,
+    teethVisible: 0,
+    tongueVisible: 0,
+  },
   quality: 1,
   outline: [],
 });
@@ -74,7 +92,7 @@ describe('MirrorGuide', () => {
 
   it('explains audio-only sounds', () => {
     render(<MirrorGuide sound="K" target={null} features={null} muted camera={null} />);
-    expect(screen.getByText(/Camera không nhìn thấy lưỡi/)).toBeInTheDocument();
+    expect(screen.getByText(/camera không thấy/)).toBeInTheDocument();
     expect(screen.getByRole('img', { name: 'Không có mẫu khẩu hình' })).toBeInTheDocument();
   });
 });

@@ -17,6 +17,7 @@ import type { MouthTracker, TrackedSample } from '@/interfaces/tracker.interface
 import { normaliseFeatures } from '@/utils/calibration.util';
 import { lipOutline, lipPolygons } from '@/utils/lip-outline.util';
 import { poseFromMatrix, poseQuality, rawMouthFeatures } from '@/utils/mouth-features.util';
+import { sampleMouthPixels } from '@/utils/mouth-pixels.util';
 
 const drawLips = (
   canvas: HTMLCanvasElement,
@@ -57,6 +58,7 @@ export const useMouthTracker = ({ enabled, calibration }: MouthTrackerOptions): 
   const { landmarker, status: modelStatus, error: modelError } = useFaceLandmarker(enabled);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const bufferRef = useRef<BufferedFrame[]>([]);
+  const scratchRef = useRef<HTMLCanvasElement | null>(null);
   const calibrationRef = useRef(calibration);
   const [video, setVideo] = useState<HTMLVideoElement | null>(null);
   const [cameraError, setCameraError] = useState<string | null>(null);
@@ -113,7 +115,13 @@ export const useMouthTracker = ({ enabled, calibration }: MouthTrackerOptions): 
       );
       const matrix = result.facialTransformationMatrixes[0]?.data;
       const pose = matrix ? poseFromMatrix(matrix) : null;
-      const raw = rawMouthFeatures({ landmarks, blendshapes, pose });
+      scratchRef.current ??= document.createElement('canvas');
+      const pixels = sampleMouthPixels({
+        canvas: scratchRef.current,
+        video,
+        polygon: lipPolygons(landmarks).inner,
+      });
+      const raw = rawMouthFeatures({ landmarks, blendshapes, pose, pixels });
       if (!raw) return;
       const features = calibrationRef.current
         ? normaliseFeatures(raw, calibrationRef.current)

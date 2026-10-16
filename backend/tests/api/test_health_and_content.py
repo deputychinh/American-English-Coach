@@ -22,7 +22,8 @@ def test_content_endpoints_return_authored_items(client: TestClient) -> None:
     visemes = client.get("/api/v1/content/visemes").json()
     assert visemes["features"][0] == "aperture"
     assert len(visemes["groups"]) == 7
-    assert len(visemes["calibration"]) == 5
+    assert len(visemes["calibration"]) == 6
+    assert visemes["features"][-1] == "tongueVisible"
 
 
 def test_unknown_route_under_api_is_json_404(client: TestClient) -> None:

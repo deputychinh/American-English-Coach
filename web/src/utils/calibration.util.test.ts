@@ -14,6 +14,8 @@ const sample = (overrides: Partial<MouthFeatures>): MouthFeatures => ({
   jaw: 0.1,
   lipClosed: 0,
   lowerLipTuck: 0,
+  teethVisible: 0,
+  tongueVisible: 0,
   ...overrides,
 });
 

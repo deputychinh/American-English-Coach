@@ -1,6 +1,15 @@
 {
   "schema": "coach.visemes/1",
-  "features": ["aperture", "width", "roundness", "jaw", "lipClosed", "lowerLipTuck"],
+  "features": [
+    "aperture",
+    "width",
+    "roundness",
+    "jaw",
+    "lipClosed",
+    "lowerLipTuck",
+    "teethVisible",
+    "tongueVisible"
+  ],
   "groups": {
     "V1": {
       "name_vi": "Hai môi khép",
@@ -45,11 +54,14 @@
         },
         "roundness": {
           "max": 0.5
+        },
+        "tongueVisible": {
+          "min": 0.35
         }
       },
       "hold_ms": 200,
       "hint_vi": "Đầu lưỡi lộ nhẹ giữa hai hàm răng.",
-      "common_error_vi": "Lưỡi nằm sau răng nên thành /t/ hoặc /s/. Camera không nhìn thấy lưỡi rõ; dựa vào âm thanh."
+      "common_error_vi": "Lưỡi nằm sau răng nên thành /t/ hoặc /s/. Camera ước lượng lưỡi lộ ra giữa răng bằng màu (thử nghiệm); kết luận chính vẫn dựa vào âm thanh."
     },
     "V4": {
       "name_vi": "Môi tròn, chu ra",
@@ -100,6 +112,9 @@
         },
         "roundness": {
           "max": 0.35
+        },
+        "teethVisible": {
+          "min": 0.3
         }
       },
       "hold_ms": 250,
@@ -147,6 +162,11 @@
       {
         "id": "mmm",
         "prompt_vi": "Khép chặt môi \"mmm\"",
+        "seconds": 3
+      },
+      {
+        "id": "th",
+        "prompt_vi": "Đặt đầu lưỡi nhẹ giữa hai hàm răng như âm 'th' và giữ",
         "seconds": 3
       }
     ]

@@ -9,6 +9,8 @@ const labels = {
   jaw: 'Độ mở hàm',
   lipClosed: 'Môi khép',
   lowerLipTuck: 'Môi dưới chạm răng',
+  teethVisible: 'răng',
+  tongueVisible: 'lưỡi',
 };
 const features: MouthFeatures = {
   aperture: 0.3,
@@ -17,6 +19,8 @@ const features: MouthFeatures = {
   jaw: 0.2,
   lipClosed: 0,
   lowerLipTuck: 0,
+  teethVisible: 0,
+  tongueVisible: 0,
 };
 
 describe('viseme match', () => {
