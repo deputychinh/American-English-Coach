@@ -11,6 +11,9 @@ const nextConfig: NextConfig = {
   trailingSlash: true,
   images: { unoptimized: true },
   typedRoutes: true,
+  // Next 16 blocks dev resources (HMR, Suspense chunks) for origins other than localhost; the
+  // Makefile and docs use 127.0.0.1, so allow it or client pages stay on their Suspense fallback.
+  allowedDevOrigins: ['127.0.0.1'],
   ...(isDevelopment
     ? {
         rewrites: () =>
