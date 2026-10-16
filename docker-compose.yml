@@ -1,0 +1,26 @@
+# Optional: run API + static web in one container. Requires `make build-web` and `make models` first;
+# the model directory is mounted read-only, learner data lives in the `coach-data` volume.
+services:
+  coach:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    ports:
+      - '8765:8765'
+    volumes:
+      - ./data/models:/srv/data/models:ro
+      - coach-data:/srv/data
+    healthcheck:
+      test:
+        [
+          'CMD',
+          'python',
+          '-c',
+          "import urllib.request;urllib.request.urlopen('http://127.0.0.1:8765/api/v1/health')",
+        ]
+      interval: 10s
+      timeout: 3s
+      retries: 12
+
+volumes:
+  coach-data:

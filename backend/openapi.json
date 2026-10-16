@@ -1,0 +1,1234 @@
+{
+  "components": {
+    "schemas": {
+      "AssessmentResponse": {
+        "description": "Everything the result card needs; also stored verbatim for history.",
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "item_id": {
+            "title": "Item Id",
+            "type": "string"
+          },
+          "model_version": {
+            "title": "Model Version",
+            "type": "string"
+          },
+          "prosody": {
+            "items": {
+              "$ref": "#/components/schemas/ProsodyResult"
+            },
+            "title": "Prosody",
+            "type": "array"
+          },
+          "summary": {
+            "$ref": "#/components/schemas/AssessmentSummary"
+          },
+          "text": {
+            "title": "Text",
+            "type": "string"
+          },
+          "words": {
+            "items": {
+              "$ref": "#/components/schemas/WordResult"
+            },
+            "title": "Words",
+            "type": "array"
+          }
+        },
+        "required": ["id", "item_id", "text", "model_version", "words", "prosody", "summary"],
+        "title": "AssessmentResponse",
+        "type": "object"
+      },
+      "AssessmentSummary": {
+        "description": "Counts and the top priorities.",
+        "properties": {
+          "camera_used": {
+            "title": "Camera Used",
+            "type": "boolean"
+          },
+          "check": {
+            "title": "Check",
+            "type": "integer"
+          },
+          "error": {
+            "title": "Error",
+            "type": "integer"
+          },
+          "focus": {
+            "items": {
+              "$ref": "#/components/schemas/FocusItem"
+            },
+            "title": "Focus",
+            "type": "array"
+          },
+          "ok": {
+            "title": "Ok",
+            "type": "integer"
+          }
+        },
+        "required": ["ok", "check", "error", "focus", "camera_used"],
+        "title": "AssessmentSummary",
+        "type": "object"
+      },
+      "Body_assess_api_v1_assess_post": {
+        "properties": {
+          "audio": {
+            "contentMediaType": "application/octet-stream",
+            "title": "Audio",
+            "type": "string"
+          },
+          "audio_started_at": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Audio Started At"
+          },
+          "item_id": {
+            "maxLength": 64,
+            "minLength": 1,
+            "title": "Item Id",
+            "type": "string"
+          },
+          "kind": {
+            "default": "word",
+            "title": "Kind",
+            "type": "string"
+          },
+          "mouth_frames": {
+            "default": "[]",
+            "title": "Mouth Frames",
+            "type": "string"
+          },
+          "text": {
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Text",
+            "type": "string"
+          }
+        },
+        "required": ["audio", "text", "item_id"],
+        "title": "Body_assess_api_v1_assess_post",
+        "type": "object"
+      },
+      "CalibrationPayload": {
+        "description": "Min/max per feature captured by the browser.",
+        "properties": {
+          "features": {
+            "additionalProperties": {
+              "additionalProperties": {
+                "type": "number"
+              },
+              "type": "object"
+            },
+            "title": "Features",
+            "type": "object"
+          }
+        },
+        "required": ["features"],
+        "title": "CalibrationPayload",
+        "type": "object"
+      },
+      "CalibrationStep": {
+        "description": "One step of the 20-second calibration flow.",
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "prompt_vi": {
+            "title": "Prompt Vi",
+            "type": "string"
+          },
+          "seconds": {
+            "title": "Seconds",
+            "type": "integer"
+          }
+        },
+        "required": ["id", "prompt_vi", "seconds"],
+        "title": "CalibrationStep",
+        "type": "object"
+      },
+      "FocusItem": {
+        "description": "One of at most two priorities to practise next.",
+        "properties": {
+          "count": {
+            "title": "Count",
+            "type": "integer"
+          },
+          "error_id": {
+            "title": "Error Id",
+            "type": "string"
+          },
+          "hint_vi": {
+            "title": "Hint Vi",
+            "type": "string"
+          },
+          "ipa": {
+            "title": "Ipa",
+            "type": "string"
+          },
+          "phoneme": {
+            "title": "Phoneme",
+            "type": "string"
+          }
+        },
+        "required": ["error_id", "phoneme", "ipa", "hint_vi", "count"],
+        "title": "FocusItem",
+        "type": "object"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "title": "Detail",
+            "type": "array"
+          }
+        },
+        "title": "HTTPValidationError",
+        "type": "object"
+      },
+      "HealthResponse": {
+        "description": "Liveness plus feature availability.",
+        "properties": {
+          "model_ready": {
+            "title": "Model Ready",
+            "type": "boolean"
+          },
+          "realtime_enabled": {
+            "title": "Realtime Enabled",
+            "type": "boolean"
+          },
+          "status": {
+            "title": "Status",
+            "type": "string"
+          },
+          "tts_available": {
+            "title": "Tts Available",
+            "type": "boolean"
+          },
+          "version": {
+            "title": "Version",
+            "type": "string"
+          }
+        },
+        "required": ["status", "version", "realtime_enabled", "model_ready", "tts_available"],
+        "title": "HealthResponse",
+        "type": "object"
+      },
+      "KnownErrorCard": {
+        "description": "Catalogue entry exposed to the UI.",
+        "properties": {
+          "enabled": {
+            "title": "Enabled",
+            "type": "boolean"
+          },
+          "expected": {
+            "title": "Expected",
+            "type": "string"
+          },
+          "final_only": {
+            "title": "Final Only",
+            "type": "boolean"
+          },
+          "heard": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Heard",
+            "type": "array"
+          },
+          "hint_vi": {
+            "title": "Hint Vi",
+            "type": "string"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "kind": {
+            "title": "Kind",
+            "type": "string"
+          },
+          "mouth_tip_vi": {
+            "title": "Mouth Tip Vi",
+            "type": "string"
+          },
+          "priority": {
+            "title": "Priority",
+            "type": "integer"
+          },
+          "viseme_group": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/VisemeGroup"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "expected",
+          "heard",
+          "kind",
+          "priority",
+          "final_only",
+          "viseme_group",
+          "hint_vi",
+          "mouth_tip_vi",
+          "enabled"
+        ],
+        "title": "KnownErrorCard",
+        "type": "object"
+      },
+      "MinimalPair": {
+        "description": "Two words that differ in the focus sound.",
+        "properties": {
+          "error_id": {
+            "title": "Error Id",
+            "type": "string"
+          },
+          "focus": {
+            "title": "Focus",
+            "type": "string"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "title_vi": {
+            "title": "Title Vi",
+            "type": "string"
+          },
+          "words": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Words",
+            "type": "array"
+          }
+        },
+        "required": ["id", "focus", "words", "error_id", "title_vi"],
+        "title": "MinimalPair",
+        "type": "object"
+      },
+      "PhoneResult": {
+        "description": "Verdict for one expected phone.",
+        "properties": {
+          "audio_verdict": {
+            "$ref": "#/components/schemas/Verdict"
+          },
+          "end": {
+            "title": "End",
+            "type": "number"
+          },
+          "error_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Error Id"
+          },
+          "gop": {
+            "title": "Gop",
+            "type": "number"
+          },
+          "heard": {
+            "title": "Heard",
+            "type": "string"
+          },
+          "heard_ipa": {
+            "title": "Heard Ipa",
+            "type": "string"
+          },
+          "hint_vi": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Hint Vi"
+          },
+          "ipa": {
+            "title": "Ipa",
+            "type": "string"
+          },
+          "mouth_tip_vi": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Mouth Tip Vi"
+          },
+          "show_mouth_hint": {
+            "title": "Show Mouth Hint",
+            "type": "boolean"
+          },
+          "start": {
+            "title": "Start",
+            "type": "number"
+          },
+          "symbol": {
+            "title": "Symbol",
+            "type": "string"
+          },
+          "verdict": {
+            "$ref": "#/components/schemas/Verdict"
+          },
+          "viseme_group": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/VisemeGroup"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "visual": {
+            "$ref": "#/components/schemas/VisualVerdict"
+          }
+        },
+        "required": [
+          "symbol",
+          "ipa",
+          "verdict",
+          "audio_verdict",
+          "visual",
+          "viseme_group",
+          "gop",
+          "heard",
+          "heard_ipa",
+          "start",
+          "end",
+          "error_id",
+          "hint_vi",
+          "mouth_tip_vi",
+          "show_mouth_hint"
+        ],
+        "title": "PhoneResult",
+        "type": "object"
+      },
+      "PhonemeCard": {
+        "description": "One entry of the 44-sound chart with Vietnamese articulation tips.",
+        "properties": {
+          "arpabet": {
+            "title": "Arpabet",
+            "type": "string"
+          },
+          "contrast": {
+            "title": "Contrast",
+            "type": "string"
+          },
+          "example": {
+            "title": "Example",
+            "type": "string"
+          },
+          "group": {
+            "title": "Group",
+            "type": "string"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "note": {
+            "title": "Note",
+            "type": "string"
+          },
+          "symbol": {
+            "title": "Symbol",
+            "type": "string"
+          },
+          "tip": {
+            "title": "Tip",
+            "type": "string"
+          },
+          "us": {
+            "title": "Us",
+            "type": "string"
+          },
+          "viseme_group": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/VisemeGroup"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "symbol",
+          "us",
+          "group",
+          "example",
+          "contrast",
+          "arpabet",
+          "tip",
+          "note",
+          "viseme_group"
+        ],
+        "title": "PhonemeCard",
+        "type": "object"
+      },
+      "PhonemeStatModel": {
+        "description": "Per-sound totals.",
+        "properties": {
+          "check": {
+            "title": "Check",
+            "type": "integer"
+          },
+          "error": {
+            "title": "Error",
+            "type": "integer"
+          },
+          "ipa": {
+            "title": "Ipa",
+            "type": "string"
+          },
+          "ok": {
+            "title": "Ok",
+            "type": "integer"
+          },
+          "phoneme": {
+            "title": "Phoneme",
+            "type": "string"
+          },
+          "total": {
+            "title": "Total",
+            "type": "integer"
+          }
+        },
+        "required": ["phoneme", "ipa", "total", "ok", "check", "error"],
+        "title": "PhonemeStatModel",
+        "type": "object"
+      },
+      "ProgressResponse": {
+        "description": "Dashboard payload; machine-measured only (self-assessment is a separate concept).",
+        "properties": {
+          "phonemes": {
+            "items": {
+              "$ref": "#/components/schemas/PhonemeStatModel"
+            },
+            "title": "Phonemes",
+            "type": "array"
+          },
+          "recent": {
+            "items": {
+              "$ref": "#/components/schemas/RunSummaryModel"
+            },
+            "title": "Recent",
+            "type": "array"
+          },
+          "runs": {
+            "title": "Runs",
+            "type": "integer"
+          }
+        },
+        "required": ["runs", "phonemes", "recent"],
+        "title": "ProgressResponse",
+        "type": "object"
+      },
+      "ProsodyAspect": {
+        "description": "Prosody dimensions the analyser reports on.",
+        "enum": ["word_stress", "final_contour", "rhythm"],
+        "title": "ProsodyAspect",
+        "type": "string"
+      },
+      "ProsodyResult": {
+        "description": "One prosody finding (never stronger than `check`).",
+        "properties": {
+          "aspect": {
+            "$ref": "#/components/schemas/ProsodyAspect"
+          },
+          "detail_vi": {
+            "title": "Detail Vi",
+            "type": "string"
+          },
+          "verdict": {
+            "$ref": "#/components/schemas/Verdict"
+          },
+          "word_index": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Word Index"
+          }
+        },
+        "required": ["aspect", "verdict", "detail_vi", "word_index"],
+        "title": "ProsodyResult",
+        "type": "object"
+      },
+      "RunSummaryModel": {
+        "description": "History row.",
+        "properties": {
+          "check": {
+            "title": "Check",
+            "type": "integer"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "disputed": {
+            "title": "Disputed",
+            "type": "boolean"
+          },
+          "error": {
+            "title": "Error",
+            "type": "integer"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "item_id": {
+            "title": "Item Id",
+            "type": "string"
+          },
+          "model_version": {
+            "title": "Model Version",
+            "type": "string"
+          },
+          "ok": {
+            "title": "Ok",
+            "type": "integer"
+          },
+          "text": {
+            "title": "Text",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "item_id",
+          "text",
+          "created_at",
+          "ok",
+          "check",
+          "error",
+          "model_version",
+          "disputed"
+        ],
+        "title": "RunSummaryModel",
+        "type": "object"
+      },
+      "Sentence": {
+        "description": "A practice sentence with its intonation kind.",
+        "properties": {
+          "focus": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Focus",
+            "type": "array"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "kind": {
+            "title": "Kind",
+            "type": "string"
+          },
+          "text": {
+            "title": "Text",
+            "type": "string"
+          },
+          "title_vi": {
+            "title": "Title Vi",
+            "type": "string"
+          }
+        },
+        "required": ["id", "text", "focus", "kind", "title_vi"],
+        "title": "Sentence",
+        "type": "object"
+      },
+      "ValidationError": {
+        "properties": {
+          "ctx": {
+            "title": "Context",
+            "type": "object"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "title": "Location",
+            "type": "array"
+          },
+          "msg": {
+            "title": "Message",
+            "type": "string"
+          },
+          "type": {
+            "title": "Error Type",
+            "type": "string"
+          }
+        },
+        "required": ["loc", "msg", "type"],
+        "title": "ValidationError",
+        "type": "object"
+      },
+      "Verdict": {
+        "description": "Three-level conclusion for one phoneme; never a binary right/wrong.",
+        "enum": ["ok", "check", "error"],
+        "title": "Verdict",
+        "type": "string"
+      },
+      "VisemeContent": {
+        "description": "Everything the mirror needs at start-up.",
+        "properties": {
+          "calibration": {
+            "items": {
+              "$ref": "#/components/schemas/CalibrationStep"
+            },
+            "title": "Calibration",
+            "type": "array"
+          },
+          "features": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Features",
+            "type": "array"
+          },
+          "groups": {
+            "items": {
+              "$ref": "#/components/schemas/VisemeTargetCard"
+            },
+            "title": "Groups",
+            "type": "array"
+          }
+        },
+        "required": ["features", "groups", "calibration"],
+        "title": "VisemeContent",
+        "type": "object"
+      },
+      "VisemeGroup": {
+        "description": "Visible mouth-shape group (plan \u00a72.1). Sounds outside these are audio-only.",
+        "enum": ["V1", "V2", "V3", "V4", "V5", "V6", "V7"],
+        "title": "VisemeGroup",
+        "type": "string"
+      },
+      "VisemeTargetCard": {
+        "description": "Target ranges and copy for the mouth mirror.",
+        "properties": {
+          "common_error_vi": {
+            "title": "Common Error Vi",
+            "type": "string"
+          },
+          "group": {
+            "$ref": "#/components/schemas/VisemeGroup"
+          },
+          "hint_vi": {
+            "title": "Hint Vi",
+            "type": "string"
+          },
+          "hold_ms": {
+            "title": "Hold Ms",
+            "type": "integer"
+          },
+          "name_vi": {
+            "title": "Name Vi",
+            "type": "string"
+          },
+          "sounds": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Sounds",
+            "type": "array"
+          },
+          "targets": {
+            "additionalProperties": {
+              "additionalProperties": {
+                "type": "number"
+              },
+              "type": "object"
+            },
+            "title": "Targets",
+            "type": "object"
+          }
+        },
+        "required": [
+          "group",
+          "name_vi",
+          "sounds",
+          "targets",
+          "hold_ms",
+          "hint_vi",
+          "common_error_vi"
+        ],
+        "title": "VisemeTargetCard",
+        "type": "object"
+      },
+      "VisualVerdict": {
+        "description": "Outcome of comparing the learner's mouth features with the target of a sound.",
+        "enum": ["ok", "off", "unavailable"],
+        "title": "VisualVerdict",
+        "type": "string"
+      },
+      "WordResult": {
+        "description": "A prompt word with its reference IPA and per-phone verdicts.",
+        "properties": {
+          "ipa": {
+            "title": "Ipa",
+            "type": "string"
+          },
+          "phones": {
+            "items": {
+              "$ref": "#/components/schemas/PhoneResult"
+            },
+            "title": "Phones",
+            "type": "array"
+          },
+          "word": {
+            "title": "Word",
+            "type": "string"
+          }
+        },
+        "required": ["word", "ipa", "phones"],
+        "title": "WordResult",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "American English Coach API",
+    "version": "1.0.0"
+  },
+  "openapi": "3.1.0",
+  "paths": {
+    "/api/v1/assess": {
+      "post": {
+        "description": "Score one recording of `text`; mouth frames are optional and never contain video.",
+        "operationId": "assess_api_v1_assess_post",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_assess_api_v1_assess_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AssessmentResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Assess",
+        "tags": ["assessment"]
+      }
+    },
+    "/api/v1/audio": {
+      "get": {
+        "description": "WAV of the prompt spoken by the local American voice (cached).",
+        "operationId": "audio_api_v1_audio_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "text",
+            "required": true,
+            "schema": {
+              "maxLength": 200,
+              "minLength": 1,
+              "title": "Text",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Audio",
+        "tags": ["audio"]
+      }
+    },
+    "/api/v1/calibration": {
+      "get": {
+        "description": "Stored mouth calibration, if any.",
+        "operationId": "calibration_api_v1_calibration_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/CalibrationPayload"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "title": "Response Calibration Api V1 Calibration Get"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Calibration",
+        "tags": ["progress"]
+      },
+      "put": {
+        "description": "Replace the mouth calibration.",
+        "operationId": "save_calibration_api_v1_calibration_put",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CalibrationPayload"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Save Calibration",
+        "tags": ["progress"]
+      }
+    },
+    "/api/v1/content/errors": {
+      "get": {
+        "description": "Error catalogue.",
+        "operationId": "errors_api_v1_content_errors_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/KnownErrorCard"
+                  },
+                  "title": "Response Errors Api V1 Content Errors Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Errors",
+        "tags": ["content"]
+      }
+    },
+    "/api/v1/content/pairs": {
+      "get": {
+        "description": "Minimal pairs.",
+        "operationId": "pairs_api_v1_content_pairs_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/MinimalPair"
+                  },
+                  "title": "Response Pairs Api V1 Content Pairs Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Pairs",
+        "tags": ["content"]
+      }
+    },
+    "/api/v1/content/phonemes": {
+      "get": {
+        "description": "The 44-sound chart.",
+        "operationId": "phonemes_api_v1_content_phonemes_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/PhonemeCard"
+                  },
+                  "title": "Response Phonemes Api V1 Content Phonemes Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Phonemes",
+        "tags": ["content"]
+      }
+    },
+    "/api/v1/content/sentences": {
+      "get": {
+        "description": "Practice sentences.",
+        "operationId": "sentences_api_v1_content_sentences_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/Sentence"
+                  },
+                  "title": "Response Sentences Api V1 Content Sentences Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Sentences",
+        "tags": ["content"]
+      }
+    },
+    "/api/v1/content/visemes": {
+      "get": {
+        "description": "Mouth-shape targets and calibration steps.",
+        "operationId": "visemes_api_v1_content_visemes_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VisemeContent"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Visemes",
+        "tags": ["content"]
+      }
+    },
+    "/api/v1/health": {
+      "get": {
+        "description": "Report whether the model and the local TTS are usable.",
+        "operationId": "health_api_v1_health_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Health",
+        "tags": ["health"]
+      }
+    },
+    "/api/v1/progress": {
+      "get": {
+        "description": "Per-sound totals and recent runs.",
+        "operationId": "progress_api_v1_progress_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 20,
+              "maximum": 100,
+              "minimum": 1,
+              "title": "Limit",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProgressResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Progress",
+        "tags": ["progress"]
+      }
+    },
+    "/api/v1/runs/{run_id}": {
+      "get": {
+        "description": "A stored assessment result.",
+        "operationId": "run_api_v1_runs__run_id__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "run_id",
+            "required": true,
+            "schema": {
+              "title": "Run Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Run",
+        "tags": ["progress"]
+      }
+    },
+    "/api/v1/runs/{run_id}/dispute": {
+      "post": {
+        "description": "Learner says \"T\u00f4i n\u00f3i \u0111\u00fang m\u00e0\"; kept as false-alarm evidence.",
+        "operationId": "dispute_api_v1_runs__run_id__dispute_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "run_id",
+            "required": true,
+            "schema": {
+              "title": "Run Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Dispute",
+        "tags": ["progress"]
+      }
+    }
+  }
+}

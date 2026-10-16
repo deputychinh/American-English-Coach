@@ -1,0 +1,105 @@
+[project]
+name = "coach-backend"
+version = "1.0.0"
+description = "American English Coach API: phoneme, mouth-shape and prosody assessment for Vietnamese learners"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+  "fastapi>=0.115",
+  "uvicorn[standard]>=0.32",
+  "pydantic>=2.9",
+  "pydantic-settings>=2.6",
+  "sqlalchemy>=2.0.36",
+  "numpy>=2.1",
+  "soundfile>=0.12",
+  "librosa>=0.10.2",
+  "torch>=2.5",
+  "transformers>=4.46",
+  "huggingface-hub>=0.26",
+  "python-multipart>=0.0.32",
+]
+
+[dependency-groups]
+dev = [
+  "pytest>=8.3",
+  "pytest-cov>=6.0",
+  "httpx>=0.28",
+  "ruff>=0.8",
+  "mypy>=1.13",
+  "hypothesis>=6.115",
+]
+
+[tool.uv]
+# torch publishes arm64 macOS wheels on PyPI; no extra index needed.
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = [
+  "E", "W", "F", "I", "N", "UP", "B", "SIM", "RUF", "ANN", "D", "PL", "PT", "S", "C4", "RET",
+  "ARG", "C90", "PTH", "TRY", "ERA", "ASYNC",
+]
+ignore = [
+  "D107",    # __init__ is documented by its class
+  "TRY003",  # short messages next to the raise are clearer than one class per message
+  "B008",    # FastAPI Depends() in defaults is the framework idiom
+]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.lint.mccabe]
+max-complexity = 8
+
+[tool.ruff.lint.pylint]
+# Composition roots and pure mappers take every collaborator/value explicitly.
+max-args = 8
+max-positional-args = 8
+max-branches = 10
+max-returns = 4
+max-statements = 35
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["S101", "PLR2004", "D100", "D101", "D102", "D103", "D104", "ANN", "ARG", "RUF001", "RUF003"]
+"alembic/**" = ["D", "ANN"]
+# IPA symbols are the data of this module, not typos.
+"app/domain/phoneme_inventory.py" = ["RUF001"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+files = ["app", "tests"]
+plugins = ["pydantic.mypy"]
+
+[[tool.mypy.overrides]]
+module = ["librosa", "librosa.*", "soundfile", "transformers", "transformers.*", "huggingface_hub"]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = "-q --strict-markers --cov=app --cov-branch --cov-report=term-missing:skip-covered --cov-fail-under=90"
+filterwarnings = [
+  "error",
+  "ignore::DeprecationWarning",
+  "ignore::FutureWarning",
+  "ignore::UserWarning:torch",
+  "ignore::UserWarning:transformers",
+  "ignore::pytest.PytestUnraisableExceptionWarning",
+]
+
+[tool.coverage.run]
+branch = true
+source = ["app"]
+# Scripts and the torch adapter are exercised by `make bench`/`make models`, not unit tests.
+omit = [
+  "app/ml/recognizer.py",
+  "app/ml/model_download.py",
+  "app/eval/*",
+  "app/doctor.py",
+  "app/openapi_export.py",
+]
+
+[tool.coverage.report]
+exclude_also = ["if __name__ == .__main__.:", "if TYPE_CHECKING:"]

@@ -1,0 +1,105 @@
+"""Composition root: builds every collaborator once from settings (constructor injection)."""
+
+from dataclasses import dataclass
+from functools import cached_property
+
+from app.config import Settings
+from app.db.engine import SessionFactory, create_sqlite_engine
+from app.domain.error_catalog import ErrorCatalog
+from app.domain.ports import PhonemeRecognizer
+from app.domain.pronouncing import PronouncingDictionary
+from app.domain.viseme import VisemeCatalog
+from app.ml.audio import AudioDecoder
+from app.ml.features import ProsodyFeatureExtractor
+from app.ml.tts import SpeechSynthesizer
+from app.repositories.calibration_repository import CalibrationRepository
+from app.repositories.results_repository import ResultsRepository
+from app.services.assessment_service import AssessmentService
+from app.services.audio_service import AudioService
+from app.services.content_service import ContentService
+from app.services.progress_service import ProgressService
+
+ENABLED_ERRORS_FILE = "enabled_errors.json"
+
+
+@dataclass
+class AppContainer:
+    """Lazily-built singletons; tests pass a fake recogniser."""
+
+    settings: Settings
+    recognizer_override: PhonemeRecognizer | None = None
+
+    @cached_property
+    def sessions(self) -> SessionFactory:
+        """Database sessions."""
+        return SessionFactory(create_sqlite_engine(self.settings.database_path))
+
+    @cached_property
+    def catalog(self) -> ErrorCatalog:
+        """Vietnamese error catalogue with the measured enablement list."""
+        return ErrorCatalog.load(
+            self.settings.content_dir, self.settings.content_dir / ENABLED_ERRORS_FILE
+        )
+
+    @cached_property
+    def visemes(self) -> VisemeCatalog:
+        """Mouth-shape targets."""
+        return VisemeCatalog.load(self.settings.content_dir)
+
+    @cached_property
+    def dictionary(self) -> PronouncingDictionary:
+        """CMUdict."""
+        return PronouncingDictionary.load(self.settings.vendor_dir / "cmudict.dict")
+
+    @cached_property
+    def recognizer(self) -> PhonemeRecognizer:
+        """The phoneme model (imported lazily so the API starts without torch warm-up)."""
+        if self.recognizer_override is not None:
+            return self.recognizer_override
+        from app.ml.recognizer import Wav2Vec2Recognizer  # noqa: PLC0415 - heavy import on demand
+
+        return Wav2Vec2Recognizer(self.settings.resolved_model_dir, self.settings.device)
+
+    @cached_property
+    def results(self) -> ResultsRepository:
+        """Assessment storage."""
+        return ResultsRepository(self.sessions)
+
+    @cached_property
+    def calibration(self) -> CalibrationRepository:
+        """Calibration storage."""
+        return CalibrationRepository(self.sessions)
+
+    @cached_property
+    def content(self) -> ContentService:
+        """Lesson content."""
+        return ContentService(self.settings.content_dir, self.catalog, self.visemes)
+
+    @cached_property
+    def audio(self) -> AudioService:
+        """Reference audio."""
+        return AudioService(SpeechSynthesizer(self.settings.audio_dir, self.settings.tts_voice))
+
+    @cached_property
+    def progress(self) -> ProgressService:
+        """Progress dashboard."""
+        return ProgressService(self.results, self.calibration)
+
+    @cached_property
+    def assessment(self) -> AssessmentService:
+        """The assessment pipeline."""
+        return AssessmentService(
+            decoder=AudioDecoder(),
+            recognizer=self.recognizer,
+            dictionary=self.dictionary,
+            catalog=self.catalog,
+            visemes=self.visemes,
+            features=ProsodyFeatureExtractor(),
+            results=self.results,
+        )
+
+    def model_ready(self) -> bool:
+        """Whether the model files are present (loading happens on first use)."""
+        if self.recognizer_override is not None:
+            return True
+        return (self.settings.resolved_model_dir / "vocab.json").exists()
