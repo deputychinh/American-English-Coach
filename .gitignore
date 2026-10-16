@@ -1,10 +1,35 @@
-data/
-vendor/lexicon.sqlite3
-vendor/*.building
-vendor/*.building-*
+# OS / editors
+.DS_Store
+.idea/
+.vscode/
+
+# Node
+node_modules/
+.next/
+out/
+coverage/
+*.tsbuildinfo
+web/next-env.d.ts
+
+# Python
 __pycache__/
 *.pyc
-.coverage
-htmlcov/
 .venv/
-.DS_Store
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.hypothesis/
+.coverage
+
+# Local data: learner progress, recordings, cached audio, downloaded models and datasets
+data/
+!data/.gitkeep
+
+# Legacy app build artefacts
+vendor/lexicon.sqlite3
+
+# Secrets
+.env
+
+# Vendored MediaPipe runtime and model (restored by `make vendor-web`)
+web/public/vendor/mediapipe/

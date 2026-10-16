@@ -1,0 +1,13 @@
+node_modules
+.next
+out
+coverage
+legacy
+vendor
+data
+backend/.venv
+web/next-env.d.ts
+web/src/api/*.schema.ts
+web/public/vendor
+*.tsbuildinfo
+package-lock.json

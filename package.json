@@ -1,0 +1,20 @@
+{
+  "name": "american-english-coach-repo",
+  "private": true,
+  "description": "Repo-level tooling only (formatting, git hooks, commit rules). backend/ and web/ have their own manifests.",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "prepare": "husky",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "devDependencies": {
+    "@commitlint/cli": "21.2.3",
+    "@commitlint/config-conventional": "21.2.3",
+    "husky": "9.1.7",
+    "lint-staged": "17.6.0",
+    "prettier": "3.9.10"
+  }
+}
