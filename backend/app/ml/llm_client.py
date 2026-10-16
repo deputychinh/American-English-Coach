@@ -14,7 +14,9 @@ class ChatClient:
         api_key: str,
         timeout_seconds: float,
         transport: httpx.BaseTransport | None = None,
+        max_tokens: int = 1200,
     ) -> None:
+        self._max_tokens = max_tokens
         self._client = httpx.Client(
             base_url=base_url.rstrip("/"),
             headers={"Authorization": f"Bearer {api_key}"},
@@ -23,11 +25,20 @@ class ChatClient:
         )
 
     def complete(self, model: str, messages: list[dict[str, object]]) -> str:
-        """Return the assistant text of the first choice (Kimi only accepts temperature 1)."""
+        """Return the assistant text of the first choice.
+
+        Kimi only accepts temperature 1 and its reasoning models spend tokens on
+        `reasoning_content` first, so `max_tokens` must leave room for the visible answer.
+        """
         try:
             response = self._client.post(
                 "/chat/completions",
-                json={"model": model, "temperature": 1, "messages": messages},
+                json={
+                    "model": model,
+                    "temperature": 1,
+                    "max_tokens": self._max_tokens,
+                    "messages": messages,
+                },
             )
             response.raise_for_status()
             body = response.json()

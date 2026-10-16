@@ -35,9 +35,12 @@ class Settings(BaseSettings):
     llm_provider: str = Field(default="none", pattern="^(none|kimi|openai)$")
     llm_api_key: SecretStr = SecretStr("")
     llm_base_url: str = "https://api.moonshot.ai/v1"
-    llm_model: str = "kimi-k2.6"
+    # Measured 2026-10-16: the highspeed model answers in ~2 s; kimi-k2.6 reasons for 10 s+ but
+    # reads images, so it is kept for mouth photos only.
+    llm_model: str = "kimi-k2.7-code-highspeed"
     llm_vision_model: str = "kimi-k2.6"
-    llm_timeout_seconds: float = 45.0
+    llm_timeout_seconds: float = 120.0
+    llm_max_tokens: int = 1200
 
     @property
     def tutor_enabled(self) -> bool:
