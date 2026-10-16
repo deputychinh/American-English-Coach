@@ -118,6 +118,30 @@
         "title": "Body_assess_api_v1_assess_post",
         "type": "object"
       },
+      "Body_mouth_api_v1_tutor_mouth_post": {
+        "properties": {
+          "image": {
+            "contentMediaType": "application/octet-stream",
+            "title": "Image",
+            "type": "string"
+          },
+          "sound_ipa": {
+            "maxLength": 8,
+            "minLength": 1,
+            "title": "Sound Ipa",
+            "type": "string"
+          },
+          "target_vi": {
+            "maxLength": 300,
+            "minLength": 1,
+            "title": "Target Vi",
+            "type": "string"
+          }
+        },
+        "required": ["image", "sound_ipa", "target_vi"],
+        "title": "Body_mouth_api_v1_tutor_mouth_post",
+        "type": "object"
+      },
       "CalibrationPayload": {
         "description": "Min/max per feature captured by the browser.",
         "properties": {
@@ -154,6 +178,50 @@
         },
         "required": ["id", "prompt_vi", "seconds"],
         "title": "CalibrationStep",
+        "type": "object"
+      },
+      "DrillSentence": {
+        "description": "A practice sentence with its intonation kind.",
+        "properties": {
+          "kind": {
+            "title": "Kind",
+            "type": "string"
+          },
+          "text": {
+            "title": "Text",
+            "type": "string"
+          }
+        },
+        "required": ["text", "kind"],
+        "title": "DrillSentence",
+        "type": "object"
+      },
+      "DrillWord": {
+        "description": "A practice word with where the target sound sits.",
+        "properties": {
+          "position": {
+            "title": "Position",
+            "type": "string"
+          },
+          "word": {
+            "title": "Word",
+            "type": "string"
+          }
+        },
+        "required": ["word", "position"],
+        "title": "DrillWord",
+        "type": "object"
+      },
+      "ExplainRequest": {
+        "description": "Which stored run to explain.",
+        "properties": {
+          "run_id": {
+            "title": "Run Id",
+            "type": "string"
+          }
+        },
+        "required": ["run_id"],
+        "title": "ExplainRequest",
         "type": "object"
       },
       "FocusItem": {
@@ -216,12 +284,35 @@
             "title": "Tts Available",
             "type": "boolean"
           },
+          "tutor_available": {
+            "title": "Tutor Available",
+            "type": "boolean"
+          },
+          "tutor_model": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tutor Model"
+          },
           "version": {
             "title": "Version",
             "type": "string"
           }
         },
-        "required": ["status", "version", "realtime_enabled", "model_ready", "tts_available"],
+        "required": [
+          "status",
+          "version",
+          "realtime_enabled",
+          "model_ready",
+          "tts_available",
+          "tutor_available",
+          "tutor_model"
+        ],
         "title": "HealthResponse",
         "type": "object"
       },
@@ -471,6 +562,17 @@
             "title": "Us",
             "type": "string"
           },
+          "viseme_confidence": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Viseme Confidence"
+          },
           "viseme_group": {
             "anyOf": [
               {
@@ -492,7 +594,8 @@
           "arpabet",
           "tip",
           "note",
-          "viseme_group"
+          "viseme_group",
+          "viseme_confidence"
         ],
         "title": "PhonemeCard",
         "type": "object"
@@ -676,6 +779,190 @@
         "title": "Sentence",
         "type": "object"
       },
+      "SoundDrill": {
+        "description": "Validated practice material for one chart sound.",
+        "properties": {
+          "arpabet": {
+            "title": "Arpabet",
+            "type": "string"
+          },
+          "group": {
+            "title": "Group",
+            "type": "string"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "pairs": {
+            "items": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "title": "Pairs",
+            "type": "array"
+          },
+          "sentences": {
+            "items": {
+              "$ref": "#/components/schemas/DrillSentence"
+            },
+            "title": "Sentences",
+            "type": "array"
+          },
+          "symbol": {
+            "title": "Symbol",
+            "type": "string"
+          },
+          "transition_vi": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Transition Vi"
+          },
+          "us": {
+            "title": "Us",
+            "type": "string"
+          },
+          "viseme_confidence": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Viseme Confidence"
+          },
+          "viseme_group": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/VisemeGroup"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "words": {
+            "items": {
+              "$ref": "#/components/schemas/DrillWord"
+            },
+            "title": "Words",
+            "type": "array"
+          }
+        },
+        "required": [
+          "id",
+          "symbol",
+          "us",
+          "arpabet",
+          "group",
+          "viseme_group",
+          "viseme_confidence",
+          "transition_vi",
+          "words",
+          "pairs",
+          "sentences"
+        ],
+        "title": "SoundDrill",
+        "type": "object"
+      },
+      "SoundDrillSummary": {
+        "description": "Row of the \"practise by sound\" list.",
+        "properties": {
+          "arpabet": {
+            "title": "Arpabet",
+            "type": "string"
+          },
+          "group": {
+            "title": "Group",
+            "type": "string"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "pair_count": {
+            "title": "Pair Count",
+            "type": "integer"
+          },
+          "sentence_count": {
+            "title": "Sentence Count",
+            "type": "integer"
+          },
+          "symbol": {
+            "title": "Symbol",
+            "type": "string"
+          },
+          "us": {
+            "title": "Us",
+            "type": "string"
+          },
+          "viseme_confidence": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Viseme Confidence"
+          },
+          "viseme_group": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/VisemeGroup"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "word_count": {
+            "title": "Word Count",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "id",
+          "symbol",
+          "us",
+          "arpabet",
+          "group",
+          "viseme_group",
+          "viseme_confidence",
+          "word_count",
+          "pair_count",
+          "sentence_count"
+        ],
+        "title": "SoundDrillSummary",
+        "type": "object"
+      },
+      "TutorReply": {
+        "description": "The tutor's Vietnamese text and the model that wrote it.",
+        "properties": {
+          "model": {
+            "title": "Model",
+            "type": "string"
+          },
+          "text_vi": {
+            "title": "Text Vi",
+            "type": "string"
+          }
+        },
+        "required": ["text_vi", "model"],
+        "title": "TutorReply",
+        "type": "object"
+      },
       "ValidationError": {
         "properties": {
           "ctx": {
@@ -728,6 +1015,13 @@
             "title": "Calibration",
             "type": "array"
           },
+          "confidence_labels": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "title": "Confidence Labels",
+            "type": "object"
+          },
           "features": {
             "items": {
               "type": "string"
@@ -741,15 +1035,22 @@
             },
             "title": "Groups",
             "type": "array"
+          },
+          "transitions": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "title": "Transitions",
+            "type": "object"
           }
         },
-        "required": ["features", "groups", "calibration"],
+        "required": ["features", "groups", "calibration", "transitions", "confidence_labels"],
         "title": "VisemeContent",
         "type": "object"
       },
       "VisemeGroup": {
         "description": "Visible mouth-shape group (plan \u00a72.1). Sounds outside these are audio-only.",
-        "enum": ["V1", "V2", "V3", "V4", "V5", "V6", "V7"],
+        "enum": ["V1", "V2", "V3", "V4", "V5", "V6", "V7", "V8", "V9", "V10", "V11", "V12"],
         "title": "VisemeGroup",
         "type": "string"
       },
@@ -758,6 +1059,10 @@
         "properties": {
           "common_error_vi": {
             "title": "Common Error Vi",
+            "type": "string"
+          },
+          "confidence": {
+            "title": "Confidence",
             "type": "string"
           },
           "group": {
@@ -800,7 +1105,8 @@
           "targets",
           "hold_ms",
           "hint_vi",
-          "common_error_vi"
+          "common_error_vi",
+          "confidence"
         ],
         "title": "VisemeTargetCard",
         "type": "object"
@@ -1073,6 +1379,71 @@
         "tags": ["content"]
       }
     },
+    "/api/v1/content/sounds": {
+      "get": {
+        "description": "Every chart sound with the size of its drill.",
+        "operationId": "sounds_api_v1_content_sounds_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/SoundDrillSummary"
+                  },
+                  "title": "Response Sounds Api V1 Content Sounds Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Sounds",
+        "tags": ["content"]
+      }
+    },
+    "/api/v1/content/sounds/{sound_id}": {
+      "get": {
+        "description": "Words, pairs and sentences validated against CMUdict for one sound.",
+        "operationId": "sound_api_v1_content_sounds__sound_id__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "sound_id",
+            "required": true,
+            "schema": {
+              "title": "Sound Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SoundDrill"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Sound",
+        "tags": ["content"]
+      }
+    },
     "/api/v1/content/visemes": {
       "get": {
         "description": "Mouth-shape targets and calibration steps.",
@@ -1228,6 +1599,86 @@
         },
         "summary": "Dispute",
         "tags": ["progress"]
+      }
+    },
+    "/api/v1/tutor/explain": {
+      "post": {
+        "description": "Explain a run's verdicts in plain Vietnamese (the model does not score).",
+        "operationId": "explain_api_v1_tutor_explain_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExplainRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TutorReply"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Explain",
+        "tags": ["tutor"]
+      }
+    },
+    "/api/v1/tutor/mouth": {
+      "post": {
+        "description": "Comment on one JPEG of the learner's mouth (sent only when the learner asks).",
+        "operationId": "mouth_api_v1_tutor_mouth_post",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_mouth_api_v1_tutor_mouth_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TutorReply"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Mouth",
+        "tags": ["tutor"]
       }
     }
   }

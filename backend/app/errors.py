@@ -47,3 +47,9 @@ class TtsUnavailableError(DomainError):
     """The local speech synthesiser is missing or failed."""
 
     code = ErrorCode.TTS_UNAVAILABLE
+
+
+class TutorUnavailableError(DomainError):
+    """The LLM tutor is disabled, misconfigured or the provider failed."""
+
+    code = ErrorCode.TUTOR_UNAVAILABLE

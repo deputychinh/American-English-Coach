@@ -9,8 +9,10 @@ from app.domain.error_catalog import ErrorCatalog
 from app.domain.ports import PhonemeRecognizer
 from app.domain.pronouncing import PronouncingDictionary
 from app.domain.viseme import VisemeCatalog
+from app.errors import TutorUnavailableError
 from app.ml.audio import AudioDecoder
 from app.ml.features import ProsodyFeatureExtractor
+from app.ml.llm_client import ChatClient
 from app.ml.tts import SpeechSynthesizer
 from app.repositories.calibration_repository import CalibrationRepository
 from app.repositories.results_repository import ResultsRepository
@@ -18,6 +20,7 @@ from app.services.assessment_service import AssessmentService
 from app.services.audio_service import AudioService
 from app.services.content_service import ContentService
 from app.services.progress_service import ProgressService
+from app.services.tutor_service import TutorService
 
 ENABLED_ERRORS_FILE = "enabled_errors.json"
 
@@ -28,6 +31,7 @@ class AppContainer:
 
     settings: Settings
     recognizer_override: PhonemeRecognizer | None = None
+    chat_client_override: ChatClient | None = None
 
     @cached_property
     def sessions(self) -> SessionFactory:
@@ -96,6 +100,22 @@ class AppContainer:
             visemes=self.visemes,
             features=ProsodyFeatureExtractor(),
             results=self.results,
+        )
+
+    @cached_property
+    def tutor(self) -> TutorService:
+        """LLM tutor; raises a typed error when no provider is configured."""
+        if not self.settings.tutor_enabled and self.chat_client_override is None:
+            raise TutorUnavailableError(
+                "tutor is off: set COACH_LLM_PROVIDER and COACH_LLM_API_KEY"
+            )
+        client = self.chat_client_override or ChatClient(
+            self.settings.llm_base_url,
+            self.settings.llm_api_key.get_secret_value(),
+            self.settings.llm_timeout_seconds,
+        )
+        return TutorService(
+            client, self.results, self.settings.llm_model, self.settings.llm_vision_model
         )
 
     def model_ready(self) -> bool:

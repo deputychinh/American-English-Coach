@@ -52,6 +52,8 @@ class HealthResponse(BaseModel):
     realtime_enabled: bool
     model_ready: bool
     tts_available: bool
+    tutor_available: bool
+    tutor_model: str | None
 
 
 class ProblemDetails(BaseModel):

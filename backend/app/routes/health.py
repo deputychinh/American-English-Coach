@@ -21,4 +21,6 @@ def health(container: AppContainer = Depends(get_container)) -> HealthResponse:
         realtime_enabled=container.settings.realtime_enabled,
         model_ready=container.model_ready(),
         tts_available=shutil.which("say") is not None,
+        tutor_available=container.settings.tutor_enabled,
+        tutor_model=container.settings.llm_model if container.settings.tutor_enabled else None,
     )

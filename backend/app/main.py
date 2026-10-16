@@ -18,7 +18,8 @@ from app.domain.ports import PhonemeRecognizer
 from app.enums import ErrorCode
 from app.errors import DomainError
 from app.logging_setup import configure_logging
-from app.routes import assess, audio, content, health, progress
+from app.ml.llm_client import ChatClient
+from app.routes import assess, audio, content, health, progress, tutor
 
 logger = logging.getLogger(__name__)
 
@@ -30,6 +31,7 @@ STATUS_BY_CODE: dict[ErrorCode, HTTPStatus] = {
     ErrorCode.WORD_UNKNOWN: HTTPStatus.UNPROCESSABLE_ENTITY,
     ErrorCode.MODEL_UNAVAILABLE: HTTPStatus.SERVICE_UNAVAILABLE,
     ErrorCode.TTS_UNAVAILABLE: HTTPStatus.SERVICE_UNAVAILABLE,
+    ErrorCode.TUTOR_UNAVAILABLE: HTTPStatus.SERVICE_UNAVAILABLE,
 }
 
 
@@ -46,7 +48,9 @@ def problem(status: HTTPStatus, code: str, detail: str) -> JSONResponse:
 
 
 def create_app(
-    settings: Settings | None = None, recognizer: PhonemeRecognizer | None = None
+    settings: Settings | None = None,
+    recognizer: PhonemeRecognizer | None = None,
+    chat_client: ChatClient | None = None,
 ) -> FastAPI:
     """Build the app; tests pass settings pointing at a temp dir and a fake recogniser."""
     resolved = settings or get_settings()
@@ -54,7 +58,7 @@ def create_app(
 
     @asynccontextmanager
     async def lifespan(app: FastAPI) -> AsyncIterator[None]:
-        app.state.container = AppContainer(resolved, recognizer)
+        app.state.container = AppContainer(resolved, recognizer, chat_client)
         logger.info("coach api ready")
         yield
 
@@ -71,7 +75,15 @@ def create_app(
         allow_methods=["GET", "POST", "PUT"],
         allow_headers=["*"],
     )
-    for router in (health.router, content.router, assess.router, audio.router, progress.router):
+    routers = (
+        health.router,
+        content.router,
+        assess.router,
+        audio.router,
+        progress.router,
+        tutor.router,
+    )
+    for router in routers:
         app.include_router(router, prefix=API_PREFIX)
 
     @app.exception_handler(DomainError)

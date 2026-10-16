@@ -8,6 +8,7 @@ import numpy as np
 import pytest
 import soundfile as sf
 from fastapi.testclient import TestClient
+from pydantic import SecretStr
 
 from app.config.settings import REPO_ROOT, Settings
 from app.main import create_app
@@ -21,6 +22,8 @@ def settings(tmp_path: Path) -> Settings:
         content_dir=REPO_ROOT / "content",
         vendor_dir=REPO_ROOT / "vendor",
         web_dist_dir=None,
+        llm_provider="none",
+        llm_api_key=SecretStr(""),
     )
 
 

@@ -3,7 +3,7 @@
 from functools import lru_cache
 from pathlib import Path
 
-from pydantic import Field
+from pydantic import Field, SecretStr
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 from app.constants import DEFAULT_MODEL_ID, DEFAULT_VOICE
@@ -14,7 +14,9 @@ REPO_ROOT = Path(__file__).resolve().parents[3]
 class Settings(BaseSettings):
     """Runtime configuration; defaults suit a single learner on one machine."""
 
-    model_config = SettingsConfigDict(env_prefix="COACH_", extra="ignore")
+    model_config = SettingsConfigDict(
+        env_prefix="COACH_", env_file=REPO_ROOT / ".env", extra="ignore"
+    )
 
     host: str = "127.0.0.1"
     port: int = 8765
@@ -29,6 +31,18 @@ class Settings(BaseSettings):
     tts_voice: str = DEFAULT_VOICE
     cors_origins: list[str] = ["http://127.0.0.1:3200", "http://localhost:3200"]
     log_level: str = "INFO"
+    # Optional LLM tutor (explains results; never scores). Off unless a provider and key are set.
+    llm_provider: str = Field(default="none", pattern="^(none|kimi|openai)$")
+    llm_api_key: SecretStr = SecretStr("")
+    llm_base_url: str = "https://api.moonshot.ai/v1"
+    llm_model: str = "kimi-k2.6"
+    llm_vision_model: str = "kimi-k2.6"
+    llm_timeout_seconds: float = 45.0
+
+    @property
+    def tutor_enabled(self) -> bool:
+        """True when a provider and a key are configured."""
+        return self.llm_provider != "none" and bool(self.llm_api_key.get_secret_value())
 
     @property
     def database_path(self) -> Path:
