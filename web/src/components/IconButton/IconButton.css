@@ -1,0 +1,32 @@
+.icon-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: var(--size-touch-target);
+  block-size: var(--size-touch-target);
+  font-size: var(--text-lg);
+  color: var(--color-text);
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition:
+    background-color var(--duration-fast) var(--ease-standard),
+    border-color var(--duration-fast) var(--ease-standard);
+}
+
+.icon-button:hover {
+  background: var(--color-primary-subtle);
+}
+
+.icon-button[aria-pressed='true'] {
+  border-color: var(--color-border-control);
+}
+
+.icon-button--on-brand {
+  color: var(--color-on-brand);
+}
+
+.icon-button--on-brand:hover {
+  background: var(--color-brand-hover);
+}

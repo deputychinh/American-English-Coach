@@ -60,7 +60,7 @@
   --color-blue-800: #1e40af;
   --color-blue-900: #172554;
 
-  /* Marketplace canvas: light grey page, white panels on top (Shopee/Amazon pattern). */
+  /* Warm canvas: soft neutral page with white cards on top. */
   --color-bg: var(--color-ink-100);
   --color-surface: #fff;
   --color-surface-raised: #fff;
@@ -90,16 +90,25 @@
   /* Brand header: white text stays at 5.2:1 or better over the whole gradient. */
   --color-brand-from: var(--color-saffron-600);
   --color-brand-to: var(--color-saffron-700);
+  --color-brand-hover: rgb(255 255 255 / 14%);
   --color-on-brand: #fff;
   --color-on-brand-muted: var(--color-saffron-50);
-  --color-price: var(--color-saffron-600);
-  --color-star: var(--color-amber-600);
-  --color-star-empty: var(--color-ink-300);
+  --color-ipa-bg: var(--color-saffron-50);
+  --color-ipa-text: var(--color-saffron-800);
+
+  /* Text on filled primary/danger controls: white in light, ink in dark (saffron-400 is light). */
+  --color-on-primary: #fff;
+  --color-on-danger: #fff;
 
   color-scheme: light;
 }
 
 [data-theme='dark'] {
+  --color-brand-hover: rgb(255 255 255 / 12%);
+  --color-on-primary: var(--color-ink-900);
+  --color-on-danger: var(--color-ink-900);
+  --color-ipa-bg: var(--color-saffron-900);
+  --color-ipa-text: var(--color-saffron-200);
   --color-bg: var(--color-ink-900);
   --color-surface: var(--color-ink-800);
   --color-surface-raised: var(--color-ink-700);
@@ -129,9 +138,6 @@
   --color-brand-to: var(--color-saffron-900);
   --color-on-brand: #fff;
   --color-on-brand-muted: var(--color-saffron-50);
-  --color-price: var(--color-saffron-300);
-  --color-star: var(--color-amber-600);
-  --color-star-empty: var(--color-ink-600);
 
   color-scheme: dark;
 }

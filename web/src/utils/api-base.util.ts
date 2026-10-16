@@ -1,4 +1,8 @@
-import { NATIVE_DEFAULT_API_BASE_URL } from '@/constants/api.constant';
+import {
+  DEVICE_TOKEN_HEADER,
+  NATIVE_DEFAULT_API_BASE_URL,
+  UNAUTHORIZED_EVENT,
+} from '@/constants/api.constant';
 import { StorageKey } from '@/enums/storage-key.enum';
 import { readStorage } from '@/utils/storage.util';
 
@@ -34,4 +38,33 @@ export const redirectToApiBase = (request: Request, baseUrl: string): Request =>
   const url = new URL(request.url);
   if (!url.pathname.startsWith('/api/')) return request;
   return new Request(`${baseUrl}${url.pathname}${url.search}`, request);
+};
+
+/** Device token obtained by pairing (Settings → Ghép nối); '' on the Mac itself. */
+export const deviceToken = (): string => readStorage<string>(StorageKey.DeviceToken, '');
+
+/** Headers to add to every API request: the pairing token when the device has one. */
+export const deviceHeaders = (): Record<string, string> => {
+  const token = deviceToken();
+  return token ? { [DEVICE_TOKEN_HEADER]: token } : {};
+};
+
+/** Clone a request with the pairing token attached (no-op when there is none). */
+export const withDeviceToken = (request: Request): Request => {
+  const token = deviceToken();
+  if (!token) return request;
+  const headers = new Headers(request.headers);
+  headers.set(DEVICE_TOKEN_HEADER, token);
+  return new Request(request, { headers });
+};
+
+/** Lets the shell show the "pair this device" banner when the server rejects us. */
+export const announceUnauthorized = (): void => {
+  if (typeof window !== 'undefined') window.dispatchEvent(new CustomEvent(UNAUTHORIZED_EVENT));
+};
+
+/** Surface a 401 from any API call as an unauthorized event; returns the response unchanged. */
+export const noteUnauthorized = (response: Response): Response => {
+  if (response.status === 401) announceUnauthorized();
+  return response;
 };

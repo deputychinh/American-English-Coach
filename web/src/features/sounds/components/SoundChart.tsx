@@ -2,14 +2,18 @@
 
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
-import type { ReactElement } from 'react';
+import { type ReactElement, useState } from 'react';
 
 import { ConfidenceBadge } from '@/components/ConfidenceBadge/ConfidenceBadge';
+import { EmptyState } from '@/components/EmptyState/EmptyState';
 import { ErrorState } from '@/components/ErrorState/ErrorState';
+import { Icon } from '@/components/Icon/Icon';
 import { PageIntro } from '@/components/PageIntro/PageIntro';
 import { Skeleton } from '@/components/Skeleton/Skeleton';
+import { Tabs } from '@/components/Tabs/Tabs';
 import { COPY } from '@/constants/copy.constant';
 import { AsyncStatus } from '@/enums/async-status.enum';
+import { IconName } from '@/enums/icon-name.enum';
 import { getPhonemes } from '@/features/content/services/content.service';
 import { SoundDetail } from '@/features/sounds/components/SoundDetail';
 import { useAsync } from '@/hooks/useAsync';
@@ -18,10 +22,15 @@ import { cx } from '@/utils/cx.util';
 
 import './SoundChart.css';
 
-const GROUP_LABEL: Record<string, string> = {
-  vowel: COPY.sounds.vowels,
-  diphthong: 'Nguyên âm đôi',
-  consonant: COPY.sounds.consonants,
+const GROUP_LABEL: Record<string, string> = COPY.sounds.groups;
+type GroupFilter = 'all' | 'vowel' | 'diphthong' | 'consonant';
+
+const matches = (card: PhonemeCard, query: string): boolean => {
+  const needle = query.trim().toLowerCase();
+  if (!needle) return true;
+  return [card.us, card.symbol, card.example, card.contrast, card.arpabet].some((field) =>
+    field.toLowerCase().includes(needle),
+  );
 };
 
 const groupsOf = (cards: PhonemeCard[]): [string, PhonemeCard[]][] => {
@@ -37,19 +46,46 @@ export const SoundChart = (): ReactElement => {
   const { status, data, error, reload } = useAsync(getPhonemes);
   const selectedId = useSearchParams().get('id');
   const selected = data?.find((card) => card.id === selectedId) ?? null;
+  const [query, setQuery] = useState('');
+  const [filter, setFilter] = useState<GroupFilter>('all');
+  const visible = (data ?? []).filter(
+    (card) => (filter === 'all' || card.group.toLowerCase() === filter) && matches(card, query),
+  );
 
   return (
     <div className="sound-chart">
-      <PageIntro
-        title={COPY.sounds.title}
-        lead="Bảng 44 âm truyền thống với đối chiếu Mỹ, từ mẫu, cặp dễ nhầm và hướng dẫn khẩu hình tiếng Việt."
-      />
+      <PageIntro title={COPY.sounds.title} lead={COPY.sounds.lead} />
+      <div className="sound-chart__toolbar">
+        <label className="sound-chart__search">
+          <Icon name={IconName.Search} className="sound-chart__search-icon" />
+          <span className="visually-hidden">{COPY.sounds.search}</span>
+          <input
+            type="search"
+            className="sound-chart__search-input"
+            placeholder={COPY.sounds.search}
+            value={query}
+            onChange={(event) => setQuery(event.target.value)}
+          />
+        </label>
+        <Tabs
+          label={COPY.sounds.groups.vowel}
+          value={filter}
+          options={[
+            { id: 'all', label: COPY.sounds.all },
+            { id: 'vowel', label: COPY.sounds.groups.vowel },
+            { id: 'diphthong', label: COPY.sounds.groups.diphthong },
+            { id: 'consonant', label: COPY.sounds.groups.consonant },
+          ]}
+          onChange={setFilter}
+        />
+      </div>
       {status === AsyncStatus.Loading ? <Skeleton lines={6} /> : null}
       {status === AsyncStatus.Error ? <ErrorState message={error ?? ''} onRetry={reload} /> : null}
       {data ? (
         <div className={cx('sound-chart__layout', selected && 'has-detail')}>
           <div className="sound-chart__groups">
-            {groupsOf(data).map(([group, cards]) => (
+            {visible.length === 0 ? <EmptyState message={COPY.sounds.emptySearch} /> : null}
+            {groupsOf(visible).map(([group, cards]) => (
               <section
                 key={group}
                 className="sound-chart__group"
@@ -57,6 +93,9 @@ export const SoundChart = (): ReactElement => {
               >
                 <h2 id={`group-${group}`} className="sound-chart__group-title">
                   {GROUP_LABEL[group] ?? group}
+                  <span className="sound-chart__group-count">
+                    {COPY.sounds.count(cards.length)}
+                  </span>
                 </h2>
                 <ul className="sound-chart__list">
                   {cards.map((card) => (

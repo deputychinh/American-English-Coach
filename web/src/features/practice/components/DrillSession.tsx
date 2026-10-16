@@ -15,6 +15,7 @@ import { ButtonVariant } from '@/enums/button-variant.enum';
 import { getSound, getVisemes } from '@/features/content/services/content.service';
 import { PracticeSession } from '@/features/practice/components/PracticeSession';
 import { useAsync } from '@/hooks/useAsync';
+import { useKeepAwake } from '@/hooks/useKeepAwake';
 import type {
   AssessmentResponse,
   DrillItem,
@@ -87,6 +88,7 @@ export const DrillSession = ({ soundId }: DrillSessionProps): ReactElement => {
   const [index, setIndex] = useState(0);
   const [tally, setTally] = useState<DrillTally>(emptyTally);
   const [isScored, setIsScored] = useState(false);
+  useKeepAwake();
 
   const items = useMemo(
     () => (content.data ? buildDrillItems(content.data.drill) : []),

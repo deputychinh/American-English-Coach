@@ -56,6 +56,20 @@ export const ResultCard = ({
           {summary.camera_used ? COPY.practice.cameraUsed : COPY.practice.cameraUnused}
         </p>
       </div>
+      <ul className="result-card__totals" aria-hidden="true">
+        <li className="result-card__total is-ok">
+          <span className="result-card__total-value">{summary.ok}</span>
+          <span>{COPY.verdict.ok}</span>
+        </li>
+        <li className="result-card__total is-check">
+          <span className="result-card__total-value">{summary.check}</span>
+          <span>{COPY.verdict.check}</span>
+        </li>
+        <li className="result-card__total is-error">
+          <span className="result-card__total-value">{summary.error}</span>
+          <span>{COPY.verdict.error}</span>
+        </li>
+      </ul>
 
       <div className="result-card__words">
         {result.words.map((word) => (

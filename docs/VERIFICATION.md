@@ -1,3 +1,22 @@
+# Kiểm chứng — cập nhật 2026-10-17 (bản hoàn thiện: 44 âm, gia sư AI, iOS, hardening)
+
+## Tự động (`make ci`, chạy lại 2026-10-17)
+
+| Phần                                            | Kết quả                                                                                                                                                                 |
+| ----------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Backend                                         | ruff + mypy strict sạch (86 file); **88 test pass**, coverage **98,3%**                                                                                                 |
+| Web                                             | ESLint 0 cảnh báo, Stylelint sạch, tsc sạch; **69 test / 30 file**, lines **86,5%**; build 8 route; Prettier sạch                                                       |
+| Playwright (dev server, API + model thật)       | **18/18 pass** desktop + mobile (home, 44 âm, luyện theo âm, bài theo âm, gương/hiệu chỉnh, tiến độ, cài đặt + ghép nối, tab bar)                                       |
+| Playwright với `COACH_RECOGNIZER=fake` (như CI) | **14/14 pass** trên cổng riêng, không cần model                                                                                                                         |
+| Lighthouse 12 (bản tĩnh)                        | home **95/100/96**, sounds **94/100/96**, practice **94/100/96** (performance / accessibility / best-practices); chi tiết `docs/lighthouse/`                            |
+| iOS                                             | `xcodebuild` simulator **BUILD SUCCEEDED** (7 plugin Capacitor); cài và chạy trên iPhone 17 simulator, kết nối máy chấm qua 127.0.0.1 (`docs/screenshots/ios-home.png`) |
+| Di trú DB                                       | DB thật (22 lượt) được đóng dấu baseline rồi nâng lên `0002` khi API khởi động; `/ready` trả `ready`                                                                    |
+| Gia sư AI                                       | OpenAI `gpt-6-luna`: giải thích 2–4 s, ảnh miệng 3 s (gọi thật qua API)                                                                                                 |
+
+Chưa kiểm chứng: iPhone thật (camera, ghép nối qua LAN), Safari, Docker image (Docker Desktop tắt trên máy).
+
+---
+
 # Kiểm chứng — 2026-10-16 (bản FastAPI + Next.js, nhánh `feat/av-mvp`)
 
 Máy: Apple M4 Pro, 48 GB, macOS 27.0.1, Python 3.12.15 (uv), Node 26.10, Chromium (Playwright 1.64). Mọi số dưới đây là kết quả chạy thật trên máy này trong ngày; bản kiểm chứng của app cũ (2026-10-11) nằm ở cuối.

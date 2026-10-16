@@ -6,6 +6,8 @@ const shot = (page: Page, name: string, project: string): Promise<Buffer> =>
 test('home shows the API status and quick entries', async ({ page }, info) => {
   await page.goto('/');
   await expect(page.locator('.api-status-banner')).toContainText(/Máy chấm/);
+  await expect(page.getByRole('link', { name: /Luyện ngay/ }).first()).toBeVisible();
+  await expect(page.locator('.stat')).toHaveCount(3);
   await expect(page.getByRole('link', { name: /Luyện cặp âm/ })).toBeVisible();
   await shot(page, 'home', info.project.name);
 });
@@ -86,9 +88,40 @@ test('mirror asks for calibration first, then calibration page opens the camera'
   await shot(page, 'calibration', info.project.name);
 });
 
-test('progress lists runs and settings', async ({ page }, info) => {
+test('progress shows stats, the ranked table and a link to settings', async ({ page }, info) => {
   await page.goto('/progress/');
   await expect(page.getByRole('heading', { name: /Theo từng âm/ })).toBeVisible();
-  await expect(page.getByRole('checkbox', { name: /Mặc định bật camera/ })).toBeVisible();
+  await expect(page.locator('.stat')).toHaveCount(4);
+  await expect(page.getByRole('link', { name: /Mở cài đặt/ })).toBeVisible();
   await shot(page, 'progress', info.project.name);
+});
+
+test('settings has theme, server check, pairing and data sections', async ({ page }, info) => {
+  await page.goto('/settings/');
+  await expect(page.getByRole('heading', { name: 'Cài đặt', level: 1 })).toBeVisible();
+  await expect(page.getByRole('checkbox', { name: /Mặc định bật camera/ })).toBeVisible();
+  await page.getByRole('button', { name: 'Lưu và kiểm tra' }).click();
+  await expect(page.getByRole('status').filter({ hasText: /Kết nối được/ })).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Ghép nối' })).toBeDisabled();
+  await page.getByRole('tab', { name: 'Tối' }).click();
+  await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
+  await shot(page, 'settings', info.project.name);
+  await page.getByRole('tab', { name: 'Sáng' }).click();
+});
+
+test('the shell shows a bottom tab bar on phones and a header nav on desktop', async ({
+  page,
+}, info) => {
+  await page.goto('/');
+  const tabbar = page.locator('.app-shell__tabbar');
+  const nav = page.locator('.app-shell__nav');
+  if (info.project.name === 'mobile') {
+    await expect(tabbar).toBeVisible();
+    await expect(nav).toBeHidden();
+    await tabbar.getByRole('link', { name: 'Luyện tập' }).click();
+    await expect(page).toHaveURL(/\/practice\//);
+  } else {
+    await expect(nav).toBeVisible();
+    await expect(tabbar).toBeHidden();
+  }
 });

@@ -18,6 +18,11 @@ export type SoundDrillSummary = components['schemas']['SoundDrillSummary'];
 export type TutorReply = components['schemas']['TutorReply'];
 
 /** What the learner is about to say, resolved from the `item` search param. */
+export interface PairedDevice {
+  token: string;
+  deviceName: string;
+}
+
 export interface PracticeItem {
   id: string;
   text: string;

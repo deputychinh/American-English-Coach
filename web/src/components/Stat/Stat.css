@@ -1,0 +1,39 @@
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  min-inline-size: 0;
+  padding: var(--space-4);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.stat__label {
+  font-size: var(--text-xs);
+  font-weight: var(--weight-medium);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.stat__value {
+  font-size: var(--text-3xl);
+  font-weight: var(--weight-semibold);
+  font-variant-numeric: tabular-nums;
+  line-height: var(--leading-tight);
+  letter-spacing: -0.02em;
+}
+
+.stat__hint {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+.stat--success .stat__value {
+  color: var(--color-success);
+}
+
+.stat--warning .stat__value {
+  color: var(--color-warning);
+}

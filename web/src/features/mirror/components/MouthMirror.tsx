@@ -19,6 +19,7 @@ import { useCalibration } from '@/features/mirror/hooks/useCalibration';
 import { useMouthTracker } from '@/features/mirror/hooks/useMouthTracker';
 import { MouthTutorButton } from '@/features/tutor/components/MouthTutorButton';
 import { useAsync } from '@/hooks/useAsync';
+import { useKeepAwake } from '@/hooks/useKeepAwake';
 import { useStoredState } from '@/hooks/useStoredState';
 import type { PhonemeCard, VisemeContent } from '@/interfaces/practice.interface';
 
@@ -33,6 +34,7 @@ export const MouthMirror = (): ReactElement => {
   const params = useSearchParams();
   const content = useAsync(loadAll);
   const calibration = useCalibration();
+  useKeepAwake();
   const [muted, setMuted] = useStoredState<boolean>(StorageKey.Muted, false);
   const [cameraOn, setCameraOn] = useState(false);
   const [picked, setPicked] = useState<string | null>(null);

@@ -18,8 +18,59 @@
   align-items: flex-start;
   padding: var(--padding-card);
   background: var(--color-surface);
-  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
   box-shadow: var(--shadow-sm);
+}
+
+.calibration-flow__steps {
+  display: flex;
+  gap: var(--space-2);
+  padding: 0;
+  list-style: none;
+}
+
+.calibration-flow__step-dot {
+  inline-size: 28px;
+  block-size: 6px;
+  background: var(--color-border);
+  border-radius: var(--radius-full);
+  transition: background-color var(--duration-normal) var(--ease-standard);
+}
+
+.calibration-flow__step-dot.is-done {
+  background: var(--color-success);
+}
+
+.calibration-flow__step-dot.is-current {
+  background: var(--color-primary);
+}
+
+.calibration-flow__ring-row {
+  display: flex;
+  gap: var(--space-3);
+  align-items: center;
+}
+
+.calibration-flow__ring {
+  inline-size: 48px;
+  block-size: 48px;
+  transform: rotate(-90deg);
+}
+
+.calibration-flow__ring-track {
+  fill: none;
+  stroke: var(--color-border);
+  stroke-width: 4;
+}
+
+.calibration-flow__ring-value {
+  transition: stroke-dashoffset var(--duration-slow) var(--ease-standard);
+  fill: none;
+  stroke: var(--color-primary);
+  stroke-dasharray: 126;
+  stroke-linecap: round;
+  stroke-width: 4;
 }
 
 .calibration-flow__step {

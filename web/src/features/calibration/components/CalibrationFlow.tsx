@@ -16,8 +16,10 @@ import { CameraPanel } from '@/features/mirror/components/CameraPanel';
 import { useMouthTracker } from '@/features/mirror/hooks/useMouthTracker';
 import { saveCalibration } from '@/features/mirror/services/calibration.service';
 import { useAsync } from '@/hooks/useAsync';
+import { useKeepAwake } from '@/hooks/useKeepAwake';
 import type { MouthFeatures } from '@/interfaces/mouth.interface';
 import { calibrationFromSamples } from '@/utils/calibration.util';
+import { cx } from '@/utils/cx.util';
 
 import './CalibrationFlow.css';
 
@@ -26,6 +28,7 @@ const MIN_SAMPLES_PER_STEP = 8;
 export const CalibrationFlow = (): ReactElement => {
   const sound = useSearchParams().get('sound');
   const content = useAsync(getVisemes);
+  useKeepAwake();
   const tracker = useMouthTracker({ enabled: true, calibration: null });
   const [stepIndex, setStepIndex] = useState(-1);
   const [attempt, setAttempt] = useState(0);
@@ -91,14 +94,46 @@ export const CalibrationFlow = (): ReactElement => {
       <div className="calibration-flow__layout">
         <CameraPanel tracker={tracker} />
         <div className="calibration-flow__panel" aria-live="polite">
+          <ol className="calibration-flow__steps" aria-label={COPY.calibration.stepsTitle}>
+            {steps.map((item, position) => (
+              <li
+                key={item.id}
+                className={cx(
+                  'calibration-flow__step-dot',
+                  position < stepIndex && 'is-done',
+                  position === stepIndex && 'is-current',
+                )}
+                aria-current={position === stepIndex ? 'step' : undefined}
+              >
+                <span className="visually-hidden">{item.prompt_vi}</span>
+              </li>
+            ))}
+          </ol>
           {stepIndex < 0 ? (
             <Button onClick={() => setStepIndex(0)}>{COPY.calibration.start}</Button>
           ) : null}
           {step ? (
             <>
-              <p className="calibration-flow__step">
-                {COPY.calibration.step(stepIndex + 1, steps.length)}
-              </p>
+              <div className="calibration-flow__ring-row">
+                <svg
+                  className="calibration-flow__ring"
+                  viewBox="0 0 48 48"
+                  role="img"
+                  aria-label={COPY.calibration.progressAria}
+                >
+                  <circle className="calibration-flow__ring-track" cx="24" cy="24" r="20" />
+                  <circle
+                    className="calibration-flow__ring-value"
+                    cx="24"
+                    cy="24"
+                    r="20"
+                    style={{ strokeDashoffset: 126 - (126 * (stepIndex + 1)) / steps.length }}
+                  />
+                </svg>
+                <p className="calibration-flow__step">
+                  {COPY.calibration.step(stepIndex + 1, steps.length)}
+                </p>
+              </div>
               <p className="calibration-flow__prompt">{step.prompt_vi}</p>
               <p className="calibration-flow__muted">{COPY.calibration.hold}</p>
               {isRetryShown || !tracker.isFaceVisible ? (

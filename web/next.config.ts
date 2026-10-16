@@ -11,6 +11,8 @@ const nextConfig: NextConfig = {
   trailingSlash: true,
   images: { unoptimized: true },
   typedRoutes: true,
+  // The CSS is a few KB: inlining removes six render-blocking requests on first paint (Lighthouse).
+  experimental: { inlineCss: true },
   // Next 16 blocks dev resources (HMR, Suspense chunks) for origins other than localhost; the
   // Makefile and docs use 127.0.0.1, so allow it or client pages stay on their Suspense fallback.
   allowedDevOrigins: ['127.0.0.1'],

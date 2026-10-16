@@ -1,0 +1,86 @@
+import { render, screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import type { ReactElement } from 'react';
+
+import { ToastProvider } from '@/components/Toast/Toast';
+import { StorageKey } from '@/enums/storage-key.enum';
+import { jsonResponse, mockApi } from '@/test-utils/api-mock';
+
+import { SettingsScreen } from './SettingsScreen';
+
+const health = {
+  status: 'ok',
+  version: '1.0.0',
+  realtime_enabled: true,
+  model_ready: true,
+  tts_available: true,
+  tutor_available: true,
+  tutor_model: 'gpt-6-luna',
+};
+
+const renderScreen = (): ReactElement => (
+  <ToastProvider>
+    <SettingsScreen />
+  </ToastProvider>
+);
+
+describe('SettingsScreen', () => {
+  afterEach(() => {
+    localStorage.clear();
+    document.documentElement.dataset.theme = 'light';
+  });
+
+  it('switches the theme, saves the server address and reports the check', async () => {
+    const user = userEvent.setup();
+    mockApi({ '/api/v1/health': () => jsonResponse(health) });
+    render(renderScreen());
+    await user.click(screen.getByRole('tab', { name: 'Tối' }));
+    expect(document.documentElement.dataset.theme).toBe('dark');
+    await user.type(screen.getByLabelText('Địa chỉ máy chấm'), '192.168.1.9:8765');
+    await user.click(screen.getByRole('button', { name: 'Lưu và kiểm tra' }));
+    await waitFor(() => expect(screen.getAllByRole('status')[0]).toHaveTextContent(/gpt-6-luna/));
+    expect(JSON.parse(localStorage.getItem(StorageKey.ApiBaseUrl) ?? '""')).toBe(
+      'http://192.168.1.9:8765',
+    );
+  });
+
+  it('pairs the device with a 6-digit code and can unpair', async () => {
+    const user = userEvent.setup();
+    const fetchMock = mockApi({
+      '/api/v1/pair': () => jsonResponse({ token: 'tok-abc', device_name: 'iPhone' }),
+    });
+    render(renderScreen());
+    const pair = screen.getByRole('button', { name: 'Ghép nối' });
+    expect(pair).toBeDisabled();
+    await user.type(screen.getByLabelText('Mã ghép nối (6 số)'), '12ab3456');
+    expect(pair).toBeEnabled();
+    await user.click(pair);
+    await waitFor(() => expect(screen.getByText(/Đã ghép nối: iPhone/)).toBeInTheDocument());
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+    expect(JSON.parse(localStorage.getItem(StorageKey.DeviceToken) ?? '""')).toBe('tok-abc');
+    await user.click(screen.getByRole('button', { name: 'Hủy ghép nối' }));
+    expect(localStorage.getItem(StorageKey.DeviceToken)).toBeNull();
+    expect(screen.getByRole('button', { name: 'Ghép nối' })).toBeInTheDocument();
+  });
+
+  it('shows the failure message when the code is rejected', async () => {
+    const user = userEvent.setup();
+    mockApi({
+      '/api/v1/pair': () => jsonResponse({ detail: 'bad', code: 'UNAUTHORIZED' }, 401),
+    });
+    render(renderScreen());
+    await user.type(screen.getByLabelText('Mã ghép nối (6 số)'), '000000');
+    await user.click(screen.getByRole('button', { name: 'Ghép nối' }));
+    await waitFor(() => expect(screen.getByText(/Mã không đúng/)).toBeInTheDocument());
+  });
+
+  it('clears on-device data', async () => {
+    const user = userEvent.setup();
+    mockApi({});
+    localStorage.setItem(StorageKey.Calibration, JSON.stringify({ aperture: { min: 0, max: 1 } }));
+    render(renderScreen());
+    await user.click(screen.getByRole('button', { name: 'Xóa dữ liệu trên thiết bị này' }));
+    expect(localStorage.getItem(StorageKey.Calibration)).toBeNull();
+    expect(screen.getByText('Đã xóa dữ liệu trên thiết bị.')).toBeInTheDocument();
+  });
+});

@@ -16,3 +16,4 @@ web/playwright-report
 web/out
 web/ios
 web/assets
+docs/lighthouse/*.json

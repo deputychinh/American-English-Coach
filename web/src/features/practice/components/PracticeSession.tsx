@@ -6,10 +6,12 @@ import { type ReactElement, type ReactNode, useCallback, useState } from 'react'
 import { Button } from '@/components/Button/Button';
 import { ConfidenceBadge } from '@/components/ConfidenceBadge/ConfidenceBadge';
 import { ErrorState } from '@/components/ErrorState/ErrorState';
+import { Icon } from '@/components/Icon/Icon';
 import { PageIntro } from '@/components/PageIntro/PageIntro';
 import { Skeleton } from '@/components/Skeleton/Skeleton';
 import { COPY } from '@/constants/copy.constant';
 import { ButtonVariant } from '@/enums/button-variant.enum';
+import { IconName } from '@/enums/icon-name.enum';
 import { PracticeStatus } from '@/enums/practice-status.enum';
 import { RecorderStatus } from '@/enums/recorder-status.enum';
 import { StorageKey } from '@/enums/storage-key.enum';
@@ -22,6 +24,7 @@ import { useRecorder } from '@/features/practice/hooks/useRecorder';
 import { useReferenceAudio } from '@/features/practice/hooks/useReferenceAudio';
 import { assess } from '@/features/practice/services/assessment.service';
 import { MouthTutorButton } from '@/features/tutor/components/MouthTutorButton';
+import { useKeepAwake } from '@/hooks/useKeepAwake';
 import { useStoredState } from '@/hooks/useStoredState';
 import type { Point2 } from '@/interfaces/mouth.interface';
 import type {
@@ -60,6 +63,7 @@ export const PracticeSession = ({
   const [recording, setRecording] = useState<Recording | null>(null);
   const [cameraOn, setCameraOn] = useStoredState<boolean>(StorageKey.CameraDefault, false);
   const recorder = useRecorder();
+  useKeepAwake();
   const reference = useReferenceAudio();
   const calibration = useCalibration();
   const tracker = useMouthTracker({ enabled: cameraOn, calibration: calibration.value });
@@ -120,7 +124,7 @@ export const PracticeSession = ({
         </Link>
       </PageIntro>
 
-      <section className="practice-session__prompt" aria-label="Bài luyện">
+      <section className="practice-session__prompt" aria-label={COPY.practice.promptAria}>
         <p className="practice-session__text">{item.text}</p>
         <div className="practice-session__actions">
           <Button
@@ -173,6 +177,7 @@ export const PracticeSession = ({
           onClick={() => void (isRecording ? finish() : begin())}
           disabled={status === PracticeStatus.Scoring}
         >
+          <Icon name={isRecording ? IconName.Stop : IconName.Record} />
           {isRecording
             ? `${COPY.practice.stop} (${String(recorder.seconds)}s)`
             : COPY.practice.record}
@@ -180,7 +185,7 @@ export const PracticeSession = ({
         <span
           className="practice-session__level"
           role="meter"
-          aria-label="Mức âm"
+          aria-label={COPY.practice.levelAria}
           aria-valuemin={0}
           aria-valuemax={100}
           aria-valuenow={Math.round(Math.min(1, recorder.level * 4) * 100)}

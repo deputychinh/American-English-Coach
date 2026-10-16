@@ -39,8 +39,10 @@ describe('SoundChart', () => {
     mockApi({ '/api/v1/content/phonemes': () => jsonResponse(cards) });
     params.get.mockReturnValue('c01');
     render(<SoundChart />);
-    await waitFor(() => expect(screen.getByText('Nguyên âm')).toBeInTheDocument());
-    expect(screen.getByText('Phụ âm')).toBeInTheDocument();
+    await waitFor(() =>
+      expect(screen.getByRole('heading', { name: /^Nguyên âm/ })).toBeInTheDocument(),
+    );
+    expect(screen.getByRole('heading', { name: /^Phụ âm/ })).toBeInTheDocument();
     expect(document.querySelectorAll('.confidence-badge')).toHaveLength(3);
     expect(screen.getByRole('heading', { name: '/θ/' })).toBeInTheDocument();
     expect(screen.getByText('Lưỡi giữa răng.')).toBeInTheDocument();
@@ -56,5 +58,24 @@ describe('SoundChart', () => {
     render(<SoundChart />);
     await waitFor(() => expect(screen.getByRole('alert')).toHaveTextContent('down'));
     expect(screen.getByRole('button', { name: 'Thử lại' })).toBeInTheDocument();
+  });
+});
+
+describe('SoundChart filters', () => {
+  it('filters by group tab and by search text', async () => {
+    const { default: userEvent } = await import('@testing-library/user-event');
+    const user = userEvent.setup();
+    mockApi({ '/api/v1/content/phonemes': () => jsonResponse(cards) });
+    params.get.mockReturnValue(null);
+    render(<SoundChart />);
+    await waitFor(() => expect(document.querySelectorAll('.sound-chart__card')).toHaveLength(2));
+    await user.click(screen.getByRole('tab', { name: 'Phụ âm' }));
+    expect(document.querySelectorAll('.sound-chart__card')).toHaveLength(1);
+    await user.click(screen.getByRole('tab', { name: 'Tất cả' }));
+    await user.type(screen.getByRole('searchbox'), 'see');
+    expect(document.querySelectorAll('.sound-chart__card')).toHaveLength(1);
+    await user.clear(screen.getByRole('searchbox'));
+    await user.type(screen.getByRole('searchbox'), 'zzz');
+    expect(screen.getByText(/Không có âm nào khớp/)).toBeInTheDocument();
   });
 });

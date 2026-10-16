@@ -39,3 +39,18 @@
   color: var(--color-text-muted);
   background: var(--color-ink-100);
 }
+
+/* IPA always sits in a tinted pill, in the IPA font, so symbols read as symbols. */
+.ipa-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-inline-size: 44px;
+  padding: var(--space-1) var(--space-2);
+  font-family: var(--font-ipa);
+  font-size: var(--text-lg);
+  line-height: var(--leading-tight);
+  color: var(--color-ipa-text);
+  background: var(--color-ipa-bg);
+  border-radius: var(--radius-sm);
+}

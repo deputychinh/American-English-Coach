@@ -1,7 +1,7 @@
 import { env } from '@/config/env';
 import type { AssessRequest } from '@/interfaces/hooks.interface';
 import type { AssessmentResponse } from '@/interfaces/practice.interface';
-import { resolveApiBaseUrl } from '@/utils/api-base.util';
+import { deviceHeaders, noteUnauthorized, resolveApiBaseUrl } from '@/utils/api-base.util';
 import { problemMessage } from '@/utils/problem.util';
 
 /** Multipart upload (openapi-fetch's JSON client is kept for everything else). */
@@ -18,11 +18,14 @@ export const assess = async ({
   form.append('kind', item.kind);
   form.append('mouth_frames', JSON.stringify(mouthFrames));
   if (audioStartedAt !== null) form.append('audio_started_at', String(audioStartedAt));
-  const response = await fetch(`${resolveApiBaseUrl(env.apiBaseUrl)}/api/v1/assess`, {
-    method: 'POST',
-    body: form,
-    signal: AbortSignal.timeout(60_000),
-  });
+  const response = noteUnauthorized(
+    await fetch(`${resolveApiBaseUrl(env.apiBaseUrl)}/api/v1/assess`, {
+      method: 'POST',
+      body: form,
+      headers: deviceHeaders(),
+      signal: AbortSignal.timeout(60_000),
+    }),
+  );
   const body: unknown = await response.json().catch(() => null);
   if (!response.ok) throw new Error(problemMessage(body, `Máy chấm trả lỗi ${response.status}`));
   return body as AssessmentResponse;

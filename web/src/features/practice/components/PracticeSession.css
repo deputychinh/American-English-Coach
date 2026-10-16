@@ -2,22 +2,26 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-6);
+  padding-block-end: var(--space-20);
 }
 
 .practice-session__prompt {
   display: flex;
   flex-direction: column;
-  gap: var(--space-3);
+  gap: var(--space-4);
   padding: var(--padding-card);
-  background: var(--color-surface);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-sm);
+  background:
+    radial-gradient(100% 120% at 100% 0%, var(--color-primary-subtle), transparent 60%),
+    var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
 }
 
 .practice-session__text {
-  font-size: var(--text-3xl);
+  font-size: var(--text-4xl);
   font-weight: var(--weight-semibold);
   line-height: var(--leading-tight);
+  letter-spacing: -0.02em;
 }
 
 .practice-session__actions {
@@ -36,27 +40,39 @@
   color: var(--color-danger);
 }
 
+/* Sticky record bar: always reachable with the thumb on phones, inline on desktop. */
 .practice-session__recorder {
+  position: fixed;
+  bottom: calc(var(--tabbar-height) + var(--safe-bottom));
+  z-index: var(--z-sticky);
   display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
-  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-4);
+  align-items: center;
+  padding: var(--space-3) var(--padding-page-x);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-lg);
+  border-block-start: 1px solid var(--color-border);
+  inset-inline: 0;
 }
 
 .practice-session__record {
-  min-inline-size: 200px;
+  flex: 1 1 200px;
   min-block-size: 56px;
   font-size: var(--text-lg);
+  border-radius: var(--radius-full);
 }
 
 .practice-session__record.is-recording {
+  color: var(--color-on-danger);
   background: var(--color-danger);
+  animation: pulse 1.2s ease-in-out infinite;
 }
 
 .practice-session__level {
   display: block;
+  flex: 1 1 160px;
   overflow: hidden;
-  inline-size: min(100%, 320px);
   block-size: 8px;
   background: var(--color-border);
   border-radius: var(--radius-full);
@@ -80,10 +96,10 @@
   display: flex;
   gap: var(--space-3);
   align-items: flex-start;
-  padding: var(--space-3);
+  padding: var(--space-4);
   background: var(--color-surface);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
 }
 
 .practice-session__target-copy {
@@ -103,8 +119,46 @@
   gap: var(--gap-inline);
 }
 
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.8;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .practice-session__record.is-recording {
+    animation: none;
+  }
+}
+
 @media (--bp-md) {
+  .practice-session {
+    padding-block-end: 0;
+  }
+
   .practice-session__camera {
-    grid-template-columns: minmax(0, 2fr) minmax(240px, 1fr);
+    grid-template-columns: minmax(0, 2fr) minmax(260px, 1fr);
+  }
+
+  .practice-session__recorder {
+    position: static;
+    padding: var(--padding-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    box-shadow: none;
+  }
+
+  .practice-session__record {
+    flex: 0 0 auto;
+    min-inline-size: 220px;
+  }
+
+  .practice-session__level {
+    max-inline-size: 320px;
   }
 }

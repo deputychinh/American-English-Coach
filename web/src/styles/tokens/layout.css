@@ -1,8 +1,12 @@
 :root {
-  --container-max: 1200px;
+  --container-max: 1120px;
   --container-narrow: 720px;
-  --header-height: 64px;
-  --sidebar-width: 248px;
+  --header-height: 60px;
+  --tabbar-height: 60px;
+
+  /* iOS notch / home indicator; 0 everywhere else. */
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
 
   /* WCAG 2.2 target size (AAA 44px) for buttons and inputs. */
   --size-touch-target: 44px;

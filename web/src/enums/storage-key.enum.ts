@@ -4,4 +4,6 @@ export enum StorageKey {
   Muted = 'coach.muted',
   Calibration = 'coach.calibration',
   ApiBaseUrl = 'coach.apiBaseUrl',
+  DeviceToken = 'coach.deviceToken',
+  DeviceName = 'coach.deviceName',
 }

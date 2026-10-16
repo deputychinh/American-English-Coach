@@ -3,124 +3,172 @@
 import Link from 'next/link';
 import type { ReactElement } from 'react';
 
+import { Card } from '@/components/Card/Card';
 import { EmptyState } from '@/components/EmptyState/EmptyState';
 import { ErrorState } from '@/components/ErrorState/ErrorState';
+import { Icon } from '@/components/Icon/Icon';
+import { ListRow } from '@/components/ListRow/ListRow';
 import { PageIntro } from '@/components/PageIntro/PageIntro';
+import { SectionHeader } from '@/components/SectionHeader/SectionHeader';
 import { Skeleton } from '@/components/Skeleton/Skeleton';
-import { COPY } from '@/constants/copy.constant';
+import { Stat } from '@/components/Stat/Stat';
 import { AsyncStatus } from '@/enums/async-status.enum';
+import { IconName } from '@/enums/icon-name.enum';
 import { getSounds } from '@/features/content/services/content.service';
-import { SettingsPanel } from '@/features/progress/components/SettingsPanel';
 import { getProgress } from '@/features/progress/services/progress.service';
 import { useAsync } from '@/hooks/useAsync';
+import { useCopy } from '@/hooks/useCopy';
 import { targetPhoneOf } from '@/utils/drill.util';
 import { formatDateTime, formatPercent } from '@/utils/format.util';
 
 import './ProgressDashboard.css';
 
 export const ProgressDashboard = (): ReactElement => {
+  const copy = useCopy();
   const { status, data, error, reload } = useAsync(getProgress);
   const sounds = useAsync(getSounds);
   const drillIdOf = (phoneme: string): string | null =>
     sounds.data?.find((sound) => targetPhoneOf(sound.arpabet) === phoneme)?.id ?? null;
+  const ranked = [...(data?.phonemes ?? [])].sort(
+    (a, b) => b.check + b.error - (a.check + a.error) || b.total - a.total,
+  );
+  const totals = ranked.reduce(
+    (sum, stat) => ({
+      total: sum.total + stat.total,
+      ok: sum.ok + stat.ok,
+      check: sum.check + stat.check + stat.error,
+    }),
+    { total: 0, ok: 0, check: 0 },
+  );
+
   return (
     <div className="progress-dashboard">
-      <PageIntro title={COPY.progress.title} lead={COPY.progress.machineHint} />
+      <PageIntro title={copy.progress.title} lead={copy.progress.machineHint}>
+        <Link href="/settings" className="button button--ghost">
+          <Icon name={IconName.Settings} />
+          {copy.progress.openSettings}
+        </Link>
+      </PageIntro>
       {status === AsyncStatus.Loading ? <Skeleton lines={5} /> : null}
       {status === AsyncStatus.Error ? <ErrorState message={error ?? ''} onRetry={reload} /> : null}
       {data ? (
         <>
-          <section className="progress-dashboard__panel" aria-labelledby="per-sound">
-            <h2 id="per-sound" className="progress-dashboard__heading">
-              {COPY.progress.perSound} · {COPY.progress.machine}
-            </h2>
-            {data.phonemes.length === 0 ? (
-              <EmptyState message={COPY.progress.empty} />
+          <div className="progress-dashboard__stats">
+            <Stat label={copy.progress.statRuns} value={String(data.runs)} />
+            <Stat
+              label={copy.progress.statOk}
+              value={totals.total ? formatPercent(totals.ok, totals.total) : '–'}
+              tone="success"
+            />
+            <Stat label={copy.progress.statCheck} value={String(totals.check)} tone="warning" />
+            <Stat label={copy.progress.statSounds} value={String(ranked.length)} />
+          </div>
+
+          <Card as="section" aria-labelledby="per-sound" className="progress-dashboard__panel">
+            <SectionHeader
+              id="per-sound"
+              title={`${copy.progress.perSound} · ${copy.progress.machine}`}
+              hint={copy.progress.sortedHint}
+            />
+            {ranked.length === 0 ? (
+              <EmptyState message={copy.progress.empty} />
             ) : (
-              <table className="progress-dashboard__table">
-                <thead>
-                  <tr>
-                    <th scope="col">Âm</th>
-                    <th scope="col">{COPY.progress.total}</th>
-                    <th scope="col">{COPY.verdict.ok}</th>
-                    <th scope="col">{COPY.verdict.check}</th>
-                    <th scope="col">{COPY.verdict.error}</th>
-                    <th scope="col">Tỷ lệ</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {data.phonemes.map((stat) => (
-                    <tr key={stat.phoneme}>
-                      <th scope="row" className="progress-dashboard__ipa">
-                        {drillIdOf(stat.phoneme) ? (
-                          <Link
-                            href={{
-                              pathname: '/practice',
-                              query: { sound: drillIdOf(stat.phoneme) },
-                            }}
-                          >
-                            /{stat.ipa}/
-                          </Link>
-                        ) : (
-                          `/${stat.ipa}/`
-                        )}
+              <div className="progress-dashboard__scroll">
+                <table className="progress-dashboard__table">
+                  <thead>
+                    <tr>
+                      <th scope="col" className="progress-dashboard__head-cell">
+                        {copy.progress.sound}
                       </th>
-                      <td>{stat.total}</td>
-                      <td>{stat.ok}</td>
-                      <td>{stat.check}</td>
-                      <td>{stat.error}</td>
-                      <td>
-                        <span
-                          className="progress-dashboard__bar"
-                          role="img"
-                          aria-label={`${formatPercent(stat.ok, stat.total)} đạt`}
-                        >
-                          <span
-                            className="progress-dashboard__bar-ok"
-                            style={{ inlineSize: formatPercent(stat.ok, stat.total) }}
-                          />
-                          <span
-                            className="progress-dashboard__bar-check"
-                            style={{ inlineSize: formatPercent(stat.check, stat.total) }}
-                          />
-                        </span>
-                        <span className="progress-dashboard__muted">
-                          {formatPercent(stat.ok, stat.total)}
-                        </span>
-                      </td>
+                      <th scope="col" className="progress-dashboard__head-cell">
+                        {copy.progress.total}
+                      </th>
+                      <th scope="col" className="progress-dashboard__head-cell">
+                        {copy.verdict.ok}
+                      </th>
+                      <th scope="col" className="progress-dashboard__head-cell">
+                        {copy.verdict.check}
+                      </th>
+                      <th scope="col" className="progress-dashboard__head-cell">
+                        {copy.verdict.error}
+                      </th>
+                      <th scope="col" className="progress-dashboard__head-cell">
+                        {copy.progress.rate}
+                      </th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody>
+                    {ranked.map((stat) => (
+                      <tr key={stat.phoneme}>
+                        <th
+                          scope="row"
+                          className="progress-dashboard__ipa progress-dashboard__cell"
+                        >
+                          {drillIdOf(stat.phoneme) ? (
+                            <Link
+                              href={{
+                                pathname: '/practice',
+                                query: { sound: drillIdOf(stat.phoneme) },
+                              }}
+                              className="ipa-pill"
+                            >
+                              /{stat.ipa}/
+                            </Link>
+                          ) : (
+                            <span className="ipa-pill">/{stat.ipa}/</span>
+                          )}
+                        </th>
+                        <td className="progress-dashboard__cell">{stat.total}</td>
+                        <td className="progress-dashboard__cell">{stat.ok}</td>
+                        <td className="progress-dashboard__cell">{stat.check}</td>
+                        <td className="progress-dashboard__cell">{stat.error}</td>
+                        <td className="progress-dashboard__cell">
+                          <span
+                            className="progress-dashboard__bar"
+                            role="img"
+                            aria-label={copy.progress.okShare(formatPercent(stat.ok, stat.total))}
+                          >
+                            <span
+                              className="progress-dashboard__bar-ok"
+                              style={{ inlineSize: formatPercent(stat.ok, stat.total) }}
+                            />
+                            <span
+                              className="progress-dashboard__bar-check"
+                              style={{ inlineSize: formatPercent(stat.check, stat.total) }}
+                            />
+                          </span>
+                          <span className="progress-dashboard__muted">
+                            {formatPercent(stat.ok, stat.total)}
+                          </span>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             )}
-          </section>
-          <section className="progress-dashboard__panel" aria-labelledby="recent">
-            <h2 id="recent" className="progress-dashboard__heading">
-              {COPY.progress.recent}
-            </h2>
+          </Card>
+
+          <Card as="section" aria-labelledby="recent" className="progress-dashboard__panel">
+            <SectionHeader id="recent" title={copy.progress.recent} />
             {data.recent.length === 0 ? (
-              <EmptyState message={COPY.progress.empty} />
+              <EmptyState message={copy.progress.empty} />
             ) : (
-              <ul className="progress-dashboard__runs">
+              <div className="progress-dashboard__runs">
                 {data.recent.map((run) => (
-                  <li key={run.id} className="progress-dashboard__run">
-                    <span className="progress-dashboard__run-text">{run.text}</span>
-                    <span className="progress-dashboard__muted">
-                      {formatDateTime(run.created_at)} ·{' '}
-                      {COPY.practice.summary(run.ok, run.check, run.error)}
-                      {run.disputed ? ` · ${COPY.progress.disputedBadge}` : ''}
-                    </span>
-                    <Link href={{ pathname: '/practice', query: { run: run.id } }}>
-                      {COPY.progress.view}
-                    </Link>
-                  </li>
+                  <ListRow
+                    key={run.id}
+                    title={run.text}
+                    subtitle={`${formatDateTime(run.created_at)} · ${copy.practice.summary(run.ok, run.check, run.error)}${run.disputed ? ` · ${copy.progress.disputedBadge}` : ''}`}
+                    trailing={copy.progress.view}
+                    href={{ pathname: '/practice', query: { run: run.id } }}
+                  />
                 ))}
-              </ul>
+              </div>
             )}
-          </section>
+          </Card>
         </>
       ) : null}
-      <SettingsPanel />
     </div>
   );
 };

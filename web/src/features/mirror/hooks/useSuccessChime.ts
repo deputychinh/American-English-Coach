@@ -2,6 +2,8 @@
 
 import { useEffect, useRef } from 'react';
 
+import { nativeHaptic } from '@/utils/native.util';
+
 /** A short soft tone when the hold completes; silent when muted or reduced motion is preferred. */
 export const useSuccessChime = (trigger: boolean, muted: boolean): void => {
   const playedRef = useRef(false);
@@ -14,6 +16,7 @@ export const useSuccessChime = (trigger: boolean, muted: boolean): void => {
     if (playedRef.current || muted) return;
     if (globalThis.matchMedia?.('(prefers-reduced-motion: reduce)').matches) return;
     playedRef.current = true;
+    void nativeHaptic('success');
     try {
       const context = new AudioContext();
       const oscillator = context.createOscillator();

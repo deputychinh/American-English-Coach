@@ -1,0 +1,25 @@
+.app-error-boundary {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  align-items: flex-start;
+  max-inline-size: var(--container-narrow);
+  margin: var(--space-8) auto;
+  padding: var(--padding-card);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+
+.app-error-boundary__icon {
+  font-size: var(--text-3xl);
+  color: var(--color-warning);
+}
+
+.app-error-boundary__title {
+  font-size: var(--text-2xl);
+}
+
+.app-error-boundary__message {
+  color: var(--color-text-muted);
+}

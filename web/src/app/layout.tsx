@@ -4,8 +4,10 @@ import type { Metadata, Viewport } from 'next';
 import Script from 'next/script';
 import type { ReactElement, ReactNode } from 'react';
 
-import { AppHeader } from '@/components/AppHeader/AppHeader';
+import { AppErrorBoundary } from '@/components/AppErrorBoundary/AppErrorBoundary';
+import { AppShell } from '@/components/AppShell/AppShell';
 import { RegisterServiceWorker } from '@/components/RegisterServiceWorker/RegisterServiceWorker';
+import { ToastProvider } from '@/components/Toast/Toast';
 import { COPY } from '@/constants/copy.constant';
 
 export const metadata: Metadata = {
@@ -17,9 +19,13 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: '#c2410c',
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#c2410c' },
+    { media: '(prefers-color-scheme: dark)', color: '#1c1917' },
+  ],
   width: 'device-width',
   initialScale: 1,
+  viewportFit: 'cover',
 };
 
 interface RootLayoutProps {
@@ -33,16 +39,11 @@ const RootLayout = ({ children }: RootLayoutProps): ReactElement => (
       <Script src="/theme.js" strategy="beforeInteractive" />
     </head>
     <body>
-      <a className="skip-link" href="#main">
-        {COPY.skipToContent}
-      </a>
-      <AppHeader />
-      <main id="main" className="container page" tabIndex={-1}>
-        {children}
-      </main>
-      <footer className="container page-footer">
-        <p>{COPY.home.privacy}</p>
-      </footer>
+      <AppErrorBoundary>
+        <ToastProvider>
+          <AppShell>{children}</AppShell>
+        </ToastProvider>
+      </AppErrorBoundary>
       <RegisterServiceWorker />
     </body>
   </html>

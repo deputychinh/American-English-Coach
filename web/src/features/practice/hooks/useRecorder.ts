@@ -12,6 +12,7 @@ import {
 import { RecorderStatus } from '@/enums/recorder-status.enum';
 import type { Recorder, RecorderSession } from '@/interfaces/hooks.interface';
 import type { Recording } from '@/interfaces/practice.interface';
+import { nativeHaptic } from '@/utils/native.util';
 import { concatChunks, encodeWav, resample, rmsLevel } from '@/utils/wav-encoder.util';
 
 const permissionMessage = (error: unknown): string => {
@@ -83,6 +84,7 @@ export const useRecorder = (): Recorder => {
     await session.context.close().catch(() => undefined);
     setStatus(RecorderStatus.Idle);
     setLevel(0);
+    void nativeHaptic('medium');
     const samples = resample(concatChunks(session.chunks), sampleRate);
     const blob = encodeWav(samples);
     return {
@@ -125,6 +127,7 @@ export const useRecorder = (): Recorder => {
       session.node = await attachNode(context, source);
       session.timer = setTimeout(() => void stopRef.current(), MAX_RECORD_SECONDS * 1000);
       setStatus(RecorderStatus.Recording);
+      void nativeHaptic('light');
     } catch (cause) {
       setError(permissionMessage(cause));
       setStatus(RecorderStatus.Error);

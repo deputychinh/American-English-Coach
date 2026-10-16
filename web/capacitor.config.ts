@@ -7,9 +7,21 @@ const config: CapacitorConfig = {
   appName: 'American English Coach',
   webDir: 'out',
   ios: {
-    contentInset: 'automatic',
-    backgroundColor: '#F5F5F4',
+    contentInset: 'never',
+    backgroundColor: '#C2410C',
     allowsLinkPreview: false,
+    preferredContentMode: 'mobile',
+  },
+  plugins: {
+    SplashScreen: {
+      launchAutoHide: false,
+      backgroundColor: '#C2410C',
+      showSpinner: false,
+    },
+    StatusBar: {
+      overlaysWebView: true,
+      style: 'LIGHT',
+    },
   },
 };
 

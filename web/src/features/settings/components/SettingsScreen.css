@@ -1,0 +1,61 @@
+.settings-screen {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-stack);
+  max-inline-size: var(--container-narrow);
+}
+
+.settings-screen__row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  align-items: center;
+  min-block-size: var(--size-touch-target);
+  font-size: var(--text-sm);
+}
+
+.settings-screen__label {
+  font-weight: var(--weight-semibold);
+}
+
+.settings-screen__input {
+  flex: 1 1 220px;
+  min-block-size: var(--size-touch-target);
+  padding: var(--padding-control-sm);
+  font: inherit;
+  color: var(--color-text);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-control);
+  border-radius: var(--radius-sm);
+}
+
+.settings-screen__status,
+.settings-screen__muted {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+.settings-screen__pairing {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  align-items: flex-end;
+}
+
+.settings-screen__field {
+  display: flex;
+  flex: 1 1 160px;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.settings-screen__input--code {
+  font-family: var(--font-mono);
+  font-size: var(--text-xl);
+  letter-spacing: 0.3em;
+}
+
+.settings-screen__paired {
+  font-weight: var(--weight-medium);
+  color: var(--color-success);
+}

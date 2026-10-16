@@ -228,6 +228,26 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  '/api/v1/pair': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    /**
+     * Pair
+     * @description Exchange the pairing code for a device token.
+     */
+    post: operations['pair_api_v1_pair_post'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   '/api/v1/progress': {
     parameters: {
       query?: never;
@@ -240,6 +260,26 @@ export interface paths {
      * @description Per-sound totals and recent runs.
      */
     get: operations['progress_api_v1_progress_get'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/v1/ready': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /**
+     * Ready
+     * @description Readiness: the database answers and the recogniser can serve (model files present).
+     */
+    get: operations['ready_api_v1_ready_get'];
     put?: never;
     post?: never;
     delete?: never;
@@ -532,6 +572,26 @@ export interface components {
       words: string[];
     };
     /**
+     * PairRequest
+     * @description The six-digit code shown by `make api-lan` and a name for the phone.
+     */
+    PairRequest: {
+      /** Code */
+      code: string;
+      /** Device Name */
+      device_name: string;
+    };
+    /**
+     * PairResponse
+     * @description Token to send as `X-Coach-Token` on every later request.
+     */
+    PairResponse: {
+      /** Device Name */
+      device_name: string;
+      /** Token */
+      token: string;
+    };
+    /**
      * PhoneResult
      * @description Verdict for one expected phone.
      */
@@ -637,6 +697,18 @@ export interface components {
       verdict: components['schemas']['Verdict'];
       /** Word Index */
       word_index: number | null;
+    };
+    /**
+     * ReadyResponse
+     * @description Readiness probe body.
+     */
+    ReadyResponse: {
+      /** Model Version */
+      model_version: string;
+      /** Recognizer */
+      recognizer: string;
+      /** Status */
+      status: string;
     };
     /**
      * RunSummaryModel
@@ -1124,6 +1196,39 @@ export interface operations {
       };
     };
   };
+  pair_api_v1_pair_post: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['PairRequest'];
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['PairResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
   progress_api_v1_progress_get: {
     parameters: {
       query?: {
@@ -1151,6 +1256,26 @@ export interface operations {
         };
         content: {
           'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  ready_api_v1_ready_get: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['ReadyResponse'];
         };
       };
     };
