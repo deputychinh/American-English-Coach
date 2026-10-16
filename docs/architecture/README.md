@@ -56,8 +56,9 @@ flowchart LR
 | `assessment_runs` | `id` (uuid), `item_id`, `text`, `model_version`, `created_at`, `ok_count/check_count/error_count`, `result_json`, `disputed` |
 | `phoneme_results` | `run_id` → runs, `word`, `phoneme` (ARPAbet), `verdict`, `gop`, `visual`, `error_id`                                         |
 | `calibrations`    | `id='default'`, `data_json` (min/max mỗi đặc trưng), `created_at`                                                            |
+| `devices`         | `token` (khóa), `name`, `created_at`, `last_seen_at` — điện thoại đã ghép nối                                                |
 
-Lược đồ được tạo bằng `metadata.create_all` khi khởi động (một người dùng, một file); đổi lược đồ phá vỡ tương thích phải kèm script di trú và ADR.
+Lược đồ do **Alembic** quản lý (`backend/alembic/versions`): API tự chạy `upgrade head` khi mở DB (`app/db/migrate.py`); DB tạo trước khi có Alembic được đóng dấu baseline `0001` rồi nâng cấp. Mọi thay đổi lược đồ đi kèm một revision mới (`make migrate` để chạy tay).
 
 ## Quy ước lớp
 
@@ -66,3 +67,11 @@ Lược đồ được tạo bằng `metadata.create_all` khi khởi động (m�
 - `services/`: use case; một phương thức công khai mỗi use case; nhận collaborator qua constructor.
 - `routes/`: validate → gọi một service → trả model. Lỗi domain đổi sang problem+json một lần ở `main.py`.
 - `container.py`: composition root (lazy singletons); test truyền `recognizer` giả.
+
+## Vận hành
+
+- **Log**: JSON một dòng mỗi sự kiện (`app/logging_setup.py`); mỗi request có `X-Request-Id` (trả về trong header, ghi trong log truy cập và log lỗi). Không log audio, ảnh, key.
+- **Probe**: `GET /api/v1/health` (liveness, cờ tính năng) và `GET /api/v1/ready` (DB trả lời, model có mặt).
+- **Ghép nối điện thoại**: client không phải loopback phải gửi `X-Coach-Token`; token nhận từ `POST /api/v1/pair` với mã 6 số in trong log khi API chạy trên mạng (`make api-lan`, `COACH_PAIRING_CODE` để cố định). `/health`, `/ready`, `/pair` và file tĩnh luôn mở.
+- **Giới hạn**: gia sư AI 10 yêu cầu/phút/client (429), upload audio ≤ 8 MB, ảnh ≤ 2 MB.
+- **Chế độ không model**: `COACH_RECOGNIZER=fake` để chạy API trong CI/demo; kết quả gắn `model_version = fake-recognizer@ci`.

@@ -23,7 +23,7 @@ make api-lan          # API nghe trên 0.0.0.0:8765; lệnh in ra địa chỉ, 
 make ios-open         # mở Xcode: chọn Team (Signing & Capabilities), chọn iPhone, bấm Run
 ```
 
-Trong app: **Tiến độ → Cài đặt → Địa chỉ máy chấm** nhập `192.168.40.188:8765` → "Lưu và kiểm tra". Địa chỉ được lưu trên máy; mọi lời gọi `/api/v1/*` (chấm, giọng mẫu, gia sư AI) đi tới máy Mac. Lần đầu iOS hỏi quyền Camera, Micro và Mạng nội bộ (chuỗi giải thích tiếng Việt trong `Info.plist`).
+Trong app: **Cài đặt → Địa chỉ máy chấm** nhập `192.168.40.188:8765` → "Lưu và kiểm tra", rồi **Ghép nối**: nhập mã 6 số mà `make api-lan` in ra trong log (`pairing code for phones on this network`). App nhận token và gửi kèm mọi yêu cầu (`X-Coach-Token`); máy Mac dùng trực tiếp không cần ghép nối. Địa chỉ được lưu trên máy; mọi lời gọi `/api/v1/*` (chấm, giọng mẫu, gia sư AI) đi tới máy Mac. Lần đầu iOS hỏi quyền Camera, Micro và Mạng nội bộ (chuỗi giải thích tiếng Việt trong `Info.plist`).
 
 ## Những gì nằm ở đâu
 
