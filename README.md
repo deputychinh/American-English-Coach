@@ -1,144 +1,91 @@
 # American English Coach
 
-An offline-first pronunciation and vocabulary trainer for Vietnamese learners of American English. Study the traditional 44-sound IPA chart, listen to example words, record your voice, and explore a local dictionary of 466,550 entries.
+Huấn luyện viên phát âm tiếng Anh Mỹ cho người Việt, chạy hoàn toàn trên máy của bạn: **gương khẩu hình** (camera + MediaPipe trong trình duyệt), **chấm âm vị** (wav2vec2 local, điểm GOP), **trọng âm và ngữ điệu** (gợi ý), **luyện trọn 44 âm**, gia sư AI tùy chọn, giao diện tiếng Việt, web và app iOS. Không tài khoản, video không rời thiết bị.
 
-The app runs on your computer. It requires no account, API key, paid service, or runtime internet connection. Its interface and pronunciation guidance are in Vietnamese.
+_An offline-first American English pronunciation coach for Vietnamese learners: mouth-shape mirror, phoneme scoring, prosody hints and drills for all 44 sounds, on your own machine, with an optional AI tutor and an iOS app._
 
-## Screenshots
+| Bảng 44 âm                                             | Luyện với camera và kết quả theo từng âm                                   |
+| ------------------------------------------------------ | -------------------------------------------------------------------------- |
+| ![Bảng 44 âm IPA](docs/screenshots/sounds-desktop.png) | ![Thẻ kết quả luyện phát âm](docs/screenshots/practice-result-desktop.png) |
 
-| 44-sound IPA chart                                                                              | Guided sound practice                                                                                            |
-| ----------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| ![The IPA chart with American sound notes and 466,550 indexed words](docs/images/ipa-chart.jpg) | ![A sound lesson with mouth guidance, example audio, recording, and full-word IPA](docs/images/ipa-practice.jpg) |
+## Bắt đầu nhanh (macOS Apple Silicon)
 
-![Dictionary lookup showing the American IPA and Vietnamese meaning for “geese”](docs/images/dictionary-example.jpg)
+Yêu cầu: Python 3.12 + [uv](https://docs.astral.sh/uv/), Node ≥ 24, giọng tiếng Anh Mỹ của macOS (`Samantha`), khoảng 2 GB trống cho model và thư viện.
 
-## Architecture
+```sh
+make install     # tooling repo, backend (uv sync), web (npm install), MediaPipe vào web/public
+make models      # tải model âm vị (~1,2 GB) vào data/models và ghi checksum vào docs/DATA-MANIFEST.json
+make doctor      # kiểm tra Python, nội dung, CMUdict, model, `say`, cổng
+make serve       # build web tĩnh rồi chạy API + web trên http://127.0.0.1:8765
+```
 
-Everything used while studying runs on the same computer. The browser talks only to the loopback Python server. The pronunciation index is built locally from the bundled data; speech uses macOS `say`; learning state, recordings, and generated audio stay in local files.
+Khi phát triển: `make api` (FastAPI :8765, reload) và `make web` (Next.js dev :3200, proxy `/api/v1` sang API). `make help` liệt kê mọi lệnh.
+
+## Tính năng
+
+- **Luyện trọn 44 âm**: mỗi âm có bộ bài riêng (6–10 từ ở vị trí đầu/giữa/cuối, cặp tối thiểu, 2 câu), tất cả kiểm tra tự động bằng CMUdict (`content/sound_drills.json`, 440 từ). Mọi âm đều được camera theo dõi: 12 nhóm khẩu hình phủ đủ 39 âm vị Mỹ, mỗi nhóm ghi mức tin cậy ("camera thấy rõ / thấy một phần / chỉ thấy môi-hàm, chấm bằng tai").
+- **Luyện phát âm AI**: cặp tối thiểu theo lỗi phổ biến của người Việt (think/sink, she/see, vest/west, bad/bed, âm cuối -p/-t/-s…), câu kể và câu hỏi. Ghi âm trong trình duyệt (WAV 16 kHz), nhận thẻ kết quả theo từng âm với ba mức `ok / check / error`, âm máy nghe được, gợi ý tiếng Việt và khẩu hình lúc phát âm.
+- **Gương khẩu hình**: hiệu chỉnh cá nhân 6 bước (20 giây); thanh đo độ tròn môi, độ mở hàm, môi khép, môi dưới chạm răng, thấy răng, thấy lưỡi (ước lượng bằng màu vùng trong miệng, thử nghiệm); gợi ý khi lệch quá 0,5 s; viền xanh khi giữ đúng. Hình được ghép với âm theo mốc thời gian để nâng/giảm mức kết luận (bảng luật fusion).
+- **Trọng âm, ngữ điệu, nhịp**: so độ nổi bật âm tiết với trọng âm từ điển (REcord/reCORD), hướng giọng cuối câu hỏi/câu kể, tỷ lệ dài âm nhấn/không nhấn. Chỉ ở mức gợi ý.
+- **Bảng 44 âm IPA** với hướng dẫn khẩu hình tiếng Việt, từ mẫu, giọng mẫu local.
+- **Gia sư AI (tùy chọn; mặc định OpenAI GPT‑6 Luna, hoặc Kimi / API tương thích OpenAI)**: giải thích kết quả đã chấm bằng tiếng Việt (model không chấm lại, không được thêm lỗi) và nhận xét **một ảnh chụp miệng** khi người học bấm "Hỏi AI về khẩu hình" (gửi một ảnh JPEG, không gửi video). Tắt mặc định; bật bằng `.env` theo `.env.example`.
+- **Tiến độ do máy đo** theo từng âm, lịch sử lượt luyện, nút "Tôi nói đúng mà" (ghi nhận để hiệu chỉnh).
+
+## Kiến trúc
 
 ```mermaid
 flowchart LR
-    learner["Learner"] <--> browser["Browser UI<br/>HTML · CSS · JavaScript"]
-
-    subgraph computer["Your computer · offline at runtime"]
-        browser <-->|"HTTP · 127.0.0.1:8765"| server["Python local server<br/>coach/server.py"]
-        server --> store["Learning store<br/>coach/store.py · SQLite"]
-        store --> progress[("data/coach.sqlite3<br/>progress · reviews · settings")]
-
-        server --> lexicon["Dictionary & IPA index<br/>coach/lexicon.py · SQLite"]
-        lexicon --> index[("vendor/lexicon.sqlite3<br/>built on first launch")]
-
-        server -->|"speech on demand"| say["macOS say<br/>American English voices"]
-        say --> audio[("data/audio/<br/>cached WAV files")]
-        audio --> browser
-
-        browser -->|"microphone recording · localhost"| server
-        server --> recordings[("data/recordings/<br/>local recordings")]
+    subgraph Client["Trình duyệt hoặc app iOS (web/, Next.js static trong Capacitor)"]
+        cam[Camera] --> mp[MediaPipe Face Landmarker<br/>WASM local]
+        mp --> feat[8 đặc trưng miệng + viền môi]
+        mic[Micro] --> wav[AudioWorklet → WAV 16 kHz]
     end
-
-    subgraph bundled["Bundled sources · no download during study"]
-        words["dwyl English word list"] --> builder["Local index builder"]
-        ipa["ipa-dict · US IPA"] --> builder
-        cmu["CMUdict · pronunciations"] --> builder
-        vi["thichhoc-dict · EN–VI"] --> builder
-        lessons["Authored lessons · Vietnamese"] --> store
-        builder --> lexicon
+    feat -->|JSON, không video| api
+    wav --> api[POST /api/v1/assess]
+    subgraph API["backend/ (FastAPI, Mac của bạn)"]
+        api --> rec[wav2vec2 phoneme CTC]
+        rec --> gop[Căn chỉnh ép + GOP]
+        gop --> cat[Catalogue lỗi người Việt]
+        cat --> fuse[Fusion audio + hình]
+        rec --> pros[Prosody: pitch, năng lượng, độ dài]
+        fuse --> db[(SQLite data/coach.sqlite3)]
+        db --> tutor[Gia sư AI tùy chọn<br/>OpenAI / Kimi]
     end
 ```
 
-The project does not send audio, search queries, or learning progress to a cloud service.
+Chi tiết: [docs/architecture/README.md](docs/architecture/README.md), quyết định: [docs/adr](docs/adr), quy ước code: [docs/conventions.md](docs/conventions.md), kiểm thử: [docs/testing.md](docs/testing.md), số đo: [docs/BENCHMARK-REALTIME.md](docs/BENCHMARK-REALTIME.md), iOS: [docs/ios.md](docs/ios.md).
 
-## Features
+## Ứng dụng iOS
 
-- **44 IPA sounds:** Vietnamese articulation tips, American English mappings, example words, and related vocabulary.
-- **Readable American IPA:** source pronunciations from `ipa-dict`, syllable stress, visible sound highlighting, and a larger-type option.
-- **Word practice:** play a local voice example, record yourself in the browser, and play back recordings saved on your computer.
-- **Offline dictionary:** search the 466,550-word `dwyl/english-words` list by prefix and browse pronunciations and Vietnamese meanings when available.
-- **Listening and review:** short listening-and-dictation exercises, vocabulary review, a 12-week/90-day practice schedule, and local progress tracking.
-- **Privacy by default:** the server listens on `127.0.0.1`; recordings, cached audio, and learning progress stay in the local `data/` directory.
+`web/ios/` là app iOS (Capacitor + Swift host) bọc đúng bản web: camera, thu âm và giao diện chạy trong app; máy chấm chạy trên Mac cùng mạng Wi‑Fi. `make ios-run` build và mở trên simulator; `make api-lan` + `make ios-open` để chạy trên iPhone thật (nhập địa chỉ máy chấm trong Tiến độ → Cài đặt). Chi tiết: [docs/ios.md](docs/ios.md).
 
-## Quick start
+## Riêng tư
 
-### macOS
+API bind `127.0.0.1` (hoặc `0.0.0.0` khi bạn chạy `make api-lan` cho điện thoại). Trình duyệt chỉ gửi tám đặc trưng miệng (số đo, không ảnh) và chuỗi điểm viền môi, không gửi video. Bản ghi âm chỉ dùng để chấm rồi bỏ; kết quả nằm ở `data/coach.sqlite3`. Gia sư AI chỉ gọi ra ngoài khi được bật trong `.env` và khi người học bấm nút; mỗi lần gửi JSON kết quả hoặc một ảnh miệng. Không telemetry.
 
-Requirements: Python 3.9 or newer and a built-in macOS English voice. No Python packages need to be installed.
+## Giới hạn cần biết
 
-```sh
-git clone https://github.com/deputychinh/American-English-Coach.git
-cd American-English-Coach
-./start.command
+- Camera **không thấy lưỡi bên trong miệng**; app ước lượng răng/lưỡi lộ ra bằng màu vùng trong môi (thử nghiệm). /θ ð/ và phần lớn khác biệt nguyên âm vẫn dựa vào audio.
+- Mức `error` chỉ bật cho lỗi đã đo precision ≥ 0,85 trên tập đánh giá (`content/enabled_errors.json`). Hiện danh sách này **rỗng** vì tập đánh giá sẵn có (speechocean762, người nói Mandarin) chưa cho precision đủ cao; mọi lỗi hiển thị ở mức `check` ("nghe lại") cho đến khi có dữ liệu người Việt.
+- Giọng mẫu là TTS của macOS (`say`), không phải người thật; gợi ý ngữ điệu so với giọng này.
+- iOS: chưa ký phát hành TestFlight; kết nối máy chấm qua HTTP trong mạng nội bộ.
+
+## Chất lượng
+
+`make ci` = lint + typecheck + test cho backend (ruff, mypy strict, pytest với coverage ≥ 90%) và web (ESLint 0 cảnh báo, Stylelint BEM + token, tsc, Vitest), cộng Prettier và commitlint (Conventional Commits, scope trong `commitlint.config.mjs`). CI trên GitHub Actions chạy cùng bộ lệnh. `make e2e` chạy Playwright với camera/micro giả.
+
+## Cấu trúc
+
+```
+backend/   FastAPI + domain + adapter ML (uv, ruff, mypy, pytest)
+web/       Next.js static export (TS strict, ESLint, Stylelint, Vitest, Playwright) + web/ios (Capacitor)
+content/   nội dung tiếng Việt: 44 âm, bộ bài 44 âm, catalogue lỗi, viseme, cặp tối thiểu, câu, enabled_errors
+vendor/    CMUdict, ipa-dict, thichhoc (giấy phép trong legacy/static/licenses)
+legacy/    app stdlib phiên bản đầu (vẫn chạy: cd legacy && python3 app.py)
+docs/      kế hoạch, ADR, kiến trúc, quy ước, kiểm thử, benchmark, manifest dữ liệu, iOS, ảnh chụp
+data/      (không commit) model, dataset đánh giá, SQLite, audio cache
 ```
 
-The launcher starts the local server and opens the app at <http://127.0.0.1:8765>. You can also start it from Terminal:
+## Giấy phép dữ liệu và model
 
-```sh
-python3 app.py
-```
-
-Keep the Terminal window open while you study; press `Ctrl+C` to stop the server. If port `8765` is in use, choose another port with `python3 app.py --port 8767`.
-
-On first launch, the app builds a local SQLite search index from the included word, pronunciation, and translation data. It rebuilds the index if it is missing or out of date. The macOS `say` voices used for audio are `Samantha` and `Eddy (English (US))`; select a voice in Settings. Generate-audio-on-demand keeps the repository smaller than bundling audio for every word.
-
-The web interface can open on other platforms, but local text-to-speech is currently implemented with macOS `say` and is not supported on Windows or Linux.
-
-## Start learning
-
-1. Open **44 IPA Sounds** and choose a sound.
-2. Read the Vietnamese mouth and tongue guidance, then listen to the example word.
-3. Record yourself and play the recording back. The app does not grade your accent automatically.
-4. Browse words that use the sound. Select a word to see its American IPA and Vietnamese meaning when available.
-5. Use **Aa · Larger IPA** if you want a bigger transcription. The choice is remembered in your browser.
-6. Mark sounds as new, practicing, or comfortable to keep track of your own progress.
-
-## Data coverage and limitations
-
-| Dataset                                 |                                         Current coverage |
-| --------------------------------------- | -------------------------------------------------------: |
-| Traditional IPA chart entries           | 44, with notes for corresponding American pronunciations |
-| `dwyl/english-words` entries            |                                                  466,550 |
-| Entries matched to an IPA pronunciation |                                                   72,072 |
-| Entries with a Vietnamese meaning       |                                                  115,655 |
-| Authored starter lessons                |          120 word cards and 60 sentences across 12 weeks |
-
-Coverage is source-based. The vocabulary list includes rare words, proper names, and entries with numbers or symbols. Many entries do not yet have an IPA transcription or Vietnamese meaning; the app labels missing data rather than inventing it.
-
-Vietnamese meanings are from **thichhoc-dict**. The source project says its Vietnamese translations are machine-generated and have not been human-reviewed. The app labels these meanings accordingly. Inflected forms such as `geese` link to their headword (`goose`).
-
-IPA is taken from **ipa-dict** when available. If only CMUdict data is available, the app converts its pronunciation symbols and omits stress rather than guessing syllable boundaries. A word can have several pronunciations; the TTS voice may use a different variant from the displayed transcription.
-
-The 44-symbol chart follows a traditional teaching convention that includes some British notation. It shows American correspondences and explains notation differences; it does not claim that American English has exactly 44 distinct phonemes.
-
-The 90-day schedule reuses the starter material; it does not contain 90 independent lesson packs. There is no speech recognition, automatic pronunciation assessment, or CEFR certification. Three months of practice is a study goal, not a guaranteed proficiency outcome.
-
-## Local data and backups
-
-- Progress, preferences, and review schedule: `data/coach.sqlite3`.
-- Voice recordings: `data/recordings/`.
-- Generated speech cache: `data/audio/`.
-- JSON export includes progress, not recordings. To back up everything, stop the app and copy the entire `data/` directory.
-- Restoring a JSON export replaces existing learning progress after you confirm in the app.
-- Use `python3 app.py --data-dir /path/to/profile` to run a separate profile. Do not run two app processes against the same data directory at once.
-
-The generated search index at `vendor/lexicon.sqlite3` is intentionally excluded from Git. The app rebuilds it from the included data files when needed. Keep your `data/` directory when updating the project.
-
-## Development and checks
-
-The app backend uses Python's standard library, SQLite, and the system `say` command. The UI uses plain HTML, CSS, and JavaScript. Node.js is only needed to run the UI helper tests.
-
-```sh
-python3 -m unittest discover -s tests -q
-node --test tests/lexicon-view.test.mjs
-node --check static/app.js
-```
-
-See [verification notes](docs/VERIFICATION.md), the [product brief](PRODUCT-BRIEF.md), the [repository research](docs/REPOSITORY-RESEARCH.md), and the [data manifest](docs/DATA-MANIFEST.json).
-
-## Data sources and attribution
-
-- [dwyl/english-words](https://github.com/dwyl/english-words): word list. See `vendor/ENGLISH-WORDS-LICENSE.md`.
-- [CMUdict](https://github.com/cmusphinx/cmudict): ARPAbet pronunciations. BSD license; see `vendor/CMUDICT-LICENSE`.
-- [ipa-dict](https://github.com/open-dict-data/ipa-dict): American English IPA. MIT license; see `vendor/IPA-DICT-LICENSE`.
-- [thichhoc-dict](https://github.com/thichhoc-org/thichhoc-dict): Vietnamese meanings and inflections. Dictionary data is CC BY-SA 4.0. The app links forms and indexes fields without rewriting the meanings; this derived dictionary data remains CC BY-SA 4.0. Full terms and required attribution are in `vendor/thichhoc/LICENSE-DATA` and in the app's **Data sources and licenses** section.
-- [Noto Sans](https://github.com/google/fonts/tree/main/ofl/notosans): bundled font under the SIL Open Font License; see `vendor/NOTO-SANS-OFL.txt`.
-
-Source file sizes and SHA-256 checksums are listed in [docs/DATA-MANIFEST.json](docs/DATA-MANIFEST.json).
+Xem [docs/DATA-MANIFEST.json](docs/DATA-MANIFEST.json): wav2vec2-xlsr-53-espeak-cv-ft (Apache-2.0), MediaPipe Face Landmarker và `@mediapipe/tasks-vision` (Apache-2.0), CMUdict (BSD), ipa-dict (MIT), thichhoc (dịch máy, ghi nhãn), speechocean762 (CC BY 4.0, chỉ dùng đánh giá), Noto Sans và Inter (OFL).
