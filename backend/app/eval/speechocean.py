@@ -5,7 +5,6 @@ so the numbers calibrate the pipeline, not Vietnamese learners.
 """
 
 import argparse
-import io
 import json
 import logging
 import random
@@ -71,7 +70,7 @@ def load_rows(limit: int, seed: int) -> list[dict[str, object]]:
 
 
 def strip(phone: str) -> str:
-    """speechocean phones carry stress digits and occasional lower-case."""
+    """Strip stress digits; speechocean phones occasionally come lower-case."""
     cleaned = phone.rstrip("0123456789").upper()
     return cleaned if cleaned in ARPABET else "?"
 
@@ -126,7 +125,7 @@ class Evaluator:
                     pairs[i].actual,
                     verdict,
                     known.id if known else None,
-                )  # fmt: skip
+                )
             )
         return observations
 
@@ -158,11 +157,16 @@ class Evaluator:
         return "error" if known else "check"
 
 
+def average_ranks(values: NDArray[np.float64]) -> NDArray[np.float64]:
+    """Ranks starting at 1 with ties sharing their average rank."""
+    _unique, inverse, counts = np.unique(values, return_inverse=True, return_counts=True)
+    starts = np.cumsum(counts) - counts
+    return (starts + (counts + 1) / 2.0)[inverse]
+
+
 def spearman(x: NDArray[np.float64], y: NDArray[np.float64]) -> float:
     """Spearman rank correlation (average ranks for ties)."""
-    from scipy.stats import rankdata  # noqa: PLC0415 - optional at runtime
-
-    return float(np.corrcoef(rankdata(x), rankdata(y))[0, 1])
+    return float(np.corrcoef(average_ranks(x), average_ranks(y))[0, 1])
 
 
 def correlations(observations: list[PhoneObservation]) -> dict[str, float]:

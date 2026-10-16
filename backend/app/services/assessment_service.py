@@ -4,8 +4,13 @@ import uuid
 from collections import Counter
 from dataclasses import dataclass
 
-from app.constants import GOP_CHECK_THRESHOLD, GOP_OK_THRESHOLD, VISUAL_WINDOW_PAD_SECONDS
-from app.domain.aligner import AlignedPair, PhonemeAligner
+from app.constants import (
+    ALIGN_GAP_COST,
+    GOP_CHECK_THRESHOLD,
+    GOP_OK_THRESHOLD,
+    VISUAL_WINDOW_PAD_SECONDS,
+)
+from app.domain.aligner import AlignedPair, PhonemeAligner, substitution_cost
 from app.domain.ctc_decoder import greedy_decode
 from app.domain.error_catalog import ErrorCatalog, KnownError
 from app.domain.fusion import FusionRules
@@ -126,7 +131,12 @@ class AssessmentService:
 
     def _cost(self, variant: tuple[Phone, ...], span: list[str]) -> float:
         pairs = self._aligner.align([p.symbol for p in variant], span)
-        return sum(1.0 for p in pairs if p.op is not AlignmentOp.MATCH)
+        return sum(
+            ALIGN_GAP_COST
+            if not (p.expected and p.actual)
+            else substitution_cost(p.expected, p.actual)
+            for p in pairs
+        )
 
     # --- per-phone verdicts ----------------------------------------------------
 
@@ -164,7 +174,9 @@ class AssessmentService:
         if op is AlignmentOp.MATCH:
             return Verdict.OK if gop >= GOP_CHECK_THRESHOLD else Verdict.CHECK
         if gop >= GOP_OK_THRESHOLD:
-            return Verdict.CHECK
+            # Greedy decoding disagrees but forced alignment supports the target: trust the
+            # alignment (measured on speechocean762, this removes most false alarms).
+            return Verdict.OK
         if known is not None and self._catalog.is_enabled(known):
             return Verdict.ERROR
         return Verdict.CHECK

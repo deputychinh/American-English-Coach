@@ -97,11 +97,48 @@ def parse_cmu(tokens: Iterable[str]) -> list[Phone]:
     return phones
 
 
+# The model was trained on many languages, so near-English sounds surface with foreign symbols
+# (ɕ for /ʃ/, ɲ for /ŋ/, x for /k/, tone-numbered vowels…). They map to the closest English phone;
+# anything still unknown becomes `?` and can only ever yield `check`.
+NEAREST_ENGLISH: Final[dict[str, tuple[str, ...]]] = {
+    "ɕ": ("SH",), "ʂ": ("SH",), "s.": ("SH",), "ʑ": ("ZH",), "ʐ": ("ZH",), "tɕ": ("CH",),
+    "ts.": ("CH",), "dʑ": ("JH",), "ɲ": ("NG",), "ɴ": ("NG",), "ɳ": ("N",), "x": ("K",),
+    "χ": ("K",), "q": ("K",), "c": ("K",), "ç": ("HH",), "ħ": ("HH",), "ɣ": ("G",), "ɟ": ("JH",),
+    "ʈ": ("T",), "ɖ": ("D",), "th": ("T",), "kh": ("K",), "ph": ("P",), "β": ("V",), "ʋ": ("V",),
+    "ɸ": ("F",), "ɭ": ("L",), "ʎ": ("L",), "ɽ": ("R",), "ʁ": ("R",), "ɨ": ("IH",), "ɯ": ("UW",),
+    "y": ("UW",), "ø": ("ER",), "œ": ("ER",), "ɵ": ("UH",), "ä": ("AA",), "e̞": ("EH",),
+    "o̞": ("OW",), "ei": ("EY",), "ou": ("OW",), "ai": ("AY",), "au": ("AW",), "oe": ("ER",),
+    "ie": ("IY", "AH"), "iɛ": ("IY", "EH"), "ua": ("UW", "AA"), "uo": ("UW", "OW"),
+    "iɑ": ("IY", "AA"), "ɑu": ("AW",), "uei": ("W", "EY"), "iou": ("Y", "OW"), "yæ": ("UW", "AE"),
+    "yɛ": ("UW", "EH"), "ər": ("ER",), "onɡ": ("OW", "NG"), "ɑɨ": ("AY",), "əɪ": ("EY",),
+    "ɛɪ": ("EY",), "æi": ("AY",), "eʊ": ("OW",), "ɛʊ": ("OW",), "ui": ("W", "IY"),
+}  # fmt: skip
+DIACRITICS: Final = ("ʲ", "ʰ", "ː", "̪", "̩", "̃", "^", "[", '"', ":")
+TONE_DIGITS: Final = "12345"
+
+
+def normalize_token(token: str) -> tuple[str, ...]:
+    """Resolve one model token: exact table, then nearest-English table after stripping marks."""
+    if token in ESPEAK_TO_ARPABET:
+        return ESPEAK_TO_ARPABET[token]
+    base = token.rstrip(TONE_DIGITS)
+    for mark in DIACRITICS:
+        base = base.replace(mark, "")
+    if base.endswith("ɜ") and len(base) > 1:
+        base = base[:-1]
+    for candidate in (token, base):
+        if candidate in ESPEAK_TO_ARPABET:
+            return ESPEAK_TO_ARPABET[candidate]
+        if candidate in NEAREST_ENGLISH:
+            return NEAREST_ENGLISH[candidate]
+    return (UNKNOWN,)
+
+
 def espeak_to_arpabet(tokens: Iterable[str]) -> list[str]:
-    """Map recognised espeak-style tokens to ARPAbet; unknown tokens become `?`."""
+    """Map recognised model tokens to ARPAbet; unknown tokens become `?`."""
     symbols: list[str] = []
     for token in tokens:
-        symbols.extend(ESPEAK_TO_ARPABET.get(token, (UNKNOWN,)))
+        symbols.extend(normalize_token(token))
     return symbols
 
 

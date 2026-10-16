@@ -51,7 +51,7 @@ def test_unstressed_schwa_is_shown_as_schwa() -> None:
 
 
 def test_unknown_tokens_become_question_marks_and_multi_phone_tokens_expand() -> None:
-    assert espeak_to_arpabet(["θ", "ɪ", "ŋ", "k", "ʁ", "əl"]) == [
+    assert espeak_to_arpabet(["θ", "ɪ", "ŋ", "k", "??", "əl"]) == [
         "TH",
         "IH",
         "NG",
@@ -60,3 +60,17 @@ def test_unknown_tokens_become_question_marks_and_multi_phone_tokens_expand() ->
         "AH",
         "L",
     ]
+
+
+def test_foreign_and_tone_marked_tokens_fall_back_to_the_nearest_english_phone() -> None:
+    assert espeak_to_arpabet(["ɕ", "ɲ", "x", "u5", "i5", "ei5", "ɑ5", "s.", "ɨ", "tʰ", "iɜ"]) == [
+        "SH", "NG", "K", "UW", "IY", "EY", "AA", "SH", "IH", "T", "IY",
+    ]  # fmt: skip
+    assert espeak_to_arpabet(["??", "ʔʔʔ"]) == ["?", "?"]
+
+
+def test_every_nearest_english_target_is_a_known_phone() -> None:
+    for targets in inv.NEAREST_ENGLISH.values():
+        for symbol in targets:
+            assert symbol in inv.ARPABET
+    assert [token for token in inv.NEAREST_ENGLISH if token in inv.ESPEAK_TO_ARPABET] == []

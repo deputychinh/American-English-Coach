@@ -129,7 +129,11 @@ def main() -> None:
     folder = REPO / "data" / "eval" / "say"
     folder.mkdir(parents=True, exist_ok=True)
     with tempfile.TemporaryDirectory() as tmp:
-        container = AppContainer(Settings(data_dir=Path(tmp), web_dist_dir=None))
+        defaults = Settings()
+        settings = Settings(
+            data_dir=Path(tmp), model_dir=defaults.resolved_model_dir, web_dist_dir=None
+        )
+        container = AppContainer(settings)
         trials: list[Trial] = []
         for voice in available_voices():
             for target, subs in SUBSTITUTIONS.items():

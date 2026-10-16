@@ -26,6 +26,7 @@ dev = [
   "ruff>=0.8",
   "mypy>=1.13",
   "hypothesis>=6.115",
+  "pyarrow>=26.0.0",
 ]
 
 [tool.uv]
@@ -73,7 +74,10 @@ files = ["app", "tests"]
 plugins = ["pydantic.mypy"]
 
 [[tool.mypy.overrides]]
-module = ["librosa", "librosa.*", "soundfile", "transformers", "transformers.*", "huggingface_hub"]
+module = [
+  "librosa", "librosa.*", "soundfile", "transformers", "transformers.*", "huggingface_hub",
+  "pyarrow", "pyarrow.*",
+]
 ignore_missing_imports = true
 
 [tool.pytest.ini_options]
