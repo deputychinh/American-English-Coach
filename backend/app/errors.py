@@ -65,3 +65,9 @@ class NotReadyError(DomainError):
     """A dependency the API needs (model, database) is not available yet."""
 
     code = ErrorCode.NOT_READY
+
+
+class UnauthorizedError(DomainError):
+    """Missing or invalid device token / pairing code."""
+
+    code = ErrorCode.UNAUTHORIZED

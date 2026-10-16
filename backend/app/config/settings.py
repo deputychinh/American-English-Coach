@@ -30,6 +30,8 @@ class Settings(BaseSettings):
     # `fake` runs the API without the model (CI, demos); results are tagged fake-recognizer@ci.
     recognizer: str = Field(default="wav2vec2", pattern="^(wav2vec2|fake)$")
     log_json: bool = True
+    # Fixed pairing code (6 digits) for phones; empty = a new code each start, printed in the log.
+    pairing_code: str = Field(default="", pattern=r"^(\d{6})?$")
     tutor_rate_limit_per_minute: int = 10
     realtime_enabled: bool = True
     tts_voice: str = DEFAULT_VOICE

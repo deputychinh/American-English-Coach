@@ -61,3 +61,14 @@ class Calibration(Base):
     id: Mapped[str] = mapped_column(String(32), primary_key=True)
     data_json: Mapped[str] = mapped_column(Text)
     created_at: Mapped[datetime] = mapped_column(default=utcnow)
+
+
+class Device(Base):
+    """A phone paired with this coach; the token travels in `X-Coach-Token`."""
+
+    __tablename__ = "devices"
+
+    token: Mapped[str] = mapped_column(String(64), primary_key=True)
+    name: Mapped[str] = mapped_column(String(80))
+    created_at: Mapped[datetime] = mapped_column(default=utcnow)
+    last_seen_at: Mapped[datetime | None] = mapped_column(nullable=True)

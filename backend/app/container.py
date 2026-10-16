@@ -16,7 +16,9 @@ from app.ml.features import ProsodyFeatureExtractor
 from app.ml.llm_client import ChatClient
 from app.ml.tts import SpeechSynthesizer
 from app.repositories.calibration_repository import CalibrationRepository
+from app.repositories.device_repository import DeviceRepository
 from app.repositories.results_repository import ResultsRepository
+from app.security import new_pairing_code
 from app.services.assessment_service import AssessmentService
 from app.services.audio_service import AudioService
 from app.services.content_service import ContentService
@@ -89,6 +91,16 @@ class AppContainer:
         from app.ml.recognizer import Wav2Vec2Recognizer  # noqa: PLC0415 - heavy import on demand
 
         return Wav2Vec2Recognizer(self.settings.resolved_model_dir, self.settings.device)
+
+    @cached_property
+    def devices(self) -> DeviceRepository:
+        """Paired phones."""
+        return DeviceRepository(self.sessions)
+
+    @cached_property
+    def pairing_code(self) -> str:
+        """Configured code or a fresh one per process start."""
+        return self.settings.pairing_code or new_pairing_code()
 
     @cached_property
     def results(self) -> ResultsRepository:
