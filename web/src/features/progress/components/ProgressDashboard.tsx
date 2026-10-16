@@ -9,15 +9,20 @@ import { PageIntro } from '@/components/PageIntro/PageIntro';
 import { Skeleton } from '@/components/Skeleton/Skeleton';
 import { COPY } from '@/constants/copy.constant';
 import { AsyncStatus } from '@/enums/async-status.enum';
+import { getSounds } from '@/features/content/services/content.service';
 import { SettingsPanel } from '@/features/progress/components/SettingsPanel';
 import { getProgress } from '@/features/progress/services/progress.service';
 import { useAsync } from '@/hooks/useAsync';
+import { targetPhoneOf } from '@/utils/drill.util';
 import { formatDateTime, formatPercent } from '@/utils/format.util';
 
 import './ProgressDashboard.css';
 
 export const ProgressDashboard = (): ReactElement => {
   const { status, data, error, reload } = useAsync(getProgress);
+  const sounds = useAsync(getSounds);
+  const drillIdOf = (phoneme: string): string | null =>
+    sounds.data?.find((sound) => targetPhoneOf(sound.arpabet) === phoneme)?.id ?? null;
   return (
     <div className="progress-dashboard">
       <PageIntro title={COPY.progress.title} lead={COPY.progress.machineHint} />
@@ -47,7 +52,18 @@ export const ProgressDashboard = (): ReactElement => {
                   {data.phonemes.map((stat) => (
                     <tr key={stat.phoneme}>
                       <th scope="row" className="progress-dashboard__ipa">
-                        /{stat.ipa}/
+                        {drillIdOf(stat.phoneme) ? (
+                          <Link
+                            href={{
+                              pathname: '/practice',
+                              query: { sound: drillIdOf(stat.phoneme) },
+                            }}
+                          >
+                            /{stat.ipa}/
+                          </Link>
+                        ) : (
+                          `/${stat.ipa}/`
+                        )}
                       </th>
                       <td>{stat.total}</td>
                       <td>{stat.ok}</td>

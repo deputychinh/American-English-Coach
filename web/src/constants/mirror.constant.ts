@@ -40,3 +40,6 @@ export const TEETH_MAX_SATURATION = 0.28;
 export const TONGUE_MIN_VALUE = 70;
 export const TONGUE_MIN_SATURATION = 0.3;
 export const TONGUE_RED_MARGIN = 20;
+/** One-off mouth snapshot sent to the tutor on request. */
+export const SNAPSHOT_MAX_WIDTH = 512;
+export const SNAPSHOT_PADDING = 0.6;

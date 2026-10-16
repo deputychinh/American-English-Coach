@@ -41,7 +41,7 @@ describe('SoundChart', () => {
     render(<SoundChart />);
     await waitFor(() => expect(screen.getByText('Nguyên âm')).toBeInTheDocument());
     expect(screen.getByText('Phụ âm')).toBeInTheDocument();
-    expect(screen.getAllByText('Camera nhìn thấy')).toHaveLength(1);
+    expect(document.querySelectorAll('.confidence-badge')).toHaveLength(3);
     expect(screen.getByRole('heading', { name: '/θ/' })).toBeInTheDocument();
     expect(screen.getByText('Lưỡi giữa răng.')).toBeInTheDocument();
     expect(screen.getByRole('link', { name: 'Luyện từ này' })).toHaveAttribute(

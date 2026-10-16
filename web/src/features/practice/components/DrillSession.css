@@ -1,0 +1,41 @@
+.drill-session {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.drill-session__head {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap-inline);
+  align-items: center;
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+}
+
+.drill-session__progress {
+  font-weight: var(--weight-semibold);
+}
+
+.drill-session__tally {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+.drill-session__summary {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--padding-card);
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+}
+
+.drill-session__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap-inline);
+}

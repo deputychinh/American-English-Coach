@@ -3,6 +3,8 @@ import type {
   MinimalPair,
   PhonemeCard,
   Sentence,
+  SoundDrill,
+  SoundDrillSummary,
   VisemeContent,
 } from '@/interfaces/practice.interface';
 import { problemMessage } from '@/utils/problem.util';
@@ -25,10 +27,20 @@ export const getSentences = async (): Promise<Sentence[]> =>
 export const getVisemes = async (): Promise<VisemeContent> =>
   unwrap(await api.GET('/api/v1/content/visemes'), 'mẫu khẩu hình');
 
+export const getSounds = async (): Promise<SoundDrillSummary[]> =>
+  unwrap(await api.GET('/api/v1/content/sounds'), 'danh sách âm');
+
+export const getSound = async (soundId: string): Promise<SoundDrill> =>
+  unwrap(
+    await api.GET('/api/v1/content/sounds/{sound_id}', { params: { path: { sound_id: soundId } } }),
+    'bài luyện âm',
+  );
+
 export const getPracticeContent = async (): Promise<{
   pairs: MinimalPair[];
   sentences: Sentence[];
+  sounds: SoundDrillSummary[];
 }> => {
-  const [pairs, sentences] = await Promise.all([getPairs(), getSentences()]);
-  return { pairs, sentences };
+  const [pairs, sentences, sounds] = await Promise.all([getPairs(), getSentences(), getSounds()]);
+  return { pairs, sentences, sounds };
 };

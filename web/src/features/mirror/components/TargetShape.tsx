@@ -39,6 +39,28 @@ const SHAPES: Record<VisemeGroup, { outer: string; inner: string; extra?: string
     outer: 'M24 50 Q60 30 96 50 Q60 100 24 50 Z',
     inner: 'M36 52 Q60 40 84 52 Q60 86 36 52 Z',
   },
+  [VisemeGroup.V8]: {
+    outer: 'M18 58 Q60 44 102 58 Q60 76 18 58 Z',
+    inner: 'M32 58 Q60 52 88 58 Q60 66 32 58 Z',
+    extra: 'M40 58 L80 58',
+  },
+  [VisemeGroup.V9]: {
+    outer: 'M26 54 Q60 36 94 54 Q60 88 26 54 Z',
+    inner: 'M40 56 Q60 46 80 56 Q60 74 40 56 Z',
+  },
+  [VisemeGroup.V10]: {
+    outer: 'M32 56 Q60 36 88 56 Q60 84 32 56 Z',
+    inner: 'M46 56 Q60 48 74 56 Q60 70 46 56 Z',
+  },
+  [VisemeGroup.V11]: {
+    outer: 'M24 56 Q60 42 96 56 Q60 78 24 56 Z',
+    inner: 'M38 56 Q60 50 82 56 Q60 66 38 56 Z',
+    extra: 'M52 56 Q60 52 68 56',
+  },
+  [VisemeGroup.V12]: {
+    outer: 'M24 56 Q60 40 96 56 Q60 82 24 56 Z',
+    inner: 'M38 56 Q60 48 82 56 Q60 70 38 56 Z',
+  },
 };
 
 export const TargetShape = ({ group, size }: TargetShapeProps): ReactElement => {

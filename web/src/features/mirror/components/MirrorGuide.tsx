@@ -2,6 +2,7 @@
 
 import { type ReactElement, type ReactNode, useMemo } from 'react';
 
+import { ConfidenceBadge } from '@/components/ConfidenceBadge/ConfidenceBadge';
 import { FeatureBar } from '@/components/FeatureBar/FeatureBar';
 import { COPY } from '@/constants/copy.constant';
 import { FEATURE_NAMES } from '@/constants/mirror.constant';
@@ -22,6 +23,10 @@ interface MirrorGuideProps {
   features: TrackedSample | null;
   muted: boolean;
   camera: ReactNode;
+  confidenceLabels?: Record<string, string>;
+  transitionVi?: string | null;
+  /** Optional "ask the AI about my mouth" block (only when the tutor is configured). */
+  tutor?: ReactNode;
 }
 
 export const MirrorGuide = ({
@@ -30,6 +35,9 @@ export const MirrorGuide = ({
   features,
   muted,
   camera,
+  confidenceLabels,
+  transitionVi = null,
+  tutor = null,
 }: MirrorGuideProps): ReactElement => {
   const targets = useMemo(() => (target ? targetsFromApi(target.targets) : {}), [target]);
   const usable = features && features.quality >= 0.5 ? features.features : null;
@@ -51,7 +59,12 @@ export const MirrorGuide = ({
             {target ? (
               <>
                 <p className="mirror-guide__name">{target.name_vi}</p>
+                <ConfidenceBadge confidence={target.confidence} labels={confidenceLabels} />
                 <p>{target.hint_vi}</p>
+                {transitionVi ? <p className="mirror-guide__transition">{transitionVi}</p> : null}
+                {target.confidence === 'low' ? (
+                  <p className="mirror-guide__muted">{COPY.mirror.lowConfidence}</p>
+                ) : null}
                 <p className="mirror-guide__muted">
                   {COPY.mirror.commonError}: {target.common_error_vi}
                 </p>
@@ -76,6 +89,7 @@ export const MirrorGuide = ({
           {!hold.isHeld && hold.isOnTarget ? COPY.mirror.hold : null}
           {hold.showHint && hint ? hint : null}
         </p>
+        {tutor}
       </aside>
     </div>
   );

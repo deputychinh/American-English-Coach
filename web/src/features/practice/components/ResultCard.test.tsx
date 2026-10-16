@@ -43,7 +43,10 @@ describe('ResultCard', () => {
     render(<ResultCard result={assessmentFixture()} recording={null} outlineAt={() => []} />);
     await user.click(screen.getByRole('button', { name: 'Tôi nói đúng mà' }));
     await waitFor(() => expect(screen.getByRole('status')).toHaveTextContent('Đã ghi nhận'));
-    expect(fetchMock).toHaveBeenCalledTimes(1);
+    const urls = fetchMock.mock.calls.map((call: unknown[]) =>
+      String(call[0] instanceof Request ? call[0].url : call[0]),
+    );
+    expect(urls.filter((url) => url.includes('/dispute'))).toHaveLength(1);
   });
 
   it('shows the dispute error when the API refuses', async () => {

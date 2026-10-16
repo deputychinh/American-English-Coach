@@ -1,0 +1,50 @@
+.sound-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+.sound-list__heading {
+  font-size: var(--text-xl);
+  margin-block-end: var(--space-3);
+}
+
+.sound-list__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(150px, 100%), 1fr));
+  gap: var(--space-3);
+  padding: 0;
+  list-style: none;
+}
+
+.sound-list__card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  align-items: flex-start;
+  block-size: 100%;
+  padding: var(--space-3);
+  text-decoration: none;
+  color: var(--color-text);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  transition: border-color var(--duration-fast) var(--ease-standard);
+}
+
+.sound-list__card:hover {
+  color: var(--color-text);
+  border-color: var(--color-primary);
+}
+
+.sound-list__ipa {
+  font-family: var(--font-ipa);
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-semibold);
+  color: var(--color-primary);
+}
+
+.sound-list__meta {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+}

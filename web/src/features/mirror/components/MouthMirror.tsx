@@ -17,6 +17,7 @@ import { CameraPanel } from '@/features/mirror/components/CameraPanel';
 import { MirrorGuide } from '@/features/mirror/components/MirrorGuide';
 import { useCalibration } from '@/features/mirror/hooks/useCalibration';
 import { useMouthTracker } from '@/features/mirror/hooks/useMouthTracker';
+import { MouthTutorButton } from '@/features/tutor/components/MouthTutorButton';
 import { useAsync } from '@/hooks/useAsync';
 import { useStoredState } from '@/hooks/useStoredState';
 import type { PhonemeCard, VisemeContent } from '@/interfaces/practice.interface';
@@ -65,7 +66,6 @@ export const MouthMirror = (): ReactElement => {
             {content.data.phonemes.map((item) => (
               <option key={item.id} value={item.arpabet}>
                 /{item.us}/ · {item.example}
-                {item.viseme_group ? '' : ` · ${COPY.sounds.audioOnly}`}
               </option>
             ))}
           </select>
@@ -118,6 +118,17 @@ export const MouthMirror = (): ReactElement => {
           features={cameraOn ? tracker.latest : null}
           muted={muted}
           camera={<CameraPanel tracker={tracker} />}
+          confidenceLabels={content.data.visemes.confidence_labels}
+          transitionVi={content.data.visemes.transitions[sound] ?? null}
+          tutor={
+            cameraOn && target ? (
+              <MouthTutorButton
+                tracker={tracker}
+                soundIpa={card?.us ?? sound}
+                targetVi={target.hint_vi}
+              />
+            ) : null
+          }
         />
       ) : null}
     </div>

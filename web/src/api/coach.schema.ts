@@ -4,1310 +4,1310 @@
  */
 
 export interface paths {
-    "/api/v1/assess": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /**
-         * Assess
-         * @description Score one recording of `text`; mouth frames are optional and never contain video.
-         */
-        post: operations["assess_api_v1_assess_post"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+  '/api/v1/assess': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/v1/audio": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Audio
-         * @description WAV of the prompt spoken by the local American voice (cached).
-         */
-        get: operations["audio_api_v1_audio_get"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    get?: never;
+    put?: never;
+    /**
+     * Assess
+     * @description Score one recording of `text`; mouth frames are optional and never contain video.
+     */
+    post: operations['assess_api_v1_assess_post'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/v1/audio': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/v1/calibration": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Calibration
-         * @description Stored mouth calibration, if any.
-         */
-        get: operations["calibration_api_v1_calibration_get"];
-        /**
-         * Save Calibration
-         * @description Replace the mouth calibration.
-         */
-        put: operations["save_calibration_api_v1_calibration_put"];
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    /**
+     * Audio
+     * @description WAV of the prompt spoken by the local American voice (cached).
+     */
+    get: operations['audio_api_v1_audio_get'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/v1/calibration': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/v1/content/errors": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Errors
-         * @description Error catalogue.
-         */
-        get: operations["errors_api_v1_content_errors_get"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    /**
+     * Calibration
+     * @description Stored mouth calibration, if any.
+     */
+    get: operations['calibration_api_v1_calibration_get'];
+    /**
+     * Save Calibration
+     * @description Replace the mouth calibration.
+     */
+    put: operations['save_calibration_api_v1_calibration_put'];
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/v1/content/errors': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/v1/content/pairs": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Pairs
-         * @description Minimal pairs.
-         */
-        get: operations["pairs_api_v1_content_pairs_get"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    /**
+     * Errors
+     * @description Error catalogue.
+     */
+    get: operations['errors_api_v1_content_errors_get'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/v1/content/pairs': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/v1/content/phonemes": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Phonemes
-         * @description The 44-sound chart.
-         */
-        get: operations["phonemes_api_v1_content_phonemes_get"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    /**
+     * Pairs
+     * @description Minimal pairs.
+     */
+    get: operations['pairs_api_v1_content_pairs_get'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/v1/content/phonemes': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/v1/content/sentences": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Sentences
-         * @description Practice sentences.
-         */
-        get: operations["sentences_api_v1_content_sentences_get"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    /**
+     * Phonemes
+     * @description The 44-sound chart.
+     */
+    get: operations['phonemes_api_v1_content_phonemes_get'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/v1/content/sentences': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/v1/content/sounds": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Sounds
-         * @description Every chart sound with the size of its drill.
-         */
-        get: operations["sounds_api_v1_content_sounds_get"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    /**
+     * Sentences
+     * @description Practice sentences.
+     */
+    get: operations['sentences_api_v1_content_sentences_get'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/v1/content/sounds': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/v1/content/sounds/{sound_id}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Sound
-         * @description Words, pairs and sentences validated against CMUdict for one sound.
-         */
-        get: operations["sound_api_v1_content_sounds__sound_id__get"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    /**
+     * Sounds
+     * @description Every chart sound with the size of its drill.
+     */
+    get: operations['sounds_api_v1_content_sounds_get'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/v1/content/sounds/{sound_id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/v1/content/visemes": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Visemes
-         * @description Mouth-shape targets and calibration steps.
-         */
-        get: operations["visemes_api_v1_content_visemes_get"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    /**
+     * Sound
+     * @description Words, pairs and sentences validated against CMUdict for one sound.
+     */
+    get: operations['sound_api_v1_content_sounds__sound_id__get'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/v1/content/visemes': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/v1/health": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Health
-         * @description Report whether the model and the local TTS are usable.
-         */
-        get: operations["health_api_v1_health_get"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    /**
+     * Visemes
+     * @description Mouth-shape targets and calibration steps.
+     */
+    get: operations['visemes_api_v1_content_visemes_get'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/v1/health': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/v1/progress": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Progress
-         * @description Per-sound totals and recent runs.
-         */
-        get: operations["progress_api_v1_progress_get"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    /**
+     * Health
+     * @description Report whether the model and the local TTS are usable.
+     */
+    get: operations['health_api_v1_health_get'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/v1/progress': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/v1/runs/{run_id}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Run
-         * @description A stored assessment result.
-         */
-        get: operations["run_api_v1_runs__run_id__get"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    /**
+     * Progress
+     * @description Per-sound totals and recent runs.
+     */
+    get: operations['progress_api_v1_progress_get'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/v1/runs/{run_id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/v1/runs/{run_id}/dispute": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /**
-         * Dispute
-         * @description Learner says "Tôi nói đúng mà"; kept as false-alarm evidence.
-         */
-        post: operations["dispute_api_v1_runs__run_id__dispute_post"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    /**
+     * Run
+     * @description A stored assessment result.
+     */
+    get: operations['run_api_v1_runs__run_id__get'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/v1/runs/{run_id}/dispute': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/v1/tutor/explain": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /**
-         * Explain
-         * @description Explain a run's verdicts in plain Vietnamese (the model does not score).
-         */
-        post: operations["explain_api_v1_tutor_explain_post"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    get?: never;
+    put?: never;
+    /**
+     * Dispute
+     * @description Learner says "Tôi nói đúng mà"; kept as false-alarm evidence.
+     */
+    post: operations['dispute_api_v1_runs__run_id__dispute_post'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/v1/tutor/explain': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/v1/tutor/mouth": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /**
-         * Mouth
-         * @description Comment on one JPEG of the learner's mouth (sent only when the learner asks).
-         */
-        post: operations["mouth_api_v1_tutor_mouth_post"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    get?: never;
+    put?: never;
+    /**
+     * Explain
+     * @description Explain a run's verdicts in plain Vietnamese (the model does not score).
+     */
+    post: operations['explain_api_v1_tutor_explain_post'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/v1/tutor/mouth': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
+    get?: never;
+    put?: never;
+    /**
+     * Mouth
+     * @description Comment on one JPEG of the learner's mouth (sent only when the learner asks).
+     */
+    post: operations['mouth_api_v1_tutor_mouth_post'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
 }
 export type webhooks = Record<string, never>;
 export interface components {
-    schemas: {
-        /**
-         * AssessmentResponse
-         * @description Everything the result card needs; also stored verbatim for history.
-         */
-        AssessmentResponse: {
-            /** Id */
-            id: string;
-            /** Item Id */
-            item_id: string;
-            /** Model Version */
-            model_version: string;
-            /** Prosody */
-            prosody: components["schemas"]["ProsodyResult"][];
-            summary: components["schemas"]["AssessmentSummary"];
-            /** Text */
-            text: string;
-            /** Words */
-            words: components["schemas"]["WordResult"][];
-        };
-        /**
-         * AssessmentSummary
-         * @description Counts and the top priorities.
-         */
-        AssessmentSummary: {
-            /** Camera Used */
-            camera_used: boolean;
-            /** Check */
-            check: number;
-            /** Error */
-            error: number;
-            /** Focus */
-            focus: components["schemas"]["FocusItem"][];
-            /** Ok */
-            ok: number;
-        };
-        /** Body_assess_api_v1_assess_post */
-        Body_assess_api_v1_assess_post: {
-            /** Audio */
-            audio: string;
-            /** Audio Started At */
-            audio_started_at?: number | null;
-            /** Item Id */
-            item_id: string;
-            /**
-             * Kind
-             * @default word
-             */
-            kind: string;
-            /**
-             * Mouth Frames
-             * @default []
-             */
-            mouth_frames: string;
-            /** Text */
-            text: string;
-        };
-        /** Body_mouth_api_v1_tutor_mouth_post */
-        Body_mouth_api_v1_tutor_mouth_post: {
-            /** Image */
-            image: string;
-            /** Sound Ipa */
-            sound_ipa: string;
-            /** Target Vi */
-            target_vi: string;
-        };
-        /**
-         * CalibrationPayload
-         * @description Min/max per feature captured by the browser.
-         */
-        CalibrationPayload: {
-            /** Features */
-            features: {
-                [key: string]: {
-                    [key: string]: number;
-                };
-            };
-        };
-        /**
-         * CalibrationStep
-         * @description One step of the 20-second calibration flow.
-         */
-        CalibrationStep: {
-            /** Id */
-            id: string;
-            /** Prompt Vi */
-            prompt_vi: string;
-            /** Seconds */
-            seconds: number;
-        };
-        /**
-         * DrillSentence
-         * @description A practice sentence with its intonation kind.
-         */
-        DrillSentence: {
-            /** Kind */
-            kind: string;
-            /** Text */
-            text: string;
-        };
-        /**
-         * DrillWord
-         * @description A practice word with where the target sound sits.
-         */
-        DrillWord: {
-            /** Position */
-            position: string;
-            /** Word */
-            word: string;
-        };
-        /**
-         * ExplainRequest
-         * @description Which stored run to explain.
-         */
-        ExplainRequest: {
-            /** Run Id */
-            run_id: string;
-        };
-        /**
-         * FocusItem
-         * @description One of at most two priorities to practise next.
-         */
-        FocusItem: {
-            /** Count */
-            count: number;
-            /** Error Id */
-            error_id: string;
-            /** Hint Vi */
-            hint_vi: string;
-            /** Ipa */
-            ipa: string;
-            /** Phoneme */
-            phoneme: string;
-        };
-        /** HTTPValidationError */
-        HTTPValidationError: {
-            /** Detail */
-            detail?: components["schemas"]["ValidationError"][];
-        };
-        /**
-         * HealthResponse
-         * @description Liveness plus feature availability.
-         */
-        HealthResponse: {
-            /** Model Ready */
-            model_ready: boolean;
-            /** Realtime Enabled */
-            realtime_enabled: boolean;
-            /** Status */
-            status: string;
-            /** Tts Available */
-            tts_available: boolean;
-            /** Tutor Available */
-            tutor_available: boolean;
-            /** Tutor Model */
-            tutor_model: string | null;
-            /** Version */
-            version: string;
-        };
-        /**
-         * KnownErrorCard
-         * @description Catalogue entry exposed to the UI.
-         */
-        KnownErrorCard: {
-            /** Enabled */
-            enabled: boolean;
-            /** Expected */
-            expected: string;
-            /** Final Only */
-            final_only: boolean;
-            /** Heard */
-            heard: string[];
-            /** Hint Vi */
-            hint_vi: string;
-            /** Id */
-            id: string;
-            /** Kind */
-            kind: string;
-            /** Mouth Tip Vi */
-            mouth_tip_vi: string;
-            /** Priority */
-            priority: number;
-            viseme_group: components["schemas"]["VisemeGroup"] | null;
-        };
-        /**
-         * MinimalPair
-         * @description Two words that differ in the focus sound.
-         */
-        MinimalPair: {
-            /** Error Id */
-            error_id: string;
-            /** Focus */
-            focus: string;
-            /** Id */
-            id: string;
-            /** Title Vi */
-            title_vi: string;
-            /** Words */
-            words: string[];
-        };
-        /**
-         * PhoneResult
-         * @description Verdict for one expected phone.
-         */
-        PhoneResult: {
-            audio_verdict: components["schemas"]["Verdict"];
-            /** End */
-            end: number;
-            /** Error Id */
-            error_id: string | null;
-            /** Gop */
-            gop: number;
-            /** Heard */
-            heard: string;
-            /** Heard Ipa */
-            heard_ipa: string;
-            /** Hint Vi */
-            hint_vi: string | null;
-            /** Ipa */
-            ipa: string;
-            /** Mouth Tip Vi */
-            mouth_tip_vi: string | null;
-            /** Show Mouth Hint */
-            show_mouth_hint: boolean;
-            /** Start */
-            start: number;
-            /** Symbol */
-            symbol: string;
-            verdict: components["schemas"]["Verdict"];
-            viseme_group: components["schemas"]["VisemeGroup"] | null;
-            visual: components["schemas"]["VisualVerdict"];
-        };
-        /**
-         * PhonemeCard
-         * @description One entry of the 44-sound chart with Vietnamese articulation tips.
-         */
-        PhonemeCard: {
-            /** Arpabet */
-            arpabet: string;
-            /** Contrast */
-            contrast: string;
-            /** Example */
-            example: string;
-            /** Group */
-            group: string;
-            /** Id */
-            id: string;
-            /** Note */
-            note: string;
-            /** Symbol */
-            symbol: string;
-            /** Tip */
-            tip: string;
-            /** Us */
-            us: string;
-            /** Viseme Confidence */
-            viseme_confidence: string | null;
-            viseme_group: components["schemas"]["VisemeGroup"] | null;
-        };
-        /**
-         * PhonemeStatModel
-         * @description Per-sound totals.
-         */
-        PhonemeStatModel: {
-            /** Check */
-            check: number;
-            /** Error */
-            error: number;
-            /** Ipa */
-            ipa: string;
-            /** Ok */
-            ok: number;
-            /** Phoneme */
-            phoneme: string;
-            /** Total */
-            total: number;
-        };
-        /**
-         * ProgressResponse
-         * @description Dashboard payload; machine-measured only (self-assessment is a separate concept).
-         */
-        ProgressResponse: {
-            /** Phonemes */
-            phonemes: components["schemas"]["PhonemeStatModel"][];
-            /** Recent */
-            recent: components["schemas"]["RunSummaryModel"][];
-            /** Runs */
-            runs: number;
-        };
-        /**
-         * ProsodyAspect
-         * @description Prosody dimensions the analyser reports on.
-         * @enum {string}
-         */
-        ProsodyAspect: ProsodyAspect;
-        /**
-         * ProsodyResult
-         * @description One prosody finding (never stronger than `check`).
-         */
-        ProsodyResult: {
-            aspect: components["schemas"]["ProsodyAspect"];
-            /** Detail Vi */
-            detail_vi: string;
-            verdict: components["schemas"]["Verdict"];
-            /** Word Index */
-            word_index: number | null;
-        };
-        /**
-         * RunSummaryModel
-         * @description History row.
-         */
-        RunSummaryModel: {
-            /** Check */
-            check: number;
-            /**
-             * Created At
-             * Format: date-time
-             */
-            created_at: string;
-            /** Disputed */
-            disputed: boolean;
-            /** Error */
-            error: number;
-            /** Id */
-            id: string;
-            /** Item Id */
-            item_id: string;
-            /** Model Version */
-            model_version: string;
-            /** Ok */
-            ok: number;
-            /** Text */
-            text: string;
-        };
-        /**
-         * Sentence
-         * @description A practice sentence with its intonation kind.
-         */
-        Sentence: {
-            /** Focus */
-            focus: string[];
-            /** Id */
-            id: string;
-            /** Kind */
-            kind: string;
-            /** Text */
-            text: string;
-            /** Title Vi */
-            title_vi: string;
-        };
-        /**
-         * SoundDrill
-         * @description Validated practice material for one chart sound.
-         */
-        SoundDrill: {
-            /** Arpabet */
-            arpabet: string;
-            /** Group */
-            group: string;
-            /** Id */
-            id: string;
-            /** Pairs */
-            pairs: string[][];
-            /** Sentences */
-            sentences: components["schemas"]["DrillSentence"][];
-            /** Symbol */
-            symbol: string;
-            /** Transition Vi */
-            transition_vi: string | null;
-            /** Us */
-            us: string;
-            /** Viseme Confidence */
-            viseme_confidence: string | null;
-            viseme_group: components["schemas"]["VisemeGroup"] | null;
-            /** Words */
-            words: components["schemas"]["DrillWord"][];
-        };
-        /**
-         * SoundDrillSummary
-         * @description Row of the "practise by sound" list.
-         */
-        SoundDrillSummary: {
-            /** Arpabet */
-            arpabet: string;
-            /** Group */
-            group: string;
-            /** Id */
-            id: string;
-            /** Pair Count */
-            pair_count: number;
-            /** Sentence Count */
-            sentence_count: number;
-            /** Symbol */
-            symbol: string;
-            /** Us */
-            us: string;
-            /** Viseme Confidence */
-            viseme_confidence: string | null;
-            viseme_group: components["schemas"]["VisemeGroup"] | null;
-            /** Word Count */
-            word_count: number;
-        };
-        /**
-         * TutorReply
-         * @description The tutor's Vietnamese text and the model that wrote it.
-         */
-        TutorReply: {
-            /** Model */
-            model: string;
-            /** Text Vi */
-            text_vi: string;
-        };
-        /** ValidationError */
-        ValidationError: {
-            /** Context */
-            ctx?: Record<string, never>;
-            /** Input */
-            input?: unknown;
-            /** Location */
-            loc: (string | number)[];
-            /** Message */
-            msg: string;
-            /** Error Type */
-            type: string;
-        };
-        /**
-         * Verdict
-         * @description Three-level conclusion for one phoneme; never a binary right/wrong.
-         * @enum {string}
-         */
-        Verdict: Verdict;
-        /**
-         * VisemeContent
-         * @description Everything the mirror needs at start-up.
-         */
-        VisemeContent: {
-            /** Calibration */
-            calibration: components["schemas"]["CalibrationStep"][];
-            /** Confidence Labels */
-            confidence_labels: {
-                [key: string]: string;
-            };
-            /** Features */
-            features: string[];
-            /** Groups */
-            groups: components["schemas"]["VisemeTargetCard"][];
-            /** Transitions */
-            transitions: {
-                [key: string]: string;
-            };
-        };
-        /**
-         * VisemeGroup
-         * @description Visible mouth-shape group (plan §2.1). Sounds outside these are audio-only.
-         * @enum {string}
-         */
-        VisemeGroup: VisemeGroup;
-        /**
-         * VisemeTargetCard
-         * @description Target ranges and copy for the mouth mirror.
-         */
-        VisemeTargetCard: {
-            /** Common Error Vi */
-            common_error_vi: string;
-            /** Confidence */
-            confidence: string;
-            group: components["schemas"]["VisemeGroup"];
-            /** Hint Vi */
-            hint_vi: string;
-            /** Hold Ms */
-            hold_ms: number;
-            /** Name Vi */
-            name_vi: string;
-            /** Sounds */
-            sounds: string[];
-            /** Targets */
-            targets: {
-                [key: string]: {
-                    [key: string]: number;
-                };
-            };
-        };
-        /**
-         * VisualVerdict
-         * @description Outcome of comparing the learner's mouth features with the target of a sound.
-         * @enum {string}
-         */
-        VisualVerdict: VisualVerdict;
-        /**
-         * WordResult
-         * @description A prompt word with its reference IPA and per-phone verdicts.
-         */
-        WordResult: {
-            /** Ipa */
-            ipa: string;
-            /** Phones */
-            phones: components["schemas"]["PhoneResult"][];
-            /** Word */
-            word: string;
-        };
+  schemas: {
+    /**
+     * AssessmentResponse
+     * @description Everything the result card needs; also stored verbatim for history.
+     */
+    AssessmentResponse: {
+      /** Id */
+      id: string;
+      /** Item Id */
+      item_id: string;
+      /** Model Version */
+      model_version: string;
+      /** Prosody */
+      prosody: components['schemas']['ProsodyResult'][];
+      summary: components['schemas']['AssessmentSummary'];
+      /** Text */
+      text: string;
+      /** Words */
+      words: components['schemas']['WordResult'][];
     };
-    responses: never;
-    parameters: never;
-    requestBodies: never;
-    headers: never;
-    pathItems: never;
+    /**
+     * AssessmentSummary
+     * @description Counts and the top priorities.
+     */
+    AssessmentSummary: {
+      /** Camera Used */
+      camera_used: boolean;
+      /** Check */
+      check: number;
+      /** Error */
+      error: number;
+      /** Focus */
+      focus: components['schemas']['FocusItem'][];
+      /** Ok */
+      ok: number;
+    };
+    /** Body_assess_api_v1_assess_post */
+    Body_assess_api_v1_assess_post: {
+      /** Audio */
+      audio: string;
+      /** Audio Started At */
+      audio_started_at?: number | null;
+      /** Item Id */
+      item_id: string;
+      /**
+       * Kind
+       * @default word
+       */
+      kind: string;
+      /**
+       * Mouth Frames
+       * @default []
+       */
+      mouth_frames: string;
+      /** Text */
+      text: string;
+    };
+    /** Body_mouth_api_v1_tutor_mouth_post */
+    Body_mouth_api_v1_tutor_mouth_post: {
+      /** Image */
+      image: string;
+      /** Sound Ipa */
+      sound_ipa: string;
+      /** Target Vi */
+      target_vi: string;
+    };
+    /**
+     * CalibrationPayload
+     * @description Min/max per feature captured by the browser.
+     */
+    CalibrationPayload: {
+      /** Features */
+      features: {
+        [key: string]: {
+          [key: string]: number;
+        };
+      };
+    };
+    /**
+     * CalibrationStep
+     * @description One step of the 20-second calibration flow.
+     */
+    CalibrationStep: {
+      /** Id */
+      id: string;
+      /** Prompt Vi */
+      prompt_vi: string;
+      /** Seconds */
+      seconds: number;
+    };
+    /**
+     * DrillSentence
+     * @description A practice sentence with its intonation kind.
+     */
+    DrillSentence: {
+      /** Kind */
+      kind: string;
+      /** Text */
+      text: string;
+    };
+    /**
+     * DrillWord
+     * @description A practice word with where the target sound sits.
+     */
+    DrillWord: {
+      /** Position */
+      position: string;
+      /** Word */
+      word: string;
+    };
+    /**
+     * ExplainRequest
+     * @description Which stored run to explain.
+     */
+    ExplainRequest: {
+      /** Run Id */
+      run_id: string;
+    };
+    /**
+     * FocusItem
+     * @description One of at most two priorities to practise next.
+     */
+    FocusItem: {
+      /** Count */
+      count: number;
+      /** Error Id */
+      error_id: string;
+      /** Hint Vi */
+      hint_vi: string;
+      /** Ipa */
+      ipa: string;
+      /** Phoneme */
+      phoneme: string;
+    };
+    /** HTTPValidationError */
+    HTTPValidationError: {
+      /** Detail */
+      detail?: components['schemas']['ValidationError'][];
+    };
+    /**
+     * HealthResponse
+     * @description Liveness plus feature availability.
+     */
+    HealthResponse: {
+      /** Model Ready */
+      model_ready: boolean;
+      /** Realtime Enabled */
+      realtime_enabled: boolean;
+      /** Status */
+      status: string;
+      /** Tts Available */
+      tts_available: boolean;
+      /** Tutor Available */
+      tutor_available: boolean;
+      /** Tutor Model */
+      tutor_model: string | null;
+      /** Version */
+      version: string;
+    };
+    /**
+     * KnownErrorCard
+     * @description Catalogue entry exposed to the UI.
+     */
+    KnownErrorCard: {
+      /** Enabled */
+      enabled: boolean;
+      /** Expected */
+      expected: string;
+      /** Final Only */
+      final_only: boolean;
+      /** Heard */
+      heard: string[];
+      /** Hint Vi */
+      hint_vi: string;
+      /** Id */
+      id: string;
+      /** Kind */
+      kind: string;
+      /** Mouth Tip Vi */
+      mouth_tip_vi: string;
+      /** Priority */
+      priority: number;
+      viseme_group: components['schemas']['VisemeGroup'] | null;
+    };
+    /**
+     * MinimalPair
+     * @description Two words that differ in the focus sound.
+     */
+    MinimalPair: {
+      /** Error Id */
+      error_id: string;
+      /** Focus */
+      focus: string;
+      /** Id */
+      id: string;
+      /** Title Vi */
+      title_vi: string;
+      /** Words */
+      words: string[];
+    };
+    /**
+     * PhoneResult
+     * @description Verdict for one expected phone.
+     */
+    PhoneResult: {
+      audio_verdict: components['schemas']['Verdict'];
+      /** End */
+      end: number;
+      /** Error Id */
+      error_id: string | null;
+      /** Gop */
+      gop: number;
+      /** Heard */
+      heard: string;
+      /** Heard Ipa */
+      heard_ipa: string;
+      /** Hint Vi */
+      hint_vi: string | null;
+      /** Ipa */
+      ipa: string;
+      /** Mouth Tip Vi */
+      mouth_tip_vi: string | null;
+      /** Show Mouth Hint */
+      show_mouth_hint: boolean;
+      /** Start */
+      start: number;
+      /** Symbol */
+      symbol: string;
+      verdict: components['schemas']['Verdict'];
+      viseme_group: components['schemas']['VisemeGroup'] | null;
+      visual: components['schemas']['VisualVerdict'];
+    };
+    /**
+     * PhonemeCard
+     * @description One entry of the 44-sound chart with Vietnamese articulation tips.
+     */
+    PhonemeCard: {
+      /** Arpabet */
+      arpabet: string;
+      /** Contrast */
+      contrast: string;
+      /** Example */
+      example: string;
+      /** Group */
+      group: string;
+      /** Id */
+      id: string;
+      /** Note */
+      note: string;
+      /** Symbol */
+      symbol: string;
+      /** Tip */
+      tip: string;
+      /** Us */
+      us: string;
+      /** Viseme Confidence */
+      viseme_confidence: string | null;
+      viseme_group: components['schemas']['VisemeGroup'] | null;
+    };
+    /**
+     * PhonemeStatModel
+     * @description Per-sound totals.
+     */
+    PhonemeStatModel: {
+      /** Check */
+      check: number;
+      /** Error */
+      error: number;
+      /** Ipa */
+      ipa: string;
+      /** Ok */
+      ok: number;
+      /** Phoneme */
+      phoneme: string;
+      /** Total */
+      total: number;
+    };
+    /**
+     * ProgressResponse
+     * @description Dashboard payload; machine-measured only (self-assessment is a separate concept).
+     */
+    ProgressResponse: {
+      /** Phonemes */
+      phonemes: components['schemas']['PhonemeStatModel'][];
+      /** Recent */
+      recent: components['schemas']['RunSummaryModel'][];
+      /** Runs */
+      runs: number;
+    };
+    /**
+     * ProsodyAspect
+     * @description Prosody dimensions the analyser reports on.
+     * @enum {string}
+     */
+    ProsodyAspect: ProsodyAspect;
+    /**
+     * ProsodyResult
+     * @description One prosody finding (never stronger than `check`).
+     */
+    ProsodyResult: {
+      aspect: components['schemas']['ProsodyAspect'];
+      /** Detail Vi */
+      detail_vi: string;
+      verdict: components['schemas']['Verdict'];
+      /** Word Index */
+      word_index: number | null;
+    };
+    /**
+     * RunSummaryModel
+     * @description History row.
+     */
+    RunSummaryModel: {
+      /** Check */
+      check: number;
+      /**
+       * Created At
+       * Format: date-time
+       */
+      created_at: string;
+      /** Disputed */
+      disputed: boolean;
+      /** Error */
+      error: number;
+      /** Id */
+      id: string;
+      /** Item Id */
+      item_id: string;
+      /** Model Version */
+      model_version: string;
+      /** Ok */
+      ok: number;
+      /** Text */
+      text: string;
+    };
+    /**
+     * Sentence
+     * @description A practice sentence with its intonation kind.
+     */
+    Sentence: {
+      /** Focus */
+      focus: string[];
+      /** Id */
+      id: string;
+      /** Kind */
+      kind: string;
+      /** Text */
+      text: string;
+      /** Title Vi */
+      title_vi: string;
+    };
+    /**
+     * SoundDrill
+     * @description Validated practice material for one chart sound.
+     */
+    SoundDrill: {
+      /** Arpabet */
+      arpabet: string;
+      /** Group */
+      group: string;
+      /** Id */
+      id: string;
+      /** Pairs */
+      pairs: string[][];
+      /** Sentences */
+      sentences: components['schemas']['DrillSentence'][];
+      /** Symbol */
+      symbol: string;
+      /** Transition Vi */
+      transition_vi: string | null;
+      /** Us */
+      us: string;
+      /** Viseme Confidence */
+      viseme_confidence: string | null;
+      viseme_group: components['schemas']['VisemeGroup'] | null;
+      /** Words */
+      words: components['schemas']['DrillWord'][];
+    };
+    /**
+     * SoundDrillSummary
+     * @description Row of the "practise by sound" list.
+     */
+    SoundDrillSummary: {
+      /** Arpabet */
+      arpabet: string;
+      /** Group */
+      group: string;
+      /** Id */
+      id: string;
+      /** Pair Count */
+      pair_count: number;
+      /** Sentence Count */
+      sentence_count: number;
+      /** Symbol */
+      symbol: string;
+      /** Us */
+      us: string;
+      /** Viseme Confidence */
+      viseme_confidence: string | null;
+      viseme_group: components['schemas']['VisemeGroup'] | null;
+      /** Word Count */
+      word_count: number;
+    };
+    /**
+     * TutorReply
+     * @description The tutor's Vietnamese text and the model that wrote it.
+     */
+    TutorReply: {
+      /** Model */
+      model: string;
+      /** Text Vi */
+      text_vi: string;
+    };
+    /** ValidationError */
+    ValidationError: {
+      /** Context */
+      ctx?: Record<string, never>;
+      /** Input */
+      input?: unknown;
+      /** Location */
+      loc: (string | number)[];
+      /** Message */
+      msg: string;
+      /** Error Type */
+      type: string;
+    };
+    /**
+     * Verdict
+     * @description Three-level conclusion for one phoneme; never a binary right/wrong.
+     * @enum {string}
+     */
+    Verdict: Verdict;
+    /**
+     * VisemeContent
+     * @description Everything the mirror needs at start-up.
+     */
+    VisemeContent: {
+      /** Calibration */
+      calibration: components['schemas']['CalibrationStep'][];
+      /** Confidence Labels */
+      confidence_labels: {
+        [key: string]: string;
+      };
+      /** Features */
+      features: string[];
+      /** Groups */
+      groups: components['schemas']['VisemeTargetCard'][];
+      /** Transitions */
+      transitions: {
+        [key: string]: string;
+      };
+    };
+    /**
+     * VisemeGroup
+     * @description Visible mouth-shape group (plan §2.1). Sounds outside these are audio-only.
+     * @enum {string}
+     */
+    VisemeGroup: VisemeGroup;
+    /**
+     * VisemeTargetCard
+     * @description Target ranges and copy for the mouth mirror.
+     */
+    VisemeTargetCard: {
+      /** Common Error Vi */
+      common_error_vi: string;
+      /** Confidence */
+      confidence: string;
+      group: components['schemas']['VisemeGroup'];
+      /** Hint Vi */
+      hint_vi: string;
+      /** Hold Ms */
+      hold_ms: number;
+      /** Name Vi */
+      name_vi: string;
+      /** Sounds */
+      sounds: string[];
+      /** Targets */
+      targets: {
+        [key: string]: {
+          [key: string]: number;
+        };
+      };
+    };
+    /**
+     * VisualVerdict
+     * @description Outcome of comparing the learner's mouth features with the target of a sound.
+     * @enum {string}
+     */
+    VisualVerdict: VisualVerdict;
+    /**
+     * WordResult
+     * @description A prompt word with its reference IPA and per-phone verdicts.
+     */
+    WordResult: {
+      /** Ipa */
+      ipa: string;
+      /** Phones */
+      phones: components['schemas']['PhoneResult'][];
+      /** Word */
+      word: string;
+    };
+  };
+  responses: never;
+  parameters: never;
+  requestBodies: never;
+  headers: never;
+  pathItems: never;
 }
 export type $defs = Record<string, never>;
 export interface operations {
-    assess_api_v1_assess_post: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "multipart/form-data": components["schemas"]["Body_assess_api_v1_assess_post"];
-            };
-        };
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["AssessmentResponse"];
-                };
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
-        };
+  assess_api_v1_assess_post: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    audio_api_v1_audio_get: {
-        parameters: {
-            query: {
-                text: string;
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
-        };
+    requestBody: {
+      content: {
+        'multipart/form-data': components['schemas']['Body_assess_api_v1_assess_post'];
+      };
     };
-    calibration_api_v1_calibration_get: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown;
         };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["CalibrationPayload"] | null;
-                };
-            };
+        content: {
+          'application/json': components['schemas']['AssessmentResponse'];
         };
+      };
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
     };
-    save_calibration_api_v1_calibration_put: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["CalibrationPayload"];
-            };
-        };
-        responses: {
-            /** @description Successful Response */
-            204: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
-        };
+  };
+  audio_api_v1_audio_get: {
+    parameters: {
+      query: {
+        text: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    errors_api_v1_content_errors_get: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+    requestBody?: never;
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown;
         };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["KnownErrorCard"][];
-                };
-            };
+        content?: never;
+      };
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown;
         };
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
     };
-    pairs_api_v1_content_pairs_get: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["MinimalPair"][];
-                };
-            };
-        };
+  };
+  calibration_api_v1_calibration_get: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    phonemes_api_v1_content_phonemes_get: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+    requestBody?: never;
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown;
         };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["PhonemeCard"][];
-                };
-            };
+        content: {
+          'application/json': components['schemas']['CalibrationPayload'] | null;
         };
+      };
     };
-    sentences_api_v1_content_sentences_get: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Sentence"][];
-                };
-            };
-        };
+  };
+  save_calibration_api_v1_calibration_put: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    sounds_api_v1_content_sounds_get: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["SoundDrillSummary"][];
-                };
-            };
-        };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['CalibrationPayload'];
+      };
     };
-    sound_api_v1_content_sounds__sound_id__get: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                sound_id: string;
-            };
-            cookie?: never;
+    responses: {
+      /** @description Successful Response */
+      204: {
+        headers: {
+          [name: string]: unknown;
         };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["SoundDrill"];
-                };
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
+        content?: never;
+      };
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown;
         };
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
     };
-    visemes_api_v1_content_visemes_get: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["VisemeContent"];
-                };
-            };
-        };
+  };
+  errors_api_v1_content_errors_get: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    health_api_v1_health_get: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+    requestBody?: never;
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown;
         };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HealthResponse"];
-                };
-            };
+        content: {
+          'application/json': components['schemas']['KnownErrorCard'][];
         };
+      };
     };
-    progress_api_v1_progress_get: {
-        parameters: {
-            query?: {
-                limit?: number;
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ProgressResponse"];
-                };
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
-        };
+  };
+  pairs_api_v1_content_pairs_get: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    run_api_v1_runs__run_id__get: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                run_id: string;
-            };
-            cookie?: never;
+    requestBody?: never;
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown;
         };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": unknown;
-                };
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
+        content: {
+          'application/json': components['schemas']['MinimalPair'][];
         };
+      };
     };
-    dispute_api_v1_runs__run_id__dispute_post: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                run_id: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            204: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
-        };
+  };
+  phonemes_api_v1_content_phonemes_get: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    explain_api_v1_tutor_explain_post: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+    requestBody?: never;
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown;
         };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["ExplainRequest"];
-            };
+        content: {
+          'application/json': components['schemas']['PhonemeCard'][];
         };
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["TutorReply"];
-                };
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
-        };
+      };
     };
-    mouth_api_v1_tutor_mouth_post: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "multipart/form-data": components["schemas"]["Body_mouth_api_v1_tutor_mouth_post"];
-            };
-        };
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["TutorReply"];
-                };
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
-        };
+  };
+  sentences_api_v1_content_sentences_get: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
+    requestBody?: never;
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['Sentence'][];
+        };
+      };
+    };
+  };
+  sounds_api_v1_content_sounds_get: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['SoundDrillSummary'][];
+        };
+      };
+    };
+  };
+  sound_api_v1_content_sounds__sound_id__get: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        sound_id: string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['SoundDrill'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  visemes_api_v1_content_visemes_get: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['VisemeContent'];
+        };
+      };
+    };
+  };
+  health_api_v1_health_get: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['HealthResponse'];
+        };
+      };
+    };
+  };
+  progress_api_v1_progress_get: {
+    parameters: {
+      query?: {
+        limit?: number;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['ProgressResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  run_api_v1_runs__run_id__get: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        run_id: string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': unknown;
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  dispute_api_v1_runs__run_id__dispute_post: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        run_id: string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Successful Response */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  explain_api_v1_tutor_explain_post: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['ExplainRequest'];
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['TutorReply'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  mouth_api_v1_tutor_mouth_post: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'multipart/form-data': components['schemas']['Body_mouth_api_v1_tutor_mouth_post'];
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['TutorReply'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
 }
 export enum ProsodyAspect {
-    word_stress = "word_stress",
-    final_contour = "final_contour",
-    rhythm = "rhythm"
+  word_stress = 'word_stress',
+  final_contour = 'final_contour',
+  rhythm = 'rhythm',
 }
 export enum Verdict {
-    ok = "ok",
-    check = "check",
-    error = "error"
+  ok = 'ok',
+  check = 'check',
+  error = 'error',
 }
 export enum VisemeGroup {
-    V1 = "V1",
-    V2 = "V2",
-    V3 = "V3",
-    V4 = "V4",
-    V5 = "V5",
-    V6 = "V6",
-    V7 = "V7",
-    V8 = "V8",
-    V9 = "V9",
-    V10 = "V10",
-    V11 = "V11",
-    V12 = "V12"
+  V1 = 'V1',
+  V2 = 'V2',
+  V3 = 'V3',
+  V4 = 'V4',
+  V5 = 'V5',
+  V6 = 'V6',
+  V7 = 'V7',
+  V8 = 'V8',
+  V9 = 'V9',
+  V10 = 'V10',
+  V11 = 'V11',
+  V12 = 'V12',
 }
 export enum VisualVerdict {
-    ok = "ok",
-    off = "off",
-    unavailable = "unavailable"
+  ok = 'ok',
+  off = 'off',
+  unavailable = 'unavailable',
 }

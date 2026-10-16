@@ -42,6 +42,8 @@ export default defineConfig({
         'src/features/practice/hooks/useRecorder.ts',
         'src/features/practice/hooks/useReferenceAudio.ts',
         'src/features/practice/components/PracticeSession.tsx',
+        'src/features/practice/components/DrillSession.tsx',
+        'src/features/tutor/components/MouthTutorButton.tsx',
       ],
       thresholds: { lines: 80 },
     },

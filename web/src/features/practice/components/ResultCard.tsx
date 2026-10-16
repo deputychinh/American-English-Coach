@@ -10,6 +10,9 @@ import { ButtonVariant } from '@/enums/button-variant.enum';
 import { PhoneDetail } from '@/features/practice/components/PhoneDetail';
 import { ProsodyList } from '@/features/practice/components/ProsodyList';
 import { disputeRun } from '@/features/progress/services/progress.service';
+import { TutorPanel } from '@/features/tutor/components/TutorPanel';
+import { useTutorAvailability } from '@/features/tutor/hooks/useTutorAvailability';
+import { explainRun } from '@/features/tutor/services/tutor.service';
 import type { Point2 } from '@/interfaces/mouth.interface';
 import type { AssessmentResponse, PhoneResult, Recording } from '@/interfaces/practice.interface';
 
@@ -32,6 +35,7 @@ export const ResultCard = ({
   const [disputed, setDisputed] = useState(false);
   const [disputeError, setDisputeError] = useState<string | null>(null);
   const { summary } = result;
+  const tutor = useTutorAvailability();
 
   const dispute = (): void => {
     disputeRun(result.id)
@@ -102,6 +106,14 @@ export const ResultCard = ({
       ) : null}
 
       <ProsodyList findings={result.prosody} />
+
+      {tutor.isAvailable ? (
+        <TutorPanel
+          title={COPY.tutor.panelTitle}
+          buttonLabel={COPY.tutor.explain}
+          request={() => explainRun(result.id)}
+        />
+      ) : null}
 
       <div className="result-card__actions">
         {onRetry ? <Button onClick={onRetry}>{COPY.practice.retry}</Button> : null}

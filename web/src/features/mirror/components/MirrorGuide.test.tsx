@@ -13,6 +13,7 @@ const target = {
   hold_ms: 10,
   hint_vi: 'Chu môi tròn.',
   common_error_vi: 'Môi dẹt.',
+  confidence: 'high',
 };
 
 const sample = (roundness: number, width: number): TrackedSample => ({

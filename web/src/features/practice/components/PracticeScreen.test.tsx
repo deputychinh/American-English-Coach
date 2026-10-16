@@ -36,6 +36,21 @@ const content = {
       },
     ]),
   '/api/v1/content/sentences': () => jsonResponse([]),
+  '/api/v1/content/sounds': () =>
+    jsonResponse([
+      {
+        id: 'c09',
+        symbol: 'θ',
+        us: 'θ',
+        arpabet: 'TH',
+        group: 'consonant',
+        viseme_group: 'V3',
+        viseme_confidence: 'medium',
+        word_count: 8,
+        pair_count: 3,
+        sentence_count: 2,
+      },
+    ]),
   '/api/v1/calibration': () => jsonResponse(null),
 };
 
@@ -74,5 +89,19 @@ describe('PracticeScreen', () => {
       expect(screen.getByRole('button', { name: '/θ/ nghe lại' })).toBeInTheDocument(),
     );
     expect(screen.getByRole('link', { name: 'Chọn bài khác' })).toBeInTheDocument();
+  });
+});
+
+describe('PracticeScreen · by sound', () => {
+  beforeEach(() => params.clear());
+
+  it('lists the sounds tab by default with badge and counts, and switches tabs', async () => {
+    mockApi(content);
+    render(<PracticeScreen />);
+    await waitFor(() => expect(screen.getByRole('link', { name: /\/θ\//i })).toBeInTheDocument());
+    expect(screen.getByText('8 từ · 3 cặp · 2 câu')).toBeInTheDocument();
+    expect(screen.getByText('Camera thấy một phần')).toBeInTheDocument();
+    screen.getByRole('tab', { name: 'Cặp âm & câu' }).click();
+    await waitFor(() => expect(screen.getByRole('link', { name: 'think' })).toBeInTheDocument());
   });
 });

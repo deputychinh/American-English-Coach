@@ -2,7 +2,7 @@ import type { MinimalPair, PracticeItem, Sentence } from '@/interfaces/practice.
 
 const KINDS = new Set(['word', 'statement', 'question', 'wh_question']);
 
-const sentenceKind = (kind: string): PracticeItem['kind'] =>
+export const sentenceKind = (kind: string): PracticeItem['kind'] =>
   KINDS.has(kind) ? (kind as PracticeItem['kind']) : 'statement';
 
 /** Resolves `?item=pair:<id>:<0|1>` / `sentence:<id>` / `word:<word>` against the content. */

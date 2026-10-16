@@ -21,4 +21,6 @@ export interface MouthTracker {
   attachCanvas: (element: HTMLCanvasElement | null) => void;
   framesBetween: (from: number, to: number) => TrackedFrame[];
   rawSince: (from: number) => MouthFeatures[];
+  /** One JPEG crop of the mouth from the live video (only when the learner asks for it). */
+  snapshotMouth: () => Promise<Blob | null>;
 }

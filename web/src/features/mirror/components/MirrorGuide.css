@@ -39,6 +39,10 @@
   font-weight: var(--weight-semibold);
 }
 
+.mirror-guide__transition {
+  font-style: italic;
+}
+
 .mirror-guide__muted {
   color: var(--color-text-muted);
 }

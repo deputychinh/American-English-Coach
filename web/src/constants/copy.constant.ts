@@ -49,6 +49,16 @@ export const COPY = {
     mirror: 'Soi gương âm này',
     close: 'Đóng',
     note: 'Ghi chú',
+    practiceSound: 'Luyện âm này',
+    transition: 'Chuyển động khẩu hình',
+    drillSize: (words: number, pairs: number, sentences: number): string =>
+      `${words} từ · ${pairs} cặp · ${sentences} câu`,
+    confidence: {
+      high: 'Camera thấy rõ',
+      medium: 'Camera thấy một phần',
+      low: 'Camera chỉ thấy môi/hàm; chấm bằng tai',
+    },
+    groups: { vowel: 'Nguyên âm', diphthong: 'Nguyên âm đôi', consonant: 'Phụ âm' },
   },
   practice: {
     title: 'Luyện tập',
@@ -97,6 +107,29 @@ export const COPY = {
       question: 'Câu hỏi yes/no',
       wh_question: 'Câu hỏi wh-',
     },
+    bySound: 'Theo âm',
+    bySoundLead:
+      'Đủ 44 âm. Mỗi âm có từ, cặp tối thiểu và câu đã kiểm tra bằng từ điển; camera theo dõi khẩu hình cho mọi âm.',
+    byItems: 'Cặp âm & câu',
+    byItemsLead:
+      'Chọn một cặp âm hoặc một câu. Thu âm, máy chấm từng âm; bật camera để nhận xét thêm về khẩu hình.',
+    drill: {
+      progress: (index: number, total: number): string => `Bài ${index} / ${total}`,
+      next: 'Tiếp theo',
+      skip: 'Bỏ qua',
+      stage: { word: 'Từ', pair: 'Cặp tối thiểu', sentence: 'Câu' },
+      targetPhone: 'Âm đích',
+      summaryTitle: 'Kết quả bài luyện âm',
+      tally: (counts: { ok: number; check: number; error: number; skipped: number }): string =>
+        `${counts.ok} lần đạt · ${counts.check} lần cần nghe lại · ${counts.error} lần sai · ${counts.skipped} bỏ qua`,
+      allDone: 'Mọi lần thu đều đạt âm đích. Tuyệt!',
+      retryFailed: 'Luyện lại các từ chưa đạt',
+      mirror: 'Soi gương âm này',
+      backToSounds: 'Chọn âm khác',
+      restart: 'Luyện lại từ đầu',
+      loading: 'Đang tải bài luyện…',
+      targetHint: 'Khẩu hình mục tiêu',
+    },
   },
   verdict: {
     ok: 'đạt',
@@ -137,6 +170,8 @@ export const COPY = {
     startCamera: 'Bật camera',
     stopCamera: 'Tắt camera',
     commonError: 'Lỗi thường gặp',
+    lowConfidence:
+      'Với âm này camera chỉ theo dõi được môi và hàm; vị trí lưỡi bên trong do máy chấm âm quyết định.',
   },
   calibration: {
     title: 'Hiệu chỉnh khẩu hình',
@@ -168,6 +203,18 @@ export const COPY = {
     resetCalibration: 'Xóa hiệu chỉnh khẩu hình',
     calibrationCleared: 'Đã xóa hiệu chỉnh trên trình duyệt này.',
     total: 'Tổng',
+  },
+  tutor: {
+    explain: 'Giải thích bằng AI',
+    panelTitle: 'Gia sư AI (Kimi) · giải thích kết quả đã chấm, không chấm lại',
+    askMouth: 'Hỏi AI về khẩu hình (gửi 1 ảnh)',
+    mouthTitle: 'Gia sư AI (Kimi) · nhận xét một ảnh miệng',
+    confirm: 'Ảnh này sẽ được gửi tới Kimi',
+    send: 'Gửi ảnh',
+    cancel: 'Hủy',
+    loading: 'Gia sư đang viết…',
+    noFrame: 'Chưa có khung hình miệng. Bật camera và nhìn thẳng rồi thử lại.',
+    modelLabel: 'model',
   },
   common: {
     loading: 'Đang tải…',

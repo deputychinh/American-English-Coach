@@ -1,9 +1,10 @@
 'use client';
 
 import Link from 'next/link';
-import { type ReactElement, useCallback, useState } from 'react';
+import { type ReactElement, type ReactNode, useCallback, useState } from 'react';
 
 import { Button } from '@/components/Button/Button';
+import { ConfidenceBadge } from '@/components/ConfidenceBadge/ConfidenceBadge';
 import { ErrorState } from '@/components/ErrorState/ErrorState';
 import { PageIntro } from '@/components/PageIntro/PageIntro';
 import { Skeleton } from '@/components/Skeleton/Skeleton';
@@ -13,15 +14,22 @@ import { PracticeStatus } from '@/enums/practice-status.enum';
 import { RecorderStatus } from '@/enums/recorder-status.enum';
 import { StorageKey } from '@/enums/storage-key.enum';
 import { CameraPanel } from '@/features/mirror/components/CameraPanel';
+import { TargetShape } from '@/features/mirror/components/TargetShape';
 import { useCalibration } from '@/features/mirror/hooks/useCalibration';
 import { useMouthTracker } from '@/features/mirror/hooks/useMouthTracker';
 import { ResultCard } from '@/features/practice/components/ResultCard';
 import { useRecorder } from '@/features/practice/hooks/useRecorder';
 import { useReferenceAudio } from '@/features/practice/hooks/useReferenceAudio';
 import { assess } from '@/features/practice/services/assessment.service';
+import { MouthTutorButton } from '@/features/tutor/components/MouthTutorButton';
 import { useStoredState } from '@/hooks/useStoredState';
 import type { Point2 } from '@/interfaces/mouth.interface';
-import type { AssessmentResponse, PracticeItem, Recording } from '@/interfaces/practice.interface';
+import type {
+  AssessmentResponse,
+  PracticeItem,
+  Recording,
+  VisemeTargetCard,
+} from '@/interfaces/practice.interface';
 import { cx } from '@/utils/cx.util';
 import { medianOutline } from '@/utils/lip-outline.util';
 
@@ -29,9 +37,23 @@ import './PracticeSession.css';
 
 interface PracticeSessionProps {
   item: PracticeItem;
+  /** Viseme target of the drill's sound, shown next to the camera. */
+  targetGroup?: VisemeTargetCard | null;
+  targetIpa?: string;
+  transitionVi?: string | null;
+  onResult?: (result: AssessmentResponse) => void;
+  /** Drill navigation (next / skip) rendered under the recorder. */
+  extraActions?: ReactNode;
 }
 
-export const PracticeSession = ({ item }: PracticeSessionProps): ReactElement => {
+export const PracticeSession = ({
+  item,
+  targetGroup = null,
+  targetIpa,
+  transitionVi = null,
+  onResult,
+  extraActions,
+}: PracticeSessionProps): ReactElement => {
   const [status, setStatus] = useState(PracticeStatus.Idle);
   const [error, setError] = useState<string | null>(null);
   const [result, setResult] = useState<AssessmentResponse | null>(null);
@@ -71,11 +93,12 @@ export const PracticeSession = ({ item }: PracticeSessionProps): ReactElement =>
       });
       setResult(response);
       setStatus(PracticeStatus.Success);
+      onResult?.(response);
     } catch (cause) {
       setError(cause instanceof Error ? cause.message : String(cause));
       setStatus(PracticeStatus.Error);
     }
-  }, [cameraOn, item, recorder, tracker]);
+  }, [cameraOn, item, onResult, recorder, tracker]);
 
   const outlineAt = useCallback(
     (start: number, end: number): Point2[] => {
@@ -119,7 +142,30 @@ export const PracticeSession = ({ item }: PracticeSessionProps): ReactElement =>
         <p className="practice-session__muted">{COPY.practice.cameraHint}</p>
       </section>
 
-      {cameraOn ? <CameraPanel tracker={tracker} compact /> : null}
+      {cameraOn ? (
+        <div className="practice-session__camera">
+          <CameraPanel tracker={tracker} compact />
+          {targetGroup ? (
+            <aside className="practice-session__target" aria-label={COPY.practice.drill.targetHint}>
+              <TargetShape group={targetGroup.group} size={96} />
+              <div className="practice-session__target-copy">
+                <p className="practice-session__target-name">
+                  {targetIpa ? `/${targetIpa}/ · ` : ''}
+                  {targetGroup.name_vi}
+                </p>
+                <ConfidenceBadge confidence={targetGroup.confidence} />
+                <p className="practice-session__muted">{targetGroup.hint_vi}</p>
+                {transitionVi ? <p className="practice-session__muted">{transitionVi}</p> : null}
+                <MouthTutorButton
+                  tracker={tracker}
+                  soundIpa={targetIpa ?? item.focus[0] ?? ''}
+                  targetVi={targetGroup.hint_vi}
+                />
+              </div>
+            </aside>
+          ) : null}
+        </div>
+      ) : null}
 
       <section className="practice-session__recorder" aria-live="polite">
         <Button
@@ -146,6 +192,7 @@ export const PracticeSession = ({ item }: PracticeSessionProps): ReactElement =>
         </span>
         {isRecording ? <p className="practice-session__muted">{COPY.practice.recording}</p> : null}
         {recorder.error ? <ErrorState message={recorder.error} /> : null}
+        {extraActions ? <div className="practice-session__extra">{extraActions}</div> : null}
       </section>
 
       {status === PracticeStatus.Scoring ? (

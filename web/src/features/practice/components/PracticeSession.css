@@ -68,3 +68,43 @@
   background: var(--color-success);
   transition: inline-size var(--duration-fast) linear;
 }
+
+.practice-session__camera {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--gap-grid);
+  align-items: start;
+}
+
+.practice-session__target {
+  display: flex;
+  gap: var(--space-3);
+  align-items: flex-start;
+  padding: var(--space-3);
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+}
+
+.practice-session__target-copy {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  align-items: flex-start;
+}
+
+.practice-session__target-name {
+  font-weight: var(--weight-semibold);
+}
+
+.practice-session__extra {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap-inline);
+}
+
+@media (--bp-md) {
+  .practice-session__camera {
+    grid-template-columns: minmax(0, 2fr) minmax(240px, 1fr);
+  }
+}

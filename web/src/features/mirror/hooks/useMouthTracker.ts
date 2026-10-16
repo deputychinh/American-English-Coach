@@ -7,12 +7,14 @@ import {
   FPS_SAMPLE_FRAMES,
   FRAME_BUFFER_SECONDS,
   MIN_FPS,
+  SNAPSHOT_MAX_WIDTH,
+  SNAPSHOT_PADDING,
   UI_REFRESH_HZ,
 } from '@/constants/mirror.constant';
 import { TrackerStatus } from '@/enums/tracker-status.enum';
 import { useFaceLandmarker } from '@/features/mirror/hooks/useFaceLandmarker';
 import type { BufferedFrame, MouthTrackerOptions } from '@/interfaces/hooks.interface';
-import type { MouthFeatures, TrackedFrame } from '@/interfaces/mouth.interface';
+import type { MouthFeatures, Point2, TrackedFrame } from '@/interfaces/mouth.interface';
 import type { MouthTracker, TrackedSample } from '@/interfaces/tracker.interface';
 import { normaliseFeatures } from '@/utils/calibration.util';
 import { lipOutline, lipPolygons } from '@/utils/lip-outline.util';
@@ -47,6 +49,31 @@ const drawLips = (
   }
 };
 
+/** Crops the mouth (lip outline box + padding) from the live video into one JPEG. */
+const snapshotFromVideo = (
+  video: HTMLVideoElement | null,
+  outline: Point2[],
+): Promise<Blob | null> => {
+  if (!video || outline.length === 0 || !video.videoWidth) return Promise.resolve(null);
+  const xs = outline.map((p) => p.x * video.videoWidth);
+  const ys = outline.map((p) => p.y * video.videoHeight);
+  const boxW = Math.max(...xs) - Math.min(...xs);
+  const boxH = Math.max(...ys) - Math.min(...ys);
+  const pad = Math.max(boxW, boxH) * SNAPSHOT_PADDING;
+  const sx = Math.max(0, Math.min(...xs) - pad);
+  const sy = Math.max(0, Math.min(...ys) - pad);
+  const sw = Math.min(video.videoWidth - sx, boxW + 2 * pad);
+  const sh = Math.min(video.videoHeight - sy, boxH + 2 * pad);
+  const scale = Math.min(1, SNAPSHOT_MAX_WIDTH / sw);
+  const canvas = document.createElement('canvas');
+  canvas.width = Math.round(sw * scale);
+  canvas.height = Math.round(sh * scale);
+  const context = canvas.getContext('2d');
+  if (!context) return Promise.resolve(null);
+  context.drawImage(video, sx, sy, sw, sh, 0, 0, canvas.width, canvas.height);
+  return new Promise((resolve) => canvas.toBlob(resolve, 'image/jpeg', 0.85));
+};
+
 const cameraMessage = (error: unknown): string => {
   if (error instanceof DOMException && error.name === 'NotAllowedError')
     return COPY.practice.cameraDenied;
@@ -59,6 +86,7 @@ export const useMouthTracker = ({ enabled, calibration }: MouthTrackerOptions): 
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const bufferRef = useRef<BufferedFrame[]>([]);
   const scratchRef = useRef<HTMLCanvasElement | null>(null);
+  const outlineRef = useRef<Point2[]>([]);
   const calibrationRef = useRef(calibration);
   const [video, setVideo] = useState<HTMLVideoElement | null>(null);
   const [cameraError, setCameraError] = useState<string | null>(null);
@@ -133,6 +161,7 @@ export const useMouthTracker = ({ enabled, calibration }: MouthTrackerOptions): 
         quality: poseQuality(pose),
         outline: lipOutline(landmarks),
       };
+      outlineRef.current = frame.outline;
       const buffer = bufferRef.current;
       buffer.push(frame);
       while (buffer.length > 0 && (buffer[0]?.t ?? 0) < frame.t - FRAME_BUFFER_SECONDS)
@@ -171,6 +200,7 @@ export const useMouthTracker = ({ enabled, calibration }: MouthTrackerOptions): 
       video.srcObject = null;
       setLatest(null);
       setIsFaceVisible(false);
+      outlineRef.current = [];
     };
   }, [enabled, landmarker, video]);
 
@@ -192,6 +222,11 @@ export const useMouthTracker = ({ enabled, calibration }: MouthTrackerOptions): 
     [],
   );
 
+  const snapshotMouth = useCallback(
+    (): Promise<Blob | null> => snapshotFromVideo(video, outlineRef.current),
+    [video],
+  );
+
   const status = cameraError ? TrackerStatus.Error : enabled ? modelStatus : TrackerStatus.Idle;
   const error = cameraError ?? modelError;
   // Memoised so effects that depend on the tracker do not re-arm on every UI refresh.
@@ -206,7 +241,19 @@ export const useMouthTracker = ({ enabled, calibration }: MouthTrackerOptions): 
       attachCanvas,
       framesBetween,
       rawSince,
+      snapshotMouth,
     }),
-    [status, error, fps, isFaceVisible, latest, attachVideo, attachCanvas, framesBetween, rawSince],
+    [
+      status,
+      error,
+      fps,
+      isFaceVisible,
+      latest,
+      attachVideo,
+      attachCanvas,
+      framesBetween,
+      rawSince,
+      snapshotMouth,
+    ],
   );
 };

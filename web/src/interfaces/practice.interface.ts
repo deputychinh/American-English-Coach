@@ -13,6 +13,9 @@ export type CalibrationStep = components['schemas']['CalibrationStep'];
 export type ProgressResponse = components['schemas']['ProgressResponse'];
 export type HealthResponse = components['schemas']['HealthResponse'];
 export type FocusItem = components['schemas']['FocusItem'];
+export type SoundDrill = components['schemas']['SoundDrill'];
+export type SoundDrillSummary = components['schemas']['SoundDrillSummary'];
+export type TutorReply = components['schemas']['TutorReply'];
 
 /** What the learner is about to say, resolved from the `item` search param. */
 export interface PracticeItem {
@@ -36,4 +39,32 @@ export interface Recording {
   url: string;
   startedAt: number;
   durationSeconds: number;
+}
+
+export type DrillStage = 'word' | 'pair' | 'sentence';
+
+/** One step of a per-sound drill: the practice item plus which part of the drill it came from. */
+export interface DrillItem {
+  item: PracticeItem;
+  stage: DrillStage;
+}
+
+/** Running score of a drill, counted on the target phone only. */
+export interface DrillTally {
+  ok: number;
+  check: number;
+  error: number;
+  skipped: number;
+  failedIds: string[];
+}
+
+export interface MouthAskRequest {
+  image: Blob;
+  soundIpa: string;
+  targetVi: string;
+}
+
+export interface TutorAvailability {
+  isAvailable: boolean;
+  model: string | null;
 }

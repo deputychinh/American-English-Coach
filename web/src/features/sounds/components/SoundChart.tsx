@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import type { ReactElement } from 'react';
 
+import { ConfidenceBadge } from '@/components/ConfidenceBadge/ConfidenceBadge';
 import { ErrorState } from '@/components/ErrorState/ErrorState';
 import { PageIntro } from '@/components/PageIntro/PageIntro';
 import { Skeleton } from '@/components/Skeleton/Skeleton';
@@ -68,9 +69,7 @@ export const SoundChart = (): ReactElement => {
                       >
                         <span className="sound-chart__ipa">/{card.us}/</span>
                         <span className="sound-chart__example">{card.example}</span>
-                        <span className="sound-chart__badge">
-                          {card.viseme_group ? COPY.sounds.seen : COPY.sounds.audioOnly}
-                        </span>
+                        <ConfidenceBadge confidence={card.viseme_confidence} />
                       </Link>
                     </li>
                   ))}
