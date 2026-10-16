@@ -9,9 +9,12 @@ Ngày 2026-10-16 · nhánh `feat/av-mvp` · chưa push, chưa merge (chờ chủ
 - Repo: Makefile, CI (backend, web, repo, legacy), husky + commitlint + lint-staged, Prettier, compose tùy chọn, script vendor MediaPipe (43 MB không vào git), README, ADR 0001–0003.
 - Legacy giữ nguyên dưới `legacy/` (33 unittest + 2 node test pass).
 
-## Web (session web)
+## Web (session web, đã tích hợp và kiểm chứng lại)
 
-Xem phần cuối tài liệu này sau khi session web bàn giao.
+- `web/`: Next.js 16 static export, TS strict, 160 file nguồn theo cấu trúc `features/` (home, health, content, sounds, practice, mirror, calibration, progress) + `components/`, `hooks/`, `utils/`, `enums/`, `interfaces/`, `constants/` (toàn bộ copy tiếng Việt trong `copy.constant.ts`), design tokens + BEM, dark theme, PWA (manifest, service worker, icon).
+- Pipeline camera: `useFaceLandmarker` (MediaPipe từ `/vendor/mediapipe`, GPU), `useMouthTracker` (ring buffer đặc trưng + viền môi, overlay, guard fps), `mouth-features`/`calibration`/`lip-outline`/`viseme-match` có unit test. Ghi âm: AudioWorklet → WAV 16 kHz (fallback ScriptProcessor), giới hạn 15 s.
+- Cổng: lint 0 cảnh báo, typecheck sạch, Vitest 42 test (lines 89,98%), build 7 route, Playwright 10/10 (desktop + mobile, camera/mic giả, backend thật). Ảnh chụp trong `docs/screenshots/`.
+- Đề xuất của session web chưa làm: `GET /content/pairs` kèm IPA tham chiếu để hiện trước khi ghi; viền môi cho lượt đã lưu (`?run=`) không có vì không lưu đặc trưng; Safari chưa chạy.
 
 ## Đã đo (session eval)
 
