@@ -53,3 +53,15 @@ class TutorUnavailableError(DomainError):
     """The LLM tutor is disabled, misconfigured or the provider failed."""
 
     code = ErrorCode.TUTOR_UNAVAILABLE
+
+
+class RateLimitedError(DomainError):
+    """Too many requests from one client in the window."""
+
+    code = ErrorCode.RATE_LIMITED
+
+
+class NotReadyError(DomainError):
+    """A dependency the API needs (model, database) is not available yet."""
+
+    code = ErrorCode.NOT_READY

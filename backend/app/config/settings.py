@@ -27,6 +27,10 @@ class Settings(BaseSettings):
     model_id: str = DEFAULT_MODEL_ID
     model_dir: Path | None = None
     device: str = Field(default="auto", pattern="^(auto|cpu|mps|cuda)$")
+    # `fake` runs the API without the model (CI, demos); results are tagged fake-recognizer@ci.
+    recognizer: str = Field(default="wav2vec2", pattern="^(wav2vec2|fake)$")
+    log_json: bool = True
+    tutor_rate_limit_per_minute: int = 10
     realtime_enabled: bool = True
     tts_voice: str = DEFAULT_VOICE
     cors_origins: list[str] = [

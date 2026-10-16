@@ -2,6 +2,7 @@
 
 from dataclasses import dataclass
 from functools import cached_property
+from pathlib import Path
 
 from app.config import Settings
 from app.db.engine import SessionFactory, create_sqlite_engine
@@ -23,6 +24,27 @@ from app.services.progress_service import ProgressService
 from app.services.tutor_service import TutorService
 
 ENABLED_ERRORS_FILE = "enabled_errors.json"
+
+
+WINDOW_SECONDS = 60.0
+
+
+class TutorRateLimiter:
+    """Fixed-window limiter per client key (token or address); in-memory, single process."""
+
+    def __init__(self, per_minute: int) -> None:
+        self._per_minute = per_minute
+        self._hits: dict[str, list[float]] = {}
+
+    def allow(self, key: str, now: float) -> bool:
+        """Record a hit and tell whether it is within the window."""
+        window = [t for t in self._hits.get(key, []) if now - t < WINDOW_SECONDS]
+        if len(window) >= self._per_minute:
+            self._hits[key] = window
+            return False
+        window.append(now)
+        self._hits[key] = window
+        return True
 
 
 @dataclass
@@ -60,6 +82,10 @@ class AppContainer:
         """The phoneme model (imported lazily so the API starts without torch warm-up)."""
         if self.recognizer_override is not None:
             return self.recognizer_override
+        if self.settings.recognizer == "fake":
+            from app.ml.fake_recognizer import FakeRecognizer  # noqa: PLC0415 - optional mode
+
+            return FakeRecognizer(Path(__file__).resolve().parent / "resources" / "vocab.json")
         from app.ml.recognizer import Wav2Vec2Recognizer  # noqa: PLC0415 - heavy import on demand
 
         return Wav2Vec2Recognizer(self.settings.resolved_model_dir, self.settings.device)
@@ -103,6 +129,11 @@ class AppContainer:
         )
 
     @cached_property
+    def tutor_limiter(self) -> TutorRateLimiter:
+        """Shared limiter for the tutor endpoints."""
+        return TutorRateLimiter(self.settings.tutor_rate_limit_per_minute)
+
+    @cached_property
     def tutor(self) -> TutorService:
         """LLM tutor; raises a typed error when no provider is configured."""
         if not self.settings.tutor_enabled and self.chat_client_override is None:
@@ -122,6 +153,6 @@ class AppContainer:
 
     def model_ready(self) -> bool:
         """Whether the model files are present (loading happens on first use)."""
-        if self.recognizer_override is not None:
+        if self.recognizer_override is not None or self.settings.recognizer == "fake":
             return True
         return (self.settings.resolved_model_dir / "vocab.json").exists()

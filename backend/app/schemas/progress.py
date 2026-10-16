@@ -64,3 +64,11 @@ class ProblemDetails(BaseModel):
     status: int
     detail: str
     code: str
+
+
+class ReadyResponse(BaseModel):
+    """Readiness probe body."""
+
+    status: str
+    recognizer: str
+    model_version: str
