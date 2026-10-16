@@ -1,0 +1,55 @@
+.calibration-flow {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.calibration-flow__layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--gap-grid);
+  align-items: start;
+}
+
+.calibration-flow__panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  align-items: flex-start;
+  padding: var(--padding-card);
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+}
+
+.calibration-flow__step {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+.calibration-flow__prompt {
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-semibold);
+}
+
+.calibration-flow__muted {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+.calibration-flow__done {
+  font-weight: var(--weight-semibold);
+  color: var(--color-success);
+}
+
+.calibration-flow__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap-inline);
+}
+
+@media (--bp-lg) {
+  .calibration-flow__layout {
+    grid-template-columns: minmax(0, 3fr) minmax(280px, 2fr);
+  }
+}

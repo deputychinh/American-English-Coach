@@ -1,0 +1,70 @@
+.practice-session {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.practice-session__prompt {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--padding-card);
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+}
+
+.practice-session__text {
+  font-size: var(--text-3xl);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-tight);
+}
+
+.practice-session__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap-inline);
+}
+
+.practice-session__muted {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+.practice-session__error {
+  font-size: var(--text-sm);
+  color: var(--color-danger);
+}
+
+.practice-session__recorder {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  align-items: flex-start;
+}
+
+.practice-session__record {
+  min-inline-size: 200px;
+  min-block-size: 56px;
+  font-size: var(--text-lg);
+}
+
+.practice-session__record.is-recording {
+  background: var(--color-danger);
+}
+
+.practice-session__level {
+  display: block;
+  overflow: hidden;
+  inline-size: min(100%, 320px);
+  block-size: 8px;
+  background: var(--color-border);
+  border-radius: var(--radius-full);
+}
+
+.practice-session__level-fill {
+  display: block;
+  block-size: 100%;
+  background: var(--color-success);
+  transition: inline-size var(--duration-fast) linear;
+}

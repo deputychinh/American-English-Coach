@@ -1,0 +1,48 @@
+.api-status-banner {
+  display: flex;
+  gap: var(--space-2);
+  align-items: center;
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.api-status-banner__dot {
+  inline-size: 10px;
+  block-size: 10px;
+  background: var(--color-border-control);
+  border-radius: var(--radius-full);
+}
+
+.api-status-banner--success {
+  color: var(--color-on-success-subtle);
+  background: var(--color-success-subtle);
+  border-color: var(--color-success);
+}
+
+.api-status-banner--success .api-status-banner__dot {
+  background: var(--color-success);
+}
+
+.api-status-banner--warning {
+  color: var(--color-on-warning-subtle);
+  background: var(--color-warning-subtle);
+  border-color: var(--color-warning);
+}
+
+.api-status-banner--warning .api-status-banner__dot {
+  background: var(--color-warning);
+}
+
+.api-status-banner--danger {
+  color: var(--color-on-danger-subtle);
+  background: var(--color-danger-subtle);
+  border-color: var(--color-danger);
+}
+
+.api-status-banner--danger .api-status-banner__dot {
+  background: var(--color-danger);
+}

@@ -11,3 +11,6 @@ web/src/api/*.schema.ts
 web/public/vendor
 *.tsbuildinfo
 package-lock.json
+web/test-results
+web/playwright-report
+web/out

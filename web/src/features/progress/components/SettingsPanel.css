@@ -1,0 +1,22 @@
+.settings-panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--padding-card);
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+}
+
+.settings-panel__heading {
+  font-size: var(--text-lg);
+}
+
+.settings-panel__row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  align-items: center;
+  min-block-size: var(--size-touch-target);
+  font-size: var(--text-sm);
+}

@@ -1,0 +1,51 @@
+.verdict-chip {
+  display: inline-flex;
+  flex-direction: column;
+  gap: var(--space-0-5);
+  align-items: center;
+  min-inline-size: var(--size-touch-target);
+  min-block-size: var(--size-touch-target);
+  padding: var(--space-1) var(--space-2);
+  font: inherit;
+  color: var(--color-text);
+  background: var(--color-surface);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+}
+
+.verdict-chip__ipa {
+  font-family: var(--font-ipa);
+  font-size: var(--text-xl);
+  line-height: var(--leading-tight);
+}
+
+.verdict-chip__mark {
+  font-size: var(--text-xs);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-none);
+}
+
+.verdict-chip.is-ok {
+  color: var(--color-on-success-subtle);
+  background: var(--color-success-subtle);
+  border-color: var(--color-success);
+}
+
+.verdict-chip.is-check {
+  color: var(--color-on-warning-subtle);
+  background: var(--color-warning-subtle);
+  border-color: var(--color-warning);
+  border-style: dashed;
+}
+
+.verdict-chip.is-error {
+  color: var(--color-on-danger-subtle);
+  background: var(--color-danger-subtle);
+  border-color: var(--color-danger);
+}
+
+.verdict-chip.is-selected {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 2px;
+}

@@ -1,0 +1,47 @@
+.feature-bar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.feature-bar__head {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--text-sm);
+}
+
+.feature-bar__label {
+  color: var(--color-text-muted);
+}
+
+.feature-bar__value {
+  font-variant-numeric: tabular-nums;
+}
+
+.feature-bar__track {
+  position: relative;
+  overflow: hidden;
+  block-size: 12px;
+  background: var(--color-border);
+  border-radius: var(--radius-full);
+}
+
+.feature-bar__target {
+  position: absolute;
+  background: var(--color-success-subtle);
+  border-inline: 2px solid var(--color-success);
+  inset-block: 0;
+}
+
+.feature-bar__fill {
+  position: absolute;
+  background: var(--color-primary);
+  border-radius: var(--radius-full);
+  transition: inline-size var(--duration-fast) linear;
+  inset-block: 0;
+  inset-inline-start: 0;
+}
+
+.feature-bar__fill.is-inside {
+  background: var(--color-success);
+}

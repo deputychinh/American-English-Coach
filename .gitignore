@@ -33,3 +33,6 @@ vendor/lexicon.sqlite3
 
 # Vendored MediaPipe runtime and model (restored by `make vendor-web`)
 web/public/vendor/mediapipe/
+web/test-results/
+web/playwright-report/
+web/e2e/fixtures/

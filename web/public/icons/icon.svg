@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="American English Coach">
+  <rect width="512" height="512" rx="96" fill="#c2410c"/>
+  <path d="M116 300c40 70 100 104 140 104s100-34 140-104" fill="none" stroke="#fff" stroke-width="34" stroke-linecap="round"/>
+  <path d="M116 300c40-40 100-60 140-60s100 20 140 60" fill="none" stroke="#ffe6d5" stroke-width="22" stroke-linecap="round"/>
+  <text x="256" y="196" font-family="Noto Sans, Inter, sans-serif" font-size="150" font-weight="700" fill="#fff" text-anchor="middle">θ</text>
+</svg>

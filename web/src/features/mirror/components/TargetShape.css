@@ -1,0 +1,28 @@
+.target-shape {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.target-shape__outer {
+  fill: var(--color-primary-subtle);
+  stroke: var(--color-primary);
+  stroke-width: 3;
+}
+
+.target-shape__inner {
+  fill: var(--color-ink-800);
+  stroke: var(--color-primary);
+  stroke-width: 2;
+}
+
+.target-shape__extra {
+  fill: var(--color-on-brand);
+  stroke: var(--color-text-muted);
+  stroke-width: 2;
+}
+
+.target-shape__text {
+  font-size: var(--text-3xl);
+  fill: var(--color-text-muted);
+}

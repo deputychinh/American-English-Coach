@@ -1,0 +1,31 @@
+export const MEDIAPIPE_WASM_PATH = '/vendor/mediapipe';
+export const FACE_MODEL_PATH = '/vendor/mediapipe/face_landmarker.task';
+export const HINT_DELAY_MS = 500;
+export const MIN_FPS = 24;
+export const FPS_SAMPLE_FRAMES = 60;
+export const MAX_YAW_DEGREES = 20;
+export const MAX_PITCH_DEGREES = 15;
+export const FRAME_BUFFER_SECONDS = 20;
+export const UI_REFRESH_HZ = 15;
+export const DEFAULT_CALIBRATION_STEP_SECONDS = 3;
+/** Landmark indices (MediaPipe Face Mesh topology). */
+export const LIP_OUTER = [
+  61, 146, 91, 181, 84, 17, 314, 405, 321, 375, 291, 409, 270, 269, 267, 0, 37, 39, 40, 185,
+];
+export const LIP_INNER = [
+  78, 95, 88, 178, 87, 14, 317, 402, 318, 324, 308, 415, 310, 311, 312, 13, 82, 81, 80, 191,
+];
+export const UPPER_INNER_LIP = 13;
+export const LOWER_INNER_LIP = 14;
+export const MOUTH_LEFT_CORNER = 61;
+export const MOUTH_RIGHT_CORNER = 291;
+export const EYE_OUTER_LEFT = 33;
+export const EYE_OUTER_RIGHT = 263;
+export const FEATURE_NAMES = [
+  'aperture',
+  'width',
+  'roundness',
+  'jaw',
+  'lipClosed',
+  'lowerLipTuck',
+] as const;

@@ -1,0 +1,25 @@
+:root {
+  --font-sans: 'Inter Variable', 'Inter Variable Fallback', system-ui, sans-serif;
+  --font-display: 'Inter Variable', 'Inter Variable Fallback', system-ui, sans-serif;
+  --font-ipa: 'Noto Sans Variable', 'Noto Sans', 'Inter Variable', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  --text-2xs: 11px;
+  --text-xs: 12px;
+  --text-sm: 14px;
+  --text-md: 16px;
+  --text-lg: 18px;
+  --text-xl: 20px;
+  --text-2xl: 24px;
+  --text-3xl: 30px;
+  --text-4xl: 36px;
+  --text-5xl: 48px;
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+  --leading-none: 1;
+  --leading-tight: 1.2;
+  --leading-snug: 1.4;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.7;
+}

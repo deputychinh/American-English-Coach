@@ -1,0 +1,61 @@
+.sound-detail {
+  position: sticky;
+  top: calc(var(--header-height) + var(--space-4));
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  align-items: flex-start;
+  padding: var(--padding-card);
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+}
+
+.sound-detail__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  inline-size: 100%;
+}
+
+.sound-detail__ipa {
+  font-family: var(--font-ipa);
+  font-size: var(--text-4xl);
+  color: var(--color-primary);
+}
+
+.sound-detail__close {
+  font-size: var(--text-sm);
+}
+
+.sound-detail__muted {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+.sound-detail__facts {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--space-1) var(--space-4);
+  font-size: var(--text-sm);
+}
+
+.sound-detail__badge {
+  padding: var(--space-0-5) var(--space-2);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
+  color: var(--color-on-info-subtle);
+  background: var(--color-info-subtle);
+  border-radius: var(--radius-sm);
+}
+
+.sound-detail__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap-inline);
+}
+
+.sound-detail__error {
+  font-size: var(--text-sm);
+  color: var(--color-danger);
+}

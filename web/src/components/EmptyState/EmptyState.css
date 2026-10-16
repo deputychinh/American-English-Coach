@@ -1,0 +1,14 @@
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  align-items: flex-start;
+  padding: var(--padding-card);
+  color: var(--color-text-muted);
+  border: 1px dashed var(--color-border-control);
+  border-radius: var(--radius-md);
+}
+
+.empty-state__message {
+  font-size: var(--text-sm);
+}
