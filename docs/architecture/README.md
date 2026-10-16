@@ -51,11 +51,11 @@ flowchart LR
 
 ## Mô hình dữ liệu (SQLite)
 
-| Bảng | Trường chính |
-|---|---|
+| Bảng              | Trường chính                                                                                                                 |
+| ----------------- | ---------------------------------------------------------------------------------------------------------------------------- |
 | `assessment_runs` | `id` (uuid), `item_id`, `text`, `model_version`, `created_at`, `ok_count/check_count/error_count`, `result_json`, `disputed` |
-| `phoneme_results` | `run_id` → runs, `word`, `phoneme` (ARPAbet), `verdict`, `gop`, `visual`, `error_id` |
-| `calibrations` | `id='default'`, `data_json` (min/max mỗi đặc trưng), `created_at` |
+| `phoneme_results` | `run_id` → runs, `word`, `phoneme` (ARPAbet), `verdict`, `gop`, `visual`, `error_id`                                         |
+| `calibrations`    | `id='default'`, `data_json` (min/max mỗi đặc trưng), `created_at`                                                            |
 
 Lược đồ được tạo bằng `metadata.create_all` khi khởi động (một người dùng, một file); đổi lược đồ phá vỡ tương thích phải kèm script di trú và ADR.
 

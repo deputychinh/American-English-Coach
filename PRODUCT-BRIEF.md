@@ -31,12 +31,12 @@ Máy hiện tại báo kiến trúc arm64; chưa xác định được RAM trong
 
 ## 2. Kết quả học và cách đo
 
-| Năng lực | Hành vi cần luyện | Kiểm tra |
-|---|---|---|
-| Phát âm Mỹ | Âm rõ, âm cuối, trọng âm, nhịp/nối âm, ngữ điệu | Thu âm từ/câu mới, nghe A/B, rubric và phản hồi âm đã kiểm chứng |
-| Đọc từ mới | Nhận quan hệ chữ–âm, dùng IPA, nhận biết ngoại lệ | Đọc trước khi nghe mẫu; đo riêng lượt có/không IPA |
-| Hiểu từ/câu | Nhớ nghĩa theo ngữ cảnh, chọn đúng nghĩa và dùng từ | Câu hỏi nghĩa, diễn giải, câu tự viết |
-| Nghe–viết | Nhận ra âm/cụm, viết lại và hiểu nội dung | Chép audio mới; chấm nghe, chính tả và hiểu nghĩa riêng |
+| Năng lực    | Hành vi cần luyện                                   | Kiểm tra                                                         |
+| ----------- | --------------------------------------------------- | ---------------------------------------------------------------- |
+| Phát âm Mỹ  | Âm rõ, âm cuối, trọng âm, nhịp/nối âm, ngữ điệu     | Thu âm từ/câu mới, nghe A/B, rubric và phản hồi âm đã kiểm chứng |
+| Đọc từ mới  | Nhận quan hệ chữ–âm, dùng IPA, nhận biết ngoại lệ   | Đọc trước khi nghe mẫu; đo riêng lượt có/không IPA               |
+| Hiểu từ/câu | Nhớ nghĩa theo ngữ cảnh, chọn đúng nghĩa và dùng từ | Câu hỏi nghĩa, diễn giải, câu tự viết                            |
+| Nghe–viết   | Nhận ra âm/cụm, viết lại và hiểu nội dung           | Chép audio mới; chấm nghe, chính tả và hiểu nghĩa riêng          |
 
 Giọng mẫu hướng đến các cách đọc Mỹ tương thích, không coi mọi biến thể khác mẫu là lỗi. Từ đa cách đọc, tên riêng và từ đồng âm cần tra cứu/ngữ cảnh; không hứa đọc/hiểu mọi từ chỉ từ chữ hoặc âm.
 
@@ -55,13 +55,13 @@ Giọng mẫu hướng đến các cách đọc Mỹ tương thích, không coi 
 
 ### Một buổi 60 phút
 
-| Phần | Phút đề xuất | Người học thực hiện |
-|---|---:|---|
-| Ôn đến hạn | 10 | Nhớ nghĩa, nghe–viết hoặc đọc theo kỹ năng yếu |
-| Âm/trọng âm | 15 | Hướng dẫn Việt, phân biệt âm, thu âm và nghe A/B |
-| Nghe chép | 15 | Nghe khi chưa thấy chữ, viết, xem lỗi, nghe lại phần khó |
-| Từ trong ngữ cảnh | 10 | 5–10 mục vừa sức, chọn nghĩa và viết câu |
-| Shadowing/nói | 10 | Bắt chước nhịp rồi nói lại khi ẩn transcript |
+| Phần              | Phút đề xuất | Người học thực hiện                                      |
+| ----------------- | -----------: | -------------------------------------------------------- |
+| Ôn đến hạn        |           10 | Nhớ nghĩa, nghe–viết hoặc đọc theo kỹ năng yếu           |
+| Âm/trọng âm       |           15 | Hướng dẫn Việt, phân biệt âm, thu âm và nghe A/B         |
+| Nghe chép         |           15 | Nghe khi chưa thấy chữ, viết, xem lỗi, nghe lại phần khó |
+| Từ trong ngữ cảnh |           10 | 5–10 mục vừa sức, chọn nghĩa và viết câu                 |
+| Shadowing/nói     |           10 | Bắt chước nhịp rồi nói lại khi ẩn transcript             |
 
 30 phút giảm bài mới, giữ ôn và trọng tâm. 90 phút thêm speaker và nói tự do. Không tăng tải để bù mọi ngày bỏ học. Có thể nghỉ/chia buổi; lượng bài mới giảm khi tồn nhiều bài ôn.
 
@@ -105,21 +105,21 @@ Dùng bài mới có độ khó tương đương; tách audio human/TTS, speaker
 
 Đây là thứ tự dự kiến, điều chỉnh theo đầu vào. Các âm là ví dụ ưu tiên, không chẩn đoán mặc định mọi người Việt.
 
-| Tuần | Trọng tâm | Áp dụng/kiểm tra |
-|---|---|---|
-| 1 | Đầu vào, IPA nhập môn, âm cuối, /iː/–/ɪ/ | Từ/câu ngắn, bản ghi đường cơ sở |
-| 2 | /ɛ/–/æ/, /ʊ/–/uː/, schwa | Minimal pairs, chép câu mới |
-| 3 | /θ/–/ð/, /s/–/ʃ/, /tʃ/–/dʒ/, hữu thanh | Phân biệt âm và đọc trong câu |
-| 4 | /ɹ/, cụm phụ âm, -s/-ed | Đọc biến đổi từ; kiểm tra tháng đầu |
-| 5 | Trọng âm từ, họ từ, chữ–âm/ngoại lệ | Đọc từ chưa luyện, trước/sau IPA |
-| 6 | Trọng âm câu, weak forms | Chép cụm, shadowing, hiểu trọng tâm |
-| 7 | Nối âm, flap /t/, rhythm Mỹ | Câu tự nhiên, ghi riêng số lần nghe |
-| 8 | Ngữ điệu và nhiều speaker | Audio người thật được chọn; đánh giá giữa kỳ |
-| 9 | Giới thiệu, mua sắm, đường đi | Chép hội thoại và đóng vai có prompt |
-| 10 | Công việc/học tập theo nhu cầu | Nghe ghi chú và giải thích ý |
-| 11 | Đoạn 30–60 giây, diễn đạt lại | Hiểu ý chính, nói 1–2 phút với rubric |
-| 12 | Lỗi cá nhân và nội dung mới | Từ/câu/speaker giữ lại, luyện điểm yếu |
-| Ngày 85–90 | Đánh giá cuối và kế hoạch tiếp tục | Bài tương đương đầu vào, thu âm mới |
+| Tuần       | Trọng tâm                                | Áp dụng/kiểm tra                             |
+| ---------- | ---------------------------------------- | -------------------------------------------- |
+| 1          | Đầu vào, IPA nhập môn, âm cuối, /iː/–/ɪ/ | Từ/câu ngắn, bản ghi đường cơ sở             |
+| 2          | /ɛ/–/æ/, /ʊ/–/uː/, schwa                 | Minimal pairs, chép câu mới                  |
+| 3          | /θ/–/ð/, /s/–/ʃ/, /tʃ/–/dʒ/, hữu thanh   | Phân biệt âm và đọc trong câu                |
+| 4          | /ɹ/, cụm phụ âm, -s/-ed                  | Đọc biến đổi từ; kiểm tra tháng đầu          |
+| 5          | Trọng âm từ, họ từ, chữ–âm/ngoại lệ      | Đọc từ chưa luyện, trước/sau IPA             |
+| 6          | Trọng âm câu, weak forms                 | Chép cụm, shadowing, hiểu trọng tâm          |
+| 7          | Nối âm, flap /t/, rhythm Mỹ              | Câu tự nhiên, ghi riêng số lần nghe          |
+| 8          | Ngữ điệu và nhiều speaker                | Audio người thật được chọn; đánh giá giữa kỳ |
+| 9          | Giới thiệu, mua sắm, đường đi            | Chép hội thoại và đóng vai có prompt         |
+| 10         | Công việc/học tập theo nhu cầu           | Nghe ghi chú và giải thích ý                 |
+| 11         | Đoạn 30–60 giây, diễn đạt lại            | Hiểu ý chính, nói 1–2 phút với rubric        |
+| 12         | Lỗi cá nhân và nội dung mới              | Từ/câu/speaker giữ lại, luyện điểm yếu       |
+| Ngày 85–90 | Đánh giá cuối và kế hoạch tiếp tục       | Bài tương đương đầu vào, thu âm mới          |
 
 Người mới có thể cần kéo dài tuần 1–4; mốc ngày không ép vượt bài. Nói tự do MVP dùng prompt/rubric, không cần chatbot cloud hay LLM local nặng.
 
@@ -127,27 +127,27 @@ Người mới có thể cần kéo dài tuần 1–4; mốc ngày không ép v�
 
 Tách kho tra cứu lớn khỏi bài học được duyệt; không biến hàng trăm nghìn từ thành nghĩa vụ học.
 
-| Gói | Quy mô đề xuất | Điều kiện |
-|---|---|---|
-| Pilot một tuần | 100 từ/nghĩa, 60 câu, 10 bài âm/nhịp | Nghĩa Việt, IPA, audio, đáp án được duyệt |
-| Bản học đầu | 300 mục từ/nghĩa, 150 câu, 20 bài âm/nhịp | Nhiều độ khó, bài giữ lại, tối thiểu 2 voice duyệt |
-| Gói 90 ngày | Khoảng 800–1.200 mục từ/cụm/nghĩa, 400–600 câu, 30–50 đoạn | Mục tiêu sản xuất; lượng học thực tế tùy đầu vào/tải ôn |
+| Gói            | Quy mô đề xuất                                             | Điều kiện                                               |
+| -------------- | ---------------------------------------------------------- | ------------------------------------------------------- |
+| Pilot một tuần | 100 từ/nghĩa, 60 câu, 10 bài âm/nhịp                       | Nghĩa Việt, IPA, audio, đáp án được duyệt               |
+| Bản học đầu    | 300 mục từ/nghĩa, 150 câu, 20 bài âm/nhịp                  | Nhiều độ khó, bài giữ lại, tối thiểu 2 voice duyệt      |
+| Gói 90 ngày    | Khoảng 800–1.200 mục từ/cụm/nghĩa, 400–600 câu, 30–50 đoạn | Mục tiêu sản xuất; lượng học thực tế tùy đầu vào/tải ôn |
 
 “Mục” là nghĩa/cụm sử dụng, không đồng nghĩa lemma độc lập. Các gói chưa được tạo. Cần đo công biên tập qua pilot trước khi hẹn ngày hoàn thành. Mỗi bài có mục tiêu, điều kiện trước, kỹ năng, độ khó nội bộ, item, đáp án/policy, audio và giải thích lỗi. Không suy CEFR từ tần suất.
 
 ## 7. Nguồn dữ liệu và voice đề xuất
 
-| Thành phần | Nguồn local | Vai trò/giới hạn |
-|---|---|---|
-| Phát âm Mỹ | [CMUdict](https://github.com/cmusphinx/cmudict) | Âm vị, stress, biến thể; thiếu nghĩa/audio |
-| Ưu tiên học | [wordfreq](https://github.com/rspeer/wordfreq) | Tần suất; giữ attribution/giấy phép dữ liệu |
-| Nghĩa Anh | [Open English Wordnet](https://github.com/globalwordnet/english-wordnet) | Nghĩa có cấu trúc, thêm lớp Việt được biên tập |
-| Kho mở rộng | [Kaikki](https://kaikki.org/dictionary/English/), [Wiktextract](https://github.com/tatuylonen/wiktextract) | Lọc nguồn/giọng/giấy phép; chưa nhập toàn dump |
-| Danh sách phụ | [dwyl/english-words](https://github.com/dwyl/english-words) | Tra cứu tùy chọn, không giáo trình/định nghĩa |
-| TTS Mỹ | [Kokoro](https://github.com/hexgrad/kokoro) | Ứng viên tạo local, cần nghe/đo trước chốt |
-| Audio người thật | [LibriSpeech](https://www.openslr.org/12), [Tatoeba](https://tatoeba.org/en/terms_of_use) | Chọn clip, kiểm tra accent/transcript/quyền dùng |
-| ASR | [whisper.cpp](https://github.com/ggml-org/whisper.cpp), CPU [faster-whisper](https://github.com/SYSTRAN/faster-whisper) | Chọn một runtime sau benchmark |
-| Assessment thử nghiệm | [OpenPronounce](https://github.com/Halleck45/OpenPronounce), R&D [GOPT](https://github.com/YuanGongND/gopt) | Chưa đủ căn cứ sửa âm tự động cho người Việt |
+| Thành phần            | Nguồn local                                                                                                             | Vai trò/giới hạn                                 |
+| --------------------- | ----------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------ |
+| Phát âm Mỹ            | [CMUdict](https://github.com/cmusphinx/cmudict)                                                                         | Âm vị, stress, biến thể; thiếu nghĩa/audio       |
+| Ưu tiên học           | [wordfreq](https://github.com/rspeer/wordfreq)                                                                          | Tần suất; giữ attribution/giấy phép dữ liệu      |
+| Nghĩa Anh             | [Open English Wordnet](https://github.com/globalwordnet/english-wordnet)                                                | Nghĩa có cấu trúc, thêm lớp Việt được biên tập   |
+| Kho mở rộng           | [Kaikki](https://kaikki.org/dictionary/English/), [Wiktextract](https://github.com/tatuylonen/wiktextract)              | Lọc nguồn/giọng/giấy phép; chưa nhập toàn dump   |
+| Danh sách phụ         | [dwyl/english-words](https://github.com/dwyl/english-words)                                                             | Tra cứu tùy chọn, không giáo trình/định nghĩa    |
+| TTS Mỹ                | [Kokoro](https://github.com/hexgrad/kokoro)                                                                             | Ứng viên tạo local, cần nghe/đo trước chốt       |
+| Audio người thật      | [LibriSpeech](https://www.openslr.org/12), [Tatoeba](https://tatoeba.org/en/terms_of_use)                               | Chọn clip, kiểm tra accent/transcript/quyền dùng |
+| ASR                   | [whisper.cpp](https://github.com/ggml-org/whisper.cpp), CPU [faster-whisper](https://github.com/SYSTRAN/faster-whisper) | Chọn một runtime sau benchmark                   |
+| Assessment thử nghiệm | [OpenPronounce](https://github.com/Halleck45/OpenPronounce), R&D [GOPT](https://github.com/YuanGongND/gopt)             | Chưa đủ căn cứ sửa âm tự động cho người Việt     |
 
 Loại cloud assessment khỏi triển khai. Free tier không là lời giải chi phí 0 lâu dài. Browser TTS chỉ tiện ích tùy chọn, không giọng mẫu bắt buộc vì giọng/offline khác nhau theo OS. Xem [nghiên cứu](docs/REPOSITORY-RESEARCH.md) cho phương án thay thế/giấy phép; chưa cài hay chạy các model.
 
@@ -192,17 +192,17 @@ Launcher cần các thao tác setup, doctor, start, backup. Đây là yêu cầu
 
 ## 10. Mô hình dữ liệu và nhập nội dung
 
-| Thực thể | Trường quan trọng |
-|---|---|
-| Source | URL, version/commit, ngày tải, checksum, license, attribution |
-| Lexeme | Lemma, dạng viết, từ loại, biến thể, nguồn |
-| Sense | Nghĩa Anh/Việt, ví dụ, độ khó, trạng thái duyệt |
-| Pronunciation | Locale, âm vị gốc/IPA, stress, biến thể, dictionary/G2P, trạng thái duyệt |
-| AudioAsset | Text version, pronunciation, voice/speaker, human/TTS, file, license, trạng thái duyệt |
-| Exercise | Skill, prompt, answer policy, audio, explanation, luyện/kiểm tra |
-| Attempt | Version bài, đáp án/bản ghi, lần nghe, trợ giúp, điểm từng chiều, lỗi, model version |
-| ReviewState | Item/skill, due date, scheduler state, review history |
-| AssessmentRun | Reference, transcript, hợp lệ/lỗi/thiếu dữ liệu, engine/version, thời gian chạy |
+| Thực thể      | Trường quan trọng                                                                      |
+| ------------- | -------------------------------------------------------------------------------------- |
+| Source        | URL, version/commit, ngày tải, checksum, license, attribution                          |
+| Lexeme        | Lemma, dạng viết, từ loại, biến thể, nguồn                                             |
+| Sense         | Nghĩa Anh/Việt, ví dụ, độ khó, trạng thái duyệt                                        |
+| Pronunciation | Locale, âm vị gốc/IPA, stress, biến thể, dictionary/G2P, trạng thái duyệt              |
+| AudioAsset    | Text version, pronunciation, voice/speaker, human/TTS, file, license, trạng thái duyệt |
+| Exercise      | Skill, prompt, answer policy, audio, explanation, luyện/kiểm tra                       |
+| Attempt       | Version bài, đáp án/bản ghi, lần nghe, trợ giúp, điểm từng chiều, lỗi, model version   |
+| ReviewState   | Item/skill, due date, scheduler state, review history                                  |
+| AssessmentRun | Reference, transcript, hợp lệ/lỗi/thiếu dữ liệu, engine/version, thời gian chạy        |
 
 Pipeline: tải nguồn ghim version → giữ raw → normalize → join lemma/từ loại/nghĩa → chọn tập phổ biến → biên tập Việt/ví dụ → tạo audio → duyệt → xuất content pack.
 
@@ -210,13 +210,13 @@ Không overwrite progress khi cập nhật pack. Item đổi giữ version để
 
 ## 11. Chi phí và cấu hình nhẹ
 
-| Khoản | Phương án |
-|---|---|
-| API/subscription/hosting | 0, không sử dụng |
-| Model/data | Nguồn công khai sau kiểm tra giấy phép |
-| GPU | Không mua, thử CPU/Apple Silicon trước |
-| Điện/băng thông/ổ đĩa | Tài nguyên máy, chưa đo |
-| Nội dung | Tự biên soạn/nguồn được phép; công kiểm tra là chi phí thực |
+| Khoản                    | Phương án                                                   |
+| ------------------------ | ----------------------------------------------------------- |
+| API/subscription/hosting | 0, không sử dụng                                            |
+| Model/data               | Nguồn công khai sau kiểm tra giấy phép                      |
+| GPU                      | Không mua, thử CPU/Apple Silicon trước                      |
+| Điện/băng thông/ổ đĩa    | Tài nguyên máy, chưa đo                                     |
+| Nội dung                 | Tự biên soạn/nguồn được phép; công kiểm tra là chi phí thực |
 
 Chế độ nhẹ chỉ cần app, SQLite và audio pack. ASR là gói thêm model nhỏ; assessor thêm riêng, mặc định tắt. Launcher phải báo kích thước trước tải; chưa công bố tổng GB hoặc tốc độ khi chưa chọn/đo model.
 
@@ -239,13 +239,13 @@ Bộ công nghệ theo [nghiên cứu](docs/REPOSITORY-RESEARCH.md): 200 mục t
 
 90 ngày là thời gian học, không mặc định thời gian xây app. Chưa hẹn ngày hoàn thành trước PoC và pilot nội dung.
 
-| Bước | Bàn giao | Điều kiện hoàn thành |
-|---|---|---|
-| P0 | Dictionary + TTS + ASR thử local, manifest nguồn | Đo RAM/latency, chọn runtime hoặc tắt ASR; không phí API |
-| P1 | App hôm nay, audio, nghe chép, thu âm A/B, SQLite, backup, pilot 1 tuần | Restart giữ tiến độ; học khi ngắt mạng; không cần model nặng |
-| P2 | Ôn theo kỹ năng, sổ lỗi, tra từ, tháng đầu, báo cáo | Không trùng/mất review; bài kiểm tra giữ lại |
-| P3 | Gói các tuần còn lại, nhiều speaker, hội thoại prompt | Mọi bài đủ audio/đáp án/nguồn và đã duyệt |
-| P4 | Assessment local tùy chọn + báo cáo kiểm chứng | Chỉ bật nhóm lỗi có bằng chứng; chưa đạt thì giữ A/B |
+| Bước | Bàn giao                                                                | Điều kiện hoàn thành                                         |
+| ---- | ----------------------------------------------------------------------- | ------------------------------------------------------------ |
+| P0   | Dictionary + TTS + ASR thử local, manifest nguồn                        | Đo RAM/latency, chọn runtime hoặc tắt ASR; không phí API     |
+| P1   | App hôm nay, audio, nghe chép, thu âm A/B, SQLite, backup, pilot 1 tuần | Restart giữ tiến độ; học khi ngắt mạng; không cần model nặng |
+| P2   | Ôn theo kỹ năng, sổ lỗi, tra từ, tháng đầu, báo cáo                     | Không trùng/mất review; bài kiểm tra giữ lại                 |
+| P3   | Gói các tuần còn lại, nhiều speaker, hội thoại prompt                   | Mọi bài đủ audio/đáp án/nguồn và đã duyệt                    |
+| P4   | Assessment local tùy chọn + báo cáo kiểm chứng                          | Chỉ bật nhóm lỗi có bằng chứng; chưa đạt thì giữ A/B         |
 
 Chấm accent tự động không chặn app đầu tiên chạy được. Ràng buộc local/gần 0 phí giữ ở mọi bước.
 

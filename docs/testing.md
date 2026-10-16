@@ -2,14 +2,14 @@
 
 ## Tầng
 
-| Tầng | Ở đâu | Cách chạy | Ngưỡng |
-|---|---|---|---|
-| Domain (căn chỉnh, GOP, catalogue, viseme, prosody, từ điển) | `backend/tests/unit` | `cd backend && uv run pytest tests/unit` | nằm trong coverage chung ≥ 90 % |
-| API (FastAPI + `FakeRecognizer`) | `backend/tests/api` | `uv run pytest tests/api` | như trên |
-| Web unit/component | `web/src/**/*.test.ts(x)` | `cd web && npm test` | dòng ≥ 80 % |
-| Hành trình trình duyệt | `web/e2e` (Playwright, camera/mic giả: `--use-fake-device-for-media-stream`) | `make e2e` sau `make serve` | smoke: chọn bài → ghi → thẻ kết quả |
-| Legacy | `legacy/tests` | `make test-legacy` | 33 unittest + 2 node test pass |
-| Chất lượng model (không phải test tự động) | `backend/app/eval/*` | `make bench`, `make eval` | xem `docs/BENCHMARK-REALTIME.md` |
+| Tầng                                                         | Ở đâu                                                                        | Cách chạy                                | Ngưỡng                              |
+| ------------------------------------------------------------ | ---------------------------------------------------------------------------- | ---------------------------------------- | ----------------------------------- |
+| Domain (căn chỉnh, GOP, catalogue, viseme, prosody, từ điển) | `backend/tests/unit`                                                         | `cd backend && uv run pytest tests/unit` | nằm trong coverage chung ≥ 90 %     |
+| API (FastAPI + `FakeRecognizer`)                             | `backend/tests/api`                                                          | `uv run pytest tests/api`                | như trên                            |
+| Web unit/component                                           | `web/src/**/*.test.ts(x)`                                                    | `cd web && npm test`                     | dòng ≥ 80 %                         |
+| Hành trình trình duyệt                                       | `web/e2e` (Playwright, camera/mic giả: `--use-fake-device-for-media-stream`) | `make e2e` sau `make serve`              | smoke: chọn bài → ghi → thẻ kết quả |
+| Legacy                                                       | `legacy/tests`                                                               | `make test-legacy`                       | 33 unittest + 2 node test pass      |
+| Chất lượng model (không phải test tự động)                   | `backend/app/eval/*`                                                         | `make bench`, `make eval`                | xem `docs/BENCHMARK-REALTIME.md`    |
 
 `make ci` = lint + typecheck + test của backend và web; đây cũng là những gì GitHub Actions chạy (`.github/workflows/ci.yml`).
 

@@ -6,8 +6,8 @@ The app runs on your computer. It requires no account, API key, paid service, or
 
 ## Screenshots
 
-| 44-sound IPA chart | Guided sound practice |
-| --- | --- |
+| 44-sound IPA chart                                                                              | Guided sound practice                                                                                            |
+| ----------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
 | ![The IPA chart with American sound notes and 466,550 indexed words](docs/images/ipa-chart.jpg) | ![A sound lesson with mouth guidance, example audio, recording, and full-word IPA](docs/images/ipa-practice.jpg) |
 
 ![Dictionary lookup showing the American IPA and Vietnamese meaning for “geese”](docs/images/dictionary-example.jpg)
@@ -92,13 +92,13 @@ The web interface can open on other platforms, but local text-to-speech is curre
 
 ## Data coverage and limitations
 
-| Dataset | Current coverage |
-| --- | ---: |
-| Traditional IPA chart entries | 44, with notes for corresponding American pronunciations |
-| `dwyl/english-words` entries | 466,550 |
-| Entries matched to an IPA pronunciation | 72,072 |
-| Entries with a Vietnamese meaning | 115,655 |
-| Authored starter lessons | 120 word cards and 60 sentences across 12 weeks |
+| Dataset                                 |                                         Current coverage |
+| --------------------------------------- | -------------------------------------------------------: |
+| Traditional IPA chart entries           | 44, with notes for corresponding American pronunciations |
+| `dwyl/english-words` entries            |                                                  466,550 |
+| Entries matched to an IPA pronunciation |                                                   72,072 |
+| Entries with a Vietnamese meaning       |                                                  115,655 |
+| Authored starter lessons                |          120 word cards and 60 sentences across 12 weeks |
 
 Coverage is source-based. The vocabulary list includes rare words, proper names, and entries with numbers or symbols. Many entries do not yet have an IPA transcription or Vietnamese meaning; the app labels missing data rather than inventing it.
 
