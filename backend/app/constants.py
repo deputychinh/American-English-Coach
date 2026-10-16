@@ -12,7 +12,9 @@ CTC_FRAME_SECONDS: Final = 0.02
 VISUAL_WINDOW_PAD_SECONDS: Final = 0.06
 # GOP thresholds (log posterior, per phoneme). Calibrated on speechocean762;
 # see docs/BENCHMARK-REALTIME.md.
-GOP_OK_THRESHOLD: Final = -1.0
+# Swept on speechocean762 (docs/BENCHMARK-REALTIME.md §4): -1.5 trades 12.8% check-rate on
+# expert-correct phones for 61.6% detection; -1.0 gives 15.3% / 67.5%, -2.0 gives 10.8% / 57.8%.
+GOP_OK_THRESHOLD: Final = -1.5
 GOP_CHECK_THRESHOLD: Final = -3.0
 # Alignment costs: identical 0, same class 0.5, different class 1, gap 1.
 ALIGN_SAME_CLASS_COST: Final = 0.5
