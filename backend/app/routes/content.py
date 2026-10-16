@@ -4,7 +4,15 @@ from fastapi import APIRouter, Depends
 
 from app.container import AppContainer
 from app.dependencies import get_container
-from app.schemas.content import KnownErrorCard, MinimalPair, PhonemeCard, Sentence, VisemeContent
+from app.schemas.content import (
+    KnownErrorCard,
+    MinimalPair,
+    PhonemeCard,
+    Sentence,
+    SoundDrill,
+    SoundDrillSummary,
+    VisemeContent,
+)
 
 router = APIRouter(prefix="/content", tags=["content"])
 
@@ -37,3 +45,15 @@ def errors(container: AppContainer = Depends(get_container)) -> list[KnownErrorC
 def visemes(container: AppContainer = Depends(get_container)) -> VisemeContent:
     """Mouth-shape targets and calibration steps."""
     return container.content.visemes()
+
+
+@router.get("/sounds", response_model=list[SoundDrillSummary])
+def sounds(container: AppContainer = Depends(get_container)) -> list[SoundDrillSummary]:
+    """Every chart sound with the size of its drill."""
+    return container.content.drills()
+
+
+@router.get("/sounds/{sound_id}", response_model=SoundDrill)
+def sound(sound_id: str, container: AppContainer = Depends(get_container)) -> SoundDrill:
+    """Words, pairs and sentences validated against CMUdict for one sound."""
+    return container.content.drill(sound_id)

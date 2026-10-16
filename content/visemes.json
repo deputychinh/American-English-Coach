@@ -24,7 +24,8 @@
       },
       "hold_ms": 150,
       "hint_vi": "Khép kín hai môi rồi mới bật ra.",
-      "common_error_vi": "Môi không chạm nhau ở cuối từ."
+      "common_error_vi": "Môi không chạm nhau ở cuối từ.",
+      "confidence": "high"
     },
     "V2": {
       "name_vi": "Môi dưới chạm răng trên",
@@ -42,7 +43,8 @@
       },
       "hold_ms": 200,
       "hint_vi": "Đặt môi dưới dưới mép răng trên, thổi hơi.",
-      "common_error_vi": "Chu môi như /w/ hoặc khép hai môi như /b/."
+      "common_error_vi": "Chu môi như /w/ hoặc khép hai môi như /b/.",
+      "confidence": "high"
     },
     "V3": {
       "name_vi": "Lưỡi giữa răng",
@@ -61,7 +63,8 @@
       },
       "hold_ms": 200,
       "hint_vi": "Đầu lưỡi lộ nhẹ giữa hai hàm răng.",
-      "common_error_vi": "Lưỡi nằm sau răng nên thành /t/ hoặc /s/. Camera ước lượng lưỡi lộ ra giữa răng bằng màu (thử nghiệm); kết luận chính vẫn dựa vào âm thanh."
+      "common_error_vi": "Lưỡi nằm sau răng nên thành /t/ hoặc /s/. Camera ước lượng lưỡi lộ ra giữa răng bằng màu (thử nghiệm); kết luận chính vẫn dựa vào âm thanh.",
+      "confidence": "medium"
     },
     "V4": {
       "name_vi": "Môi tròn, chu ra",
@@ -79,7 +82,8 @@
       },
       "hold_ms": 250,
       "hint_vi": "Chu môi tròn về phía trước như huýt sáo.",
-      "common_error_vi": "Môi dẹt, không chu."
+      "common_error_vi": "Môi dẹt, không chu.",
+      "confidence": "high"
     },
     "V5": {
       "name_vi": "Môi hơi chu, răng gần",
@@ -98,7 +102,8 @@
       },
       "hold_ms": 200,
       "hint_vi": "Môi hơi chu và loe ra, răng gần nhau.",
-      "common_error_vi": "Môi dẹt như /s/."
+      "common_error_vi": "Môi dẹt như /s/.",
+      "confidence": "medium"
     },
     "V6": {
       "name_vi": "Môi kéo ngang",
@@ -119,7 +124,8 @@
       },
       "hold_ms": 250,
       "hint_vi": "Kéo khóe miệng sang hai bên như cười nhẹ, hàm gần khép.",
-      "common_error_vi": "Môi thả lỏng nên thành /ɪ/."
+      "common_error_vi": "Môi thả lỏng nên thành /ɪ/.",
+      "confidence": "medium"
     },
     "V7": {
       "name_vi": "Hàm mở rộng",
@@ -134,7 +140,116 @@
       },
       "hold_ms": 250,
       "hint_vi": "Hạ hàm, mở miệng rộng; với /æ/ kéo thêm khóe miệng.",
-      "common_error_vi": "Mở hàm quá ít nên /æ/ thành /ɛ/."
+      "common_error_vi": "Mở hàm quá ít nên /æ/ thành /ɛ/.",
+      "confidence": "medium"
+    },
+    "V8": {
+      "name_vi": "Môi dẹt nhẹ, hàm hé",
+      "sounds": ["IH", "EY", "Y"],
+      "confidence": "medium",
+      "targets": {
+        "width": {
+          "min": 0.4
+        },
+        "aperture": {
+          "min": 0.08,
+          "max": 0.45
+        },
+        "jaw": {
+          "max": 0.45
+        },
+        "roundness": {
+          "max": 0.4
+        }
+      },
+      "hold_ms": 250,
+      "hint_vi": "Môi hơi kéo ngang, hàm chỉ hé; thả lỏng hơn /iː/.",
+      "common_error_vi": "Kéo ngang và căng quá thành /iː/, hoặc mở hàm quá thành /ɛ/."
+    },
+    "V9": {
+      "name_vi": "Hàm mở vừa, môi trung tính",
+      "sounds": ["EH", "AH"],
+      "confidence": "medium",
+      "targets": {
+        "jaw": {
+          "min": 0.25,
+          "max": 0.65
+        },
+        "aperture": {
+          "min": 0.25,
+          "max": 0.7
+        },
+        "roundness": {
+          "max": 0.45
+        },
+        "lipClosed": {
+          "max": 0.2
+        }
+      },
+      "hold_ms": 250,
+      "hint_vi": "Hạ hàm vừa phải, môi không tròn không kéo ngang.",
+      "common_error_vi": "Mở quá rộng thành /æ/ hoặc hé quá ít thành /ɪ/."
+    },
+    "V10": {
+      "name_vi": "Môi hơi tròn, hàm mở vừa",
+      "sounds": ["AO", "ER", "R"],
+      "confidence": "low",
+      "targets": {
+        "roundness": {
+          "min": 0.3,
+          "max": 0.85
+        },
+        "jaw": {
+          "min": 0.15,
+          "max": 0.6
+        },
+        "width": {
+          "max": 0.6
+        }
+      },
+      "hold_ms": 250,
+      "hint_vi": "Môi tròn nhẹ, không chu mạnh như /uː/; với /ɹ/ lưỡi cuộn nhẹ về sau (camera không thấy).",
+      "common_error_vi": "Môi dẹt hoàn toàn, hoặc với /ɹ/ đầu lưỡi chạm lợi thành /l/."
+    },
+    "V11": {
+      "name_vi": "Đầu lưỡi lên lợi, miệng hé",
+      "sounds": ["T", "D", "N", "L"],
+      "confidence": "low",
+      "targets": {
+        "aperture": {
+          "min": 0.04,
+          "max": 0.45
+        },
+        "roundness": {
+          "max": 0.5
+        },
+        "lipClosed": {
+          "max": 0.3
+        }
+      },
+      "hold_ms": 150,
+      "hint_vi": "Miệng hé, đầu lưỡi chạm lợi sau răng trên; với /l/ đầu lưỡi có thể lộ sau răng.",
+      "common_error_vi": "Khép môi (thành /m b/) hoặc đưa lưỡi ra giữa răng (thành /θ ð/). Vị trí lưỡi chủ yếu chấm bằng tai."
+    },
+    "V12": {
+      "name_vi": "Miệng hé, môi thư giãn",
+      "sounds": ["K", "G", "NG", "HH"],
+      "confidence": "low",
+      "targets": {
+        "aperture": {
+          "min": 0.04,
+          "max": 0.6
+        },
+        "roundness": {
+          "max": 0.5
+        },
+        "lipClosed": {
+          "max": 0.3
+        }
+      },
+      "hold_ms": 150,
+      "hint_vi": "Môi thả lỏng, miệng hé; âm tạo ở cuống lưỡi hoặc cổ họng nên camera chỉ theo dõi môi và hàm.",
+      "common_error_vi": "Khép môi hoặc chu môi; âm cuối /k g ŋ/ bị bỏ. Kết luận chính dựa vào âm thanh."
     }
   },
   "calibration": {
@@ -170,5 +285,30 @@
         "seconds": 3
       }
     ]
+  },
+  "sounds_extra": {
+    "AY": {
+      "transition_vi": "Bắt đầu hàm mở rộng (/a/), kết thúc môi kéo ngang hàm khép (/ɪ/)."
+    },
+    "AW": {
+      "transition_vi": "Bắt đầu hàm mở rộng (/a/), kết thúc môi chu tròn (/ʊ/)."
+    },
+    "OY": {
+      "transition_vi": "Bắt đầu môi tròn (/ɔ/), kết thúc môi kéo ngang (/ɪ/)."
+    },
+    "EY": {
+      "transition_vi": "Bắt đầu hàm hé (/e/), kết thúc môi kéo ngang hơn (/ɪ/)."
+    },
+    "OW": {
+      "transition_vi": "Bắt đầu môi tròn nhẹ (/o/), kết thúc chu tròn hơn (/ʊ/)."
+    },
+    "ER": {
+      "transition_vi": "Giữ môi tròn nhẹ ổn định; âm /r/ Mỹ không có cú chạm lưỡi."
+    }
+  },
+  "confidence_vi": {
+    "high": "Camera thấy rõ",
+    "medium": "Camera thấy một phần",
+    "low": "Camera chỉ thấy môi/hàm; chấm bằng tai"
   }
 }

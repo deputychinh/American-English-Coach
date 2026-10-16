@@ -21,6 +21,7 @@ class VisemeTarget:
     hold_ms: int
     hint_vi: str
     common_error_vi: str
+    confidence: str = "medium"
 
     def off_features(self, features: dict[str, float]) -> list[str]:
         """Feature names outside their target range."""
@@ -40,6 +41,7 @@ class VisemeCatalog:
     def __init__(self, targets: dict[VisemeGroup, VisemeTarget], features: tuple[str, ...]) -> None:
         self._targets = targets
         self._features = features
+        self._extra: dict[str, dict[str, str]] = {}
         self._group_of = {
             sound: group for group, target in targets.items() for sound in target.sounds
         }
@@ -60,10 +62,13 @@ class VisemeCatalog:
                 hold_ms=int(item["hold_ms"]),
                 hint_vi=item["hint_vi"],
                 common_error_vi=item["common_error_vi"],
+                confidence=str(item.get("confidence", "medium")),
             )
             for key, item in raw["groups"].items()
         }
-        return cls(targets, tuple(raw["features"]))
+        catalog = cls(targets, tuple(raw["features"]))
+        catalog._extra = {k: dict(v) for k, v in raw.get("sounds_extra", {}).items()}
+        return catalog
 
     @property
     def feature_names(self) -> tuple[str, ...]:
@@ -74,6 +79,10 @@ class VisemeCatalog:
     def groups(self) -> list[VisemeGroup]:
         """Groups in content order."""
         return list(self._targets)
+
+    def transition_of(self, symbol: str) -> str | None:
+        """Start→end description for diphthongs and r-coloured vowels."""
+        return self._extra.get(symbol, {}).get("transition_vi")
 
     def group_of(self, symbol: str) -> VisemeGroup | None:
         """Viseme group of a phone; `None` when the camera cannot see the sound."""

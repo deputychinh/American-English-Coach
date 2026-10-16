@@ -6,12 +6,15 @@ from pathlib import Path
 
 from app.domain.error_catalog import ErrorCatalog
 from app.domain.viseme import VisemeCatalog
+from app.errors import NotFoundError
 from app.schemas.content import (
     CalibrationStep,
     KnownErrorCard,
     MinimalPair,
     PhonemeCard,
     Sentence,
+    SoundDrill,
+    SoundDrillSummary,
     VisemeContent,
     VisemeTargetCard,
 )
@@ -27,6 +30,7 @@ class ContentService:
         self._phonemes = self._load_phonemes()
         self._pairs = [MinimalPair(**item) for item in self._read_json("minimal_pairs.json")]
         self._sentences = [Sentence(**item) for item in self._read_json("sentences.json")]
+        self._drills = {str(item["id"]): item for item in self._read_json("sound_drills.json")}
 
     def _read_json(self, name: str) -> list[dict[str, object]]:
         items: list[dict[str, object]] = json.loads((self._dir / name).read_text(encoding="utf-8"))
@@ -46,10 +50,53 @@ class ContentService:
                 arpabet=row["pattern"],
                 tip=row["tip"],
                 note=row["note"],
-                viseme_group=self._visemes.group_of(row["pattern"]),
+                viseme_group=self._visemes.group_of(_first_phone(row["pattern"])),
+                viseme_confidence=self._confidence(_first_phone(row["pattern"])),
             )
             for row in rows
         ]
+
+    def _confidence(self, symbol: str) -> str | None:
+        group = self._visemes.group_of(symbol)
+        return self._visemes.target(group).confidence if group else None
+
+    def drills(self) -> list[SoundDrillSummary]:
+        """One row per chart sound, in chart order."""
+        return [
+            SoundDrillSummary(
+                id=str(d["id"]),
+                symbol=str(d["symbol"]),
+                us=str(d["us"]),
+                arpabet=str(d["arpabet"]),
+                group=str(d["group"]),
+                viseme_group=self._visemes.group_of(_first_phone(str(d["arpabet"]))),
+                viseme_confidence=self._confidence(_first_phone(str(d["arpabet"]))),
+                word_count=len(d["words"]),  # type: ignore[arg-type]
+                pair_count=len(d["pairs"]),  # type: ignore[arg-type]
+                sentence_count=len(d["sentences"]),  # type: ignore[arg-type]
+            )
+            for d in self._drills.values()
+        ]
+
+    def drill(self, sound_id: str) -> SoundDrill:
+        """Full material for one sound."""
+        item = self._drills.get(sound_id)
+        if item is None:
+            raise NotFoundError(f"sound {sound_id} not found")
+        symbol = _first_phone(str(item["arpabet"]))
+        return SoundDrill(
+            id=str(item["id"]),
+            symbol=str(item["symbol"]),
+            us=str(item["us"]),
+            arpabet=str(item["arpabet"]),
+            group=str(item["group"]),
+            viseme_group=self._visemes.group_of(symbol),
+            viseme_confidence=self._confidence(symbol),
+            transition_vi=self._visemes.transition_of(symbol),
+            words=item["words"],
+            pairs=item["pairs"],
+            sentences=item["sentences"],  # type: ignore[arg-type]
+        )
 
     def phonemes(self) -> list[PhonemeCard]:
         """The 44-entry chart with American mappings."""
@@ -96,10 +143,21 @@ class ContentService:
                 hold_ms=target.hold_ms,
                 hint_vi=target.hint_vi,
                 common_error_vi=target.common_error_vi,
+                confidence=target.confidence,
             )
             for target in (self._visemes.target(g) for g in self._visemes.groups)
         ]
         steps = [CalibrationStep(**step) for step in raw["calibration"]["steps"]]
         return VisemeContent(
-            features=list(self._visemes.feature_names), groups=groups, calibration=steps
+            features=list(self._visemes.feature_names),
+            groups=groups,
+            calibration=steps,
+            transitions={k: v["transition_vi"] for k, v in raw.get("sounds_extra", {}).items()},
+            confidence_labels=dict(raw.get("confidence_vi", {})),
         )
+
+
+def _first_phone(pattern: str) -> str:
+    """`AH1,AH2` → AH; `IH R` → IH (the chart maps r-coloured vowels to their vowel)."""
+    first = pattern.split(",", maxsplit=1)[0].split(maxsplit=1)[0]
+    return first.rstrip("012")

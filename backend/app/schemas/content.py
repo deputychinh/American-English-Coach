@@ -18,6 +18,7 @@ class PhonemeCard(BaseModel):
     tip: str
     note: str
     viseme_group: VisemeGroup | None
+    viseme_confidence: str | None
 
 
 class MinimalPair(BaseModel):
@@ -65,6 +66,7 @@ class VisemeTargetCard(BaseModel):
     hold_ms: int
     hint_vi: str
     common_error_vi: str
+    confidence: str
 
 
 class CalibrationStep(BaseModel):
@@ -81,3 +83,50 @@ class VisemeContent(BaseModel):
     features: list[str]
     groups: list[VisemeTargetCard]
     calibration: list[CalibrationStep]
+    transitions: dict[str, str]
+    confidence_labels: dict[str, str]
+
+
+class DrillWord(BaseModel):
+    """A practice word with where the target sound sits."""
+
+    word: str
+    position: str
+
+
+class DrillSentence(BaseModel):
+    """A practice sentence with its intonation kind."""
+
+    text: str
+    kind: str
+
+
+class SoundDrill(BaseModel):
+    """Validated practice material for one chart sound."""
+
+    id: str
+    symbol: str
+    us: str
+    arpabet: str
+    group: str
+    viseme_group: VisemeGroup | None
+    viseme_confidence: str | None
+    transition_vi: str | None
+    words: list[DrillWord]
+    pairs: list[list[str]]
+    sentences: list[DrillSentence]
+
+
+class SoundDrillSummary(BaseModel):
+    """Row of the "practise by sound" list."""
+
+    id: str
+    symbol: str
+    us: str
+    arpabet: str
+    group: str
+    viseme_group: VisemeGroup | None
+    viseme_confidence: str | None
+    word_count: int
+    pair_count: int
+    sentence_count: int

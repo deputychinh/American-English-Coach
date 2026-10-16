@@ -21,10 +21,27 @@ def test_content_endpoints_return_authored_items(client: TestClient) -> None:
     assert all(e["enabled"] is False for e in errors)  # no enabled list in a fresh content dir
     visemes = client.get("/api/v1/content/visemes").json()
     assert visemes["features"][0] == "aperture"
-    assert len(visemes["groups"]) == 7
+    assert len(visemes["groups"]) == 12
+    assert visemes["transitions"]["AY"]
+    assert visemes["confidence_labels"]["low"]
     assert len(visemes["calibration"]) == 6
     assert visemes["features"][-1] == "tongueVisible"
 
 
 def test_unknown_route_under_api_is_json_404(client: TestClient) -> None:
     assert client.get("/api/v1/nope").status_code == 404
+
+
+def test_every_sound_has_a_drill_and_a_tracked_viseme_group(client: TestClient) -> None:
+    summaries = client.get("/api/v1/content/sounds").json()
+    assert len(summaries) == 44
+    assert all(s["viseme_group"] is not None for s in summaries)
+    assert all(s["word_count"] >= 6 and s["sentence_count"] >= 2 for s in summaries)
+    drill = client.get("/api/v1/content/sounds/c09").json()
+    assert drill["symbol"] == "θ"
+    assert drill["viseme_group"] == "V3"
+    assert {"word": "think", "position": "initial"} in drill["words"]
+    assert ["think", "sink"] in drill["pairs"]
+    assert client.get("/api/v1/content/sounds/zzz").status_code == 404
+    diphthong = client.get("/api/v1/content/sounds/d02").json()
+    assert "kết thúc" in diphthong["transition_vi"]

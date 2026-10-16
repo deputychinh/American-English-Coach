@@ -42,6 +42,11 @@ class VisemeGroup(StrEnum):
     PROTRUDED = "V5"
     SPREAD = "V6"
     OPEN = "V7"
+    SLIGHT_SPREAD = "V8"
+    MID_OPEN = "V9"
+    SLIGHT_ROUND = "V10"
+    TONGUE_TIP = "V11"
+    RELAXED = "V12"
 
 
 class VisualVerdict(StrEnum):
