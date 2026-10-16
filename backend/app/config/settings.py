@@ -40,7 +40,8 @@ class Settings(BaseSettings):
     llm_model: str = "kimi-k2.7-code-highspeed"
     llm_vision_model: str = "kimi-k2.6"
     llm_timeout_seconds: float = 120.0
-    llm_max_tokens: int = 1200
+    # Reasoning tokens vary 800–2100 per answer (measured); the visible answer needs room after them.
+    llm_max_tokens: int = 4000
 
     @property
     def tutor_enabled(self) -> bool:

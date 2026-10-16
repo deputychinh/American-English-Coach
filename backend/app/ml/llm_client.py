@@ -28,8 +28,22 @@ class ChatClient:
         """Return the assistant text of the first choice.
 
         Kimi only accepts temperature 1 and its reasoning models spend tokens on
-        `reasoning_content` first, so `max_tokens` must leave room for the visible answer.
+        `reasoning_content` first. When the visible answer comes back empty, one retry asks for
+        the final answer only before giving up.
         """
+        content = self._ask(model, messages)
+        if content:
+            return content
+        nudge: list[dict[str, object]] = [
+            *messages,
+            {"role": "user", "content": "Hãy in thẳng câu trả lời cuối cùng, không suy luận dài."},
+        ]
+        content = self._ask(model, nudge)
+        if not content:
+            raise TutorUnavailableError("LLM returned an empty answer")
+        return content
+
+    def _ask(self, model: str, messages: list[dict[str, object]]) -> str:
         try:
             response = self._client.post(
                 "/chat/completions",
@@ -45,6 +59,4 @@ class ChatClient:
             content = body["choices"][0]["message"]["content"]
         except (httpx.HTTPError, KeyError, IndexError, TypeError, ValueError) as error:
             raise TutorUnavailableError(f"LLM request failed: {error}") from error
-        if not isinstance(content, str) or not content.strip():
-            raise TutorUnavailableError("LLM returned an empty answer")
-        return content.strip()
+        return content.strip() if isinstance(content, str) else ""

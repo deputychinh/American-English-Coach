@@ -75,3 +75,29 @@ def test_provider_errors_become_503(settings: Settings) -> None:
         reply = test_client.post("/api/v1/tutor/explain", json={"run_id": run_id})
         assert reply.status_code == 503
         assert reply.json()["code"] == "TUTOR_UNAVAILABLE"
+
+
+def test_empty_answer_is_retried_once_with_a_nudge(settings: Settings) -> None:
+    answers = iter(["", "Câu trả lời sau khi nhắc."])
+    seen: list[dict[str, object]] = []
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        seen.append(json.loads(request.content))
+        return httpx.Response(200, json={"choices": [{"message": {"content": next(answers)}}]})
+
+    llm = ChatClient("https://llm.test/v1", "k", 5, transport=httpx.MockTransport(handler))
+    app = create_app(settings, FakeRecognizer(["θ", "ɪ", "ŋ", "k"]), llm)
+    with TestClient(app) as test_client:
+        run_id = post(test_client, "think").json()["id"]
+        reply = test_client.post("/api/v1/tutor/explain", json={"run_id": run_id})
+    assert reply.json()["text_vi"] == "Câu trả lời sau khi nhắc."
+    assert len(seen) == 2
+    assert "in thẳng" in str(seen[1]["messages"][-1]["content"])  # type: ignore[index]
+
+
+def test_two_empty_answers_are_an_error(settings: Settings) -> None:
+    llm, _ = fake_llm("   ")
+    app = create_app(settings, FakeRecognizer(["θ", "ɪ", "ŋ", "k"]), llm)
+    with TestClient(app) as test_client:
+        run_id = post(test_client, "think").json()["id"]
+        assert test_client.post("/api/v1/tutor/explain", json={"run_id": run_id}).status_code == 503
