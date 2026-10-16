@@ -5,7 +5,11 @@
     "cmudict": "https://github.com/cmusphinx/cmudict",
     "ipa": "https://github.com/open-dict-data/ipa-dict",
     "meanings": "https://github.com/thichhoc-org/thichhoc-dict",
-    "font": "https://github.com/google/fonts/tree/main/ofl/notosans"
+    "font": "https://github.com/google/fonts/tree/main/ofl/notosans",
+    "phoneme_model": "https://huggingface.co/facebook/wav2vec2-xlsr-53-espeak-cv-ft",
+    "mediapipe_face_landmarker": "https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task",
+    "mediapipe_tasks_vision": "https://www.npmjs.com/package/@mediapipe/tasks-vision",
+    "speechocean762": "https://huggingface.co/datasets/mispeech/speechocean762 (mirror of https://www.openslr.org/101)"
   },
   "files": {
     "vendor/words.txt": {
@@ -395,6 +399,39 @@
     "vendor/thichhoc/entries/general-z.jsonl": {
       "bytes": 148220,
       "sha256": "6925a1a7ffabe768cbb3de0e300fc59b92179e8054e607c12f1e15d14e37e03d"
+    }
+  },
+  "models": {
+    "facebook/wav2vec2-xlsr-53-espeak-cv-ft": {
+      "downloaded": "2026-10-16",
+      "local_dir": "data/models/wav2vec2-xlsr-53-espeak-cv-ft",
+      "weights": "pytorch_model.bin",
+      "sha256": "04366b6c8d24099ef313cf02f0e58d26f5dddfda16edbfc8eb2c713d94a9f551",
+      "license": "Apache-2.0 (model card)",
+      "use": "phoneme CTC recogniser (espeak-style IPA vocab, 392 tokens)"
+    },
+    "mediapipe/face_landmarker": {
+      "downloaded": "2026-10-16",
+      "local_path": "web/public/vendor/mediapipe/face_landmarker.task",
+      "version": "float16/1",
+      "sha256": "64184e229b263107bc2b804c6625db1341ff2bb731874b0bcc2fe6544e0bc9ff",
+      "license": "Apache-2.0",
+      "use": "478 landmarks + 52 blendshapes in the browser; no video leaves the page"
+    },
+    "@mediapipe/tasks-vision": {
+      "version": "1.1.1",
+      "local_path": "web/public/vendor/mediapipe/ (wasm runtime copied from the npm package)",
+      "sha256_vision_wasm_internal.wasm": "0e101a010e262ef8e78f22e3c95b60a9705fd06962753c9acd6356d9fb56b7bd",
+      "license": "Apache-2.0"
+    }
+  },
+  "datasets": {
+    "speechocean762": {
+      "downloaded": "2026-10-16",
+      "local_dir": "data/datasets/speechocean762-hf (parquet test split, 2,500 utterances)",
+      "license": "CC BY 4.0",
+      "speakers": "250 non-native speakers, Mandarin L1, half children",
+      "use": "evaluation only (precision gate for content/enabled_errors.json); never bundled, never used for training"
     }
   }
 }
