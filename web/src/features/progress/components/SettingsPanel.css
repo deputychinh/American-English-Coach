@@ -20,3 +20,35 @@
   min-block-size: var(--size-touch-target);
   font-size: var(--text-sm);
 }
+
+.settings-panel__server {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding-block-start: var(--space-3);
+  border-block-start: 1px solid var(--color-border);
+}
+
+.settings-panel__label {
+  font-weight: var(--weight-semibold);
+}
+
+.settings-panel__help {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+.settings-panel__input {
+  flex: 1 1 220px;
+  min-block-size: var(--size-touch-target);
+  padding: var(--padding-control-sm);
+  font: inherit;
+  color: var(--color-text);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-control);
+  border-radius: var(--radius-sm);
+}
+
+.settings-panel__status {
+  font-size: var(--text-sm);
+}

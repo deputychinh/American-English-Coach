@@ -3,4 +3,5 @@ export enum StorageKey {
   CameraDefault = 'coach.camera',
   Muted = 'coach.muted',
   Calibration = 'coach.calibration',
+  ApiBaseUrl = 'coach.apiBaseUrl',
 }

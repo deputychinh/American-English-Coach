@@ -202,14 +202,24 @@ export const COPY = {
     muted: 'Tắt âm báo trong gương',
     resetCalibration: 'Xóa hiệu chỉnh khẩu hình',
     calibrationCleared: 'Đã xóa hiệu chỉnh trên trình duyệt này.',
+    serverTitle: 'Địa chỉ máy chấm',
+    serverHelp:
+      'Để trống khi dùng trên cùng máy. Trên điện thoại, nhập địa chỉ máy Mac đang chạy `make api-lan`, ví dụ 192.168.1.10:8765.',
+    serverPlaceholder: '192.168.1.10:8765',
+    serverSave: 'Lưu và kiểm tra',
+    serverOk: (model: string | null): string =>
+      model
+        ? `Kết nối được. Máy chấm sẵn sàng, gia sư AI: ${model}.`
+        : 'Kết nối được. Máy chấm sẵn sàng.',
+    serverFail: 'Không kết nối được. Kiểm tra Wi‑Fi, địa chỉ và lệnh `make api-lan` trên máy tính.',
     total: 'Tổng',
   },
   tutor: {
     explain: 'Giải thích bằng AI',
-    panelTitle: 'Gia sư AI (Kimi) · giải thích kết quả đã chấm, không chấm lại',
+    panelTitle: 'Gia sư AI · giải thích kết quả đã chấm, không chấm lại',
     askMouth: 'Hỏi AI về khẩu hình (gửi 1 ảnh)',
-    mouthTitle: 'Gia sư AI (Kimi) · nhận xét một ảnh miệng',
-    confirm: 'Ảnh này sẽ được gửi tới Kimi',
+    mouthTitle: 'Gia sư AI · nhận xét một ảnh miệng',
+    confirm: 'Một ảnh chụp miệng sẽ được gửi tới dịch vụ AI đã cấu hình',
     send: 'Gửi ảnh',
     cancel: 'Hủy',
     loading: 'Gia sư đang viết…',

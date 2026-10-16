@@ -1,7 +1,7 @@
 # American English Coach — one command per task. `make help` lists them.
 .DEFAULT_GOAL := help
 # `web` and others are also directory names; declare every target phony so make never skips them.
-.PHONY: help install vendor-web models doctor api web build-web serve lint format test test-legacy bench eval openapi e2e ci up down
+.PHONY: help install vendor-web models doctor api api-lan web build-web serve lint format test test-legacy bench eval openapi e2e ci up down ios-assets ios-sync ios-build ios-run ios-open
 SHELL := /bin/bash
 BACKEND := cd backend &&
 WEB := cd web &&
@@ -30,6 +30,10 @@ doctor: ## Check Python, Node, model files, ports and the macOS `say` voice
 # --- run ---------------------------------------------------------------------
 api: ## Run the API with reload on :$(API_PORT)
 	$(BACKEND) uv run uvicorn app.main:app --reload --host 127.0.0.1 --port $(API_PORT)
+
+api-lan: ## Run the API reachable from phones on this network (0.0.0.0:$(API_PORT)); prints the address
+	@echo "Máy chấm: http://$$(ipconfig getifaddr en0 2>/dev/null || hostname -I | awk '{print $$1}'):$(API_PORT)"
+	$(BACKEND) COACH_HOST=0.0.0.0 uv run uvicorn app.main:app --host 0.0.0.0 --port $(API_PORT)
 
 web: ## Run the web app in development on :$(WEB_PORT) (proxies /api to the API)
 	$(WEB) npm run dev
@@ -66,6 +70,28 @@ eval: ## Mispronunciation-detection evaluation on speechocean762 (needs data/dat
 openapi: ## Export backend/openapi.json and regenerate the web API types
 	$(BACKEND) uv run python -m app.openapi_export
 	$(WEB) npm run gen:api
+
+# --- iOS (Capacitor shell around the static web export) ---------------------
+XCODE := DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer
+IOS_SIM ?= iPhone 17
+
+ios-assets: ## Render the app icon and splash from public/icons/icon.svg into the Xcode asset catalog
+	$(WEB) node scripts/render-app-assets.mjs && npx capacitor-assets generate --ios --iconBackgroundColor '#C2410C' --splashBackgroundColor '#F5F5F4' --splashBackgroundColorDark '#1C1917'
+
+ios-sync: build-web ## Copy the web build into the iOS project (web/ios)
+	$(WEB) npx cap sync ios
+
+ios-build: ios-sync ## Build the iOS app for the simulator (Xcode required)
+	cd web/ios/App && $(XCODE) xcodebuild -project App.xcodeproj -scheme App -configuration Debug -sdk iphonesimulator -destination 'platform=iOS Simulator,name=$(IOS_SIM)' -derivedDataPath build build CODE_SIGNING_ALLOWED=NO | tail -3
+
+ios-run: ios-build ## Boot the simulator, install and launch the app
+	$(XCODE) xcrun simctl boot "$(IOS_SIM)" 2>/dev/null || true
+	$(XCODE) open -a Simulator
+	$(XCODE) xcrun simctl install booted web/ios/App/build/Build/Products/Debug-iphonesimulator/App.app
+	$(XCODE) xcrun simctl launch booted com.deputychinh.americanenglishcoach
+
+ios-open: ios-sync ## Open the Xcode project (sign with your team to run on a real iPhone)
+	$(WEB) npx cap open ios
 
 e2e: ## Browser journey with fake camera and microphone (Playwright, needs `make serve`)
 	$(WEB) npx playwright test

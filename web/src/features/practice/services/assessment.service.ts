@@ -1,6 +1,7 @@
 import { env } from '@/config/env';
 import type { AssessRequest } from '@/interfaces/hooks.interface';
 import type { AssessmentResponse } from '@/interfaces/practice.interface';
+import { resolveApiBaseUrl } from '@/utils/api-base.util';
 import { problemMessage } from '@/utils/problem.util';
 
 /** Multipart upload (openapi-fetch's JSON client is kept for everything else). */
@@ -17,7 +18,7 @@ export const assess = async ({
   form.append('kind', item.kind);
   form.append('mouth_frames', JSON.stringify(mouthFrames));
   if (audioStartedAt !== null) form.append('audio_started_at', String(audioStartedAt));
-  const response = await fetch(`${env.apiBaseUrl}/api/v1/assess`, {
+  const response = await fetch(`${resolveApiBaseUrl(env.apiBaseUrl)}/api/v1/assess`, {
     method: 'POST',
     body: form,
     signal: AbortSignal.timeout(60_000),
@@ -29,4 +30,4 @@ export const assess = async ({
 
 /** URL of the cached reference pronunciation (macOS voice on the API host). */
 export const referenceAudioUrl = (text: string): string =>
-  `${env.apiBaseUrl}/api/v1/audio?text=${encodeURIComponent(text)}`;
+  `${resolveApiBaseUrl(env.apiBaseUrl)}/api/v1/audio?text=${encodeURIComponent(text)}`;

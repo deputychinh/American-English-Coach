@@ -29,7 +29,16 @@ class Settings(BaseSettings):
     device: str = Field(default="auto", pattern="^(auto|cpu|mps|cuda)$")
     realtime_enabled: bool = True
     tts_voice: str = DEFAULT_VOICE
-    cors_origins: list[str] = ["http://127.0.0.1:3200", "http://localhost:3200"]
+    cors_origins: list[str] = [
+        "http://127.0.0.1:3200",
+        "http://localhost:3200",
+        # Capacitor (iOS app) serves the web app from these origins.
+        "capacitor://localhost",
+        "ionic://localhost",
+        "http://localhost",
+    ]
+    # Phones on the LAN reach the API by the Mac's private address (make api-lan).
+    cors_origin_regex: str = r"^https?://(192\.168|10|172\.(1[6-9]|2\d|3[01]))\.\d+\.\d+(:\d+)?$"
     log_level: str = "INFO"
     # Optional LLM tutor (explains results; never scores). Off unless a provider and key are set.
     llm_provider: str = Field(default="none", pattern="^(none|kimi|openai)$")
