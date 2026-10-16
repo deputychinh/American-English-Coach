@@ -1,0 +1,72 @@
+[
+  {
+    "id": "s1",
+    "text": "I think this is the third time.",
+    "focus": ["TH", "DH"],
+    "kind": "statement",
+    "title_vi": "Câu luyện /θ/ /ð/"
+  },
+  {
+    "id": "s2",
+    "text": "She sells fresh fish and chips.",
+    "focus": ["SH", "CH"],
+    "kind": "statement",
+    "title_vi": "Câu luyện /ʃ/ /tʃ/"
+  },
+  {
+    "id": "s3",
+    "text": "We visited a very wide valley.",
+    "focus": ["V", "W"],
+    "kind": "statement",
+    "title_vi": "Câu luyện /v/ /w/"
+  },
+  {
+    "id": "s4",
+    "text": "Please stop at the top of the steps.",
+    "focus": ["P", "T"],
+    "kind": "statement",
+    "title_vi": "Âm cuối /p/ /t/"
+  },
+  {
+    "id": "s5",
+    "text": "Did you finish your work?",
+    "focus": ["SH", "K"],
+    "kind": "question",
+    "title_vi": "Câu hỏi yes/no: lên giọng cuối câu"
+  },
+  {
+    "id": "s6",
+    "text": "I record every record I find.",
+    "focus": ["ER", "AO"],
+    "kind": "statement",
+    "title_vi": "Trọng âm REcord và reCORD"
+  },
+  {
+    "id": "s7",
+    "text": "The cats sat on the mats.",
+    "focus": ["S", "T"],
+    "kind": "statement",
+    "title_vi": "Đuôi -s và -t"
+  },
+  {
+    "id": "s8",
+    "text": "Where did you buy that bag?",
+    "focus": ["AE", "G"],
+    "kind": "question",
+    "title_vi": "Câu hỏi wh-: xuống giọng cuối câu"
+  },
+  {
+    "id": "s9",
+    "text": "My teacher thinks maths is fun.",
+    "focus": ["TH", "S"],
+    "kind": "statement",
+    "title_vi": "/θ/ trong cụm phụ âm"
+  },
+  {
+    "id": "s10",
+    "text": "Could you repeat that, please?",
+    "focus": ["T", "P"],
+    "kind": "question",
+    "title_vi": "Câu hỏi lịch sự"
+  }
+]

@@ -1,0 +1,114 @@
+[
+  {
+    "id": "think-sink",
+    "focus": "TH",
+    "words": ["think", "sink"],
+    "error_id": "th_to_t_s_f",
+    "title_vi": "/θ/ và /s/"
+  },
+  {
+    "id": "think-tink",
+    "focus": "TH",
+    "words": ["think", "tin"],
+    "error_id": "th_to_t_s_f",
+    "title_vi": "/θ/ và /t/"
+  },
+  {
+    "id": "this-dis",
+    "focus": "DH",
+    "words": ["this", "dizzy"],
+    "error_id": "dh_to_d_z",
+    "title_vi": "/ð/ và /d/"
+  },
+  {
+    "id": "she-see",
+    "focus": "SH",
+    "words": ["she", "see"],
+    "error_id": "sh_to_s",
+    "title_vi": "/ʃ/ và /s/"
+  },
+  {
+    "id": "chip-sip",
+    "focus": "CH",
+    "words": ["chip", "sip"],
+    "error_id": "ch_to_s_sh",
+    "title_vi": "/tʃ/ và /s/"
+  },
+  {
+    "id": "vest-west",
+    "focus": "V",
+    "words": ["vest", "west"],
+    "error_id": "v_to_w",
+    "title_vi": "/v/ và /w/"
+  },
+  {
+    "id": "very-wary",
+    "focus": "V",
+    "words": ["very", "wary"],
+    "error_id": "v_to_w",
+    "title_vi": "/v/ và /w/ trong từ dài"
+  },
+  {
+    "id": "bad-bed",
+    "focus": "AE",
+    "words": ["bad", "bed"],
+    "error_id": "ae_to_eh",
+    "title_vi": "/æ/ và /ɛ/"
+  },
+  {
+    "id": "cap-cat",
+    "focus": "P",
+    "words": ["cap", "cat"],
+    "error_id": "final_p_dropped",
+    "title_vi": "Âm cuối /p/ và /t/"
+  },
+  {
+    "id": "seat-sit",
+    "focus": "IY",
+    "words": ["seat", "sit"],
+    "error_id": "iy_to_ih",
+    "title_vi": "/iː/ và /ɪ/"
+  },
+  {
+    "id": "pool-pull",
+    "focus": "UW",
+    "words": ["pool", "pull"],
+    "error_id": "uw_to_uh",
+    "title_vi": "/uː/ và /ʊ/"
+  },
+  {
+    "id": "live-life",
+    "focus": "V",
+    "words": ["live", "life"],
+    "error_id": "final_v_dropped",
+    "title_vi": "Âm cuối /v/ và /f/"
+  },
+  {
+    "id": "stop-stuff",
+    "focus": "P",
+    "words": ["stop", "stuff"],
+    "error_id": "final_p_dropped",
+    "title_vi": "Âm cuối /p/ và /f/"
+  },
+  {
+    "id": "right-light",
+    "focus": "R",
+    "words": ["right", "light"],
+    "error_id": "r_to_l",
+    "title_vi": "/ɹ/ và /l/"
+  },
+  {
+    "id": "cats-cat",
+    "focus": "S",
+    "words": ["cats", "cat"],
+    "error_id": "final_s_dropped",
+    "title_vi": "Đuôi -s số nhiều"
+  },
+  {
+    "id": "worked-work",
+    "focus": "T",
+    "words": ["worked", "work"],
+    "error_id": "final_t_dropped",
+    "title_vi": "Đuôi -ed /t/"
+  }
+]
