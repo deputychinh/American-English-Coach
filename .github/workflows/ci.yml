@@ -82,6 +82,9 @@ jobs:
       - uses: astral-sh/setup-uv@v6
         with:
           python-version: '3.12'
+          # The API keeps running in the background during the tests; the cache post-step would
+          # otherwise try to prune a venv that is still in use.
+          enable-cache: false
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
@@ -100,6 +103,9 @@ jobs:
           cat ../data/api-ci.log
           exit 1
       - run: cd web && E2E_BASE_URL=http://127.0.0.1:8765 npx playwright test
+      - name: Stop the API
+        if: always()
+        run: pkill -f "uvicorn app.main:app" || true
       - uses: actions/upload-artifact@v4
         if: failure()
         with:
