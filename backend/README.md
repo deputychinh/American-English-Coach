@@ -4,8 +4,8 @@ Huấn luyện viên phát âm tiếng Anh Mỹ cho người Việt, chạy hoà
 
 _An offline-first American English pronunciation coach for Vietnamese learners: mouth-shape mirror, phoneme scoring and prosody hints, all on your own machine._
 
-| Bảng 44 âm | Luyện với camera và kết quả theo từng âm |
-| --- | --- |
+| Bảng 44 âm                                             | Luyện với camera và kết quả theo từng âm                                   |
+| ------------------------------------------------------ | -------------------------------------------------------------------------- |
 | ![Bảng 44 âm IPA](docs/screenshots/sounds-desktop.png) | ![Thẻ kết quả luyện phát âm](docs/screenshots/practice-result-desktop.png) |
 
 ## Bắt đầu nhanh (macOS Apple Silicon)

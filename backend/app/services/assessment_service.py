@@ -4,12 +4,7 @@ import uuid
 from collections import Counter
 from dataclasses import dataclass
 
-from app.constants import (
-    ALIGN_GAP_COST,
-    GOP_CHECK_THRESHOLD,
-    GOP_OK_THRESHOLD,
-    VISUAL_WINDOW_PAD_SECONDS,
-)
+from app.constants import ALIGN_GAP_COST, VISUAL_WINDOW_PAD_SECONDS
 from app.domain.aligner import AlignedPair, PhonemeAligner, substitution_cost
 from app.domain.ctc_decoder import greedy_decode
 from app.domain.error_catalog import ErrorCatalog, KnownError
@@ -19,6 +14,7 @@ from app.domain.phoneme_inventory import ARPABET_IPA, Phone, espeak_to_arpabet
 from app.domain.ports import PhonemeRecognizer
 from app.domain.pronouncing import PronouncingDictionary, WordPronunciations
 from app.domain.prosody import ProsodyAnalyzer, SyllableNucleus
+from app.domain.verdict import audio_verdict
 from app.domain.viseme import VisemeCatalog
 from app.enums import AlignmentOp, Verdict, VisualVerdict
 from app.ml.audio import AudioDecoder
@@ -171,15 +167,8 @@ class AssessmentService:
         return results
 
     def _audio_verdict(self, op: AlignmentOp, gop: float, known: KnownError | None) -> Verdict:
-        if op is AlignmentOp.MATCH:
-            return Verdict.OK if gop >= GOP_CHECK_THRESHOLD else Verdict.CHECK
-        if gop >= GOP_OK_THRESHOLD:
-            # Greedy decoding disagrees but forced alignment supports the target: trust the
-            # alignment (measured on speechocean762, this removes most false alarms).
-            return Verdict.OK
-        if known is not None and self._catalog.is_enabled(known):
-            return Verdict.ERROR
-        return Verdict.CHECK
+        enabled = known is not None and self._catalog.is_enabled(known)
+        return audio_verdict(op, gop, enabled)
 
     def _visual(self, symbol: str, segment: PhoneSegment, data: AssessmentInput) -> VisualVerdict:
         if data.audio_started_at is None or not data.mouth_frames:

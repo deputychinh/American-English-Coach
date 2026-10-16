@@ -23,6 +23,7 @@ from app.domain.ctc_decoder import greedy_decode
 from app.domain.error_catalog import ErrorCatalog
 from app.domain.gop_scorer import GopScorer
 from app.domain.phoneme_inventory import ARPABET, espeak_to_arpabet
+from app.domain.verdict import audio_verdict
 from app.enums import AlignmentOp
 from app.ml.audio import AudioDecoder
 from app.ml.recognizer import Wav2Vec2Recognizer
@@ -149,12 +150,8 @@ class Evaluator:
 
     @staticmethod
     def _verdict(op: AlignmentOp, gop: float, known: bool) -> str:
-        """Audio verdict as the service computes it, with every catalogue error enabled."""
-        if op is AlignmentOp.MATCH:
-            return "ok" if gop >= GOP_CHECK_THRESHOLD else "check"
-        if gop >= GOP_OK_THRESHOLD:
-            return "check"
-        return "error" if known else "check"
+        """Audio verdict exactly as the service computes it, with every catalogue error enabled."""
+        return audio_verdict(op, gop, known).value
 
 
 def average_ranks(values: NDArray[np.float64]) -> NDArray[np.float64]:
