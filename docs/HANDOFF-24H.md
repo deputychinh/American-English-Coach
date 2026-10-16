@@ -9,6 +9,12 @@ Ngày 2026-10-16 · nhánh `feat/av-mvp` · chưa push, chưa merge (chờ chủ
 - Repo: Makefile, CI (backend, web, repo, legacy), husky + commitlint + lint-staged, Prettier, compose tùy chọn, script vendor MediaPipe (43 MB không vào git), README, ADR 0001–0003.
 - Legacy giữ nguyên dưới `legacy/` (33 unittest + 2 node test pass).
 
+## Phiên test cùng chủ dự án (2026-10-16 → 17)
+
+- Sửa: bước hiệu chỉnh lặp vì timer phụ thuộc object tracker; trang trống khi mở `127.0.0.1:3200` ở dev (Next 16 `allowedDevOrigins`); `make web` bị bỏ qua vì trùng tên thư mục (`.PHONY`).
+- Thêm: đặc trưng `teethVisible`/`tongueVisible` từ màu vùng trong môi + bước hiệu chỉnh "th"; bộ bài cho 44 âm (`scripts/build_sound_drills.py`, kiểm tra CMUdict); 12 nhóm viseme phủ 39 âm với `confidence`; API `/content/sounds`, `/content/sounds/{id}`; gia sư Kimi (`/tutor/explain`, `/tutor/mouth`), cấu hình qua `.env` (`.env.example`). Đo: model `kimi-k2.7-code-highspeed` trả lời ~2–6 s; `kimi-k2.6` đọc được ảnh nhưng suy luận 10 s+; Kimi chỉ nhận `temperature=1`; câu trả lời có thể rỗng khi hết token cho suy luận → budget 4000 + thử lại một lần.
+- Lưu ý bảo mật: key Kimi đã được dán vào chat; chủ dự án nên thu hồi và tạo key mới sau khi test.
+
 ## Web (session web, đã tích hợp và kiểm chứng lại)
 
 - `web/`: Next.js 16 static export, TS strict, 160 file nguồn theo cấu trúc `features/` (home, health, content, sounds, practice, mirror, calibration, progress) + `components/`, `hooks/`, `utils/`, `enums/`, `interfaces/`, `constants/` (toàn bộ copy tiếng Việt trong `copy.constant.ts`), design tokens + BEM, dark theme, PWA (manifest, service worker, icon).
