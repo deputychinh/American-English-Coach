@@ -13,7 +13,8 @@ Ngày 2026-10-16 · nhánh `feat/av-mvp` · chưa push, chưa merge (chờ chủ
 
 - Sửa: bước hiệu chỉnh lặp vì timer phụ thuộc object tracker; trang trống khi mở `127.0.0.1:3200` ở dev (Next 16 `allowedDevOrigins`); `make web` bị bỏ qua vì trùng tên thư mục (`.PHONY`).
 - Thêm: đặc trưng `teethVisible`/`tongueVisible` từ màu vùng trong môi + bước hiệu chỉnh "th"; bộ bài cho 44 âm (`scripts/build_sound_drills.py`, kiểm tra CMUdict); 12 nhóm viseme phủ 39 âm với `confidence`; API `/content/sounds`, `/content/sounds/{id}`; gia sư Kimi (`/tutor/explain`, `/tutor/mouth`), cấu hình qua `.env` (`.env.example`). Đo: model `kimi-k2.7-code-highspeed` trả lời ~2–6 s; `kimi-k2.6` đọc được ảnh nhưng suy luận 10 s+; Kimi chỉ nhận `temperature=1`; câu trả lời có thể rỗng khi hết token cho suy luận → budget 4000 + thử lại một lần.
-- Lưu ý bảo mật: key Kimi đã được dán vào chat; chủ dự án nên thu hồi và tạo key mới sau khi test.
+- 2026-10-17: chuyển gia sư sang OpenAI `gpt-6-luna` theo yêu cầu (đo: giải thích 2–4 s, ảnh miệng 3 s; client dùng `max_completion_tokens`, không gửi temperature cho OpenAI). Kimi vẫn dùng được qua `.env`.
+- Lưu ý bảo mật: key Kimi và key OpenAI đã được dán vào chat; chủ dự án nên thu hồi và tạo key mới sau khi test.
 
 ## Web (session web, đã tích hợp và kiểm chứng lại)
 

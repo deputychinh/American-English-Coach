@@ -34,11 +34,11 @@ class Settings(BaseSettings):
     # Optional LLM tutor (explains results; never scores). Off unless a provider and key are set.
     llm_provider: str = Field(default="none", pattern="^(none|kimi|openai)$")
     llm_api_key: SecretStr = SecretStr("")
-    llm_base_url: str = "https://api.moonshot.ai/v1"
-    # Measured 2026-10-16: the highspeed model answers in ~2 s; kimi-k2.6 reasons for 10 s+ but
-    # reads images, so it is kept for mouth photos only.
-    llm_model: str = "kimi-k2.7-code-highspeed"
-    llm_vision_model: str = "kimi-k2.6"
+    llm_base_url: str = "https://api.openai.com/v1"
+    # Defaults target OpenAI (GPT-6 Luna reads images too). For Kimi use kimi-k2.7-code-highspeed
+    # for text (~2 s) and kimi-k2.6 for photos; see .env.example.
+    llm_model: str = "gpt-6-luna"
+    llm_vision_model: str = "gpt-6-luna"
     llm_timeout_seconds: float = 120.0
     # Reasoning tokens vary 800-2100 per answer (measured); the answer needs room after them.
     llm_max_tokens: int = 4000

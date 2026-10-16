@@ -1,4 +1,8 @@
-"""Minimal OpenAI-compatible chat client (Kimi/Moonshot, OpenAI) over httpx."""
+"""Minimal OpenAI-compatible chat client (OpenAI, Kimi/Moonshot) over httpx.
+
+Provider quirks are isolated here: OpenAI's current models take `max_completion_tokens` and
+reject a custom temperature; Kimi takes `max_tokens` and only accepts temperature 1.
+"""
 
 import httpx
 
@@ -15,8 +19,10 @@ class ChatClient:
         timeout_seconds: float,
         transport: httpx.BaseTransport | None = None,
         max_tokens: int = 1200,
+        provider: str = "kimi",
     ) -> None:
         self._max_tokens = max_tokens
+        self._provider = provider
         self._client = httpx.Client(
             base_url=base_url.rstrip("/"),
             headers={"Authorization": f"Bearer {api_key}"},
@@ -43,17 +49,19 @@ class ChatClient:
             raise TutorUnavailableError("LLM returned an empty answer")
         return content
 
+    def _payload(self, model: str, messages: list[dict[str, object]]) -> dict[str, object]:
+        if self._provider == "openai":
+            return {"model": model, "max_completion_tokens": self._max_tokens, "messages": messages}
+        return {
+            "model": model,
+            "temperature": 1,
+            "max_tokens": self._max_tokens,
+            "messages": messages,
+        }
+
     def _ask(self, model: str, messages: list[dict[str, object]]) -> str:
         try:
-            response = self._client.post(
-                "/chat/completions",
-                json={
-                    "model": model,
-                    "temperature": 1,
-                    "max_tokens": self._max_tokens,
-                    "messages": messages,
-                },
-            )
+            response = self._client.post("/chat/completions", json=self._payload(model, messages))
             response.raise_for_status()
             body = response.json()
             content = body["choices"][0]["message"]["content"]

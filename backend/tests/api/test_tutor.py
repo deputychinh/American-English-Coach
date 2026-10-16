@@ -101,3 +101,19 @@ def test_two_empty_answers_are_an_error(settings: Settings) -> None:
     with TestClient(app) as test_client:
         run_id = post(test_client, "think").json()["id"]
         assert test_client.post("/api/v1/tutor/explain", json={"run_id": run_id}).status_code == 503
+
+
+def test_openai_provider_uses_max_completion_tokens_and_no_temperature() -> None:
+    seen: list[dict[str, object]] = []
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        seen.append(json.loads(request.content))
+        return httpx.Response(200, json={"choices": [{"message": {"content": "ok"}}]})
+
+    client = ChatClient(
+        "https://llm.test/v1", "k", 5, transport=httpx.MockTransport(handler), provider="openai"
+    )
+    assert client.complete("gpt-x", [{"role": "user", "content": "hi"}]) == "ok"
+    assert seen[0]["max_completion_tokens"] == 1200
+    assert "temperature" not in seen[0]
+    assert "max_tokens" not in seen[0]

@@ -114,6 +114,7 @@ class AppContainer:
             self.settings.llm_api_key.get_secret_value(),
             self.settings.llm_timeout_seconds,
             max_tokens=self.settings.llm_max_tokens,
+            provider=self.settings.llm_provider,
         )
         return TutorService(
             client, self.results, self.settings.llm_model, self.settings.llm_vision_model
