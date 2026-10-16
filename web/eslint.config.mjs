@@ -53,6 +53,9 @@ const restrictAllExcept = (...allowed) => [
 
 export default defineConfig(
   globalIgnores([
+    'ios/**',
+    'assets/**',
+    'out/**',
     '.next/**',
     'coverage/**',
     'node_modules/**',

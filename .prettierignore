@@ -14,3 +14,5 @@ package-lock.json
 web/test-results
 web/playwright-report
 web/out
+web/ios
+web/assets
