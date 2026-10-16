@@ -16,6 +16,12 @@ Ngày 2026-10-16 · nhánh `feat/av-mvp` · chưa push, chưa merge (chờ chủ
 - 2026-10-17: chuyển gia sư sang OpenAI `gpt-6-luna` theo yêu cầu (đo: giải thích 2–4 s, ảnh miệng 3 s; client dùng `max_completion_tokens`, không gửi temperature cho OpenAI). Kimi vẫn dùng được qua `.env`.
 - Lưu ý bảo mật: key Kimi và key OpenAI đã được dán vào chat; chủ dự án nên thu hồi và tạo key mới sau khi test.
 
+## Hoàn thiện mức sản phẩm (2026-10-17, theo `docs/backlog.md`)
+
+- ☑ AEC-001 CI xanh với iOS trong repo · ☑ AEC-003 Alembic (baseline 0001 + devices 0002, tự nâng cấp khi mở DB, DB thật 22 lượt đã nâng cấp) · ☑ AEC-004 log JSON + `X-Request-Id` · ☑ AEC-005 `COACH_RECOGNIZER=fake` + job e2e trên macOS (14/14 pass local) · ☑ AEC-006 giới hạn gia sư 10/phút · ☑ AEC-007 `/ready`.
+- ◐ AEC-002 ghép nối điện thoại: backend xong (`POST /pair`, middleware token cho client ngoài loopback, bảng `devices`); UI đang do session web làm cùng AEC-010…015 (thiết kế thống nhất, tab bar di động, native polish, Lighthouse, i18n).
+- Chưa làm (P2): hồ sơ nhiều người học, lộ trình tuần, giọng mẫu người thật, pilot người Việt, phát hành TestFlight, HTTPS từ xa.
+
 ## iOS (2026-10-17)
 
 - `web/ios/`: app Capacitor 8 (Swift host, SPM), id `com.deputychinh.americanenglishcoach`; icon/splash sinh từ `public/icons/icon.svg`; `Info.plist` có quyền camera/micro/mạng nội bộ và `NSAllowsLocalNetworking`.
