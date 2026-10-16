@@ -16,6 +16,13 @@ Ngày 2026-10-16 · nhánh `feat/av-mvp` · chưa push, chưa merge (chờ chủ
 - 2026-10-17: chuyển gia sư sang OpenAI `gpt-6-luna` theo yêu cầu (đo: giải thích 2–4 s, ảnh miệng 3 s; client dùng `max_completion_tokens`, không gửi temperature cho OpenAI). Kimi vẫn dùng được qua `.env`.
 - Lưu ý bảo mật: key Kimi và key OpenAI đã được dán vào chat; chủ dự án nên thu hồi và tạo key mới sau khi test.
 
+## iOS (2026-10-17)
+
+- `web/ios/`: app Capacitor 8 (Swift host, SPM), id `com.deputychinh.americanenglishcoach`; icon/splash sinh từ `public/icons/icon.svg`; `Info.plist` có quyền camera/micro/mạng nội bộ và `NSAllowsLocalNetworking`.
+- Địa chỉ máy chấm cấu hình lúc chạy (Tiến độ → Cài đặt → "Địa chỉ máy chấm", lưu `coach.apiBaseUrl`); mọi lời gọi `/api/*` được chuyển hướng trong `api-client.util.ts`; backend mở CORS cho `capacitor://localhost` và địa chỉ LAN; `make api-lan` nghe trên 0.0.0.0.
+- Lệnh: `make ios-assets`, `make ios-sync`, `make ios-build`, `make ios-run` (simulator), `make ios-open` (Xcode, chạy máy thật). Tài liệu: `docs/ios.md`.
+- Chưa: ký TestFlight; kiểm tra trên iPhone thật do chủ dự án thực hiện (camera không có trên simulator).
+
 ## Web (session web, đã tích hợp và kiểm chứng lại)
 
 - `web/`: Next.js 16 static export, TS strict, 160 file nguồn theo cấu trúc `features/` (home, health, content, sounds, practice, mirror, calibration, progress) + `components/`, `hooks/`, `utils/`, `enums/`, `interfaces/`, `constants/` (toàn bộ copy tiếng Việt trong `copy.constant.ts`), design tokens + BEM, dark theme, PWA (manifest, service worker, icon).
