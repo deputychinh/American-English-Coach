@@ -415,6 +415,42 @@
         "title": "MinimalPair",
         "type": "object"
       },
+      "PairRequest": {
+        "description": "The six-digit code shown by `make api-lan` and a name for the phone.",
+        "properties": {
+          "code": {
+            "maxLength": 6,
+            "minLength": 6,
+            "title": "Code",
+            "type": "string"
+          },
+          "device_name": {
+            "maxLength": 80,
+            "minLength": 1,
+            "title": "Device Name",
+            "type": "string"
+          }
+        },
+        "required": ["code", "device_name"],
+        "title": "PairRequest",
+        "type": "object"
+      },
+      "PairResponse": {
+        "description": "Token to send as `X-Coach-Token` on every later request.",
+        "properties": {
+          "device_name": {
+            "title": "Device Name",
+            "type": "string"
+          },
+          "token": {
+            "title": "Token",
+            "type": "string"
+          }
+        },
+        "required": ["token", "device_name"],
+        "title": "PairResponse",
+        "type": "object"
+      },
       "PhoneResult": {
         "description": "Verdict for one expected phone.",
         "properties": {
@@ -691,6 +727,26 @@
         },
         "required": ["aspect", "verdict", "detail_vi", "word_index"],
         "title": "ProsodyResult",
+        "type": "object"
+      },
+      "ReadyResponse": {
+        "description": "Readiness probe body.",
+        "properties": {
+          "model_version": {
+            "title": "Model Version",
+            "type": "string"
+          },
+          "recognizer": {
+            "title": "Recognizer",
+            "type": "string"
+          },
+          "status": {
+            "title": "Status",
+            "type": "string"
+          }
+        },
+        "required": ["status", "recognizer", "model_version"],
+        "title": "ReadyResponse",
         "type": "object"
       },
       "RunSummaryModel": {
@@ -1484,6 +1540,46 @@
         "tags": ["health"]
       }
     },
+    "/api/v1/pair": {
+      "post": {
+        "description": "Exchange the pairing code for a device token.",
+        "operationId": "pair_api_v1_pair_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PairRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PairResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Pair",
+        "tags": ["pairing"]
+      }
+    },
     "/api/v1/progress": {
       "get": {
         "description": "Per-sound totals and recent runs.",
@@ -1526,6 +1622,26 @@
         },
         "summary": "Progress",
         "tags": ["progress"]
+      }
+    },
+    "/api/v1/ready": {
+      "get": {
+        "description": "Readiness: the database answers and the recogniser can serve (model files present).",
+        "operationId": "ready_api_v1_ready_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReadyResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Ready",
+        "tags": ["health"]
       }
     },
     "/api/v1/runs/{run_id}": {
