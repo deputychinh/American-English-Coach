@@ -1,6 +1,19 @@
-# Bàn giao 24h (đang cập nhật)
+# Bàn giao 24h
 
-Phần này do session DOCS + EVAL khởi tạo; session chính bổ sung phần backend/web/commit.
+Ngày 2026-10-16 · nhánh `feat/av-mvp` · chưa push, chưa merge (chờ chủ dự án).
+
+## Đã giao (session chính: backend, tích hợp, commit)
+
+- `backend/`: FastAPI `/api/v1` (health, content, assess, audio, progress, runs, calibration), domain thuần (inventory 39 âm + ánh xạ espeak/nearest-English, aligner Needleman-Wunsch, GopScorer với căn chỉnh ép CTC và blank làm đối thủ, catalogue lỗi người Việt, viseme, prosody, fusion, luật verdict dùng chung), adapter ML (wav2vec2 MPS, decoder audio, pyin, `say`), SQLite (SQLAlchemy 2), container composition root. 68 test, coverage 98%, ruff + mypy strict sạch.
+- Quyết định kỹ thuật đã đo: `GOP_OK_THRESHOLD = -2.0` (BENCHMARK §5), luật "tin căn chỉnh ép khi GOP cao" giảm báo động giả 23,4% → 12,5% trên speechocean762 và 9/28 → 2/28 trên tập `say`.
+- Repo: Makefile, CI (backend, web, repo, legacy), husky + commitlint + lint-staged, Prettier, compose tùy chọn, script vendor MediaPipe (43 MB không vào git), README, ADR 0001–0003.
+- Legacy giữ nguyên dưới `legacy/` (33 unittest + 2 node test pass).
+
+## Web (session web)
+
+Xem phần cuối tài liệu này sau khi session web bàn giao.
+
+## Đã đo (session eval)
 
 ## Đã đo (session eval)
 

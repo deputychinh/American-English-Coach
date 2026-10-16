@@ -1,20 +1,20 @@
 # American English Coach — luyện tiếng Anh Mỹ local trong 90 ngày
 
-Phiên bản 3 · 2026-10-11 · Đã có bản local chạy được; xem README.md và docs/VERIFICATION.md.
+Phiên bản 4 · 2026-10-16 · Bản MVP AI (khẩu hình + âm vị + ngữ điệu) đã triển khai theo [kế hoạch 24 giờ](docs/PLAN-24H-AV-PRONUNCIATION.md); xem README.md, [docs/BENCHMARK-REALTIME.md](docs/BENCHMARK-REALTIME.md) và [docs/HANDOFF-24H.md](docs/HANDOFF-24H.md).
 
-Tài liệu liên quan: [so sánh repo và công nghệ giọng nói](docs/REPOSITORY-RESEARCH.md), [kế hoạch AI hội thoại + khẩu hình realtime](docs/REALTIME-AV-COACH-PLAN.md). Các số lượng nội dung, ngưỡng và cấu hình dưới đây là **đề xuất**, chưa phải kết quả đã đạt.
+Tài liệu liên quan: [so sánh repo và công nghệ giọng nói](docs/REPOSITORY-RESEARCH.md), [lộ trình dài hạn AI hội thoại + khẩu hình realtime](docs/REALTIME-AV-COACH-PLAN.md), [ADR](docs/adr). Các số lượng nội dung, ngưỡng và cấu hình ở phần kế hoạch bên dưới là **đề xuất**, chưa phải kết quả đã đạt.
 
-## Phạm vi bản đã triển khai
+## Phạm vi bản đã triển khai (2026-10-16)
 
-Trọng tâm theo yêu cầu mới: **44 mục IPA + toàn bộ 466.550 mục của words.txt**. Bảng 44 truyền thống có một số âm/ký hiệu Anh–Anh, nên mỗi mục có đối chiếu Mỹ rõ ràng, không quảng cáo Mỹ có đúng 44 âm vị độc lập.
+Stack theo quy ước chung của các dự án: `backend/` FastAPI (uv, ruff, mypy strict, pytest ≥ 90% coverage), `web/` Next.js static export (TS strict, ESLint, Stylelint BEM + token, Vitest, Playwright), Makefile một lệnh một việc, CI GitHub Actions, Conventional Commits. Bản stdlib đầu tiên giữ nguyên trong `legacy/` và vẫn chạy.
 
-- Bảng âm, hướng dẫn khẩu hình tiếng Việt, từ mẫu, nghe TTS Mỹ local, thu âm/nghe lại và tự đánh giá từng âm.
-- Kho SQLite tra theo tiền tố, lọc âm, phân trang; 72.072 mục ghép được phát âm. Từ thông dụng được ưu tiên trong từng âm.
-- **115.655 mục có nghĩa Việt**, gồm đối chiếu biến thể; nguồn thichhoc là dịch máy chưa kiểm duyệt và được ghi nhãn. Không khẳng định toàn bộ 466.550 mục đều có nghĩa hay IPA.
-- IPA dùng Noto Sans local, chữ lớn, phiên âm viết liền từ ipa-dict, tô âm đang luyện, tùy chọn phóng lớn. Biến thể phát âm hiển thị riêng; chưa liên kết từng biến thể với từ loại.
-- Gói phụ: 120 mục từ/nghĩa và 60 câu, luyện nghe–chép, thẻ ôn, theo dõi và sao lưu local. Nội dung luân phiên trong lịch 90 ngày.
-- Runtime thực tế: Python 3.9+ standard library, SQLite, HTML/CSS/JS, macOS `say`. Không API trả phí hay model cloud.
-- Chưa có chấm phát âm AI, STT, 90 bộ bài độc lập, FSRS hoặc kiểm tra CEFR. Các tính năng nâng cao ở phần kế hoạch bên dưới là hướng phát triển, không phải chức năng hiện hữu.
+- **Chấm âm vị local**: wav2vec2 phoneme CTC (`facebook/wav2vec2-xlsr-53-espeak-cv-ft`, Apache-2.0) chạy trên Apple Silicon (MPS p95 32 ms cho câu 3 s); căn chỉnh ép + GOP, so với CMUdict (mọi biến thể phát âm), ba mức `ok / check / error`, catalogue 29 lỗi đặc trưng người Việt với gợi ý tiếng Việt.
+- **Cổng precision**: mức `error` chỉ bật cho lỗi có precision ≥ 0,85 trên tập đánh giá; hiện `content/enabled_errors.json` rỗng (speechocean762 chưa cho precision đủ), nên mọi lỗi hiển thị `check`.
+- **Gương khẩu hình**: MediaPipe Face Landmarker trong trình duyệt, 6 đặc trưng miệng chuẩn hóa theo hiệu chỉnh cá nhân, mẫu cho 7 nhóm viseme, bảng luật fusion audio + hình, không gửi video.
+- **Trọng âm / ngữ điệu / nhịp**: pyin + năng lượng + mốc thời gian âm vị, so với trọng âm từ điển và hướng giọng cuối câu; chỉ `ok/check`.
+- **Nội dung**: 44 âm, 16 cặp tối thiểu, 10 câu, 29 lỗi, viseme; giọng mẫu macOS `say` (cache).
+- **Lưu trữ**: SQLite local (`data/coach.sqlite3`): lượt luyện, kết quả từng âm, tranh luận "Tôi nói đúng mà", hiệu chỉnh.
+- Chưa có: gia sư hội thoại LLM, phát hiện lưỡi, pilot người học Việt, app native, HTTPS LAN, FSRS, cổng 90 ngày/nghe chép trong stack mới (vẫn ở `legacy/`).
 
 ## 1. Ràng buộc đã chốt
 
