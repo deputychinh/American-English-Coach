@@ -86,7 +86,7 @@ ios-build: ios-sync ## Build the iOS app for the simulator (Xcode required)
 
 ios-run: ios-build ## Boot the simulator, install and launch the app
 	$(XCODE) xcrun simctl boot "$(IOS_SIM)" 2>/dev/null || true
-	$(XCODE) open -a Simulator
+	open /Applications/Xcode.app/Contents/Developer/Applications/Simulator.app
 	$(XCODE) xcrun simctl install booted web/ios/App/build/Build/Products/Debug-iphonesimulator/App.app
 	$(XCODE) xcrun simctl launch booted com.deputychinh.americanenglishcoach
 

@@ -1,3 +1,4 @@
+import { NATIVE_DEFAULT_API_BASE_URL } from '@/constants/api.constant';
 import { StorageKey } from '@/enums/storage-key.enum';
 import { readStorage } from '@/utils/storage.util';
 
@@ -16,9 +17,16 @@ export const normaliseBaseUrl = (value: string): string => {
 export const resolveApiBaseUrl = (buildTimeBaseUrl: string): string =>
   storedApiBaseUrl() || buildTimeBaseUrl;
 
-/** Saved server address (normalised) or '' when the learner has not set one. */
-export const storedApiBaseUrl = (): string =>
-  normaliseBaseUrl(readStorage<string>(StorageKey.ApiBaseUrl, ''));
+/**
+ * Saved server address (normalised). Inside the native shell nothing is same-origin, so the
+ * default points at the Mac's loopback, which is what the iOS simulator sees; a real iPhone
+ * needs the Mac's LAN address typed in Settings.
+ */
+export const storedApiBaseUrl = (): string => {
+  const stored = normaliseBaseUrl(readStorage<string>(StorageKey.ApiBaseUrl, ''));
+  if (stored) return stored;
+  return isNativeShell() ? NATIVE_DEFAULT_API_BASE_URL : '';
+};
 
 /** Sends an `/api/...` request to the saved server instead of the page's own origin. */
 export const redirectToApiBase = (request: Request, baseUrl: string): Request => {
