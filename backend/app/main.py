@@ -20,6 +20,7 @@ from app.errors import DomainError
 from app.logging_setup import configure_logging
 from app.middleware import request_context
 from app.ml.llm_client import ChatClient
+from app.routes import assess, audio, content, health, pair, progress, tutor
 from app.security import TOKEN_HEADER, requires_token
 
 logger = logging.getLogger(__name__)
