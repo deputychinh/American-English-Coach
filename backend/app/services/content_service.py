@@ -95,7 +95,7 @@ class ContentService:
             transition_vi=self._visemes.transition_of(symbol),
             words=item["words"],
             pairs=item["pairs"],
-            sentences=item["sentences"],  # type: ignore[arg-type]
+            sentences=item["sentences"],
         )
 
     def phonemes(self) -> list[PhonemeCard]:

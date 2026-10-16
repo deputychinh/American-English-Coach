@@ -1128,6 +1128,10 @@
         "position": "final"
       },
       {
+        "word": "beard",
+        "position": "medial"
+      },
+      {
         "word": "ear",
         "position": "medial"
       },
@@ -1154,24 +1158,29 @@
       {
         "word": "cheer",
         "position": "final"
+      },
+      {
+        "word": "steer",
+        "position": "final"
       }
     ],
     "pairs": [
       ["near", "knee"],
+      ["beard", "he"],
       ["beer", "bee"],
       ["fear", "fee"]
     ],
     "sentences": [
       {
-        "text": "Come here near the clear water.",
+        "text": "Come near the clear water.",
         "kind": "statement"
       },
       {
-        "text": "Can you hear the cheer this year?",
+        "text": "Can you steer clear this year?",
         "kind": "question"
       }
     ],
-    "dropped": ["here", "hear"]
+    "dropped": []
   },
   {
     "id": "d07",
@@ -1251,6 +1260,10 @@
         "position": "final"
       },
       {
+        "word": "jury",
+        "position": "medial"
+      },
+      {
         "word": "tour",
         "position": "final"
       },
@@ -1279,12 +1292,13 @@
         "position": "final"
       },
       {
-        "word": "insurance",
-        "position": "medial"
+        "word": "secure",
+        "position": "final"
       }
     ],
     "pairs": [
       ["tour", "tore"],
+      ["jury", "pour"],
       ["sure", "shore"],
       ["pure", "peer"]
     ],
@@ -1294,11 +1308,11 @@
         "kind": "statement"
       },
       {
-        "text": "Is the tourist poor during the tour?",
+        "text": "Is the tourist secure during the tour?",
         "kind": "question"
       }
     ],
-    "dropped": ["poor"]
+    "dropped": []
   },
   {
     "id": "c01",
@@ -2800,6 +2814,10 @@
       {
         "word": "new",
         "position": "medial"
+      },
+      {
+        "word": "yard",
+        "position": "initial"
       }
     ],
     "pairs": [
@@ -2818,7 +2836,7 @@
         "kind": "statement"
       }
     ],
-    "dropped": ["beyond"]
+    "dropped": []
   },
   {
     "id": "c24",

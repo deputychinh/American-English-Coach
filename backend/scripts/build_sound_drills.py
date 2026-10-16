@@ -116,11 +116,11 @@ CANDIDATES: dict[str, tuple[list[str], list[tuple[str, str]], list[tuple[str, st
         [("Go down to the town now.", "statement"), ("How loud is the brown cow?", "wh_question")],
     ),
     "d06": (
-        ["near", "here", "ear", "year", "beer", "clear", "dear", "fear", "cheer", "hear"],
-        [("near", "knee"), ("here", "he"), ("beer", "bee"), ("fear", "fee")],
+        ["near", "beard", "ear", "year", "beer", "clear", "dear", "fear", "cheer", "steer"],
+        [("near", "knee"), ("beard", "he"), ("beer", "bee"), ("fear", "fee")],
         [
-            ("Come here near the clear water.", "statement"),
-            ("Can you hear the cheer this year?", "question"),
+            ("Come near the clear water.", "statement"),
+            ("Can you steer clear this year?", "question"),
         ],
     ),
     "d07": (
@@ -134,7 +134,7 @@ CANDIDATES: dict[str, tuple[list[str], list[tuple[str, str]], list[tuple[str, st
     "d08": (
         [
             "pure",
-            "poor",
+            "jury",
             "tour",
             "sure",
             "cure",
@@ -142,12 +142,12 @@ CANDIDATES: dict[str, tuple[list[str], list[tuple[str, str]], list[tuple[str, st
             "during",
             "tourist",
             "assure",
-            "insurance",
+            "secure",
         ],
-        [("tour", "tore"), ("poor", "pour"), ("sure", "shore"), ("pure", "peer")],
+        [("tour", "tore"), ("jury", "pour"), ("sure", "shore"), ("pure", "peer")],
         [
             ("I am sure the tour is pure fun.", "statement"),
-            ("Is the tourist poor during the tour?", "question"),
+            ("Is the tourist secure during the tour?", "question"),
         ],
     ),
     "c01": (
@@ -343,7 +343,7 @@ CANDIDATES: dict[str, tuple[list[str], list[tuple[str, str]], list[tuple[str, st
         ],
     ),
     "c23": (
-        ["yes", "you", "year", "yellow", "young", "use", "music", "few", "new", "beyond"],
+        ["yes", "you", "year", "yellow", "young", "use", "music", "few", "new", "yard"],
         [("yes", "less"), ("year", "ear"), ("yet", "jet"), ("yam", "jam")],
         [("You use new music every year.", "statement"), ("The young man says yes.", "statement")],
     ),
