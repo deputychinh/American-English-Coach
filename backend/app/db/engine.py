@@ -7,11 +7,11 @@ from pathlib import Path
 from sqlalchemy import Engine, create_engine, event
 from sqlalchemy.orm import Session, sessionmaker
 
-from app.db.models import Base
+from app.db.migrate import run_migrations
 
 
 def create_sqlite_engine(path: Path) -> Engine:
-    """SQLite engine with WAL and foreign keys; creates the schema if missing."""
+    """SQLite engine with WAL and foreign keys; applies Alembic migrations on open."""
     path.parent.mkdir(parents=True, exist_ok=True)
     engine = create_engine(f"sqlite:///{path}", future=True)
 
@@ -22,7 +22,7 @@ def create_sqlite_engine(path: Path) -> Engine:
         cursor.execute("PRAGMA foreign_keys=ON")
         cursor.close()
 
-    Base.metadata.create_all(engine)
+    run_migrations(engine)
     return engine
 
 

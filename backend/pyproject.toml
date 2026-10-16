@@ -16,6 +16,7 @@ dependencies = [
   "transformers>=4.46",
   "huggingface-hub>=0.26",
   "python-multipart>=0.0.32",
+  "alembic>=1.20.0",
 ]
 
 [dependency-groups]
@@ -63,7 +64,7 @@ max-statements = 35
 
 [tool.ruff.lint.per-file-ignores]
 "tests/**" = ["S101", "PLR2004", "D100", "D101", "D102", "D103", "D104", "ANN", "ARG", "RUF001", "RUF003"]
-"alembic/**" = ["D", "ANN"]
+"alembic/**" = ["D", "ANN", "INP001", "ERA001"]
 # IPA symbols are the data of this module, not typos.
 "app/domain/phoneme_inventory.py" = ["RUF001"]
 "app/ml/fake_recognizer.py" = ["RUF001"]

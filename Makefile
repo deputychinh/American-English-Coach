@@ -1,7 +1,7 @@
 # American English Coach — one command per task. `make help` lists them.
 .DEFAULT_GOAL := help
 # `web` and others are also directory names; declare every target phony so make never skips them.
-.PHONY: help install vendor-web models doctor api api-lan web build-web serve lint format test test-legacy bench eval openapi e2e ci up down ios-assets ios-sync ios-build ios-run ios-open
+.PHONY: help install vendor-web models migrate doctor api api-lan web build-web serve lint format test test-legacy bench eval openapi e2e ci up down ios-assets ios-sync ios-build ios-run ios-open
 SHELL := /bin/bash
 BACKEND := cd backend &&
 WEB := cd web &&
@@ -23,6 +23,9 @@ vendor-web: ## Copy the MediaPipe WASM runtime and download the face model into 
 
 models: ## Download the phoneme model into data/models (checksums in docs/DATA-MANIFEST.json)
 	$(BACKEND) uv run python -m app.ml.model_download
+
+migrate: ## Apply database migrations to data/coach.sqlite3 (also runs automatically when the API starts)
+	$(BACKEND) uv run alembic -c alembic.ini -x url=sqlite:///../data/coach.sqlite3 upgrade head
 
 doctor: ## Check Python, Node, model files, ports and the macOS `say` voice
 	$(BACKEND) uv run python -m app.doctor
