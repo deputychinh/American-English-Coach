@@ -1,5 +1,7 @@
 # American English Coach — one command per task. `make help` lists them.
 .DEFAULT_GOAL := help
+# `web` and others are also directory names; declare every target phony so make never skips them.
+.PHONY: help install vendor-web models doctor api web build-web serve lint format test test-legacy bench eval openapi e2e ci up down
 SHELL := /bin/bash
 BACKEND := cd backend &&
 WEB := cd web &&

@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import { COPY } from '@/constants/copy.constant';
 import {
@@ -185,15 +185,20 @@ export const useMouthTracker = ({ enabled, calibration }: MouthTrackerOptions): 
   );
 
   const status = cameraError ? TrackerStatus.Error : enabled ? modelStatus : TrackerStatus.Idle;
-  return {
-    status,
-    error: cameraError ?? modelError,
-    fps,
-    isFaceVisible,
-    latest,
-    attachVideo,
-    attachCanvas,
-    framesBetween,
-    rawSince,
-  };
+  const error = cameraError ?? modelError;
+  // Memoised so effects that depend on the tracker do not re-arm on every UI refresh.
+  return useMemo(
+    () => ({
+      status,
+      error,
+      fps,
+      isFaceVisible,
+      latest,
+      attachVideo,
+      attachCanvas,
+      framesBetween,
+      rawSince,
+    }),
+    [status, error, fps, isFaceVisible, latest, attachVideo, attachCanvas, framesBetween, rawSince],
+  );
 };

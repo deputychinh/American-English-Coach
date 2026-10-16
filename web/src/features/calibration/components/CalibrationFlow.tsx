@@ -36,11 +36,15 @@ export const CalibrationFlow = (): ReactElement => {
   const steps = content.data?.calibration ?? [];
   const step = steps[stepIndex];
 
+  // The tracker object changes whenever a frame updates the UI, but `rawSince` is stable; the step
+  // timer must depend on that function only, never on the whole tracker.
+  const { rawSince } = tracker;
+
   useEffect(() => {
     if (!step) return;
     const startedAt = performance.now() / 1000;
     const timer = setTimeout(() => {
-      const captured = tracker.rawSince(startedAt);
+      const captured = rawSince(startedAt);
       if (captured.length < MIN_SAMPLES_PER_STEP) {
         setIsRetryShown(true);
         setAttempt((count) => count + 1); // re-arms this effect for the same step
@@ -51,7 +55,7 @@ export const CalibrationFlow = (): ReactElement => {
       setStepIndex((index) => index + 1);
     }, step.seconds * 1000);
     return () => clearTimeout(timer);
-  }, [step, tracker, attempt]);
+  }, [step, attempt, rawSince]);
 
   useEffect(() => {
     if (stepIndex < steps.length || steps.length === 0 || isDone) return;
@@ -97,7 +101,7 @@ export const CalibrationFlow = (): ReactElement => {
               </p>
               <p className="calibration-flow__prompt">{step.prompt_vi}</p>
               <p className="calibration-flow__muted">{COPY.calibration.hold}</p>
-              {isRetryShown ? (
+              {isRetryShown || !tracker.isFaceVisible ? (
                 <p className="calibration-flow__muted">{COPY.calibration.needFace}</p>
               ) : null}
             </>
