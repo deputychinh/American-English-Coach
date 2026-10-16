@@ -71,3 +71,35 @@ jobs:
           node-version: '24'
       - run: cd legacy && python3 -m unittest discover -s tests -q
       - run: cd legacy && node --test tests/lexicon-view.test.mjs
+
+  e2e:
+    # macOS runner: has `say` for reference audio and the e2e microphone fixture; the API runs
+    # with the fake recognizer so no model download is needed.
+    runs-on: macos-latest
+    needs: [backend, web]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - run: cd backend && uv sync --frozen
+      - run: cd web && npm ci && node scripts/vendor-mediapipe.mjs && npm run build
+      - run: cd web && npx playwright install chromium
+      - name: Start the API with the fake recognizer, serving web/out
+        run: |
+          cd backend
+          COACH_RECOGNIZER=fake COACH_WEB_DIST_DIR=../web/out nohup uv run uvicorn app.main:app --host 127.0.0.1 --port 8765 > ../data/api-ci.log 2>&1 &
+          for i in $(seq 1 30); do curl -sf http://127.0.0.1:8765/api/v1/ready && break; sleep 2; done
+      - run: cd web && E2E_BASE_URL=http://127.0.0.1:8765 npx playwright test
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: playwright-report
+          path: |
+            web/playwright-report
+            data/api-ci.log
