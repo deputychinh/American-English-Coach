@@ -110,3 +110,5 @@ Hai thay đổi sau §3: (1) `AssessmentService._audio_verdict` trả `ok` khi b
 Tương quan GOP với điểm chuyên gia sau khi đưa blank vào mẫu số: Pearson 0,474, Spearman 0,354 (§3 trước đó: 0,436 / 0,327).
 
 Chọn -2,0: báo động giả tương đương mức -1,5 của luật cũ nhưng độ nhạy cao hơn. So với luật ban đầu (§3: 23,4% không gọi `ok` trên âm đúng), báo động giả giảm gần một nửa. Precision theo từng mục catalogue vẫn dưới 0,85 với support ≥ 15, nên `content/enabled_errors.json` vẫn rỗng và mọi lỗi hiện ở mức `check` cho đến khi có dữ liệu người Việt (ADR 0002).
+
+Chạy lại tập đối chứng `say` (§2) với hai sửa đổi trên (`data/eval/synthetic_contrast-v2.json`): báo động giả trên prompt đúng giảm từ 9/28 xuống **2/28** (còn _chip_ và _think_ với giọng Samantha), phát hiện prompt sai **33/40** (trước: 32/40). Hai cặp nguyên âm _bad/bed_ và _pool/pull_ do TTS tạo ra không bị phát hiện: khác biệt âm học giữa hai bản `say` quá nhỏ, không kết luận được gì về giọng người thật.
