@@ -96,15 +96,15 @@ Caveat: (1) nhãn speechocean là điểm 0–2 theo âm, không ghi âm thay th
 - Chạy lại §3 với toàn bộ 2.500 câu và với L2-ARCTIC (4 người Việt) khi có link; ghi `model_version` cùng mọi bảng.
 - Hiệu chỉnh ngưỡng GOP (-1 / -3) bằng đường ROC trên speechocean thay vì giá trị tay.
 
-## 4. Quét ngưỡng GOP sau khi sửa luật kết luận (2026-10-16, session chính)
+## 5. Quét ngưỡng GOP sau hai sửa đổi của session chính (2026-10-16)
 
-Luật mới trong `AssessmentService._audio_verdict`: khi bộ giải mã tham lam nghe khác nhưng căn chỉnh ép vẫn ủng hộ âm đích (GOP ≥ `GOP_OK_THRESHOLD`) thì trả `ok`. Quét trên `data/eval/speechocean762-phones.json` (4757 âm; "đúng" = chuyên gia chấm 2, "sai" = chuyên gia chấm < 1,5, n = 320). `GOP_CHECK_THRESHOLD` không ảnh hưởng vì âm khớp (match) hầu như luôn có GOP ≈ 0.
+Hai thay đổi sau §3: (1) `AssessmentService._audio_verdict` trả `ok` khi bộ giải mã tham lam nghe khác nhưng căn chỉnh ép vẫn ủng hộ âm đích (GOP ≥ `GOP_OK_THRESHOLD`); (2) `GopScorer` đưa **blank** vào mẫu số GOP, để âm bị bỏ (ví dụ phụ âm cuối rơi vào khoảng im lặng) không được điểm tốt chỉ vì mọi âm khác cũng khó xảy ra ở đó. Chạy lại `app.eval.speechocean` cùng 250 câu (seed 7) rồi quét trên `data/eval/speechocean762-phones.json` ("đúng" = chuyên gia chấm 2, n = 3888; "sai" = chấm < 1,5, n = 320). `GOP_CHECK_THRESHOLD` gần như không ảnh hưởng vì âm khớp luôn có GOP ≈ 0.
 
 | `GOP_OK_THRESHOLD` | Không gọi `ok` trên âm đúng (báo động giả) | Bắt được âm sai | Precision của nhóm bị gắn cờ |
 |---:|---:|---:|---:|
-| -0,5 | 17,5% | 70,0% | 0,38 |
-| -1,0 | 15,3% | 67,5% | 0,40 |
-| **-1,5 (chọn)** | **12,8%** | **61,6%** | **0,42** |
-| -2,0 | 10,8% | 57,8% | 0,45 |
+| -1,0 | 17,2% | 72,2% | 0,40 |
+| -1,5 | 14,6% | 67,8% | 0,42 |
+| **-2,0 (chọn)** | **12,5%** | **64,7%** | **0,44** |
+| -3,0 | 8,2% | 58,1% | 0,50 |
 
-Chọn -1,5 theo nguyên tắc "sửa nhầm hại hơn bỏ sót" nhưng vẫn giữ hơn 60% độ nhạy. Với luật cũ (trả `check` khi hai nguồn mâu thuẫn), báo động giả là 23,4% (§3). Precision theo từng mục catalogue vẫn dưới 0,85 (trừ `final_z_to_s` 0,92 với 12 mẫu, `final_d_dropped` 0,86 với 7 mẫu — chưa đủ support ≥ 15), nên `content/enabled_errors.json` vẫn rỗng: mọi lỗi hiện ở mức `check` cho đến khi có dữ liệu người Việt.
+Chọn -2,0: báo động giả tương đương mức -1,5 của luật cũ nhưng độ nhạy cao hơn. So với luật ban đầu (§3: 23,4% không gọi `ok` trên âm đúng), báo động giả giảm gần một nửa. Precision theo từng mục catalogue vẫn dưới 0,85 với support ≥ 15, nên `content/enabled_errors.json` vẫn rỗng và mọi lỗi hiện ở mức `check` cho đến khi có dữ liệu người Việt (ADR 0002).

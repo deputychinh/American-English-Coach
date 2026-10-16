@@ -49,7 +49,12 @@ class GopScorer:
         merged = self.merged_log_probs(log_probs)
         emissions = self._emissions(log_probs, merged, expected)
         boundaries = self._viterbi(emissions)
-        competitor = np.max(np.stack(list(merged.values())), axis=0)
+        # The blank competes too: a phone forced into silence (dropped final consonant) must not
+        # score well just because every other phone is equally unlikely there.
+        competitor = np.maximum(
+            np.max(np.stack(list(merged.values())), axis=0),
+            log_probs[:, self._blank_id].astype(np.float64),
+        )
         segments: list[PhoneSegment] = []
         for index, symbol in enumerate(expected):
             start, end = boundaries[index]
