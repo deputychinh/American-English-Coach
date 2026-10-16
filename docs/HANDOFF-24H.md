@@ -18,8 +18,10 @@ Ngày 2026-10-16 · nhánh `feat/av-mvp` · chưa push, chưa merge (chờ chủ
 
 ## Hoàn thiện mức sản phẩm (2026-10-17, theo `docs/backlog.md`)
 
+- GitHub Actions xanh toàn bộ 5 job (backend, web, repo, legacy, e2e trên macOS với recognizer giả) tại commit `4cea475`: https://github.com/deputychinh/American-English-Coach/actions/runs/38957536818.
+
 - ☑ AEC-001 CI xanh với iOS trong repo · ☑ AEC-003 Alembic (baseline 0001 + devices 0002, tự nâng cấp khi mở DB, DB thật 22 lượt đã nâng cấp) · ☑ AEC-004 log JSON + `X-Request-Id` · ☑ AEC-005 `COACH_RECOGNIZER=fake` + job e2e trên macOS (14/14 pass local) · ☑ AEC-006 giới hạn gia sư 10/phút · ☑ AEC-007 `/ready`.
-- ◐ AEC-002 ghép nối điện thoại: backend xong (`POST /pair`, middleware token cho client ngoài loopback, bảng `devices`); UI đang do session web làm cùng AEC-010…015 (thiết kế thống nhất, tab bar di động, native polish, Lighthouse, i18n).
+- ☑ AEC-002 ghép nối điện thoại (backend + màn hình Cài đặt) · ☑ AEC-010…014 (hệ thống thiết kế, AppShell + tab bar, native polish, trạng thái/lỗi, Lighthouse 94–100) · ◐ AEC-015 i18n (copy tách khóa, `en` mới có khung).
 - Chưa làm (P2): hồ sơ nhiều người học, lộ trình tuần, giọng mẫu người thật, pilot người Việt, phát hành TestFlight, HTTPS từ xa.
 
 ## iOS (2026-10-17)
