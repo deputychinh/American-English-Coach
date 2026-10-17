@@ -35,3 +35,4 @@ Mỗi ticket có tiêu chí nghiệm thu; một commit Conventional Commit cho m
 | AEC-023 | ◐          | Pilot người Việt và bật `error` theo bằng chứng | Precision ≥ 0,85 trên tập người Việt; `enabled_errors.json` sinh từ dữ liệu thật               |
 | AEC-024 | ☐          | Phát hành iOS                                   | Ký với Team, TestFlight nội bộ, App Store metadata, ảnh chụp theo kích cỡ, chính sách riêng tư |
 | AEC-025 | ☑          | HTTPS cho máy chấm từ xa                        | Caddy/Tailscale; app chấp nhận `https://`                                                      |
+| AEC-026 | ☑          | Ngoại tuyến có kiểm soát                        | SW phiên bản theo build; bài, tiến độ, gương, giọng mẫu xem được khi mất API; unit + e2e       |

@@ -33,6 +33,7 @@ Cùng bộ quy ước với các dự án khác của nhóm (bazaar, relay, sale
 | Trạng thái | server state qua fetch trong service của feature; URL state cho lựa chọn bài; local `useState/useReducer`; `useEffect` chỉ để đồng bộ với hệ thống ngoài (camera, mic, MediaPipe)                                                                                  |
 | UI         | mọi màn dữ liệu có loading/empty/error/success; màu không là tín hiệu duy nhất; bàn phím dùng được                                                                                                                                                                 |
 | Test       | Vitest + Testing Library qua role/label; coverage dòng ≥ 80 % (route và schema sinh loại trừ); Playwright với camera/mic giả cho hành trình chính                                                                                                                  |
+| PWA        | `public/sw.js` là nguồn, không sửa `out/sw.js`; `npm run build` chạy `scripts/build-sw.mjs` đóng dấu build id + asset; endpoint đọc-only mới muốn xem được ngoại tuyến thì thêm vào `OFFLINE_API`; test qua harness `src/test-utils/service-worker.ts`             |
 
 ## Commit và nhánh
 

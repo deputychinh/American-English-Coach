@@ -75,6 +75,18 @@ Lược đồ do **Alembic** quản lý (`backend/alembic/versions`): API tự c
 - `routes/`: validate → gọi một service → trả model. Lỗi domain đổi sang problem+json một lần ở `main.py`.
 - `container.py`: composition root (lazy singletons); test truyền `recognizer` giả.
 
+## Ngoại tuyến có kiểm soát (web)
+
+`web/public/sw.js` là service worker nguồn; `npm run build` chạy `scripts/build-sw.mjs` để đóng dấu build id của Next và danh sách mọi file `_next/static` vào `out/sw.js` (file API phục vụ). Ba chiến lược:
+
+| Nhóm                                                                                                  | Chiến lược                                                                                                                                                                                                                       | Cache                            |
+| ----------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------- |
+| Vỏ ứng dụng: 10 route HTML, `_next/static`, icon, manifest, worklet, runtime MediaPipe                | cache-first; precache lúc cài (bỏ qua từng file lỗi thay vì hủy cả lô); điều hướng khớp bỏ query string, route lạ khi ngoại tuyến rơi về `/`; mỗi build một cache, `activate` xóa cache build cũ                                 | `coach-shell-<build id>`         |
+| API đọc-only: `content/*`, `course`, `plan`, `progress`, `profiles`, `calibration`, `runs/*`, `audio` | network-first; phản hồi 200 gần nhất được giữ, khóa theo URL + `X-Coach-Profile` + `X-Coach-Voice` nên hồ sơ nào xem lịch sử hồ sơ đó; giọng mẫu được tải trọn file và cắt `206` theo `Range` khi phát từ cache (Safari yêu cầu) | `coach-api-v1` (sống qua deploy) |
+| Còn lại: `health`/`ready`, `assess`, `pair`, mọi request không phải GET, khác origin                  | không chạm — trạng thái máy chấm luôn là thật; ngoại tuyến thì banner trang chủ báo "Máy chấm chưa chạy… Bạn vẫn xem được bài học"                                                                                               | —                                |
+
+Giới hạn: chấm điểm, gia sư AI và lưu hiệu chỉnh cần API; runtime MediaPipe (≈40 MB) chỉ vào cache sau lần mở gương đầu tiên; vỏ native iOS không đăng ký service worker (file đã đóng gói). Kiểm chứng: `web/src/components/RegisterServiceWorker/service-worker-*.test.ts` chạy `sw.js` trong `node:vm` với CacheStorage giả; `web/e2e/offline.spec.ts` làm ấm rồi `context.setOffline(true)`.
+
 ## Vận hành
 
 - **Log**: JSON một dòng mỗi sự kiện (`app/logging_setup.py`); mỗi request có `X-Request-Id` (trả về trong header, ghi trong log truy cập và log lỗi). Không log audio, ảnh, key.
