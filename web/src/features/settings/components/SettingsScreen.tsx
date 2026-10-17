@@ -8,20 +8,15 @@ import { PageIntro } from '@/components/PageIntro/PageIntro';
 import { SectionHeader } from '@/components/SectionHeader/SectionHeader';
 import { Tabs } from '@/components/Tabs/Tabs';
 import { useToast } from '@/components/Toast/Toast';
-import { PAIR_CODE_LENGTH } from '@/constants/api.constant';
 import { APP_VERSION } from '@/constants/ui.constant';
 import { ButtonVariant } from '@/enums/button-variant.enum';
 import { StorageKey } from '@/enums/storage-key.enum';
 import { Theme } from '@/enums/theme.enum';
 import { getHealth } from '@/features/health/services/health.service';
 import { clearCalibration } from '@/features/mirror/services/calibration.service';
+import { GoalCard } from '@/features/settings/components/GoalCard';
+import { PairingCard } from '@/features/settings/components/PairingCard';
 import { ProfilesCard } from '@/features/settings/components/ProfilesCard';
-import {
-  guessDeviceName,
-  pairDevice,
-  pairedDevice,
-  unpairDevice,
-} from '@/features/settings/services/pairing.service';
 import { useCopy } from '@/hooks/useCopy';
 import { useStoredState } from '@/hooks/useStoredState';
 import { normaliseBaseUrl } from '@/utils/api-base.util';
@@ -50,33 +45,6 @@ export const SettingsScreen = (): ReactElement => {
   const [server, setServer] = useStoredState<string>(StorageKey.ApiBaseUrl, '');
   const [draft, setDraft] = useState<string | null>(null);
   const [serverStatus, setServerStatus] = useState<string | null>(null);
-  const [paired, setPaired] = useState(() => pairedDevice());
-  const [code, setCode] = useState('');
-  const [deviceName, setDeviceName] = useState(() =>
-    guessDeviceName(copy.settings.defaultDeviceName),
-  );
-  const [pairStatus, setPairStatus] = useState<string | null>(null);
-
-  const pair = async (): Promise<void> => {
-    try {
-      const result = await pairDevice(
-        code.trim(),
-        deviceName.trim() || copy.settings.defaultDeviceName,
-      );
-      setPaired(result);
-      setCode('');
-      setPairStatus(copy.settings.pairingDone);
-      toast.show(copy.settings.pairingDone, 'success');
-    } catch {
-      setPairStatus(copy.settings.pairingFailed);
-    }
-  };
-  const unpair = (): void => {
-    unpairDevice();
-    setPaired(null);
-    setPairStatus(copy.settings.unpaired);
-  };
-
   const setTheme = (next: Theme): void => {
     document.documentElement.dataset.theme = next;
     writeStorage(StorageKey.Theme, next);
@@ -100,6 +68,7 @@ export const SettingsScreen = (): ReactElement => {
     removeStorage(StorageKey.CameraDefault);
     removeStorage(StorageKey.Muted);
     removeStorage(StorageKey.ApiBaseUrl);
+    removeStorage(StorageKey.DailyGoal);
     toast.show(copy.settings.dataCleared, 'success');
   };
 
@@ -121,6 +90,8 @@ export const SettingsScreen = (): ReactElement => {
       </Card>
 
       <ProfilesCard />
+
+      <GoalCard />
 
       <Card as="section" aria-labelledby="settings-practice">
         <SectionHeader id="settings-practice" title={copy.settings.practice} />
@@ -174,54 +145,7 @@ export const SettingsScreen = (): ReactElement => {
         ) : null}
       </Card>
 
-      <Card as="section" aria-labelledby="settings-pairing">
-        <SectionHeader
-          id="settings-pairing"
-          title={copy.settings.pairingTitle}
-          hint={copy.settings.pairingHelp}
-        />
-        {paired ? (
-          <div className="settings-screen__row">
-            <span className="settings-screen__paired" role="status">
-              {copy.settings.paired(paired.deviceName)}
-            </span>
-            <Button variant={ButtonVariant.Ghost} isSmall onClick={unpair}>
-              {copy.settings.unpair}
-            </Button>
-          </div>
-        ) : (
-          <div className="settings-screen__pairing">
-            <label className="settings-screen__field">
-              <span className="settings-screen__label">{copy.settings.pairingCode}</span>
-              <input
-                className="settings-screen__input settings-screen__input--code"
-                inputMode="numeric"
-                pattern="[0-9]*"
-                maxLength={PAIR_CODE_LENGTH}
-                autoComplete="one-time-code"
-                value={code}
-                onChange={(event) => setCode(event.target.value.replace(/\D/g, ''))}
-              />
-            </label>
-            <label className="settings-screen__field">
-              <span className="settings-screen__label">{copy.settings.pairingDevice}</span>
-              <input
-                className="settings-screen__input"
-                value={deviceName}
-                onChange={(event) => setDeviceName(event.target.value)}
-              />
-            </label>
-            <Button isSmall disabled={code.length !== PAIR_CODE_LENGTH} onClick={() => void pair()}>
-              {copy.settings.pair}
-            </Button>
-          </div>
-        )}
-        {pairStatus ? (
-          <p className="settings-screen__status" role="status">
-            {pairStatus}
-          </p>
-        ) : null}
-      </Card>
+      <PairingCard />
 
       <Card as="section" aria-labelledby="settings-data">
         <SectionHeader

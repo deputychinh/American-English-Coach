@@ -7,18 +7,14 @@ import { Card } from '@/components/Card/Card';
 import { Icon } from '@/components/Icon/Icon';
 import { ListRow } from '@/components/ListRow/ListRow';
 import { SectionHeader } from '@/components/SectionHeader/SectionHeader';
-import { Skeleton } from '@/components/Skeleton/Skeleton';
 import { Stat } from '@/components/Stat/Stat';
-import { FOCUS_LIMIT } from '@/constants/api.constant';
-import { AsyncStatus } from '@/enums/async-status.enum';
 import { IconName } from '@/enums/icon-name.enum';
-import { getSounds } from '@/features/content/services/content.service';
 import { ApiStatusBanner } from '@/features/health/components/ApiStatusBanner';
+import { PlanCard } from '@/features/plan/components/PlanCard';
 import { getProgress } from '@/features/progress/services/progress.service';
 import { useActiveProfile } from '@/hooks/useActiveProfile';
 import { useAsync } from '@/hooks/useAsync';
 import { useCopy } from '@/hooks/useCopy';
-import { targetPhoneOf } from '@/utils/drill.util';
 import { formatDateTime, formatPercent } from '@/utils/format.util';
 
 import './HomeScreen.css';
@@ -35,19 +31,12 @@ export const HomeScreen = (): ReactElement => {
   const copy = useCopy();
   const profile = useActiveProfile();
   const progress = useAsync(getProgress);
-  const sounds = useAsync(getSounds);
   const phonemes = progress.data?.phonemes ?? [];
-  const focus = phonemes
-    .filter((stat) => stat.check + stat.error > 0)
-    .sort((a, b) => b.check + b.error - (a.check + a.error))
-    .slice(0, FOCUS_LIMIT);
   const totals = phonemes.reduce(
     (sum, stat) => ({ total: sum.total + stat.total, ok: sum.ok + stat.ok }),
     { total: 0, ok: 0 },
   );
   const last = progress.data?.recent[0] ?? null;
-  const drillIdOf = (phoneme: string): string | null =>
-    sounds.data?.find((sound) => targetPhoneOf(sound.arpabet) === phoneme)?.id ?? null;
   const quickCopy: Record<(typeof QUICK)[number]['key'], { title: string; hint: string }> = {
     sounds: { title: copy.home.sounds, hint: copy.home.soundsHint },
     pairs: { title: copy.home.pairs, hint: copy.home.pairsHint },
@@ -95,34 +84,7 @@ export const HomeScreen = (): ReactElement => {
         <Stat label={copy.home.statSounds} value={String(phonemes.length)} />
       </section>
 
-      <Card as="section" aria-labelledby="today-title">
-        <SectionHeader
-          id="today-title"
-          title={copy.home.todayTitle}
-          hint={focus.length > 0 ? copy.home.todayHint : undefined}
-        />
-        {progress.status === AsyncStatus.Loading ? <Skeleton lines={2} /> : null}
-        {progress.status !== AsyncStatus.Loading && focus.length === 0 ? (
-          <p className="home-screen__muted">{copy.home.todayEmpty}</p>
-        ) : null}
-        {focus.length > 0 ? (
-          <div className="home-screen__focus">
-            {focus.map((stat) => (
-              <ListRow
-                key={stat.phoneme}
-                leading={<span className="ipa-pill">/{stat.ipa}/</span>}
-                title={copy.home.reviewCount(stat.check + stat.error, stat.total)}
-                trailing={copy.practice.practiceNow}
-                href={
-                  drillIdOf(stat.phoneme)
-                    ? { pathname: '/practice', query: { sound: drillIdOf(stat.phoneme) } }
-                    : { pathname: '/mirror', query: { sound: stat.phoneme } }
-                }
-              />
-            ))}
-          </div>
-        ) : null}
-      </Card>
+      <PlanCard headingId="today-title" />
 
       <section aria-labelledby="quick-title" className="home-screen__quick">
         <SectionHeader id="quick-title" title={copy.home.quick} />

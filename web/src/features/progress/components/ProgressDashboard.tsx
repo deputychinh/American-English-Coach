@@ -15,6 +15,7 @@ import { Stat } from '@/components/Stat/Stat';
 import { AsyncStatus } from '@/enums/async-status.enum';
 import { IconName } from '@/enums/icon-name.enum';
 import { getSounds } from '@/features/content/services/content.service';
+import { PlanCard } from '@/features/plan/components/PlanCard';
 import { getProgress } from '@/features/progress/services/progress.service';
 import { useAsync } from '@/hooks/useAsync';
 import { useCopy } from '@/hooks/useCopy';
@@ -63,6 +64,8 @@ export const ProgressDashboard = (): ReactElement => {
             <Stat label={copy.progress.statCheck} value={String(totals.check)} tone="warning" />
             <Stat label={copy.progress.statSounds} value={String(ranked.length)} />
           </div>
+
+          <PlanCard headingId="week" showFocus={false} />
 
           <Card as="section" aria-labelledby="per-sound" className="progress-dashboard__panel">
             <SectionHeader

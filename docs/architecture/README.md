@@ -59,6 +59,8 @@ flowchart LR
 | `calibrations`    | `id` = `profile_id`, `data_json` (min/max mỗi đặc trưng), `created_at`                                                                                      |
 | `devices`         | `token` (khóa), `name`, `created_at`, `last_seen_at` — điện thoại đã ghép nối                                                                               |
 
+`GET /plan?tz_offset&goal` (app/domain/planner.py, thuần) tính chuỗi ngày liên tiếp, 7 ngày gần nhất theo múi giờ người học và 3 âm trọng tâm: yếu (≥ 3 mẫu, tỷ lệ đạt < 70 %), ôn lại (đạt nhưng ≥ 3 ngày chưa luyện), mới (chưa luyện, theo thứ tự bảng âm).
+
 Hồ sơ đang dùng do thiết bị chọn và gửi trong header `X-Coach-Profile` (thiếu = `default`); `/profiles` có tạo/đổi tên/xóa, `/profiles/{id}/export` và `/profiles/import` chuyển toàn bộ lượt chấm + hiệu chỉnh giữa hai máy chấm (định dạng `aec-profile/1`).
 
 Lược đồ do **Alembic** quản lý (`backend/alembic/versions`): API tự chạy `upgrade head` khi mở DB (`app/db/migrate.py`); DB tạo trước khi có Alembic được đóng dấu baseline `0001` rồi nâng cấp. Mọi thay đổi lược đồ đi kèm một revision mới (`make migrate` để chạy tay).

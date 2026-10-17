@@ -56,11 +56,6 @@
   color: var(--color-text-muted);
 }
 
-.home-screen__focus {
-  display: flex;
-  flex-direction: column;
-}
-
 .home-screen__quick {
   display: flex;
   flex-direction: column;

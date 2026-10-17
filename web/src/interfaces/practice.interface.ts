@@ -19,6 +19,9 @@ export type TutorReply = components['schemas']['TutorReply'];
 export type Profile = components['schemas']['ProfileModel'];
 export type ProfileExport = components['schemas']['ProfileExport'];
 export type ImportResult = components['schemas']['ImportResult'];
+export type PlanResponse = components['schemas']['PlanResponse'];
+export type PlanDay = components['schemas']['PlanDay'];
+export type PlanFocus = components['schemas']['PlanFocus'];
 
 /** The profile this device works in (stored locally; the API is told through a header). */
 export interface ActiveProfile {

@@ -8,6 +8,10 @@ test('home shows the API status and quick entries', async ({ page }, info) => {
   await expect(page.locator('.api-status-banner')).toContainText(/Máy chấm/);
   await expect(page.getByRole('link', { name: /Luyện ngay/ }).first()).toBeVisible();
   await expect(page.locator('.stat')).toHaveCount(3);
+  await expect(page.getByRole('heading', { name: 'Hôm nay luyện gì' })).toBeVisible();
+  await expect(page.getByRole('progressbar', { name: 'Tiến độ mục tiêu hôm nay' })).toBeVisible();
+  await expect(page.locator('.week-strip__day')).toHaveCount(7);
+  await expect(page.getByRole('link', { name: /Luyện ngay/ }).nth(1)).toBeVisible();
   await expect(page.getByRole('link', { name: /Luyện cặp âm/ })).toBeVisible();
   await shot(page, 'home', info.project.name);
 });
@@ -92,6 +96,8 @@ test('progress shows stats, the ranked table and a link to settings', async ({ p
   await page.goto('/progress/');
   await expect(page.getByRole('heading', { name: /Theo từng âm/ })).toBeVisible();
   await expect(page.locator('.stat')).toHaveCount(4);
+  await expect(page.getByRole('heading', { name: 'Tuần này' })).toBeVisible();
+  await expect(page.locator('.week-strip__day')).toHaveCount(7);
   await expect(page.getByRole('link', { name: /Mở cài đặt/ })).toBeVisible();
   await shot(page, 'progress', info.project.name);
 });
@@ -100,6 +106,8 @@ test('settings has theme, server check, pairing and data sections', async ({ pag
   await page.goto('/settings/');
   await expect(page.getByRole('heading', { name: 'Cài đặt', level: 1 })).toBeVisible();
   await expect(page.getByRole('checkbox', { name: /Mặc định bật camera/ })).toBeVisible();
+  await page.getByRole('tab', { name: '5 lần' }).click();
+  await expect(page.getByRole('tab', { name: '5 lần' })).toHaveAttribute('aria-selected', 'true');
   await page.getByRole('button', { name: 'Lưu và kiểm tra' }).click();
   await expect(page.getByRole('status').filter({ hasText: /Kết nối được/ })).toBeVisible();
   await expect(page.getByRole('button', { name: 'Ghép nối' })).toBeDisabled();

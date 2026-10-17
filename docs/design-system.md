@@ -54,16 +54,17 @@ Tương phản (WCAG 2.2): chữ ink-900 trên ink-100 16:1; chữ phụ ink-600
 | `Toast` (`useToast`)                     | Xác nhận không chặn, tự tắt sau 3,5 s                                                                           | Hiện trên tab bar                                   |
 | `AppErrorBoundary`                       | Màn hình lỗi thân thiện + Tải lại                                                                               | Bọc toàn app trong `layout.tsx`                     |
 | `PageIntro`                              | H1 + đoạn dẫn + hành động                                                                                       | Mỗi trang đúng một H1                               |
+| `WeekStrip`                              | Bảy ô ngày: đầy khi đạt mục tiêu, nửa khi có thu âm, viền hôm nay; nhãn ARIA đầy đủ từng ngày                   | Dùng trong `PlanCard`                               |
 
 ## 5. Mẫu màn hình
 
-- **Trang chủ**: hero (CTA "Luyện ngay" + "Soi gương"), 3 ô `Stat`, "Hôm nay luyện gì" (`ListRow` theo âm), lưới bắt đầu nhanh có icon, "Lần luyện gần nhất".
+- **Trang chủ**: hero (CTA "Luyện ngay" + "Soi gương", huy hiệu hồ sơ đang dùng), 3 ô `Stat`, `PlanCard` "Hôm nay luyện gì" (tiến độ mục tiêu ngày, chuỗi ngày liên tiếp, `WeekStrip`, 3 âm trọng tâm có lý do Yếu/Ôn lại/Mới), lưới bắt đầu nhanh có icon, "Lần luyện gần nhất".
 - **Bảng 44 âm**: ô tìm kiếm + `Tabs` lọc nhóm, lưới thẻ với `.ipa-pill`, panel chi tiết bên phải ở ≥ 1024 px.
 - **Luyện tập**: tab "Theo âm" / "Cặp âm & câu"; phiên luyện = thẻ đề bài → camera + mục tiêu khẩu hình (cạnh nhau trên desktop, xếp dọc trên mobile) → **thanh thu âm dính đáy** trên mobile với vạch mức âm → thẻ kết quả với tổng kết trước, chip theo từng âm, gợi ý ngữ điệu, gia sư AI.
 - **Gương**: camera toàn chiều rộng, điều khiển và thanh đo bên dưới, huy hiệu mức tin cậy, chuyển động đầu–cuối cho nguyên âm đôi.
 - **Hiệu chỉnh**: stepper 6 bước (vạch tiến trình + vòng tròn), lời nhắc lớn, trạng thái khuôn mặt.
-- **Tiến độ**: 4 ô `Stat`, bảng theo âm xếp theo mức cần luyện, lần thu gần đây; nút mở Cài đặt.
-- **Cài đặt** (`/settings/`): giao diện, hồ sơ người học (danh sách có hàng đang dùng, tạo, đổi tên tại chỗ, xuất/nhập tệp, xóa có xác nhận inline), luyện tập, máy chấm (địa chỉ + kiểm tra), ghép nối điện thoại (mã 6 số), dữ liệu trên thiết bị, về ứng dụng.
+- **Tiến độ**: 4 ô `Stat`, `PlanCard` rút gọn "Tuần này", bảng theo âm xếp theo mức cần luyện, lần thu gần đây; nút mở Cài đặt.
+- **Cài đặt** (`/settings/`): giao diện, hồ sơ người học, mục tiêu mỗi ngày (1/3/5/10) và nhắc luyện iOS (danh sách có hàng đang dùng, tạo, đổi tên tại chỗ, xuất/nhập tệp, xóa có xác nhận inline), luyện tập, máy chấm (địa chỉ + kiểm tra), ghép nối điện thoại (mã 6 số), dữ liệu trên thiết bị, về ứng dụng.
 
 ## 6. Native (iOS)
 

@@ -1,3 +1,5 @@
+import { REMINDER_NOTIFICATION_ID } from '@/constants/plan.constant';
+import type { ReminderOutcome } from '@/interfaces/native.interface';
 import { isNativeShell } from '@/utils/api-base.util';
 
 type Haptic = 'light' | 'medium' | 'success' | 'warning';
@@ -69,5 +71,35 @@ export const nativeShareFile = async (name: string, text: string): Promise<boole
     return true;
   } catch {
     return false;
+  }
+};
+
+/** Daily practice reminder at `HH:MM` local time (null cancels); a repeating local notification. */
+export const nativeScheduleDailyReminder = async (
+  time: string | null,
+  title: string,
+  body: string,
+): Promise<ReminderOutcome> => {
+  if (!isNativeShell()) return 'unsupported';
+  try {
+    const { LocalNotifications } = await import('@capacitor/local-notifications');
+    await LocalNotifications.cancel({ notifications: [{ id: REMINDER_NOTIFICATION_ID }] });
+    if (!time) return 'cancelled';
+    const permission = await LocalNotifications.requestPermissions();
+    if (permission.display !== 'granted') return 'denied';
+    const [hour = 19, minute = 30] = time.split(':').map(Number);
+    await LocalNotifications.schedule({
+      notifications: [
+        {
+          id: REMINDER_NOTIFICATION_ID,
+          title,
+          body,
+          schedule: { on: { hour, minute }, allowWhileIdle: true },
+        },
+      ],
+    });
+    return 'scheduled';
+  } catch {
+    return 'unsupported';
   }
 };

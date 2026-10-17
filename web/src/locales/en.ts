@@ -15,8 +15,12 @@ export const en: CopyOverrides = {
     ariaMain: 'Main navigation',
     ariaTabs: 'Tab bar',
   },
+  plan: {
+    title: 'What to practise today',
+    weekTitle: 'This week',
+    reasonLabel: { weak: 'Weak', review: 'Review', new: 'New' },
+  },
   home: {
-    todayTitle: 'What to practise today',
     quick: 'Quick start',
     heroCta: 'Practise now',
     heroSecondary: 'Open the mouth mirror',
