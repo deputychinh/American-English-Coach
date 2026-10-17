@@ -5,8 +5,14 @@ test.beforeEach(async ({ page }) => {
   await page.addInitScript(() => localStorage.setItem('coach.onboarded', 'true'));
 });
 
-const shot = (page: Page, name: string, project: string): Promise<Buffer> =>
-  page.screenshot({ path: `../docs/screenshots/${name}-${project}.png`, fullPage: true });
+/** Documentation screenshots; a capture hiccup on a CI runner must never fail a journey. */
+const shot = async (page: Page, name: string, project: string): Promise<void> => {
+  try {
+    await page.screenshot({ path: `../docs/screenshots/${name}-${project}.png`, fullPage: true });
+  } catch (error) {
+    console.warn(`screenshot ${name}-${project} skipped: ${String(error)}`);
+  }
+};
 
 test('home shows the API status and quick entries', async ({ page }, info) => {
   await page.goto('/');
