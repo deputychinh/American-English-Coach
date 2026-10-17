@@ -1,9 +1,12 @@
 import { StorageKey } from '@/enums/storage-key.enum';
 
 import {
+  activeProfileId,
   announceUnauthorized,
   deviceHeaders,
   noteUnauthorized,
+  profileHeaders,
+  withClientHeaders,
   withDeviceToken,
 } from './api-base.util';
 
@@ -28,5 +31,18 @@ describe('device token', () => {
     announceUnauthorized();
     expect(listener).toHaveBeenCalledTimes(2);
     window.removeEventListener('coach:unauthorized', listener);
+  });
+
+  it('names the active profile only when it is not the default one', () => {
+    const bare = new Request('http://localhost/api/v1/progress');
+    expect(activeProfileId()).toBe('default');
+    expect(profileHeaders()).toEqual({});
+    expect(withClientHeaders(bare)).toBe(bare);
+    localStorage.setItem(StorageKey.ProfileId, JSON.stringify('ab12cd34'));
+    localStorage.setItem(StorageKey.DeviceToken, JSON.stringify('tok-123'));
+    const scoped = withClientHeaders(bare);
+    expect(scoped.headers.get('X-Coach-Profile')).toBe('ab12cd34');
+    expect(scoped.headers.get('X-Coach-Token')).toBe('tok-123');
+    expect(profileHeaders()).toEqual({ 'X-Coach-Profile': 'ab12cd34' });
   });
 });

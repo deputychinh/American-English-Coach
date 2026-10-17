@@ -16,6 +16,15 @@ export type FocusItem = components['schemas']['FocusItem'];
 export type SoundDrill = components['schemas']['SoundDrill'];
 export type SoundDrillSummary = components['schemas']['SoundDrillSummary'];
 export type TutorReply = components['schemas']['TutorReply'];
+export type Profile = components['schemas']['ProfileModel'];
+export type ProfileExport = components['schemas']['ProfileExport'];
+export type ImportResult = components['schemas']['ImportResult'];
+
+/** The profile this device works in (stored locally; the API is told through a header). */
+export interface ActiveProfile {
+  id: string;
+  name: string;
+}
 
 /** What the learner is about to say, resolved from the `item` search param. */
 export interface PairedDevice {

@@ -52,3 +52,22 @@ export const nativeConfigureChrome = async (isDark: boolean): Promise<void> => {
     // Keyboard plugin absent on this platform.
   }
 };
+
+/** Write a text file to the app cache and open the share sheet; false outside the native shell. */
+export const nativeShareFile = async (name: string, text: string): Promise<boolean> => {
+  if (!isNativeShell()) return false;
+  try {
+    const { Directory, Encoding, Filesystem } = await import('@capacitor/filesystem');
+    const { Share } = await import('@capacitor/share');
+    const written = await Filesystem.writeFile({
+      path: name,
+      data: text,
+      directory: Directory.Cache,
+      encoding: Encoding.UTF8,
+    });
+    await Share.share({ title: name, url: written.uri, dialogTitle: name });
+    return true;
+  } catch {
+    return false;
+  }
+};

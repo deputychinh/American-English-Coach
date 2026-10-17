@@ -35,5 +35,15 @@ export const en: CopyOverrides = {
     clearData: 'Clear data on this device',
     about: 'About',
     version: 'Version',
+    profiles: {
+      title: 'Learner profiles',
+      active: 'In use',
+      use: 'Use this profile',
+      create: 'Create profile',
+      import: 'Import from file',
+      export: 'Export file',
+      remove: 'Delete',
+      defaultName: 'Learner',
+    },
   },
 };

@@ -15,6 +15,7 @@ import { IconName } from '@/enums/icon-name.enum';
 import { getSounds } from '@/features/content/services/content.service';
 import { ApiStatusBanner } from '@/features/health/components/ApiStatusBanner';
 import { getProgress } from '@/features/progress/services/progress.service';
+import { useActiveProfile } from '@/hooks/useActiveProfile';
 import { useAsync } from '@/hooks/useAsync';
 import { useCopy } from '@/hooks/useCopy';
 import { targetPhoneOf } from '@/utils/drill.util';
@@ -32,6 +33,7 @@ const QUICK = [
 
 export const HomeScreen = (): ReactElement => {
   const copy = useCopy();
+  const profile = useActiveProfile();
   const progress = useAsync(getProgress);
   const sounds = useAsync(getSounds);
   const phonemes = progress.data?.phonemes ?? [];
@@ -62,6 +64,13 @@ export const HomeScreen = (): ReactElement => {
             {copy.appName}
           </h1>
           <p className="home-screen__tagline">{copy.tagline}</p>
+          <Link
+            href={{ pathname: '/settings', hash: 'profiles' }}
+            className="badge badge--subtle home-screen__profile"
+            title={copy.home.changeProfile}
+          >
+            {copy.home.profileBadge(profile.name)}
+          </Link>
           <div className="home-screen__cta">
             <Link href="/practice" className="button button--primary button--large">
               <Icon name={IconName.Practice} />

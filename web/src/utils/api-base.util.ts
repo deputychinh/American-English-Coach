@@ -1,6 +1,8 @@
 import {
+  DEFAULT_PROFILE_ID,
   DEVICE_TOKEN_HEADER,
   NATIVE_DEFAULT_API_BASE_URL,
+  PROFILE_HEADER,
   UNAUTHORIZED_EVENT,
 } from '@/constants/api.constant';
 import { StorageKey } from '@/enums/storage-key.enum';
@@ -57,6 +59,29 @@ export const withDeviceToken = (request: Request): Request => {
   headers.set(DEVICE_TOKEN_HEADER, token);
   return new Request(request, { headers });
 };
+
+/** Id of the learner profile chosen on this device ('default' until one is picked). */
+export const activeProfileId = (): string =>
+  readStorage<string>(StorageKey.ProfileId, '') || DEFAULT_PROFILE_ID;
+
+/** Header naming the active profile; omitted for the default profile. */
+export const profileHeaders = (): Record<string, string> => {
+  const id = activeProfileId();
+  return id === DEFAULT_PROFILE_ID ? {} : { [PROFILE_HEADER]: id };
+};
+
+/** Clone a request with the active profile named (no-op for the default profile). */
+export const withProfile = (request: Request): Request => {
+  const id = activeProfileId();
+  if (id === DEFAULT_PROFILE_ID) return request;
+  const headers = new Headers(request.headers);
+  headers.set(PROFILE_HEADER, id);
+  return new Request(request, { headers });
+};
+
+/** Everything a request needs to be accepted and scoped: pairing token + active profile. */
+export const withClientHeaders = (request: Request): Request =>
+  withProfile(withDeviceToken(request));
 
 /** Lets the shell show the "pair this device" banner when the server rejects us. */
 export const announceUnauthorized = (): void => {

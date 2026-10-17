@@ -16,7 +16,13 @@ export const mockApi = (routes: Record<string, Handler>): ReturnType<typeof vi.f
     const url = new URL(request.url, 'http://localhost');
     const handler = routes[url.pathname];
     if (!handler) throw new Error(`unmocked ${request.method} ${url.pathname}`);
-    return handler(url, init ?? { method: request.method, body: await request.blob() });
+    // The app passes a Request plus `{ signal }`; handlers get the method and body regardless.
+    const hasBody = !['GET', 'HEAD'].includes(request.method);
+    return handler(url, {
+      ...init,
+      method: request.method,
+      body: init?.body ?? (hasBody ? await request.clone().blob() : undefined),
+    });
   });
   vi.stubGlobal('fetch', fetchMock);
   return fetchMock;

@@ -5,13 +5,13 @@ import {
   noteUnauthorized,
   redirectToApiBase,
   storedApiBaseUrl,
-  withDeviceToken,
+  withClientHeaders,
 } from '@/utils/api-base.util';
 
 const fetchWithTimeout =
   (timeoutMs: number) =>
   (request: Request): Promise<Response> => {
-    const target = withDeviceToken(redirectToApiBase(request, storedApiBaseUrl()));
+    const target = withClientHeaders(redirectToApiBase(request, storedApiBaseUrl()));
     return fetch(target, {
       signal: AbortSignal.any([request.signal, AbortSignal.timeout(timeoutMs)]),
     }).then(noteUnauthorized);

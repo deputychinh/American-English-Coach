@@ -109,6 +109,27 @@ test('settings has theme, server check, pairing and data sections', async ({ pag
   await page.getByRole('tab', { name: 'Sáng' }).click();
 });
 
+test('profiles can be created, switched, renamed and deleted from settings', async ({ page }) => {
+  await page.goto('/settings/');
+  const card = page.locator('#profiles');
+  await expect(card.getByText('Đang dùng')).toBeVisible();
+  const name = `E2E ${Date.now().toString().slice(-5)}`;
+  await card.getByLabel('Tên hồ sơ mới').fill(name);
+  await card.getByRole('button', { name: 'Tạo hồ sơ' }).click();
+  const row = card.locator('.profiles-card__row', { hasText: name });
+  await expect(row).toHaveAttribute('aria-current', 'true');
+  await page.goto('/');
+  await expect(page.getByRole('link', { name: `Hồ sơ: ${name}` })).toBeVisible();
+  await page.goto('/settings/');
+  await card
+    .locator('.profiles-card__row', { hasText: 'Người học' })
+    .getByRole('button', { name: 'Dùng hồ sơ này' })
+    .click();
+  await row.getByRole('button', { name: 'Xóa' }).click();
+  await row.getByRole('button', { name: 'Xóa hồ sơ' }).click();
+  await expect(row).toHaveCount(0);
+});
+
 test('the shell shows a bottom tab bar on phones and a header nav on desktop', async ({
   page,
 }, info) => {

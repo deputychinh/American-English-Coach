@@ -15,6 +15,7 @@ import { StorageKey } from '@/enums/storage-key.enum';
 import { Theme } from '@/enums/theme.enum';
 import { getHealth } from '@/features/health/services/health.service';
 import { clearCalibration } from '@/features/mirror/services/calibration.service';
+import { ProfilesCard } from '@/features/settings/components/ProfilesCard';
 import {
   guessDeviceName,
   pairDevice,
@@ -118,6 +119,8 @@ export const SettingsScreen = (): ReactElement => {
           onChange={setTheme}
         />
       </Card>
+
+      <ProfilesCard />
 
       <Card as="section" aria-labelledby="settings-practice">
         <SectionHeader id="settings-practice" title={copy.settings.practice} />

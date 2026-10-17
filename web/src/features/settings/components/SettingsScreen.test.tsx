@@ -18,6 +18,10 @@ const health = {
   tutor_model: 'gpt-6-luna',
 };
 
+const profiles = [
+  { id: 'default', name: 'Người học', created_at: '2026-10-01T00:00:00Z', runs: 3 },
+];
+
 const renderScreen = (): ReactElement => (
   <ToastProvider>
     <SettingsScreen />
@@ -32,7 +36,10 @@ describe('SettingsScreen', () => {
 
   it('switches the theme, saves the server address and reports the check', async () => {
     const user = userEvent.setup();
-    mockApi({ '/api/v1/health': () => jsonResponse(health) });
+    mockApi({
+      '/api/v1/health': () => jsonResponse(health),
+      '/api/v1/profiles': () => jsonResponse(profiles),
+    });
     render(renderScreen());
     await user.click(screen.getByRole('tab', { name: 'Tối' }));
     expect(document.documentElement.dataset.theme).toBe('dark');
@@ -48,6 +55,7 @@ describe('SettingsScreen', () => {
     const user = userEvent.setup();
     const fetchMock = mockApi({
       '/api/v1/pair': () => jsonResponse({ token: 'tok-abc', device_name: 'iPhone' }),
+      '/api/v1/profiles': () => jsonResponse(profiles),
     });
     render(renderScreen());
     const pair = screen.getByRole('button', { name: 'Ghép nối' });
@@ -56,7 +64,10 @@ describe('SettingsScreen', () => {
     expect(pair).toBeEnabled();
     await user.click(pair);
     await waitFor(() => expect(screen.getByText(/Đã ghép nối: iPhone/)).toBeInTheDocument());
-    expect(fetchMock).toHaveBeenCalledTimes(1);
+    const pairCalls = fetchMock.mock.calls.filter((call: unknown[]) =>
+      new URL((call[0] as Request).url).pathname.endsWith('/pair'),
+    );
+    expect(pairCalls).toHaveLength(1);
     expect(JSON.parse(localStorage.getItem(StorageKey.DeviceToken) ?? '""')).toBe('tok-abc');
     await user.click(screen.getByRole('button', { name: 'Hủy ghép nối' }));
     expect(localStorage.getItem(StorageKey.DeviceToken)).toBeNull();
@@ -67,6 +78,7 @@ describe('SettingsScreen', () => {
     const user = userEvent.setup();
     mockApi({
       '/api/v1/pair': () => jsonResponse({ detail: 'bad', code: 'UNAUTHORIZED' }, 401),
+      '/api/v1/profiles': () => jsonResponse(profiles),
     });
     render(renderScreen());
     await user.type(screen.getByLabelText('Mã ghép nối (6 số)'), '000000');
@@ -76,7 +88,7 @@ describe('SettingsScreen', () => {
 
   it('clears on-device data', async () => {
     const user = userEvent.setup();
-    mockApi({});
+    mockApi({ '/api/v1/profiles': () => jsonResponse(profiles) });
     localStorage.setItem(StorageKey.Calibration, JSON.stringify({ aperture: { min: 0, max: 1 } }));
     render(renderScreen());
     await user.click(screen.getByRole('button', { name: 'Xóa dữ liệu trên thiết bị này' }));

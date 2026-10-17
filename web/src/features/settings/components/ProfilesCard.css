@@ -1,0 +1,92 @@
+.profiles-card__list {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.profiles-card__row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-3);
+  align-items: center;
+  justify-content: space-between;
+  min-block-size: var(--size-touch-target);
+  padding-block: var(--space-3);
+  border-block-end: 1px solid var(--color-border);
+}
+
+.profiles-card__row.is-active {
+  border-inline-start: 3px solid var(--color-primary);
+  padding-inline-start: var(--space-3);
+}
+
+.profiles-card__text {
+  display: flex;
+  flex: 1 1 200px;
+  flex-direction: column;
+  gap: var(--space-0-5);
+}
+
+.profiles-card__name {
+  display: inline-flex;
+  gap: var(--space-2);
+  align-items: center;
+  font-weight: var(--weight-semibold);
+}
+
+.profiles-card__meta,
+.profiles-card__status {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+.profiles-card__actions,
+.profiles-card__edit,
+.profiles-card__new,
+.profiles-card__confirm {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  align-items: center;
+}
+
+.profiles-card__confirm {
+  flex-basis: 100%;
+  padding: var(--space-3);
+  font-size: var(--text-sm);
+  background: var(--color-danger-subtle);
+  border-radius: var(--radius-sm);
+}
+
+.profiles-card__new {
+  align-items: flex-end;
+  margin-block-start: var(--space-4);
+}
+
+.profiles-card__field {
+  display: flex;
+  flex: 1 1 200px;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.profiles-card__label {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+}
+
+.profiles-card__input {
+  min-block-size: var(--size-touch-target);
+  padding: var(--padding-control-sm);
+  font: inherit;
+  color: var(--color-text);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-control);
+  border-radius: var(--radius-sm);
+}
+
+.profiles-card__import {
+  cursor: pointer;
+}

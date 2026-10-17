@@ -6,4 +6,8 @@ export enum StorageKey {
   ApiBaseUrl = 'coach.apiBaseUrl',
   DeviceToken = 'coach.deviceToken',
   DeviceName = 'coach.deviceName',
+  ProfileId = 'coach.profileId',
+  ProfileName = 'coach.profileName',
+  DailyGoal = 'coach.dailyGoal',
+  ReminderTime = 'coach.reminderTime',
 }

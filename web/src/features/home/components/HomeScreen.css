@@ -34,6 +34,10 @@
   color: var(--color-text-muted);
 }
 
+.home-screen__profile {
+  text-decoration: none;
+}
+
 .home-screen__cta {
   display: flex;
   flex-wrap: wrap;
