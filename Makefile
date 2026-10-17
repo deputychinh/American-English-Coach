@@ -42,7 +42,7 @@ web: ## Run the web app in development on :$(WEB_PORT) (proxies /api to the API)
 	$(WEB) npm run dev
 
 build-web: ## Build the static web export into web/out (served by the API in production mode)
-	$(WEB) npm run build
+	$(WEB) NEXT_PUBLIC_NATIVE_API_BASE_URL="$(NATIVE_API)" npm run build
 
 serve: build-web ## Production mode on one port: API + static web on :$(API_PORT)
 	$(BACKEND) COACH_WEB_DIST_DIR=../web/out uv run uvicorn app.main:app --host 127.0.0.1 --port $(API_PORT)
@@ -83,6 +83,8 @@ openapi: ## Export backend/openapi.json and regenerate the web API types
 # --- iOS (Capacitor shell around the static web export) ---------------------
 XCODE := DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer
 IOS_SIM ?= iPhone 17
+# Scoring-server address baked into the web build as the iOS default (empty = Mac loopback, for the simulator).
+NATIVE_API ?=
 
 ios-assets: ## Render the app icon and splash from public/icons/icon.svg into the Xcode asset catalog
 	$(WEB) node scripts/render-app-assets.mjs && npx capacitor-assets generate --ios --iconBackgroundColor '#C2410C' --splashBackgroundColor '#F5F5F4' --splashBackgroundColorDark '#1C1917'
@@ -99,7 +101,9 @@ ios-run: ios-build ## Boot the simulator, install and launch the app
 	$(XCODE) xcrun simctl install booted web/ios/App/build/Build/Products/Debug-iphonesimulator/App.app
 	$(XCODE) xcrun simctl launch booted com.deputychinh.americanenglishcoach
 
-ios-device: ios-sync ## Build signed for a real iPhone and install + launch it (IOS_DEVICE=<name or UDID>; sign in to Xcode → Settings → Accounts first)
+ios-device: ## Build signed for a real iPhone with this Mac's LAN address baked in, install and launch (IOS_DEVICE=<name or UDID>)
+	@echo "Máy chấm mặc định trong app: http://$$(ipconfig getifaddr en0):8765 (đổi được trong Cài đặt)"
+	$(MAKE) --no-print-directory ios-sync NATIVE_API=http://$$(ipconfig getifaddr en0):8765
 	cd web/ios/App && $(XCODE) xcodebuild -project App.xcodeproj -scheme App -configuration Debug -sdk iphoneos -destination 'generic/platform=iOS' -derivedDataPath build-device -allowProvisioningUpdates build | tail -3
 	$(XCODE) xcrun devicectl device install app --device "$(IOS_DEVICE)" "$(CURDIR)/web/ios/App/build-device/Build/Products/Debug-iphoneos/App.app"
 	$(XCODE) xcrun devicectl device process launch --device "$(IOS_DEVICE)" com.deputychinh.americanenglishcoach

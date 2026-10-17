@@ -30,6 +30,8 @@ xcrun devicectl list devices                              # lấy tên hoặc UD
 make ios-device IOS_DEVICE=00008030-000178683C09802E      # build ký, cài và mở app trên máy
 ```
 
+`make ios-device` nhúng sẵn địa chỉ LAN của Mac lúc build làm máy chấm mặc định của app (biến `NATIVE_API`, đọc qua `NEXT_PUBLIC_NATIVE_API_BASE_URL`), nên trên điện thoại chỉ còn bước Ghép nối; đổi mạng thì build lại hoặc sửa địa chỉ trong Cài đặt → Máy chấm.
+
 Trong app: **Cài đặt → Địa chỉ máy chấm** nhập `192.168.40.188:8765` → "Lưu và kiểm tra", rồi **Ghép nối**: nhập mã 6 số mà `make api-lan` in ra trong log (`pairing code for phones on this network`). App nhận token và gửi kèm mọi yêu cầu (`X-Coach-Token`); máy Mac dùng trực tiếp không cần ghép nối. Địa chỉ được lưu trên máy; mọi lời gọi `/api/v1/*` (chấm, giọng mẫu, gia sư AI) đi tới máy Mac. Lần đầu iOS hỏi quyền Camera, Micro và Mạng nội bộ (chuỗi giải thích tiếng Việt trong `Info.plist`).
 
 ## Những gì nằm ở đâu

@@ -1,3 +1,4 @@
+import { env } from '@/config/env';
 import {
   DEFAULT_PROFILE_ID,
   DEVICE_TOKEN_HEADER,
@@ -25,13 +26,14 @@ export const resolveApiBaseUrl = (buildTimeBaseUrl: string): string =>
 
 /**
  * Saved server address (normalised). Inside the native shell nothing is same-origin, so the
- * default points at the Mac's loopback, which is what the iOS simulator sees; a real iPhone
- * needs the Mac's LAN address typed in Settings.
+ * default is the address baked in at build time (`make ios-device` uses the Mac's LAN address)
+ * and otherwise the Mac's loopback, which is what the iOS simulator sees.
  */
 export const storedApiBaseUrl = (): string => {
   const stored = normaliseBaseUrl(readStorage<string>(StorageKey.ApiBaseUrl, ''));
   if (stored) return stored;
-  return isNativeShell() ? NATIVE_DEFAULT_API_BASE_URL : '';
+  if (!isNativeShell()) return '';
+  return normaliseBaseUrl(env.nativeApiBaseUrl) || NATIVE_DEFAULT_API_BASE_URL;
 };
 
 /** Sends an `/api/...` request to the saved server instead of the page's own origin. */
