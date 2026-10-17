@@ -15,12 +15,12 @@ Nguyên tắc không đổi: local-first (video không rời thiết bị), ba m
 
 ## Giai đoạn B — Hoàn thiện trải nghiệm ứng dụng
 
-| #   | Trạng thái | Hạng mục                      | Tiêu chí nghiệm thu                                                                                                                           |
-| --- | ---------- | ----------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| B1  | ☑          | Onboarding lần đầu            | 3 bước: giới thiệu + quyền camera/mic, chọn/tạo hồ sơ, hiệu chỉnh 20 giây; chỉ hiện một lần; bỏ qua được; e2e                                 |
-| B2  | ☑          | Song ngữ hoàn chỉnh (AEC-015) | `en.ts` đủ khóa (kiểm tra bằng test so khóa với `vi`); đổi ngôn ngữ trong Cài đặt, nhớ lựa chọn; không còn chuỗi cứng trong component/service |
-| B3  | ☑          | Tiếp cận (a11y) và chữ lớn    | Kiểm tra VoiceOver/axe trên 7 trang; hỗ trợ Dynamic Type (rem-based, không cắt chữ ở 200 %); báo cáo lưu `docs/lighthouse/`                   |
-| B4  | ☑          | Ngoại tuyến có kiểm soát      | Service worker cache vỏ ứng dụng + nội dung bài; trạng thái "không có máy chấm" vẫn xem bài, gương và lịch sử đã tải; test                    |
+| #   | Trạng thái | Hạng mục                      | Tiêu chí nghiệm thu                                                                                                                                     |
+| --- | ---------- | ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| B1  | ☑          | Onboarding lần đầu            | 3 bước: giới thiệu + quyền camera/mic, chọn/tạo hồ sơ, hiệu chỉnh 20 giây; chỉ hiện một lần; bỏ qua được; e2e                                           |
+| B2  | ☑          | Song ngữ hoàn chỉnh (AEC-015) | `en.ts` đủ khóa (kiểm tra bằng test so khóa với `vi`); đổi ngôn ngữ trong Cài đặt, nhớ lựa chọn; không còn chuỗi cứng trong component/service           |
+| B3  | ☑          | Tiếp cận (a11y) và chữ lớn    | Kiểm tra VoiceOver/axe trên 7 trang; hỗ trợ Dynamic Type (rem-based, đo 200 % trên 11 trang: không tràn, không cắt chữ); báo cáo lưu `docs/lighthouse/` |
+| B4  | ☑          | Ngoại tuyến có kiểm soát      | Service worker cache vỏ ứng dụng + nội dung bài; trạng thái "không có máy chấm" vẫn xem bài, gương và lịch sử đã tải; test                              |
 
 ## Giai đoạn C — Chất lượng chấm và nội dung
 

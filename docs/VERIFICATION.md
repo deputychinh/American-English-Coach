@@ -6,6 +6,7 @@
 | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Service worker    | `npm run build` đóng dấu build id + **73 asset** `_next/static` vào `out/sw.js`; 14 unit test (`node:vm` + CacheStorage giả): precache chịu lỗi lẻ, dọn cache build cũ, điều hướng bỏ query, API theo hồ sơ, `206` theo `Range` |
 | Playwright như CI | **50/50 pass** desktop + mobile: thêm `offline.spec.ts` (làm ấm 5 màn, `setOffline(true)`, mở lại bảng 44 âm, tiến độ, gương, khóa học, trang chủ với banner "Bạn vẫn xem được bài học", route lạ về `/`)                       |
+| Chữ lớn 200 %     | 11 trang ở khổ 390 px với `html { font-size: 200% }`: `scrollWidth` = 390 trên mọi trang, không phần tử nào vượt mép phải, không chữ bị cắt (chỉ `.visually-hidden` dành cho trình đọc màn hình)                                |
 | `make ci`         | ruff/mypy/ESLint/Stylelint/tsc/Prettier sạch; backend **110 test, 98,5 %**; web **99 test / 38 file**                                                                                                                           |
 
 ## Tự động (`make ci`, `main` 2026-10-17 chiều — bản 1.1.0)
