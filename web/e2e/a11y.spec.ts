@@ -11,6 +11,8 @@ const ROUTES = [
   '/calibration/',
   '/progress/',
   '/settings/',
+  '/course/',
+  '/privacy/',
 ];
 
 test.beforeEach(async ({ page }) => {

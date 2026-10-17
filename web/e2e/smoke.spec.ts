@@ -122,6 +122,18 @@ test('settings has theme, server check, pairing and data sections', async ({ pag
   await page.getByRole('tab', { name: 'Sáng' }).click();
 });
 
+test('the course lists 14 days with the current one open', async ({ page }, info) => {
+  await page.goto('/course/');
+  await expect(page.getByRole('heading', { name: /Khóa 14 ngày/ })).toBeVisible();
+  await expect(page.locator('.course-screen__day')).toHaveCount(14);
+  await expect(page.locator('details[open]')).toHaveCount(1);
+  await expect(page.locator('details[open] .course-screen__item').first()).toHaveAttribute(
+    'href',
+    /practice/,
+  );
+  await shot(page, 'course', info.project.name);
+});
+
 test('the interface switches to English and back from settings', async ({ page }) => {
   await page.goto('/settings/');
   await page.getByRole('tab', { name: 'English' }).click();

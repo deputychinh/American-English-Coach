@@ -1,0 +1,20 @@
+.privacy-screen {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-stack);
+  max-inline-size: var(--container-narrow);
+}
+
+.privacy-screen__card {
+  gap: var(--space-3);
+}
+
+.privacy-screen__heading {
+  font-size: var(--text-lg);
+}
+
+.privacy-screen__text {
+  font-size: var(--text-sm);
+  line-height: var(--leading-relaxed, 1.6);
+  color: var(--color-text);
+}

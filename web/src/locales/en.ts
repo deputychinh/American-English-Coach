@@ -1,5 +1,6 @@
 import type { Copy } from '@/interfaces/copy.interface';
 
+import { enCourse } from './en-course';
 import { enPractice } from './en-practice';
 import { enSettings } from './en-settings';
 
@@ -51,6 +52,8 @@ export const en: Copy = {
     progressHint: 'Machine-measured results per sound',
     sounds: 'Practise by sound',
     soundsHint: 'All 44 sounds, one deck each',
+    course: '14-day course',
+    courseHint: 'A ready-made path for Vietnamese learners, 10–15 min/day',
     heroCta: 'Practise now',
     heroSecondary: 'Open the mouth mirror',
     lastSession: 'Last session',
@@ -63,6 +66,7 @@ export const en: Copy = {
     changeProfile: 'Switch profile',
     privacy:
       'Everything runs on your machine. Video never leaves the browser; only mouth measurements go to the local scoring server.',
+    privacyLink: 'Privacy policy',
   },
   sounds: {
     title: '44-sound chart',
@@ -95,6 +99,9 @@ export const en: Copy = {
     chartSays: (symbol: string, arpabet: string): string =>
       `Chart symbol /${symbol}/ · ARPAbet ${arpabet}`,
   },
+  privacy: enCourse.privacy,
+  course: enCourse.course,
+  onboarding: enCourse.onboarding,
   plan: enSettings.plan,
   practice: enPractice.practice,
   verdict: enPractice.verdict,
@@ -137,41 +144,6 @@ export const en: Copy = {
     insideTarget: 'inside the target range',
     lowConfidence:
       'For this sound the camera only follows lips and jaw; the tongue position inside is judged by the audio scorer.',
-  },
-  onboarding: {
-    title: 'Getting started with American English Coach',
-    lead: 'Three steps, about a minute: permissions, your profile and the mouth calibration.',
-    stepsAria: 'Getting-started steps',
-    steps: { intro: 'Permissions', profile: 'Profile', calibrate: 'Calibration' },
-    introTitle: 'What the app needs and why',
-    introMic:
-      'The microphone records you reading words and sentences; every sound is scored on your computer.',
-    introCamera: 'The camera follows lips, jaw, and visible teeth and tongue in real time.',
-    introPrivacy:
-      'Video never leaves the device. Only mouth measurements and recordings go to the local scoring server.',
-    allow: 'Allow microphone and camera',
-    asking: 'Asking for permission…',
-    later: 'Later',
-    next: 'Continue',
-    granted: 'allowed',
-    denied: 'denied',
-    missing: 'no device',
-    micStatus: (state: string): string => `Microphone: ${state}`,
-    cameraStatus: (state: string): string => `Camera: ${state}`,
-    profileTitle: 'Who is practising?',
-    profileLead:
-      'One profile per person keeps progress, weekly plan and calibration apart. You can change it in Settings.',
-    profileName: 'Your name',
-    profilePlaceholder: 'For example: Minh',
-    createProfile: 'Create profile and continue',
-    useDefault: 'Use the default profile',
-    profileOffline: 'The scoring server is not reachable, so the profile was not created.',
-    skipProfile: 'Skip this step',
-    calibrateTitle: 'Mouth calibration (20 seconds)',
-    calibrateLead:
-      'The mirror and the mouth feedback need to learn your mouth once. Do it now or when you first open the mirror.',
-    calibrateNow: 'Calibrate now',
-    finish: 'Later, go to home',
   },
   calibration: {
     title: 'Mouth calibration',

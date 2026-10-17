@@ -1,3 +1,4 @@
+import { viCourse } from './vi-course';
 import { viPractice } from './vi-practice';
 import { viSettings } from './vi-settings';
 
@@ -45,6 +46,8 @@ export const vi = {
     progressHint: 'Kết quả do máy đo theo từng âm',
     sounds: 'Luyện theo âm',
     soundsHint: 'Đủ 44 âm, mỗi âm một bộ bài',
+    course: 'Khóa 14 ngày',
+    courseHint: 'Lộ trình có sẵn cho người Việt, 10–15 phút/ngày',
     heroCta: 'Luyện ngay',
     heroSecondary: 'Soi gương khẩu hình',
     lastSession: 'Lần luyện gần nhất',
@@ -57,6 +60,7 @@ export const vi = {
     changeProfile: 'Đổi hồ sơ',
     privacy:
       'Mọi xử lý chạy trên máy của bạn. Video không rời trình duyệt; chỉ các số đo khẩu hình được gửi tới máy chấm local.',
+    privacyLink: 'Chính sách quyền riêng tư',
   },
   sounds: {
     title: 'Bảng 44 âm',
@@ -89,6 +93,9 @@ export const vi = {
     chartSays: (symbol: string, arpabet: string): string =>
       `Bảng 44 ghi /${symbol}/ · ARPAbet ${arpabet}`,
   },
+  privacy: viCourse.privacy,
+  course: viCourse.course,
+  onboarding: viCourse.onboarding,
   plan: viSettings.plan,
   practice: viPractice.practice,
   verdict: viPractice.verdict,
@@ -131,40 +138,6 @@ export const vi = {
     insideTarget: 'trong vùng mục tiêu',
     lowConfidence:
       'Với âm này camera chỉ theo dõi được môi và hàm; vị trí lưỡi bên trong do máy chấm âm quyết định.',
-  },
-  onboarding: {
-    title: 'Bắt đầu với American English Coach',
-    lead: 'Ba bước, khoảng một phút: quyền truy cập, hồ sơ của bạn và hiệu chỉnh khẩu hình.',
-    stepsAria: 'Các bước bắt đầu',
-    steps: { intro: 'Quyền truy cập', profile: 'Hồ sơ', calibrate: 'Hiệu chỉnh' },
-    introTitle: 'Ứng dụng cần gì và vì sao',
-    introMic: 'Micro để thu âm bạn đọc từ và câu; máy chấm từng âm trên máy tính của bạn.',
-    introCamera: 'Camera để soi môi, hàm, răng và lưỡi lộ ra theo thời gian thực.',
-    introPrivacy:
-      'Video không rời thiết bị. Chỉ các số đo khẩu hình và bản ghi âm được gửi tới máy chấm local.',
-    allow: 'Cho phép micro và camera',
-    asking: 'Đang hỏi quyền…',
-    later: 'Để sau',
-    next: 'Tiếp tục',
-    granted: 'đã cho phép',
-    denied: 'bị từ chối',
-    missing: 'không có thiết bị',
-    micStatus: (state: string): string => `Micro: ${state}`,
-    cameraStatus: (state: string): string => `Camera: ${state}`,
-    profileTitle: 'Ai sẽ luyện?',
-    profileLead:
-      'Mỗi người một hồ sơ để tiến độ, kế hoạch tuần và hiệu chỉnh không lẫn nhau. Có thể đổi trong Cài đặt.',
-    profileName: 'Tên của bạn',
-    profilePlaceholder: 'Ví dụ: Minh',
-    createProfile: 'Tạo hồ sơ và tiếp tục',
-    useDefault: 'Dùng hồ sơ mặc định',
-    profileOffline: 'Chưa kết nối được máy chấm nên chưa tạo được hồ sơ.',
-    skipProfile: 'Bỏ qua bước này',
-    calibrateTitle: 'Hiệu chỉnh khẩu hình (20 giây)',
-    calibrateLead:
-      'Gương và nhận xét khẩu hình cần học miệng của bạn một lần. Bạn có thể làm ngay hoặc khi mở gương lần đầu.',
-    calibrateNow: 'Hiệu chỉnh ngay',
-    finish: 'Để sau, vào trang chủ',
   },
   calibration: {
     title: 'Hiệu chỉnh khẩu hình',

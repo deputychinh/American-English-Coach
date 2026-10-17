@@ -60,6 +60,7 @@ Tương phản (WCAG 2.2): chữ ink-900 trên ink-100 16:1; chữ phụ ink-600
 
 - **Bắt đầu** (`/welcome/`, chỉ lần đầu; trang chủ chuyển hướng khi chưa có cờ `coach.onboarded`): stepper 3 bước (quyền micro/camera với lý do và quyền riêng tư, hồ sơ, hiệu chỉnh), mỗi bước một `Card`, luôn có đường "Để sau"; xem lại từ Cài đặt → Về ứng dụng.
 - **Trang chủ**: hero (CTA "Luyện ngay" + "Soi gương", huy hiệu hồ sơ đang dùng), 3 ô `Stat`, `PlanCard` "Hôm nay luyện gì" (tiến độ mục tiêu ngày, chuỗi ngày liên tiếp, `WeekStrip`, 3 âm trọng tâm có lý do Yếu/Ôn lại/Mới), lưới bắt đầu nhanh có icon, "Lần luyện gần nhất".
+- **Khóa 14 ngày** (`/course/`): 2 ô `Stat` (ngày đã xong, ngày hiện tại), danh sách 14 thẻ `details/summary` (ngày hiện tại mở sẵn, huy hiệu số/✓, phút, số mục), mục là liên kết tới đúng bài (`sound=`/`item=`) kèm số lần thu.
 - **Bảng 44 âm**: ô tìm kiếm + `Tabs` lọc nhóm, lưới thẻ với `.ipa-pill`, panel chi tiết bên phải ở ≥ 1024 px.
 - **Luyện tập**: tab "Theo âm" / "Cặp âm & câu"; phiên luyện = thẻ đề bài → camera + mục tiêu khẩu hình (cạnh nhau trên desktop, xếp dọc trên mobile) → **thanh thu âm dính đáy** trên mobile với vạch mức âm → thẻ kết quả với tổng kết trước, chip theo từng âm, gợi ý ngữ điệu, gia sư AI.
 - **Gương**: camera toàn chiều rộng, điều khiển và thanh đo bên dưới, huy hiệu mức tin cậy, chuyển động đầu–cuối cho nguyên âm đôi.

@@ -22,6 +22,7 @@ import { formatDateTime, formatPercent } from '@/utils/format.util';
 import './HomeScreen.css';
 
 const QUICK = [
+  { key: 'course', href: '/course', icon: IconName.Sparkles },
   { key: 'sounds', href: '/practice', icon: IconName.Practice },
   { key: 'pairs', href: '/practice', hash: 'items', icon: IconName.Sounds },
   { key: 'chart', href: '/sounds', icon: IconName.Info },
@@ -44,6 +45,7 @@ export const HomeScreen = (): ReactElement => {
   );
   const last = progress.data?.recent[0] ?? null;
   const quickCopy: Record<(typeof QUICK)[number]['key'], { title: string; hint: string }> = {
+    course: { title: copy.home.course, hint: copy.home.courseHint },
     sounds: { title: copy.home.sounds, hint: copy.home.soundsHint },
     pairs: { title: copy.home.pairs, hint: copy.home.pairsHint },
     chart: { title: copy.home.chart, hint: copy.home.chartHint },

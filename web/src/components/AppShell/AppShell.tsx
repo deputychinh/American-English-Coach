@@ -140,7 +140,9 @@ export const AppShell = ({ children }: AppShellProps): ReactElement => {
         {children}
       </main>
       <footer className="app-shell__footer container">
-        <p>{copy.home.privacy}</p>
+        <p>
+          {copy.home.privacy} <Link href="/privacy">{copy.home.privacyLink}</Link>
+        </p>
       </footer>
       <nav className="app-shell__tabbar" aria-label={copy.nav.ariaTabs}>
         {NAV_ITEMS.map((item) => (
