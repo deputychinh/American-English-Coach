@@ -60,7 +60,7 @@ Cập nhật 2026-10-17: `feat/av-mvp` đã merge fast-forward vào `main`; mọ
 ## Lộ trình hoàn thiện (2026-10-17 chiều, `docs/ROADMAP.md`)
 
 - ☑ A1 hồ sơ nhiều người học · ☑ A2 kế hoạch tuần + mục tiêu ngày + nhắc luyện iOS · ☑ A3 mốc thời gian UTC · ☑ A4 backlog.
-- ☑ B1 onboarding `/welcome/` · ☑ B2 song ngữ Việt/Anh · ☑ B3 axe-core 0 vi phạm serious/critical trên 11 trang (Dynamic Type: chữ theo rem, chưa đo tay 200 %) · ☑ B4 ngoại tuyến có kiểm soát (service worker phiên bản theo build id, precache toàn bộ vỏ app, cache API đọc-only theo hồ sơ; 14 unit test + e2e `offline.spec.ts`).
+- ☑ B1 onboarding `/welcome/` · ☑ B2 song ngữ Việt/Anh · ☑ B3 axe-core 0 vi phạm serious/critical trên 11 trang (chữ 200 %: 11 trang ở 390 px không tràn ngang, không cắt chữ — đo bằng Chromium headless) · ☑ B4 ngoại tuyến có kiểm soát (service worker phiên bản theo build id, precache toàn bộ vỏ app, cache API đọc-only theo hồ sơ; 14 unit test + e2e `offline.spec.ts`).
 - ☑ C1 công cụ pilot (`make pilot-export/report`, `docs/pilot.md`) — cần người Việt thu âm và người chấm · ☑ C2 thư viện giọng người thật (chỗ cắm + manifest giấy phép; chưa có clip) · ☑ C3 khóa 14 ngày.
 - ☑ D1 HTTPS từ xa (`docs/remote-access.md`) · ☑ D2 hồ sơ phát hành (`docs/release/`, trang `/privacy/`) — ký TestFlight cần Team · ☑ D3 Docker đã kiểm chứng (3,97 GB) · ☑ D4 CHANGELOG + 1.1.0 (tag sau khi CI xanh).
 - Việc của chủ dự án: thu hồi hai API key đã dán trong chat; chạy trên iPhone thật; pilot người Việt; clip giọng có giấy phép; Apple Team.
