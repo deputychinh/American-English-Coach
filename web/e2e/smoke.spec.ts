@@ -10,7 +10,10 @@ const shot = async (page: Page, name: string, project: string): Promise<void> =>
   try {
     await page.screenshot({ path: `../docs/screenshots/${name}-${project}.png`, fullPage: true });
   } catch (error) {
-    console.warn(`screenshot ${name}-${project} skipped: ${String(error)}`);
+    test.info().annotations.push({
+      type: 'screenshot-skipped',
+      description: `${name}-${project}: ${String(error)}`,
+    });
   }
 };
 
