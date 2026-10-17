@@ -1,0 +1,416 @@
+{
+  "schema": "coach.curriculum/1",
+  "levels": [
+    {
+      "id": "L1",
+      "title_vi": "Nền tảng",
+      "title_en": "Foundation",
+      "goal_vi": "Nghe ra và phát được từng âm trong từ, không rụng âm cuối, biết âm tiết nào mạnh.",
+      "units": [
+        {
+          "id": "u01",
+          "title_vi": "Âm tiết và trọng âm từ hai âm tiết",
+          "title_en": "Syllables and two-syllable stress",
+          "goal_vi": "Đếm được âm tiết và làm âm tiết mạnh dài hơn, to hơn, cao hơn.",
+          "vn_error_vi": "Mỗi âm tiết tiếng Việt có thanh riêng nên các âm tiết hay được đọc đều nhau; tiếng Anh cần một âm tiết nổi hẳn.",
+          "minutes": 12,
+          "days": 4,
+          "focus_sounds": ["v12"],
+          "steps": [
+            {
+              "kind": "describe",
+              "sounds": ["v12"],
+              "notes_vi": "Đặt tay dưới cằm: hàm hạ một lần cho mỗi âm tiết. Âm tiết mạnh dài, to và cao hơn; các âm tiết còn lại thường về schwa /ə/."
+            },
+            {
+              "kind": "discriminate",
+              "pairs": [],
+              "stress": [
+                {
+                  "word": "table",
+                  "syllables": ["TA", "ble"],
+                  "stressed": 0
+                },
+                {
+                  "word": "about",
+                  "syllables": ["a", "BOUT"],
+                  "stressed": 1
+                },
+                {
+                  "word": "happy",
+                  "syllables": ["HAP", "py"],
+                  "stressed": 0
+                },
+                {
+                  "word": "begin",
+                  "syllables": ["be", "GIN"],
+                  "stressed": 1
+                },
+                {
+                  "word": "doctor",
+                  "syllables": ["DOC", "tor"],
+                  "stressed": 0
+                },
+                {
+                  "word": "today",
+                  "syllables": ["to", "DAY"],
+                  "stressed": 1
+                }
+              ],
+              "focus": [
+                {
+                  "sentence": "s4",
+                  "word": "top"
+                }
+              ]
+            },
+            {
+              "kind": "controlled",
+              "items": [
+                {
+                  "kind": "sound",
+                  "id": "v12"
+                },
+                {
+                  "kind": "sentence",
+                  "id": "s4"
+                }
+              ]
+            },
+            {
+              "kind": "guided",
+              "sentences": ["s4"]
+            },
+            {
+              "kind": "communicate",
+              "scenario_vi": "Giới thiệu bản thân bằng ba câu, mỗi câu có một từ hai âm tiết.",
+              "target_words": ["today", "happy", "about", "begin"]
+            }
+          ]
+        },
+        {
+          "id": "u02",
+          "title_vi": "Phụ âm cuối /p/ /t/ /k/",
+          "title_en": "Final /p/ /t/ /k/",
+          "goal_vi": "Không nuốt âm cuối: khép môi, chạm lưỡi, nâng lưỡi sau dù không bật hơi.",
+          "vn_error_vi": "Âm cuối /p t k/ tiếng Việt không bật và thường bị bỏ khi nói tiếng Anh; cap, cat, back nghe như nhau.",
+          "minutes": 12,
+          "days": 5,
+          "focus_sounds": ["c01", "c03", "c05"],
+          "steps": [
+            {
+              "kind": "describe",
+              "sounds": ["c01", "c03", "c05"],
+              "notes_vi": "Ba âm này kết thúc từ bằng một cú chặn hơi: môi (p), đầu lưỡi (t), lưỡi sau (k). Chặn đủ rồi mới thả."
+            },
+            {
+              "kind": "discriminate",
+              "pairs": ["cap-cat", "stop-stuff"],
+              "stress": [],
+              "focus": [
+                {
+                  "sentence": "s4",
+                  "word": "stop"
+                }
+              ]
+            },
+            {
+              "kind": "controlled",
+              "items": [
+                {
+                  "kind": "sound",
+                  "id": "c01"
+                },
+                {
+                  "kind": "sound",
+                  "id": "c03"
+                },
+                {
+                  "kind": "sound",
+                  "id": "c05"
+                },
+                {
+                  "kind": "pair",
+                  "id": "cap-cat"
+                },
+                {
+                  "kind": "pair",
+                  "id": "stop-stuff"
+                },
+                {
+                  "kind": "sentence",
+                  "id": "s4"
+                }
+              ]
+            },
+            {
+              "kind": "guided",
+              "sentences": ["s4", "s10"]
+            },
+            {
+              "kind": "communicate",
+              "scenario_vi": "Kể ba đồ vật trên bàn làm việc của bạn, dùng từ kết thúc bằng /p/ /t/ /k/.",
+              "target_words": ["cup", "desk", "book", "laptop"]
+            }
+          ]
+        },
+        {
+          "id": "u03",
+          "title_vi": "Âm /θ/ và /ð/",
+          "title_en": "The two TH sounds",
+          "goal_vi": "Đưa đầu lưỡi ra giữa hai hàm răng cho cả hai âm; phân biệt với /t d s z f/.",
+          "vn_error_vi": "Tiếng Việt không có /θ ð/: think thành \"sink\" hoặc \"tink\", this thành \"dis\".",
+          "minutes": 12,
+          "days": 5,
+          "focus_sounds": ["c09", "c10"],
+          "steps": [
+            {
+              "kind": "describe",
+              "sounds": ["c09", "c10"],
+              "notes_vi": "Đầu lưỡi lộ ra giữa hai hàm răng, hơi đi qua khe. /θ/ không rung, /ð/ rung cổ họng."
+            },
+            {
+              "kind": "discriminate",
+              "pairs": ["think-sink", "think-tink", "this-dis"],
+              "stress": [],
+              "focus": [
+                {
+                  "sentence": "s1",
+                  "word": "third"
+                }
+              ]
+            },
+            {
+              "kind": "controlled",
+              "items": [
+                {
+                  "kind": "sound",
+                  "id": "c09"
+                },
+                {
+                  "kind": "sound",
+                  "id": "c10"
+                },
+                {
+                  "kind": "pair",
+                  "id": "think-sink"
+                },
+                {
+                  "kind": "pair",
+                  "id": "this-dis"
+                },
+                {
+                  "kind": "sentence",
+                  "id": "s1"
+                }
+              ]
+            },
+            {
+              "kind": "guided",
+              "sentences": ["s1", "s9"]
+            },
+            {
+              "kind": "communicate",
+              "scenario_vi": "Kể về gia đình bạn bằng các từ có TH.",
+              "target_words": ["mother", "father", "brother", "three", "birthday"]
+            }
+          ]
+        },
+        {
+          "id": "u04",
+          "title_vi": "/ɪ–iː/ và /ʊ–uː/",
+          "title_en": "Short and long high vowels",
+          "goal_vi": "Nghe ra và nói đúng hai cặp nguyên âm cao; khác nhau ở độ căng, không chỉ độ dài.",
+          "vn_error_vi": "Cả hai cặp thường bị gộp thành một âm i hoặc u: sit/seat, full/fool lẫn nhau.",
+          "minutes": 12,
+          "days": 5,
+          "focus_sounds": ["v01", "v02", "v08", "v09"],
+          "steps": [
+            {
+              "kind": "describe",
+              "sounds": ["v01", "v02", "v08", "v09"],
+              "notes_vi": "/iː/ và /uː/ căng, môi kéo ngang hoặc chu rõ; /ɪ/ và /ʊ/ thả lỏng, ngắn, miệng mở hơn một chút."
+            },
+            {
+              "kind": "discriminate",
+              "pairs": ["seat-sit", "pool-pull"],
+              "stress": [],
+              "focus": [
+                {
+                  "sentence": "s7",
+                  "word": "sat"
+                }
+              ]
+            },
+            {
+              "kind": "controlled",
+              "items": [
+                {
+                  "kind": "sound",
+                  "id": "v01"
+                },
+                {
+                  "kind": "sound",
+                  "id": "v02"
+                },
+                {
+                  "kind": "sound",
+                  "id": "v08"
+                },
+                {
+                  "kind": "sound",
+                  "id": "v09"
+                },
+                {
+                  "kind": "pair",
+                  "id": "seat-sit"
+                },
+                {
+                  "kind": "pair",
+                  "id": "pool-pull"
+                }
+              ]
+            },
+            {
+              "kind": "guided",
+              "sentences": ["s7"]
+            },
+            {
+              "kind": "communicate",
+              "scenario_vi": "Mô tả một bữa ăn bạn thích.",
+              "target_words": ["eat", "chicken", "soup", "good"]
+            }
+          ]
+        },
+        {
+          "id": "u05",
+          "title_vi": "/æ/ /e/ /ʌ/",
+          "title_en": "Three front and central vowels",
+          "goal_vi": "Mở hàm đúng mức cho từng âm: /æ/ rộng nhất, /e/ vừa, /ʌ/ ngắn và thả lỏng.",
+          "vn_error_vi": "bad, bed, bud nghe giống nhau; /æ/ hay thành /e/ vì hàm không mở đủ.",
+          "minutes": 12,
+          "days": 4,
+          "focus_sounds": ["v03", "v04", "v10"],
+          "steps": [
+            {
+              "kind": "describe",
+              "sounds": ["v03", "v04", "v10"],
+              "notes_vi": "/æ/: hàm mở rộng, môi kéo ngang. /e/: hàm mở vừa. /ʌ/: ngắn, miệng gần như thả lỏng."
+            },
+            {
+              "kind": "discriminate",
+              "pairs": ["bad-bed"],
+              "stress": [],
+              "focus": [
+                {
+                  "sentence": "s8",
+                  "word": "bag"
+                }
+              ]
+            },
+            {
+              "kind": "controlled",
+              "items": [
+                {
+                  "kind": "sound",
+                  "id": "v03"
+                },
+                {
+                  "kind": "sound",
+                  "id": "v04"
+                },
+                {
+                  "kind": "sound",
+                  "id": "v10"
+                },
+                {
+                  "kind": "pair",
+                  "id": "bad-bed"
+                },
+                {
+                  "kind": "sentence",
+                  "id": "s8"
+                }
+              ]
+            },
+            {
+              "kind": "guided",
+              "sentences": ["s8"]
+            },
+            {
+              "kind": "communicate",
+              "scenario_vi": "Kể một ngày vui hoặc tệ của bạn.",
+              "target_words": ["bad", "happy", "lunch", "friend"]
+            }
+          ]
+        },
+        {
+          "id": "u06",
+          "title_vi": "/ʃ ʒ tʃ dʒ/ và đuôi -s",
+          "title_en": "Sh, zh, ch, j and the -s ending",
+          "goal_vi": "Tròn môi cho nhóm /ʃ/, phân biệt /ʃ/–/s/ và /tʃ/–/ʃ/, không bỏ -s/-es cuối.",
+          "vn_error_vi": "she thành \"see\", watch thành \"wash\"; đuôi số nhiều và ngôi ba -s thường bị bỏ.",
+          "minutes": 12,
+          "days": 5,
+          "focus_sounds": ["c13", "c14", "c16", "c17", "c11", "c12"],
+          "steps": [
+            {
+              "kind": "describe",
+              "sounds": ["c13", "c16", "c17", "c11"],
+              "notes_vi": "/ʃ ʒ tʃ dʒ/ đều chu môi và lưỡi lùi hơn /s z/. Đuôi -s đọc /s/ sau âm vô thanh, /z/ sau hữu thanh, /ɪz/ sau âm xuýt."
+            },
+            {
+              "kind": "discriminate",
+              "pairs": ["she-see", "chip-sip", "cats-cat"],
+              "stress": [],
+              "focus": [
+                {
+                  "sentence": "s2",
+                  "word": "she"
+                }
+              ]
+            },
+            {
+              "kind": "controlled",
+              "items": [
+                {
+                  "kind": "sound",
+                  "id": "c13"
+                },
+                {
+                  "kind": "sound",
+                  "id": "c16"
+                },
+                {
+                  "kind": "pair",
+                  "id": "she-see"
+                },
+                {
+                  "kind": "pair",
+                  "id": "chip-sip"
+                },
+                {
+                  "kind": "pair",
+                  "id": "cats-cat"
+                },
+                {
+                  "kind": "sentence",
+                  "id": "s2"
+                }
+              ]
+            },
+            {
+              "kind": "guided",
+              "sentences": ["s2", "s5"]
+            },
+            {
+              "kind": "communicate",
+              "scenario_vi": "Nói về việc nhà hằng ngày với động từ ngôi ba số ít.",
+              "target_words": ["washes", "watches", "dishes", "shoes"]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
