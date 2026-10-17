@@ -1,5 +1,5 @@
 // App-shell cache. Lessons and the face model work offline; /api is network-first (live scoring).
-const VERSION = 'coach-v1';
+const VERSION = 'coach-v2';
 const SHELL = [
   '/',
   '/sounds/',
@@ -7,6 +7,10 @@ const SHELL = [
   '/mirror/',
   '/calibration/',
   '/progress/',
+  '/settings/',
+  '/course/',
+  '/welcome/',
+  '/privacy/',
   '/manifest.webmanifest',
 ];
 
