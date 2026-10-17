@@ -132,6 +132,46 @@ export const CalibrationFlow = (): ReactElement => {
     </div>
   ) : null;
 
+  const panel = (
+    <div className="calibration-flow__panel" aria-live="polite">
+      {ring}
+      {stepIndex < 0 ? (
+        <>
+          <p className="calibration-flow__lead">{copy.calibration.intro}</p>
+          <Button onClick={() => setStepIndex(0)}>{copy.calibration.start}</Button>
+        </>
+      ) : null}
+      {step ? (
+        <>
+          <p className="calibration-flow__muted">{copy.calibration.hold}</p>
+          {isRetryShown || !tracker.isFaceVisible ? (
+            <p className="calibration-flow__muted">{copy.calibration.needFace}</p>
+          ) : null}
+        </>
+      ) : null}
+      {isSaving ? <p className="calibration-flow__muted">{copy.calibration.saving}</p> : null}
+      {isDone ? (
+        <>
+          <p className="calibration-flow__done">{copy.calibration.done}</p>
+          {isSaveFailed ? (
+            <p className="calibration-flow__muted">{copy.calibration.failed}</p>
+          ) : null}
+          <div className="calibration-flow__actions">
+            <Link
+              href={next ?? (sound ? { pathname: '/mirror', query: { sound } } : '/mirror')}
+              className="button button--primary"
+            >
+              {next ? copy.calibration.goNext : copy.calibration.goMirror}
+            </Link>
+            <Button variant={ButtonVariant.Ghost} onClick={restart}>
+              {copy.calibration.redo}
+            </Button>
+          </div>
+        </>
+      ) : null}
+    </div>
+  );
+
   return (
     <div className="calibration-flow">
       <div className="calibration-flow__intro">
@@ -140,45 +180,9 @@ export const CalibrationFlow = (): ReactElement => {
       <CameraStage
         tracker={tracker}
         topStart={dots}
-        bottom={ring}
+        bottom={panel}
         prompt={step ? step.prompt_vi : null}
       />
-      <div className="calibration-flow__panel" aria-live="polite">
-        {stepIndex < 0 ? (
-          <>
-            <p className="calibration-flow__lead">{copy.calibration.intro}</p>
-            <Button onClick={() => setStepIndex(0)}>{copy.calibration.start}</Button>
-          </>
-        ) : null}
-        {step ? (
-          <>
-            <p className="calibration-flow__muted">{copy.calibration.hold}</p>
-            {isRetryShown || !tracker.isFaceVisible ? (
-              <p className="calibration-flow__muted">{copy.calibration.needFace}</p>
-            ) : null}
-          </>
-        ) : null}
-        {isSaving ? <p className="calibration-flow__muted">{copy.calibration.saving}</p> : null}
-        {isDone ? (
-          <>
-            <p className="calibration-flow__done">{copy.calibration.done}</p>
-            {isSaveFailed ? (
-              <p className="calibration-flow__muted">{copy.calibration.failed}</p>
-            ) : null}
-            <div className="calibration-flow__actions">
-              <Link
-                href={next ?? (sound ? { pathname: '/mirror', query: { sound } } : '/mirror')}
-                className="button button--primary"
-              >
-                {next ? copy.calibration.goNext : copy.calibration.goMirror}
-              </Link>
-              <Button variant={ButtonVariant.Ghost} onClick={restart}>
-                {copy.calibration.redo}
-              </Button>
-            </div>
-          </>
-        ) : null}
-      </div>
     </div>
   );
 };

@@ -2,8 +2,7 @@
   position: relative;
   overflow: hidden;
   inline-size: 100%;
-  max-block-size: calc(100dvh - var(--tabbar-height) - var(--safe-bottom) - 164px);
-  aspect-ratio: 3 / 4;
+  block-size: calc(100dvh - var(--tabbar-height) - var(--safe-bottom));
   color: var(--color-on-scrim);
   background: var(--color-stage);
 }
@@ -124,8 +123,7 @@
 
 @media (--bp-md) {
   .camera-stage {
-    max-block-size: 70vh;
-    aspect-ratio: 4 / 3;
+    block-size: min(82vh, 920px);
     border-radius: var(--radius-xl);
   }
 

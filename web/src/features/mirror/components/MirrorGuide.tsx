@@ -1,9 +1,12 @@
 'use client';
 
-import { type ReactElement, type ReactNode, useEffect, useMemo } from 'react';
+import { type ReactElement, type ReactNode, useEffect, useMemo, useState } from 'react';
 
 import { ConfidenceBadge } from '@/components/ConfidenceBadge/ConfidenceBadge';
 import { FeatureBar } from '@/components/FeatureBar/FeatureBar';
+import { Icon } from '@/components/Icon/Icon';
+import { Sheet } from '@/components/Sheet/Sheet';
+import { IconName } from '@/enums/icon-name.enum';
 import { MatchState } from '@/enums/match-state.enum';
 import { CameraStage } from '@/features/mirror/components/CameraStage';
 import { CueChip } from '@/features/mirror/components/CueChip';
@@ -37,7 +40,10 @@ interface MirrorGuideProps {
   topEnd?: ReactNode;
 }
 
-/** Live mirror: ghost target over the mouth, match dial, one cue, chips, details on demand. */
+/**
+ * Live mirror on one screen: ghost target over the mouth, match dial, one cue and the feature
+ * chips float on the video; everything else opens in a half sheet so the face stays in view.
+ */
 export const MirrorGuide = ({
   sound,
   target,
@@ -50,6 +56,7 @@ export const MirrorGuide = ({
   topEnd = null,
 }: MirrorGuideProps): ReactElement => {
   const copy = useCopy();
+  const [isDetailsOpen, setIsDetailsOpen] = useState(false);
   const targets = useMemo(() => (target ? targetsFromApi(target.targets) : {}), [target]);
   const names = useMemo(() => Object.keys(targets) as MouthFeatureName[], [targets]);
   const sample = tracker.latest;
@@ -81,76 +88,87 @@ export const MirrorGuide = ({
         topStart={topStart}
         topEnd={topEnd}
         bottom={
-          target ? (
-            <>
-              {cue && match.worst ? <CueChip text={cue} direction={match.worst.direction} /> : null}
-              <MatchRing
-                score={match.score}
-                state={match.state}
-                isHeld={hold.isHeld}
-                holdProgress={hold.holdProgress}
-              />
-            </>
-          ) : null
+          <>
+            {target ? (
+              <>
+                {cue && match.worst ? (
+                  <CueChip text={cue} direction={match.worst.direction} />
+                ) : null}
+                <MatchRing
+                  score={match.score}
+                  state={match.state}
+                  isHeld={hold.isHeld}
+                  holdProgress={hold.holdProgress}
+                />
+                <FeatureChips
+                  names={names}
+                  verdicts={match.verdicts}
+                  labels={copy.mirror.features}
+                  isIdle={!usable}
+                  isOnScrim
+                />
+              </>
+            ) : (
+              <p className="mirror-guide__audio-only">{copy.mirror.audioOnly}</p>
+            )}
+            <button
+              type="button"
+              className="mirror-guide__details-button"
+              aria-haspopup="dialog"
+              onClick={() => setIsDetailsOpen(true)}
+            >
+              <Icon name={IconName.Info} />
+              {copy.mirror.details}
+            </button>
+          </>
         }
       />
-      <div className="mirror-guide__below">
-        <p className="visually-hidden" role="status" aria-live="polite">
-          {target ? `${stateLabel}${cue ? ` · ${cue}` : ''}` : ''}
-        </p>
-        {target ? (
-          <FeatureChips
-            names={names}
-            verdicts={match.verdicts}
-            labels={copy.mirror.features}
-            isIdle={!usable}
-          />
-        ) : (
-          <p className="mirror-guide__audio-only">{copy.mirror.audioOnly}</p>
-        )}
-        <details className="mirror-guide__details">
-          <summary className="mirror-guide__summary">{copy.mirror.details}</summary>
-          <div className="mirror-guide__body">
-            <div className="mirror-guide__target">
-              <TargetShape group={target?.group ?? null} size={96} />
-              <div className="mirror-guide__copy">
-                <p className="mirror-guide__sound">{sound}</p>
-                {target ? (
-                  <>
-                    <p className="mirror-guide__name">{target.name_vi}</p>
-                    <ConfidenceBadge confidence={target.confidence} labels={confidenceLabels} />
-                    <p>{target.hint_vi}</p>
-                    {transitionVi ? (
-                      <p className="mirror-guide__transition">{transitionVi}</p>
-                    ) : null}
-                    {target.confidence === 'low' ? (
-                      <p className="mirror-guide__muted">{copy.mirror.lowConfidence}</p>
-                    ) : null}
-                    <p className="mirror-guide__muted">
-                      {copy.mirror.commonError}: {target.common_error_vi}
-                    </p>
-                  </>
-                ) : (
-                  <p>{copy.mirror.audioOnly}</p>
-                )}
-              </div>
+      <p className="visually-hidden" role="status" aria-live="polite">
+        {target ? `${stateLabel}${cue ? ` · ${cue}` : ''}` : ''}
+      </p>
+      <Sheet
+        isOpen={isDetailsOpen}
+        title={target?.name_vi ?? copy.mirror.title}
+        onClose={() => setIsDetailsOpen(false)}
+        isHalf
+      >
+        <div className="mirror-guide__body">
+          <div className="mirror-guide__target">
+            <TargetShape group={target?.group ?? null} size={88} />
+            <div className="mirror-guide__copy">
+              <p className="mirror-guide__sound">{sound}</p>
+              {target ? (
+                <>
+                  <ConfidenceBadge confidence={target.confidence} labels={confidenceLabels} />
+                  <p>{target.hint_vi}</p>
+                  {transitionVi ? <p className="mirror-guide__transition">{transitionVi}</p> : null}
+                  {target.confidence === 'low' ? (
+                    <p className="mirror-guide__muted">{copy.mirror.lowConfidence}</p>
+                  ) : null}
+                  <p className="mirror-guide__muted">
+                    {copy.mirror.commonError}: {target.common_error_vi}
+                  </p>
+                </>
+              ) : (
+                <p>{copy.mirror.audioOnly}</p>
+              )}
             </div>
-            {names.length > 0 ? (
-              <div className="mirror-guide__bars">
-                {names.map((name) => (
-                  <FeatureBar
-                    key={name}
-                    label={copy.mirror.features[name]}
-                    value={usable?.[name] ?? 0}
-                    target={targets[name]}
-                  />
-                ))}
-              </div>
-            ) : null}
-            {tutor}
           </div>
-        </details>
-      </div>
+          {names.length > 0 ? (
+            <div className="mirror-guide__bars">
+              {names.map((name) => (
+                <FeatureBar
+                  key={name}
+                  label={copy.mirror.features[name]}
+                  value={usable?.[name] ?? 0}
+                  target={targets[name]}
+                />
+              ))}
+            </div>
+          ) : null}
+          {tutor}
+        </div>
+      </Sheet>
     </div>
   );
 };

@@ -15,6 +15,8 @@ interface FeatureChipsProps {
   labels: Record<MouthFeatureName, string>;
   /** No usable face yet: every chip is neutral. */
   isIdle: boolean;
+  /** Drawn over the video. */
+  isOnScrim?: boolean;
 }
 
 /** One chip per target feature: teal inside the range, amber with an arrow when it needs to move. */
@@ -23,11 +25,15 @@ export const FeatureChips = ({
   verdicts,
   labels,
   isIdle,
+  isOnScrim = false,
 }: FeatureChipsProps): ReactElement => {
   const copy = useCopy();
   const byName = new Map(verdicts.map((verdict) => [verdict.name, verdict]));
   return (
-    <ul className="feature-chips" aria-label={copy.mirror.details}>
+    <ul
+      className={cx('feature-chips', isOnScrim && 'feature-chips--on-scrim')}
+      aria-label={copy.mirror.featuresAria}
+    >
       {names.map((name) => {
         const verdict = isIdle ? null : byName.get(name);
         const direction = verdict?.direction ?? 'idle';

@@ -1,4 +1,4 @@
-import { act, render, screen, within } from '@testing-library/react';
+import { act, fireEvent, render, screen, within } from '@testing-library/react';
 
 import { VisemeGroup } from '@/api/coach.schema';
 import { TrackerStatus } from '@/enums/tracker-status.enum';
@@ -72,10 +72,12 @@ describe('MirrorGuide', () => {
 
   it('shows a chip per target feature, the details and the bars', () => {
     render(<MirrorGuide sound="UW" target={target} tracker={trackerWith(null)} muted />);
-    const chips = screen.getByRole('list', { name: 'Chi tiết' });
+    const chips = screen.getByRole('list', { name: 'Trạng thái từng đặc trưng khẩu hình' });
     expect(chips).toHaveTextContent('Độ tròn môi');
     expect(chips).toHaveTextContent('Độ rộng miệng');
-    expect(screen.getByText('Môi tròn, chu ra')).toBeInTheDocument();
+    expect(screen.queryByText('Chu môi tròn.')).not.toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button', { name: 'Chi tiết' }));
+    expect(screen.getByText('Chu môi tròn.')).toBeInTheDocument();
     expect(screen.getByRole('meter', { name: 'Độ tròn môi', hidden: true })).toBeInTheDocument();
     expect(
       screen.queryByRole('meter', { name: 'Độ mở hàm', hidden: true }),

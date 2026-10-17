@@ -11,13 +11,16 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
-  align-items: flex-start;
-  padding: var(--space-4) var(--padding-page-x)
-    calc(var(--space-6) + var(--tabbar-height) + var(--safe-bottom));
+  align-items: center;
+  inline-size: 100%;
+  text-align: center;
+  color: var(--color-on-scrim);
 }
 
 .calibration-flow__lead {
-  color: var(--color-text-muted);
+  max-inline-size: 40ch;
+  font-size: var(--text-sm);
+  color: var(--color-on-scrim-muted);
 }
 
 .calibration-flow__steps {
@@ -78,18 +81,19 @@
 
 .calibration-flow__muted {
   font-size: var(--text-sm);
-  color: var(--color-text-muted);
+  color: var(--color-on-scrim-muted);
 }
 
 .calibration-flow__done {
   font-weight: var(--weight-semibold);
-  color: var(--color-success);
+  color: var(--color-teal-300);
 }
 
 .calibration-flow__actions {
   display: flex;
   flex-wrap: wrap;
   gap: var(--gap-inline);
+  justify-content: center;
 }
 
 @media (--bp-md) {
@@ -99,13 +103,5 @@
 
   .calibration-flow__intro {
     display: block;
-  }
-
-  .calibration-flow__panel {
-    padding: var(--padding-card);
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-sm);
   }
 }

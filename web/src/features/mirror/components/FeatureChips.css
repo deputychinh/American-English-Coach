@@ -2,18 +2,29 @@
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-2);
+  justify-content: center;
+  max-inline-size: 100%;
   padding: 0;
   list-style: none;
 }
 
+.feature-chips--on-scrim {
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  padding-inline: var(--space-2);
+  scrollbar-width: none;
+}
+
 .feature-chips__chip {
   display: inline-flex;
+  flex-shrink: 0;
   gap: var(--space-2);
   align-items: center;
   min-block-size: 36px;
   padding: var(--space-1) var(--space-3);
   font-size: var(--text-sm);
   font-weight: var(--weight-medium);
+  white-space: nowrap;
   color: var(--color-text-muted);
   background: var(--color-surface);
   border: 1px solid var(--color-border);
@@ -23,10 +34,22 @@
     color var(--duration-fast) var(--ease-standard);
 }
 
+.feature-chips--on-scrim .feature-chips__chip {
+  color: var(--color-on-scrim);
+  background: var(--color-scrim-strong);
+  border-color: var(--color-on-scrim-muted);
+}
+
 .feature-chips__chip--inside {
   color: var(--color-on-success-subtle);
   background: var(--color-success-subtle);
   border-color: var(--color-success);
+}
+
+.feature-chips--on-scrim .feature-chips__chip--inside {
+  color: var(--color-on-brand);
+  background: var(--color-teal-600);
+  border-color: var(--color-teal-400);
 }
 
 .feature-chips__chip--low,
@@ -34,6 +57,13 @@
   color: var(--color-on-warning-subtle);
   background: var(--color-warning-subtle);
   border-color: var(--color-warning);
+}
+
+.feature-chips--on-scrim .feature-chips__chip--low,
+.feature-chips--on-scrim .feature-chips__chip--high {
+  color: var(--color-ink-900);
+  background: var(--color-amber-300);
+  border-color: var(--color-amber-400);
 }
 
 .feature-chips__dot {

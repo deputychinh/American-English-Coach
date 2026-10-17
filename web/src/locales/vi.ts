@@ -152,6 +152,7 @@ export const vi = {
       ghostAria: 'Mẫu môi cần đạt, đặt môi bạn trùng với mẫu',
     },
     details: 'Chi tiết',
+    featuresAria: 'Trạng thái từng đặc trưng khẩu hình',
     pause: 'Tạm dừng camera',
     resume: 'Bật lại camera',
     pickerTitle: 'Chọn âm để soi',

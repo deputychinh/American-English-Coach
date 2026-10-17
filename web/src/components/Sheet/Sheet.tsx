@@ -5,6 +5,7 @@ import { type ReactElement, type ReactNode, useEffect, useRef } from 'react';
 import { IconButton } from '@/components/IconButton/IconButton';
 import { IconName } from '@/enums/icon-name.enum';
 import { useCopy } from '@/hooks/useCopy';
+import { cx } from '@/utils/cx.util';
 
 import './Sheet.css';
 
@@ -13,10 +14,18 @@ interface SheetProps {
   title: string;
   onClose: () => void;
   children: ReactNode;
+  /** Half-height panel with a clear backdrop, for use over the live camera. */
+  isHalf?: boolean;
 }
 
 /** Bottom sheet on phones, centred panel on wide screens; the native dialog traps focus and Esc. */
-export const Sheet = ({ isOpen, title, onClose, children }: SheetProps): ReactElement => {
+export const Sheet = ({
+  isOpen,
+  title,
+  onClose,
+  children,
+  isHalf = false,
+}: SheetProps): ReactElement => {
   const copy = useCopy();
   const ref = useRef<HTMLDialogElement>(null);
 
@@ -34,7 +43,12 @@ export const Sheet = ({ isOpen, title, onClose, children }: SheetProps): ReactEl
   }, [isOpen]);
 
   return (
-    <dialog ref={ref} className="sheet" aria-label={title} onClose={onClose}>
+    <dialog
+      ref={ref}
+      className={cx('sheet', isHalf && 'sheet--half')}
+      aria-label={title}
+      onClose={onClose}
+    >
       <button
         type="button"
         className="sheet__backdrop"

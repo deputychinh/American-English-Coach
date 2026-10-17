@@ -161,6 +161,7 @@ export const en: Copy = {
       ghostAria: 'Target lip shape; line your lips up with it',
     },
     details: 'Details',
+    featuresAria: 'State of each mouth feature',
     pause: 'Pause camera',
     resume: 'Resume camera',
     pickerTitle: 'Pick a sound to mirror',

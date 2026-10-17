@@ -69,6 +69,15 @@
   padding: 0 var(--space-4) var(--space-4);
 }
 
+.sheet--half .sheet__backdrop {
+  background: transparent;
+}
+
+.sheet--half .sheet__panel {
+  max-block-size: 52dvh;
+  box-shadow: var(--shadow-lg);
+}
+
 @media (--bp-md) {
   .sheet[open] {
     align-items: center;
