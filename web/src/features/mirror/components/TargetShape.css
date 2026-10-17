@@ -26,3 +26,28 @@
   font-size: var(--text-3xl);
   fill: var(--color-text-muted);
 }
+
+/* Ghost variant: drawn over the live video, aligned to the learner's mouth. */
+.target-shape--ghost {
+  inline-size: 100%;
+  block-size: auto;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+}
+
+.target-shape--ghost .target-shape__outer {
+  fill: var(--color-ghost-fill);
+  stroke: var(--color-ghost-stroke);
+  stroke-dasharray: 6 4;
+}
+
+.target-shape--ghost .target-shape__inner {
+  fill: transparent;
+  stroke: var(--color-ghost-stroke);
+}
+
+.target-shape--ghost .target-shape__extra {
+  fill: transparent;
+  stroke: var(--color-on-scrim-muted);
+}

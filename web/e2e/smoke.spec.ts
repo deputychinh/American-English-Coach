@@ -97,7 +97,7 @@ test('mirror asks for calibration first, then calibration page opens the camera'
   const notice = page.getByRole('status').filter({ hasText: /Cần hiệu chỉnh/ });
   const guide = page.locator('.mirror-guide');
   await expect(notice.or(guide)).toBeVisible();
-  await expect(page.locator('.confidence-badge').or(notice)).toBeVisible();
+  await expect(page.locator('.feature-chips').or(notice)).toBeVisible();
   await shot(page, 'mirror', info.project.name);
   const enter = (await notice.count()) > 0 ? 'Hiệu chỉnh ngay' : 'Hiệu chỉnh lại';
   await page.getByRole('link', { name: enter }).click();

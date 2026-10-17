@@ -71,4 +71,6 @@ export interface TargetHold {
   isHeld: boolean;
   showHint: boolean;
   offFeatures: string[];
+  /** 0..1 share of `holdMs` already held on target. */
+  holdProgress: number;
 }

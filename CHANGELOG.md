@@ -6,6 +6,9 @@ Theo [Keep a Changelog](https://keepachangelog.com/vi/1.1.0/); phiên bản theo
 
 ### Thêm
 
+- Màn Gương làm lại cho điện thoại theo mẫu ứng dụng camera (`docs/design/mobile-mirror.md`): camera cạnh-sát-cạnh, "bóng mờ" mẫu môi căn theo miệng thật, vòng điểm khớp 0–100 % ba màu, một gợi ý chỉnh duy nhất bằng câu tự nhiên, chip trạng thái từng đặc trưng, chi tiết thu gọn, sheet chọn âm 44 âm có tìm kiếm; rung và âm báo khi giữ đúng. Hiệu chỉnh dùng cùng sân khấu camera. Trên điện thoại, màn camera ẩn header/footer; các màn khác bỏ footer (link chính sách nằm trong Cài đặt).
+- App iOS: `make ios-device` build ký, cài và mở app trên iPhone thật với địa chỉ Mac nhúng sẵn; banner và lỗi 401 chỉ dẫn ghép nối bằng tiếng Việt; thẻ Ghép nối lên đầu Cài đặt trong vỏ native.
+
 - Ngoại tuyến có kiểm soát: service worker phiên bản theo build id precache toàn bộ vỏ ứng dụng; nội dung bài, khóa học, kế hoạch, tiến độ, hiệu chỉnh và giọng mẫu được giữ lại theo hồ sơ nên vẫn xem được khi máy chấm không chạy; `/health`, `/ready` và chấm điểm không bao giờ qua cache. Unit test chạy `sw.js` trong `node:vm` và e2e `offline.spec.ts`.
 
 ## [1.1.0] - 2026-10-17
@@ -20,6 +23,10 @@ Theo [Keep a Changelog](https://keepachangelog.com/vi/1.1.0/); phiên bản theo
 - Thư viện giọng người thật có giấy phép (`content/voice/`) ưu tiên trước giọng tổng hợp; header `X-Coach-Voice`.
 - Công cụ pilot: `make pilot-export` / `make pilot-report` để bật mức `error` theo precision đo được.
 - Kiểm tra tiếp cận bằng axe-core trên 10 trang trong e2e; hướng dẫn HTTPS từ xa (Tailscale/Caddy).
+
+### Sửa
+
+- POST tới máy chấm có địa chỉ (ghép nối, chấm, tạo hồ sơ) thất bại vì thân yêu cầu bị sao chép thành stream; giờ sao chép thành bytes. Phiên bản iOS lấy từ cấu hình project; Team ID ký đúng.
 
 ### Sửa
 

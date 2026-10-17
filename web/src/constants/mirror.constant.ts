@@ -1,6 +1,12 @@
 export const MEDIAPIPE_WASM_PATH = '/vendor/mediapipe';
 export const FACE_MODEL_PATH = '/vendor/mediapipe/face_landmarker.task';
 export const HINT_DELAY_MS = 500;
+/** A feature one full tolerance outside its range scores 0; inside scores 1. */
+export const MATCH_TOLERANCE = 0.25;
+/** The ghost target lips are drawn this many times wider than the detected mouth. */
+export const GHOST_SCALE = 1.35;
+/** Share of the TargetShape viewBox width that the widest lip path spans (14..106 of 120). */
+export const GHOST_LIP_SPAN = 0.77;
 export const MIN_FPS = 24;
 export const FPS_SAMPLE_FRAMES = 60;
 export const MAX_YAW_DEGREES = 20;

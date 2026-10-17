@@ -7,7 +7,13 @@ import type { TargetHold } from '@/interfaces/hooks.interface';
 import type { MouthFeatures, TargetMap } from '@/interfaces/mouth.interface';
 import { offTargetFeatures } from '@/utils/viseme-match.util';
 
-const IDLE: TargetHold = { isOnTarget: false, isHeld: false, showHint: false, offFeatures: [] };
+const IDLE: TargetHold = {
+  isOnTarget: false,
+  isHeld: false,
+  showHint: false,
+  offFeatures: [],
+  holdProgress: 0,
+};
 
 /** Tracks how long the mouth has been on/off target: hints after 500 ms off, success after `holdMs` on. */
 export const useTargetHold = (
@@ -39,6 +45,7 @@ export const useTargetHold = (
           isHeld: now - since >= holdMs,
           showHint: false,
           offFeatures: [],
+          holdProgress: Math.min(1, (now - since) / holdMs),
         });
         return;
       }
@@ -50,6 +57,7 @@ export const useTargetHold = (
         isHeld: false,
         showHint: now - since >= HINT_DELAY_MS,
         offFeatures: off,
+        holdProgress: 0,
       });
     });
     return () => cancelAnimationFrame(frame);

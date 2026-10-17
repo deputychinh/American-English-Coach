@@ -87,6 +87,15 @@
   --color-on-info-subtle: var(--color-blue-700);
   --color-focus-ring: var(--color-saffron-500);
 
+  /* Layers over live video: dark scrim, white type, translucent ghost lips. */
+  --color-scrim: rgb(28 25 23 / 55%);
+  --color-scrim-strong: rgb(28 25 23 / 82%);
+  --color-on-scrim: #fff;
+  --color-on-scrim-muted: rgb(255 255 255 / 74%);
+  --color-ghost-fill: rgb(255 255 255 / 16%);
+  --color-ghost-stroke: rgb(255 255 255 / 92%);
+  --color-stage: var(--color-ink-900);
+
   /* Brand header: white text stays at 5.2:1 or better over the whole gradient. */
   --color-brand-from: var(--color-saffron-600);
   --color-brand-to: var(--color-saffron-700);

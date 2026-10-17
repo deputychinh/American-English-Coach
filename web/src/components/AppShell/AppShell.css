@@ -189,6 +189,25 @@
   line-height: var(--leading-none);
 }
 
+/* Phones: the tab bar is the navigation, so no footer; camera screens drop the header too. */
+@media (--bp-below-md) {
+  .app-shell__footer {
+    display: none;
+  }
+
+  .app-shell__main {
+    padding-block-end: calc(var(--space-8) + var(--tabbar-height) + var(--safe-bottom));
+  }
+
+  .app-shell--immersive .app-shell__header {
+    display: none;
+  }
+
+  .app-shell--immersive .app-shell__main {
+    padding: 0;
+  }
+}
+
 @media (--bp-md) {
   .app-shell__nav {
     display: flex;

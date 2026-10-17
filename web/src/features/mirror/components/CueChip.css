@@ -1,0 +1,17 @@
+.cue-chip {
+  display: inline-flex;
+  gap: var(--space-2);
+  align-items: center;
+  padding: var(--space-2) var(--space-4);
+  font-size: var(--text-md);
+  font-weight: var(--weight-semibold);
+  color: var(--color-ink-900);
+  background: var(--color-amber-300);
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-md);
+}
+
+.cue-chip__arrow {
+  font-size: var(--text-lg);
+  line-height: var(--leading-none);
+}

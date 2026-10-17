@@ -28,4 +28,8 @@ export const ICON_PATHS: Record<IconName, string> = {
   [IconName.Refresh]: 'M21 12a9 9 0 1 1-2.6-6.4M21 4v5h-5',
   [IconName.Camera]: 'M4 8h4l2-3h4l2 3h4v11H4zM12 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z',
   [IconName.Info]: 'M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20zM12 16v-4M12 8h.01',
+  [IconName.Pause]: 'M8 5v14M16 5v14',
+  [IconName.Volume]: 'M11 5 6 9H3v6h3l5 4V5zM15.5 8.5a5 5 0 0 1 0 7',
+  [IconName.VolumeOff]: 'M11 5 6 9H3v6h3l5 4V5zM22 9l-6 6M16 9l6 6',
+  [IconName.ChevronDown]: 'm6 9 6 6 6-6',
 };

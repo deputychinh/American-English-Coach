@@ -20,4 +20,8 @@ export enum IconName {
   Refresh = 'refresh',
   Camera = 'camera',
   Info = 'info',
+  Pause = 'pause',
+  Volume = 'volume',
+  VolumeOff = 'volume-off',
+  ChevronDown = 'chevron-down',
 }

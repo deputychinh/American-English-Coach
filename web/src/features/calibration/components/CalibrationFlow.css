@@ -1,14 +1,10 @@
 .calibration-flow {
   display: flex;
   flex-direction: column;
-  gap: var(--space-6);
 }
 
-.calibration-flow__layout {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--gap-grid);
-  align-items: start;
+.calibration-flow__intro {
+  display: none;
 }
 
 .calibration-flow__panel {
@@ -16,11 +12,12 @@
   flex-direction: column;
   gap: var(--space-3);
   align-items: flex-start;
-  padding: var(--padding-card);
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-sm);
+  padding: var(--space-4) var(--padding-page-x)
+    calc(var(--space-6) + var(--tabbar-height) + var(--safe-bottom));
+}
+
+.calibration-flow__lead {
+  color: var(--color-text-muted);
 }
 
 .calibration-flow__steps {
@@ -33,23 +30,24 @@
 .calibration-flow__step-dot {
   inline-size: 28px;
   block-size: 6px;
-  background: var(--color-border);
+  background: var(--color-on-scrim-muted);
   border-radius: var(--radius-full);
   transition: background-color var(--duration-normal) var(--ease-standard);
 }
 
 .calibration-flow__step-dot.is-done {
-  background: var(--color-success);
+  background: var(--color-teal-300);
 }
 
 .calibration-flow__step-dot.is-current {
-  background: var(--color-primary);
+  background: var(--color-on-scrim);
 }
 
 .calibration-flow__ring-row {
   display: flex;
   gap: var(--space-3);
   align-items: center;
+  color: var(--color-on-scrim);
 }
 
 .calibration-flow__ring {
@@ -60,14 +58,14 @@
 
 .calibration-flow__ring-track {
   fill: none;
-  stroke: var(--color-border);
+  stroke: var(--color-on-scrim-muted);
   stroke-width: 4;
 }
 
 .calibration-flow__ring-value {
   transition: stroke-dashoffset var(--duration-slow) var(--ease-standard);
   fill: none;
-  stroke: var(--color-primary);
+  stroke: var(--color-teal-300);
   stroke-dasharray: 126;
   stroke-linecap: round;
   stroke-width: 4;
@@ -75,12 +73,7 @@
 
 .calibration-flow__step {
   font-size: var(--text-sm);
-  color: var(--color-text-muted);
-}
-
-.calibration-flow__prompt {
-  font-size: var(--text-2xl);
-  font-weight: var(--weight-semibold);
+  font-weight: var(--weight-medium);
 }
 
 .calibration-flow__muted {
@@ -99,8 +92,20 @@
   gap: var(--gap-inline);
 }
 
-@media (--bp-lg) {
-  .calibration-flow__layout {
-    grid-template-columns: minmax(0, 3fr) minmax(280px, 2fr);
+@media (--bp-md) {
+  .calibration-flow {
+    gap: var(--space-6);
+  }
+
+  .calibration-flow__intro {
+    display: block;
+  }
+
+  .calibration-flow__panel {
+    padding: var(--padding-card);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
   }
 }

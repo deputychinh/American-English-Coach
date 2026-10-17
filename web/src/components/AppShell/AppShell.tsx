@@ -18,6 +18,7 @@ import { IconName } from '@/enums/icon-name.enum';
 import { StorageKey } from '@/enums/storage-key.enum';
 import { Theme } from '@/enums/theme.enum';
 import { useCopy } from '@/hooks/useCopy';
+import { useIsImmersive } from '@/hooks/useImmersive';
 import { cx } from '@/utils/cx.util';
 import { nativeConfigureChrome } from '@/utils/native.util';
 import { writeStorage } from '@/utils/storage.util';
@@ -48,6 +49,7 @@ export const AppShell = ({ children }: AppShellProps): ReactElement => {
   const copy = useCopy();
   const pathname = usePathname();
   const theme = useSyncExternalStore(subscribeTheme, readTheme, () => Theme.Light);
+  const isImmersive = useIsImmersive();
 
   useEffect(() => {
     void nativeConfigureChrome(theme === Theme.Dark);
@@ -75,7 +77,7 @@ export const AppShell = ({ children }: AppShellProps): ReactElement => {
   };
 
   return (
-    <div className="app-shell">
+    <div className={cx('app-shell', isImmersive && 'app-shell--immersive')}>
       <a className="skip-link" href="#main">
         {copy.skipToContent}
       </a>

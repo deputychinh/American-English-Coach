@@ -183,6 +183,9 @@ export const SettingsScreen = (): ReactElement => {
           <Button variant={ButtonVariant.Ghost} isSmall onClick={clearData}>
             {copy.settings.clearData}
           </Button>
+          <Link href="/privacy" className="button button--ghost button--small">
+            {copy.privacy.title}
+          </Link>
         </div>
       </Card>
 

@@ -22,6 +22,15 @@ Nguyên tắc không đổi: local-first (video không rời thiết bị), ba m
 | B3  | ☑          | Tiếp cận (a11y) và chữ lớn    | Kiểm tra VoiceOver/axe trên 7 trang; hỗ trợ Dynamic Type (rem-based, đo 200 % trên 11 trang: không tràn, không cắt chữ); báo cáo lưu `docs/lighthouse/` |
 | B4  | ☑          | Ngoại tuyến có kiểm soát      | Service worker cache vỏ ứng dụng + nội dung bài; trạng thái "không có máy chấm" vẫn xem bài, gương và lịch sử đã tải; test                              |
 
+### Bổ sung sau 1.1.0 — trải nghiệm điện thoại
+
+| #   | Trạng thái | Hạng mục                          | Tiêu chí nghiệm thu                                                                                                                                                   |
+| --- | ---------- | --------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| E1  | ☑          | Gương khẩu hình kiểu camera       | Camera toàn màn, bóng mờ mẫu môi căn theo miệng, vòng điểm khớp + một gợi ý, chip đặc trưng, sheet chọn âm; unit + e2e; thiết kế trong `docs/design/mobile-mirror.md` |
+| E2  | ☑          | Chạy trên iPhone thật             | `make ios-device` cài và mở app; địa chỉ Mac nhúng sẵn; ghép nối hoạt động (sửa lỗi POST qua địa chỉ máy chấm)                                                        |
+| E3  | ☐          | Màn Luyện tập và kết quả kiểu app | Thẻ kết quả từng âm theo mẫu BoldVoice (điểm tổng, bấm từ xem âm), nút thu âm giữ-để-nói, phản hồi khẩu hình gộp với âm                                               |
+| E4  | ☐          | Trang chủ và điều hướng           | Bỏ hero kiểu web, lời chào + mục tiêu ngày + "luyện tiếp" một chạm; tiêu đề lớn theo iOS                                                                              |
+
 ## Giai đoạn C — Chất lượng chấm và nội dung
 
 | #   | Trạng thái | Hạng mục                              | Tiêu chí nghiệm thu                                                                                                                                                                                  |

@@ -1,5 +1,14 @@
 # Kiểm chứng — cập nhật 2026-10-17 (bản hoàn thiện: 44 âm, gia sư AI, iOS, hardening)
 
+## Bổ sung 2026-10-17 đêm — Gương khẩu hình kiểu ứng dụng camera (E1) và iPhone thật (E2)
+
+| Phần           | Kết quả                                                                                                                                                                                                                           |
+| -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Web unit       | **108 test / 41 file**: điểm khớp khẩu hình (`mouth-match.util`), vị trí bóng mờ (`ghost-placement.util`), MirrorGuide (chip, vòng điểm, giữ đủ → "Đúng rồi!", một gợi ý sau 0,5 s lệch, bóng mờ khi có viền môi), locale so khóa |
+| e2e như CI     | **50/50** desktop + mobile, gồm axe trên `/mirror/` và `/calibration/` với bố cục mới                                                                                                                                             |
+| iPhone 11 thật | `make ios-device`: build ký với Team `9AVWS3MKNW`, cài và mở app; địa chỉ Mac nhúng sẵn; ghép nối thành công sau khi sửa lỗi POST qua địa chỉ máy chấm                                                                            |
+| Chưa đo        | Độ chính xác bóng mờ và ngưỡng điểm khớp trên khuôn mặt thật (fake camera trong CI không có mặt); cần thử trên iPhone và chỉnh `MATCH_TOLERANCE`, `GHOST_SCALE`                                                                   |
+
 ## Bổ sung 2026-10-17 tối — B4 ngoại tuyến có kiểm soát
 
 | Phần              | Kết quả                                                                                                                                                                                                                         |

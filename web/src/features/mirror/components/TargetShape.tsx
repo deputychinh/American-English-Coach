@@ -4,11 +4,13 @@ import type { ReactElement } from 'react';
 
 import { VisemeGroup } from '@/api/coach.schema';
 import { useCopy } from '@/hooks/useCopy';
+import { cx } from '@/utils/cx.util';
 import './TargetShape.css';
 
 interface TargetShapeProps {
   group: VisemeGroup | null;
   size: number;
+  className?: string;
 }
 
 /** Schematic lips (front view) per viseme group: outer lip path, inner opening, teeth/tongue cues. */
@@ -65,12 +67,12 @@ const SHAPES: Record<VisemeGroup, { outer: string; inner: string; extra?: string
   },
 };
 
-export const TargetShape = ({ group, size }: TargetShapeProps): ReactElement => {
+export const TargetShape = ({ group, size, className }: TargetShapeProps): ReactElement => {
   const copy = useCopy();
   const shape = group ? SHAPES[group] : null;
   return (
     <svg
-      className="target-shape"
+      className={cx('target-shape', className)}
       viewBox="0 0 120 120"
       width={size}
       height={size}

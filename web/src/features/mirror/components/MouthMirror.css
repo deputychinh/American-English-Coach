@@ -1,28 +1,91 @@
 .mouth-mirror {
   display: flex;
   flex-direction: column;
-  gap: var(--space-6);
 }
 
-.mouth-mirror__picker {
-  display: block;
-  min-inline-size: 240px;
+.mouth-mirror__intro {
+  display: none;
 }
 
-.mouth-mirror__notice {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-3);
+.mouth-mirror__chip {
+  display: inline-flex;
+  gap: var(--space-2);
   align-items: center;
-  padding: var(--padding-card);
-  color: var(--color-on-warning-subtle);
-  background: var(--color-warning-subtle);
-  border: 1px solid var(--color-warning);
-  border-radius: var(--radius-md);
+  min-block-size: var(--size-touch-target);
+  padding: var(--space-1) var(--space-3) var(--space-1) var(--space-4);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  color: var(--color-on-scrim);
+  background: var(--color-scrim-strong);
+  border: 1px solid var(--color-on-scrim-muted);
+  border-radius: var(--radius-full);
+  cursor: pointer;
 }
 
-.mouth-mirror__controls {
+.mouth-mirror__chip-ipa {
+  font-family: var(--font-ipa);
+  font-size: var(--text-lg);
+  font-weight: var(--weight-semibold);
+}
+
+.mouth-mirror__chip-word {
+  color: var(--color-on-scrim-muted);
+}
+
+.mouth-mirror__control,
+.mouth-mirror__icon-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: var(--size-touch-target);
+  block-size: var(--size-touch-target);
+  font-size: var(--text-lg);
+  color: var(--color-on-scrim);
+  background: var(--color-scrim-strong);
+  border-radius: var(--radius-full);
+}
+
+.mouth-mirror__control:hover,
+.mouth-mirror__icon-link:hover {
+  color: var(--color-on-scrim);
+  background: var(--color-scrim-strong);
+}
+
+.mouth-mirror__gate {
   display: flex;
-  flex-wrap: wrap;
-  gap: var(--gap-inline);
+  flex-direction: column;
+  gap: var(--space-4);
+  align-items: center;
+  justify-content: center;
+  min-block-size: 60dvh;
+  padding: var(--space-8) var(--padding-page-x);
+  text-align: center;
+  color: var(--color-on-scrim);
+  background: var(--color-stage);
+}
+
+.mouth-mirror__gate-icon {
+  font-size: var(--text-5xl);
+  color: var(--color-on-scrim-muted);
+}
+
+.mouth-mirror__gate-text {
+  max-inline-size: 28ch;
+  font-size: var(--text-lg);
+  font-weight: var(--weight-medium);
+}
+
+@media (--bp-md) {
+  .mouth-mirror {
+    gap: var(--space-6);
+  }
+
+  .mouth-mirror__intro {
+    display: block;
+  }
+
+  .mouth-mirror__gate {
+    min-block-size: 360px;
+    border-radius: var(--radius-xl);
+  }
 }

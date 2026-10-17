@@ -1,0 +1,66 @@
+.match-ring {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  inline-size: 112px;
+  text-align: center;
+  color: var(--color-on-scrim);
+}
+
+.match-ring__svg {
+  inline-size: 72px;
+  block-size: 72px;
+  transform: rotate(-90deg);
+}
+
+.match-ring__track {
+  fill: none;
+  stroke: var(--color-on-scrim-muted);
+  stroke-opacity: 0.35;
+  stroke-width: 5;
+}
+
+.match-ring__value {
+  transition: stroke-dashoffset var(--duration-normal) var(--ease-standard);
+  fill: none;
+  stroke: var(--color-on-scrim-muted);
+  stroke-linecap: round;
+  stroke-width: 5;
+}
+
+.match-ring--close .match-ring__value {
+  stroke: var(--color-amber-400);
+}
+
+.match-ring--on-target .match-ring__value,
+.match-ring.is-held .match-ring__value {
+  stroke: var(--color-teal-400);
+}
+
+.match-ring__hold {
+  transition: stroke-dashoffset var(--duration-fast) linear;
+  fill: none;
+  stroke: var(--color-teal-300);
+  stroke-linecap: round;
+  stroke-width: 3;
+}
+
+.match-ring__percent {
+  position: absolute;
+  top: 36px;
+  font-size: var(--text-md);
+  font-weight: var(--weight-bold);
+  font-variant-numeric: tabular-nums;
+  transform: translateY(-50%);
+}
+
+.match-ring__label {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  margin-block-start: var(--space-1);
+}
+
+.match-ring.is-held .match-ring__percent {
+  font-size: var(--text-2xl);
+  color: var(--color-teal-300);
+}

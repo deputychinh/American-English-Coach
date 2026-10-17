@@ -81,3 +81,10 @@ export interface TargetRange {
 }
 
 export type TargetMap = Partial<Record<MouthFeatureName, TargetRange>>;
+
+/** Where to draw the ghost target lips over the mirrored video, in percent of the frame. */
+export interface GhostPlacement {
+  leftPercent: number;
+  topPercent: number;
+  widthPercent: number;
+}
