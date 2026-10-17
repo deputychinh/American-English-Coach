@@ -4,12 +4,12 @@ Mục tiêu: app iOS trông và dùng như ứng dụng camera chuyên nghiệp,
 
 ## Học từ các app nổi tiếng
 
-| App / mẫu                                    | Điều học được                                                                                             | Áp dụng                                                                                    |
-| -------------------------------------------- | --------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
-| ELSA Speak                                   | Mã màu xanh / vàng / đỏ cho đúng – gần đúng – sai; mỗi lần chỉ một lỗi chính; video khẩu hình mẫu           | Ba trạng thái màu cho vòng điểm; một gợi ý chỉnh duy nhất; mẫu môi đè lên video             |
-| BoldVoice                                    | Điểm tổng % ngay sau khi nói, bấm vào từ để xem từng âm; video HLV chỉ vị trí lưỡi                          | Điểm khớp % theo thời gian thực; chip từng đặc trưng mở ra chi tiết                        |
-| App chỉnh tư thế (Posture Sense, Skeletal PT) | Khung xương **mẫu** đè lên khung xương **của bạn**; đổi sang xanh khi đạt; cue bằng rung và giọng           | "Bóng mờ" mẫu môi căn theo vị trí miệng thật; viền môi đổi xanh; rung + âm báo khi giữ đủ   |
-| Camera iOS / TikTok                          | Khung hình chiếm toàn màn, điều khiển nổi trên video, nút chính ở giữa dưới, không tiêu đề trang           | Màn gương không header/footer, camera cạnh-sát-cạnh, vòng điểm ở giữa dưới, chọn âm bằng sheet |
+| App / mẫu                                     | Điều học được                                                                                     | Áp dụng                                                                                        |
+| --------------------------------------------- | ------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| ELSA Speak                                    | Mã màu xanh / vàng / đỏ cho đúng – gần đúng – sai; mỗi lần chỉ một lỗi chính; video khẩu hình mẫu | Ba trạng thái màu cho vòng điểm; một gợi ý chỉnh duy nhất; mẫu môi đè lên video                |
+| BoldVoice                                     | Điểm tổng % ngay sau khi nói, bấm vào từ để xem từng âm; video HLV chỉ vị trí lưỡi                | Điểm khớp % theo thời gian thực; chip từng đặc trưng mở ra chi tiết                            |
+| App chỉnh tư thế (Posture Sense, Skeletal PT) | Khung xương **mẫu** đè lên khung xương **của bạn**; đổi sang xanh khi đạt; cue bằng rung và giọng | "Bóng mờ" mẫu môi căn theo vị trí miệng thật; viền môi đổi xanh; rung + âm báo khi giữ đủ      |
+| Camera iOS / TikTok                           | Khung hình chiếm toàn màn, điều khiển nổi trên video, nút chính ở giữa dưới, không tiêu đề trang  | Màn gương không header/footer, camera cạnh-sát-cạnh, vòng điểm ở giữa dưới, chọn âm bằng sheet |
 
 ## Màn Gương (điện thoại)
 
