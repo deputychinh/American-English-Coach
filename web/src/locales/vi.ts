@@ -30,6 +30,9 @@ export const vi = {
     ready: 'Máy chấm sẵn sàng',
     modelMissing: 'Máy chấm đang chạy nhưng chưa tải model. Chạy `make models`.',
     offline: 'Máy chấm chưa chạy — chạy `make api`. Bạn vẫn xem được bài học.',
+    offlineNative:
+      'Chưa kết nối được máy chấm trên máy Mac. Chạy `make api-lan` trên Mac rồi nhập địa chỉ nó in ra trong Cài đặt → Máy chấm.',
+    openSettings: 'Mở Cài đặt',
     disabled: 'Chấm phát âm đang tắt trong cấu hình máy chủ.',
   },
   home: {

@@ -36,6 +36,9 @@ export const en: Copy = {
     modelMissing:
       'The scoring server is running but the model is not downloaded. Run `make models`.',
     offline: 'The scoring server is not running — run `make api`. Lessons are still available.',
+    offlineNative:
+      'Not connected to the scoring server on your Mac. Run `make api-lan` there and enter the printed address under Settings → Scoring server.',
+    openSettings: 'Open Settings',
     disabled: 'Pronunciation scoring is disabled in the server configuration.',
   },
   home: {
