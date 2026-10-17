@@ -26,7 +26,7 @@ Nguyên tắc không đổi: local-first (video không rời thiết bị), ba m
 
 | #   | Trạng thái | Hạng mục                              | Tiêu chí nghiệm thu                                                                                                                                                                                  |
 | --- | ---------- | ------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| C1  | ☐          | Bộ công cụ pilot người Việt (AEC-023) | `make pilot`: thu thập bản ghi có đồng ý (từ lượt chấm được gắn cờ), bảng chấm tay CSV, script tính precision/recall theo lỗi và sinh `enabled_errors.json` khi precision ≥ 0,85; tài liệu quy trình |
+| C1  | ☑          | Bộ công cụ pilot người Việt (AEC-023) | `make pilot`: thu thập bản ghi có đồng ý (từ lượt chấm được gắn cờ), bảng chấm tay CSV, script tính precision/recall theo lỗi và sinh `enabled_errors.json` khi precision ≥ 0,85; tài liệu quy trình |
 | C2  | ☐          | Giọng mẫu chất lượng cao (AEC-022)    | Lớp `ReferenceVoice` chọn giọng theo thứ tự: clip người thật có giấy phép (nếu có trong `content/voice/`) → giọng hệ thống nâng cao; manifest giấy phép; phát trên iOS                               |
 | C3  | ☐          | Bài học có cấu trúc                   | Khóa 14 ngày cho người Việt (âm cuối, th, cặp nguyên âm dài/ngắn, trọng âm, ngữ điệu); mỗi ngày 10–15 phút, nối với kế hoạch tuần; nội dung trong `content/course.json` có test tính hợp lệ          |
 

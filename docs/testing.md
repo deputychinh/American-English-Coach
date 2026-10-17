@@ -10,6 +10,8 @@
 | Hành trình trình duyệt                                       | `web/e2e` (Playwright, camera/mic giả: `--use-fake-device-for-media-stream`) | `make e2e` sau `make serve`              | smoke: chọn bài → ghi → thẻ kết quả |
 | Legacy                                                       | `legacy/tests`                                                               | `make test-legacy`                       | 33 unittest + 2 node test pass      |
 | Chất lượng model (không phải test tự động)                   | `backend/app/eval/*`                                                         | `make bench`, `make eval`                | xem `docs/BENCHMARK-REALTIME.md`    |
+| Pilot người Việt (người chấm tay)                            | `backend/app/eval/pilot.py`                                                  | `make pilot-export`, `make pilot-report` | precision ≥ 0,85, ≥ 20 dòng/lỗi     |
+| Tiếp cận (axe-core, serious/critical = 0)                    | `web/e2e/a11y.spec.ts`                                                       | `make e2e`                               | 9 trang, 2 kích cỡ                  |
 
 `make ci` = lint + typecheck + test của backend và web; đây cũng là những gì GitHub Actions chạy (`.github/workflows/ci.yml`).
 

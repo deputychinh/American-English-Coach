@@ -32,6 +32,6 @@ Mỗi ticket có tiêu chí nghiệm thu; một commit Conventional Commit cho m
 | AEC-020 | ☑          | Hồ sơ nhiều người học                           | Chọn/tạo hồ sơ; kết quả và hiệu chỉnh theo hồ sơ; export/import                                |
 | AEC-021 | ☑          | Lộ trình học theo tuần                          | Kế hoạch từ tiến độ đo được; nhắc luyện; thẻ "hôm nay"                                         |
 | AEC-022 | ☐          | Giọng mẫu người thật                            | Bộ clip có giấy phép thay `say` cho 44 âm + câu                                                |
-| AEC-023 | ☐          | Pilot người Việt và bật `error` theo bằng chứng | Precision ≥ 0,85 trên tập người Việt; `enabled_errors.json` sinh từ dữ liệu thật               |
+| AEC-023 | ◐          | Pilot người Việt và bật `error` theo bằng chứng | Precision ≥ 0,85 trên tập người Việt; `enabled_errors.json` sinh từ dữ liệu thật               |
 | AEC-024 | ☐          | Phát hành iOS                                   | Ký với Team, TestFlight nội bộ, App Store metadata, ảnh chụp theo kích cỡ, chính sách riêng tư |
 | AEC-025 | ☑          | HTTPS cho máy chấm từ xa                        | Caddy/Tailscale; app chấp nhận `https://`                                                      |
