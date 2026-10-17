@@ -1,6 +1,6 @@
 # Bàn giao 24h
 
-Ngày 2026-10-16 · nhánh `feat/av-mvp` · chưa push, chưa merge (chờ chủ dự án).
+Cập nhật 2026-10-17: `feat/av-mvp` đã merge fast-forward vào `main`; mọi việc sau đó làm trực tiếp trên `main` theo `docs/ROADMAP.md`. Bản 1.1.0 (xem `CHANGELOG.md`).
 
 ## Đã giao (session chính: backend, tích hợp, commit)
 
@@ -56,3 +56,11 @@ Ngày 2026-10-16 · nhánh `feat/av-mvp` · chưa push, chưa merge (chờ chủ
 - Prosody vẫn ở mức `check`; cần giọng mẫu người thật thay TTS.
 - Ngưỡng khẩu hình trong `content/visemes.json` là giá trị khởi điểm, chưa đo trên video thật.
 - HTTPS cho điện thoại trên LAN; Safari chỉ smoke test.
+
+## Lộ trình hoàn thiện (2026-10-17 chiều, `docs/ROADMAP.md`)
+
+- ☑ A1 hồ sơ nhiều người học · ☑ A2 kế hoạch tuần + mục tiêu ngày + nhắc luyện iOS · ☑ A3 mốc thời gian UTC · ☑ A4 backlog.
+- ☑ B1 onboarding `/welcome/` · ☑ B2 song ngữ Việt/Anh · ☑ B3 axe-core 0 vi phạm serious/critical trên 11 trang (Dynamic Type: chữ theo rem, chưa đo tay 200 %) · ☐ B4 ngoại tuyến có kiểm soát (service worker cache vỏ app đã có từ 1.0; chưa thêm test).
+- ☑ C1 công cụ pilot (`make pilot-export/report`, `docs/pilot.md`) — cần người Việt thu âm và người chấm · ☑ C2 thư viện giọng người thật (chỗ cắm + manifest giấy phép; chưa có clip) · ☑ C3 khóa 14 ngày.
+- ☑ D1 HTTPS từ xa (`docs/remote-access.md`) · ☑ D2 hồ sơ phát hành (`docs/release/`, trang `/privacy/`) — ký TestFlight cần Team · ☑ D3 Docker đã kiểm chứng (3,97 GB) · ☑ D4 CHANGELOG + 1.1.0 (tag sau khi CI xanh).
+- Việc của chủ dự án: thu hồi hai API key đã dán trong chat; chạy trên iPhone thật; pilot người Việt; clip giọng có giấy phép; Apple Team.

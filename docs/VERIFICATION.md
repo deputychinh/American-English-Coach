@@ -1,5 +1,21 @@
 # Kiểm chứng — cập nhật 2026-10-17 (bản hoàn thiện: 44 âm, gia sư AI, iOS, hardening)
 
+## Tự động (`make ci`, `main` 2026-10-17 chiều — bản 1.1.0)
+
+| Phần                                          | Kết quả                                                                                                                                                                                      |
+| --------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Backend                                       | ruff + mypy strict sạch (106 file); **97 test pass**, coverage **98,5 %** (hồ sơ, kế hoạch tuần, khóa học, thư viện giọng, pilot, migration 0003 trên DB cũ có dữ liệu)                      |
+| Web                                           | ESLint 0 cảnh báo, Stylelint sạch, tsc sạch; **85 test / 36 file**; build 10 route (`/welcome/`, `/course/`, `/privacy/` mới); test so khóa `en` ↔ `vi`                                      |
+| Playwright như CI (bản tĩnh + recognizer giả) | **48/48 pass** desktop + mobile: 12 hành trình (thêm hồ sơ, đổi ngôn ngữ, khóa học, onboarding) + **axe-core 11 trang, 0 vi phạm serious/critical**                                          |
+| Docker                                        | `aec-coach:test` build từ `backend/Dockerfile`: **3,97 GB** (trước 19,4 GB — torch CPU cho Linux); container `/ready` = ready, web root 200, `/course` trả 401 đúng vì client ngoài loopback |
+| iOS                                           | `cap sync` (10 plugin: thêm local-notifications, filesystem, share) + `xcodebuild` simulator **BUILD SUCCEEDED**; chạy trên iPhone 17 simulator, màn "Bắt đầu" lần đầu hiện đúng             |
+| Di trú DB                                     | DB thật nâng từ `0002` lên `0003` khi API reload: 38 lượt về hồ sơ `default`, hiệu chỉnh giữ nguyên                                                                                          |
+| CI GitHub                                     | Xanh trên `main` cho các commit hồ sơ, song ngữ, onboarding, pilot, a11y (lần đỏ duy nhất: selector e2e trùng chữ "đang dùng" trong câu gợi ý, đã sửa `exact: true`)                         |
+
+Chưa kiểm chứng: iPhone thật (camera, ghép nối LAN, thông báo nhắc luyện), Safari, clip giọng người thật (chưa có tệp có giấy phép), TestFlight (cần Team).
+
+---
+
 ## Tự động (`make ci`, chạy lại 2026-10-17)
 
 | Phần                                            | Kết quả                                                                                                                                                                 |

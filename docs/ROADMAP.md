@@ -19,7 +19,7 @@ Nguyên tắc không đổi: local-first (video không rời thiết bị), ba m
 | --- | ---------- | ----------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
 | B1  | ☑          | Onboarding lần đầu            | 3 bước: giới thiệu + quyền camera/mic, chọn/tạo hồ sơ, hiệu chỉnh 20 giây; chỉ hiện một lần; bỏ qua được; e2e                                 |
 | B2  | ☑          | Song ngữ hoàn chỉnh (AEC-015) | `en.ts` đủ khóa (kiểm tra bằng test so khóa với `vi`); đổi ngôn ngữ trong Cài đặt, nhớ lựa chọn; không còn chuỗi cứng trong component/service |
-| B3  | ☐          | Tiếp cận (a11y) và chữ lớn    | Kiểm tra VoiceOver/axe trên 7 trang; hỗ trợ Dynamic Type (rem-based, không cắt chữ ở 200 %); báo cáo lưu `docs/lighthouse/`                   |
+| B3  | ☑          | Tiếp cận (a11y) và chữ lớn    | Kiểm tra VoiceOver/axe trên 7 trang; hỗ trợ Dynamic Type (rem-based, không cắt chữ ở 200 %); báo cáo lưu `docs/lighthouse/`                   |
 | B4  | ☐          | Ngoại tuyến có kiểm soát      | Service worker cache vỏ ứng dụng + nội dung bài; trạng thái "không có máy chấm" vẫn xem bài, gương và lịch sử đã tải; test                    |
 
 ## Giai đoạn C — Chất lượng chấm và nội dung
@@ -35,8 +35,8 @@ Nguyên tắc không đổi: local-first (video không rời thiết bị), ba m
 | #   | Trạng thái | Hạng mục                           | Tiêu chí nghiệm thu                                                                                                                                                        |
 | --- | ---------- | ---------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | D1  | ☑          | HTTPS cho máy chấm từ xa (AEC-025) | Hướng dẫn Caddy và Tailscale; app chấp nhận `https://`; CORS cho origin https; kiểm tra tay                                                                                |
-| D2  | ☐          | Hồ sơ phát hành iOS (AEC-024)      | `docs/release/`: checklist TestFlight, văn bản App Store (vi/en), chính sách riêng tư, kích cỡ ảnh chụp, bump version/build theo tag; ký thật cần Apple Team của chủ dự án |
-| D3  | ◐          | Đóng gói Docker đã kiểm chứng      | `make up` build và chạy được, `/ready` xanh trong container                                                                                                                |
+| D2  | ☑          | Hồ sơ phát hành iOS (AEC-024)      | `docs/release/`: checklist TestFlight, văn bản App Store (vi/en), chính sách riêng tư, kích cỡ ảnh chụp, bump version/build theo tag; ký thật cần Apple Team của chủ dự án |
+| D3  | ☑          | Đóng gói Docker đã kiểm chứng      | `make up` build và chạy được, `/ready` xanh trong container                                                                                                                |
 | D4  | ◐          | Phiên bản và nhật ký thay đổi      | `CHANGELOG.md` theo Keep a Changelog; tag `v1.1.0` khi A–B xong                                                                                                            |
 
 ## Ngoài phạm vi tự làm (cần chủ dự án)
