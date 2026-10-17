@@ -34,4 +34,4 @@ Mỗi ticket có tiêu chí nghiệm thu; một commit Conventional Commit cho m
 | AEC-022 | ☐          | Giọng mẫu người thật                            | Bộ clip có giấy phép thay `say` cho 44 âm + câu                                                |
 | AEC-023 | ☐          | Pilot người Việt và bật `error` theo bằng chứng | Precision ≥ 0,85 trên tập người Việt; `enabled_errors.json` sinh từ dữ liệu thật               |
 | AEC-024 | ☐          | Phát hành iOS                                   | Ký với Team, TestFlight nội bộ, App Store metadata, ảnh chụp theo kích cỡ, chính sách riêng tư |
-| AEC-025 | ☐          | HTTPS cho máy chấm từ xa                        | Caddy/Tailscale; app chấp nhận `https://`                                                      |
+| AEC-025 | ☑          | HTTPS cho máy chấm từ xa                        | Caddy/Tailscale; app chấp nhận `https://`                                                      |

@@ -36,6 +36,8 @@ Trong app: **Cài đặt → Địa chỉ máy chấm** nhập `192.168.40.188:8
 | Địa chỉ máy chấm lúc chạy                                              | `web/src/utils/api-base.util.ts` (localStorage `coach.apiBaseUrl`), UI trong `SettingsPanel` |
 | CORS cho `capacitor://localhost` và địa chỉ LAN                        | `backend/app/config/settings.py` (`cors_origins`, `cors_origin_regex`)                       |
 
+Ngoài mạng nhà: xem [docs/remote-access.md](remote-access.md) (Tailscale hoặc Caddy, địa chỉ `https://`).
+
 ## Nhắc luyện
 
 Cài đặt → "Mục tiêu và nhắc luyện" lên lịch một thông báo cục bộ lặp hằng ngày (`@capacitor/local-notifications`, id 1). Lần đầu iOS hỏi quyền thông báo; nếu từ chối, app chỉ dẫn bật lại trong Cài đặt hệ thống. Trên web nút này tắt và ghi rõ chỉ có trong ứng dụng iOS. Xuất hồ sơ trên iOS ghi tệp vào thư mục cache rồi mở bảng chia sẻ (`@capacitor/filesystem` + `@capacitor/share`).

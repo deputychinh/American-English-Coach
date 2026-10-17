@@ -34,7 +34,7 @@ Nguyên tắc không đổi: local-first (video không rời thiết bị), ba m
 
 | #   | Trạng thái | Hạng mục                           | Tiêu chí nghiệm thu                                                                                                                                                        |
 | --- | ---------- | ---------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| D1  | ☐          | HTTPS cho máy chấm từ xa (AEC-025) | Hướng dẫn Caddy và Tailscale; app chấp nhận `https://`; CORS cho origin https; kiểm tra tay                                                                                |
+| D1  | ☑          | HTTPS cho máy chấm từ xa (AEC-025) | Hướng dẫn Caddy và Tailscale; app chấp nhận `https://`; CORS cho origin https; kiểm tra tay                                                                                |
 | D2  | ☐          | Hồ sơ phát hành iOS (AEC-024)      | `docs/release/`: checklist TestFlight, văn bản App Store (vi/en), chính sách riêng tư, kích cỡ ảnh chụp, bump version/build theo tag; ký thật cần Apple Team của chủ dự án |
 | D3  | ☐          | Đóng gói Docker đã kiểm chứng      | `make up` build và chạy được, `/ready` xanh trong container                                                                                                                |
 | D4  | ☐          | Phiên bản và nhật ký thay đổi      | `CHANGELOG.md` theo Keep a Changelog; tag `v1.1.0` khi A–B xong                                                                                                            |

@@ -57,7 +57,7 @@ Chi tiết: [docs/architecture/README.md](docs/architecture/README.md), quyết 
 
 ## Ứng dụng iOS
 
-`web/ios/` là app iOS (Capacitor + Swift host) bọc đúng bản web: camera, thu âm và giao diện chạy trong app; máy chấm chạy trên Mac cùng mạng Wi‑Fi. `make ios-run` build và mở trên simulator; `make api-lan` + `make ios-open` để chạy trên iPhone thật (nhập địa chỉ máy chấm trong Tiến độ → Cài đặt). Chi tiết: [docs/ios.md](docs/ios.md).
+`web/ios/` là app iOS (Capacitor + Swift host) bọc đúng bản web: camera, thu âm và giao diện chạy trong app; máy chấm chạy trên Mac cùng mạng Wi‑Fi. `make ios-run` build và mở trên simulator; `make api-lan` + `make ios-open` để chạy trên iPhone thật (nhập địa chỉ máy chấm trong Tiến độ → Cài đặt). Chi tiết: [docs/ios.md](docs/ios.md); dùng từ xa qua HTTPS: [docs/remote-access.md](docs/remote-access.md).
 
 ## Riêng tư
 
