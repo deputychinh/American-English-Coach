@@ -7,6 +7,7 @@ Theo [Keep a Changelog](https://keepachangelog.com/vi/1.1.0/); phiên bản theo
 ### Thêm
 
 - Màn Gương làm lại cho điện thoại theo mẫu ứng dụng camera (`docs/design/mobile-mirror.md`): camera cạnh-sát-cạnh, "bóng mờ" mẫu môi căn theo miệng thật, vòng điểm khớp 0–100 % ba màu, một gợi ý chỉnh duy nhất bằng câu tự nhiên, chip trạng thái từng đặc trưng, chi tiết thu gọn, sheet chọn âm 44 âm có tìm kiếm; rung và âm báo khi giữ đúng. Hiệu chỉnh dùng cùng sân khấu camera. Trên điện thoại, màn camera ẩn header/footer; các màn khác bỏ footer (link chính sách nằm trong Cài đặt).
+- Lộ trình phát âm chuẩn (`content/curriculum.json`, `GET /curriculum`, trang `/curriculum/`): cấp 1 với 6 đơn vị, mỗi đơn vị 5 bước (xem khẩu hình, nghe phân biệt, luyện có chấm, shadowing, hội thoại); tiến độ theo hồ sơ; nội dung được kiểm tra chéo với âm, cặp và câu khi khởi động.
 - App iOS: `make ios-device` build ký, cài và mở app trên iPhone thật với địa chỉ Mac nhúng sẵn; banner và lỗi 401 chỉ dẫn ghép nối bằng tiếng Việt; thẻ Ghép nối lên đầu Cài đặt trong vỏ native.
 
 - Ngoại tuyến có kiểm soát: service worker phiên bản theo build id precache toàn bộ vỏ ứng dụng; nội dung bài, khóa học, kế hoạch, tiến độ, hiệu chỉnh và giọng mẫu được giữ lại theo hồ sơ nên vẫn xem được khi máy chấm không chạy; `/health`, `/ready` và chấm điểm không bao giờ qua cache. Unit test chạy `sw.js` trong `node:vm` và e2e `offline.spec.ts`.

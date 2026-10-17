@@ -143,6 +143,21 @@ test('the course lists 14 days with the current one open', async ({ page }, info
   await shot(page, 'course', info.project.name);
 });
 
+test('the curriculum lists levels and opens the current unit with five steps', async ({
+  page,
+}, info) => {
+  await page.goto('/curriculum/');
+  await expect(page.getByRole('heading', { name: 'Lộ trình phát âm chuẩn' })).toBeVisible();
+  await expect(page.locator('.curriculum-screen__unit')).toHaveCount(6);
+  await expect(page.locator('details[open]')).toHaveCount(1);
+  await expect(page.locator('details[open] .unit-steps__step')).toHaveCount(5);
+  await expect(page.locator('details[open] .unit-steps__chip').first()).toHaveAttribute(
+    'href',
+    /sounds/,
+  );
+  await shot(page, 'curriculum', info.project.name);
+});
+
 test('the interface switches to English and back from settings', async ({ page }) => {
   await page.goto('/settings/');
   await page.getByRole('tab', { name: 'English' }).click();

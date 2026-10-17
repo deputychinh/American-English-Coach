@@ -25,6 +25,7 @@ from app.routes import (
     audio,
     content,
     course,
+    curriculum,
     health,
     pair,
     plan,
@@ -156,6 +157,7 @@ def create_app(
         profiles.router,
         plan.router,
         course.router,
+        curriculum.router,
     )
     for router in routers:
         app.include_router(router, prefix=API_PREFIX)

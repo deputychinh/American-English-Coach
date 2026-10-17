@@ -33,7 +33,11 @@ export const CourseScreen = (): ReactElement => {
 
   return (
     <div className="course-screen">
-      <PageIntro title={copy.course.title} lead={copy.course.lead} />
+      <PageIntro title={copy.course.title} lead={copy.course.lead}>
+        <Link href="/curriculum" className="button button--ghost">
+          {copy.curriculum.title}
+        </Link>
+      </PageIntro>
       {status === AsyncStatus.Loading ? <Skeleton lines={6} /> : null}
       {status === AsyncStatus.Error ? <ErrorState message={error ?? ''} onRetry={reload} /> : null}
       {data ? (

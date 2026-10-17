@@ -228,6 +228,26 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  '/api/v1/curriculum': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /**
+     * Curriculum
+     * @description Levels and units; progress counts scored runs of each unit's controlled step.
+     */
+    get: operations['curriculum_api_v1_curriculum_get'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   '/api/v1/health': {
     parameters: {
       query?: never;
@@ -590,6 +610,34 @@ export interface components {
       seconds: number;
     };
     /**
+     * CommunicateStep
+     * @description Step 5: use the target in free speech.
+     */
+    CommunicateStep: {
+      /**
+       * @description discriminator enum property added by openapi-typescript
+       * @enum {string}
+       */
+      kind: CommunicateStepKind;
+      /** Scenario Vi */
+      scenario_vi: string;
+      /** Target Words */
+      target_words: string[];
+    };
+    /**
+     * ControlledStep
+     * @description Step 3: scored repetition of words, pairs and sentences.
+     */
+    ControlledStep: {
+      /** Items */
+      items: components['schemas']['CourseItemRef'][];
+      /**
+       * @description discriminator enum property added by openapi-typescript
+       * @enum {string}
+       */
+      kind: ControlledStepKind;
+    };
+    /**
      * CourseDayModel
      * @description One day of the course.
      */
@@ -635,6 +683,19 @@ export interface components {
       runs: number;
     };
     /**
+     * CourseItemRef
+     * @description A content reference as written in `content/course.json`.
+     */
+    CourseItemRef: {
+      /** Id */
+      id: string;
+      /**
+       * Kind
+       * @enum {string}
+       */
+      kind: CourseItemRefKind;
+    };
+    /**
      * CourseResponse
      * @description All days plus which one to do next.
      */
@@ -647,6 +708,52 @@ export interface components {
       days: components['schemas']['CourseDayModel'][];
       /** Total Days */
       total_days: number;
+    };
+    /**
+     * CurriculumResponse
+     * @description All levels plus which unit to do next.
+     */
+    CurriculumResponse: {
+      /** Completed Units */
+      completed_units: number;
+      /** Current Unit */
+      current_unit: string;
+      /** Levels */
+      levels: components['schemas']['LevelModel'][];
+      /** Total Units */
+      total_units: number;
+    };
+    /**
+     * DescribeStep
+     * @description Step 1: what the sounds look and feel like.
+     */
+    DescribeStep: {
+      /**
+       * @description discriminator enum property added by openapi-typescript
+       * @enum {string}
+       */
+      kind: DescribeStepKind;
+      /** Notes Vi */
+      notes_vi: string;
+      /** Sounds */
+      sounds: string[];
+    };
+    /**
+     * DiscriminateStep
+     * @description Step 2: listening, before speaking.
+     */
+    DiscriminateStep: {
+      /** Focus */
+      focus: components['schemas']['FocusWordItem'][];
+      /**
+       * @description discriminator enum property added by openapi-typescript
+       * @enum {string}
+       */
+      kind: DiscriminateStepKind;
+      /** Pairs */
+      pairs: string[];
+      /** Stress */
+      stress: components['schemas']['StressItem'][];
     };
     /**
      * DrillSentence
@@ -742,6 +849,29 @@ export interface components {
      * @enum {string}
      */
     FocusReason: FocusReason;
+    /**
+     * FocusWordItem
+     * @description A sentence whose focus word the learner must hear.
+     */
+    FocusWordItem: {
+      /** Sentence */
+      sentence: string;
+      /** Word */
+      word: string;
+    };
+    /**
+     * GuidedStep
+     * @description Step 4: shadowing sentences with the model voice.
+     */
+    GuidedStep: {
+      /**
+       * @description discriminator enum property added by openapi-typescript
+       * @enum {string}
+       */
+      kind: GuidedStepKind;
+      /** Sentences */
+      sentences: string[];
+    };
     /** HTTPValidationError */
     HTTPValidationError: {
       /** Detail */
@@ -802,6 +932,24 @@ export interface components {
       /** Priority */
       priority: number;
       viseme_group: components['schemas']['VisemeGroup'] | null;
+    };
+    /**
+     * LevelModel
+     * @description A level with its units and how many are done.
+     */
+    LevelModel: {
+      /** Done Units */
+      done_units: number;
+      /** Goal Vi */
+      goal_vi: string;
+      /** Id */
+      id: string;
+      /** Title En */
+      title_en: string;
+      /** Title Vi */
+      title_vi: string;
+      /** Units */
+      units: components['schemas']['UnitModel'][];
     };
     /**
      * MinimalPair
@@ -1169,6 +1317,18 @@ export interface components {
       word_count: number;
     };
     /**
+     * StressItem
+     * @description A word whose stressed syllable the learner must hear.
+     */
+    StressItem: {
+      /** Stressed */
+      stressed: number;
+      /** Syllables */
+      syllables: string[];
+      /** Word */
+      word: string;
+    };
+    /**
      * TutorReply
      * @description The tutor's Vietnamese text and the model that wrote it.
      */
@@ -1177,6 +1337,55 @@ export interface components {
       model: string;
       /** Text Vi */
       text_vi: string;
+    };
+    /**
+     * UnitModel
+     * @description A unit with its place in the sequence and the profile's progress.
+     */
+    UnitModel: {
+      /** Days */
+      days: number;
+      /** Focus Sounds */
+      focus_sounds: string[];
+      /** Goal Vi */
+      goal_vi: string;
+      /** Id */
+      id: string;
+      /** Index */
+      index: number;
+      /** Level */
+      level: string;
+      /** Minutes */
+      minutes: number;
+      progress: components['schemas']['UnitProgressModel'];
+      /** Steps */
+      steps: (
+        | components['schemas']['DescribeStep']
+        | components['schemas']['DiscriminateStep']
+        | components['schemas']['ControlledStep']
+        | components['schemas']['GuidedStep']
+        | components['schemas']['CommunicateStep']
+      )[];
+      /** Title En */
+      title_en: string;
+      /** Title Vi */
+      title_vi: string;
+      /** Vn Error Vi */
+      vn_error_vi: string;
+    };
+    /**
+     * UnitProgressModel
+     * @description Scored-run progress of the controlled step, as the course counts it.
+     */
+    UnitProgressModel: {
+      /** Done Ids */
+      done_ids: string[];
+      /** Done Items */
+      done_items: number;
+      /** Is Done */
+      is_done: boolean;
+      /** Total Items */
+      total_items: number;
     };
     /** ValidationError */
     ValidationError: {
@@ -1572,6 +1781,37 @@ export interface operations {
         };
         content: {
           'application/json': components['schemas']['CourseResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  curriculum_api_v1_curriculum_get: {
+    parameters: {
+      query?: never;
+      header?: {
+        'x-coach-profile'?: string | null;
+      };
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['CurriculumResponse'];
         };
       };
       /** @description Validation Error */
@@ -2035,15 +2275,35 @@ export interface operations {
     };
   };
 }
+export enum CommunicateStepKind {
+  communicate = 'communicate',
+}
+export enum ControlledStepKind {
+  controlled = 'controlled',
+}
 export enum CourseItemModelKind {
   sound = 'sound',
   pair = 'pair',
   sentence = 'sentence',
 }
+export enum CourseItemRefKind {
+  sound = 'sound',
+  pair = 'pair',
+  sentence = 'sentence',
+}
+export enum DescribeStepKind {
+  describe = 'describe',
+}
+export enum DiscriminateStepKind {
+  discriminate = 'discriminate',
+}
 export enum FocusReason {
   weak = 'weak',
   review = 'review',
   new = 'new',
+}
+export enum GuidedStepKind {
+  guided = 'guided',
 }
 export enum ProsodyAspect {
   word_stress = 'word_stress',

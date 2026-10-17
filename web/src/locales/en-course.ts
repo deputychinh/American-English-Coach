@@ -1,7 +1,7 @@
 import type { Copy } from '@/interfaces/copy.interface';
 
 /** English course, onboarding and privacy copy. */
-export const enCourse: Pick<Copy, 'privacy' | 'course' | 'onboarding'> = {
+export const enCourse: Pick<Copy, 'privacy' | 'course' | 'onboarding' | 'curriculum'> = {
   privacy: {
     title: 'Privacy policy',
     updated:
@@ -50,6 +50,40 @@ export const enCourse: Pick<Copy, 'privacy' | 'course' | 'onboarding'> = {
     runs: (count: number): string => `${count} recordings`,
     notYet: 'Not yet',
     loadFailed: 'Could not load the course from the scoring server.',
+  },
+  curriculum: {
+    title: 'Clear pronunciation path',
+    lead: 'Four levels; each unit is 4–5 days × 10–15 minutes in a five-step loop: see the mouth shape, listen and discriminate, scored practice, shadowing, use it in conversation. Units are ordered by the errors Vietnamese speakers make most.',
+    quickPath: '14-day quick path',
+    statDone: 'Units completed',
+    statCurrent: 'In progress',
+    unitShort: (index: number): string => `Unit ${index}`,
+    levelTitle: (id: string, title: string): string => `Level ${id.replace('L', '')} · ${title}`,
+    unitsDone: (done: number, total: number): string => `${done}/${total} units`,
+    meta: (days: number, minutes: number): string => `${days} days · ${minutes} min/day`,
+    currentBadge: 'In progress',
+    doneBadge: 'Done',
+    vnError: 'Common Vietnamese error',
+    steps: {
+      describe: 'See the mouth shape',
+      discriminate: 'Listen and discriminate',
+      controlled: 'Scored practice',
+      guided: 'Shadowing',
+      communicate: 'Use it in conversation',
+    },
+    discriminateSummary: (pairs: number, stress: number, focus: number): string =>
+      [
+        pairs ? `${pairs} word pairs` : '',
+        stress ? `${stress} stress words` : '',
+        focus ? `${focus} focus-word sentences` : '',
+      ]
+        .filter(Boolean)
+        .join(' · '),
+    comingSoon: 'Coming soon',
+    proSoon: 'Pro · coming soon',
+    targetWords: 'Target words',
+    itemDone: 'scored',
+    loadFailed: 'Could not load the path from the scoring server.',
   },
   onboarding: {
     title: 'Getting started with American English Coach',

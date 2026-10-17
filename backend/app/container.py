@@ -25,6 +25,7 @@ from app.services.assessment_service import AssessmentService
 from app.services.audio_service import AudioService
 from app.services.content_service import ContentService
 from app.services.course_service import CourseService
+from app.services.curriculum_service import CurriculumService
 from app.services.plan_service import PlanService
 from app.services.profile_service import ProfileService
 from app.services.progress_service import ProgressService
@@ -153,6 +154,11 @@ class AppContainer:
     def course(self) -> CourseService:
         """The 14-day course."""
         return CourseService(self.settings.content_dir, self.content, self.results)
+
+    @cached_property
+    def curriculum(self) -> CurriculumService:
+        """The levelled curriculum."""
+        return CurriculumService(self.settings.content_dir, self.content, self.results)
 
     @cached_property
     def plan(self) -> PlanService:

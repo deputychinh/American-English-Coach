@@ -104,6 +104,7 @@ export const en: Copy = {
   },
   privacy: enCourse.privacy,
   course: enCourse.course,
+  curriculum: enCourse.curriculum,
   onboarding: enCourse.onboarding,
   plan: enSettings.plan,
   practice: enPractice.practice,

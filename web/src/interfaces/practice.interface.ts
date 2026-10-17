@@ -25,6 +25,11 @@ export type PlanFocus = components['schemas']['PlanFocus'];
 export type CourseResponse = components['schemas']['CourseResponse'];
 export type CourseDay = components['schemas']['CourseDayModel'];
 export type CourseItem = components['schemas']['CourseItemModel'];
+export type CurriculumResponse = components['schemas']['CurriculumResponse'];
+export type CurriculumLevel = components['schemas']['LevelModel'];
+export type CurriculumUnit = components['schemas']['UnitModel'];
+export type CurriculumStep = CurriculumUnit['steps'][number];
+export type CurriculumItemRef = components['schemas']['CourseItemRef'];
 
 /** The profile this device works in (stored locally; the API is told through a header). */
 export interface ActiveProfile {

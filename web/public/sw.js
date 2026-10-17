@@ -23,6 +23,7 @@ const SHELL = [
   '/course/',
   '/welcome/',
   '/privacy/',
+  '/curriculum/',
   '/manifest.webmanifest',
   '/theme.js',
   '/icons/icon.svg',
@@ -34,6 +35,7 @@ const SHELL = [
 const OFFLINE_API = [
   '/api/v1/content/',
   '/api/v1/course',
+  '/api/v1/curriculum',
   '/api/v1/plan',
   '/api/v1/progress',
   '/api/v1/profiles',

@@ -12,6 +12,7 @@ const ROUTES = [
   '/progress/',
   '/settings/',
   '/course/',
+  '/curriculum/',
   '/privacy/',
 ];
 

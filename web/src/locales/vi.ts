@@ -98,6 +98,7 @@ export const vi = {
   },
   privacy: viCourse.privacy,
   course: viCourse.course,
+  curriculum: viCourse.curriculum,
   onboarding: viCourse.onboarding,
   plan: viSettings.plan,
   practice: viPractice.practice,

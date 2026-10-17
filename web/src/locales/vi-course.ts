@@ -49,6 +49,40 @@ export const viCourse = {
     notYet: 'Chưa luyện',
     loadFailed: 'Không tải được khóa học từ máy chấm.',
   },
+  curriculum: {
+    title: 'Lộ trình phát âm chuẩn',
+    lead: 'Bốn cấp, mỗi đơn vị 4–5 ngày × 10–15 phút theo một vòng năm bước: xem khẩu hình, nghe phân biệt, luyện có chấm, shadowing, dùng trong hội thoại. Thứ tự bài đi từ lỗi người Việt hay mắc nhất.',
+    quickPath: 'Lộ trình nhanh 14 ngày',
+    statDone: 'Đơn vị đã xong',
+    statCurrent: 'Đang học',
+    unitShort: (index: number): string => `Đơn vị ${index}`,
+    levelTitle: (id: string, title: string): string => `Cấp ${id.replace('L', '')} · ${title}`,
+    unitsDone: (done: number, total: number): string => `${done}/${total} đơn vị`,
+    meta: (days: number, minutes: number): string => `${days} ngày · ${minutes} phút/ngày`,
+    currentBadge: 'Đang học',
+    doneBadge: 'Đã xong',
+    vnError: 'Người Việt hay mắc',
+    steps: {
+      describe: 'Xem khẩu hình',
+      discriminate: 'Nghe phân biệt',
+      controlled: 'Luyện có chấm',
+      guided: 'Shadowing',
+      communicate: 'Dùng trong hội thoại',
+    },
+    discriminateSummary: (pairs: number, stress: number, focus: number): string =>
+      [
+        pairs ? `${pairs} cặp từ` : '',
+        stress ? `${stress} từ trọng âm` : '',
+        focus ? `${focus} câu từ trọng tâm` : '',
+      ]
+        .filter(Boolean)
+        .join(' · '),
+    comingSoon: 'Sắp có',
+    proSoon: 'Gói Pro · sắp có',
+    targetWords: 'Từ mục tiêu',
+    itemDone: 'đã chấm',
+    loadFailed: 'Không tải được lộ trình từ máy chấm.',
+  },
   onboarding: {
     title: 'Bắt đầu với American English Coach',
     lead: 'Ba bước, khoảng một phút: quyền truy cập, hồ sơ của bạn và hiệu chỉnh khẩu hình.',
