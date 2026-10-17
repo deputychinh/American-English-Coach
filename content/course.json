@@ -1,0 +1,384 @@
+[
+  {
+    "id": "day01",
+    "title_vi": "Âm cuối /p/ /t/ /k/",
+    "title_en": "Final /p/ /t/ /k/",
+    "goal_vi": "Không nuốt âm cuối: khép môi, chạm lưỡi, dù không bật hơi.",
+    "minutes": 12,
+    "items": [
+      {
+        "kind": "sound",
+        "id": "c01"
+      },
+      {
+        "kind": "sound",
+        "id": "c03"
+      },
+      {
+        "kind": "sound",
+        "id": "c05"
+      },
+      {
+        "kind": "pair",
+        "id": "cap-cat"
+      }
+    ]
+  },
+  {
+    "id": "day02",
+    "title_vi": "Âm cuối /s/ /z/ và đuôi -s",
+    "title_en": "Final /s/ /z/ and the -s ending",
+    "goal_vi": "Đuôi số nhiều và ngôi ba phải nghe thấy.",
+    "minutes": 12,
+    "items": [
+      {
+        "kind": "sound",
+        "id": "c11"
+      },
+      {
+        "kind": "sound",
+        "id": "c12"
+      },
+      {
+        "kind": "pair",
+        "id": "cats-cat"
+      },
+      {
+        "kind": "sentence",
+        "id": "s7"
+      }
+    ]
+  },
+  {
+    "id": "day03",
+    "title_vi": "Âm cuối /t/ /d/ và đuôi -ed",
+    "title_en": "Final /t/ /d/ and the -ed ending",
+    "goal_vi": "Phân biệt worked/work; đuôi -ed không thêm âm tiết.",
+    "minutes": 12,
+    "items": [
+      {
+        "kind": "sound",
+        "id": "c04"
+      },
+      {
+        "kind": "pair",
+        "id": "worked-work"
+      },
+      {
+        "kind": "sentence",
+        "id": "s5"
+      }
+    ]
+  },
+  {
+    "id": "day04",
+    "title_vi": "Âm /θ/ (th không rung)",
+    "title_en": "The voiceless th /θ/",
+    "goal_vi": "Đầu lưỡi lộ ra giữa hai hàm răng, không thay bằng /t/ hay /s/.",
+    "minutes": 15,
+    "items": [
+      {
+        "kind": "sound",
+        "id": "c09"
+      },
+      {
+        "kind": "pair",
+        "id": "think-sink"
+      },
+      {
+        "kind": "pair",
+        "id": "think-tink"
+      },
+      {
+        "kind": "sentence",
+        "id": "s1"
+      }
+    ]
+  },
+  {
+    "id": "day05",
+    "title_vi": "Âm /ð/ (th rung)",
+    "title_en": "The voiced th /ð/",
+    "goal_vi": "this, the, that: lưỡi giữa răng và dây thanh rung.",
+    "minutes": 12,
+    "items": [
+      {
+        "kind": "sound",
+        "id": "c10"
+      },
+      {
+        "kind": "pair",
+        "id": "this-dis"
+      },
+      {
+        "kind": "sentence",
+        "id": "s9"
+      }
+    ]
+  },
+  {
+    "id": "day06",
+    "title_vi": "/ʃ/ /tʃ/ /ʒ/ /dʒ/",
+    "title_en": "/ʃ/ /tʃ/ /ʒ/ /dʒ/",
+    "goal_vi": "Môi chu, lưỡi lùi; she khác see, chip khác sip.",
+    "minutes": 15,
+    "items": [
+      {
+        "kind": "sound",
+        "id": "c13"
+      },
+      {
+        "kind": "sound",
+        "id": "c16"
+      },
+      {
+        "kind": "sound",
+        "id": "c17"
+      },
+      {
+        "kind": "pair",
+        "id": "she-see"
+      },
+      {
+        "kind": "pair",
+        "id": "chip-sip"
+      },
+      {
+        "kind": "sentence",
+        "id": "s2"
+      }
+    ]
+  },
+  {
+    "id": "day07",
+    "title_vi": "/v/ với /w/ và /f/",
+    "title_en": "/v/ versus /w/ and /f/",
+    "goal_vi": "Môi dưới chạm răng trên cho /v/ /f/; môi tròn cho /w/.",
+    "minutes": 15,
+    "items": [
+      {
+        "kind": "sound",
+        "id": "c08"
+      },
+      {
+        "kind": "sound",
+        "id": "c24"
+      },
+      {
+        "kind": "sound",
+        "id": "c07"
+      },
+      {
+        "kind": "pair",
+        "id": "vest-west"
+      },
+      {
+        "kind": "pair",
+        "id": "very-wary"
+      },
+      {
+        "kind": "pair",
+        "id": "live-life"
+      },
+      {
+        "kind": "sentence",
+        "id": "s3"
+      }
+    ]
+  },
+  {
+    "id": "day08",
+    "title_vi": "Nguyên âm dài–ngắn /iː/ /ɪ/",
+    "title_en": "Long and short /iː/ /ɪ/",
+    "goal_vi": "seat/sit: độ căng môi và độ dài khác nhau.",
+    "minutes": 12,
+    "items": [
+      {
+        "kind": "sound",
+        "id": "v01"
+      },
+      {
+        "kind": "sound",
+        "id": "v02"
+      },
+      {
+        "kind": "pair",
+        "id": "seat-sit"
+      }
+    ]
+  },
+  {
+    "id": "day09",
+    "title_vi": "/æ/ /ɛ/ /ʌ/",
+    "title_en": "/æ/ /ɛ/ /ʌ/",
+    "goal_vi": "bad/bed: hàm mở rộng hơn cho /æ/.",
+    "minutes": 12,
+    "items": [
+      {
+        "kind": "sound",
+        "id": "v04"
+      },
+      {
+        "kind": "sound",
+        "id": "v03"
+      },
+      {
+        "kind": "sound",
+        "id": "v10"
+      },
+      {
+        "kind": "pair",
+        "id": "bad-bed"
+      }
+    ]
+  },
+  {
+    "id": "day10",
+    "title_vi": "/uː/ /ʊ/ và /ɔ/ /oʊ/",
+    "title_en": "/uː/ /ʊ/ and /ɔ/ /oʊ/",
+    "goal_vi": "pool/pull; /oʊ/ là nguyên âm đôi, môi tròn dần.",
+    "minutes": 12,
+    "items": [
+      {
+        "kind": "sound",
+        "id": "v09"
+      },
+      {
+        "kind": "sound",
+        "id": "v08"
+      },
+      {
+        "kind": "sound",
+        "id": "v07"
+      },
+      {
+        "kind": "sound",
+        "id": "d04"
+      },
+      {
+        "kind": "pair",
+        "id": "pool-pull"
+      },
+      {
+        "kind": "sentence",
+        "id": "s4"
+      }
+    ]
+  },
+  {
+    "id": "day11",
+    "title_vi": "/ɹ/ /l/ và nguyên âm r",
+    "title_en": "/ɹ/ /l/ and r-coloured vowels",
+    "goal_vi": "right/light; /ɝ/ cuộn lưỡi, không chạm vòm.",
+    "minutes": 15,
+    "items": [
+      {
+        "kind": "sound",
+        "id": "c22"
+      },
+      {
+        "kind": "sound",
+        "id": "c21"
+      },
+      {
+        "kind": "sound",
+        "id": "v11"
+      },
+      {
+        "kind": "pair",
+        "id": "right-light"
+      },
+      {
+        "kind": "sentence",
+        "id": "s6"
+      }
+    ]
+  },
+  {
+    "id": "day12",
+    "title_vi": "Nguyên âm đôi",
+    "title_en": "Diphthongs",
+    "goal_vi": "Khẩu hình chuyển động từ đầu tới cuối âm.",
+    "minutes": 12,
+    "items": [
+      {
+        "kind": "sound",
+        "id": "d01"
+      },
+      {
+        "kind": "sound",
+        "id": "d02"
+      },
+      {
+        "kind": "sound",
+        "id": "d05"
+      },
+      {
+        "kind": "sound",
+        "id": "d03"
+      },
+      {
+        "kind": "sentence",
+        "id": "s8"
+      }
+    ]
+  },
+  {
+    "id": "day13",
+    "title_vi": "Trọng âm và nhịp",
+    "title_en": "Stress and rhythm",
+    "goal_vi": "Âm tiết nhấn dài hơn; /ə/ ở âm tiết không nhấn.",
+    "minutes": 12,
+    "items": [
+      {
+        "kind": "sound",
+        "id": "v12"
+      },
+      {
+        "kind": "sentence",
+        "id": "s3"
+      },
+      {
+        "kind": "sentence",
+        "id": "s6"
+      },
+      {
+        "kind": "sentence",
+        "id": "s9"
+      }
+    ]
+  },
+  {
+    "id": "day14",
+    "title_vi": "Ngữ điệu câu hỏi và tổng ôn",
+    "title_en": "Question intonation and review",
+    "goal_vi": "Câu hỏi yes/no lên giọng, câu hỏi wh- xuống; ôn các cặp khó nhất.",
+    "minutes": 15,
+    "items": [
+      {
+        "kind": "sentence",
+        "id": "s5"
+      },
+      {
+        "kind": "sentence",
+        "id": "s8"
+      },
+      {
+        "kind": "sentence",
+        "id": "s10"
+      },
+      {
+        "kind": "pair",
+        "id": "stop-stuff"
+      },
+      {
+        "kind": "pair",
+        "id": "think-sink"
+      },
+      {
+        "kind": "pair",
+        "id": "vest-west"
+      }
+    ]
+  }
+]

@@ -15,6 +15,7 @@ from app.ml.audio import AudioDecoder
 from app.ml.features import ProsodyFeatureExtractor
 from app.ml.llm_client import ChatClient
 from app.ml.tts import SpeechSynthesizer
+from app.ml.voice_library import VoiceLibrary
 from app.repositories.calibration_repository import CalibrationRepository
 from app.repositories.device_repository import DeviceRepository
 from app.repositories.profile_repository import ProfileRepository
@@ -23,6 +24,7 @@ from app.security import new_pairing_code
 from app.services.assessment_service import AssessmentService
 from app.services.audio_service import AudioService
 from app.services.content_service import ContentService
+from app.services.course_service import CourseService
 from app.services.plan_service import PlanService
 from app.services.profile_service import ProfileService
 from app.services.progress_service import ProgressService
@@ -131,14 +133,26 @@ class AppContainer:
         return ContentService(self.settings.content_dir, self.catalog, self.visemes)
 
     @cached_property
+    def voices(self) -> VoiceLibrary:
+        """Licensed human clips (content/voice)."""
+        return VoiceLibrary(self.settings.content_dir / "voice")
+
+    @cached_property
     def audio(self) -> AudioService:
-        """Reference audio."""
-        return AudioService(SpeechSynthesizer(self.settings.audio_dir, self.settings.tts_voice))
+        """Reference audio: human clip first, then local TTS."""
+        return AudioService(
+            SpeechSynthesizer(self.settings.audio_dir, self.settings.tts_voice), self.voices
+        )
 
     @cached_property
     def progress(self) -> ProgressService:
         """Progress dashboard."""
         return ProgressService(self.results, self.calibration)
+
+    @cached_property
+    def course(self) -> CourseService:
+        """The 14-day course."""
+        return CourseService(self.settings.content_dir, self.content, self.results)
 
     @cached_property
     def plan(self) -> PlanService:

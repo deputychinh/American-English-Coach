@@ -180,6 +180,124 @@
         "title": "CalibrationStep",
         "type": "object"
       },
+      "CourseDayModel": {
+        "description": "One day of the course.",
+        "properties": {
+          "done_items": {
+            "title": "Done Items",
+            "type": "integer"
+          },
+          "goal_vi": {
+            "title": "Goal Vi",
+            "type": "string"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "index": {
+            "title": "Index",
+            "type": "integer"
+          },
+          "is_done": {
+            "title": "Is Done",
+            "type": "boolean"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/CourseItemModel"
+            },
+            "title": "Items",
+            "type": "array"
+          },
+          "minutes": {
+            "title": "Minutes",
+            "type": "integer"
+          },
+          "title_en": {
+            "title": "Title En",
+            "type": "string"
+          },
+          "title_vi": {
+            "title": "Title Vi",
+            "type": "string"
+          },
+          "total_items": {
+            "title": "Total Items",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "id",
+          "index",
+          "title_vi",
+          "title_en",
+          "goal_vi",
+          "minutes",
+          "items",
+          "done_items",
+          "total_items",
+          "is_done"
+        ],
+        "title": "CourseDayModel",
+        "type": "object"
+      },
+      "CourseItemModel": {
+        "description": "One practice item of a day with the learner's run count.",
+        "properties": {
+          "done": {
+            "title": "Done",
+            "type": "boolean"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "kind": {
+            "enum": ["sound", "pair", "sentence"],
+            "title": "Kind",
+            "type": "string"
+          },
+          "label": {
+            "title": "Label",
+            "type": "string"
+          },
+          "runs": {
+            "title": "Runs",
+            "type": "integer"
+          }
+        },
+        "required": ["kind", "id", "label", "runs", "done"],
+        "title": "CourseItemModel",
+        "type": "object"
+      },
+      "CourseResponse": {
+        "description": "All days plus which one to do next.",
+        "properties": {
+          "completed_days": {
+            "title": "Completed Days",
+            "type": "integer"
+          },
+          "current_day": {
+            "title": "Current Day",
+            "type": "string"
+          },
+          "days": {
+            "items": {
+              "$ref": "#/components/schemas/CourseDayModel"
+            },
+            "title": "Days",
+            "type": "array"
+          },
+          "total_days": {
+            "title": "Total Days",
+            "type": "integer"
+          }
+        },
+        "required": ["days", "current_day", "completed_days", "total_days"],
+        "title": "CourseResponse",
+        "type": "object"
+      },
       "DrillSentence": {
         "description": "A practice sentence with its intonation kind.",
         "properties": {
@@ -1613,7 +1731,7 @@
     },
     "/api/v1/audio": {
       "get": {
-        "description": "WAV of the prompt spoken by the local American voice (cached).",
+        "description": "WAV of the prompt: a licensed human clip when available, else the local voice (cached).",
         "operationId": "audio_api_v1_audio_get",
         "parameters": [
           {
@@ -1933,6 +2051,55 @@
         },
         "summary": "Visemes",
         "tags": ["content"]
+      }
+    },
+    "/api/v1/course": {
+      "get": {
+        "description": "Days, items and which day to do next.",
+        "operationId": "course_api_v1_course_get",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "x-coach-profile",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "maxLength": 32,
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Coach-Profile"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CourseResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Course",
+        "tags": ["course"]
       }
     },
     "/api/v1/health": {

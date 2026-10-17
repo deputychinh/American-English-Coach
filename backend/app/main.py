@@ -20,7 +20,18 @@ from app.errors import DomainError
 from app.logging_setup import configure_logging
 from app.middleware import request_context
 from app.ml.llm_client import ChatClient
-from app.routes import assess, audio, content, health, pair, plan, profiles, progress, tutor
+from app.routes import (
+    assess,
+    audio,
+    content,
+    course,
+    health,
+    pair,
+    plan,
+    profiles,
+    progress,
+    tutor,
+)
 from app.security import TOKEN_HEADER, requires_token
 
 logger = logging.getLogger(__name__)
@@ -141,6 +152,7 @@ def create_app(
         pair.router,
         profiles.router,
         plan.router,
+        course.router,
     )
     for router in routers:
         app.include_router(router, prefix=API_PREFIX)

@@ -14,6 +14,11 @@ def audio(
     text: str = Query(..., min_length=1, max_length=200),
     container: AppContainer = Depends(get_container),
 ) -> FileResponse:
-    """WAV of the prompt spoken by the local American voice (cached)."""
+    """WAV of the prompt: a licensed human clip when available, else the local voice (cached)."""
     path = container.audio.reference(text)
-    return FileResponse(path, media_type="audio/wav", headers={"Cache-Control": "max-age=86400"})
+    source = "human" if container.audio.is_human(text) else "tts"
+    return FileResponse(
+        path,
+        media_type="audio/wav",
+        headers={"Cache-Control": "max-age=86400", "X-Coach-Voice": source},
+    )

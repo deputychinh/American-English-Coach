@@ -175,6 +175,16 @@ class ResultsRepository:
             )
             return int(total or 0)
 
+    def item_counts(self, profile_id: str = DEFAULT_PROFILE_ID) -> dict[str, int]:
+        """Number of runs per stored item id for a profile (course progress)."""
+        with self._sessions.session() as session:
+            rows = session.execute(
+                select(AssessmentRun.item_id, func.count())
+                .where(AssessmentRun.profile_id == profile_id)
+                .group_by(AssessmentRun.item_id)
+            ).all()
+        return {str(item_id): int(count) for item_id, count in rows}
+
     def phoneme_stats(self, profile_id: str = DEFAULT_PROFILE_ID) -> list[PhonemeStat]:
         """Verdict counts per sound over all runs of a profile (machine-measured progress)."""
         with self._sessions.session() as session:
