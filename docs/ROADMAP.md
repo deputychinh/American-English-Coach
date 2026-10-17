@@ -27,8 +27,8 @@ Nguyên tắc không đổi: local-first (video không rời thiết bị), ba m
 | #   | Trạng thái | Hạng mục                              | Tiêu chí nghiệm thu                                                                                                                                                                                  |
 | --- | ---------- | ------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | C1  | ☑          | Bộ công cụ pilot người Việt (AEC-023) | `make pilot`: thu thập bản ghi có đồng ý (từ lượt chấm được gắn cờ), bảng chấm tay CSV, script tính precision/recall theo lỗi và sinh `enabled_errors.json` khi precision ≥ 0,85; tài liệu quy trình |
-| C2  | ☐          | Giọng mẫu chất lượng cao (AEC-022)    | Lớp `ReferenceVoice` chọn giọng theo thứ tự: clip người thật có giấy phép (nếu có trong `content/voice/`) → giọng hệ thống nâng cao; manifest giấy phép; phát trên iOS                               |
-| C3  | ☐          | Bài học có cấu trúc                   | Khóa 14 ngày cho người Việt (âm cuối, th, cặp nguyên âm dài/ngắn, trọng âm, ngữ điệu); mỗi ngày 10–15 phút, nối với kế hoạch tuần; nội dung trong `content/course.json` có test tính hợp lệ          |
+| C2  | ☑          | Giọng mẫu chất lượng cao (AEC-022)    | Lớp `ReferenceVoice` chọn giọng theo thứ tự: clip người thật có giấy phép (nếu có trong `content/voice/`) → giọng hệ thống nâng cao; manifest giấy phép; phát trên iOS                               |
+| C3  | ☑          | Bài học có cấu trúc                   | Khóa 14 ngày cho người Việt (âm cuối, th, cặp nguyên âm dài/ngắn, trọng âm, ngữ điệu); mỗi ngày 10–15 phút, nối với kế hoạch tuần; nội dung trong `content/course.json` có test tính hợp lệ          |
 
 ## Giai đoạn D — Phát hành
 
@@ -36,8 +36,8 @@ Nguyên tắc không đổi: local-first (video không rời thiết bị), ba m
 | --- | ---------- | ---------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | D1  | ☑          | HTTPS cho máy chấm từ xa (AEC-025) | Hướng dẫn Caddy và Tailscale; app chấp nhận `https://`; CORS cho origin https; kiểm tra tay                                                                                |
 | D2  | ☐          | Hồ sơ phát hành iOS (AEC-024)      | `docs/release/`: checklist TestFlight, văn bản App Store (vi/en), chính sách riêng tư, kích cỡ ảnh chụp, bump version/build theo tag; ký thật cần Apple Team của chủ dự án |
-| D3  | ☐          | Đóng gói Docker đã kiểm chứng      | `make up` build và chạy được, `/ready` xanh trong container                                                                                                                |
-| D4  | ☐          | Phiên bản và nhật ký thay đổi      | `CHANGELOG.md` theo Keep a Changelog; tag `v1.1.0` khi A–B xong                                                                                                            |
+| D3  | ◐          | Đóng gói Docker đã kiểm chứng      | `make up` build và chạy được, `/ready` xanh trong container                                                                                                                |
+| D4  | ◐          | Phiên bản và nhật ký thay đổi      | `CHANGELOG.md` theo Keep a Changelog; tag `v1.1.0` khi A–B xong                                                                                                            |
 
 ## Ngoài phạm vi tự làm (cần chủ dự án)
 
