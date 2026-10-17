@@ -224,6 +224,100 @@
         "title": "ExplainRequest",
         "type": "object"
       },
+      "ExportedPhonemeModel": {
+        "description": "One per-phone row of a run.",
+        "properties": {
+          "error_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Error Id"
+          },
+          "gop": {
+            "title": "Gop",
+            "type": "number"
+          },
+          "phoneme": {
+            "title": "Phoneme",
+            "type": "string"
+          },
+          "verdict": {
+            "$ref": "#/components/schemas/Verdict"
+          },
+          "visual": {
+            "title": "Visual",
+            "type": "string"
+          },
+          "word": {
+            "title": "Word",
+            "type": "string"
+          }
+        },
+        "required": ["word", "phoneme", "verdict", "gop", "visual", "error_id"],
+        "title": "ExportedPhonemeModel",
+        "type": "object"
+      },
+      "ExportedRunModel": {
+        "description": "A full run as stored.",
+        "properties": {
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "disputed": {
+            "title": "Disputed",
+            "type": "boolean"
+          },
+          "id": {
+            "maxLength": 36,
+            "minLength": 1,
+            "title": "Id",
+            "type": "string"
+          },
+          "item_id": {
+            "title": "Item Id",
+            "type": "string"
+          },
+          "model_version": {
+            "title": "Model Version",
+            "type": "string"
+          },
+          "phonemes": {
+            "items": {
+              "$ref": "#/components/schemas/ExportedPhonemeModel"
+            },
+            "title": "Phonemes",
+            "type": "array"
+          },
+          "result": {
+            "additionalProperties": true,
+            "title": "Result",
+            "type": "object"
+          },
+          "text": {
+            "title": "Text",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "item_id",
+          "text",
+          "model_version",
+          "created_at",
+          "disputed",
+          "result",
+          "phonemes"
+        ],
+        "title": "ExportedRunModel",
+        "type": "object"
+      },
       "FocusItem": {
         "description": "One of at most two priorities to practise next.",
         "properties": {
@@ -251,6 +345,12 @@
         "required": ["error_id", "phoneme", "ipa", "hint_vi", "count"],
         "title": "FocusItem",
         "type": "object"
+      },
+      "FocusReason": {
+        "description": "Why the weekly plan proposes a sound today.",
+        "enum": ["weak", "review", "new"],
+        "title": "FocusReason",
+        "type": "string"
       },
       "HTTPValidationError": {
         "properties": {
@@ -314,6 +414,25 @@
           "tutor_model"
         ],
         "title": "HealthResponse",
+        "type": "object"
+      },
+      "ImportResult": {
+        "description": "Outcome of importing an export file into a fresh profile.",
+        "properties": {
+          "imported_runs": {
+            "title": "Imported Runs",
+            "type": "integer"
+          },
+          "profile": {
+            "$ref": "#/components/schemas/ProfileModel"
+          },
+          "skipped_runs": {
+            "title": "Skipped Runs",
+            "type": "integer"
+          }
+        },
+        "required": ["profile", "imported_runs", "skipped_runs"],
+        "title": "ImportResult",
         "type": "object"
       },
       "KnownErrorCard": {
@@ -666,6 +785,235 @@
         },
         "required": ["phoneme", "ipa", "total", "ok", "check", "error"],
         "title": "PhonemeStatModel",
+        "type": "object"
+      },
+      "PlanDay": {
+        "description": "One of the last seven local days.",
+        "properties": {
+          "check": {
+            "title": "Check",
+            "type": "integer"
+          },
+          "date": {
+            "format": "date",
+            "title": "Date",
+            "type": "string"
+          },
+          "error": {
+            "title": "Error",
+            "type": "integer"
+          },
+          "goal_met": {
+            "title": "Goal Met",
+            "type": "boolean"
+          },
+          "ok": {
+            "title": "Ok",
+            "type": "integer"
+          },
+          "runs": {
+            "title": "Runs",
+            "type": "integer"
+          }
+        },
+        "required": ["date", "runs", "ok", "check", "error", "goal_met"],
+        "title": "PlanDay",
+        "type": "object"
+      },
+      "PlanFocus": {
+        "description": "A sound proposed for today with the reason.",
+        "properties": {
+          "days_since": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Days Since"
+          },
+          "ipa": {
+            "title": "Ipa",
+            "type": "string"
+          },
+          "ok_rate": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Ok Rate"
+          },
+          "phoneme": {
+            "title": "Phoneme",
+            "type": "string"
+          },
+          "reason": {
+            "$ref": "#/components/schemas/FocusReason"
+          },
+          "sound_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Sound Id"
+          },
+          "total": {
+            "title": "Total",
+            "type": "integer"
+          }
+        },
+        "required": ["phoneme", "ipa", "reason", "sound_id", "total", "ok_rate", "days_since"],
+        "title": "PlanFocus",
+        "type": "object"
+      },
+      "PlanResponse": {
+        "description": "Everything the \"H\u00f4m nay\" card and the weekly strip need.",
+        "properties": {
+          "focus": {
+            "items": {
+              "$ref": "#/components/schemas/PlanFocus"
+            },
+            "title": "Focus",
+            "type": "array"
+          },
+          "goal_runs": {
+            "title": "Goal Runs",
+            "type": "integer"
+          },
+          "practised_sounds": {
+            "title": "Practised Sounds",
+            "type": "integer"
+          },
+          "runs_today": {
+            "title": "Runs Today",
+            "type": "integer"
+          },
+          "streak_days": {
+            "title": "Streak Days",
+            "type": "integer"
+          },
+          "today": {
+            "format": "date",
+            "title": "Today",
+            "type": "string"
+          },
+          "total_sounds": {
+            "title": "Total Sounds",
+            "type": "integer"
+          },
+          "week": {
+            "items": {
+              "$ref": "#/components/schemas/PlanDay"
+            },
+            "title": "Week",
+            "type": "array"
+          }
+        },
+        "required": [
+          "today",
+          "goal_runs",
+          "runs_today",
+          "streak_days",
+          "week",
+          "focus",
+          "practised_sounds",
+          "total_sounds"
+        ],
+        "title": "PlanResponse",
+        "type": "object"
+      },
+      "ProfileCreate": {
+        "description": "Body for creating or renaming.",
+        "properties": {
+          "name": {
+            "maxLength": 80,
+            "minLength": 1,
+            "title": "Name",
+            "type": "string"
+          }
+        },
+        "required": ["name"],
+        "title": "ProfileCreate",
+        "type": "object"
+      },
+      "ProfileExport": {
+        "description": "Everything a profile owns, portable between coaches.",
+        "properties": {
+          "calibration": {
+            "anyOf": [
+              {
+                "additionalProperties": {
+                  "additionalProperties": {
+                    "type": "number"
+                  },
+                  "type": "object"
+                },
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Calibration"
+          },
+          "exported_at": {
+            "format": "date-time",
+            "title": "Exported At",
+            "type": "string"
+          },
+          "format": {
+            "const": "aec-profile/1",
+            "title": "Format",
+            "type": "string"
+          },
+          "profile": {
+            "$ref": "#/components/schemas/ProfileModel"
+          },
+          "runs": {
+            "items": {
+              "$ref": "#/components/schemas/ExportedRunModel"
+            },
+            "title": "Runs",
+            "type": "array"
+          }
+        },
+        "required": ["format", "exported_at", "profile", "calibration", "runs"],
+        "title": "ProfileExport",
+        "type": "object"
+      },
+      "ProfileModel": {
+        "description": "A learner on this coach.",
+        "properties": {
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "runs": {
+            "title": "Runs",
+            "type": "integer"
+          }
+        },
+        "required": ["id", "name", "created_at", "runs"],
+        "title": "ProfileModel",
         "type": "object"
       },
       "ProgressResponse": {
@@ -1208,6 +1556,25 @@
       "post": {
         "description": "Score one recording of `text`; mouth frames are optional and never contain video.",
         "operationId": "assess_api_v1_assess_post",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "x-coach-profile",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "maxLength": 32,
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Coach-Profile"
+            }
+          }
+        ],
         "requestBody": {
           "content": {
             "multipart/form-data": {
@@ -1282,8 +1649,27 @@
     },
     "/api/v1/calibration": {
       "get": {
-        "description": "Stored mouth calibration, if any.",
+        "description": "Stored mouth calibration of the active profile, if any.",
         "operationId": "calibration_api_v1_calibration_get",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "x-coach-profile",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "maxLength": 32,
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Coach-Profile"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "content": {
@@ -1302,14 +1688,43 @@
               }
             },
             "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
           }
         },
         "summary": "Calibration",
         "tags": ["progress"]
       },
       "put": {
-        "description": "Replace the mouth calibration.",
+        "description": "Replace the mouth calibration of the active profile.",
         "operationId": "save_calibration_api_v1_calibration_put",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "x-coach-profile",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "maxLength": 32,
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Coach-Profile"
+            }
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -1580,9 +1995,328 @@
         "tags": ["pairing"]
       }
     },
+    "/api/v1/plan": {
+      "get": {
+        "description": "Streak, last seven days and today's focus; `tz_offset` is minutes east of UTC.",
+        "operationId": "plan_api_v1_plan_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "tz_offset",
+            "required": false,
+            "schema": {
+              "default": 0,
+              "maximum": 840,
+              "minimum": -840,
+              "title": "Tz Offset",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "goal",
+            "required": false,
+            "schema": {
+              "default": 3,
+              "maximum": 50,
+              "minimum": 1,
+              "title": "Goal",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-coach-profile",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "maxLength": 32,
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Coach-Profile"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlanResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Plan",
+        "tags": ["plan"]
+      }
+    },
+    "/api/v1/profiles": {
+      "get": {
+        "description": "Every profile with its run count.",
+        "operationId": "list_profiles_api_v1_profiles_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/ProfileModel"
+                  },
+                  "title": "Response List Profiles Api V1 Profiles Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "List Profiles",
+        "tags": ["profiles"]
+      },
+      "post": {
+        "description": "Create an empty profile.",
+        "operationId": "create_profile_api_v1_profiles_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProfileCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProfileModel"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Create Profile",
+        "tags": ["profiles"]
+      }
+    },
+    "/api/v1/profiles/import": {
+      "post": {
+        "description": "Create a new profile from an export file.",
+        "operationId": "import_profile_api_v1_profiles_import_post",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "name",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "maxLength": 80,
+                  "minLength": 1,
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Name"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProfileExport"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImportResult"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Import Profile",
+        "tags": ["profiles"]
+      }
+    },
+    "/api/v1/profiles/{profile_id}": {
+      "delete": {
+        "description": "Delete a profile with its runs and calibration (not the default one).",
+        "operationId": "delete_profile_api_v1_profiles__profile_id__delete",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "profile_id",
+            "required": true,
+            "schema": {
+              "title": "Profile Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Delete Profile",
+        "tags": ["profiles"]
+      },
+      "patch": {
+        "description": "Rename a profile.",
+        "operationId": "rename_profile_api_v1_profiles__profile_id__patch",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "profile_id",
+            "required": true,
+            "schema": {
+              "title": "Profile Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProfileCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProfileModel"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Rename Profile",
+        "tags": ["profiles"]
+      }
+    },
+    "/api/v1/profiles/{profile_id}/export": {
+      "get": {
+        "description": "Download everything the profile owns as JSON.",
+        "operationId": "export_profile_api_v1_profiles__profile_id__export_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "profile_id",
+            "required": true,
+            "schema": {
+              "title": "Profile Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProfileExport"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Export Profile",
+        "tags": ["profiles"]
+      }
+    },
     "/api/v1/progress": {
       "get": {
-        "description": "Per-sound totals and recent runs.",
+        "description": "Per-sound totals and recent runs of the active profile.",
         "operationId": "progress_api_v1_progress_get",
         "parameters": [
           {
@@ -1595,6 +2329,23 @@
               "minimum": 1,
               "title": "Limit",
               "type": "integer"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-coach-profile",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "maxLength": 32,
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Coach-Profile"
             }
           }
         ],

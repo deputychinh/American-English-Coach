@@ -17,11 +17,14 @@ from app.ml.llm_client import ChatClient
 from app.ml.tts import SpeechSynthesizer
 from app.repositories.calibration_repository import CalibrationRepository
 from app.repositories.device_repository import DeviceRepository
+from app.repositories.profile_repository import ProfileRepository
 from app.repositories.results_repository import ResultsRepository
 from app.security import new_pairing_code
 from app.services.assessment_service import AssessmentService
 from app.services.audio_service import AudioService
 from app.services.content_service import ContentService
+from app.services.plan_service import PlanService
+from app.services.profile_service import ProfileService
 from app.services.progress_service import ProgressService
 from app.services.tutor_service import TutorService
 
@@ -108,6 +111,16 @@ class AppContainer:
         return ResultsRepository(self.sessions)
 
     @cached_property
+    def profiles(self) -> ProfileRepository:
+        """Learner profiles."""
+        return ProfileRepository(self.sessions)
+
+    @cached_property
+    def profile_service(self) -> ProfileService:
+        """Profile use cases (export/import move runs and calibration together)."""
+        return ProfileService(self.profiles, self.results, self.calibration)
+
+    @cached_property
     def calibration(self) -> CalibrationRepository:
         """Calibration storage."""
         return CalibrationRepository(self.sessions)
@@ -126,6 +139,11 @@ class AppContainer:
     def progress(self) -> ProgressService:
         """Progress dashboard."""
         return ProgressService(self.results, self.calibration)
+
+    @cached_property
+    def plan(self) -> PlanService:
+        """Weekly plan."""
+        return PlanService(self.results, self.content)
 
     @cached_property
     def assessment(self) -> AssessmentService:

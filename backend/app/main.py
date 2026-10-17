@@ -20,7 +20,7 @@ from app.errors import DomainError
 from app.logging_setup import configure_logging
 from app.middleware import request_context
 from app.ml.llm_client import ChatClient
-from app.routes import assess, audio, content, health, pair, progress, tutor
+from app.routes import assess, audio, content, health, pair, plan, profiles, progress, tutor
 from app.security import TOKEN_HEADER, requires_token
 
 logger = logging.getLogger(__name__)
@@ -75,7 +75,7 @@ def install_middleware(app: FastAPI, settings: Settings) -> None:
         CORSMiddleware,
         allow_origins=settings.cors_origins,
         allow_origin_regex=settings.cors_origin_regex,
-        allow_methods=["GET", "POST", "PUT"],
+        allow_methods=["GET", "POST", "PUT", "PATCH", "DELETE"],
         allow_headers=["*"],
     )
 
@@ -139,6 +139,8 @@ def create_app(
         progress.router,
         tutor.router,
         pair.router,
+        profiles.router,
+        plan.router,
     )
     for router in routers:
         app.include_router(router, prefix=API_PREFIX)

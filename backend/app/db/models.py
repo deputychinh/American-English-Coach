@@ -15,12 +15,28 @@ class Base(DeclarativeBase):
     """Declarative base shared by all tables."""
 
 
+DEFAULT_PROFILE_ID = "default"
+
+
+class Profile(Base):
+    """A learner on this coach; results and calibration are kept per profile."""
+
+    __tablename__ = "profiles"
+
+    id: Mapped[str] = mapped_column(String(32), primary_key=True)
+    name: Mapped[str] = mapped_column(String(80))
+    created_at: Mapped[datetime] = mapped_column(default=utcnow)
+
+
 class AssessmentRun(Base):
     """One recorded attempt and its full JSON result."""
 
     __tablename__ = "assessment_runs"
 
     id: Mapped[str] = mapped_column(String(36), primary_key=True)
+    # Plain indexed column (no DB-level FK): SQLite cannot add constraints to an existing table
+    # without rebuilding it; the profile service deletes runs with their profile.
+    profile_id: Mapped[str] = mapped_column(String(32), index=True, default=DEFAULT_PROFILE_ID)
     item_id: Mapped[str] = mapped_column(String(64), index=True)
     text: Mapped[str] = mapped_column(Text)
     model_version: Mapped[str] = mapped_column(String(128))
@@ -54,7 +70,7 @@ class PhonemeResult(Base):
 
 
 class Calibration(Base):
-    """Personal mouth-feature calibration (min/max per feature) from the 20-second flow."""
+    """Personal mouth-feature calibration (min/max per feature); the row id is the profile id."""
 
     __tablename__ = "calibrations"
 

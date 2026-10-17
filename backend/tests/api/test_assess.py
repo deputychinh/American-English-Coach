@@ -10,10 +10,13 @@ from tests.conftest import wav_bytes
 from tests.fakes import FakeRecognizer
 
 
-def post(client: TestClient, text: str, **fields: str) -> Response:
+def post(
+    client: TestClient, text: str, headers_profile: str | None = None, **fields: str
+) -> Response:
     data = {"text": text, "item_id": "pair:think-sink:0", "kind": "word", **fields}
     files = {"audio": ("rec.wav", wav_bytes(), "audio/wav")}
-    return client.post("/api/v1/assess", data=data, files=files)
+    headers = {"X-Coach-Profile": headers_profile} if headers_profile else {}
+    return client.post("/api/v1/assess", data=data, files=files, headers=headers)
 
 
 def test_correct_think_is_all_ok_and_is_stored(client: TestClient) -> None:

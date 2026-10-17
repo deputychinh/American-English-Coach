@@ -5,6 +5,7 @@ from collections import Counter
 from dataclasses import dataclass
 
 from app.constants import ALIGN_GAP_COST, VISUAL_WINDOW_PAD_SECONDS
+from app.db.models import DEFAULT_PROFILE_ID
 from app.domain.aligner import AlignedPair, PhonemeAligner, substitution_cost
 from app.domain.ctc_decoder import greedy_decode
 from app.domain.error_catalog import ErrorCatalog, KnownError
@@ -50,6 +51,7 @@ class AssessmentInput:
     audio: bytes
     mouth_frames: list[MouthFrame]
     audio_started_at: float | None
+    profile_id: str = DEFAULT_PROFILE_ID
 
 
 @dataclass(frozen=True, slots=True)
@@ -100,7 +102,7 @@ class AssessmentService:
         phones = self._judge(expected, pairs, segments, data)
         prosody = self._prosody(waveform, expected, segments, words, data.kind)
         response = self._build_response(data, words, expected, phones, prosody)
-        self._persist(response)
+        self._persist(response, data.profile_id)
         return response
 
     def _gop_scorer(self) -> GopScorer:
@@ -303,7 +305,7 @@ class AssessmentService:
             for error_id, count in ordered[:FOCUS_LIMIT]
         ]
 
-    def _persist(self, response: AssessmentResponse) -> None:
+    def _persist(self, response: AssessmentResponse, profile_id: str) -> None:
         rows = [
             PhonemeRow(
                 word=word.word,
@@ -323,6 +325,7 @@ class AssessmentService:
             response.model_version,
             response.model_dump(mode="json"),
             rows,
+            profile_id,
         )
 
 

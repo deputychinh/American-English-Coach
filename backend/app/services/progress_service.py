@@ -13,8 +13,8 @@ class ProgressService:
         self._results = results
         self._calibration = calibration
 
-    def summary(self, recent_limit: int = 20) -> ProgressResponse:
-        """Per-sound totals and the latest runs."""
+    def summary(self, profile_id: str, recent_limit: int = 20) -> ProgressResponse:
+        """Per-sound totals and the latest runs of one profile."""
         recent = [
             RunSummaryModel(
                 id=r.id,
@@ -27,7 +27,7 @@ class ProgressService:
                 model_version=r.model_version,
                 disputed=r.disputed,
             )
-            for r in self._results.recent(recent_limit)
+            for r in self._results.recent(recent_limit, profile_id)
         ]
         phonemes = [
             PhonemeStatModel(
@@ -38,9 +38,11 @@ class ProgressService:
                 check=s.check,
                 error=s.error,
             )
-            for s in self._results.phoneme_stats()
+            for s in self._results.phoneme_stats(profile_id)
         ]
-        return ProgressResponse(runs=len(recent), phonemes=phonemes, recent=recent)
+        return ProgressResponse(
+            runs=self._results.count(profile_id), phonemes=phonemes, recent=recent
+        )
 
     def run(self, run_id: str) -> dict[str, object]:
         """Stored result of one run."""
@@ -50,10 +52,10 @@ class ProgressService:
         """Learner disagrees with the verdicts; recorded as false-alarm data."""
         self._results.dispute(run_id)
 
-    def save_calibration(self, features: dict[str, dict[str, float]]) -> None:
-        """Persist the mouth calibration."""
-        self._calibration.save(features)
+    def save_calibration(self, profile_id: str, features: dict[str, dict[str, float]]) -> None:
+        """Persist the mouth calibration of a profile."""
+        self._calibration.save(features, profile_id)
 
-    def calibration(self) -> dict[str, dict[str, float]] | None:
-        """Stored calibration if any."""
-        return self._calibration.get()
+    def calibration(self, profile_id: str) -> dict[str, dict[str, float]] | None:
+        """Stored calibration of a profile, if any."""
+        return self._calibration.get(profile_id)

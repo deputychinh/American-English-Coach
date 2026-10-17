@@ -2,13 +2,42 @@
 
 from pathlib import Path
 
-from sqlalchemy import create_engine, inspect
+from sqlalchemy import create_engine, inspect, text
 
+from alembic import command
 from app.db.engine import create_sqlite_engine
-from app.db.models import Base
+from app.db.migrate import alembic_config
 
 
-def test_fresh_database_gets_every_table_and_a_version_stamp(tmp_path: Path) -> None:
+def _legacy_database(path: Path) -> None:
+    """A database from the first release: baseline tables with data, no alembic_version."""
+    engine = create_engine(f"sqlite:///{path}")
+    config = alembic_config(engine)
+    with engine.begin() as connection:
+        config.attributes["connection"] = connection
+        command.upgrade(config, "0001")
+    with engine.begin() as connection:
+        connection.execute(text("DROP TABLE alembic_version"))
+        connection.execute(
+            text(
+                "INSERT INTO assessment_runs (id, item_id, text, model_version, created_at, "
+                "ok_count, check_count, error_count, result_json, disputed) VALUES "
+                "('run-old', 'pair:think-sink:0', 'think', 'm', '2026-10-01 10:00:00', "
+                "4, 0, 0, '{}', 0)"
+            )
+        )
+        connection.execute(
+            text(
+                "INSERT INTO calibrations (id, data_json, created_at) "
+                "VALUES ('default', '{}', '2026-10-01 10:00:00')"
+            )
+        )
+    engine.dispose()
+
+
+def test_fresh_database_gets_every_table_a_default_profile_and_a_version_stamp(
+    tmp_path: Path,
+) -> None:
     engine = create_sqlite_engine(tmp_path / "fresh.sqlite3")
     tables = set(inspect(engine).get_table_names())
     assert {
@@ -16,25 +45,26 @@ def test_fresh_database_gets_every_table_and_a_version_stamp(tmp_path: Path) -> 
         "phoneme_results",
         "calibrations",
         "devices",
+        "profiles",
         "alembic_version",
     } <= tables
+    with engine.connect() as connection:
+        assert connection.execute(text("SELECT id FROM profiles")).scalars().all() == ["default"]
 
 
-def test_pre_alembic_database_is_stamped_then_upgraded(tmp_path: Path) -> None:
+def test_pre_alembic_database_is_stamped_then_upgraded_keeping_its_data(tmp_path: Path) -> None:
     path = tmp_path / "old.sqlite3"
-    legacy = create_engine(f"sqlite:///{path}")
-    # Simulate the first release: baseline tables only, no alembic_version, no devices.
-    Base.metadata.create_all(
-        legacy,
-        tables=[
-            Base.metadata.tables[n] for n in ("assessment_runs", "phoneme_results", "calibrations")
-        ],
-    )
-    assert "devices" not in inspect(legacy).get_table_names()
+    _legacy_database(path)
+    assert "devices" not in inspect(create_engine(f"sqlite:///{path}")).get_table_names()
     engine = create_sqlite_engine(path)
     tables = set(inspect(engine).get_table_names())
-    assert "devices" in tables
-    assert "alembic_version" in tables
+    assert {"devices", "profiles", "alembic_version"} <= tables
+    with engine.connect() as connection:
+        row = connection.execute(
+            text("SELECT profile_id, text FROM assessment_runs WHERE id = 'run-old'")
+        ).one()
+        assert tuple(row) == ("default", "think")
+        assert connection.execute(text("SELECT count(*) FROM calibrations")).scalar() == 1
     # Running again is a no-op.
     again = create_sqlite_engine(path)
-    assert "devices" in inspect(again).get_table_names()
+    assert "profiles" in inspect(again).get_table_names()

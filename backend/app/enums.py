@@ -79,3 +79,11 @@ class ErrorCode(StrEnum):
     RATE_LIMITED = "RATE_LIMITED"
     NOT_READY = "NOT_READY"
     UNAUTHORIZED = "UNAUTHORIZED"
+
+
+class FocusReason(StrEnum):
+    """Why the weekly plan proposes a sound today."""
+
+    WEAK = "weak"
+    REVIEW = "review"
+    NEW = "new"

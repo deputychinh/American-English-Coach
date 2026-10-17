@@ -78,6 +78,24 @@ class ContentService:
             for d in self._drills.values()
         ]
 
+    def chart_phones(self) -> list[str]:
+        """Target phones of the 44 chart sounds in chart order, without repeats."""
+        seen: set[str] = set()
+        phones: list[str] = []
+        for item in self._drills.values():
+            phone = _first_phone(str(item["arpabet"]))
+            if phone not in seen:
+                seen.add(phone)
+                phones.append(phone)
+        return phones
+
+    def drill_id_of(self, phone: str) -> str | None:
+        """Id of the first drill whose target is `phone` (None for phones outside the chart)."""
+        for item in self._drills.values():
+            if _first_phone(str(item["arpabet"])) == phone:
+                return str(item["id"])
+        return None
+
     def drill(self, sound_id: str) -> SoundDrill:
         """Full material for one sound."""
         item = self._drills.get(sound_id)

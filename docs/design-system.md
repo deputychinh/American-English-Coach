@@ -63,7 +63,7 @@ Tương phản (WCAG 2.2): chữ ink-900 trên ink-100 16:1; chữ phụ ink-600
 - **Gương**: camera toàn chiều rộng, điều khiển và thanh đo bên dưới, huy hiệu mức tin cậy, chuyển động đầu–cuối cho nguyên âm đôi.
 - **Hiệu chỉnh**: stepper 6 bước (vạch tiến trình + vòng tròn), lời nhắc lớn, trạng thái khuôn mặt.
 - **Tiến độ**: 4 ô `Stat`, bảng theo âm xếp theo mức cần luyện, lần thu gần đây; nút mở Cài đặt.
-- **Cài đặt** (`/settings/`): giao diện, luyện tập, máy chấm (địa chỉ + kiểm tra), ghép nối điện thoại (mã 6 số), dữ liệu trên thiết bị, về ứng dụng.
+- **Cài đặt** (`/settings/`): giao diện, hồ sơ người học (danh sách có hàng đang dùng, tạo, đổi tên tại chỗ, xuất/nhập tệp, xóa có xác nhận inline), luyện tập, máy chấm (địa chỉ + kiểm tra), ghép nối điện thoại (mã 6 số), dữ liệu trên thiết bị, về ứng dụng.
 
 ## 6. Native (iOS)
 
