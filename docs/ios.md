@@ -23,7 +23,7 @@ make api-lan          # API nghe trên 0.0.0.0:8765; lệnh in ra địa chỉ, 
 make ios-open         # mở Xcode: chọn iPhone ở thanh trên, bấm Run
 ```
 
-Project đã đặt Team `R446JX33L5` (ký tự động). Xcode cần Apple ID tương ứng đăng nhập một lần: **Xcode → Settings → Accounts → +**; thiếu bước này `xcodebuild` báo `No Account for Team`. Cắm iPhone qua cáp, mở khóa và bấm "Tin cậy"; lần đầu iPhone cần bật Developer Mode (Cài đặt → Quyền riêng tư & Bảo mật). Không cần mở Xcode:
+Project đã đặt Team `9AVWS3MKNW` (ký tự động). Xcode cần Apple ID tương ứng đăng nhập một lần: **Xcode → Settings → Accounts → +**; thiếu bước này `xcodebuild` báo `No Account for Team`. Cắm iPhone qua cáp, mở khóa và bấm "Tin cậy"; lần đầu iPhone cần bật Developer Mode (Cài đặt → Quyền riêng tư & Bảo mật). Không cần mở Xcode:
 
 ```sh
 xcrun devicectl list devices                              # lấy tên hoặc UDID của iPhone

@@ -101,7 +101,7 @@ ios-run: ios-build ## Boot the simulator, install and launch the app
 
 ios-device: ios-sync ## Build signed for a real iPhone and install + launch it (IOS_DEVICE=<name or UDID>; sign in to Xcode → Settings → Accounts first)
 	cd web/ios/App && $(XCODE) xcodebuild -project App.xcodeproj -scheme App -configuration Debug -sdk iphoneos -destination 'generic/platform=iOS' -derivedDataPath build-device -allowProvisioningUpdates build | tail -3
-	$(XCODE) xcrun devicectl device install app --device "$(IOS_DEVICE)" web/ios/App/build-device/Build/Products/Debug-iphoneos/App.app
+	$(XCODE) xcrun devicectl device install app --device "$(IOS_DEVICE)" "$(CURDIR)/web/ios/App/build-device/Build/Products/Debug-iphoneos/App.app"
 	$(XCODE) xcrun devicectl device process launch --device "$(IOS_DEVICE)" com.deputychinh.americanenglishcoach
 
 ios-open: ios-sync ## Open the Xcode project (sign with your team to run on a real iPhone)
