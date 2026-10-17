@@ -10,11 +10,12 @@ import {
 
 const fetchWithTimeout =
   (timeoutMs: number) =>
-  (request: Request): Promise<Response> => {
-    const target = withClientHeaders(redirectToApiBase(request, storedApiBaseUrl()));
-    return fetch(target, {
+  async (request: Request): Promise<Response> => {
+    const target = withClientHeaders(await redirectToApiBase(request, storedApiBaseUrl()));
+    const response = await fetch(target, {
       signal: AbortSignal.any([request.signal, AbortSignal.timeout(timeoutMs)]),
-    }).then(noteUnauthorized);
+    });
+    return noteUnauthorized(response);
   };
 
 /** Typed client for one generated OpenAPI `paths` type; every request gives up after `timeoutMs`. */

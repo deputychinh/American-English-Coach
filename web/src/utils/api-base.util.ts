@@ -36,12 +36,23 @@ export const storedApiBaseUrl = (): string => {
   return normaliseBaseUrl(env.nativeApiBaseUrl) || NATIVE_DEFAULT_API_BASE_URL;
 };
 
-/** Sends an `/api/...` request to the saved server instead of the page's own origin. */
-export const redirectToApiBase = (request: Request, baseUrl: string): Request => {
+/**
+ * Sends an `/api/...` request to the saved server instead of the page's own origin.
+ * The body is copied as bytes on purpose: `new Request(url, request)` would hand the browser a
+ * stream body, and streamed uploads need HTTP/2, so every POST to a LAN server failed with
+ * "Failed to fetch" / "Load failed" while GETs worked.
+ */
+export const redirectToApiBase = async (request: Request, baseUrl: string): Promise<Request> => {
   if (!baseUrl) return request;
   const url = new URL(request.url);
   if (!url.pathname.startsWith('/api/')) return request;
-  return new Request(`${baseUrl}${url.pathname}${url.search}`, request);
+  const hasBody = !['GET', 'HEAD'].includes(request.method);
+  return new Request(`${baseUrl}${url.pathname}${url.search}`, {
+    method: request.method,
+    headers: request.headers,
+    body: hasBody ? await request.clone().arrayBuffer() : undefined,
+    signal: request.signal,
+  });
 };
 
 /** Device token obtained by pairing (Settings → Ghép nối); '' on the Mac itself. */

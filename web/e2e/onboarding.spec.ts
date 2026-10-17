@@ -1,5 +1,11 @@
 import { expect, test } from '@playwright/test';
 
+// The first run creates a profile (a POST); saving the API's own address as the "server" sends
+// it through the same redirect path a phone uses for a LAN server, which only GETs covered before.
+test.beforeEach(async ({ page, baseURL }) => {
+  await page.addInitScript((base) => localStorage.setItem('coach.apiBaseUrl', base), baseURL ?? '');
+});
+
 test('a first visit is guided through permissions, profile and calibration', async ({
   page,
 }, info) => {
