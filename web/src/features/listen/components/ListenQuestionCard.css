@@ -1,0 +1,107 @@
+.listen-question-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  align-items: center;
+  padding: var(--space-5) var(--space-4);
+  text-align: center;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-sm);
+}
+
+.listen-question-card__progress {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  color: var(--color-text-muted);
+}
+
+.listen-question-card__play {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 88px;
+  block-size: 88px;
+  font-size: var(--text-4xl);
+  color: var(--color-on-primary);
+  background: var(--color-primary);
+  border: 0;
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-md);
+  cursor: pointer;
+  transition: transform var(--duration-fast) var(--ease-standard);
+}
+
+.listen-question-card__play.is-playing {
+  transform: scale(1.06);
+}
+
+.listen-question-card__error {
+  font-size: var(--text-sm);
+  color: var(--color-danger);
+}
+
+.listen-question-card__question {
+  font-size: var(--text-lg);
+  font-weight: var(--weight-semibold);
+}
+
+.listen-question-card__options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  justify-content: center;
+  inline-size: 100%;
+}
+
+.listen-question-card--pair .listen-question-card__options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.listen-question-card__option {
+  min-inline-size: 64px;
+  min-block-size: 56px;
+  padding: var(--space-3) var(--space-4);
+  font-size: var(--text-lg);
+  font-weight: var(--weight-semibold);
+  color: var(--color-text);
+  background: var(--color-bg);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  transition:
+    background-color var(--duration-fast) var(--ease-standard),
+    border-color var(--duration-fast) var(--ease-standard);
+}
+
+.listen-question-card--focus .listen-question-card__option {
+  min-block-size: 44px;
+  font-size: var(--text-md);
+}
+
+.listen-question-card__option:disabled {
+  cursor: default;
+}
+
+.listen-question-card__option.is-correct {
+  color: var(--color-on-success-subtle);
+  background: var(--color-success-subtle);
+  border-color: var(--color-success);
+}
+
+.listen-question-card__option.is-wrong {
+  color: var(--color-on-danger-subtle);
+  background: var(--color-danger-subtle);
+  border-color: var(--color-danger);
+}
+
+.listen-question-card__option.is-dim {
+  opacity: 0.6;
+}
+
+.listen-question-card__feedback {
+  min-block-size: 1.5em;
+  font-weight: var(--weight-medium);
+}

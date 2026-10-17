@@ -1,6 +1,7 @@
 import type { Copy } from '@/interfaces/copy.interface';
 
 import { enCourse } from './en-course';
+import { enListen } from './en-listen';
 import { enPractice } from './en-practice';
 import { enSettings } from './en-settings';
 
@@ -105,6 +106,7 @@ export const en: Copy = {
   privacy: enCourse.privacy,
   course: enCourse.course,
   curriculum: enCourse.curriculum,
+  listen: enListen.listen,
   onboarding: enCourse.onboarding,
   plan: enSettings.plan,
   practice: enPractice.practice,

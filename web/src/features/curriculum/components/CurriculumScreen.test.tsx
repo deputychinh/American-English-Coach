@@ -90,10 +90,11 @@ describe('CurriculumScreen', () => {
     expect(current).toHaveTextContent('1 cặp từ · 1 từ trọng âm');
     const links = current.querySelectorAll('a');
     expect(links[0]).toHaveAttribute('href', expect.stringContaining('/sounds'));
-    expect(links[1]).toHaveAttribute('href', expect.stringContaining('sound=c09'));
-    expect(links[1]?.className).toContain('is-done');
-    expect(links[2]).toHaveAttribute('href', expect.stringContaining('item=pair%3Athink-sink%3A0'));
-    expect(links[3]).toHaveAttribute('href', expect.stringContaining('item=sentence%3As1'));
+    expect(links[1]).toHaveAttribute('href', expect.stringContaining('/listen?unit=u02'));
+    expect(links[2]).toHaveAttribute('href', expect.stringContaining('sound=c09'));
+    expect(links[2]?.className).toContain('is-done');
+    expect(links[3]).toHaveAttribute('href', expect.stringContaining('item=pair%3Athink-sink%3A0'));
+    expect(links[4]).toHaveAttribute('href', expect.stringContaining('item=sentence%3As1'));
     expect(screen.getByRole('link', { name: 'Lộ trình nhanh 14 ngày' })).toHaveAttribute(
       'href',
       '/course',

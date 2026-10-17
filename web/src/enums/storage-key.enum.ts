@@ -12,4 +12,5 @@ export enum StorageKey {
   ReminderTime = 'coach.reminderTime',
   Language = 'coach.language',
   Onboarded = 'coach.onboarded',
+  Listening = 'coach.listening',
 }

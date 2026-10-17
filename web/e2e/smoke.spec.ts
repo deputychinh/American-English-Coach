@@ -158,6 +158,27 @@ test('the curriculum lists levels and opens the current unit with five steps', a
   await shot(page, 'curriculum', info.project.name);
 });
 
+test('the listening step asks one question at a time and ends with a summary', async ({
+  page,
+}, info) => {
+  await page.goto('/listen/?unit=u03');
+  await expect(page.getByRole('heading', { name: 'Nghe phân biệt' })).toBeVisible();
+  const options = page.locator('.listen-question-card__option');
+  await expect(options.first()).toBeVisible();
+  await shot(page, 'listen', info.project.name);
+  for (let i = 0; i < 12; i += 1) {
+    if ((await page.locator('.listen-screen__summary').count()) > 0) break;
+    await options.first().click();
+    await expect(page.locator('.listen-question-card__feedback')).not.toBeEmpty();
+    await page.getByRole('button', { name: /Câu tiếp theo|Xem kết quả/ }).click();
+  }
+  await expect(page.getByRole('heading', { name: 'Kết quả nghe' })).toBeVisible();
+  await expect(page.getByRole('link', { name: 'Sang bước luyện có chấm' })).toBeVisible();
+  await page.goto('/curriculum/');
+  await page.locator('.curriculum-screen__summary').filter({ hasText: '/θ/' }).click();
+  await expect(page.getByRole('link', { name: /Đã nghe · \d+%/ })).toBeVisible();
+});
+
 test('the interface switches to English and back from settings', async ({ page }) => {
   await page.goto('/settings/');
   await page.getByRole('tab', { name: 'English' }).click();
