@@ -52,6 +52,7 @@
     }
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.14.0",
     "@capacitor/assets": "^3.0.5",
     "@capacitor/cli": "^8.5.3",
     "@capacitor/ios": "^8.5.3",
