@@ -40,3 +40,10 @@ Cùng bộ quy ước với các dự án khác của nhóm (bazaar, relay, sale
 - Một commit cho một đơn vị việc hoàn chỉnh (code + test + docs), ví dụ `feat(api): add phoneme assessment endpoint`.
 - Husky chạy Prettier (pre-commit) và commitlint (commit-msg); CI chạy lại cả hai.
 - Đổi hành vi hoặc quyết định thì cập nhật ADR/docs trong cùng commit.
+
+## Copy và ngôn ngữ (web)
+
+- Không có chuỗi hiển thị cứng trong component, hook, service hay util. Component đọc copy qua `useCopy()` (re-render khi đổi ngôn ngữ); mã ngoài React dùng `getCopy()` từ `src/locales`.
+- `vi` là nguồn sự thật (`Copy = typeof vi`); `en` được khai báo kiểu `Copy` nên thiếu khóa là lỗi biên dịch, và `src/locales/locales.test.ts` so khóa hai chiều.
+- Tệp copy tối đa 300 dòng: tách theo mảng (`vi-practice.ts`, `vi-settings.ts`, `en-*.ts`).
+- Nội dung từ API (gợi ý khẩu hình, nhận xét, tên nhóm) là tiếng Việt theo thiết kế sản phẩm; chỉ giao diện song ngữ.

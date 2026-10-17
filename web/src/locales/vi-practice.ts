@@ -44,6 +44,12 @@ export const viPractice = {
     mouthUnavailable: 'Bật camera để xem khẩu hình.',
     mouthNotVisible: 'Camera không nhìn thấy âm này; dựa vào tai.',
     phoneDetailHint: 'Bấm vào từng âm để xem nhận xét.',
+    phoneAria: (ipa: string): string => `Âm /${ipa}/`,
+    notFound: (item: string): string => `Không tìm thấy bài "${item}".`,
+    serverError: (status: number): string => `Máy chấm trả lỗi ${status}`,
+    referenceFailedOffline: 'Không phát được giọng mẫu (máy chấm chưa chạy?)',
+    referenceFailed: 'Không phát được giọng mẫu',
+    sentenceTitle: (label: string, index: number): string => `${label} · câu ${index}`,
     errorTitle: 'Chưa chấm được',
     loadingRun: 'Đang tải kết quả đã lưu…',
     kind: {

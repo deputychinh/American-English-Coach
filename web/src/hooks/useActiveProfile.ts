@@ -3,9 +3,9 @@
 import { useMemo, useSyncExternalStore } from 'react';
 
 import { DEFAULT_PROFILE_ID, PROFILE_CHANGED_EVENT } from '@/constants/api.constant';
-import { COPY } from '@/constants/copy.constant';
 import { StorageKey } from '@/enums/storage-key.enum';
 import type { ActiveProfile } from '@/interfaces/practice.interface';
+import { getCopy } from '@/locales';
 import { readStorage } from '@/utils/storage.util';
 
 const subscribe = (listener: () => void): (() => void) => {
@@ -27,7 +27,7 @@ export const useActiveProfile = (): ActiveProfile => {
     const [id, name] = raw.split('\n');
     return {
       id: id || DEFAULT_PROFILE_ID,
-      name: name || COPY.settings.profiles.defaultName,
+      name: name || getCopy().settings.profiles.defaultName,
     };
   }, [raw]);
 };

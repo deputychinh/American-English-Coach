@@ -3,8 +3,8 @@
 import type { ReactElement } from 'react';
 
 import { ErrorState } from '@/components/ErrorState/ErrorState';
-import { COPY } from '@/constants/copy.constant';
 import { TrackerStatus } from '@/enums/tracker-status.enum';
+import { useCopy } from '@/hooks/useCopy';
 import type { MouthTracker } from '@/interfaces/tracker.interface';
 import { cx } from '@/utils/cx.util';
 
@@ -22,6 +22,7 @@ export const CameraPanel = ({
   compact = false,
   isOnTarget = false,
 }: CameraPanelProps): ReactElement => {
+  const copy = useCopy();
   // Destructured so the lint's ref tracking applies to the two callback refs only.
   const { attachVideo, attachCanvas, status, error, latest, fps, isFaceVisible } = tracker;
   return (
@@ -43,21 +44,21 @@ export const CameraPanel = ({
         <canvas ref={attachCanvas} className="camera-panel__overlay" aria-hidden="true" />
         {status === TrackerStatus.Loading ? (
           <p className="camera-panel__notice" role="status">
-            {COPY.mirror.loadingModel}
+            {copy.mirror.loadingModel}
           </p>
         ) : null}
         {status === TrackerStatus.Ready && !isFaceVisible ? (
           <p className="camera-panel__notice" role="status">
-            {COPY.mirror.noFace}
+            {copy.mirror.noFace}
           </p>
         ) : null}
         {latest && latest.quality < 0.5 ? (
           <p className="camera-panel__notice" role="status">
-            {COPY.mirror.turnStraight}
+            {copy.mirror.turnStraight}
           </p>
         ) : null}
       </div>
-      <p className="camera-panel__meta">{fps > 0 ? `${String(fps)} ${COPY.mirror.fps}` : ''}</p>
+      <p className="camera-panel__meta">{fps > 0 ? `${String(fps)} ${copy.mirror.fps}` : ''}</p>
       {status === TrackerStatus.Error && error ? <ErrorState message={error} /> : null}
     </div>
   );

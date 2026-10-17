@@ -6,6 +6,7 @@ import type {
   PracticeItem,
   SoundDrill,
 } from '@/interfaces/practice.interface';
+import { getCopy } from '@/locales';
 import { sentenceKind } from '@/utils/practice-item.util';
 
 const SEVERITY: Record<Verdict, number> = {
@@ -61,7 +62,7 @@ export const buildDrillItems = (drill: SoundDrill): DrillItem[] => {
       id: `sound:${drill.id}:sentence:${String(index + 1)}`,
       text: sentence.text,
       kind: sentenceKind(sentence.kind),
-      title: `${label} · câu ${String(index + 1)}`,
+      title: getCopy().practice.sentenceTitle(label, index + 1),
       focus,
     },
   }));

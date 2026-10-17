@@ -2,6 +2,7 @@
 
 import { type ReactElement, useEffect, useRef } from 'react';
 
+import { useCopy } from '@/hooks/useCopy';
 import type { Point2 } from '@/interfaces/mouth.interface';
 
 import './LipOutlineCanvas.css';
@@ -13,6 +14,7 @@ interface LipOutlineCanvasProps {
 
 /** Draws a normalised 40-point lip outline (outer 20, inner 20) centred in a square canvas. */
 export const LipOutlineCanvas = ({ outline, size }: LipOutlineCanvasProps): ReactElement => {
+  const copy = useCopy();
   const ref = useRef<HTMLCanvasElement | null>(null);
 
   useEffect(() => {
@@ -48,7 +50,7 @@ export const LipOutlineCanvas = ({ outline, size }: LipOutlineCanvasProps): Reac
       height={size}
       className="lip-outline-canvas"
       role="img"
-      aria-label={outline.length > 0 ? 'Viền môi của bạn' : 'Chưa có khẩu hình'}
+      aria-label={outline.length > 0 ? copy.mirror.lipOutline : copy.mirror.noMouth}
     />
   );
 };

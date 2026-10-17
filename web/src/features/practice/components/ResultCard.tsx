@@ -5,7 +5,6 @@ import { type ReactElement, useState } from 'react';
 
 import { Button } from '@/components/Button/Button';
 import { VerdictChip } from '@/components/VerdictChip/VerdictChip';
-import { COPY } from '@/constants/copy.constant';
 import { ButtonVariant } from '@/enums/button-variant.enum';
 import { PhoneDetail } from '@/features/practice/components/PhoneDetail';
 import { ProsodyList } from '@/features/practice/components/ProsodyList';
@@ -13,6 +12,7 @@ import { disputeRun } from '@/features/progress/services/progress.service';
 import { TutorPanel } from '@/features/tutor/components/TutorPanel';
 import { useTutorAvailability } from '@/features/tutor/hooks/useTutorAvailability';
 import { explainRun } from '@/features/tutor/services/tutor.service';
+import { useCopy } from '@/hooks/useCopy';
 import type { Point2 } from '@/interfaces/mouth.interface';
 import type { AssessmentResponse, PhoneResult, Recording } from '@/interfaces/practice.interface';
 
@@ -31,6 +31,7 @@ export const ResultCard = ({
   outlineAt,
   onRetry,
 }: ResultCardProps): ReactElement => {
+  const copy = useCopy();
   const [selected, setSelected] = useState<PhoneResult | null>(null);
   const [disputed, setDisputed] = useState(false);
   const [disputeError, setDisputeError] = useState<string | null>(null);
@@ -49,25 +50,25 @@ export const ResultCard = ({
     <section className="result-card" aria-labelledby="result-title">
       <div className="result-card__head">
         <h2 id="result-title" className="result-card__title">
-          {COPY.practice.resultTitle}
+          {copy.practice.resultTitle}
         </h2>
         <p className="result-card__summary">
-          {COPY.practice.summary(summary.ok, summary.check, summary.error)} ·{' '}
-          {summary.camera_used ? COPY.practice.cameraUsed : COPY.practice.cameraUnused}
+          {copy.practice.summary(summary.ok, summary.check, summary.error)} ·{' '}
+          {summary.camera_used ? copy.practice.cameraUsed : copy.practice.cameraUnused}
         </p>
       </div>
       <ul className="result-card__totals" aria-hidden="true">
         <li className="result-card__total is-ok">
           <span className="result-card__total-value">{summary.ok}</span>
-          <span>{COPY.verdict.ok}</span>
+          <span>{copy.verdict.ok}</span>
         </li>
         <li className="result-card__total is-check">
           <span className="result-card__total-value">{summary.check}</span>
-          <span>{COPY.verdict.check}</span>
+          <span>{copy.verdict.check}</span>
         </li>
         <li className="result-card__total is-error">
           <span className="result-card__total-value">{summary.error}</span>
-          <span>{COPY.verdict.error}</span>
+          <span>{copy.verdict.error}</span>
         </li>
       </ul>
 
@@ -90,7 +91,7 @@ export const ResultCard = ({
           </div>
         ))}
       </div>
-      <p className="result-card__muted">{COPY.practice.phoneDetailHint}</p>
+      <p className="result-card__muted">{copy.practice.phoneDetailHint}</p>
 
       {selected ? (
         <PhoneDetail phone={selected} outline={outlineAt(selected.start, selected.end)} />
@@ -98,7 +99,7 @@ export const ResultCard = ({
 
       {summary.focus.length > 0 ? (
         <div className="result-card__focus">
-          <h3 className="result-card__subtitle">{COPY.practice.focusTitle}</h3>
+          <h3 className="result-card__subtitle">{copy.practice.focusTitle}</h3>
           <ul className="result-card__focus-list">
             {summary.focus.map((focus) => (
               <li key={focus.error_id} className="result-card__focus-item">
@@ -111,7 +112,7 @@ export const ResultCard = ({
                   }}
                   className="button button--secondary button--small"
                 >
-                  {COPY.practice.practiceNow}
+                  {copy.practice.practiceNow}
                 </Link>
               </li>
             ))}
@@ -123,29 +124,29 @@ export const ResultCard = ({
 
       {tutor.isAvailable ? (
         <TutorPanel
-          title={COPY.tutor.panelTitle}
-          buttonLabel={COPY.tutor.explain}
+          title={copy.tutor.panelTitle}
+          buttonLabel={copy.tutor.explain}
           request={() => explainRun(result.id)}
         />
       ) : null}
 
       <div className="result-card__actions">
-        {onRetry ? <Button onClick={onRetry}>{COPY.practice.retry}</Button> : null}
+        {onRetry ? <Button onClick={onRetry}>{copy.practice.retry}</Button> : null}
         {recording ? (
           <Button
             variant={ButtonVariant.Ghost}
             onClick={() => void new Audio(recording.url).play()}
           >
-            {COPY.practice.playback}
+            {copy.practice.playback}
           </Button>
         ) : null}
         {disputed ? (
           <p role="status" className="result-card__muted">
-            {COPY.practice.disputed}
+            {copy.practice.disputed}
           </p>
         ) : (
           <Button variant={ButtonVariant.Ghost} onClick={dispute}>
-            {COPY.practice.dispute}
+            {copy.practice.dispute}
           </Button>
         )}
         {disputeError ? <p className="result-card__error">{disputeError}</p> : null}

@@ -11,18 +11,17 @@ import { Icon } from '@/components/Icon/Icon';
 import { PageIntro } from '@/components/PageIntro/PageIntro';
 import { Skeleton } from '@/components/Skeleton/Skeleton';
 import { Tabs } from '@/components/Tabs/Tabs';
-import { COPY } from '@/constants/copy.constant';
 import { AsyncStatus } from '@/enums/async-status.enum';
 import { IconName } from '@/enums/icon-name.enum';
 import { getPhonemes } from '@/features/content/services/content.service';
 import { SoundDetail } from '@/features/sounds/components/SoundDetail';
 import { useAsync } from '@/hooks/useAsync';
+import { useCopy } from '@/hooks/useCopy';
 import type { PhonemeCard } from '@/interfaces/practice.interface';
 import { cx } from '@/utils/cx.util';
 
 import './SoundChart.css';
 
-const GROUP_LABEL: Record<string, string> = COPY.sounds.groups;
 type GroupFilter = 'all' | 'vowel' | 'diphthong' | 'consonant';
 
 const matches = (card: PhonemeCard, query: string): boolean => {
@@ -43,6 +42,8 @@ const groupsOf = (cards: PhonemeCard[]): [string, PhonemeCard[]][] => {
 };
 
 export const SoundChart = (): ReactElement => {
+  const copy = useCopy();
+  const groupLabel: Record<string, string> = copy.sounds.groups;
   const { status, data, error, reload } = useAsync(getPhonemes);
   const selectedId = useSearchParams().get('id');
   const selected = data?.find((card) => card.id === selectedId) ?? null;
@@ -54,27 +55,27 @@ export const SoundChart = (): ReactElement => {
 
   return (
     <div className="sound-chart">
-      <PageIntro title={COPY.sounds.title} lead={COPY.sounds.lead} />
+      <PageIntro title={copy.sounds.title} lead={copy.sounds.lead} />
       <div className="sound-chart__toolbar">
         <label className="sound-chart__search">
           <Icon name={IconName.Search} className="sound-chart__search-icon" />
-          <span className="visually-hidden">{COPY.sounds.search}</span>
+          <span className="visually-hidden">{copy.sounds.search}</span>
           <input
             type="search"
             className="sound-chart__search-input"
-            placeholder={COPY.sounds.search}
+            placeholder={copy.sounds.search}
             value={query}
             onChange={(event) => setQuery(event.target.value)}
           />
         </label>
         <Tabs
-          label={COPY.sounds.groups.vowel}
+          label={copy.sounds.groups.vowel}
           value={filter}
           options={[
-            { id: 'all', label: COPY.sounds.all },
-            { id: 'vowel', label: COPY.sounds.groups.vowel },
-            { id: 'diphthong', label: COPY.sounds.groups.diphthong },
-            { id: 'consonant', label: COPY.sounds.groups.consonant },
+            { id: 'all', label: copy.sounds.all },
+            { id: 'vowel', label: copy.sounds.groups.vowel },
+            { id: 'diphthong', label: copy.sounds.groups.diphthong },
+            { id: 'consonant', label: copy.sounds.groups.consonant },
           ]}
           onChange={setFilter}
         />
@@ -84,7 +85,7 @@ export const SoundChart = (): ReactElement => {
       {data ? (
         <div className={cx('sound-chart__layout', selected && 'has-detail')}>
           <div className="sound-chart__groups">
-            {visible.length === 0 ? <EmptyState message={COPY.sounds.emptySearch} /> : null}
+            {visible.length === 0 ? <EmptyState message={copy.sounds.emptySearch} /> : null}
             {groupsOf(visible).map(([group, cards]) => (
               <section
                 key={group}
@@ -92,9 +93,9 @@ export const SoundChart = (): ReactElement => {
                 aria-labelledby={`group-${group}`}
               >
                 <h2 id={`group-${group}`} className="sound-chart__group-title">
-                  {GROUP_LABEL[group] ?? group}
+                  {groupLabel[group] ?? group}
                   <span className="sound-chart__group-count">
-                    {COPY.sounds.count(cards.length)}
+                    {copy.sounds.count(cards.length)}
                   </span>
                 </h2>
                 <ul className="sound-chart__list">

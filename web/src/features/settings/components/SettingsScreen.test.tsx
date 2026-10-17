@@ -3,7 +3,9 @@ import userEvent from '@testing-library/user-event';
 import type { ReactElement } from 'react';
 
 import { ToastProvider } from '@/components/Toast/Toast';
+import { Language } from '@/enums/language.enum';
 import { StorageKey } from '@/enums/storage-key.enum';
+import { setLanguage } from '@/locales';
 import { jsonResponse, mockApi } from '@/test-utils/api-mock';
 
 import { SettingsScreen } from './SettingsScreen';
@@ -32,6 +34,19 @@ describe('SettingsScreen', () => {
   afterEach(() => {
     localStorage.clear();
     document.documentElement.dataset.theme = 'light';
+    setLanguage(Language.Vi);
+  });
+
+  it('switches the interface language and remembers it', async () => {
+    const user = userEvent.setup();
+    mockApi({ '/api/v1/profiles': () => jsonResponse(profiles) });
+    render(renderScreen());
+    await user.click(screen.getByRole('tab', { name: 'English' }));
+    expect(screen.getByRole('heading', { name: 'Settings', level: 1 })).toBeInTheDocument();
+    expect(document.documentElement.lang).toBe('en');
+    expect(JSON.parse(localStorage.getItem(StorageKey.Language) ?? '""')).toBe('en');
+    await user.click(screen.getByRole('tab', { name: 'Tiếng Việt' }));
+    expect(screen.getByRole('heading', { name: 'Cài đặt', level: 1 })).toBeInTheDocument();
   });
 
   it('switches the theme, saves the server address and reports the check', async () => {

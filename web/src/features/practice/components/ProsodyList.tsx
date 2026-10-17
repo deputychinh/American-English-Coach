@@ -1,6 +1,6 @@
 import type { ReactElement } from 'react';
 
-import { COPY } from '@/constants/copy.constant';
+import { useCopy } from '@/hooks/useCopy';
 import type { ProsodyResult } from '@/interfaces/practice.interface';
 import { cx } from '@/utils/cx.util';
 import { verdictGlyph, verdictModifier } from '@/utils/verdict.util';
@@ -12,10 +12,11 @@ interface ProsodyListProps {
 }
 
 export const ProsodyList = ({ findings }: ProsodyListProps): ReactElement | null => {
+  const copy = useCopy();
   if (findings.length === 0) return null;
   return (
     <div className="prosody-list">
-      <h3 className="prosody-list__title">{COPY.practice.prosodyTitle}</h3>
+      <h3 className="prosody-list__title">{copy.practice.prosodyTitle}</h3>
       <ul className="prosody-list__items">
         {findings.map((finding, index) => (
           <li
@@ -24,7 +25,7 @@ export const ProsodyList = ({ findings }: ProsodyListProps): ReactElement | null
           >
             <span className="prosody-list__aspect">
               <span aria-hidden="true">{verdictGlyph(finding.verdict)}</span>{' '}
-              {COPY.prosody[finding.aspect]}
+              {copy.prosody[finding.aspect]}
             </span>
             <span>{finding.detail_vi}</span>
           </li>

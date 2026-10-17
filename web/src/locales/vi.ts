@@ -86,6 +86,8 @@ export const vi = {
     all: 'Tất cả',
     emptySearch: 'Không có âm nào khớp. Thử từ khác hoặc xóa bộ lọc.',
     count: (count: number): string => `${count} âm`,
+    chartSays: (symbol: string, arpabet: string): string =>
+      `Bảng 44 ghi /${symbol}/ · ARPAbet ${arpabet}`,
   },
   plan: viSettings.plan,
   practice: viPractice.practice,
@@ -120,6 +122,13 @@ export const vi = {
     startCamera: 'Bật camera',
     stopCamera: 'Tắt camera',
     commonError: 'Lỗi thường gặp',
+    targetAria: (group: string): string => `Mẫu khẩu hình nhóm ${group}`,
+    noTarget: 'Không có mẫu khẩu hình',
+    lipOutline: 'Viền môi của bạn',
+    noMouth: 'Chưa có khẩu hình',
+    increase: 'tăng ↑',
+    decrease: 'giảm ↓',
+    insideTarget: 'trong vùng mục tiêu',
     lowConfidence:
       'Với âm này camera chỉ theo dõi được môi và hàm; vị trí lưỡi bên trong do máy chấm âm quyết định.',
   },
@@ -140,6 +149,9 @@ export const vi = {
     stepsTitle: 'Các bước',
   },
   progress: {
+    loadFailed: 'Không tải được tiến độ',
+    runLoadFailed: 'Không tải được kết quả',
+    disputeFailed: 'Không gửi được phản hồi',
     title: 'Tiến độ',
     machine: 'Kết quả do máy đo',
     machineHint:
@@ -187,6 +199,7 @@ export const vi = {
     reload: 'Tải lại',
   },
   tutor: {
+    failed: 'Gia sư AI không trả lời được',
     explain: 'Giải thích bằng AI',
     panelTitle: 'Gia sư AI · giải thích kết quả đã chấm, không chấm lại',
     askMouth: 'Hỏi AI về khẩu hình (gửi 1 ảnh)',
@@ -199,6 +212,15 @@ export const vi = {
     modelLabel: 'model',
   },
   common: {
+    loadFailed: (what: string): string => `Không tải được ${what}`,
+    content: {
+      phonemes: 'bảng âm',
+      pairs: 'cặp âm',
+      sentences: 'câu luyện',
+      visemes: 'mẫu khẩu hình',
+      sounds: 'danh sách âm',
+      drill: 'bài luyện âm',
+    },
     loading: 'Đang tải…',
     retry: 'Thử lại',
     errorTitle: 'Có lỗi xảy ra',

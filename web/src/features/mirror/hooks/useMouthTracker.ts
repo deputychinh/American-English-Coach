@@ -2,7 +2,6 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
-import { COPY } from '@/constants/copy.constant';
 import {
   FPS_SAMPLE_FRAMES,
   FRAME_BUFFER_SECONDS,
@@ -16,6 +15,7 @@ import { useFaceLandmarker } from '@/features/mirror/hooks/useFaceLandmarker';
 import type { BufferedFrame, MouthTrackerOptions } from '@/interfaces/hooks.interface';
 import type { MouthFeatures, Point2, TrackedFrame } from '@/interfaces/mouth.interface';
 import type { MouthTracker, TrackedSample } from '@/interfaces/tracker.interface';
+import { getCopy } from '@/locales';
 import { normaliseFeatures } from '@/utils/calibration.util';
 import { lipOutline, lipPolygons } from '@/utils/lip-outline.util';
 import { poseFromMatrix, poseQuality, rawMouthFeatures } from '@/utils/mouth-features.util';
@@ -76,8 +76,8 @@ const snapshotFromVideo = (
 
 const cameraMessage = (error: unknown): string => {
   if (error instanceof DOMException && error.name === 'NotAllowedError')
-    return COPY.practice.cameraDenied;
-  return error instanceof Error ? error.message : COPY.practice.noMedia;
+    return getCopy().practice.cameraDenied;
+  return error instanceof Error ? error.message : getCopy().practice.noMedia;
 };
 
 /** Camera + FaceLandmarker loop; keeps a 20 s ring buffer of features and lip outlines (no pixels). */

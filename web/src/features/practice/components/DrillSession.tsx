@@ -9,12 +9,12 @@ import { ConfidenceBadge } from '@/components/ConfidenceBadge/ConfidenceBadge';
 import { ErrorState } from '@/components/ErrorState/ErrorState';
 import { PageIntro } from '@/components/PageIntro/PageIntro';
 import { Skeleton } from '@/components/Skeleton/Skeleton';
-import { COPY } from '@/constants/copy.constant';
 import { AsyncStatus } from '@/enums/async-status.enum';
 import { ButtonVariant } from '@/enums/button-variant.enum';
 import { getSound, getVisemes } from '@/features/content/services/content.service';
 import { PracticeSession } from '@/features/practice/components/PracticeSession';
 import { useAsync } from '@/hooks/useAsync';
+import { useCopy } from '@/hooks/useCopy';
 import { useKeepAwake } from '@/hooks/useKeepAwake';
 import type {
   AssessmentResponse,
@@ -49,30 +49,33 @@ const DrillSummary = ({
   tally,
   onRetryFailed,
   onRestart,
-}: DrillSummaryProps): ReactElement => (
-  <section className="drill-session__summary" aria-labelledby="drill-summary-title">
-    <h2 id="drill-summary-title">{COPY.practice.drill.summaryTitle}</h2>
-    <p>{COPY.practice.drill.tally(tally)}</p>
-    {tally.failedIds.length === 0 ? <p>{COPY.practice.drill.allDone}</p> : null}
-    <div className="drill-session__actions">
-      {tally.failedIds.length > 0 ? (
-        <Button onClick={onRetryFailed}>{COPY.practice.drill.retryFailed}</Button>
-      ) : null}
-      <Link
-        href={{ pathname: '/mirror', query: { sound: targetPhoneOf(drill.arpabet) } }}
-        className="button button--secondary"
-      >
-        {COPY.practice.drill.mirror}
-      </Link>
-      <Button variant={ButtonVariant.Ghost} onClick={onRestart}>
-        {COPY.practice.drill.restart}
-      </Button>
-      <Link href="/practice" className="button button--ghost">
-        {COPY.practice.drill.backToSounds}
-      </Link>
-    </div>
-  </section>
-);
+}: DrillSummaryProps): ReactElement => {
+  const copy = useCopy();
+  return (
+    <section className="drill-session__summary" aria-labelledby="drill-summary-title">
+      <h2 id="drill-summary-title">{copy.practice.drill.summaryTitle}</h2>
+      <p>{copy.practice.drill.tally(tally)}</p>
+      {tally.failedIds.length === 0 ? <p>{copy.practice.drill.allDone}</p> : null}
+      <div className="drill-session__actions">
+        {tally.failedIds.length > 0 ? (
+          <Button onClick={onRetryFailed}>{copy.practice.drill.retryFailed}</Button>
+        ) : null}
+        <Link
+          href={{ pathname: '/mirror', query: { sound: targetPhoneOf(drill.arpabet) } }}
+          className="button button--secondary"
+        >
+          {copy.practice.drill.mirror}
+        </Link>
+        <Button variant={ButtonVariant.Ghost} onClick={onRestart}>
+          {copy.practice.drill.restart}
+        </Button>
+        <Link href="/practice" className="button button--ghost">
+          {copy.practice.drill.backToSounds}
+        </Link>
+      </div>
+    </section>
+  );
+};
 
 const loadDrill =
   (soundId: string) => async (): Promise<{ drill: SoundDrill; visemes: VisemeContent }> => {
@@ -82,6 +85,7 @@ const loadDrill =
 
 /** Runs every item of a sound's drill through the practice flow and tallies the target phone. */
 export const DrillSession = ({ soundId }: DrillSessionProps): ReactElement => {
+  const copy = useCopy();
   const load = useMemo(() => loadDrill(soundId), [soundId]);
   const content = useAsync(load);
   const [queue, setQueue] = useState<DrillItem[] | null>(null);
@@ -133,13 +137,13 @@ export const DrillSession = ({ soundId }: DrillSessionProps): ReactElement => {
 
   if (content.status === AsyncStatus.Error)
     return <ErrorState message={content.error ?? ''} onRetry={content.reload} />;
-  if (!content.data) return <Skeleton lines={6} label={COPY.practice.drill.loading} />;
+  if (!content.data) return <Skeleton lines={6} label={copy.practice.drill.loading} />;
   const { drill, visemes } = content.data;
 
   if (!current) {
     return (
       <div className="drill-session">
-        <PageIntro title={`/${drill.us}/`} lead={COPY.practice.bySound} />
+        <PageIntro title={`/${drill.us}/`} lead={copy.practice.bySound} />
         <DrillSummary
           drill={drill}
           tally={tally}
@@ -156,13 +160,13 @@ export const DrillSession = ({ soundId }: DrillSessionProps): ReactElement => {
     <div className="drill-session">
       <header className="drill-session__head">
         <p className="drill-session__progress">
-          {COPY.practice.drill.progress(index + 1, active.length)} ·{' '}
-          {COPY.practice.drill.stage[current.stage]} · {COPY.practice.drill.targetPhone} /{drill.us}
+          {copy.practice.drill.progress(index + 1, active.length)} ·{' '}
+          {copy.practice.drill.stage[current.stage]} · {copy.practice.drill.targetPhone} /{drill.us}
           /
         </p>
         <ConfidenceBadge confidence={drill.viseme_confidence} labels={visemes.confidence_labels} />
         <p className="drill-session__tally" aria-live="polite">
-          {COPY.practice.drill.tally(tally)}
+          {copy.practice.drill.tally(tally)}
         </p>
       </header>
       <PracticeSession
@@ -174,10 +178,10 @@ export const DrillSession = ({ soundId }: DrillSessionProps): ReactElement => {
         onResult={onResult}
         extraActions={
           <>
-            <Button onClick={next}>{COPY.practice.drill.next}</Button>
+            <Button onClick={next}>{copy.practice.drill.next}</Button>
             {!isScored ? (
               <Button variant={ButtonVariant.Ghost} onClick={() => advance(null)}>
-                {COPY.practice.drill.skip}
+                {copy.practice.drill.skip}
               </Button>
             ) : null}
           </>

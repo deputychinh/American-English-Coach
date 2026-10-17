@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { referenceAudioUrl } from '@/features/practice/services/assessment.service';
 import type { ReferenceAudio } from '@/interfaces/hooks.interface';
+import { getCopy } from '@/locales';
 
 /** Plays the cached reference WAV for a prompt; one element lives as long as the component. */
 export const useReferenceAudio = (): ReferenceAudio => {
@@ -27,13 +28,13 @@ export const useReferenceAudio = (): ReferenceAudio => {
     audio.onended = () => setIsPlaying(false);
     audio.onerror = () => {
       setIsPlaying(false);
-      setError('Không phát được giọng mẫu (máy chấm chưa chạy?)');
+      setError(getCopy().practice.referenceFailedOffline);
     };
     setError(null);
     setIsPlaying(true);
     audio.play().catch(() => {
       setIsPlaying(false);
-      setError('Không phát được giọng mẫu');
+      setError(getCopy().practice.referenceFailed);
     });
   }, []);
 

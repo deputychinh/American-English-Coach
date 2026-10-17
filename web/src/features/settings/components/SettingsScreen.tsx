@@ -10,6 +10,7 @@ import { Tabs } from '@/components/Tabs/Tabs';
 import { useToast } from '@/components/Toast/Toast';
 import { APP_VERSION } from '@/constants/ui.constant';
 import { ButtonVariant } from '@/enums/button-variant.enum';
+import { Language } from '@/enums/language.enum';
 import { StorageKey } from '@/enums/storage-key.enum';
 import { Theme } from '@/enums/theme.enum';
 import { getHealth } from '@/features/health/services/health.service';
@@ -17,8 +18,9 @@ import { clearCalibration } from '@/features/mirror/services/calibration.service
 import { GoalCard } from '@/features/settings/components/GoalCard';
 import { PairingCard } from '@/features/settings/components/PairingCard';
 import { ProfilesCard } from '@/features/settings/components/ProfilesCard';
-import { useCopy } from '@/hooks/useCopy';
+import { useCopy, useLanguage } from '@/hooks/useCopy';
 import { useStoredState } from '@/hooks/useStoredState';
+import { setLanguage } from '@/locales';
 import { normaliseBaseUrl } from '@/utils/api-base.util';
 import { removeStorage, writeStorage } from '@/utils/storage.util';
 
@@ -35,6 +37,7 @@ const readTheme = (): Theme =>
 /** Theme, practice defaults, scoring-server address and on-device data. */
 export const SettingsScreen = (): ReactElement => {
   const copy = useCopy();
+  const language = useLanguage();
   const toast = useToast();
   const theme = useSyncExternalStore(subscribeTheme, readTheme, () => Theme.Light);
   const [cameraDefault, setCameraDefault] = useStoredState<boolean>(
@@ -86,6 +89,20 @@ export const SettingsScreen = (): ReactElement => {
             { id: Theme.Dark, label: copy.settings.themeDark },
           ]}
           onChange={setTheme}
+        />
+        <SectionHeader
+          id="settings-language"
+          title={copy.settings.language}
+          hint={copy.settings.languageHint}
+        />
+        <Tabs
+          label={copy.settings.language}
+          value={language}
+          options={[
+            { id: Language.Vi, label: copy.settings.languageVi },
+            { id: Language.En, label: copy.settings.languageEn },
+          ]}
+          onChange={setLanguage}
         />
       </Card>
 

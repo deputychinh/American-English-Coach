@@ -1,7 +1,9 @@
+'use client';
+
 import type { ReactElement } from 'react';
 
 import { VisemeGroup } from '@/api/coach.schema';
-
+import { useCopy } from '@/hooks/useCopy';
 import './TargetShape.css';
 
 interface TargetShapeProps {
@@ -64,6 +66,7 @@ const SHAPES: Record<VisemeGroup, { outer: string; inner: string; extra?: string
 };
 
 export const TargetShape = ({ group, size }: TargetShapeProps): ReactElement => {
+  const copy = useCopy();
   const shape = group ? SHAPES[group] : null;
   return (
     <svg
@@ -72,7 +75,7 @@ export const TargetShape = ({ group, size }: TargetShapeProps): ReactElement => 
       width={size}
       height={size}
       role="img"
-      aria-label={group ? `Mẫu khẩu hình nhóm ${group}` : 'Không có mẫu khẩu hình'}
+      aria-label={group ? copy.mirror.targetAria(group) : copy.mirror.noTarget}
     >
       {shape ? (
         <>

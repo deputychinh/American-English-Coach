@@ -10,4 +10,5 @@ export enum StorageKey {
   ProfileName = 'coach.profileName',
   DailyGoal = 'coach.dailyGoal',
   ReminderTime = 'coach.reminderTime',
+  Language = 'coach.language',
 }

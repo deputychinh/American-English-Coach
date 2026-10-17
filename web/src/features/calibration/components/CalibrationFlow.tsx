@@ -8,7 +8,6 @@ import { Button } from '@/components/Button/Button';
 import { ErrorState } from '@/components/ErrorState/ErrorState';
 import { PageIntro } from '@/components/PageIntro/PageIntro';
 import { Skeleton } from '@/components/Skeleton/Skeleton';
-import { COPY } from '@/constants/copy.constant';
 import { AsyncStatus } from '@/enums/async-status.enum';
 import { ButtonVariant } from '@/enums/button-variant.enum';
 import { getVisemes } from '@/features/content/services/content.service';
@@ -16,6 +15,7 @@ import { CameraPanel } from '@/features/mirror/components/CameraPanel';
 import { useMouthTracker } from '@/features/mirror/hooks/useMouthTracker';
 import { saveCalibration } from '@/features/mirror/services/calibration.service';
 import { useAsync } from '@/hooks/useAsync';
+import { useCopy } from '@/hooks/useCopy';
 import { useKeepAwake } from '@/hooks/useKeepAwake';
 import type { MouthFeatures } from '@/interfaces/mouth.interface';
 import { calibrationFromSamples } from '@/utils/calibration.util';
@@ -26,6 +26,7 @@ import './CalibrationFlow.css';
 const MIN_SAMPLES_PER_STEP = 8;
 
 export const CalibrationFlow = (): ReactElement => {
+  const copy = useCopy();
   const sound = useSearchParams().get('sound');
   const content = useAsync(getVisemes);
   useKeepAwake();
@@ -90,11 +91,11 @@ export const CalibrationFlow = (): ReactElement => {
 
   return (
     <div className="calibration-flow">
-      <PageIntro title={COPY.calibration.title} lead={COPY.calibration.intro} />
+      <PageIntro title={copy.calibration.title} lead={copy.calibration.intro} />
       <div className="calibration-flow__layout">
         <CameraPanel tracker={tracker} />
         <div className="calibration-flow__panel" aria-live="polite">
-          <ol className="calibration-flow__steps" aria-label={COPY.calibration.stepsTitle}>
+          <ol className="calibration-flow__steps" aria-label={copy.calibration.stepsTitle}>
             {steps.map((item, position) => (
               <li
                 key={item.id}
@@ -110,7 +111,7 @@ export const CalibrationFlow = (): ReactElement => {
             ))}
           </ol>
           {stepIndex < 0 ? (
-            <Button onClick={() => setStepIndex(0)}>{COPY.calibration.start}</Button>
+            <Button onClick={() => setStepIndex(0)}>{copy.calibration.start}</Button>
           ) : null}
           {step ? (
             <>
@@ -119,7 +120,7 @@ export const CalibrationFlow = (): ReactElement => {
                   className="calibration-flow__ring"
                   viewBox="0 0 48 48"
                   role="img"
-                  aria-label={COPY.calibration.progressAria}
+                  aria-label={copy.calibration.progressAria}
                 >
                   <circle className="calibration-flow__ring-track" cx="24" cy="24" r="20" />
                   <circle
@@ -131,32 +132,32 @@ export const CalibrationFlow = (): ReactElement => {
                   />
                 </svg>
                 <p className="calibration-flow__step">
-                  {COPY.calibration.step(stepIndex + 1, steps.length)}
+                  {copy.calibration.step(stepIndex + 1, steps.length)}
                 </p>
               </div>
               <p className="calibration-flow__prompt">{step.prompt_vi}</p>
-              <p className="calibration-flow__muted">{COPY.calibration.hold}</p>
+              <p className="calibration-flow__muted">{copy.calibration.hold}</p>
               {isRetryShown || !tracker.isFaceVisible ? (
-                <p className="calibration-flow__muted">{COPY.calibration.needFace}</p>
+                <p className="calibration-flow__muted">{copy.calibration.needFace}</p>
               ) : null}
             </>
           ) : null}
-          {isSaving ? <p className="calibration-flow__muted">{COPY.calibration.saving}</p> : null}
+          {isSaving ? <p className="calibration-flow__muted">{copy.calibration.saving}</p> : null}
           {isDone ? (
             <>
-              <p className="calibration-flow__done">{COPY.calibration.done}</p>
+              <p className="calibration-flow__done">{copy.calibration.done}</p>
               {isSaveFailed ? (
-                <p className="calibration-flow__muted">{COPY.calibration.failed}</p>
+                <p className="calibration-flow__muted">{copy.calibration.failed}</p>
               ) : null}
               <div className="calibration-flow__actions">
                 <Link
                   href={sound ? { pathname: '/mirror', query: { sound } } : '/mirror'}
                   className="button button--primary"
                 >
-                  {COPY.calibration.goMirror}
+                  {copy.calibration.goMirror}
                 </Link>
                 <Button variant={ButtonVariant.Ghost} onClick={restart}>
-                  {COPY.calibration.redo}
+                  {copy.calibration.redo}
                 </Button>
               </div>
             </>

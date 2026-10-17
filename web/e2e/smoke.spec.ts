@@ -117,10 +117,22 @@ test('settings has theme, server check, pairing and data sections', async ({ pag
   await page.getByRole('tab', { name: 'Sáng' }).click();
 });
 
+test('the interface switches to English and back from settings', async ({ page }) => {
+  await page.goto('/settings/');
+  await page.getByRole('tab', { name: 'English' }).click();
+  await expect(page.getByRole('heading', { name: 'Settings', level: 1 })).toBeVisible();
+  await expect(page.locator('html')).toHaveAttribute('lang', 'en');
+  await page.goto('/');
+  await expect(page.getByRole('link', { name: /Practise now/ }).first()).toBeVisible();
+  await page.goto('/settings/');
+  await page.getByRole('tab', { name: 'Tiếng Việt' }).click();
+  await expect(page.getByRole('heading', { name: 'Cài đặt', level: 1 })).toBeVisible();
+});
+
 test('profiles can be created, switched, renamed and deleted from settings', async ({ page }) => {
   await page.goto('/settings/');
   const card = page.locator('#profiles');
-  await expect(card.getByText('Đang dùng')).toBeVisible();
+  await expect(card.getByText('Đang dùng', { exact: true })).toBeVisible();
   const name = `E2E ${Date.now().toString().slice(-5)}`;
   await card.getByLabel('Tên hồ sơ mới').fill(name);
   await card.getByRole('button', { name: 'Tạo hồ sơ' }).click();

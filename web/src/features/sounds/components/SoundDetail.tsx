@@ -5,11 +5,11 @@ import { type ReactElement, useCallback } from 'react';
 
 import { Button } from '@/components/Button/Button';
 import { ConfidenceBadge } from '@/components/ConfidenceBadge/ConfidenceBadge';
-import { COPY } from '@/constants/copy.constant';
 import { ButtonVariant } from '@/enums/button-variant.enum';
 import { getSound } from '@/features/content/services/content.service';
 import { useReferenceAudio } from '@/features/practice/hooks/useReferenceAudio';
 import { useAsync } from '@/hooks/useAsync';
+import { useCopy } from '@/hooks/useCopy';
 import type { PhonemeCard } from '@/interfaces/practice.interface';
 
 import './SoundDetail.css';
@@ -19,6 +19,7 @@ interface SoundDetailProps {
 }
 
 export const SoundDetail = ({ card }: SoundDetailProps): ReactElement => {
+  const copy = useCopy();
   const audio = useReferenceAudio();
   const loadDrill = useCallback(() => getSound(card.id), [card.id]);
   const drill = useAsync(loadDrill);
@@ -29,20 +30,18 @@ export const SoundDetail = ({ card }: SoundDetailProps): ReactElement => {
           /{card.us}/
         </h2>
         <Link href="/sounds" scroll={false} className="sound-detail__close">
-          {COPY.sounds.close}
+          {copy.sounds.close}
         </Link>
       </div>
       {card.symbol !== card.us ? (
-        <p className="sound-detail__muted">
-          Bảng 44 ghi /{card.symbol}/ · ARPAbet {card.arpabet}
-        </p>
+        <p className="sound-detail__muted">{copy.sounds.chartSays(card.symbol, card.arpabet)}</p>
       ) : (
         <p className="sound-detail__muted">ARPAbet {card.arpabet}</p>
       )}
       <dl className="sound-detail__facts">
-        <dt>{COPY.sounds.example}</dt>
+        <dt>{copy.sounds.example}</dt>
         <dd>{card.example}</dd>
-        <dt>{COPY.sounds.contrast}</dt>
+        <dt>{copy.sounds.contrast}</dt>
         <dd>{card.contrast}</dd>
       </dl>
       <p>{card.tip}</p>
@@ -52,12 +51,12 @@ export const SoundDetail = ({ card }: SoundDetailProps): ReactElement => {
       </p>
       {drill.data?.transition_vi ? (
         <p className="sound-detail__muted">
-          {COPY.sounds.transition}: {drill.data.transition_vi}
+          {copy.sounds.transition}: {drill.data.transition_vi}
         </p>
       ) : null}
       {drill.data ? (
         <p className="sound-detail__muted">
-          {COPY.sounds.drillSize(
+          {copy.sounds.drillSize(
             drill.data.words.length,
             drill.data.pairs.length,
             drill.data.sentences.length,
@@ -66,25 +65,25 @@ export const SoundDetail = ({ card }: SoundDetailProps): ReactElement => {
       ) : null}
       <div className="sound-detail__actions">
         <Button onClick={() => audio.play(card.example)} disabled={audio.isPlaying}>
-          {audio.isPlaying ? COPY.practice.playing : COPY.sounds.listen}
+          {audio.isPlaying ? copy.practice.playing : copy.sounds.listen}
         </Button>
         <Link
           href={{ pathname: '/practice', query: { sound: card.id } }}
           className="button button--secondary"
         >
-          {COPY.sounds.practiceSound}
+          {copy.sounds.practiceSound}
         </Link>
         <Link
           href={{ pathname: '/practice', query: { item: `word:${card.example}` } }}
           className="button button--ghost"
         >
-          {COPY.sounds.practiceWord}
+          {copy.sounds.practiceWord}
         </Link>
         <Link
           href={{ pathname: '/mirror', query: { sound: card.arpabet } }}
           className="button button--ghost"
         >
-          {COPY.sounds.mirror}
+          {copy.sounds.mirror}
         </Link>
       </div>
       {audio.error ? (
@@ -93,7 +92,7 @@ export const SoundDetail = ({ card }: SoundDetailProps): ReactElement => {
         </p>
       ) : null}
       <Button variant={ButtonVariant.Ghost} isSmall onClick={() => audio.play(card.contrast)}>
-        {COPY.sounds.listen}: {card.contrast}
+        {copy.sounds.listen}: {card.contrast}
       </Button>
     </aside>
   );

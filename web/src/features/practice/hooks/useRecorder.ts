@@ -2,7 +2,6 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 
-import { COPY } from '@/constants/copy.constant';
 import {
   MAX_RECORD_SECONDS,
   TARGET_SAMPLE_RATE,
@@ -12,14 +11,16 @@ import {
 import { RecorderStatus } from '@/enums/recorder-status.enum';
 import type { Recorder, RecorderSession } from '@/interfaces/hooks.interface';
 import type { Recording } from '@/interfaces/practice.interface';
+import { getCopy } from '@/locales';
 import { nativeHaptic } from '@/utils/native.util';
 import { concatChunks, encodeWav, resample, rmsLevel } from '@/utils/wav-encoder.util';
 
 const permissionMessage = (error: unknown): string => {
   if (error instanceof DOMException && error.name === 'NotAllowedError')
-    return COPY.practice.micDenied;
-  if (error instanceof DOMException && error.name === 'NotFoundError') return COPY.practice.noMedia;
-  return error instanceof Error ? error.message : COPY.practice.noMedia;
+    return getCopy().practice.micDenied;
+  if (error instanceof DOMException && error.name === 'NotFoundError')
+    return getCopy().practice.noMedia;
+  return error instanceof Error ? error.message : getCopy().practice.noMedia;
 };
 
 const openContext = (): AudioContext => {
@@ -104,7 +105,7 @@ export const useRecorder = (): Recorder => {
     setError(null);
     setSeconds(0);
     if (!navigator.mediaDevices?.getUserMedia) {
-      setError(COPY.practice.noMedia);
+      setError(getCopy().practice.noMedia);
       setStatus(RecorderStatus.Error);
       return;
     }

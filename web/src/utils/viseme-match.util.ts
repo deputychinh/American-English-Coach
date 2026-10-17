@@ -1,4 +1,5 @@
 import type { MouthFeatureName, MouthFeatures, TargetMap } from '@/interfaces/mouth.interface';
+import { getCopy } from '@/locales';
 
 /** Names of features currently outside their target range. */
 export const offTargetFeatures = (
@@ -30,8 +31,9 @@ export const directionHint = (
   const [first] = offTargetFeatures(features, targets);
   if (!first) return null;
   const range = targets[first];
-  if (range?.min !== undefined && features[first] < range.min) return `${labels[first]}: tăng ↑`;
-  return `${labels[first]}: giảm ↓`;
+  if (range?.min !== undefined && features[first] < range.min)
+    return `${labels[first]}: ${getCopy().mirror.increase}`;
+  return `${labels[first]}: ${getCopy().mirror.decrease}`;
 };
 
 /** API targets (`{name: {min?, max?}}`) narrowed to known feature names. */

@@ -82,7 +82,7 @@ export const GoalCard = (): ReactElement => {
         </Button>
         {reminder ? (
           <Button variant={ButtonVariant.Ghost} isSmall onClick={() => void apply(null)}>
-            {copy.reminderOff.replace('Đã tắt', 'Tắt')}
+            {copy.reminderTurnOff}
           </Button>
         ) : null}
       </div>

@@ -26,6 +26,7 @@ export const viSettings = {
     unpair: 'Hủy ghép nối',
     pairingFailed: 'Mã không đúng hoặc đã hết hạn. Xem mã mới trong cửa sổ chạy máy chấm.',
     pairingDone: 'Ghép nối thành công.',
+    pairingError: 'Không ghép nối được',
     unpaired: 'Đã hủy ghép nối trên thiết bị này.',
     defaultDeviceName: 'iPhone',
     profiles: {
@@ -58,6 +59,10 @@ export const viSettings = {
       defaultName: 'Người học',
       nameLabel: 'Tên hồ sơ',
     },
+    language: 'Ngôn ngữ giao diện',
+    languageHint: 'Nội dung bài học, gợi ý khẩu hình và nhận xét của máy chấm vẫn bằng tiếng Việt.',
+    languageVi: 'Tiếng Việt',
+    languageEn: 'English',
     goalTitle: 'Mục tiêu và nhắc luyện',
     goalHint:
       'Số lần thu được chấm mỗi ngày để tính một ngày đạt; chuỗi ngày liên tiếp tính theo mục tiêu này.',
@@ -68,6 +73,7 @@ export const viSettings = {
     reminderWebOnly: 'Nhắc luyện bằng thông báo có trong ứng dụng iOS.',
     reminderSet: (time: string): string => `Sẽ nhắc mỗi ngày lúc ${time}.`,
     reminderOff: 'Đã tắt nhắc luyện.',
+    reminderTurnOff: 'Tắt nhắc luyện',
     reminderDenied:
       'iOS chưa cho phép thông báo. Bật trong Cài đặt → Thông báo → American English Coach.',
     reminderNotificationTitle: 'Đến giờ luyện phát âm',

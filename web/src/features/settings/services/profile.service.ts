@@ -1,6 +1,5 @@
 import { api } from '@/api/client';
 import { DEFAULT_PROFILE_ID, PROFILE_CHANGED_EVENT } from '@/constants/api.constant';
-import { COPY } from '@/constants/copy.constant';
 import { StorageKey } from '@/enums/storage-key.enum';
 import type {
   ActiveProfile,
@@ -8,10 +7,11 @@ import type {
   Profile,
   ProfileExport,
 } from '@/interfaces/practice.interface';
+import { getCopy } from '@/locales';
 import { problemMessage } from '@/utils/problem.util';
 import { readStorage, removeStorage, writeStorage } from '@/utils/storage.util';
 
-const copy = COPY.settings.profiles;
+const copy = getCopy().settings.profiles;
 
 export const listProfiles = async (): Promise<Profile[]> => {
   const { data, error } = await api.GET('/api/v1/profiles');

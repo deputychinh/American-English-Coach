@@ -9,7 +9,6 @@ import { ErrorState } from '@/components/ErrorState/ErrorState';
 import { Icon } from '@/components/Icon/Icon';
 import { PageIntro } from '@/components/PageIntro/PageIntro';
 import { Skeleton } from '@/components/Skeleton/Skeleton';
-import { COPY } from '@/constants/copy.constant';
 import { ButtonVariant } from '@/enums/button-variant.enum';
 import { IconName } from '@/enums/icon-name.enum';
 import { PracticeStatus } from '@/enums/practice-status.enum';
@@ -24,6 +23,7 @@ import { useRecorder } from '@/features/practice/hooks/useRecorder';
 import { useReferenceAudio } from '@/features/practice/hooks/useReferenceAudio';
 import { assess } from '@/features/practice/services/assessment.service';
 import { MouthTutorButton } from '@/features/tutor/components/MouthTutorButton';
+import { useCopy } from '@/hooks/useCopy';
 import { useKeepAwake } from '@/hooks/useKeepAwake';
 import { useStoredState } from '@/hooks/useStoredState';
 import type { Point2 } from '@/interfaces/mouth.interface';
@@ -57,6 +57,7 @@ export const PracticeSession = ({
   onResult,
   extraActions,
 }: PracticeSessionProps): ReactElement => {
+  const copy = useCopy();
   const [status, setStatus] = useState(PracticeStatus.Idle);
   const [error, setError] = useState<string | null>(null);
   const [result, setResult] = useState<AssessmentResponse | null>(null);
@@ -114,17 +115,17 @@ export const PracticeSession = ({
   );
 
   const isRecording = recorder.status === RecorderStatus.Recording;
-  const kindLabel = COPY.practice.kind[item.kind];
+  const kindLabel = copy.practice.kind[item.kind];
 
   return (
     <div className="practice-session">
       <PageIntro title={item.title} lead={kindLabel}>
         <Link href="/practice" className="button button--ghost">
-          {COPY.practice.back}
+          {copy.practice.back}
         </Link>
       </PageIntro>
 
-      <section className="practice-session__prompt" aria-label={COPY.practice.promptAria}>
+      <section className="practice-session__prompt" aria-label={copy.practice.promptAria}>
         <p className="practice-session__text">{item.text}</p>
         <div className="practice-session__actions">
           <Button
@@ -132,25 +133,25 @@ export const PracticeSession = ({
             onClick={() => reference.play(item.text)}
             disabled={reference.isPlaying}
           >
-            {reference.isPlaying ? COPY.practice.playing : COPY.practice.listen}
+            {reference.isPlaying ? copy.practice.playing : copy.practice.listen}
           </Button>
           <Button
             variant={ButtonVariant.Ghost}
             onClick={() => setCameraOn(!cameraOn)}
             aria-pressed={cameraOn}
           >
-            {cameraOn ? COPY.practice.cameraOff : COPY.practice.cameraOn}
+            {cameraOn ? copy.practice.cameraOff : copy.practice.cameraOn}
           </Button>
         </div>
         {reference.error ? <p className="practice-session__error">{reference.error}</p> : null}
-        <p className="practice-session__muted">{COPY.practice.cameraHint}</p>
+        <p className="practice-session__muted">{copy.practice.cameraHint}</p>
       </section>
 
       {cameraOn ? (
         <div className="practice-session__camera">
           <CameraPanel tracker={tracker} compact />
           {targetGroup ? (
-            <aside className="practice-session__target" aria-label={COPY.practice.drill.targetHint}>
+            <aside className="practice-session__target" aria-label={copy.practice.drill.targetHint}>
               <TargetShape group={targetGroup.group} size={96} />
               <div className="practice-session__target-copy">
                 <p className="practice-session__target-name">
@@ -179,13 +180,13 @@ export const PracticeSession = ({
         >
           <Icon name={isRecording ? IconName.Stop : IconName.Record} />
           {isRecording
-            ? `${COPY.practice.stop} (${String(recorder.seconds)}s)`
-            : COPY.practice.record}
+            ? `${copy.practice.stop} (${String(recorder.seconds)}s)`
+            : copy.practice.record}
         </Button>
         <span
           className="practice-session__level"
           role="meter"
-          aria-label={COPY.practice.levelAria}
+          aria-label={copy.practice.levelAria}
           aria-valuemin={0}
           aria-valuemax={100}
           aria-valuenow={Math.round(Math.min(1, recorder.level * 4) * 100)}
@@ -195,16 +196,16 @@ export const PracticeSession = ({
             style={{ inlineSize: `${String(Math.round(Math.min(1, recorder.level * 4) * 100))}%` }}
           />
         </span>
-        {isRecording ? <p className="practice-session__muted">{COPY.practice.recording}</p> : null}
+        {isRecording ? <p className="practice-session__muted">{copy.practice.recording}</p> : null}
         {recorder.error ? <ErrorState message={recorder.error} /> : null}
         {extraActions ? <div className="practice-session__extra">{extraActions}</div> : null}
       </section>
 
       {status === PracticeStatus.Scoring ? (
-        <Skeleton lines={4} label={COPY.practice.scoring} />
+        <Skeleton lines={4} label={copy.practice.scoring} />
       ) : null}
       {status === PracticeStatus.Error && error ? (
-        <ErrorState title={COPY.practice.errorTitle} message={error} onRetry={() => void begin()} />
+        <ErrorState title={copy.practice.errorTitle} message={error} onRetry={() => void begin()} />
       ) : null}
       {result ? (
         <ResultCard

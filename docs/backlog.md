@@ -23,7 +23,7 @@ Mỗi ticket có tiêu chí nghiệm thu; một commit Conventional Commit cho m
 | AEC-012 | ☑          | Native polish (Capacitor)                           | StatusBar, SplashScreen, Haptics, Keyboard, giữ màn hình sáng khi luyện; `PrivacyInfo.xcprivacy`; version/build; icon và splash chuẩn                                            |
 | AEC-013 | ☑          | Trạng thái và lỗi                                   | Mọi màn hình: loading/empty/error/success; ErrorBoundary toàn cục; thông điệp lỗi tiếng Việt hành động được                                                                      |
 | AEC-014 | ☑          | Lighthouse ≥ 90 (Performance, A11y, Best Practices) | Báo cáo lưu `docs/lighthouse/`                                                                                                                                                   |
-| AEC-015 | ◐          | i18n sẵn sàng                                       | Copy tách theo khóa (`src/locales/vi.ts`), khung `en`; không chuỗi cứng trong component                                                                                          |
+| AEC-015 | ☑          | i18n sẵn sàng                                       | Copy tách theo khóa (`src/locales/vi.ts`), khung `en`; không chuỗi cứng trong component                                                                                          |
 
 ## P2 — Sản phẩm
 

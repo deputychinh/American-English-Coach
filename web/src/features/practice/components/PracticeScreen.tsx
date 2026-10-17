@@ -8,7 +8,6 @@ import { Button } from '@/components/Button/Button';
 import { ErrorState } from '@/components/ErrorState/ErrorState';
 import { PageIntro } from '@/components/PageIntro/PageIntro';
 import { Skeleton } from '@/components/Skeleton/Skeleton';
-import { COPY } from '@/constants/copy.constant';
 import { AsyncStatus } from '@/enums/async-status.enum';
 import { ButtonVariant } from '@/enums/button-variant.enum';
 import { getPracticeContent } from '@/features/content/services/content.service';
@@ -19,20 +18,23 @@ import { ResultCard } from '@/features/practice/components/ResultCard';
 import { SoundList } from '@/features/practice/components/SoundList';
 import { getRun } from '@/features/progress/services/progress.service';
 import { useAsync } from '@/hooks/useAsync';
+import { useCopy } from '@/hooks/useCopy';
 import { resolvePracticeItem } from '@/utils/practice-item.util';
 
 import './PracticeScreen.css';
 
 const StoredRun = ({ runId }: { runId: string }): ReactElement => {
+  const copy = useCopy();
   const load = useCallback(() => getRun(runId), [runId]);
   const run = useAsync(load);
   if (run.status === AsyncStatus.Error)
     return <ErrorState message={run.error ?? ''} onRetry={run.reload} />;
-  if (!run.data) return <Skeleton lines={4} label={COPY.practice.loadingRun} />;
+  if (!run.data) return <Skeleton lines={4} label={copy.practice.loadingRun} />;
   return <ResultCard result={run.data} recording={null} outlineAt={() => []} />;
 };
 
 export const PracticeScreen = (): ReactElement => {
+  const copy = useCopy();
   const params = useSearchParams();
   const itemParam = params.get('item');
   const runId = params.get('run');
@@ -43,9 +45,9 @@ export const PracticeScreen = (): ReactElement => {
   if (runId) {
     return (
       <div className="stack">
-        <PageIntro title={COPY.practice.resultTitle}>
+        <PageIntro title={copy.practice.resultTitle}>
           <Link href="/practice" className="button button--ghost">
-            {COPY.practice.back}
+            {copy.practice.back}
           </Link>
         </PageIntro>
         <StoredRun runId={runId} />
@@ -63,17 +65,17 @@ export const PracticeScreen = (): ReactElement => {
   return (
     <div className="stack">
       <PageIntro
-        title={COPY.practice.title}
-        lead={tab === 'sounds' ? COPY.practice.bySoundLead : COPY.practice.byItemsLead}
+        title={copy.practice.title}
+        lead={tab === 'sounds' ? copy.practice.bySoundLead : copy.practice.byItemsLead}
       />
-      <div className="practice-screen__tabs" role="tablist" aria-label={COPY.practice.title}>
+      <div className="practice-screen__tabs" role="tablist" aria-label={copy.practice.title}>
         <Button
           role="tab"
           aria-selected={tab === 'sounds'}
           variant={tab === 'sounds' ? ButtonVariant.Primary : ButtonVariant.Ghost}
           onClick={() => setTab('sounds')}
         >
-          {COPY.practice.bySound}
+          {copy.practice.bySound}
         </Button>
         <Button
           role="tab"
@@ -81,10 +83,10 @@ export const PracticeScreen = (): ReactElement => {
           variant={tab === 'items' ? ButtonVariant.Primary : ButtonVariant.Ghost}
           onClick={() => setTab('items')}
         >
-          {COPY.practice.byItems}
+          {copy.practice.byItems}
         </Button>
       </div>
-      {itemParam ? <ErrorState message={`Không tìm thấy bài "${itemParam}".`} /> : null}
+      {itemParam ? <ErrorState message={copy.practice.notFound(itemParam)} /> : null}
       {tab === 'sounds' ? (
         <SoundList sounds={content.data.sounds} />
       ) : (

@@ -1,6 +1,7 @@
 import { env } from '@/config/env';
 import type { AssessRequest } from '@/interfaces/hooks.interface';
 import type { AssessmentResponse } from '@/interfaces/practice.interface';
+import { getCopy } from '@/locales';
 import { deviceHeaders, noteUnauthorized, resolveApiBaseUrl } from '@/utils/api-base.util';
 import { problemMessage } from '@/utils/problem.util';
 
@@ -27,7 +28,8 @@ export const assess = async ({
     }),
   );
   const body: unknown = await response.json().catch(() => null);
-  if (!response.ok) throw new Error(problemMessage(body, `Máy chấm trả lỗi ${response.status}`));
+  if (!response.ok)
+    throw new Error(problemMessage(body, getCopy().practice.serverError(response.status)));
   return body as AssessmentResponse;
 };
 

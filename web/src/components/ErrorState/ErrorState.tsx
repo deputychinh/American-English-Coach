@@ -1,9 +1,10 @@
+'use client';
+
 import type { ReactElement } from 'react';
 
 import { Button } from '@/components/Button/Button';
-import { COPY } from '@/constants/copy.constant';
 import { ButtonVariant } from '@/enums/button-variant.enum';
-
+import { useCopy } from '@/hooks/useCopy';
 import './ErrorState.css';
 
 interface ErrorStateProps {
@@ -12,18 +13,17 @@ interface ErrorStateProps {
   onRetry?: () => void;
 }
 
-export const ErrorState = ({
-  title = COPY.common.errorTitle,
-  message,
-  onRetry,
-}: ErrorStateProps): ReactElement => (
-  <div className="error-state" role="alert">
-    <p className="error-state__title">{title}</p>
-    <p className="error-state__message">{message}</p>
-    {onRetry ? (
-      <Button variant={ButtonVariant.Ghost} isSmall onClick={onRetry}>
-        {COPY.common.retry}
-      </Button>
-    ) : null}
-  </div>
-);
+export const ErrorState = ({ title, message, onRetry }: ErrorStateProps): ReactElement => {
+  const copy = useCopy();
+  return (
+    <div className="error-state" role="alert">
+      <p className="error-state__title">{title ?? copy.common.errorTitle}</p>
+      <p className="error-state__message">{message}</p>
+      {onRetry ? (
+        <Button variant={ButtonVariant.Ghost} isSmall onClick={onRetry}>
+          {copy.common.retry}
+        </Button>
+      ) : null}
+    </div>
+  );
+};

@@ -3,9 +3,9 @@
 import { type ReactElement, useState } from 'react';
 
 import { Button } from '@/components/Button/Button';
-import { COPY } from '@/constants/copy.constant';
 import { AsyncStatus } from '@/enums/async-status.enum';
 import { ButtonVariant } from '@/enums/button-variant.enum';
+import { useCopy } from '@/hooks/useCopy';
 import type { TutorReply } from '@/interfaces/practice.interface';
 
 import './TutorPanel.css';
@@ -25,6 +25,7 @@ export const TutorPanel = ({
   request,
   confirmLine,
 }: TutorPanelProps): ReactElement => {
+  const copy = useCopy();
   const [status, setStatus] = useState(AsyncStatus.Idle);
   const [isConfirming, setIsConfirming] = useState(false);
   const [reply, setReply] = useState<TutorReply | null>(null);
@@ -63,17 +64,17 @@ export const TutorPanel = ({
           <span className="tutor-panel__confirm" role="status">
             <span>{confirmLine}</span>
             <Button isSmall onClick={send}>
-              {COPY.tutor.send}
+              {copy.tutor.send}
             </Button>
             <Button isSmall variant={ButtonVariant.Ghost} onClick={() => setIsConfirming(false)}>
-              {COPY.tutor.cancel}
+              {copy.tutor.cancel}
             </Button>
           </span>
         ) : null}
       </div>
       {status === AsyncStatus.Loading ? (
         <p className="tutor-panel__muted" role="status">
-          {COPY.tutor.loading}
+          {copy.tutor.loading}
         </p>
       ) : null}
       {status === AsyncStatus.Error && error ? (
@@ -86,7 +87,7 @@ export const TutorPanel = ({
           <p className="tutor-panel__title">{title}</p>
           <p className="tutor-panel__text">{reply.text_vi}</p>
           <p className="tutor-panel__muted">
-            {COPY.tutor.modelLabel}: {reply.model}
+            {copy.tutor.modelLabel}: {reply.model}
           </p>
         </div>
       ) : null}

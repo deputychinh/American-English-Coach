@@ -4,11 +4,11 @@ import { type ReactElement, type ReactNode, useMemo } from 'react';
 
 import { ConfidenceBadge } from '@/components/ConfidenceBadge/ConfidenceBadge';
 import { FeatureBar } from '@/components/FeatureBar/FeatureBar';
-import { COPY } from '@/constants/copy.constant';
 import { FEATURE_NAMES } from '@/constants/mirror.constant';
 import { TargetShape } from '@/features/mirror/components/TargetShape';
 import { useSuccessChime } from '@/features/mirror/hooks/useSuccessChime';
 import { useTargetHold } from '@/features/mirror/hooks/useTargetHold';
+import { useCopy } from '@/hooks/useCopy';
 import type { MouthFeatureName } from '@/interfaces/mouth.interface';
 import type { VisemeTargetCard } from '@/interfaces/practice.interface';
 import type { TrackedSample } from '@/interfaces/tracker.interface';
@@ -39,11 +39,12 @@ export const MirrorGuide = ({
   transitionVi = null,
   tutor = null,
 }: MirrorGuideProps): ReactElement => {
+  const copy = useCopy();
   const targets = useMemo(() => (target ? targetsFromApi(target.targets) : {}), [target]);
   const usable = features && features.quality >= 0.5 ? features.features : null;
   const hold = useTargetHold(target ? usable : null, targets, target?.hold_ms ?? 250);
   useSuccessChime(hold.isHeld, muted);
-  const hint = usable ? directionHint(usable, targets, COPY.mirror.features) : null;
+  const hint = usable ? directionHint(usable, targets, copy.mirror.features) : null;
   const shownFeatures = target
     ? (Object.keys(targets) as MouthFeatureName[])
     : (FEATURE_NAMES as readonly MouthFeatureName[]);
@@ -63,14 +64,14 @@ export const MirrorGuide = ({
                 <p>{target.hint_vi}</p>
                 {transitionVi ? <p className="mirror-guide__transition">{transitionVi}</p> : null}
                 {target.confidence === 'low' ? (
-                  <p className="mirror-guide__muted">{COPY.mirror.lowConfidence}</p>
+                  <p className="mirror-guide__muted">{copy.mirror.lowConfidence}</p>
                 ) : null}
                 <p className="mirror-guide__muted">
-                  {COPY.mirror.commonError}: {target.common_error_vi}
+                  {copy.mirror.commonError}: {target.common_error_vi}
                 </p>
               </>
             ) : (
-              <p>{COPY.mirror.audioOnly}</p>
+              <p>{copy.mirror.audioOnly}</p>
             )}
           </div>
         </div>
@@ -78,15 +79,15 @@ export const MirrorGuide = ({
           {shownFeatures.map((name) => (
             <FeatureBar
               key={name}
-              label={COPY.mirror.features[name]}
+              label={copy.mirror.features[name]}
               value={usable?.[name] ?? 0}
               target={targets[name]}
             />
           ))}
         </div>
         <p className="mirror-guide__status" role="status" aria-live="polite">
-          {hold.isHeld ? COPY.mirror.good : null}
-          {!hold.isHeld && hold.isOnTarget ? COPY.mirror.hold : null}
+          {hold.isHeld ? copy.mirror.good : null}
+          {!hold.isHeld && hold.isOnTarget ? copy.mirror.hold : null}
           {hold.showHint && hint ? hint : null}
         </p>
         {tutor}

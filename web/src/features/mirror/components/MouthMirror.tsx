@@ -8,7 +8,6 @@ import { Button } from '@/components/Button/Button';
 import { ErrorState } from '@/components/ErrorState/ErrorState';
 import { PageIntro } from '@/components/PageIntro/PageIntro';
 import { Skeleton } from '@/components/Skeleton/Skeleton';
-import { COPY } from '@/constants/copy.constant';
 import { AsyncStatus } from '@/enums/async-status.enum';
 import { ButtonVariant } from '@/enums/button-variant.enum';
 import { StorageKey } from '@/enums/storage-key.enum';
@@ -19,6 +18,7 @@ import { useCalibration } from '@/features/mirror/hooks/useCalibration';
 import { useMouthTracker } from '@/features/mirror/hooks/useMouthTracker';
 import { MouthTutorButton } from '@/features/tutor/components/MouthTutorButton';
 import { useAsync } from '@/hooks/useAsync';
+import { useCopy } from '@/hooks/useCopy';
 import { useKeepAwake } from '@/hooks/useKeepAwake';
 import { useStoredState } from '@/hooks/useStoredState';
 import type { PhonemeCard, VisemeContent } from '@/interfaces/practice.interface';
@@ -31,6 +31,7 @@ const loadAll = async (): Promise<{ visemes: VisemeContent; phonemes: PhonemeCar
 };
 
 export const MouthMirror = (): ReactElement => {
+  const copy = useCopy();
   const params = useSearchParams();
   const content = useAsync(loadAll);
   const calibration = useCalibration();
@@ -57,9 +58,9 @@ export const MouthMirror = (): ReactElement => {
 
   return (
     <div className="mouth-mirror">
-      <PageIntro title={COPY.mirror.title} lead={card?.tip}>
+      <PageIntro title={copy.mirror.title} lead={card?.tip}>
         <label className="mouth-mirror__picker">
-          <span className="visually-hidden">{COPY.mirror.pickSound}</span>
+          <span className="visually-hidden">{copy.mirror.pickSound}</span>
           <select
             className="select"
             value={sound}
@@ -77,38 +78,38 @@ export const MouthMirror = (): ReactElement => {
             href={{ pathname: '/practice', query: { item: returnTo } }}
             className="button button--ghost"
           >
-            {COPY.practice.back}
+            {copy.practice.back}
           </Link>
         ) : null}
       </PageIntro>
 
       {needsCalibration ? (
         <div className="mouth-mirror__notice" role="status">
-          <p>{COPY.mirror.needCalibration}</p>
+          <p>{copy.mirror.needCalibration}</p>
           <Link
             href={{ pathname: '/calibration', query: { sound } }}
             className="button button--primary"
           >
-            {COPY.mirror.calibrate}
+            {copy.mirror.calibrate}
           </Link>
         </div>
       ) : (
         <div className="mouth-mirror__controls">
           <Button onClick={() => setCameraOn(!cameraOn)} aria-pressed={cameraOn}>
-            {cameraOn ? COPY.mirror.stopCamera : COPY.mirror.startCamera}
+            {cameraOn ? copy.mirror.stopCamera : copy.mirror.startCamera}
           </Button>
           <Button
             variant={ButtonVariant.Ghost}
             onClick={() => setMuted(!muted)}
             aria-pressed={muted}
           >
-            {muted ? COPY.mirror.unmute : COPY.mirror.mute}
+            {muted ? copy.mirror.unmute : copy.mirror.mute}
           </Button>
           <Link
             href={{ pathname: '/calibration', query: { sound } }}
             className="button button--ghost"
           >
-            {COPY.mirror.recalibrate}
+            {copy.mirror.recalibrate}
           </Link>
         </div>
       )}

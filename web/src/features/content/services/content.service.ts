@@ -1,4 +1,5 @@
 import { api } from '@/api/client';
+import type { Copy } from '@/interfaces/copy.interface';
 import type {
   MinimalPair,
   PhonemeCard,
@@ -7,33 +8,39 @@ import type {
   SoundDrillSummary,
   VisemeContent,
 } from '@/interfaces/practice.interface';
+import { getCopy } from '@/locales';
 import { problemMessage } from '@/utils/problem.util';
 
-const unwrap = <T>(result: { data?: T; error?: unknown }, what: string): T => {
+type ContentKind = keyof Copy['common']['content'];
+
+const unwrap = <T>(result: { data?: T; error?: unknown }, what: ContentKind): T => {
+  const copy = getCopy();
   if (result.data === undefined)
-    throw new Error(problemMessage(result.error, `Không tải được ${what}`));
+    throw new Error(
+      problemMessage(result.error, copy.common.loadFailed(copy.common.content[what])),
+    );
   return result.data;
 };
 
 export const getPhonemes = async (): Promise<PhonemeCard[]> =>
-  unwrap(await api.GET('/api/v1/content/phonemes'), 'bảng âm');
+  unwrap(await api.GET('/api/v1/content/phonemes'), 'phonemes');
 
 export const getPairs = async (): Promise<MinimalPair[]> =>
-  unwrap(await api.GET('/api/v1/content/pairs'), 'cặp âm');
+  unwrap(await api.GET('/api/v1/content/pairs'), 'pairs');
 
 export const getSentences = async (): Promise<Sentence[]> =>
-  unwrap(await api.GET('/api/v1/content/sentences'), 'câu luyện');
+  unwrap(await api.GET('/api/v1/content/sentences'), 'sentences');
 
 export const getVisemes = async (): Promise<VisemeContent> =>
-  unwrap(await api.GET('/api/v1/content/visemes'), 'mẫu khẩu hình');
+  unwrap(await api.GET('/api/v1/content/visemes'), 'visemes');
 
 export const getSounds = async (): Promise<SoundDrillSummary[]> =>
-  unwrap(await api.GET('/api/v1/content/sounds'), 'danh sách âm');
+  unwrap(await api.GET('/api/v1/content/sounds'), 'sounds');
 
 export const getSound = async (soundId: string): Promise<SoundDrill> =>
   unwrap(
     await api.GET('/api/v1/content/sounds/{sound_id}', { params: { path: { sound_id: soundId } } }),
-    'bài luyện âm',
+    'drill',
   );
 
 export const getPracticeContent = async (): Promise<{
