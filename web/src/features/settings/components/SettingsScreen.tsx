@@ -22,7 +22,7 @@ import { ProfilesCard } from '@/features/settings/components/ProfilesCard';
 import { useCopy, useLanguage } from '@/hooks/useCopy';
 import { useStoredState } from '@/hooks/useStoredState';
 import { setLanguage } from '@/locales';
-import { normaliseBaseUrl } from '@/utils/api-base.util';
+import { normaliseBaseUrl, isNativeShell } from '@/utils/api-base.util';
 import { removeStorage, writeStorage } from '@/utils/storage.util';
 
 import './SettingsScreen.css';
@@ -36,11 +36,17 @@ const readTheme = (): Theme =>
   document.documentElement.dataset.theme === Theme.Dark ? Theme.Dark : Theme.Light;
 
 /** Theme, practice defaults, scoring-server address and on-device data. */
+const subscribeNever = (): (() => void) => () => undefined;
+
 export const SettingsScreen = (): ReactElement => {
   const copy = useCopy();
   const language = useLanguage();
   const toast = useToast();
   const theme = useSyncExternalStore(subscribeTheme, readTheme, () => Theme.Light);
+  // Inside the iOS shell pairing is the first thing a new phone needs, so the card leads.
+  // External-store read: the static HTML says false, the shell flips it after hydration.
+  const isPairingFirst = useSyncExternalStore(subscribeNever, isNativeShell, () => false);
+
   const [cameraDefault, setCameraDefault] = useStoredState<boolean>(
     StorageKey.CameraDefault,
     false,
@@ -107,6 +113,8 @@ export const SettingsScreen = (): ReactElement => {
         />
       </Card>
 
+      {isPairingFirst ? <PairingCard /> : null}
+
       <ProfilesCard />
 
       <GoalCard />
@@ -163,7 +171,7 @@ export const SettingsScreen = (): ReactElement => {
         ) : null}
       </Card>
 
-      <PairingCard />
+      {isPairingFirst ? null : <PairingCard />}
 
       <Card as="section" aria-labelledby="settings-data">
         <SectionHeader

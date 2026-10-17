@@ -123,7 +123,10 @@ export const AppShell = ({ children }: AppShellProps): ReactElement => {
         <div className="app-shell__banner container" role="status">
           <Icon name={IconName.Alert} />
           <span>{copy.unauthorized.message}</span>
-          <Link href="/settings" className="button button--secondary button--small">
+          <Link
+            href="/settings#settings-pairing"
+            className="button button--secondary button--small"
+          >
             {copy.unauthorized.action}
           </Link>
           <button

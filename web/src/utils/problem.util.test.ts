@@ -13,3 +13,14 @@ describe('problem util', () => {
     expect(problemCode('nope')).toBeUndefined();
   });
 });
+
+describe('problemMessage for the pairing 401', () => {
+  it('shows the learner-facing pairing message instead of the server detail', () => {
+    const error = {
+      code: 'UNAUTHORIZED',
+      detail: 'pair this device first (…)',
+      title: 'Unauthorized',
+    };
+    expect(problemMessage(error, 'x')).toBe('Máy chấm yêu cầu ghép nối thiết bị này.');
+  });
+});

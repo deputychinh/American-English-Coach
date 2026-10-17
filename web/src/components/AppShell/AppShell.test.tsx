@@ -25,7 +25,10 @@ describe('AppShell', () => {
       window.dispatchEvent(new CustomEvent('coach:unauthorized'));
     });
     expect(screen.getByText(/yêu cầu ghép nối/)).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: 'Mở cài đặt' })).toHaveAttribute('href', '/settings');
+    expect(screen.getByRole('link', { name: 'Mở cài đặt' })).toHaveAttribute(
+      'href',
+      '/settings#settings-pairing',
+    );
   });
 
   it('toggles the theme from the header button', () => {

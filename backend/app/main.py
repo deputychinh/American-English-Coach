@@ -65,7 +65,6 @@ def problem(status: HTTPStatus, code: str, detail: str) -> JSONResponse:
 
 def install_middleware(app: FastAPI, settings: Settings) -> None:
     """Request ids/logging, device-token check for network clients, CORS."""
-    app.middleware("http")(request_context)
 
     @app.middleware("http")
     async def _device_token(
@@ -78,9 +77,13 @@ def install_middleware(app: FastAPI, settings: Settings) -> None:
                 return problem(
                     HTTPStatus.UNAUTHORIZED,
                     ErrorCode.UNAUTHORIZED.value,
-                    "pair this device first (Cài đặt → Ghép nối với mã trên máy chấm)",
+                    "Thiết bị chưa ghép nối: mở Cài đặt → Ghép nối điện thoại "
+                    "và nhập mã 6 số của máy chấm.",
                 )
         return await call_next(request)
+
+    # Added last so it wraps the token check: a 401 is logged like any other response.
+    app.middleware("http")(request_context)
 
     app.add_middleware(
         CORSMiddleware,
