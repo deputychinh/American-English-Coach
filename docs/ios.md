@@ -20,7 +20,14 @@ Simulator không có camera; thu âm dùng micro của Mac. Gương khẩu hình
 
 ```sh
 make api-lan          # API nghe trên 0.0.0.0:8765; lệnh in ra địa chỉ, ví dụ http://192.168.40.188:8765
-make ios-open         # mở Xcode: chọn Team (Signing & Capabilities), chọn iPhone, bấm Run
+make ios-open         # mở Xcode: chọn iPhone ở thanh trên, bấm Run
+```
+
+Project đã đặt Team `R446JX33L5` (ký tự động). Xcode cần Apple ID tương ứng đăng nhập một lần: **Xcode → Settings → Accounts → +**; thiếu bước này `xcodebuild` báo `No Account for Team`. Cắm iPhone qua cáp, mở khóa và bấm "Tin cậy"; lần đầu iPhone cần bật Developer Mode (Cài đặt → Quyền riêng tư & Bảo mật). Không cần mở Xcode:
+
+```sh
+xcrun devicectl list devices                              # lấy tên hoặc UDID của iPhone
+make ios-device IOS_DEVICE=00008030-000178683C09802E      # build ký, cài và mở app trên máy
 ```
 
 Trong app: **Cài đặt → Địa chỉ máy chấm** nhập `192.168.40.188:8765` → "Lưu và kiểm tra", rồi **Ghép nối**: nhập mã 6 số mà `make api-lan` in ra trong log (`pairing code for phones on this network`). App nhận token và gửi kèm mọi yêu cầu (`X-Coach-Token`); máy Mac dùng trực tiếp không cần ghép nối. Địa chỉ được lưu trên máy; mọi lời gọi `/api/v1/*` (chấm, giọng mẫu, gia sư AI) đi tới máy Mac. Lần đầu iOS hỏi quyền Camera, Micro và Mạng nội bộ (chuỗi giải thích tiếng Việt trong `Info.plist`).

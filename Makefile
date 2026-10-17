@@ -1,7 +1,7 @@
 # American English Coach — one command per task. `make help` lists them.
 .DEFAULT_GOAL := help
 # `web` and others are also directory names; declare every target phony so make never skips them.
-.PHONY: help install vendor-web models migrate doctor api api-lan web build-web serve lint format test test-legacy bench eval pilot-export pilot-report openapi e2e ci up down ios-assets ios-sync ios-build ios-run ios-open
+.PHONY: help install vendor-web models migrate doctor api api-lan web build-web serve lint format test test-legacy bench eval pilot-export pilot-report openapi e2e ci up down ios-assets ios-sync ios-build ios-run ios-device ios-open
 SHELL := /bin/bash
 BACKEND := cd backend &&
 WEB := cd web &&
@@ -98,6 +98,11 @@ ios-run: ios-build ## Boot the simulator, install and launch the app
 	@open -a Simulator 2>/dev/null || echo "(Mở Simulator bằng Xcode → Open Developer Tool → Simulator nếu cửa sổ chưa hiện; app vẫn được cài và chạy)"
 	$(XCODE) xcrun simctl install booted web/ios/App/build/Build/Products/Debug-iphonesimulator/App.app
 	$(XCODE) xcrun simctl launch booted com.deputychinh.americanenglishcoach
+
+ios-device: ios-sync ## Build signed for a real iPhone and install + launch it (IOS_DEVICE=<name or UDID>; sign in to Xcode → Settings → Accounts first)
+	cd web/ios/App && $(XCODE) xcodebuild -project App.xcodeproj -scheme App -configuration Debug -sdk iphoneos -destination 'generic/platform=iOS' -derivedDataPath build-device -allowProvisioningUpdates build | tail -3
+	$(XCODE) xcrun devicectl device install app --device "$(IOS_DEVICE)" web/ios/App/build-device/Build/Products/Debug-iphoneos/App.app
+	$(XCODE) xcrun devicectl device process launch --device "$(IOS_DEVICE)" com.deputychinh.americanenglishcoach
 
 ios-open: ios-sync ## Open the Xcode project (sign with your team to run on a real iPhone)
 	$(WEB) npx cap open ios
