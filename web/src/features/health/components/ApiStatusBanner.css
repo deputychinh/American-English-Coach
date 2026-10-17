@@ -50,7 +50,7 @@
 
 .api-status-banner__link {
   font-weight: var(--font-semibold);
-  color: inherit;
   text-decoration: underline;
   text-underline-offset: 0.15em;
+  color: inherit;
 }
