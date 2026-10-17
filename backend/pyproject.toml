@@ -1,6 +1,6 @@
 [project]
 name = "coach-backend"
-version = "1.0.0"
+version = "1.1.0"
 description = "American English Coach API: phoneme, mouth-shape and prosody assessment for Vietnamese learners"
 requires-python = ">=3.12,<3.13"
 dependencies = [
@@ -17,13 +17,14 @@ dependencies = [
   "huggingface-hub>=0.26",
   "python-multipart>=0.0.32",
   "alembic>=1.20.0",
+  # Used by the LLM tutor client at runtime (not only by tests).
+  "httpx>=0.28",
 ]
 
 [dependency-groups]
 dev = [
   "pytest>=8.3",
   "pytest-cov>=6.0",
-  "httpx>=0.28",
   "ruff>=0.8",
   "mypy>=1.13",
   "hypothesis>=6.115",
@@ -31,7 +32,16 @@ dev = [
 ]
 
 [tool.uv]
-# torch publishes arm64 macOS wheels on PyPI; no extra index needed.
+# macOS: torch arm64 wheels come from PyPI. Linux (Docker, CI): the CPU-only index keeps the image
+# a few hundred MB instead of pulling CUDA libraries nobody uses on a laptop server.
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
+
+[tool.uv.sources]
+torch = [{ index = "pytorch-cpu", marker = "sys_platform == 'linux'" }]
 
 [tool.ruff]
 line-length = 100

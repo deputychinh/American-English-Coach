@@ -136,7 +136,7 @@ def create_app(
 
     app = FastAPI(
         title="American English Coach API",
-        version="1.0.0",
+        version="1.1.0",
         lifespan=lifespan,
         docs_url="/api/docs",
         openapi_url="/api/openapi.json",

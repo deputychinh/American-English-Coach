@@ -7,6 +7,8 @@ WORKDIR /srv/backend
 COPY backend/pyproject.toml backend/uv.lock ./
 RUN uv sync --frozen --no-dev --no-install-project
 COPY backend/app ./app
+COPY backend/alembic ./alembic
+COPY backend/alembic.ini ./alembic.ini
 COPY content /srv/content
 COPY vendor/cmudict.dict /srv/vendor/cmudict.dict
 COPY web/out /srv/web/out
