@@ -62,6 +62,7 @@ export const enSettings: Pick<Copy, 'settings' | 'plan'> = {
       defaultName: 'Learner',
       nameLabel: 'Profile name',
     },
+    replayWelcome: 'Replay the getting-started guide',
     language: 'Interface language',
     languageHint: 'Lesson content, mouth-shape tips and the scorer’s remarks stay in Vietnamese.',
     languageVi: 'Tiếng Việt',

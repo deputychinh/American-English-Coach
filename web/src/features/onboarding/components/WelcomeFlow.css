@@ -1,0 +1,111 @@
+.welcome-flow {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-stack);
+  max-inline-size: var(--container-narrow);
+}
+
+.welcome-flow__steps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  font-size: var(--text-sm);
+  list-style: none;
+}
+
+.welcome-flow__step {
+  display: flex;
+  gap: var(--space-2);
+  align-items: center;
+  color: var(--color-text-muted);
+}
+
+.welcome-flow__step.is-current {
+  font-weight: var(--weight-semibold);
+  color: var(--color-text);
+}
+
+.welcome-flow__step-number {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  inline-size: 28px;
+  block-size: 28px;
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
+  background: var(--color-ink-100);
+  border-radius: var(--radius-full);
+}
+
+.welcome-flow__step.is-current .welcome-flow__step-number,
+.welcome-flow__step.is-done .welcome-flow__step-number {
+  color: var(--color-on-primary);
+  background: var(--color-primary);
+}
+
+.welcome-flow__card {
+  gap: var(--space-4);
+}
+
+.welcome-flow__heading {
+  font-size: var(--text-xl);
+}
+
+.welcome-flow__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.welcome-flow__item {
+  display: flex;
+  gap: var(--space-3);
+  align-items: flex-start;
+}
+
+.welcome-flow__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.welcome-flow__muted {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+.welcome-flow__field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.welcome-flow__label {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+}
+
+.welcome-flow__input {
+  min-block-size: var(--size-touch-target);
+  padding: var(--padding-control-sm);
+  font: inherit;
+  color: var(--color-text);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-control);
+  border-radius: var(--radius-sm);
+}
+
+.welcome-flow__link {
+  padding: 0;
+  font: inherit;
+  text-decoration: underline;
+  color: var(--color-primary);
+  background: none;
+  border: 0;
+}

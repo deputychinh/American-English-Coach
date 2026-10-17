@@ -59,6 +59,7 @@ export const viSettings = {
       defaultName: 'Người học',
       nameLabel: 'Tên hồ sơ',
     },
+    replayWelcome: 'Xem lại hướng dẫn bắt đầu',
     language: 'Ngôn ngữ giao diện',
     languageHint: 'Nội dung bài học, gợi ý khẩu hình và nhận xét của máy chấm vẫn bằng tiếng Việt.',
     languageVi: 'Tiếng Việt',

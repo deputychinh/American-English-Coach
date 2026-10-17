@@ -1,7 +1,8 @@
 'use client';
 
 import Link from 'next/link';
-import type { ReactElement } from 'react';
+import { useRouter } from 'next/navigation';
+import { type ReactElement, useEffect } from 'react';
 
 import { Card } from '@/components/Card/Card';
 import { Icon } from '@/components/Icon/Icon';
@@ -10,6 +11,7 @@ import { SectionHeader } from '@/components/SectionHeader/SectionHeader';
 import { Stat } from '@/components/Stat/Stat';
 import { IconName } from '@/enums/icon-name.enum';
 import { ApiStatusBanner } from '@/features/health/components/ApiStatusBanner';
+import { isOnboarded } from '@/features/onboarding/services/onboarding.service';
 import { PlanCard } from '@/features/plan/components/PlanCard';
 import { getProgress } from '@/features/progress/services/progress.service';
 import { useActiveProfile } from '@/hooks/useActiveProfile';
@@ -29,7 +31,11 @@ const QUICK = [
 
 export const HomeScreen = (): ReactElement => {
   const copy = useCopy();
+  const router = useRouter();
   const profile = useActiveProfile();
+  useEffect(() => {
+    if (!isOnboarded()) router.replace('/welcome');
+  }, [router]);
   const progress = useAsync(getProgress);
   const phonemes = progress.data?.phonemes ?? [];
   const totals = phonemes.reduce(

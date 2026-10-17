@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { type ReactElement, useState, useSyncExternalStore } from 'react';
 
 import { Button } from '@/components/Button/Button';
@@ -183,6 +184,9 @@ export const SettingsScreen = (): ReactElement => {
           {copy.appName} · {copy.settings.version} {APP_VERSION}
         </p>
         <p className="settings-screen__muted">{copy.home.privacy}</p>
+        <Link href="/welcome" className="button button--ghost button--small">
+          {copy.settings.replayWelcome}
+        </Link>
       </Card>
     </div>
   );

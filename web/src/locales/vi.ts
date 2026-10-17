@@ -132,6 +132,40 @@ export const vi = {
     lowConfidence:
       'Với âm này camera chỉ theo dõi được môi và hàm; vị trí lưỡi bên trong do máy chấm âm quyết định.',
   },
+  onboarding: {
+    title: 'Bắt đầu với American English Coach',
+    lead: 'Ba bước, khoảng một phút: quyền truy cập, hồ sơ của bạn và hiệu chỉnh khẩu hình.',
+    stepsAria: 'Các bước bắt đầu',
+    steps: { intro: 'Quyền truy cập', profile: 'Hồ sơ', calibrate: 'Hiệu chỉnh' },
+    introTitle: 'Ứng dụng cần gì và vì sao',
+    introMic: 'Micro để thu âm bạn đọc từ và câu; máy chấm từng âm trên máy tính của bạn.',
+    introCamera: 'Camera để soi môi, hàm, răng và lưỡi lộ ra theo thời gian thực.',
+    introPrivacy:
+      'Video không rời thiết bị. Chỉ các số đo khẩu hình và bản ghi âm được gửi tới máy chấm local.',
+    allow: 'Cho phép micro và camera',
+    asking: 'Đang hỏi quyền…',
+    later: 'Để sau',
+    next: 'Tiếp tục',
+    granted: 'đã cho phép',
+    denied: 'bị từ chối',
+    missing: 'không có thiết bị',
+    micStatus: (state: string): string => `Micro: ${state}`,
+    cameraStatus: (state: string): string => `Camera: ${state}`,
+    profileTitle: 'Ai sẽ luyện?',
+    profileLead:
+      'Mỗi người một hồ sơ để tiến độ, kế hoạch tuần và hiệu chỉnh không lẫn nhau. Có thể đổi trong Cài đặt.',
+    profileName: 'Tên của bạn',
+    profilePlaceholder: 'Ví dụ: Minh',
+    createProfile: 'Tạo hồ sơ và tiếp tục',
+    useDefault: 'Dùng hồ sơ mặc định',
+    profileOffline: 'Chưa kết nối được máy chấm nên chưa tạo được hồ sơ.',
+    skipProfile: 'Bỏ qua bước này',
+    calibrateTitle: 'Hiệu chỉnh khẩu hình (20 giây)',
+    calibrateLead:
+      'Gương và nhận xét khẩu hình cần học miệng của bạn một lần. Bạn có thể làm ngay hoặc khi mở gương lần đầu.',
+    calibrateNow: 'Hiệu chỉnh ngay',
+    finish: 'Để sau, vào trang chủ',
+  },
   calibration: {
     title: 'Hiệu chỉnh khẩu hình',
     intro:
@@ -143,6 +177,7 @@ export const vi = {
     done: 'Đã hiệu chỉnh xong.',
     redo: 'Làm lại',
     goMirror: 'Mở gương khẩu hình',
+    goNext: 'Tiếp tục',
     failed: 'Không lưu được hiệu chỉnh lên máy chấm; vẫn dùng được trên trình duyệt này.',
     needFace: 'Chưa thấy khuôn mặt, bước này sẽ lặp lại.',
     progressAria: 'Tiến trình hiệu chỉnh',

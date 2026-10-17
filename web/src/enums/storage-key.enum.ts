@@ -11,4 +11,5 @@ export enum StorageKey {
   DailyGoal = 'coach.dailyGoal',
   ReminderTime = 'coach.reminderTime',
   Language = 'coach.language',
+  Onboarded = 'coach.onboarded',
 }

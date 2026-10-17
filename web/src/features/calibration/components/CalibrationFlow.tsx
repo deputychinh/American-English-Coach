@@ -27,7 +27,10 @@ const MIN_SAMPLES_PER_STEP = 8;
 
 export const CalibrationFlow = (): ReactElement => {
   const copy = useCopy();
-  const sound = useSearchParams().get('sound');
+  const params = useSearchParams();
+  const sound = params.get('sound');
+  const nextParam = params.get('next');
+  const next = nextParam?.startsWith('/') ? nextParam : null;
   const content = useAsync(getVisemes);
   useKeepAwake();
   const tracker = useMouthTracker({ enabled: true, calibration: null });
@@ -151,10 +154,10 @@ export const CalibrationFlow = (): ReactElement => {
               ) : null}
               <div className="calibration-flow__actions">
                 <Link
-                  href={sound ? { pathname: '/mirror', query: { sound } } : '/mirror'}
+                  href={next ?? (sound ? { pathname: '/mirror', query: { sound } } : '/mirror')}
                   className="button button--primary"
                 >
-                  {copy.calibration.goMirror}
+                  {next ? copy.calibration.goNext : copy.calibration.goMirror}
                 </Link>
                 <Button variant={ButtonVariant.Ghost} onClick={restart}>
                   {copy.calibration.redo}

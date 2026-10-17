@@ -1,5 +1,10 @@
 import { expect, type Page, test } from '@playwright/test';
 
+test.beforeEach(async ({ page }) => {
+  // Every journey here starts as a returning learner; e2e/onboarding.spec.ts covers the first run.
+  await page.addInitScript(() => localStorage.setItem('coach.onboarded', 'true'));
+});
+
 const shot = (page: Page, name: string, project: string): Promise<Buffer> =>
   page.screenshot({ path: `../docs/screenshots/${name}-${project}.png`, fullPage: true });
 

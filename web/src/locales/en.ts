@@ -138,6 +138,41 @@ export const en: Copy = {
     lowConfidence:
       'For this sound the camera only follows lips and jaw; the tongue position inside is judged by the audio scorer.',
   },
+  onboarding: {
+    title: 'Getting started with American English Coach',
+    lead: 'Three steps, about a minute: permissions, your profile and the mouth calibration.',
+    stepsAria: 'Getting-started steps',
+    steps: { intro: 'Permissions', profile: 'Profile', calibrate: 'Calibration' },
+    introTitle: 'What the app needs and why',
+    introMic:
+      'The microphone records you reading words and sentences; every sound is scored on your computer.',
+    introCamera: 'The camera follows lips, jaw, and visible teeth and tongue in real time.',
+    introPrivacy:
+      'Video never leaves the device. Only mouth measurements and recordings go to the local scoring server.',
+    allow: 'Allow microphone and camera',
+    asking: 'Asking for permission…',
+    later: 'Later',
+    next: 'Continue',
+    granted: 'allowed',
+    denied: 'denied',
+    missing: 'no device',
+    micStatus: (state: string): string => `Microphone: ${state}`,
+    cameraStatus: (state: string): string => `Camera: ${state}`,
+    profileTitle: 'Who is practising?',
+    profileLead:
+      'One profile per person keeps progress, weekly plan and calibration apart. You can change it in Settings.',
+    profileName: 'Your name',
+    profilePlaceholder: 'For example: Minh',
+    createProfile: 'Create profile and continue',
+    useDefault: 'Use the default profile',
+    profileOffline: 'The scoring server is not reachable, so the profile was not created.',
+    skipProfile: 'Skip this step',
+    calibrateTitle: 'Mouth calibration (20 seconds)',
+    calibrateLead:
+      'The mirror and the mouth feedback need to learn your mouth once. Do it now or when you first open the mirror.',
+    calibrateNow: 'Calibrate now',
+    finish: 'Later, go to home',
+  },
   calibration: {
     title: 'Mouth calibration',
     intro:
@@ -149,6 +184,7 @@ export const en: Copy = {
     done: 'Calibration complete.',
     redo: 'Redo',
     goMirror: 'Open the mouth mirror',
+    goNext: 'Continue',
     failed: 'Could not save the calibration to the scoring server; it still works in this browser.',
     needFace: 'No face detected; this step will repeat.',
     progressAria: 'Calibration progress',
