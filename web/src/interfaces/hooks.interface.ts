@@ -35,6 +35,8 @@ export interface RecorderSession {
   timer: ReturnType<typeof setTimeout> | null;
   /** Voice-activity state; null when auto-stop is not requested. */
   vad: VadState | null;
+  /** Milliseconds of audio received so far: the voice-activity clock. */
+  audioMs: number;
   isAutoStopped: boolean;
 }
 

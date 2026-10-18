@@ -34,6 +34,8 @@ Theo [Keep a Changelog](https://keepachangelog.com/vi/1.1.0/); phiên bản theo
   - Bỏ 14 từ luyện mà một biến thể phiên âm không có âm đích ("ear", "law", "with"…), vì máy chấm không tìm thấy âm để chấm. Đã thay bằng từ khác đã kiểm.
   - "Gần đúng" được nửa điểm trên vòng điểm và không còn làm mất chuỗi 3 lần đúng ở màn Gương. Chỉ "Chưa đúng" thật mới reset chuỗi.
 - Nhãn độ tin cậy của máy chấm cho từng âm (`content/scorer_reliability.json`, sinh bởi `make sweep`, trả trong `/content/sounds`): ở 6 âm máy chấm hay nhầm với giọng chuẩn (/ʊ/, /ʌ/, /ɔɪ/, /f/, /k/, /tʃ/), màn Gương và tổng kết bài luyện nói rõ "Gần đúng" chưa chắc là sai và gợi ý nghe lại bản ghi để tự so với mẫu.
+- Gương/Luyện tập: lượt thu đôi khi báo "Chưa nghe thấy tiếng" dù người học đã nói, vì luồng chính bận nhận diện khuôn mặt làm âm thanh đến trễ, trong khi bộ phát hiện giọng đếm giờ bằng đồng hồ thực. Bộ phát hiện giọng giờ đếm theo thời gian âm thanh; im lặng tuyệt đối (lọc ồn iOS) không còn đẩy ngưỡng lên.
+- Gương: viên "Âm: Gần đúng" màu hổ phách thay vì đỏ, "Camera không thấy" màu trung tính.
 - e2e kiểm giọng mẫu ở mọi màn có nút phát: bảng âm, Nghe, Xếp lớp, Gương, Luyện tập.
 - e2e chạy ở "chế độ điện thoại" (`COACH_TRUST_LOOPBACK=false` + ghép nối thật trong global setup) trên CI, nên request quên token sẽ hỏng ngay trên CI thay vì trên máy người học.
 

@@ -62,10 +62,14 @@ export const useRecorder = ({ onAutoStop, silenceMs }: RecorderOptions = {}): Re
       session.startedAt = performance.now() / 1000 - chunk.length / sampleRate;
     }
     session.chunks.push(chunk);
+    // Voice activity runs on audio time, not the wall clock: while the face tracker keeps the main
+    // thread busy, chunks arrive late in bursts, and a wall clock gave up after 5 s with most of
+    // the speech still queued (e2e saw 63 of ~625 chunks before "no speech").
+    session.audioMs += (chunk.length / sampleRate) * 1000;
     const level = rmsLevel(chunk);
     setLevel(level);
     if (session.vad && !session.isAutoStopped) {
-      const step = vadStep(session.vad, { level, now: performance.now() }, vadOptionsRef.current);
+      const step = vadStep(session.vad, { level, now: session.audioMs }, vadOptionsRef.current);
       session.vad = step.state;
       if (step.event === 'speech') setHasSpeech(true);
       if (step.event === 'end' || step.event === 'no-speech') {
@@ -151,7 +155,8 @@ export const useRecorder = ({ onAutoStop, silenceMs }: RecorderOptions = {}): Re
         chunks: [],
         startedAt: null,
         timer: null,
-        vad: onAutoStopRef.current ? initialVad(performance.now()) : null,
+        vad: onAutoStopRef.current ? initialVad(0) : null,
+        audioMs: 0,
         isAutoStopped: false,
       };
       sessionRef.current = session;
