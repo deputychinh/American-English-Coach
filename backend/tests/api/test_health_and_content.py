@@ -37,6 +37,9 @@ def test_every_sound_has_a_drill_and_a_tracked_viseme_group(client: TestClient) 
     assert len(summaries) == 44
     assert all(s["viseme_group"] is not None for s in summaries)
     assert all(s["word_count"] >= 6 and s["sentence_count"] >= 2 for s in summaries)
+    # Every card shows an example word under the symbol, as the 44-sound chart does.
+    assert all(s["example"] for s in summaries)
+    assert next(s for s in summaries if s["arpabet"] == "IY")["example"] == "see"
     drill = client.get("/api/v1/content/sounds/c09").json()
     assert drill["symbol"] == "θ"
     assert drill["viseme_group"] == "V3"

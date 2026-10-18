@@ -26,6 +26,15 @@
     color var(--duration-fast) var(--ease-standard);
 }
 
+.tabs--fill {
+  display: flex;
+  inline-size: 100%;
+}
+
+.tabs--fill .tabs__tab {
+  flex: 1 1 0;
+}
+
 @media (hover: hover) {
   .tabs__tab:hover {
     color: var(--color-text);

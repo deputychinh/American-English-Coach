@@ -42,5 +42,15 @@
   font-family: var(--font-ipa);
   font-size: var(--text-xl);
   font-weight: var(--weight-semibold);
-  color: var(--color-primary);
+  color: var(--color-text);
+}
+
+/* Same hierarchy as the 44-sound chart: strong symbol, muted example word. */
+.sound-list__example {
+  overflow: hidden;
+  max-inline-size: 100%;
+  font-size: var(--text-xs);
+  white-space: nowrap;
+  color: var(--color-text-muted);
+  text-overflow: ellipsis;
 }

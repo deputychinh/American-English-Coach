@@ -10,6 +10,8 @@ interface TabsProps<T extends string> {
   value: T;
   options: readonly TabOption<T>[];
   onChange: (value: T) => void;
+  /** Full-width segmented control with equal segments (top-level switch of a screen). */
+  isFill?: boolean;
 }
 
 /** Segmented tab list (ARIA tabs); content panels are rendered by the caller. */
@@ -18,8 +20,9 @@ export const Tabs = <T extends string>({
   value,
   options,
   onChange,
+  isFill = false,
 }: TabsProps<T>): ReactElement => (
-  <div className="tabs" role="tablist" aria-label={label}>
+  <div className={cx('tabs', isFill && 'tabs--fill')} role="tablist" aria-label={label}>
     {options.map((option) => (
       <button
         key={option.id}

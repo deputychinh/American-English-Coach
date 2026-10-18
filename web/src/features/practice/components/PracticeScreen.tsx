@@ -4,12 +4,11 @@ import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { type ReactElement, useCallback, useState } from 'react';
 
-import { Button } from '@/components/Button/Button';
 import { ErrorState } from '@/components/ErrorState/ErrorState';
 import { PageIntro } from '@/components/PageIntro/PageIntro';
 import { Skeleton } from '@/components/Skeleton/Skeleton';
+import { Tabs } from '@/components/Tabs/Tabs';
 import { AsyncStatus } from '@/enums/async-status.enum';
-import { ButtonVariant } from '@/enums/button-variant.enum';
 import { getPracticeContent } from '@/features/content/services/content.service';
 import { DrillSession } from '@/features/practice/components/DrillSession';
 import { PracticeList } from '@/features/practice/components/PracticeList';
@@ -20,8 +19,6 @@ import { getRun } from '@/features/progress/services/progress.service';
 import { useAsync } from '@/hooks/useAsync';
 import { useCopy } from '@/hooks/useCopy';
 import { resolvePracticeItem } from '@/utils/practice-item.util';
-
-import './PracticeScreen.css';
 
 const StoredRun = ({ runId }: { runId: string }): ReactElement => {
   const copy = useCopy();
@@ -68,24 +65,16 @@ export const PracticeScreen = (): ReactElement => {
         title={copy.practice.title}
         lead={tab === 'sounds' ? copy.practice.bySoundLead : copy.practice.byItemsLead}
       />
-      <div className="practice-screen__tabs" role="tablist" aria-label={copy.practice.title}>
-        <Button
-          role="tab"
-          aria-selected={tab === 'sounds'}
-          variant={tab === 'sounds' ? ButtonVariant.Primary : ButtonVariant.Ghost}
-          onClick={() => setTab('sounds')}
-        >
-          {copy.practice.bySound}
-        </Button>
-        <Button
-          role="tab"
-          aria-selected={tab === 'items'}
-          variant={tab === 'items' ? ButtonVariant.Primary : ButtonVariant.Ghost}
-          onClick={() => setTab('items')}
-        >
-          {copy.practice.byItems}
-        </Button>
-      </div>
+      <Tabs
+        isFill
+        label={copy.practice.title}
+        value={tab}
+        options={[
+          { id: 'sounds', label: copy.practice.bySound },
+          { id: 'items', label: copy.practice.byItems },
+        ]}
+        onChange={setTab}
+      />
       {itemParam ? <ErrorState message={copy.practice.notFound(itemParam)} /> : null}
       {tab === 'sounds' ? (
         <SoundList sounds={content.data.sounds} />

@@ -43,6 +43,7 @@ export const SoundList = ({ sounds, labels }: SoundListProps): ReactElement => {
               className="sound-list__card"
             >
               <span className="sound-list__ipa">/{sound.us}/</span>
+              {sound.example ? <span className="sound-list__example">{sound.example}</span> : null}
               <ConfidenceBadge confidence={sound.viseme_confidence} labels={labels} isCompact />
               <span className="visually-hidden">
                 {copy.sounds.drillSize(sound.word_count, sound.pair_count, sound.sentence_count)}

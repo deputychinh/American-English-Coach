@@ -74,6 +74,7 @@ class ContentService:
                 word_count=len(d["words"]),  # type: ignore[arg-type]
                 pair_count=len(d["pairs"]),  # type: ignore[arg-type]
                 sentence_count=len(d["sentences"]),  # type: ignore[arg-type]
+                example=_first_word(d["words"]),  # type: ignore[arg-type]
             )
             for d in self._drills.values()
         ]
@@ -179,3 +180,8 @@ def _first_phone(pattern: str) -> str:
     """`AH1,AH2` → AH; `IH R` → IH (the chart maps r-coloured vowels to their vowel)."""
     first = pattern.split(",", maxsplit=1)[0].split(maxsplit=1)[0]
     return first.rstrip("012")
+
+
+def _first_word(words: list[dict[str, object]]) -> str:
+    """The drill's first word (`see` for the IY drill); empty for a drill without words."""
+    return str(words[0]["word"]) if words else ""

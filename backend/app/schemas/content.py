@@ -1,6 +1,6 @@
 """Lesson content models."""
 
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 from app.enums import VisemeGroup
 
@@ -130,3 +130,4 @@ class SoundDrillSummary(BaseModel):
     word_count: int
     pair_count: int
     sentence_count: int
+    example: str = Field(description="First drill word, shown under the symbol like the chart.")

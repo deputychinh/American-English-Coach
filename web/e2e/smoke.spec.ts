@@ -65,7 +65,11 @@ test('a sound drill records, scores the target phone and advances', async ({ pag
   await expect(page.locator('.drill-session__head .confidence-badge')).toBeVisible();
   await page.getByRole('button', { name: 'Thu âm' }).click();
   await page.waitForTimeout(1800);
-  await page.getByRole('button', { name: /Dừng/ }).click();
+  // A single word ends after a short pause, so the take may already have stopped by itself.
+  await page
+    .getByRole('button', { name: /Dừng/ })
+    .click({ timeout: 2000 })
+    .catch(() => undefined);
   await expect(page.locator('.verdict-chip').first()).toBeVisible({ timeout: 60_000 });
   await expect(page.locator('.drill-session__tally')).toContainText(/1 lần|bỏ qua/);
   await shot(page, 'drill-result', info.project.name);

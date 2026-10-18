@@ -1631,6 +1631,11 @@
             "title": "Arpabet",
             "type": "string"
           },
+          "example": {
+            "description": "First drill word, shown under the symbol like the chart.",
+            "title": "Example",
+            "type": "string"
+          },
           "group": {
             "title": "Group",
             "type": "string"
@@ -1691,7 +1696,8 @@
           "viseme_confidence",
           "word_count",
           "pair_count",
-          "sentence_count"
+          "sentence_count",
+          "example"
         ],
         "title": "SoundDrillSummary",
         "type": "object"

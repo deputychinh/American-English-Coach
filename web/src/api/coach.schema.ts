@@ -1302,6 +1302,11 @@ export interface components {
     SoundDrillSummary: {
       /** Arpabet */
       arpabet: string;
+      /**
+       * Example
+       * @description First drill word, shown under the symbol like the chart.
+       */
+      example: string;
       /** Group */
       group: string;
       /** Id */
