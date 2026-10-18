@@ -37,8 +37,32 @@ FREE_VARIANTS_BEFORE_R: Final[dict[str, frozenset[str]]] = {
 FREE_VARIANTS: Final[dict[str, frozenset[str]]] = {"AO": frozenset({"AA"})}
 
 
-def is_free_variant(expected: str, heard: str, next_symbol: str | None) -> bool:
+# Word-final P/T/K are usually unreleased in American English, so the burst that tells them from
+# B/D/G is missing (get, hot, cup, top in the sweep). Word-initial T is strongly aspirated and the
+# model sometimes hears the aspiration as HH (tea, ten, table). The Vietnamese errors on these
+# stops are dropping the final one or not aspirating, neither of which these variants excuse.
+FREE_VARIANTS_FINAL: Final[dict[str, frozenset[str]]] = {
+    "P": frozenset({"B"}),
+    "T": frozenset({"D"}),
+    "K": frozenset({"G"}),
+}
+FREE_VARIANTS_INITIAL: Final[dict[str, frozenset[str]]] = {"T": frozenset({"HH"})}
+
+
+def is_free_variant(
+    expected: str,
+    heard: str,
+    next_symbol: str | None,
+    *,
+    is_initial: bool = False,
+    is_final: bool = False,
+) -> bool:
     """True when `heard` is an accepted way of saying `expected` in this context."""
-    if heard in FREE_VARIANTS.get(expected, frozenset()):
-        return True
-    return next_symbol == "R" and heard in FREE_VARIANTS_BEFORE_R.get(expected, frozenset())
+    tables = [FREE_VARIANTS]
+    if next_symbol == "R":
+        tables.append(FREE_VARIANTS_BEFORE_R)
+    if is_final:
+        tables.append(FREE_VARIANTS_FINAL)
+    if is_initial:
+        tables.append(FREE_VARIANTS_INITIAL)
+    return any(heard in table.get(expected, frozenset()) for table in tables)

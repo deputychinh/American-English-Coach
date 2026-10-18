@@ -41,3 +41,12 @@ def test_free_variants_are_merged_vowels_and_tense_lax_pairs_before_r(
     expected: str, heard: str, next_symbol: str | None, free: bool
 ) -> None:
     assert is_free_variant(expected, heard, next_symbol) is free
+
+
+def test_unreleased_final_stops_and_aspirated_initial_t_are_free_variants() -> None:
+    assert is_free_variant("T", "D", None, is_final=True)
+    assert is_free_variant("P", "B", None, is_final=True)
+    assert not is_free_variant("T", "D", "IY")
+    assert is_free_variant("T", "HH", "IY", is_initial=True)
+    assert not is_free_variant("T", "HH", "IY", is_final=True)
+    assert not is_free_variant("T", "S", None, is_final=True)

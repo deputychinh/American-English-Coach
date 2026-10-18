@@ -157,8 +157,14 @@ class AssessmentService:
                 if following and following.word_index == item.word_index
                 else None
             )
+            previous = expected[index - 1] if index > 0 else None
+            is_initial = previous is None or previous.word_index != item.word_index
             if op is AlignmentOp.SUBSTITUTION and is_free_variant(
-                item.phone.symbol, heard, next_symbol
+                item.phone.symbol,
+                heard,
+                next_symbol,
+                is_initial=is_initial,
+                is_final=item.is_final,
             ):
                 known, audio_verdict = None, Verdict.OK
             else:
