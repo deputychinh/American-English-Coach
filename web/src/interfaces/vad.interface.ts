@@ -19,7 +19,8 @@ export interface VadOptions {
 
 export interface VadState {
   startedAt: number;
-  noiseFloor: number;
+  /** Background level; null until the first chunk (0 is a real level: digital silence). */
+  noiseFloor: number | null;
   speechSince: number | null;
   lastVoiceAt: number | null;
   hasSpeech: boolean;

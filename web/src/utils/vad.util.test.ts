@@ -29,6 +29,12 @@ describe('vadStep', () => {
     expect(state.hasSpeech).toBe(false);
   });
 
+  it('keeps digital silence as the room when speech starts during calibration', () => {
+    // 50 ms chunks: 0 then voice inside the 250 ms window; the floor must stay 0, not jump to 0.12.
+    const { state } = run([0, 0.12, 0.12]);
+    expect(state.noiseFloor).toBe(0);
+  });
+
   it('gives up when nothing is said', () => {
     const { events } = run(Array<number>(110).fill(0.002));
     expect(events[0]).toBe('no-speech@5000');
