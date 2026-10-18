@@ -50,6 +50,7 @@ export const SpeakCheck = ({
   const [outcome, setOutcome] = useState<SpeakOutcome | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [streak, setStreak] = useState(0);
+  const [lastUrl, setLastUrl] = useState<string | null>(null);
   const word = words[index % Math.max(1, words.length)] ?? '';
   const isRecording = recorder.status === RecorderStatus.Recording;
   const isMastered = streak >= MASTERY_STREAK;
@@ -63,6 +64,7 @@ export const SpeakCheck = ({
   const stop = useCallback(async () => {
     const captured = await recorder.stop();
     if (!captured) return;
+    setLastUrl(captured.url);
     setIsScoring(true);
     const frames = tracker
       .framesBetween(captured.startedAt, captured.startedAt + captured.durationSeconds)
@@ -99,6 +101,7 @@ export const SpeakCheck = ({
     setIndex((value) => (value + delta + words.length) % Math.max(1, words.length));
     setOutcome(null);
     setError(null);
+    setLastUrl(null);
   };
 
   const soundLabel = outcome?.sound ? copy.speak.verdict[outcome.sound] : copy.speak.verdict.none;
@@ -159,43 +162,48 @@ export const SpeakCheck = ({
           ) : null}
         </div>
       ) : null}
+      <p className="speak-check__word" aria-label={`${copy.speak.say}: ${word}`}>
+        {word}
+      </p>
       <div className="speak-check__row">
         <IconButton
           icon={IconName.ChevronLeft}
           label={copy.speak.prev}
-          className="speak-check__side"
+          className="speak-check__nav"
           disabled={isRecording || isScoring || words.length < 2}
           onClick={() => step(-1)}
         />
-        <div className="speak-check__center">
-          <p className="speak-check__word" aria-label={`${copy.speak.say}: ${word}`}>
-            {word}
-          </p>
-          <div className="speak-check__controls">
-            <IconButton
-              icon={IconName.Play}
-              label={copy.speak.listen}
-              className="speak-check__listen"
-              disabled={reference.isPlaying || isRecording}
-              onClick={() => reference.play(word)}
-            />
-            <button
-              type="button"
-              className={cx('speak-check__mic', isRecording && 'is-recording')}
-              disabled={isScoring || word === ''}
-              aria-label={
-                isScoring ? copy.speak.scoring : isRecording ? copy.speak.stop : copy.speak.record
-              }
-              onClick={() => void (isRecording ? stop() : start())}
-            >
-              <Icon name={isRecording ? IconName.Stop : IconName.Practice} />
-            </button>
-          </div>
-        </div>
         <IconButton
-          icon={IconName.ArrowRight}
-          label={copy.speak.next}
+          icon={IconName.Play}
+          label={copy.speak.listen}
           className="speak-check__side"
+          disabled={reference.isPlaying || isRecording}
+          onClick={() => reference.play(word)}
+        />
+        <button
+          type="button"
+          className={cx('speak-check__mic', isRecording && 'is-recording')}
+          disabled={isScoring || word === ''}
+          aria-label={
+            isScoring ? copy.speak.scoring : isRecording ? copy.speak.stop : copy.speak.record
+          }
+          onClick={() => void (isRecording ? stop() : start())}
+        >
+          <Icon name={isRecording ? IconName.Stop : IconName.Practice} />
+        </button>
+        <IconButton
+          icon={IconName.Volume}
+          label={copy.speak.replay}
+          className="speak-check__side"
+          disabled={!lastUrl || isRecording}
+          onClick={() => {
+            if (lastUrl) void new Audio(lastUrl).play();
+          }}
+        />
+        <IconButton
+          icon={IconName.ChevronRight}
+          label={copy.speak.next}
+          className="speak-check__nav"
           disabled={isRecording || isScoring || words.length < 2}
           onClick={() => step(1)}
         />

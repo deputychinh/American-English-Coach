@@ -8,6 +8,7 @@ export const enSpeak: Pick<Copy, 'speak'> = {
     stop: 'Stop and score',
     scoring: 'Scoring…',
     listen: 'Play the model',
+    replay: 'Play back your recording',
     prev: 'Previous word',
     next: 'Next word',
     sound: (ipa: string): string => `Sound /${ipa}/`,

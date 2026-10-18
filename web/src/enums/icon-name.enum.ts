@@ -24,4 +24,5 @@ export enum IconName {
   Volume = 'volume',
   VolumeOff = 'volume-off',
   ChevronDown = 'chevron-down',
+  ChevronRight = 'chevron-right',
 }

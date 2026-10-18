@@ -6,6 +6,7 @@ export const viSpeak = {
     stop: 'Dừng và chấm',
     scoring: 'Đang chấm…',
     listen: 'Nghe mẫu',
+    replay: 'Nghe lại bản ghi của bạn',
     prev: 'Từ trước',
     next: 'Từ tiếp',
     sound: (ipa: string): string => `Âm /${ipa}/`,
