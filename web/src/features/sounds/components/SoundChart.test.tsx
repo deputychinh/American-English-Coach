@@ -50,9 +50,9 @@ describe('SoundChart', () => {
     expect(document.querySelectorAll('.confidence-badge')).toHaveLength(3);
     expect(screen.getByRole('heading', { name: '/θ/' })).toBeInTheDocument();
     expect(screen.getByText('Lưỡi giữa răng.')).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: 'Luyện từ này' })).toHaveAttribute(
+    expect(screen.getByRole('link', { name: 'Soi gương âm này' })).toHaveAttribute(
       'href',
-      expect.stringContaining('item=word%3Athink'),
+      expect.stringContaining('/mirror?sound=TH'),
     );
   });
 

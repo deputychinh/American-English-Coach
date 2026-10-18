@@ -24,6 +24,12 @@ export const viPractice = {
     cameraDenied:
       'Trình duyệt chưa cho phép dùng camera. Cho phép Camera trong cài đặt trang web rồi bật lại.',
     noMedia: 'Trình duyệt này không hỗ trợ thu âm. Hãy dùng Chrome hoặc Safari mới.',
+    micDeniedNative:
+      'Chưa có quyền micro. Vào Cài đặt iPhone → American English Coach → bật Micro.',
+    cameraDeniedNative:
+      'Chưa có quyền camera. Vào Cài đặt iPhone → American English Coach → bật Camera, rồi bấm Thử lại.',
+    cameraErrorTitle: 'Chưa bật được camera',
+    cameraErrorHint: 'Vẫn nói thử được: app chấm âm, phần khẩu hình sẽ bỏ qua.',
     resultTitle: 'Kết quả',
     problems: {
       AUDIO_INVALID:

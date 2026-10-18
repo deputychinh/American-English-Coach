@@ -60,25 +60,34 @@ export const SoundDetail = ({ card }: SoundDetailProps): ReactElement => {
           )}
         </p>
       ) : null}
-      <div className="sound-detail__actions">
-        <Button onClick={() => audio.play(card.example)} disabled={audio.isPlaying}>
-          {audio.isPlaying ? copy.practice.playing : copy.sounds.listen}
+      <div className="sound-detail__listen">
+        <Button
+          variant={ButtonVariant.Ghost}
+          isSmall
+          onClick={() => audio.play(card.example)}
+          disabled={audio.isPlaying}
+        >
+          {copy.sounds.listen}: {card.example}
         </Button>
+        <Button
+          variant={ButtonVariant.Ghost}
+          isSmall
+          onClick={() => audio.play(card.contrast)}
+          disabled={audio.isPlaying}
+        >
+          {copy.sounds.listen}: {card.contrast}
+        </Button>
+      </div>
+      <div className="sound-detail__actions">
         <Link
           href={{ pathname: '/practice', query: { sound: card.id } }}
-          className="button button--secondary"
+          className="button button--primary button--full-width"
         >
           {copy.sounds.practiceSound}
         </Link>
         <Link
-          href={{ pathname: '/practice', query: { item: `word:${card.example}` } }}
-          className="button button--ghost"
-        >
-          {copy.sounds.practiceWord}
-        </Link>
-        <Link
           href={{ pathname: '/mirror', query: { sound: card.arpabet } }}
-          className="button button--ghost"
+          className="button button--secondary button--full-width"
         >
           {copy.sounds.mirror}
         </Link>
@@ -88,9 +97,6 @@ export const SoundDetail = ({ card }: SoundDetailProps): ReactElement => {
           {audio.error}
         </p>
       ) : null}
-      <Button variant={ButtonVariant.Ghost} isSmall onClick={() => audio.play(card.contrast)}>
-        {copy.sounds.listen}: {card.contrast}
-      </Button>
     </aside>
   );
 };

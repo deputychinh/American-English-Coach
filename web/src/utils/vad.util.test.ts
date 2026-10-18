@@ -1,4 +1,6 @@
-import { initialVad, VAD_DEFAULTS, vadStep } from './vad.util';
+import { VAD_DEFAULTS } from '@/constants/recorder.constant';
+
+import { initialVad, vadStep } from './vad.util';
 
 const run = (levels: number[], stepMs = 50) => {
   let state = initialVad(0);
@@ -36,5 +38,27 @@ describe('vadStep', () => {
     const noise = Array<number>(20).fill(0.03);
     const { events } = run([...noise, ...Array<number>(6).fill(0.05)]);
     expect(events).toEqual([]);
+  });
+
+  it('hears a learner who starts speaking immediately', () => {
+    const { events } = run([0.12, 0.12, 0.12, 0.12, 0.12, 0.12, 0.12, 0.12]);
+    expect(events[0]).toMatch(/^speech@/);
+  });
+
+  it('caps the threshold so a loud room still hears speech', () => {
+    const noise = Array<number>(20).fill(0.05);
+    const { events } = run([...noise, ...Array<number>(6).fill(0.2)]);
+    expect(events[0]).toMatch(/^speech@/);
+  });
+
+  it('keeps the onset through short dips between 8 ms chunks', () => {
+    const levels = [
+      ...Array<number>(40).fill(0.002),
+      ...Array.from({ length: 40 }, (_, i) => (i % 3 === 0 ? 0.004 : 0.2)),
+      ...Array<number>(120).fill(0.001),
+    ];
+    const { events } = run(levels, 8);
+    expect(events[0]).toMatch(/^speech@/);
+    expect(events[1]).toMatch(/^end@/);
   });
 });

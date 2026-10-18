@@ -8,6 +8,7 @@ import { IconButton } from '@/components/IconButton/IconButton';
 import { Sheet } from '@/components/Sheet/Sheet';
 import { IconName } from '@/enums/icon-name.enum';
 import { MatchState } from '@/enums/match-state.enum';
+import { TrackerStatus } from '@/enums/tracker-status.enum';
 import { CameraStage } from '@/features/mirror/components/CameraStage';
 import { CueChip } from '@/features/mirror/components/CueChip';
 import { FeatureChips } from '@/features/mirror/components/FeatureChips';
@@ -105,7 +106,9 @@ export const MirrorGuide = ({
         bottom={
           speak ? (
             speak(
-              target ? (
+              tracker.status === TrackerStatus.Error ? (
+                <p className="mirror-guide__audio-only">{copy.practice.cameraErrorHint}</p>
+              ) : target ? (
                 <div className="mirror-guide__live">
                   <MatchRing
                     isCompact

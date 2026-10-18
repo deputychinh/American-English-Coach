@@ -71,7 +71,7 @@ export const viSettings = {
       nameLabel: 'Tên hồ sơ',
     },
     replayWelcome: 'Xem lại hướng dẫn bắt đầu',
-    language: 'Ngôn ngữ giao diện',
+    language: 'Ngôn ngữ',
     languageHint: 'Nội dung bài học, gợi ý khẩu hình và nhận xét của máy chấm vẫn bằng tiếng Việt.',
     languageVi: 'Tiếng Việt',
     languageEn: 'English',
@@ -96,7 +96,10 @@ export const viSettings = {
     weekTitle: 'Tuần này',
     hint: 'Gợi ý từ kết quả do máy đo: âm yếu trước, rồi âm cần ôn, rồi âm chưa luyện.',
     streak: (days: number): string => `${days} ngày liên tiếp`,
-    goalProgress: (done: number, goal: number): string => `${done}/${goal} lần thu hôm nay`,
+    goalProgress: (done: number, goal: number): string =>
+      done > goal
+        ? `${done} lần thu hôm nay · mục tiêu ${goal}`
+        : `${done}/${goal} lần thu hôm nay`,
     goalHint: 'Mỗi lần thu được chấm tính một lần.',
     goalDone: 'Đã đạt mục tiêu hôm nay. Luyện thêm vẫn được tính.',
     goalAria: 'Tiến độ mục tiêu hôm nay',

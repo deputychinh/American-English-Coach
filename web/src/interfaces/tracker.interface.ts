@@ -23,4 +23,6 @@ export interface MouthTracker {
   rawSince: (from: number) => MouthFeatures[];
   /** One JPEG crop of the mouth from the live video (only when the learner asks for it). */
   snapshotMouth: () => Promise<Blob | null>;
+  /** Ask for the camera again after a refusal or a failure. */
+  retry: () => void;
 }

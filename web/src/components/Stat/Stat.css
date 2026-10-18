@@ -37,3 +37,18 @@
 .stat--warning .stat__value {
   color: var(--color-warning);
 }
+
+@media (--bp-below-md) {
+  .stat {
+    padding: var(--space-2);
+  }
+
+  .stat__label {
+    font-size: var(--text-2xs);
+    letter-spacing: 0.02em;
+  }
+
+  .stat__value {
+    font-size: var(--text-xl);
+  }
+}

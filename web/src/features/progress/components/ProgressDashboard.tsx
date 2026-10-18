@@ -46,12 +46,19 @@ export const ProgressDashboard = (): ReactElement => {
 
   return (
     <div className="progress-dashboard">
-      <PageIntro title={copy.progress.title} lead={copy.progress.machineHint}>
-        <Link href="/settings" className="button button--ghost">
-          <Icon name={IconName.Settings} />
-          {copy.progress.openSettings}
-        </Link>
-      </PageIntro>
+      <PageIntro
+        title={copy.progress.title}
+        lead={copy.progress.machineHint}
+        aside={
+          <Link
+            href="/settings"
+            className="progress-dashboard__settings"
+            aria-label={copy.progress.openSettings}
+          >
+            <Icon name={IconName.Settings} />
+          </Link>
+        }
+      />
       {status === AsyncStatus.Loading ? <Skeleton lines={5} /> : null}
       {status === AsyncStatus.Error ? <ErrorState message={error ?? ''} onRetry={reload} /> : null}
       {data ? (

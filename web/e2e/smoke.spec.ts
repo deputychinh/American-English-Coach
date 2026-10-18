@@ -100,7 +100,7 @@ test('mirror asks for calibration first, then calibration page opens the camera'
   const notice = page.getByRole('status').filter({ hasText: /Cần hiệu chỉnh/ });
   const guide = page.locator('.mirror-guide');
   await expect(notice.or(guide)).toBeVisible();
-  await expect(page.locator('.feature-chips').or(notice)).toBeVisible();
+  await expect(page.locator('.speak-check, .feature-chips').first().or(notice)).toBeVisible();
   await shot(page, 'mirror', info.project.name);
   if ((await notice.count()) > 0) {
     await page.getByRole('link', { name: 'Hiệu chỉnh ngay' }).click();
@@ -132,6 +132,7 @@ test('the mirror scores a spoken word with sound and mouth together', async ({ p
   await page.goto('/mirror/?sound=TH');
   const word = page.locator('.speak-check__word');
   await expect(word).not.toBeEmpty();
+  await page.getByRole('button', { name: 'Tự nói lại: Bật' }).click();
   await page.getByRole('button', { name: 'Nói thử' }).click();
   const stop = page.getByRole('button', { name: 'Dừng và chấm' });
   await expect(stop).toBeVisible();
@@ -140,7 +141,7 @@ test('the mirror scores a spoken word with sound and mouth together', async ({ p
   if (await stop.isVisible()) await stop.click();
   await expect(page.locator('.speak-check__result')).toContainText(/Âm \/θ\//, { timeout: 60_000 });
   await expect(page.locator('.speak-check__result')).toContainText(/Khẩu hình/);
-  await expect(page.getByRole('button', { name: /Của bạn/ })).toBeEnabled();
+  await expect(page.getByRole('button', { name: 'Nghe lại bản ghi của bạn' })).toBeEnabled();
 });
 
 test('progress shows stats, the ranked table and a link to settings', async ({ page }, info) => {

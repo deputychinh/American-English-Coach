@@ -16,6 +16,7 @@ import type { BufferedFrame, MouthTrackerOptions } from '@/interfaces/hooks.inte
 import type { MouthFeatures, Point2, TrackedFrame } from '@/interfaces/mouth.interface';
 import type { MouthTracker, TrackedSample } from '@/interfaces/tracker.interface';
 import { getCopy } from '@/locales';
+import { isNativeShell } from '@/utils/api-base.util';
 import { normaliseFeatures } from '@/utils/calibration.util';
 import { lipOutline, lipPolygons } from '@/utils/lip-outline.util';
 import { poseFromMatrix, poseQuality, rawMouthFeatures } from '@/utils/mouth-features.util';
@@ -76,7 +77,9 @@ const snapshotFromVideo = (
 
 const cameraMessage = (error: unknown): string => {
   if (error instanceof DOMException && error.name === 'NotAllowedError')
-    return getCopy().practice.cameraDenied;
+    return isNativeShell()
+      ? getCopy().practice.cameraDeniedNative
+      : getCopy().practice.cameraDenied;
   return error instanceof Error ? error.message : getCopy().practice.noMedia;
 };
 
@@ -93,6 +96,7 @@ export const useMouthTracker = ({ enabled, calibration }: MouthTrackerOptions): 
   const [fps, setFps] = useState(0);
   const [latest, setLatest] = useState<TrackedSample | null>(null);
   const [isFaceVisible, setIsFaceVisible] = useState(false);
+  const [attempt, setAttempt] = useState(0);
 
   useEffect(() => {
     calibrationRef.current = calibration;
@@ -202,7 +206,7 @@ export const useMouthTracker = ({ enabled, calibration }: MouthTrackerOptions): 
       setIsFaceVisible(false);
       outlineRef.current = [];
     };
-  }, [enabled, landmarker, video]);
+  }, [enabled, landmarker, video, attempt]);
 
   const attachVideo = useCallback((element: HTMLVideoElement | null) => setVideo(element), []);
   const attachCanvas = useCallback((element: HTMLCanvasElement | null) => {
@@ -221,6 +225,11 @@ export const useMouthTracker = ({ enabled, calibration }: MouthTrackerOptions): 
       bufferRef.current.filter((frame) => frame.t >= from).map((frame) => frame.raw),
     [],
   );
+
+  const retry = useCallback(() => {
+    setCameraError(null);
+    setAttempt((count) => count + 1);
+  }, []);
 
   const snapshotMouth = useCallback(
     (): Promise<Blob | null> => snapshotFromVideo(video, outlineRef.current),
@@ -242,6 +251,7 @@ export const useMouthTracker = ({ enabled, calibration }: MouthTrackerOptions): 
       framesBetween,
       rawSince,
       snapshotMouth,
+      retry,
     }),
     [
       status,
@@ -254,6 +264,7 @@ export const useMouthTracker = ({ enabled, calibration }: MouthTrackerOptions): 
       framesBetween,
       rawSince,
       snapshotMouth,
+      retry,
     ],
   );
 };

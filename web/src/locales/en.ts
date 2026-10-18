@@ -209,8 +209,7 @@ export const en: Copy = {
     disputeFailed: 'Could not send the feedback',
     title: 'Progress',
     machine: 'Machine-measured results',
-    machineHint:
-      'Numbers come from scored recordings. This is not an accent score; results from different models are not directly comparable.',
+    machineHint: 'From scored recordings; not an accent score.',
     perSound: 'Per sound',
     recent: 'Recent recordings',
     empty: 'No recordings yet.',

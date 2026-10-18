@@ -65,6 +65,7 @@ const tracker: MouthTracker = {
   framesBetween: () => [onTarget],
   rawSince: () => [],
   snapshotMouth: () => Promise.resolve(null),
+  retry: () => undefined,
 };
 
 const resultWith = (verdict: 'ok' | 'error') => {
@@ -109,7 +110,7 @@ describe('SpeakCheck', () => {
     expect(assess.mock.calls[0]?.[0]).toMatchObject({
       item: { id: 'sound:c09:mirror:think', text: 'think', focus: ['TH'] },
     });
-    expect(screen.getByRole('button', { name: /Của bạn/ })).toBeEnabled();
+    expect(screen.getByRole('button', { name: 'Nghe lại bản ghi của bạn' })).toBeEnabled();
   });
 
   it('stops by itself when the learner finishes speaking and queues the next try', async () => {

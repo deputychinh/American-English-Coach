@@ -26,6 +26,13 @@ export const enPractice: Pick<Copy, 'practice' | 'verdict' | 'prosody'> = {
     cameraDenied:
       'The browser has not allowed the camera. Allow Camera in the site settings and turn it on again.',
     noMedia: 'This browser cannot record audio. Use a recent Chrome or Safari.',
+    micDeniedNative:
+      'No microphone permission. Open iPhone Settings → American English Coach → turn on Microphone.',
+    cameraDeniedNative:
+      'No camera permission. Open iPhone Settings → American English Coach → turn on Camera, then tap Try again.',
+    cameraErrorTitle: 'The camera is not on',
+    cameraErrorHint:
+      'You can still try speaking: the sound is scored and the mouth part is skipped.',
     resultTitle: 'Result',
     problems: {
       AUDIO_INVALID:

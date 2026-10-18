@@ -74,7 +74,7 @@ export const enSettings: Pick<Copy, 'settings' | 'plan'> = {
       nameLabel: 'Profile name',
     },
     replayWelcome: 'Replay the getting-started guide',
-    language: 'Interface language',
+    language: 'Language',
     languageHint: 'Lesson content, mouth-shape tips and the scorer’s remarks stay in Vietnamese.',
     languageVi: 'Tiếng Việt',
     languageEn: 'English',
@@ -99,7 +99,8 @@ export const enSettings: Pick<Copy, 'settings' | 'plan'> = {
     weekTitle: 'This week',
     hint: 'Suggested from measured results: weak sounds first, then sounds due for review, then new ones.',
     streak: (days: number): string => `${days}-day streak`,
-    goalProgress: (done: number, goal: number): string => `${done}/${goal} recordings today`,
+    goalProgress: (done: number, goal: number): string =>
+      done > goal ? `${done} recordings today · goal ${goal}` : `${done}/${goal} recordings today`,
     goalHint: 'Every scored recording counts once.',
     goalDone: 'Goal reached for today. Extra practice still counts.',
     goalAria: "Today's goal progress",

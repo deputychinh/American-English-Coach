@@ -200,8 +200,7 @@ export const vi = {
     disputeFailed: 'Không gửi được phản hồi',
     title: 'Tiến độ',
     machine: 'Kết quả do máy đo',
-    machineHint:
-      'Số liệu tính từ các lần thu âm đã chấm. Không phải điểm accent; đổi model sẽ không so sánh trực tiếp.',
+    machineHint: 'Tính từ các lần thu đã chấm; không phải điểm accent.',
     perSound: 'Theo từng âm',
     recent: 'Lần thu gần đây',
     empty: 'Chưa có lần thu nào.',

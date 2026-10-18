@@ -121,7 +121,7 @@ export const SoundChart = (): ReactElement => {
           </div>
           <Sheet
             isOpen={selected !== null}
-            title={copy.sounds.title}
+            title={copy.mirror.details}
             onClose={() => router.replace('/sounds', { scroll: false })}
           >
             {selected ? <SoundDetail card={selected} /> : null}

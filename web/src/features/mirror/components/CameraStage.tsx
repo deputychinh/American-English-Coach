@@ -3,8 +3,9 @@
 import type { ReactElement, ReactNode } from 'react';
 
 import type { VisemeGroup } from '@/api/coach.schema';
-import { ErrorState } from '@/components/ErrorState/ErrorState';
+import { Icon } from '@/components/Icon/Icon';
 import { GHOST_SCALE } from '@/constants/mirror.constant';
+import { IconName } from '@/enums/icon-name.enum';
 import { TrackerStatus } from '@/enums/tracker-status.enum';
 import { TargetShape } from '@/features/mirror/components/TargetShape';
 import { useCopy } from '@/hooks/useCopy';
@@ -102,8 +103,13 @@ export const CameraStage = ({
       ) : null}
       {bottom ? <div className="camera-stage__bottom">{bottom}</div> : null}
       {status === TrackerStatus.Error && error ? (
-        <div className="camera-stage__error">
-          <ErrorState message={error} />
+        <div className="camera-stage__error" role="alert">
+          <Icon name={IconName.Camera} className="camera-stage__error-icon" />
+          <p className="camera-stage__error-title">{copy.practice.cameraErrorTitle}</p>
+          <p className="camera-stage__error-text">{error}</p>
+          <button type="button" className="camera-stage__retry" onClick={tracker.retry}>
+            {copy.common.retry}
+          </button>
         </div>
       ) : null}
     </div>

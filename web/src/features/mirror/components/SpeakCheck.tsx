@@ -237,6 +237,7 @@ export const SpeakCheck = ({
         <button
           type="button"
           className="speak-check__side"
+          aria-label={copy.speak.listen}
           disabled={reference.isPlaying || isRecording}
           onClick={() => reference.play(word)}
         >
@@ -268,6 +269,7 @@ export const SpeakCheck = ({
         <button
           type="button"
           className="speak-check__side"
+          aria-label={copy.speak.replay}
           disabled={!lastUrl || isRecording}
           onClick={() => {
             if (lastUrl) void new Audio(lastUrl).play();

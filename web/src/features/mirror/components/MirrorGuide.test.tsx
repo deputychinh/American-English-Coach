@@ -51,6 +51,7 @@ const trackerWith = (latest: TrackedSample | null): MouthTracker => ({
   framesBetween: () => [],
   rawSince: () => [],
   snapshotMouth: () => Promise.resolve(null),
+  retry: () => undefined,
 });
 
 const tick = async (ms: number): Promise<void> => {

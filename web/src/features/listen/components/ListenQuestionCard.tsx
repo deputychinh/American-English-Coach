@@ -76,11 +76,13 @@ export const ListenQuestionCard = ({
             : copy.listen.wrong(question.options[question.answer] ?? '')
           : ''}
       </p>
-      {isAnswered ? (
-        <Button isFullWidth onClick={onNext}>
-          {isLast ? copy.listen.finish : copy.listen.next}
-        </Button>
-      ) : null}
+      <div className="listen-question-card__footer">
+        {isAnswered ? (
+          <Button isFullWidth onClick={onNext}>
+            {isLast ? copy.listen.finish : copy.listen.next}
+          </Button>
+        ) : null}
+      </div>
     </section>
   );
 };

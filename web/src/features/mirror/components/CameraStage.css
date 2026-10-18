@@ -114,13 +114,44 @@
 
 .camera-stage__error {
   position: absolute;
-  inset: 0;
+  top: calc(var(--safe-top) + 76px);
   z-index: var(--z-raised);
   display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
   align-items: center;
-  justify-content: center;
   padding: var(--space-4);
+  text-align: center;
   background: var(--color-scrim-strong);
+  border: 1px solid var(--color-on-scrim-muted);
+  border-radius: var(--radius-xl);
+  inset-inline: var(--space-6);
+}
+
+.camera-stage__error-icon {
+  font-size: var(--text-2xl);
+  color: var(--color-on-scrim-muted);
+}
+
+.camera-stage__error-title {
+  font-weight: var(--weight-semibold);
+}
+
+.camera-stage__error-text {
+  font-size: var(--text-xs);
+  color: var(--color-on-scrim-muted);
+}
+
+.camera-stage__retry {
+  min-block-size: var(--size-touch-target);
+  padding: var(--space-2) var(--space-5);
+  font: inherit;
+  font-weight: var(--weight-semibold);
+  color: var(--color-ink-900);
+  background: var(--color-on-scrim);
+  border: 0;
+  border-radius: var(--radius-full);
+  cursor: pointer;
 }
 
 .camera-stage--compact {

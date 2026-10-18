@@ -170,8 +170,7 @@ export const DrillSession = ({ soundId }: DrillSessionProps): ReactElement => {
           <header className="drill-session__head">
             <p className="drill-session__progress">
               {copy.practice.drill.progress(index + 1, active.length)} ·{' '}
-              {copy.practice.drill.stage[current.stage]} · {copy.practice.drill.targetPhone} /
-              {drill.us}/
+              {copy.practice.drill.stage[current.stage]}
             </p>
             <ConfidenceBadge
               confidence={drill.viseme_confidence}
@@ -184,12 +183,14 @@ export const DrillSession = ({ soundId }: DrillSessionProps): ReactElement => {
         }
         extraActions={
           <>
-            <Button onClick={next}>{copy.practice.drill.next}</Button>
             {!isScored ? (
-              <Button variant={ButtonVariant.Ghost} onClick={() => advance(null)}>
+              <Button variant={ButtonVariant.Ghost} isSmall onClick={() => advance(null)}>
                 {copy.practice.drill.skip}
               </Button>
             ) : null}
+            <Button isSmall onClick={next}>
+              {copy.practice.drill.next}
+            </Button>
           </>
         }
       />

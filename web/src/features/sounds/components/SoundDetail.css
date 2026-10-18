@@ -1,14 +1,8 @@
 .sound-detail {
-  position: sticky;
-  top: calc(var(--header-height) + var(--space-4));
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
   align-items: flex-start;
-  padding: var(--padding-card);
-  background: var(--color-surface);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-md);
 }
 
 .sound-detail__head {
@@ -51,11 +45,18 @@
 
 .sound-detail__actions {
   display: flex;
-  flex-wrap: wrap;
-  gap: var(--gap-inline);
+  flex-direction: column;
+  gap: var(--space-2);
+  inline-size: 100%;
 }
 
 .sound-detail__error {
   font-size: var(--text-sm);
   color: var(--color-danger);
+}
+
+.sound-detail__listen {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
 }

@@ -4,7 +4,6 @@ import Link from 'next/link';
 import { type ReactElement, useState, useSyncExternalStore } from 'react';
 
 import { Button } from '@/components/Button/Button';
-import { Card } from '@/components/Card/Card';
 import { PageIntro } from '@/components/PageIntro/PageIntro';
 import { SectionHeader } from '@/components/SectionHeader/SectionHeader';
 import { Tabs } from '@/components/Tabs/Tabs';
@@ -100,34 +99,34 @@ export const SettingsScreen = (): ReactElement => {
 
   return (
     <div className="settings-screen">
-      <PageIntro title={copy.settings.title} lead={copy.settings.lead} />
+      <PageIntro title={copy.settings.title} />
 
-      <Card as="section" aria-labelledby="settings-appearance">
-        <SectionHeader id="settings-appearance" title={copy.settings.appearance} />
-        <Tabs
-          label={copy.settings.appearance}
-          value={theme}
-          options={[
-            { id: Theme.Light, label: copy.settings.themeLight },
-            { id: Theme.Dark, label: copy.settings.themeDark },
-          ]}
-          onChange={setTheme}
-        />
-        <SectionHeader
-          id="settings-language"
-          title={copy.settings.language}
-          hint={copy.settings.languageHint}
-        />
-        <Tabs
-          label={copy.settings.language}
-          value={language}
-          options={[
-            { id: Language.Vi, label: copy.settings.languageVi },
-            { id: Language.En, label: copy.settings.languageEn },
-          ]}
-          onChange={setLanguage}
-        />
-      </Card>
+      <ul className="settings-screen__rows" aria-label={copy.settings.appearance}>
+        <li className="settings-screen__inline">
+          <span className="settings-screen__inline-label">{copy.settings.appearance}</span>
+          <Tabs
+            label={copy.settings.appearance}
+            value={theme}
+            options={[
+              { id: Theme.Light, label: copy.settings.themeLight },
+              { id: Theme.Dark, label: copy.settings.themeDark },
+            ]}
+            onChange={setTheme}
+          />
+        </li>
+        <li className="settings-screen__inline">
+          <span className="settings-screen__inline-label">{copy.settings.language}</span>
+          <Tabs
+            label={copy.settings.language}
+            value={language}
+            options={[
+              { id: Language.Vi, label: copy.settings.languageVi },
+              { id: Language.En, label: copy.settings.languageEn },
+            ]}
+            onChange={setLanguage}
+          />
+        </li>
+      </ul>
 
       <section className="settings-screen__group" aria-labelledby="settings-group-learning">
         <h2 id="settings-group-learning" className="settings-screen__group-title">

@@ -8,7 +8,7 @@ export const MOUTH_HIT_RATE = 0.3;
 /** Consecutive passes (sound and mouth) that mark a sound as mastered in the mirror. */
 export const MASTERY_STREAK = 3;
 /** Pause before the next automatic attempt, so the learner can read the result. */
-export const REPEAT_DELAY_MS = 2200;
+export const REPEAT_DELAY_MS = 3000;
 /** Silent attempts in a row before automatic repeat stops asking. */
 export const MAX_SILENT_ATTEMPTS = 2;
 /** The ghost target lips are drawn this many times wider than the detected mouth. */

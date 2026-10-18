@@ -1,14 +1,5 @@
+import { VAD_DEFAULTS } from '@/constants/recorder.constant';
 import type { VadEvent, VadOptions, VadState } from '@/interfaces/vad.interface';
-
-/** Defaults tuned for one word or a short sentence spoken close to a phone microphone. */
-export const VAD_DEFAULTS: VadOptions = {
-  minThreshold: 0.015,
-  noiseFactor: 3,
-  speechMs: 120,
-  silenceMs: 750,
-  noSpeechMs: 5000,
-  calibrationMs: 250,
-};
 
 export const initialVad = (now: number): VadState => ({
   startedAt: now,
@@ -29,14 +20,27 @@ export const vadStep = (
   options: VadOptions = VAD_DEFAULTS,
 ): { state: VadState; event: VadEvent } => {
   if (now - state.startedAt < options.calibrationMs) {
-    const noiseFloor = state.noiseFloor === 0 ? level : (state.noiseFloor + level) / 2;
+    // The quietest chunk is the room: speaking right away must not raise the threshold.
+    const noiseFloor = state.noiseFloor === 0 ? level : Math.min(state.noiseFloor, level);
     return { state: { ...state, noiseFloor }, event: 'none' };
   }
-  const threshold = Math.max(options.minThreshold, state.noiseFloor * options.noiseFactor);
+  const threshold = Math.min(
+    options.maxThreshold,
+    Math.max(options.minThreshold, state.noiseFloor * options.noiseFactor),
+  );
   const isVoice = level > threshold;
   if (!isVoice) {
     const noiseFloor = state.noiseFloor === 0 ? level : state.noiseFloor * 0.95 + level * 0.05;
-    const next = { ...state, noiseFloor, speechSince: state.hasSpeech ? state.speechSince : null };
+    // Short dips inside a word (a few milliseconds per chunk) do not break the onset.
+    const isGap =
+      !state.hasSpeech &&
+      state.lastVoiceAt !== null &&
+      now - state.lastVoiceAt <= options.hangoverMs;
+    const next = {
+      ...state,
+      noiseFloor,
+      speechSince: state.hasSpeech || isGap ? state.speechSince : null,
+    };
     if (
       state.hasSpeech &&
       state.lastVoiceAt !== null &&

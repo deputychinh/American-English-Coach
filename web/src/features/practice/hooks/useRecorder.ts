@@ -13,13 +13,14 @@ import type { Recorder, RecorderSession } from '@/interfaces/hooks.interface';
 import type { Recording } from '@/interfaces/practice.interface';
 import type { RecorderOptions } from '@/interfaces/vad.interface';
 import { getCopy } from '@/locales';
+import { isNativeShell } from '@/utils/api-base.util';
 import { nativeHaptic } from '@/utils/native.util';
 import { initialVad, vadStep } from '@/utils/vad.util';
 import { concatChunks, encodeWav, resample, rmsLevel } from '@/utils/wav-encoder.util';
 
 const permissionMessage = (error: unknown): string => {
   if (error instanceof DOMException && error.name === 'NotAllowedError')
-    return getCopy().practice.micDenied;
+    return isNativeShell() ? getCopy().practice.micDeniedNative : getCopy().practice.micDenied;
   if (error instanceof DOMException && error.name === 'NotFoundError')
     return getCopy().practice.noMedia;
   return error instanceof Error ? error.message : getCopy().practice.noMedia;

@@ -52,7 +52,7 @@ export const buildQuestions = ({
   for (const item of step.focus) {
     const sentence = sentenceById.get(item.sentence);
     if (!sentence) continue;
-    const options = words(sentence.text);
+    const options = words(sentence.text).map((word) => word.replace(/[.,!?;:]+$/, ''));
     const answer = options.findIndex((word) => bare(word) === bare(item.word));
     if (answer < 0) continue;
     questions.push({
