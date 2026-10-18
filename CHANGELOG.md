@@ -26,6 +26,10 @@ Theo [Keep a Changelog](https://keepachangelog.com/vi/1.1.0/); phiên bản theo
 
 - Máy chấm: hai lượt chấm đầu tiên chạy cùng lúc có thể lỗi "compilation disabled" của numba; lần biên dịch đầu giờ được tuần tự hóa.
 - Gương: chạm nút mic đúng lúc lượt nói tự kết thúc không còn làm kẹt trạng thái "Đang nghe".
+- Giọng mẫu im lặng trên iPhone đã ghép nối: thẻ `<audio>` không gửi được token nên mọi lần "Nghe mẫu" bị máy chấm trả 401. App giờ tải giọng mẫu bằng `fetch` có token (giữ trong bộ nhớ theo phiên) và báo rõ khi chưa ghép nối hoặc máy chấm không chạy, kể cả ở màn Gương.
+- Chấm quá gắt khi bật camera: chỉ những âm camera nhìn rõ (P/B/M, F/V, nguyên âm tròn môi) mới được đổi "xem lại" thành "sai"; nhóm độ tin cậy trung bình chỉ thêm gợi ý khẩu hình; âm camera gần như không thấy (T/D/N/L, K/G, R…) không còn bị khẩu hình chi phối.
+- Cài đặt: dòng "Ghép nối điện thoại" không còn ghi "Chưa ghép nối" trong lúc một sheet đang mở.
+- e2e chạy ở "chế độ điện thoại" (`COACH_TRUST_LOOPBACK=false` + ghép nối thật trong global setup) trên CI, nên request quên token sẽ hỏng ngay trên CI thay vì trên máy người học.
 
 ## [1.1.0] - 2026-10-17
 

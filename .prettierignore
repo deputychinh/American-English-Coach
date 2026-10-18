@@ -17,3 +17,4 @@ web/out
 web/ios
 web/assets
 docs/lighthouse/*.json
+web/e2e/.auth/

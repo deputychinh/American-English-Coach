@@ -20,6 +20,8 @@ export default defineConfig({
     trace: 'retain-on-failure',
     screenshot: 'only-on-failure',
     permissions: ['camera', 'microphone'],
+    // Phone mode: the API demands the pairing token even from this machine (see global-setup).
+    storageState: process.env.E2E_PAIRING_CODE ? 'e2e/.auth/device.json' : undefined,
   },
   projects: [
     {

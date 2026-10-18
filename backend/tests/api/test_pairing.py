@@ -43,3 +43,12 @@ def test_network_client_needs_a_token_but_probes_stay_open(settings: Settings) -
 
 def test_loopback_client_is_never_asked_for_a_token(client: TestClient) -> None:
     assert client.get("/api/v1/content/phonemes").status_code == 200
+
+
+def test_untrusted_loopback_pairs_like_a_phone(settings: Settings) -> None:
+    strict = settings.model_copy(update={"pairing_code": "123456", "trust_loopback": False})
+    with TestClient(create_app(strict, FakeRecognizer(["θ", "ɪ", "ŋ", "k"]))) as client:
+        assert client.get("/api/v1/content/phonemes").status_code == 401
+        token = client.post("/api/v1/pair", json={"code": "123456", "device_name": "e2e"}).json()
+        headers = {"X-Coach-Token": token["token"]}
+        assert client.get("/api/v1/content/phonemes", headers=headers).status_code == 200

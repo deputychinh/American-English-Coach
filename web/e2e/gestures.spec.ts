@@ -1,5 +1,7 @@
 import { expect, type Locator, type Page, test } from '@playwright/test';
 
+import { apiHeaders } from './api-headers';
+
 test.beforeEach(async ({ page }) => {
   await page.addInitScript(() => localStorage.setItem('coach.onboarded', 'true'));
 });
@@ -50,7 +52,7 @@ test('swiping the mirror word moves to the next and back', async ({ page, reques
   const names = ['aperture', 'width', 'roundness', 'jaw', 'lipClosed', 'lowerLipTuck'];
   const extra = ['teethVisible', 'tongueVisible'];
   const features = Object.fromEntries([...names, ...extra].map((name) => [name, range]));
-  await request.put('/api/v1/calibration', { data: { features } });
+  await request.put('/api/v1/calibration', { headers: apiHeaders(), data: { features } });
   await page.goto('/mirror/?sound=TH');
   const word = page.locator('.speak-check__word');
   await expect(word).not.toBeEmpty();

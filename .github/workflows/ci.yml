@@ -93,16 +93,18 @@ jobs:
       - run: cd backend && uv sync --frozen
       - run: cd web && npm ci && node scripts/vendor-mediapipe.mjs && npm run build
       - run: cd web && npx playwright install chromium
+      # Phone mode: the API asks this machine for a pairing token too, like it asks the iPhone,
+      # so a request that forgets the token fails here instead of on a learner's phone.
       - name: Start the API with the fake recognizer, serving web/out
         run: |
           mkdir -p data
           cd backend
-          COACH_RECOGNIZER=fake COACH_WEB_DIST_DIR=../web/out nohup uv run uvicorn app.main:app --host 127.0.0.1 --port 8765 > ../data/api-ci.log 2>&1 &
+          COACH_TRUST_LOOPBACK=false COACH_PAIRING_CODE=246810 COACH_RECOGNIZER=fake COACH_WEB_DIST_DIR=../web/out nohup uv run uvicorn app.main:app --host 127.0.0.1 --port 8765 > ../data/api-ci.log 2>&1 &
           for i in $(seq 1 45); do curl -sf http://127.0.0.1:8765/api/v1/ready && exit 0; sleep 2; done
           echo "::error title=API did not become ready::see data/api-ci.log"
           cat ../data/api-ci.log
           exit 1
-      - run: cd web && E2E_BASE_URL=http://127.0.0.1:8765 npx playwright test
+      - run: cd web && E2E_PAIRING_CODE=246810 E2E_BASE_URL=http://127.0.0.1:8765 npx playwright test
       - name: Stop the API
         if: always()
         run: pkill -f "uvicorn app.main:app" || true

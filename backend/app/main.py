@@ -72,9 +72,9 @@ def install_middleware(app: FastAPI, settings: Settings) -> None:
     async def _device_token(
         request: Request, call_next: Callable[[Request], Awaitable[Response]]
     ) -> Response:
-        if requires_token(request):
+        container: AppContainer = request.app.state.container
+        if requires_token(request, trust_loopback=container.settings.trust_loopback):
             token = request.headers.get(TOKEN_HEADER, "")
-            container: AppContainer = request.app.state.container
             if not token or not container.devices.is_valid(token):
                 return problem(
                     HTTPStatus.UNAUTHORIZED,

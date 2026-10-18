@@ -136,7 +136,7 @@ export default defineConfig(
     rules: { 'no-restricted-syntax': restrictAllExcept('constant') },
   },
   {
-    files: ['src/config/**/*.ts', 'next.config.ts', 'playwright.config.ts'],
+    files: ['src/config/**/*.ts', 'next.config.ts', 'playwright.config.ts', 'e2e/env.ts'],
     rules: { 'no-restricted-properties': 'off' },
   },
   {

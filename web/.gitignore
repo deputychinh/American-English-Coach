@@ -45,3 +45,6 @@ next-env.d.ts
 /playwright-report/
 /test-results/
 /e2e/fixtures/
+
+# Paired browser state written by e2e phone mode
+/e2e/.auth/

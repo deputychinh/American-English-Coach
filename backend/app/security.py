@@ -32,11 +32,13 @@ def is_loopback(host: str | None) -> bool:
         return host == "testclient"
 
 
-def requires_token(request: Request) -> bool:
+def requires_token(request: Request, *, trust_loopback: bool = True) -> bool:
     """Only network clients calling the API (not the static web files) need a token."""
     path = request.url.path
     if not path.startswith(API_PREFIX) or path in OPEN_PATHS:
         return False
+    if not trust_loopback:
+        return True
     return not is_loopback(request.client.host if request.client else None)
 
 

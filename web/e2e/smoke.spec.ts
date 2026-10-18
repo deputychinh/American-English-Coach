@@ -1,5 +1,8 @@
 import { expect, type Page, test } from '@playwright/test';
 
+import { apiHeaders } from './api-headers';
+import { e2eDeviceToken } from './env';
+
 test.beforeEach(async ({ page }) => {
   // Every journey here starts as a returning learner; e2e/onboarding.spec.ts covers the first run.
   await page.addInitScript(() => localStorage.setItem('coach.onboarded', 'true'));
@@ -84,6 +87,11 @@ test('practice records with the fake microphone and shows a result card', async 
 }, info) => {
   await page.goto('/practice/?item=pair:think-sink:0');
   await expect(page.getByRole('button', { name: 'Thu âm' })).toBeVisible();
+  // The model voice must come through on a paired phone too (it went silent with a 401 once).
+  const clip = page.waitForResponse((response) => response.url().includes('/api/v1/audio'));
+  await page.getByRole('button', { name: 'Nghe mẫu' }).click();
+  expect((await clip).status()).toBe(200);
+  await expect(page.getByText(/phát được giọng mẫu/)).toHaveCount(0);
   await page.getByRole('button', { name: 'Thu âm' }).click();
   await expect(page.getByRole('button', { name: /Dừng/ })).toBeVisible();
   await page.waitForTimeout(1800);
@@ -126,6 +134,7 @@ test('mirror asks for calibration first, then calibration page opens the camera'
 test('the mirror scores a spoken word with sound and mouth together', async ({ page, request }) => {
   const range = { min: 0, max: 1 };
   await request.put('/api/v1/calibration', {
+    headers: apiHeaders(),
     data: {
       features: {
         aperture: range,
@@ -180,7 +189,12 @@ test('settings has theme, server check, pairing and data sections', async ({ pag
   await expect(page.getByRole('status').filter({ hasText: /Kết nối được/ })).toBeVisible();
   await page.keyboard.press('Escape');
   await page.getByRole('button', { name: /^Ghép nối điện thoại/ }).click();
-  await expect(page.getByRole('button', { name: 'Ghép nối', exact: true })).toBeDisabled();
+  // Phone mode runs already paired; otherwise the form waits for the six-digit code.
+  if (e2eDeviceToken()) {
+    await expect(page.getByRole('button', { name: 'Hủy ghép nối' })).toBeVisible();
+  } else {
+    await expect(page.getByRole('button', { name: 'Ghép nối', exact: true })).toBeDisabled();
+  }
   await page.keyboard.press('Escape');
   await page.getByRole('tab', { name: 'Tối' }).click();
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');

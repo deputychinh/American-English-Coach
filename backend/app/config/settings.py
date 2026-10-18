@@ -34,6 +34,8 @@ class Settings(BaseSettings):
     log_json: bool = True
     # Fixed pairing code (6 digits) for phones; empty = a new code each start, printed in the log.
     pairing_code: str = Field(default="", pattern=r"^(\d{6})?$")
+    # False makes the Mac itself pair like a phone: e2e runs this way so token bugs show up.
+    trust_loopback: bool = True
     tutor_rate_limit_per_minute: int = 10
     realtime_enabled: bool = True
     tts_voice: str = DEFAULT_VOICE
