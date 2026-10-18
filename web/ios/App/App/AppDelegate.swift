@@ -42,3 +42,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return config
     }
 }
+
+/// Bridge view controller with the iOS edge swipe for back and forward. The web app routes with
+/// the History API, so the swipe walks the same back stack as the in-app close and back buttons.
+/// Kept in this file so the Xcode project needs no new source entry.
+class MainViewController: CAPBridgeViewController {
+    override func capacitorDidLoad() {
+        super.capacitorDidLoad()
+        webView?.allowsBackForwardNavigationGestures = true
+    }
+}
