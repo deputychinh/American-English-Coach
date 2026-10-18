@@ -23,3 +23,31 @@ Plan này lấp hai khoảng trống đó.
 
 - Thử camera thật: simulator không có camera, cần người dùng cầm iPhone.
 - Dữ liệu người học thật: chưa có pilot.
+
+## Kết quả (01:17)
+
+| Chỉ số                                     | Trước                                           | Sau                                 |
+| ------------------------------------------ | ----------------------------------------------- | ----------------------------------- |
+| Lượt chấm được trên 880 (440 từ × 2 giọng) | 852 (14 từ không có âm đích trong một biến thể) | 880                                 |
+| Báo nhầm âm đích trên giọng chuẩn          | 18,0%                                           | 16,1%                               |
+| /ʊr/ (tour, sure, pure)                    | 17/19                                           | 5/20                                |
+| /ɔ/ (all, call, talk)                      | 11/16                                           | 6/20                                |
+| /t/                                        | 7/20                                            | 0/20                                |
+| /p/                                        | 6/20                                            | 3/20                                |
+| Bộ thử thay âm (`synthetic_contrast`)      |                                                 | không đổi khi bật/tắt luật biến thể |
+
+Đã làm:
+
+- A1: `make sweep`.
+- A2:
+  - Thêm biến thể hợp lệ: trước /r/, caught–cot, âm tắc cuối từ không bật hơi, /t/ đầu từ bật hơi.
+  - Thay 14 từ luyện.
+  - "Gần đúng" được nửa điểm và giữ chuỗi.
+  - Nhãn độ tin cậy cho 6 âm yếu.
+- B1: e2e chế độ điện thoại kiểm giọng mẫu ở 5 màn.
+- B2: màn Gương hiện lỗi giọng mẫu, dòng ghép nối hiển thị đúng trạng thái. Hiệu chỉnh tải lỗi được phép im lặng vì đã có banner 401.
+
+Còn lại, cần người thật hoặc dữ liệu thật:
+
+- Âm /ʊ/, /ʌ/, /ɔɪ/, /f/, /k/, /tʃ/ báo nhầm 35–80% với giọng chuẩn. Mô hình nhập các âm gần nhau; cần dữ liệu người học để hiệu chỉnh riêng từng âm.
+- Âm thanh ra loa thoại sau khi thu âm trên iOS: chỉ kiểm được trên iPhone.

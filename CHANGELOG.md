@@ -30,10 +30,10 @@ Theo [Keep a Changelog](https://keepachangelog.com/vi/1.1.0/); phiên bản theo
 - Chấm quá gắt khi bật camera: chỉ những âm camera nhìn rõ (P/B/M, F/V, nguyên âm tròn môi) mới được đổi "xem lại" thành "sai"; nhóm độ tin cậy trung bình chỉ thêm gợi ý khẩu hình; âm camera gần như không thấy (T/D/N/L, K/G, R…) không còn bị khẩu hình chi phối.
 - Cài đặt: dòng "Ghép nối điện thoại" không còn ghi "Chưa ghép nối" trong lúc một sheet đang mở.
 - Chấm công bằng hơn với giọng Mỹ chuẩn (đo bằng `make sweep`: 440 từ luyện × 2 giọng macOS):
-  - Chấp nhận các biến thể hợp lệ: trước /r/ không phân biệt /ɪ/~/i/, /ɛ/~/e/, /ʊ/~/u/~/ɔ/~/ɝ/ (tour, sure, near, air), và /ɔ/ gộp với /ɑ/ (caught–cot).
+  - Chấp nhận các biến thể hợp lệ: trước /r/ không phân biệt /ɪ/~/i/, /ɛ/~/e/, /ʊ/~/u/~/ɔ/~/ɝ/ (tour, sure, near, air), /ɔ/ gộp với /ɑ/ (caught–cot), /p t k/ cuối từ không bật hơi (nghe như /b d g/) và /t/ đầu từ bật hơi mạnh (nghe như /h/). Báo nhầm trên giọng chuẩn giảm từ 18% xuống 16,1%; bộ thử thay âm vẫn bắt được đúng những lỗi như trước.
   - Bỏ 14 từ luyện mà một biến thể phiên âm không có âm đích ("ear", "law", "with"…), vì máy chấm không tìm thấy âm để chấm. Đã thay bằng từ khác đã kiểm.
   - "Gần đúng" được nửa điểm trên vòng điểm và không còn làm mất chuỗi 3 lần đúng ở màn Gương. Chỉ "Chưa đúng" thật mới reset chuỗi.
-- Nhãn độ tin cậy của máy chấm cho từng âm (`content/scorer_reliability.json`, sinh bởi `make sweep`, trả trong `/content/sounds`): ở 7 âm máy chấm hay nhầm với giọng chuẩn (/ʊ/, /ʌ/, /ɔɪ/, /f/, /k/, /t/, /tʃ/), màn Gương và tổng kết bài luyện nói rõ "Gần đúng" chưa chắc là sai và gợi ý nghe lại bản ghi để tự so với mẫu.
+- Nhãn độ tin cậy của máy chấm cho từng âm (`content/scorer_reliability.json`, sinh bởi `make sweep`, trả trong `/content/sounds`): ở 6 âm máy chấm hay nhầm với giọng chuẩn (/ʊ/, /ʌ/, /ɔɪ/, /f/, /k/, /tʃ/), màn Gương và tổng kết bài luyện nói rõ "Gần đúng" chưa chắc là sai và gợi ý nghe lại bản ghi để tự so với mẫu.
 - e2e kiểm giọng mẫu ở mọi màn có nút phát: bảng âm, Nghe, Xếp lớp, Gương, Luyện tập.
 - e2e chạy ở "chế độ điện thoại" (`COACH_TRUST_LOOPBACK=false` + ghép nối thật trong global setup) trên CI, nên request quên token sẽ hỏng ngay trên CI thay vì trên máy người học.
 

@@ -2,7 +2,7 @@
   "source": "make sweep: drill words with Samantha, Eddy (English (US))",
   "sounds": {
     "c01": {
-      "native_false_alarm_rate": 0.3,
+      "native_false_alarm_rate": 0.15,
       "level": "medium"
     },
     "c02": {
@@ -10,8 +10,8 @@
       "level": "medium"
     },
     "c03": {
-      "native_false_alarm_rate": 0.35,
-      "level": "low"
+      "native_false_alarm_rate": 0.0,
+      "level": "high"
     },
     "c04": {
       "native_false_alarm_rate": 0.1,
