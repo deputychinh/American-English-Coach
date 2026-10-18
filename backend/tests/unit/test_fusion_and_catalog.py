@@ -11,6 +11,21 @@ CONTENT = REPO_ROOT / "content"
 
 
 @pytest.mark.parametrize(
+    ("audio", "confidence", "expected"),
+    [
+        (Verdict.CHECK, "medium", (Verdict.CHECK, True)),
+        (Verdict.OK, "medium", (Verdict.OK, True)),
+        (Verdict.CHECK, "low", (Verdict.CHECK, False)),
+        (Verdict.OK, "low", (Verdict.OK, False)),
+    ],
+)
+def test_only_clearly_visible_sounds_let_the_camera_raise_an_error(
+    audio: Verdict, confidence: str, expected: tuple[Verdict, bool]
+) -> None:
+    assert FusionRules.fuse(audio, VisualVerdict.OFF, confidence) == expected
+
+
+@pytest.mark.parametrize(
     ("audio", "visual", "expected"),
     [
         (Verdict.OK, VisualVerdict.OK, (Verdict.OK, False)),

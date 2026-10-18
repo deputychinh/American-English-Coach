@@ -153,7 +153,9 @@ class AssessmentService:
             known = self._catalog.find(item.phone.symbol, heard, op, item.is_final)
             audio_verdict = self._audio_verdict(op, segment.gop, known)
             visual = self._visual(item.phone.symbol, segment, data)
-            verdict, show_hint = FusionRules.fuse(audio_verdict, visual)
+            verdict, show_hint = FusionRules.fuse(
+                audio_verdict, visual, self._visemes.confidence_of(item.phone.symbol)
+            )
             results.append(
                 self._phone_result(
                     item=item,

@@ -88,6 +88,11 @@ class VisemeCatalog:
         """Viseme group of a phone; `None` when the camera cannot see the sound."""
         return self._group_of.get(symbol)
 
+    def confidence_of(self, symbol: str) -> str:
+        """How well the camera sees a sound: 'high', 'medium' or 'low' ('low' if unseen)."""
+        group = self.group_of(symbol)
+        return self._targets[group].confidence if group is not None else "low"
+
     def target(self, group: VisemeGroup) -> VisemeTarget:
         """Target definition of a group."""
         return self._targets[group]

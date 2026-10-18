@@ -41,3 +41,9 @@ def test_short_windows_invisible_sounds_and_empty_frames_are_unavailable() -> No
     assert CATALOG.evaluate("UW", [ROUND]) is VisualVerdict.UNAVAILABLE
     assert CATALOG.evaluate("K", [ROUND, ROUND]) is not VisualVerdict.UNAVAILABLE
     assert CATALOG.evaluate("UW", [{}, {}]) is VisualVerdict.UNAVAILABLE
+
+
+def test_confidence_follows_how_visible_the_sound_is() -> None:
+    assert CATALOG.confidence_of("F") == "high"
+    assert CATALOG.confidence_of("IY") == "medium"
+    assert CATALOG.confidence_of("D") == "low"
