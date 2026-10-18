@@ -165,6 +165,7 @@ export const DrillSession = ({ soundId }: DrillSessionProps): ReactElement => {
         targetIpa={drill.us}
         transitionVi={drill.transition_vi}
         onResult={onResult}
+        onSwipeNext={next}
         progress={index / Math.max(1, active.length)}
         banner={
           <header className="drill-session__head">

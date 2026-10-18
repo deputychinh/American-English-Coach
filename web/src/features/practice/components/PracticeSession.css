@@ -22,6 +22,9 @@
   min-block-size: 0;
   padding: var(--space-4) var(--padding-page-x);
   text-align: center;
+
+  /* Horizontal swipes are ours; vertical panning stays with the browser. */
+  touch-action: pan-y;
 }
 
 /* The camera takes whatever height the word and hint leave, so the stage never scrolls. */

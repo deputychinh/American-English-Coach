@@ -24,6 +24,7 @@ import { useCopy } from '@/hooks/useCopy';
 import { useFocusMode, useImmersive } from '@/hooks/useImmersive';
 import { useKeepAwake } from '@/hooks/useKeepAwake';
 import { useStoredState } from '@/hooks/useStoredState';
+import { useSwipe } from '@/hooks/useSwipe';
 import type { Point2 } from '@/interfaces/mouth.interface';
 import type {
   AssessmentResponse,
@@ -50,6 +51,8 @@ interface PracticeSessionProps {
   banner?: ReactNode;
   /** 0..1 position in a drill, drawn as the lesson progress bar. */
   progress?: number;
+  /** Swipe left on the prompt to move on (drills); off while recording or scoring. */
+  onSwipeNext?: () => void;
 }
 
 /**
@@ -65,6 +68,7 @@ export const PracticeSession = ({
   extraActions,
   banner,
   progress,
+  onSwipeNext,
 }: PracticeSessionProps): ReactElement => {
   const copy = useCopy();
   const [status, setStatus] = useState(PracticeStatus.Idle);
@@ -148,6 +152,10 @@ export const PracticeSession = ({
 
   const isRecording = recorder.status === RecorderStatus.Recording;
   const isScoring = status === PracticeStatus.Scoring;
+  const swipe = useSwipe({
+    onLeft: onSwipeNext,
+    isEnabled: Boolean(onSwipeNext) && !isRecording && !isScoring,
+  });
   const level = Math.round(Math.min(1, recorder.level * 4) * 100);
   const kindLabel = copy.practice.kind[item.kind];
 
@@ -170,7 +178,7 @@ export const PracticeSession = ({
       />
       {banner}
 
-      <section className="practice-session__stage" aria-label={copy.practice.promptAria}>
+      <section className="practice-session__stage" aria-label={copy.practice.promptAria} {...swipe}>
         {cameraOn ? (
           <div className="practice-session__pip">
             <MirrorGuide

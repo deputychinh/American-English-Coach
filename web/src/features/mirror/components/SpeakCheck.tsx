@@ -13,6 +13,7 @@ import { useRecorder } from '@/features/practice/hooks/useRecorder';
 import { useReferenceAudio } from '@/features/practice/hooks/useReferenceAudio';
 import { assess } from '@/features/practice/services/assessment.service';
 import { useCopy } from '@/hooks/useCopy';
+import { useSwipe } from '@/hooks/useSwipe';
 import type { SpeakOutcome, SpeakPhase } from '@/interfaces/mouth-match.interface';
 import type { TargetMap } from '@/interfaces/mouth.interface';
 import type { MouthTracker } from '@/interfaces/tracker.interface';
@@ -193,10 +194,16 @@ export const SpeakCheck = ({
   };
 
   const level = Math.min(1, recorder.level * 6);
+  // Swipe the word like a flash card; ignored while a take is recording or being scored.
+  const swipe = useSwipe({
+    onLeft: () => step(1),
+    onRight: () => step(-1),
+    isEnabled: words.length > 1 && !isRecording && phase !== 'scoring',
+  });
 
   return (
     <section className="speak-check" aria-label={copy.speak.say}>
-      <div className="speak-check__word-row">
+      <div className="speak-check__word-row" {...swipe}>
         <IconButton
           icon={IconName.ChevronLeft}
           label={copy.speak.prev}
