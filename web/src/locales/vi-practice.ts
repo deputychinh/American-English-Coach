@@ -25,6 +25,13 @@ export const viPractice = {
       'Trình duyệt chưa cho phép dùng camera. Cho phép Camera trong cài đặt trang web rồi bật lại.',
     noMedia: 'Trình duyệt này không hỗ trợ thu âm. Hãy dùng Chrome hoặc Safari mới.',
     resultTitle: 'Kết quả',
+    problems: {
+      AUDIO_INVALID:
+        'Không nghe thấy tiếng hoặc bản ghi quá ngắn. Giữ nút lâu hơn và nói rõ, gần micro.',
+      AUDIO_TOO_LONG: 'Bản ghi quá dài. Chỉ nói từ hoặc câu đang luyện.',
+      MODEL_UNAVAILABLE: 'Máy chấm chưa tải xong mô hình. Thử lại sau ít phút.',
+      WORD_UNKNOWN: 'Máy chấm chưa có cách đọc của một từ trong bài này.',
+    },
     scoreLabel: (ok: number, total: number): string => `${ok}/${total} âm đạt`,
     scoreAria: (percent: number): string => `Điểm ${percent} phần trăm`,
     openResult: 'Xem kết quả',

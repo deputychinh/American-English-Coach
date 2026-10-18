@@ -2,8 +2,8 @@ import { problemCode, problemMessage } from './problem.util';
 
 describe('problem util', () => {
   it('reads detail, then title, then the fallback', () => {
-    expect(problemMessage({ detail: 'audio is silent', code: 'AUDIO_INVALID' }, 'x')).toBe(
-      'audio is silent',
+    expect(problemMessage({ detail: 'run not found', code: 'NOT_FOUND' }, 'x')).toBe(
+      'run not found',
     );
     expect(problemMessage({ title: 'Bad Request' }, 'x')).toBe('Bad Request');
     expect(problemMessage(new Error('boom'), 'x')).toBe('boom');
@@ -22,5 +22,14 @@ describe('problemMessage for the pairing 401', () => {
       title: 'Unauthorized',
     };
     expect(problemMessage(error, 'x')).toBe('Máy chấm yêu cầu ghép nối thiết bị này.');
+  });
+});
+
+describe('problemMessage for scoring errors', () => {
+  it('turns server error codes into learner-facing Vietnamese', () => {
+    expect(
+      problemMessage({ code: 'AUDIO_INVALID', detail: 'audio is too short or silent' }, 'x'),
+    ).toMatch(/Không nghe thấy tiếng/);
+    expect(problemMessage({ code: 'SOMETHING_ELSE', detail: 'raw' }, 'x')).toBe('raw');
   });
 });

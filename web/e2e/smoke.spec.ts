@@ -129,8 +129,10 @@ test('the mirror scores a spoken word with sound and mouth together', async ({ p
   const word = page.locator('.speak-check__word');
   await expect(word).not.toBeEmpty();
   await page.getByRole('button', { name: 'Nói thử' }).click();
-  await page.waitForTimeout(1500);
-  await page.getByRole('button', { name: 'Dừng và chấm' }).click();
+  const stop = page.getByRole('button', { name: 'Dừng và chấm' });
+  await expect(stop).toBeVisible();
+  await page.waitForTimeout(1800);
+  await stop.click();
   await expect(page.locator('.speak-check__result')).toContainText(/Âm \/θ\//, { timeout: 60_000 });
   await expect(page.locator('.speak-check__result')).toContainText(/Khẩu hình/);
   await expect(page.locator('.speak-check__result')).toContainText(/lần đúng liên tiếp/);

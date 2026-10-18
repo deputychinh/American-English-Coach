@@ -27,6 +27,15 @@ export const enPractice: Pick<Copy, 'practice' | 'verdict' | 'prosody'> = {
       'The browser has not allowed the camera. Allow Camera in the site settings and turn it on again.',
     noMedia: 'This browser cannot record audio. Use a recent Chrome or Safari.',
     resultTitle: 'Result',
+    problems: {
+      AUDIO_INVALID:
+        'No voice heard or the recording was too short. Hold on longer and speak clearly, close to the mic.',
+      AUDIO_TOO_LONG:
+        'The recording is too long. Say only the word or sentence you are practising.',
+      MODEL_UNAVAILABLE:
+        'The scoring server has not finished loading its model. Try again in a few minutes.',
+      WORD_UNKNOWN: 'The scoring server does not know how to pronounce a word in this item.',
+    },
     scoreLabel: (ok: number, total: number): string => `${ok}/${total} sounds on target`,
     scoreAria: (percent: number): string => `Score ${percent} percent`,
     openResult: 'See the result',
