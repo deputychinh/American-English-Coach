@@ -1,7 +1,13 @@
 import { MatchState } from '@/enums/match-state.enum';
 import type { MouthFeatures } from '@/interfaces/mouth.interface';
 
-import { cueFor, featureVerdicts, matchMouth } from './mouth-match.util';
+import {
+  cueFor,
+  featureVerdicts,
+  matchMouth,
+  mouthHitRate,
+  speakOutcome,
+} from './mouth-match.util';
 
 const mouth = (overrides: Partial<MouthFeatures> = {}): MouthFeatures => ({
   aperture: 0.3,
@@ -52,5 +58,34 @@ describe('mouth match', () => {
     expect(matchMouth(null, targets).state).toBe(MatchState.NoFace);
     expect(matchMouth(mouth(), {}).state).toBe(MatchState.NoFace);
     expect(featureVerdicts(mouth(), {})).toEqual([]);
+  });
+});
+
+describe('speaking check', () => {
+  const frame = (roundness: number, width: number, quality = 1) => ({
+    t: 0,
+    features: mouth({ roundness, width }),
+    quality,
+  });
+
+  it('measures the share of usable frames on target', () => {
+    const frames = [frame(0.9, 0.3), frame(0.9, 0.3), frame(0.1, 0.9), frame(0.9, 0.3, 0.2)];
+    expect(mouthHitRate(frames, targets)).toBeCloseTo(2 / 3);
+    expect(mouthHitRate([], targets)).toBeNull();
+    expect(mouthHitRate(frames, {})).toBeNull();
+  });
+
+  it('passes only with the right sound and, where the camera can see it, the right mouth', () => {
+    const judge = (sound: 'ok' | 'check' | null, mouthRate: number | null) =>
+      speakOutcome({ sound, mouthRate, canJudgeMouth: true });
+    expect(judge('ok', 0.5)).toMatchObject({ kind: 'both', isPass: true });
+    expect(judge('ok', null)).toMatchObject({ kind: 'noFace', isPass: false });
+    expect(judge('ok', 0.1)).toMatchObject({ kind: 'sound', isPass: false });
+    expect(judge('check', 0.8)).toMatchObject({ kind: 'mouth', isPass: false });
+    expect(judge(null, 0.1)).toMatchObject({ kind: 'neither', isPass: false });
+    expect(speakOutcome({ sound: 'ok', mouthRate: null, canJudgeMouth: false })).toMatchObject({
+      kind: 'both',
+      isPass: true,
+    });
   });
 });

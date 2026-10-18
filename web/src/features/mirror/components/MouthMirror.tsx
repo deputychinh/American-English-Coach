@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
-import { type ReactElement, useMemo, useState } from 'react';
+import { type ReactElement, useCallback, useMemo, useState } from 'react';
 
 import { ErrorState } from '@/components/ErrorState/ErrorState';
 import { Icon } from '@/components/Icon/Icon';
@@ -12,9 +12,15 @@ import { Skeleton } from '@/components/Skeleton/Skeleton';
 import { AsyncStatus } from '@/enums/async-status.enum';
 import { IconName } from '@/enums/icon-name.enum';
 import { StorageKey } from '@/enums/storage-key.enum';
-import { getPhonemes, getVisemes } from '@/features/content/services/content.service';
+import {
+  getPhonemes,
+  getSound,
+  getSounds,
+  getVisemes,
+} from '@/features/content/services/content.service';
 import { MirrorGuide } from '@/features/mirror/components/MirrorGuide';
 import { SoundPickerSheet } from '@/features/mirror/components/SoundPickerSheet';
+import { SpeakCheck } from '@/features/mirror/components/SpeakCheck';
 import { useCalibration } from '@/features/mirror/hooks/useCalibration';
 import { useMouthTracker } from '@/features/mirror/hooks/useMouthTracker';
 import { MouthTutorButton } from '@/features/tutor/components/MouthTutorButton';
@@ -23,13 +29,23 @@ import { useCopy } from '@/hooks/useCopy';
 import { useImmersive } from '@/hooks/useImmersive';
 import { useKeepAwake } from '@/hooks/useKeepAwake';
 import { useStoredState } from '@/hooks/useStoredState';
-import type { PhonemeCard, VisemeContent } from '@/interfaces/practice.interface';
+import type {
+  PhonemeCard,
+  SoundDrillSummary,
+  VisemeContent,
+} from '@/interfaces/practice.interface';
+import { targetPhoneOf } from '@/utils/drill.util';
+import { targetsFromApi } from '@/utils/viseme-match.util';
 
 import './MouthMirror.css';
 
-const loadAll = async (): Promise<{ visemes: VisemeContent; phonemes: PhonemeCard[] }> => {
-  const [visemes, phonemes] = await Promise.all([getVisemes(), getPhonemes()]);
-  return { visemes, phonemes };
+const loadAll = async (): Promise<{
+  visemes: VisemeContent;
+  phonemes: PhonemeCard[];
+  sounds: SoundDrillSummary[];
+}> => {
+  const [visemes, phonemes, sounds] = await Promise.all([getVisemes(), getPhonemes(), getSounds()]);
+  return { visemes, phonemes, sounds };
 };
 
 /** Full-screen mirror: the camera starts as soon as a calibration exists; controls float on it. */
@@ -56,6 +72,14 @@ export const MouthMirror = (): ReactElement => {
     [content.data, sound],
   );
   const card = content.data?.phonemes.find((item) => item.arpabet === sound) ?? null;
+  const drillId =
+    content.data?.sounds.find((item) => targetPhoneOf(item.arpabet) === sound)?.id ?? null;
+  const loadDrill = useCallback(
+    () => (drillId ? getSound(drillId) : Promise.resolve(null)),
+    [drillId],
+  );
+  const drill = useAsync(loadDrill);
+  const targets = useMemo(() => (target ? targetsFromApi(target.targets) : {}), [target]);
 
   if (content.status === AsyncStatus.Error) {
     return <ErrorState message={content.error ?? ''} onRetry={content.reload} />;
@@ -146,6 +170,19 @@ export const MouthMirror = (): ReactElement => {
           transitionVi={visemes.transitions[sound] ?? null}
           topStart={topStart}
           topEnd={topEnd}
+          speak={
+            !isPaused && drill.data && drillId ? (
+              <SpeakCheck
+                key={drillId}
+                tracker={tracker}
+                targets={targets}
+                drillId={drillId}
+                words={drill.data.words.map((entry) => entry.word)}
+                symbol={sound}
+                ipa={card?.us ?? drill.data.us}
+              />
+            ) : null
+          }
           tutor={
             !isPaused && target ? (
               <MouthTutorButton

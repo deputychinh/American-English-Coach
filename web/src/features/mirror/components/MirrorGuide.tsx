@@ -4,7 +4,7 @@ import { type ReactElement, type ReactNode, useEffect, useMemo, useState } from 
 
 import { ConfidenceBadge } from '@/components/ConfidenceBadge/ConfidenceBadge';
 import { FeatureBar } from '@/components/FeatureBar/FeatureBar';
-import { Icon } from '@/components/Icon/Icon';
+import { IconButton } from '@/components/IconButton/IconButton';
 import { Sheet } from '@/components/Sheet/Sheet';
 import { IconName } from '@/enums/icon-name.enum';
 import { MatchState } from '@/enums/match-state.enum';
@@ -38,6 +38,8 @@ interface MirrorGuideProps {
   /** Controls floating over the camera: sound chip, pause, mute, recalibrate. */
   topStart?: ReactNode;
   topEnd?: ReactNode;
+  /** "Say it" control: sound and mouth scored together. */
+  speak?: ReactNode;
 }
 
 /**
@@ -54,6 +56,7 @@ export const MirrorGuide = ({
   tutor = null,
   topStart = null,
   topEnd = null,
+  speak = null,
 }: MirrorGuideProps): ReactElement => {
   const copy = useCopy();
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);
@@ -86,7 +89,19 @@ export const MirrorGuide = ({
         isOnTarget={hold.isOnTarget}
         isHeld={hold.isHeld}
         topStart={topStart}
-        topEnd={topEnd}
+        topEnd={
+          <>
+            {topEnd}
+            <IconButton
+              icon={IconName.Info}
+              label={copy.mirror.details}
+              isOnBrand
+              className="mirror-guide__details-button"
+              aria-haspopup="dialog"
+              onClick={() => setIsDetailsOpen(true)}
+            />
+          </>
+        }
         bottom={
           <>
             {target ? (
@@ -95,6 +110,7 @@ export const MirrorGuide = ({
                   <CueChip text={cue} direction={match.worst.direction} />
                 ) : null}
                 <MatchRing
+                  isCompact={speak !== null}
                   score={match.score}
                   state={match.state}
                   isHeld={hold.isHeld}
@@ -111,15 +127,7 @@ export const MirrorGuide = ({
             ) : (
               <p className="mirror-guide__audio-only">{copy.mirror.audioOnly}</p>
             )}
-            <button
-              type="button"
-              className="mirror-guide__details-button"
-              aria-haspopup="dialog"
-              onClick={() => setIsDetailsOpen(true)}
-            >
-              <Icon name={IconName.Info} />
-              {copy.mirror.details}
-            </button>
+            {speak}
           </>
         }
       />

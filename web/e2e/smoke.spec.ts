@@ -109,6 +109,33 @@ test('mirror asks for calibration first, then calibration page opens the camera'
   await shot(page, 'calibration', info.project.name);
 });
 
+test('the mirror scores a spoken word with sound and mouth together', async ({ page, request }) => {
+  const range = { min: 0, max: 1 };
+  await request.put('/api/v1/calibration', {
+    data: {
+      features: {
+        aperture: range,
+        width: range,
+        roundness: range,
+        jaw: range,
+        lipClosed: range,
+        lowerLipTuck: range,
+        teethVisible: range,
+        tongueVisible: range,
+      },
+    },
+  });
+  await page.goto('/mirror/?sound=TH');
+  const word = page.locator('.speak-check__word');
+  await expect(word).not.toBeEmpty();
+  await page.getByRole('button', { name: 'Nói thử' }).click();
+  await page.waitForTimeout(1500);
+  await page.getByRole('button', { name: 'Dừng và chấm' }).click();
+  await expect(page.locator('.speak-check__result')).toContainText(/Âm \/θ\//, { timeout: 60_000 });
+  await expect(page.locator('.speak-check__result')).toContainText(/Khẩu hình/);
+  await expect(page.locator('.speak-check__result')).toContainText(/lần đúng liên tiếp/);
+});
+
 test('progress shows stats, the ranked table and a link to settings', async ({ page }, info) => {
   await page.goto('/progress/');
   await expect(page.getByRole('heading', { name: /Theo từng âm/ })).toBeVisible();

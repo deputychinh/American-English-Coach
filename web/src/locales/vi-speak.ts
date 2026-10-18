@@ -1,0 +1,31 @@
+/** Mirror speaking-check copy (split from `vi.ts` to keep files short). */
+export const viSpeak = {
+  speak: {
+    say: 'Nói từ này',
+    record: 'Nói thử',
+    stop: 'Dừng và chấm',
+    scoring: 'Đang chấm…',
+    listen: 'Nghe mẫu',
+    prev: 'Từ trước',
+    next: 'Từ tiếp',
+    sound: (ipa: string): string => `Âm /${ipa}/`,
+    mouth: 'Khẩu hình',
+    verdict: { ok: 'Đạt', check: 'Gần đúng', error: 'Chưa đúng', none: 'Không nghe thấy' },
+    mouthOk: 'Đúng',
+    mouthOff: 'Chưa đúng',
+    mouthNone: 'Camera không thấy',
+    mouthNotNeeded: 'Âm này chấm bằng tai',
+    headline: {
+      both: 'Đúng cả âm và khẩu hình!',
+      sound: 'Âm đúng, chỉnh thêm khẩu hình theo gợi ý.',
+      noFace: 'Âm đúng nhưng camera chưa thấy miệng: đưa mặt vào khung rồi nói lại.',
+      mouth: 'Khẩu hình đúng nhưng âm chưa chuẩn: nghe mẫu rồi nói lại.',
+      neither: 'Nghe mẫu, đặt khẩu hình theo bóng mờ rồi nói lại.',
+    },
+    streak: (count: number, total: number): string => `${count}/${total} lần đúng liên tiếp`,
+    mastered: 'Đã nắm được âm này!',
+    masteredHint: 'Âm đúng và khẩu hình đúng 3 lần liên tiếp. Chuyển sang âm khác hoặc luyện câu.',
+    again: 'Nói lại',
+    practiceSentences: 'Luyện câu với âm này',
+  },
+};

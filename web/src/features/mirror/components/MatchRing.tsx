@@ -15,12 +15,20 @@ interface MatchRingProps {
   isHeld: boolean;
   /** 0..1 share of the hold time already on target. */
   holdProgress: number;
+  /** Smaller dial beside the speaking control. */
+  isCompact?: boolean;
 }
 
 const CIRCUMFERENCE = 2 * Math.PI * 26;
 
 /** Live "how close am I" dial: the arc is the score, the inner arc fills while holding on target. */
-export const MatchRing = ({ score, state, isHeld, holdProgress }: MatchRingProps): ReactElement => {
+export const MatchRing = ({
+  score,
+  state,
+  isHeld,
+  holdProgress,
+  isCompact = false,
+}: MatchRingProps): ReactElement => {
   const copy = useCopy();
   const percent = Math.round(Math.min(1, Math.max(0, score)) * 100);
   const label = isHeld
@@ -34,7 +42,12 @@ export const MatchRing = ({ score, state, isHeld, holdProgress }: MatchRingProps
           : copy.mirror.match.noFace;
   return (
     <div
-      className={cx('match-ring', `match-ring--${state}`, isHeld && 'is-held')}
+      className={cx(
+        'match-ring',
+        `match-ring--${state}`,
+        isCompact && 'match-ring--compact',
+        isHeld && 'is-held',
+      )}
       role="meter"
       aria-valuemin={0}
       aria-valuemax={100}

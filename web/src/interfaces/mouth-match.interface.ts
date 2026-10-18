@@ -19,3 +19,15 @@ export interface MouthMatch {
   /** The feature furthest from its range, or null when everything is inside. */
   worst: FeatureVerdict | null;
 }
+
+export type SpeakOutcomeKind = 'both' | 'sound' | 'noFace' | 'mouth' | 'neither';
+
+/** Result of one "say it in the mirror" attempt. */
+export interface SpeakOutcome {
+  kind: SpeakOutcomeKind;
+  /** Worst verdict on the target phone, null when it was not heard at all. */
+  sound: 'ok' | 'check' | 'error' | null;
+  /** Share of usable speaking frames on target; null when the camera cannot judge this sound. */
+  mouthRate: number | null;
+  isPass: boolean;
+}

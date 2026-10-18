@@ -1,7 +1,12 @@
-import { MATCH_TOLERANCE } from '@/constants/mirror.constant';
+import { MATCH_TOLERANCE, MOUTH_HIT_RATE } from '@/constants/mirror.constant';
 import { MatchState } from '@/enums/match-state.enum';
-import type { FeatureVerdict, MouthMatch } from '@/interfaces/mouth-match.interface';
-import type { MouthFeatureName, MouthFeatures, TargetMap } from '@/interfaces/mouth.interface';
+import type { FeatureVerdict, MouthMatch, SpeakOutcome } from '@/interfaces/mouth-match.interface';
+import type {
+  MouthFeatureName,
+  MouthFeatures,
+  MouthFrame,
+  TargetMap,
+} from '@/interfaces/mouth.interface';
 import { getCopy } from '@/locales';
 
 const clamp01 = (value: number): number => Math.min(1, Math.max(0, value));
@@ -45,4 +50,45 @@ export const cueFor = (verdict: FeatureVerdict | null): string | null => {
   if (!verdict || verdict.direction === 'inside') return null;
   const cues = getCopy().mirror.cues[verdict.name];
   return verdict.direction === 'low' ? cues.increase : cues.decrease;
+};
+
+/** Share of usable frames (quality ≥ 0.5) whose features sit inside every target range. */
+export const mouthHitRate = (frames: MouthFrame[], targets: TargetMap): number | null => {
+  const usable = frames.filter((frame) => frame.quality >= 0.5);
+  if (usable.length === 0 || Object.keys(targets).length === 0) return null;
+  const hits = usable.filter((frame) =>
+    featureVerdicts(frame.features, targets).every((v) => v.direction === 'inside'),
+  ).length;
+  return hits / usable.length;
+};
+
+/**
+ * One mirror attempt. The sound must be correct. When the camera can judge this sound the mouth
+ * must be seen and on target too; only sounds the camera cannot see pass on the sound alone.
+ */
+export const speakOutcome = ({
+  sound,
+  mouthRate,
+  canJudgeMouth,
+}: {
+  sound: SpeakOutcome['sound'];
+  mouthRate: number | null;
+  canJudgeMouth: boolean;
+}): SpeakOutcome => {
+  const soundOk = sound === 'ok';
+  const mouthOk = mouthRate !== null && mouthRate >= MOUTH_HIT_RATE;
+  const kind = !canJudgeMouth
+    ? soundOk
+      ? 'both'
+      : 'neither'
+    : soundOk && mouthOk
+      ? 'both'
+      : soundOk && mouthRate === null
+        ? 'noFace'
+        : soundOk
+          ? 'sound'
+          : mouthOk
+            ? 'mouth'
+            : 'neither';
+  return { kind, sound, mouthRate, isPass: kind === 'both' };
 };
