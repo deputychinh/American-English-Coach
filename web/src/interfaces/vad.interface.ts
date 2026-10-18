@@ -33,4 +33,6 @@ export type AutoStopReason = 'end' | 'no-speech';
 export interface RecorderOptions {
   /** Stop by itself on end of speech or no speech; the callback runs the caller's stop flow. */
   onAutoStop?: (reason: AutoStopReason) => void;
+  /** Silence that ends the take; shorter for single words (defaults to `VAD_DEFAULTS`). */
+  silenceMs?: number;
 }

@@ -16,3 +16,9 @@ export const VAD_DEFAULTS: VadOptions = {
   noSpeechMs: 5000,
   calibrationMs: 250,
 };
+
+/** End-of-speech silence for one word: a final stop's closure is ~100 ms, so 450 ms is safe. */
+export const SILENCE_MS_WORD = 450;
+
+/** Sentences keep the longer default so a pause between thought groups does not end the take. */
+export const SILENCE_MS_SENTENCE = VAD_DEFAULTS.silenceMs;

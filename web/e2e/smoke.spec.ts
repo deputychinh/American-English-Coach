@@ -83,7 +83,11 @@ test('practice records with the fake microphone and shows a result card', async 
   await page.getByRole('button', { name: 'Thu âm' }).click();
   await expect(page.getByRole('button', { name: /Dừng/ })).toBeVisible();
   await page.waitForTimeout(1800);
-  await page.getByRole('button', { name: /Dừng/ }).click();
+  // A single word ends after a short pause, so the take may already have stopped by itself.
+  await page
+    .getByRole('button', { name: /Dừng/ })
+    .click({ timeout: 2000 })
+    .catch(() => undefined);
   const chips = page.locator('.verdict-chip');
   await expect(chips.first()).toBeVisible({ timeout: 60_000 });
   await expect(chips).toHaveCount(4);

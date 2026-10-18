@@ -7,6 +7,7 @@ import {
   TARGET_SAMPLE_RATE,
   WORKLET_NAME,
   WORKLET_URL,
+  VAD_DEFAULTS,
 } from '@/constants/recorder.constant';
 import { RecorderStatus } from '@/enums/recorder-status.enum';
 import type { Recorder, RecorderSession } from '@/interfaces/hooks.interface';
@@ -35,7 +36,7 @@ const openContext = (): AudioContext => {
 };
 
 /** Captures mono PCM through an AudioWorklet (ScriptProcessor fallback) and encodes 16 kHz WAV. */
-export const useRecorder = ({ onAutoStop }: RecorderOptions = {}): Recorder => {
+export const useRecorder = ({ onAutoStop, silenceMs }: RecorderOptions = {}): Recorder => {
   const [status, setStatus] = useState(RecorderStatus.Idle);
   const [level, setLevel] = useState(0);
   const [seconds, setSeconds] = useState(0);
@@ -43,9 +44,14 @@ export const useRecorder = ({ onAutoStop }: RecorderOptions = {}): Recorder => {
   const [hasSpeech, setHasSpeech] = useState(false);
   const onAutoStopRef = useRef(onAutoStop);
 
+  const vadOptionsRef = useRef(VAD_DEFAULTS);
+
   useEffect(() => {
     onAutoStopRef.current = onAutoStop;
   }, [onAutoStop]);
+  useEffect(() => {
+    vadOptionsRef.current = { ...VAD_DEFAULTS, silenceMs: silenceMs ?? VAD_DEFAULTS.silenceMs };
+  }, [silenceMs]);
   const sessionRef = useRef<RecorderSession | null>(null);
   const stopRef = useRef<() => Promise<Recording | null>>(() => Promise.resolve(null));
 
@@ -59,7 +65,7 @@ export const useRecorder = ({ onAutoStop }: RecorderOptions = {}): Recorder => {
     const level = rmsLevel(chunk);
     setLevel(level);
     if (session.vad && !session.isAutoStopped) {
-      const step = vadStep(session.vad, { level, now: performance.now() });
+      const step = vadStep(session.vad, { level, now: performance.now() }, vadOptionsRef.current);
       session.vad = step.state;
       if (step.event === 'speech') setHasSpeech(true);
       if (step.event === 'end' || step.event === 'no-speech') {

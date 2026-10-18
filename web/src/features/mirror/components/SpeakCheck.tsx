@@ -5,6 +5,7 @@ import { type ReactElement, type ReactNode, useCallback, useEffect, useRef, useS
 import { Icon } from '@/components/Icon/Icon';
 import { IconButton } from '@/components/IconButton/IconButton';
 import { MASTERY_STREAK, MAX_SILENT_ATTEMPTS, REPEAT_DELAY_MS } from '@/constants/mirror.constant';
+import { SILENCE_MS_WORD } from '@/constants/recorder.constant';
 import { IconName } from '@/enums/icon-name.enum';
 import { RecorderStatus } from '@/enums/recorder-status.enum';
 import { SpeakStatus } from '@/features/mirror/components/SpeakStatus';
@@ -61,9 +62,13 @@ export const SpeakCheck = ({
   const [isRepeat, setIsRepeat] = useState(true);
   const [isQueued, setIsQueued] = useState(false);
   const silentRef = useRef(0);
+  const finishingRef = useRef(false);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const autoStopRef = useRef<(reason: AutoStopReason) => void>(() => undefined);
-  const recorder = useRecorder({ onAutoStop: (reason) => autoStopRef.current(reason) });
+  const recorder = useRecorder({
+    onAutoStop: (reason) => autoStopRef.current(reason),
+    silenceMs: SILENCE_MS_WORD,
+  });
   const word = words[index % Math.max(1, words.length)] ?? '';
   const isMastered = streak >= MASTERY_STREAK;
   const canJudgeMouth = Object.keys(targets).length > 0;
@@ -88,7 +93,12 @@ export const SpeakCheck = ({
   }, [start]);
 
   const finish = useCallback(async () => {
-    const captured = await recorder.stop();
+    // A tap on the mic can land in the same instant the take ends by itself: score it once.
+    if (finishingRef.current) return;
+    finishingRef.current = true;
+    const captured = await recorder.stop().finally(() => {
+      finishingRef.current = false;
+    });
     if (!captured) return;
     setLastUrl(captured.url);
     setPhase('scoring');
@@ -169,6 +179,7 @@ export const SpeakCheck = ({
     setPhase('idle');
   };
   const onMic = (): void => {
+    if (phase === 'scoring' || finishingRef.current) return;
     if (isRecording) {
       void finish();
       return;
