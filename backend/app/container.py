@@ -217,7 +217,12 @@ class AppContainer:
         if not self.settings.warm_up or not self.model_ready():
             return
         try:
+            # CMUdict, the model with its device kernels and librosa's numba pitch code all
+            # used to load on the learner's first scoring. Nothing here touches the database.
+            _ = self.dictionary
             self.recognizer.log_posteriors(np.zeros(SAMPLE_RATE, dtype=np.float32))
+            hum = np.sin(np.linspace(0, 2 * np.pi * 150, SAMPLE_RATE)).astype(np.float32) * 0.1
+            ProsodyFeatureExtractor().extract(hum)
             logger.info("phoneme model warmed up")
         except Exception:  # warm-up is best effort; the request path reports errors
             logger.warning("phoneme model warm-up failed", exc_info=True)
