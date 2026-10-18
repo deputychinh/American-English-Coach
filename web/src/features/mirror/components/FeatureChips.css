@@ -9,10 +9,8 @@
 }
 
 .feature-chips--on-scrim {
-  flex-wrap: nowrap;
-  overflow-x: auto;
+  gap: var(--space-1);
   padding-inline: var(--space-2);
-  scrollbar-width: none;
 }
 
 .feature-chips__chip {
@@ -35,6 +33,8 @@
 }
 
 .feature-chips--on-scrim .feature-chips__chip {
+  min-block-size: 32px;
+  font-size: var(--text-xs);
   color: var(--color-on-scrim);
   background: var(--color-scrim-strong);
   border-color: var(--color-on-scrim-muted);

@@ -25,7 +25,7 @@ test('a first visit is guided through permissions, profile and calibration', asy
   await expect(page).toHaveURL(/\/$/);
   await expect(page.getByRole('heading', { name: `Chào ${name}` })).toBeVisible();
   // Clean up the profile created for this run.
-  await page.goto('/settings/');
+  await page.goto('/settings/#profiles');
   const row = page.locator('.profiles-card__row', { hasText: name });
   await page
     .locator('.profiles-card__row', { hasText: 'Người học' })

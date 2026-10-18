@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 
 import { jsonResponse, mockApi } from '@/test-utils/api-mock';
 
@@ -53,16 +53,17 @@ describe('ProgressDashboard', () => {
     render(<ProgressDashboard />);
     await waitFor(() => expect(screen.getByRole('rowheader', { name: '/θ/' })).toBeInTheDocument());
     expect(screen.getByRole('img', { name: '50% đạt' })).toBeInTheDocument();
-    expect(screen.getByText(/Đã phản bác/)).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: /Xem/ })).toHaveAttribute(
-      'href',
-      expect.stringContaining('run=run-1'),
-    );
     await waitFor(() =>
       expect(screen.getByRole('link', { name: '/θ/' })).toHaveAttribute(
         'href',
         expect.stringContaining('sound=c09'),
       ),
+    );
+    fireEvent.click(screen.getByRole('tab', { name: 'Lần thu gần đây' }));
+    expect(screen.getByText(/Đã phản bác/)).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /Xem/ })).toHaveAttribute(
+      'href',
+      expect.stringContaining('run=run-1'),
     );
     expect(screen.getByRole('link', { name: /Mở cài đặt/ })).toHaveAttribute('href', '/settings');
     expect(document.querySelectorAll('.stat')).toHaveLength(4);
@@ -77,6 +78,8 @@ describe('ProgressDashboard', () => {
       '/api/v1/content/sounds': () => jsonResponse([]),
     });
     render(<ProgressDashboard />);
-    await waitFor(() => expect(screen.getAllByText('Chưa có lần thu nào.')).toHaveLength(2));
+    await waitFor(() => expect(screen.getAllByText('Chưa có lần thu nào.')).toHaveLength(1));
+    fireEvent.click(screen.getByRole('tab', { name: 'Lần thu gần đây' }));
+    expect(screen.getAllByText('Chưa có lần thu nào.')).toHaveLength(1);
   });
 });

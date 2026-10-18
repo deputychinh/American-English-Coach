@@ -9,6 +9,7 @@ import { PageIntro } from '@/components/PageIntro/PageIntro';
 import { SectionHeader } from '@/components/SectionHeader/SectionHeader';
 import { Tabs } from '@/components/Tabs/Tabs';
 import { useToast } from '@/components/Toast/Toast';
+import { DEFAULT_DAILY_GOAL } from '@/constants/plan.constant';
 import { APP_VERSION } from '@/constants/ui.constant';
 import { ButtonVariant } from '@/enums/button-variant.enum';
 import { Language } from '@/enums/language.enum';
@@ -19,6 +20,9 @@ import { clearCalibration } from '@/features/mirror/services/calibration.service
 import { GoalCard } from '@/features/settings/components/GoalCard';
 import { PairingCard } from '@/features/settings/components/PairingCard';
 import { ProfilesCard } from '@/features/settings/components/ProfilesCard';
+import { SettingsRow } from '@/features/settings/components/SettingsRow';
+import { pairedDevice } from '@/features/settings/services/pairing.service';
+import { useActiveProfile } from '@/hooks/useActiveProfile';
 import { useCopy, useLanguage } from '@/hooks/useCopy';
 import { useStoredState } from '@/hooks/useStoredState';
 import { setLanguage } from '@/locales';
@@ -38,6 +42,9 @@ const readTheme = (): Theme =>
 /** Theme, practice defaults, scoring-server address and on-device data. */
 const subscribeNever = (): (() => void) => () => undefined;
 
+const HASH_ROWS: Record<string, string> = { 'settings-pairing': 'pairing', profiles: 'profiles' };
+const readHashRow = (): string | null => HASH_ROWS[window.location.hash.replace('#', '')] ?? null;
+
 export const SettingsScreen = (): ReactElement => {
   const copy = useCopy();
   const language = useLanguage();
@@ -52,6 +59,15 @@ export const SettingsScreen = (): ReactElement => {
     false,
   );
   const [muted, setMuted] = useStoredState<boolean>(StorageKey.Muted, false);
+  const [goal] = useStoredState<number>(StorageKey.DailyGoal, DEFAULT_DAILY_GOAL);
+  const profile = useActiveProfile();
+  // Links such as the pairing banner ("/settings#settings-pairing") open the matching sheet;
+  // until the learner opens or closes one, the hash decides.
+  const hashRow = useSyncExternalStore(subscribeNever, readHashRow, () => null);
+  const [chosenRow, setChosenRow] = useState<string | null | undefined>(undefined);
+  const openRow = chosenRow === undefined ? hashRow : chosenRow;
+  // Read again whenever a sheet closes, so the row shows the state the pairing sheet left.
+  const paired = openRow === null ? pairedDevice() : null;
   const [server, setServer] = useStoredState<string>(StorageKey.ApiBaseUrl, '');
   const [draft, setDraft] = useState<string | null>(null);
   const [serverStatus, setServerStatus] = useState<string | null>(null);
@@ -113,92 +129,167 @@ export const SettingsScreen = (): ReactElement => {
         />
       </Card>
 
-      {isPairingFirst ? <PairingCard /> : null}
+      <section className="settings-screen__group" aria-labelledby="settings-group-learning">
+        <h2 id="settings-group-learning" className="settings-screen__group-title">
+          {copy.settings.rows.groupLearning}
+        </h2>
+        <ul className="settings-screen__rows">
+          {isPairingFirst ? (
+            <SettingsRow
+              label={copy.settings.pairingTitle}
+              value={paired ? copy.settings.rows.pairedValue : copy.settings.rows.notPaired}
+              isOpen={openRow === 'pairing'}
+              onOpen={() => setChosenRow('pairing')}
+              onClose={() => setChosenRow(null)}
+            >
+              <PairingCard />
+            </SettingsRow>
+          ) : null}
+          <SettingsRow
+            label={copy.settings.profiles.title}
+            value={profile.name}
+            isOpen={openRow === 'profiles'}
+            onOpen={() => setChosenRow('profiles')}
+            onClose={() => setChosenRow(null)}
+          >
+            <ProfilesCard />
+          </SettingsRow>
+          <SettingsRow
+            label={copy.settings.goalTitle}
+            value={copy.settings.rows.goalValue(goal)}
+            isOpen={openRow === 'goal'}
+            onOpen={() => setChosenRow('goal')}
+            onClose={() => setChosenRow(null)}
+          >
+            <GoalCard />
+          </SettingsRow>
+          <SettingsRow
+            label={copy.settings.practice}
+            value={cameraDefault ? copy.settings.rows.cameraOn : copy.settings.rows.cameraOff}
+            isOpen={openRow === 'practice'}
+            onOpen={() => setChosenRow('practice')}
+            onClose={() => setChosenRow(null)}
+          >
+            <SectionHeader id="settings-practice" title={copy.settings.practice} />
+            <label className="settings-screen__row">
+              <input
+                type="checkbox"
+                checked={cameraDefault}
+                onChange={(event) => setCameraDefault(event.target.checked)}
+              />
+              <span>{copy.progress.cameraDefault}</span>
+            </label>
+            <label className="settings-screen__row">
+              <input
+                type="checkbox"
+                checked={muted}
+                onChange={(event) => setMuted(event.target.checked)}
+              />
+              <span>{copy.progress.muted}</span>
+            </label>
+          </SettingsRow>
+        </ul>
+      </section>
 
-      <ProfilesCard />
+      <section className="settings-screen__group" aria-labelledby="settings-group-server">
+        <h2 id="settings-group-server" className="settings-screen__group-title">
+          {copy.settings.rows.groupServer}
+        </h2>
+        <ul className="settings-screen__rows">
+          <SettingsRow
+            label={copy.progress.serverTitle}
+            value={server || copy.settings.rows.serverLocal}
+            isOpen={openRow === 'server'}
+            onOpen={() => setChosenRow('server')}
+            onClose={() => setChosenRow(null)}
+          >
+            <SectionHeader
+              id="settings-server"
+              title={copy.settings.server}
+              hint={copy.progress.serverHelp}
+            />
+            <label className="settings-screen__label" htmlFor="server-address">
+              {copy.progress.serverTitle}
+            </label>
+            <div className="settings-screen__row">
+              <input
+                id="server-address"
+                className="settings-screen__input"
+                type="url"
+                inputMode="url"
+                autoCapitalize="none"
+                autoCorrect="off"
+                placeholder={copy.progress.serverPlaceholder}
+                value={draft ?? server}
+                onChange={(event) => setDraft(event.target.value)}
+              />
+              <Button variant={ButtonVariant.Secondary} isSmall onClick={() => void checkServer()}>
+                {copy.progress.serverSave}
+              </Button>
+            </div>
+            {serverStatus ? (
+              <p className="settings-screen__status" role="status">
+                {serverStatus}
+              </p>
+            ) : null}
+          </SettingsRow>
+          {isPairingFirst ? null : (
+            <SettingsRow
+              label={copy.settings.pairingTitle}
+              value={paired ? copy.settings.rows.pairedValue : copy.settings.rows.notPaired}
+              isOpen={openRow === 'pairing'}
+              onOpen={() => setChosenRow('pairing')}
+              onClose={() => setChosenRow(null)}
+            >
+              <PairingCard />
+            </SettingsRow>
+          )}
+        </ul>
+      </section>
 
-      <GoalCard />
-
-      <Card as="section" aria-labelledby="settings-practice">
-        <SectionHeader id="settings-practice" title={copy.settings.practice} />
-        <label className="settings-screen__row">
-          <input
-            type="checkbox"
-            checked={cameraDefault}
-            onChange={(event) => setCameraDefault(event.target.checked)}
-          />
-          <span>{copy.progress.cameraDefault}</span>
-        </label>
-        <label className="settings-screen__row">
-          <input
-            type="checkbox"
-            checked={muted}
-            onChange={(event) => setMuted(event.target.checked)}
-          />
-          <span>{copy.progress.muted}</span>
-        </label>
-      </Card>
-
-      <Card as="section" aria-labelledby="settings-server">
-        <SectionHeader
-          id="settings-server"
-          title={copy.settings.server}
-          hint={copy.progress.serverHelp}
-        />
-        <label className="settings-screen__label" htmlFor="server-address">
-          {copy.progress.serverTitle}
-        </label>
-        <div className="settings-screen__row">
-          <input
-            id="server-address"
-            className="settings-screen__input"
-            type="url"
-            inputMode="url"
-            autoCapitalize="none"
-            autoCorrect="off"
-            placeholder={copy.progress.serverPlaceholder}
-            value={draft ?? server}
-            onChange={(event) => setDraft(event.target.value)}
-          />
-          <Button variant={ButtonVariant.Secondary} isSmall onClick={() => void checkServer()}>
-            {copy.progress.serverSave}
-          </Button>
-        </div>
-        {serverStatus ? (
-          <p className="settings-screen__status" role="status">
-            {serverStatus}
-          </p>
-        ) : null}
-      </Card>
-
-      {isPairingFirst ? null : <PairingCard />}
-
-      <Card as="section" aria-labelledby="settings-data">
-        <SectionHeader
-          id="settings-data"
-          title={copy.settings.data}
-          hint={copy.settings.clearDataHint}
-        />
-        <div className="settings-screen__row">
-          <Button variant={ButtonVariant.Ghost} isSmall onClick={clearData}>
-            {copy.settings.clearData}
-          </Button>
-          <Link href="/privacy" className="button button--ghost button--small">
-            {copy.privacy.title}
-          </Link>
-        </div>
-      </Card>
-
-      <Card as="section" aria-labelledby="settings-about">
-        <SectionHeader id="settings-about" title={copy.settings.about} />
-        <p className="settings-screen__muted">
-          {copy.appName} · {copy.settings.version} {APP_VERSION}
-        </p>
-        <p className="settings-screen__muted">{copy.home.privacy}</p>
-        <Link href="/welcome" className="button button--ghost button--small">
-          {copy.settings.replayWelcome}
-        </Link>
-      </Card>
+      <section className="settings-screen__group" aria-labelledby="settings-group-other">
+        <h2 id="settings-group-other" className="settings-screen__group-title">
+          {copy.settings.rows.groupOther}
+        </h2>
+        <ul className="settings-screen__rows">
+          <SettingsRow
+            label={copy.settings.data}
+            isOpen={openRow === 'data'}
+            onOpen={() => setChosenRow('data')}
+            onClose={() => setChosenRow(null)}
+          >
+            <SectionHeader
+              id="settings-data"
+              title={copy.settings.data}
+              hint={copy.settings.clearDataHint}
+            />
+            <div className="settings-screen__row">
+              <Button variant={ButtonVariant.Ghost} isSmall onClick={clearData}>
+                {copy.settings.clearData}
+              </Button>
+              <Link href="/privacy" className="button button--ghost button--small">
+                {copy.privacy.title}
+              </Link>
+            </div>
+          </SettingsRow>
+          <SettingsRow
+            label={copy.settings.about}
+            value={`${copy.settings.version} ${APP_VERSION}`}
+            isOpen={openRow === 'about'}
+            onOpen={() => setChosenRow('about')}
+            onClose={() => setChosenRow(null)}
+          >
+            <SectionHeader id="settings-about" title={copy.settings.about} />
+            <p className="settings-screen__muted">
+              {copy.appName} · {copy.settings.version} {APP_VERSION}
+            </p>
+            <p className="settings-screen__muted">{copy.home.privacy}</p>
+            <Link href="/welcome" className="button button--ghost button--small">
+              {copy.settings.replayWelcome}
+            </Link>
+          </SettingsRow>
+        </ul>
+      </section>
     </div>
   );
 };

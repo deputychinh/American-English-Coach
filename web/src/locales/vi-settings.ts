@@ -9,6 +9,17 @@ export const viSettings = {
     practice: 'Luyện tập',
     server: 'Máy chấm',
     data: 'Dữ liệu trên thiết bị',
+    rows: {
+      groupLearning: 'Học tập',
+      groupServer: 'Máy chấm',
+      groupOther: 'Khác',
+      goalValue: (runs: number): string => `${runs} lượt/ngày`,
+      cameraOn: 'Camera bật',
+      cameraOff: 'Camera tắt',
+      serverLocal: 'Máy này',
+      notPaired: 'Chưa ghép nối',
+      pairedValue: 'Đã ghép nối',
+    },
     clearData: 'Xóa dữ liệu trên thiết bị này',
     clearDataHint:
       'Xóa hiệu chỉnh khẩu hình và lựa chọn đã lưu trên thiết bị. Kết quả đã chấm vẫn nằm trên máy chấm.',

@@ -149,12 +149,20 @@ test('progress shows stats, the ranked table and a link to settings', async ({ p
 test('settings has theme, server check, pairing and data sections', async ({ page }, info) => {
   await page.goto('/settings/');
   await expect(page.getByRole('heading', { name: 'Cài đặt', level: 1 })).toBeVisible();
+  await page.getByRole('button', { name: /^Luyện tập/ }).click();
   await expect(page.getByRole('checkbox', { name: /Mặc định bật camera/ })).toBeVisible();
+  await page.keyboard.press('Escape');
+  await page.getByRole('button', { name: /^Mục tiêu và nhắc luyện/ }).click();
   await page.getByRole('tab', { name: '5 lần' }).click();
   await expect(page.getByRole('tab', { name: '5 lần' })).toHaveAttribute('aria-selected', 'true');
+  await page.keyboard.press('Escape');
+  await page.getByRole('button', { name: /^Địa chỉ máy chấm/ }).click();
   await page.getByRole('button', { name: 'Lưu và kiểm tra' }).click();
   await expect(page.getByRole('status').filter({ hasText: /Kết nối được/ })).toBeVisible();
-  await expect(page.getByRole('button', { name: 'Ghép nối' })).toBeDisabled();
+  await page.keyboard.press('Escape');
+  await page.getByRole('button', { name: /^Ghép nối điện thoại/ }).click();
+  await expect(page.getByRole('button', { name: 'Ghép nối', exact: true })).toBeDisabled();
+  await page.keyboard.press('Escape');
   await page.getByRole('tab', { name: 'Tối' }).click();
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
   await shot(page, 'settings', info.project.name);
@@ -221,6 +229,7 @@ test('the interface switches to English and back from settings', async ({ page }
 
 test('profiles can be created, switched, renamed and deleted from settings', async ({ page }) => {
   await page.goto('/settings/');
+  await page.getByRole('button', { name: /^Hồ sơ người học/ }).click();
   const card = page.locator('#profiles');
   await expect(card.getByText('Đang dùng', { exact: true })).toBeVisible();
   const name = `E2E ${Date.now().toString().slice(-5)}`;
@@ -230,7 +239,7 @@ test('profiles can be created, switched, renamed and deleted from settings', asy
   await expect(row).toHaveAttribute('aria-current', 'true');
   await page.goto('/');
   await expect(page.getByRole('heading', { name: `Chào ${name}` })).toBeVisible();
-  await page.goto('/settings/');
+  await page.goto('/settings/#profiles');
   await card
     .locator('.profiles-card__row', { hasText: 'Người học' })
     .getByRole('button', { name: 'Dùng hồ sơ này' })

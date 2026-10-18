@@ -11,6 +11,17 @@ export const enSettings: Pick<Copy, 'settings' | 'plan'> = {
     practice: 'Practice',
     server: 'Scoring server',
     data: 'Data on this device',
+    rows: {
+      groupLearning: 'Learning',
+      groupServer: 'Scoring server',
+      groupOther: 'Other',
+      goalValue: (runs: number): string => `${runs} sessions/day`,
+      cameraOn: 'Camera on',
+      cameraOff: 'Camera off',
+      serverLocal: 'This device',
+      notPaired: 'Not paired',
+      pairedValue: 'Paired',
+    },
     clearData: 'Clear data on this device',
     clearDataHint:
       'Removes the mouth calibration and saved choices on this device. Scored results stay on the scoring server.',

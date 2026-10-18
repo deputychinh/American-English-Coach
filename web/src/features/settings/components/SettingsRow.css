@@ -1,0 +1,47 @@
+.settings-row {
+  border-block-end: 1px solid var(--color-border);
+}
+
+.settings-row:last-child {
+  border-block-end: 0;
+}
+
+.settings-row__button {
+  display: flex;
+  gap: var(--space-3);
+  align-items: center;
+  inline-size: 100%;
+  min-block-size: 52px;
+  padding: var(--space-2) var(--space-4);
+  font: inherit;
+  text-align: start;
+  color: var(--color-text);
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
+.settings-row__label {
+  flex: 1 1 auto;
+  font-weight: var(--weight-medium);
+}
+
+.settings-row__value {
+  overflow: hidden;
+  max-inline-size: 50%;
+  font-size: var(--text-sm);
+  white-space: nowrap;
+  color: var(--color-text-muted);
+  text-overflow: ellipsis;
+}
+
+.settings-row__chevron {
+  flex: none;
+  color: var(--color-text-muted);
+}
+
+.settings-row__sheet {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}

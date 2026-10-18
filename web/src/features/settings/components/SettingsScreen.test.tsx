@@ -58,7 +58,8 @@ describe('SettingsScreen', () => {
     render(renderScreen());
     await user.click(screen.getByRole('tab', { name: 'Tối' }));
     expect(document.documentElement.dataset.theme).toBe('dark');
-    await user.type(screen.getByLabelText('Địa chỉ máy chấm'), '192.168.1.9:8765');
+    await user.click(screen.getByRole('button', { name: /^Địa chỉ máy chấm/ }));
+    await user.type(screen.getByRole('textbox', { name: 'Địa chỉ máy chấm' }), '192.168.1.9:8765');
     await user.click(screen.getByRole('button', { name: 'Lưu và kiểm tra' }));
     await waitFor(() => expect(screen.getAllByRole('status')[0]).toHaveTextContent(/gpt-6-luna/));
     expect(JSON.parse(localStorage.getItem(StorageKey.ApiBaseUrl) ?? '""')).toBe(
@@ -73,6 +74,7 @@ describe('SettingsScreen', () => {
       '/api/v1/profiles': () => jsonResponse(profiles),
     });
     render(renderScreen());
+    await user.click(screen.getByRole('button', { name: /^Ghép nối điện thoại/ }));
     const pair = screen.getByRole('button', { name: 'Ghép nối' });
     expect(pair).toBeDisabled();
     await user.type(screen.getByLabelText('Mã ghép nối (6 số)'), '12ab3456');
@@ -96,6 +98,7 @@ describe('SettingsScreen', () => {
       '/api/v1/profiles': () => jsonResponse(profiles),
     });
     render(renderScreen());
+    await user.click(screen.getByRole('button', { name: /^Ghép nối điện thoại/ }));
     await user.type(screen.getByLabelText('Mã ghép nối (6 số)'), '000000');
     await user.click(screen.getByRole('button', { name: 'Ghép nối' }));
     await waitFor(() => expect(screen.getByText(/Mã không đúng/)).toBeInTheDocument());
@@ -106,6 +109,7 @@ describe('SettingsScreen', () => {
     mockApi({ '/api/v1/profiles': () => jsonResponse(profiles) });
     localStorage.setItem(StorageKey.Calibration, JSON.stringify({ aperture: { min: 0, max: 1 } }));
     render(renderScreen());
+    await user.click(screen.getByRole('button', { name: /^Dữ liệu trên thiết bị/ }));
     await user.click(screen.getByRole('button', { name: 'Xóa dữ liệu trên thiết bị này' }));
     expect(localStorage.getItem(StorageKey.Calibration)).toBeNull();
     expect(screen.getByText('Đã xóa dữ liệu trên thiết bị.')).toBeInTheDocument();
