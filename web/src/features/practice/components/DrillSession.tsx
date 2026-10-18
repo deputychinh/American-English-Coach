@@ -158,17 +158,6 @@ export const DrillSession = ({ soundId }: DrillSessionProps): ReactElement => {
 
   return (
     <div className="drill-session">
-      <header className="drill-session__head">
-        <p className="drill-session__progress">
-          {copy.practice.drill.progress(index + 1, active.length)} ·{' '}
-          {copy.practice.drill.stage[current.stage]} · {copy.practice.drill.targetPhone} /{drill.us}
-          /
-        </p>
-        <ConfidenceBadge confidence={drill.viseme_confidence} labels={visemes.confidence_labels} />
-        <p className="drill-session__tally" aria-live="polite">
-          {copy.practice.drill.tally(tally)}
-        </p>
-      </header>
       <PracticeSession
         key={current.item.id}
         item={current.item}
@@ -176,6 +165,22 @@ export const DrillSession = ({ soundId }: DrillSessionProps): ReactElement => {
         targetIpa={drill.us}
         transitionVi={drill.transition_vi}
         onResult={onResult}
+        banner={
+          <header className="drill-session__head">
+            <p className="drill-session__progress">
+              {copy.practice.drill.progress(index + 1, active.length)} ·{' '}
+              {copy.practice.drill.stage[current.stage]} · {copy.practice.drill.targetPhone} /
+              {drill.us}/
+            </p>
+            <ConfidenceBadge
+              confidence={drill.viseme_confidence}
+              labels={visemes.confidence_labels}
+            />
+            <p className="drill-session__tally" aria-live="polite">
+              {copy.practice.drill.tally(tally)}
+            </p>
+          </header>
+        }
         extraActions={
           <>
             <Button onClick={next}>{copy.practice.drill.next}</Button>

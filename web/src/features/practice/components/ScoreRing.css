@@ -1,0 +1,50 @@
+.score-ring {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  inline-size: 140px;
+  text-align: center;
+}
+
+.score-ring__svg {
+  inline-size: 96px;
+  block-size: 96px;
+  transform: rotate(-90deg);
+}
+
+.score-ring__track {
+  fill: none;
+  stroke: var(--color-border);
+  stroke-width: 6;
+}
+
+.score-ring__value {
+  transition: stroke-dashoffset var(--duration-slow) var(--ease-standard);
+  fill: none;
+  stroke: var(--color-danger);
+  stroke-linecap: round;
+  stroke-width: 6;
+}
+
+.score-ring--fair .score-ring__value {
+  stroke: var(--color-warning);
+}
+
+.score-ring--good .score-ring__value {
+  stroke: var(--color-success);
+}
+
+.score-ring__percent {
+  position: absolute;
+  top: 48px;
+  font-size: var(--text-xl);
+  font-weight: var(--weight-bold);
+  font-variant-numeric: tabular-nums;
+  transform: translateY(-50%);
+}
+
+.score-ring__label {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  margin-block-start: var(--space-1);
+}

@@ -9,55 +9,29 @@
   box-shadow: var(--shadow-md);
 }
 
-.result-card__totals {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: var(--space-2);
+.result-card--bare {
   padding: 0;
-  list-style: none;
-}
-
-.result-card__total {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-1);
-  align-items: center;
-  padding: var(--space-3);
-  font-size: var(--text-xs);
-  font-weight: var(--weight-medium);
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  border-radius: var(--radius-md);
-}
-
-.result-card__total-value {
-  font-size: var(--text-2xl);
-  font-weight: var(--weight-semibold);
-  font-variant-numeric: tabular-nums;
-  line-height: var(--leading-tight);
-  letter-spacing: 0;
-  text-transform: none;
-}
-
-.result-card__total.is-ok {
-  color: var(--color-on-success-subtle);
-  background: var(--color-success-subtle);
-}
-
-.result-card__total.is-check {
-  color: var(--color-on-warning-subtle);
-  background: var(--color-warning-subtle);
-}
-
-.result-card__total.is-error {
-  color: var(--color-on-danger-subtle);
-  background: var(--color-danger-subtle);
+  background: transparent;
+  border: 0;
+  box-shadow: none;
 }
 
 .result-card__head {
   display: flex;
+  gap: var(--space-4);
+  align-items: center;
+}
+
+.result-card__head-text {
+  display: flex;
   flex-direction: column;
   gap: var(--space-1);
+}
+
+.result-card__next {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap-inline);
 }
 
 .result-card__title {

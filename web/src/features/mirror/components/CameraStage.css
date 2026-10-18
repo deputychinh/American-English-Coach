@@ -121,6 +121,21 @@
   background: var(--color-scrim-strong);
 }
 
+.camera-stage--compact {
+  block-size: 220px;
+  border-radius: var(--radius-lg);
+}
+
+.camera-stage--compact .camera-stage__notice {
+  font-size: var(--text-xs);
+  inset-block-start: var(--space-2);
+}
+
+.camera-stage--compact .camera-stage__guide {
+  top: 10%;
+  inline-size: 36%;
+}
+
 @media (--bp-md) {
   .camera-stage {
     block-size: min(82vh, 920px);

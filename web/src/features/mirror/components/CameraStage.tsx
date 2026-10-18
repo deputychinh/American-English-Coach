@@ -25,6 +25,8 @@ interface CameraStageProps {
   bottom?: ReactNode;
   /** Large instruction over the video (calibration steps). */
   prompt?: string | null;
+  /** Small inset preview (practice screen) instead of the full-screen stage. */
+  isCompact?: boolean;
 }
 
 /** Edge-to-edge mirrored camera with the lip outline, a ghost target and floating controls. */
@@ -37,6 +39,7 @@ export const CameraStage = ({
   topEnd = null,
   bottom = null,
   prompt = null,
+  isCompact = false,
 }: CameraStageProps): ReactElement => {
   const copy = useCopy();
   const { attachVideo, attachCanvas, status, error, latest, isFaceVisible } = tracker;
@@ -52,7 +55,14 @@ export const CameraStage = ({
           : null;
 
   return (
-    <div className={cx('camera-stage', isOnTarget && 'is-on-target', isHeld && 'is-held')}>
+    <div
+      className={cx(
+        'camera-stage',
+        isCompact && 'camera-stage--compact',
+        isOnTarget && 'is-on-target',
+        isHeld && 'is-held',
+      )}
+    >
       <video
         ref={attachVideo}
         className="camera-stage__video"

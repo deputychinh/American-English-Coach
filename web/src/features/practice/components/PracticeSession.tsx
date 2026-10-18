@@ -3,19 +3,17 @@
 import Link from 'next/link';
 import { type ReactElement, type ReactNode, useCallback, useState } from 'react';
 
-import { Button } from '@/components/Button/Button';
 import { ConfidenceBadge } from '@/components/ConfidenceBadge/ConfidenceBadge';
 import { ErrorState } from '@/components/ErrorState/ErrorState';
 import { Icon } from '@/components/Icon/Icon';
-import { PageIntro } from '@/components/PageIntro/PageIntro';
+import { IconButton } from '@/components/IconButton/IconButton';
+import { Sheet } from '@/components/Sheet/Sheet';
 import { Skeleton } from '@/components/Skeleton/Skeleton';
-import { ButtonVariant } from '@/enums/button-variant.enum';
 import { IconName } from '@/enums/icon-name.enum';
 import { PracticeStatus } from '@/enums/practice-status.enum';
 import { RecorderStatus } from '@/enums/recorder-status.enum';
 import { StorageKey } from '@/enums/storage-key.enum';
-import { CameraPanel } from '@/features/mirror/components/CameraPanel';
-import { TargetShape } from '@/features/mirror/components/TargetShape';
+import { CameraStage } from '@/features/mirror/components/CameraStage';
 import { useCalibration } from '@/features/mirror/hooks/useCalibration';
 import { useMouthTracker } from '@/features/mirror/hooks/useMouthTracker';
 import { ResultCard } from '@/features/practice/components/ResultCard';
@@ -24,6 +22,7 @@ import { useReferenceAudio } from '@/features/practice/hooks/useReferenceAudio';
 import { assess } from '@/features/practice/services/assessment.service';
 import { MouthTutorButton } from '@/features/tutor/components/MouthTutorButton';
 import { useCopy } from '@/hooks/useCopy';
+import { useImmersive } from '@/hooks/useImmersive';
 import { useKeepAwake } from '@/hooks/useKeepAwake';
 import { useStoredState } from '@/hooks/useStoredState';
 import type { Point2 } from '@/interfaces/mouth.interface';
@@ -40,15 +39,21 @@ import './PracticeSession.css';
 
 interface PracticeSessionProps {
   item: PracticeItem;
-  /** Viseme target of the drill's sound, shown next to the camera. */
+  /** Viseme target of the drill's sound, drawn as ghost lips over the inset camera. */
   targetGroup?: VisemeTargetCard | null;
   targetIpa?: string;
   transitionVi?: string | null;
   onResult?: (result: AssessmentResponse) => void;
-  /** Drill navigation (next / skip) rendered under the recorder. */
+  /** Drill navigation (next / skip): in the bar while recording, in the result sheet after. */
   extraActions?: ReactNode;
+  /** Drill progress line shown under the top bar, inside the one-screen layout. */
+  banner?: ReactNode;
 }
 
+/**
+ * One screen: a thin bar, the prompt in the middle (with an optional inset camera), the record
+ * control at the bottom. The result slides up as a sheet so the prompt never scrolls away.
+ */
 export const PracticeSession = ({
   item,
   targetGroup = null,
@@ -56,21 +61,25 @@ export const PracticeSession = ({
   transitionVi = null,
   onResult,
   extraActions,
+  banner,
 }: PracticeSessionProps): ReactElement => {
   const copy = useCopy();
   const [status, setStatus] = useState(PracticeStatus.Idle);
   const [error, setError] = useState<string | null>(null);
   const [result, setResult] = useState<AssessmentResponse | null>(null);
+  const [isResultOpen, setIsResultOpen] = useState(false);
   const [recording, setRecording] = useState<Recording | null>(null);
   const [cameraOn, setCameraOn] = useStoredState<boolean>(StorageKey.CameraDefault, false);
   const recorder = useRecorder();
   useKeepAwake();
+  useImmersive();
   const reference = useReferenceAudio();
   const calibration = useCalibration();
   const tracker = useMouthTracker({ enabled: cameraOn, calibration: calibration.value });
 
   const begin = useCallback(async () => {
     setResult(null);
+    setIsResultOpen(false);
     setError(null);
     await recorder.start();
     setStatus(PracticeStatus.Recording);
@@ -97,6 +106,7 @@ export const PracticeSession = ({
         audioStartedAt: cameraOn && frames.length > 0 ? captured.startedAt : null,
       });
       setResult(response);
+      setIsResultOpen(true);
       setStatus(PracticeStatus.Success);
       onResult?.(response);
     } catch (cause) {
@@ -115,106 +125,145 @@ export const PracticeSession = ({
   );
 
   const isRecording = recorder.status === RecorderStatus.Recording;
+  const isScoring = status === PracticeStatus.Scoring;
+  const level = Math.round(Math.min(1, recorder.level * 4) * 100);
   const kindLabel = copy.practice.kind[item.kind];
 
   return (
-    <div className="practice-session">
-      <PageIntro title={item.title} lead={kindLabel}>
-        <Link href="/practice" className="button button--ghost">
-          {copy.practice.back}
+    <div className={cx('practice-session', cameraOn && 'practice-session--camera')}>
+      <header className="practice-session__bar">
+        <Link href="/practice" className="practice-session__back" aria-label={copy.practice.back}>
+          <Icon name={IconName.ChevronLeft} />
         </Link>
-      </PageIntro>
-
-      <section className="practice-session__prompt" aria-label={copy.practice.promptAria}>
-        <p className="practice-session__text">{item.text}</p>
-        <div className="practice-session__actions">
-          <Button
-            variant={ButtonVariant.Secondary}
-            onClick={() => reference.play(item.text)}
-            disabled={reference.isPlaying}
-          >
-            {reference.isPlaying ? copy.practice.playing : copy.practice.listen}
-          </Button>
-          <Button
-            variant={ButtonVariant.Ghost}
-            onClick={() => setCameraOn(!cameraOn)}
-            aria-pressed={cameraOn}
-          >
-            {cameraOn ? copy.practice.cameraOff : copy.practice.cameraOn}
-          </Button>
+        <div className="practice-session__heading">
+          <h1 className="practice-session__title">{item.title}</h1>
+          <p className="practice-session__kind">
+            {kindLabel}
+            {targetIpa ? ` · ${copy.practice.targetLabel} /${targetIpa}/` : ''}
+          </p>
         </div>
+        <IconButton
+          icon={IconName.Camera}
+          label={cameraOn ? copy.practice.cameraOff : copy.practice.cameraOn}
+          aria-pressed={cameraOn}
+          className={cx('practice-session__toggle', cameraOn && 'is-on')}
+          onClick={() => setCameraOn(!cameraOn)}
+        />
+      </header>
+      {banner}
+
+      <section className="practice-session__stage" aria-label={copy.practice.promptAria}>
+        {cameraOn ? (
+          <div className="practice-session__pip">
+            <CameraStage tracker={tracker} ghost={targetGroup?.group ?? null} isCompact />
+          </div>
+        ) : null}
+        <p className="practice-session__text">{item.text}</p>
+        {targetGroup ? (
+          <div className="practice-session__target">
+            <ConfidenceBadge confidence={targetGroup.confidence} />
+            <p className="practice-session__hint">{targetGroup.hint_vi}</p>
+            {transitionVi ? <p className="practice-session__muted">{transitionVi}</p> : null}
+          </div>
+        ) : null}
+        {cameraOn && targetGroup ? (
+          <MouthTutorButton
+            tracker={tracker}
+            soundIpa={targetIpa ?? item.focus[0] ?? ''}
+            targetVi={targetGroup.hint_vi}
+          />
+        ) : null}
         {reference.error ? <p className="practice-session__error">{reference.error}</p> : null}
-        <p className="practice-session__muted">{copy.practice.cameraHint}</p>
+        {recorder.error ? <ErrorState message={recorder.error} /> : null}
+        {status === PracticeStatus.Error && error ? (
+          <ErrorState
+            title={copy.practice.errorTitle}
+            message={error}
+            onRetry={() => void begin()}
+          />
+        ) : null}
       </section>
 
-      {cameraOn ? (
-        <div className="practice-session__camera">
-          <CameraPanel tracker={tracker} compact />
-          {targetGroup ? (
-            <aside className="practice-session__target" aria-label={copy.practice.drill.targetHint}>
-              <TargetShape group={targetGroup.group} size={96} />
-              <div className="practice-session__target-copy">
-                <p className="practice-session__target-name">
-                  {targetIpa ? `/${targetIpa}/ · ` : ''}
-                  {targetGroup.name_vi}
-                </p>
-                <ConfidenceBadge confidence={targetGroup.confidence} />
-                <p className="practice-session__muted">{targetGroup.hint_vi}</p>
-                {transitionVi ? <p className="practice-session__muted">{transitionVi}</p> : null}
-                <MouthTutorButton
-                  tracker={tracker}
-                  soundIpa={targetIpa ?? item.focus[0] ?? ''}
-                  targetVi={targetGroup.hint_vi}
-                />
-              </div>
-            </aside>
-          ) : null}
-        </div>
-      ) : null}
-
-      <section className="practice-session__recorder" aria-live="polite">
-        <Button
-          className={cx('practice-session__record', isRecording && 'is-recording')}
-          onClick={() => void (isRecording ? finish() : begin())}
-          disabled={status === PracticeStatus.Scoring}
-        >
-          <Icon name={isRecording ? IconName.Stop : IconName.Record} />
-          {isRecording
-            ? `${copy.practice.stop} (${String(recorder.seconds)}s)`
-            : copy.practice.record}
-        </Button>
+      <footer className="practice-session__recorder" aria-live="polite">
+        <IconButton
+          icon={IconName.Play}
+          label={reference.isPlaying ? copy.practice.playing : copy.practice.listen}
+          className="practice-session__side"
+          disabled={reference.isPlaying}
+          onClick={() => reference.play(item.text)}
+        />
         <span
-          className="practice-session__level"
+          className={cx('practice-session__ring', isRecording && 'is-recording')}
+          style={{
+            background: `conic-gradient(var(--color-success) ${String(level)}%, var(--color-border) 0)`,
+          }}
+        >
+          <button
+            type="button"
+            className={cx('practice-session__record', isRecording && 'is-recording')}
+            onClick={() => void (isRecording ? finish() : begin())}
+            disabled={isScoring}
+            aria-label={
+              isRecording
+                ? `${copy.practice.stop} (${String(recorder.seconds)}s)`
+                : copy.practice.record
+            }
+          >
+            <Icon name={isRecording ? IconName.Stop : IconName.Record} />
+          </button>
+        </span>
+        <span
+          className="visually-hidden"
           role="meter"
           aria-label={copy.practice.levelAria}
           aria-valuemin={0}
           aria-valuemax={100}
-          aria-valuenow={Math.round(Math.min(1, recorder.level * 4) * 100)}
-        >
-          <span
-            className="practice-session__level-fill"
-            style={{ inlineSize: `${String(Math.round(Math.min(1, recorder.level * 4) * 100))}%` }}
-          />
-        </span>
-        {isRecording ? <p className="practice-session__muted">{copy.practice.recording}</p> : null}
-        {recorder.error ? <ErrorState message={recorder.error} /> : null}
-        {extraActions ? <div className="practice-session__extra">{extraActions}</div> : null}
-      </section>
-
-      {status === PracticeStatus.Scoring ? (
-        <Skeleton lines={4} label={copy.practice.scoring} />
-      ) : null}
-      {status === PracticeStatus.Error && error ? (
-        <ErrorState title={copy.practice.errorTitle} message={error} onRetry={() => void begin()} />
-      ) : null}
-      {result ? (
-        <ResultCard
-          result={result}
-          recording={recording}
-          outlineAt={outlineAt}
-          onRetry={() => void begin()}
+          aria-valuenow={level}
         />
-      ) : null}
+        {result && !isResultOpen ? (
+          <IconButton
+            icon={IconName.Info}
+            label={copy.practice.openResult}
+            className="practice-session__side"
+            onClick={() => setIsResultOpen(true)}
+          />
+        ) : (
+          <span
+            className="practice-session__side practice-session__side--empty"
+            aria-hidden="true"
+          />
+        )}
+        <p className="practice-session__status">
+          {isRecording
+            ? `${copy.practice.recording} · ${String(recorder.seconds)}s`
+            : isScoring
+              ? copy.practice.scoring
+              : result
+                ? copy.practice.openResult
+                : copy.practice.record}
+        </p>
+        {isScoring ? <Skeleton lines={1} label={copy.practice.scoring} /> : null}
+        {extraActions && !isResultOpen ? (
+          <div className="practice-session__extra">{extraActions}</div>
+        ) : null}
+      </footer>
+
+      <Sheet
+        isOpen={isResultOpen && result !== null}
+        title={copy.practice.resultTitle}
+        onClose={() => setIsResultOpen(false)}
+      >
+        {result ? (
+          <ResultCard
+            result={result}
+            recording={recording}
+            outlineAt={outlineAt}
+            onRetry={() => void begin()}
+            extraActions={extraActions}
+            isBare
+          />
+        ) : null}
+      </Sheet>
     </div>
   );
 };

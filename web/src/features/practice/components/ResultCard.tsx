@@ -1,13 +1,14 @@
 'use client';
 
 import Link from 'next/link';
-import { type ReactElement, useState } from 'react';
+import { type ReactElement, type ReactNode, useState } from 'react';
 
 import { Button } from '@/components/Button/Button';
 import { VerdictChip } from '@/components/VerdictChip/VerdictChip';
 import { ButtonVariant } from '@/enums/button-variant.enum';
 import { PhoneDetail } from '@/features/practice/components/PhoneDetail';
 import { ProsodyList } from '@/features/practice/components/ProsodyList';
+import { ScoreRing } from '@/features/practice/components/ScoreRing';
 import { disputeRun } from '@/features/progress/services/progress.service';
 import { TutorPanel } from '@/features/tutor/components/TutorPanel';
 import { useTutorAvailability } from '@/features/tutor/hooks/useTutorAvailability';
@@ -15,6 +16,7 @@ import { explainRun } from '@/features/tutor/services/tutor.service';
 import { useCopy } from '@/hooks/useCopy';
 import type { Point2 } from '@/interfaces/mouth.interface';
 import type { AssessmentResponse, PhoneResult, Recording } from '@/interfaces/practice.interface';
+import { cx } from '@/utils/cx.util';
 
 import './ResultCard.css';
 
@@ -23,6 +25,10 @@ interface ResultCardProps {
   recording: Recording | null;
   outlineAt: (start: number, end: number) => Point2[];
   onRetry?: () => void;
+  /** Drawn inside a sheet: no card frame of its own. */
+  isBare?: boolean;
+  /** Drill navigation shown with the result (next / skip). */
+  extraActions?: ReactNode;
 }
 
 export const ResultCard = ({
@@ -30,6 +36,8 @@ export const ResultCard = ({
   recording,
   outlineAt,
   onRetry,
+  isBare = false,
+  extraActions,
 }: ResultCardProps): ReactElement => {
   const copy = useCopy();
   const [selected, setSelected] = useState<PhoneResult | null>(null);
@@ -47,30 +55,23 @@ export const ResultCard = ({
   };
 
   return (
-    <section className="result-card" aria-labelledby="result-title">
+    <section
+      className={cx('result-card', isBare && 'result-card--bare')}
+      aria-labelledby="result-title"
+    >
       <div className="result-card__head">
-        <h2 id="result-title" className="result-card__title">
-          {copy.practice.resultTitle}
-        </h2>
-        <p className="result-card__summary">
-          {copy.practice.summary(summary.ok, summary.check, summary.error)} ·{' '}
-          {summary.camera_used ? copy.practice.cameraUsed : copy.practice.cameraUnused}
-        </p>
+        <ScoreRing ok={summary.ok} total={summary.ok + summary.check + summary.error} />
+        <div className="result-card__head-text">
+          <h2 id="result-title" className="result-card__title visually-hidden">
+            {copy.practice.resultTitle}
+          </h2>
+          <p className="result-card__summary">
+            {copy.practice.summary(summary.ok, summary.check, summary.error)} ·{' '}
+            {summary.camera_used ? copy.practice.cameraUsed : copy.practice.cameraUnused}
+          </p>
+        </div>
       </div>
-      <ul className="result-card__totals" aria-hidden="true">
-        <li className="result-card__total is-ok">
-          <span className="result-card__total-value">{summary.ok}</span>
-          <span>{copy.verdict.ok}</span>
-        </li>
-        <li className="result-card__total is-check">
-          <span className="result-card__total-value">{summary.check}</span>
-          <span>{copy.verdict.check}</span>
-        </li>
-        <li className="result-card__total is-error">
-          <span className="result-card__total-value">{summary.error}</span>
-          <span>{copy.verdict.error}</span>
-        </li>
-      </ul>
+      {extraActions ? <div className="result-card__next">{extraActions}</div> : null}
 
       <div className="result-card__words">
         {result.words.map((word) => (
