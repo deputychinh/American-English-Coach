@@ -95,19 +95,22 @@
 }
 
 .sound-chart__card.is-selected {
+  background: var(--color-primary-subtle);
   border-color: var(--color-primary);
   box-shadow: var(--shadow-md);
 }
 
+/* 44 cards at once: the symbol is plain strong text, colour is kept for the selected card. */
 .sound-chart__ipa {
-  padding: 0 var(--space-2);
   font-family: var(--font-ipa);
   font-size: var(--text-xl);
   font-weight: var(--weight-semibold);
   line-height: var(--leading-snug);
-  color: var(--color-ipa-text);
-  background: var(--color-ipa-bg);
-  border-radius: var(--radius-sm);
+  color: var(--color-text);
+}
+
+.sound-chart__card.is-selected .sound-chart__ipa {
+  color: var(--color-primary);
 }
 
 .sound-chart__example {
@@ -115,6 +118,7 @@
   max-inline-size: 100%;
   font-size: var(--text-xs);
   white-space: nowrap;
+  color: var(--color-text-muted);
   text-overflow: ellipsis;
 }
 

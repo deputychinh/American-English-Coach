@@ -22,8 +22,8 @@ export const viHome = {
     goal: (done: number, goal: number): string => `${done}/${goal} lượt`,
     goalDone: 'Xong mục tiêu hôm nay',
     continueLabel: 'Tiếp tục lộ trình',
-    levelLine: (title: string, done: number, total: number): string =>
-      `${title} · ${done}/${total} đơn vị`,
+    levelLine: (level: number, done: number, total: number): string =>
+      `Cấp ${level} · ${done}/${total} đơn vị`,
     unitLine: (index: number, title: string): string => `Đơn vị ${index} · ${title}`,
     next: {
       listen: 'Bước 2 · Nghe phân biệt',

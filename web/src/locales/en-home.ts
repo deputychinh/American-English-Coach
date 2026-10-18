@@ -24,8 +24,8 @@ export const enHome: Pick<Copy, 'today' | 'placement'> = {
     goal: (done: number, goal: number): string => `${done}/${goal} sessions`,
     goalDone: "Today's goal done",
     continueLabel: 'Continue your path',
-    levelLine: (title: string, done: number, total: number): string =>
-      `${title} · ${done}/${total} units`,
+    levelLine: (level: number, done: number, total: number): string =>
+      `Level ${level} · ${done}/${total} units`,
     unitLine: (index: number, title: string): string => `Unit ${index} · ${title}`,
     next: {
       listen: 'Step 2 · Listen and discriminate',

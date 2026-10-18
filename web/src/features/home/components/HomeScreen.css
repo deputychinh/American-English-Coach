@@ -183,6 +183,12 @@
   color: var(--color-on-brand-muted);
 }
 
+.home-screen__continue-level-text {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
 .home-screen__continue-bar {
   display: block;
   overflow: hidden;

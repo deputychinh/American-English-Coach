@@ -160,12 +160,9 @@ export const HomeScreen = (): ReactElement => {
           <span className="home-screen__continue-footer">
             {level ? (
               <span className="home-screen__continue-level">
-                <span>
+                <span className="home-screen__continue-level-text">
                   {copy.today.levelLine(
-                    copy.curriculum.levelTitle(
-                      level.id,
-                      language === Language.En ? level.title_en : level.title_vi,
-                    ),
+                    (curriculum.data?.levels.indexOf(level) ?? 0) + 1,
                     level.done_units,
                     level.units.length,
                   )}

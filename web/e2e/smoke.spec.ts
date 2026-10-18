@@ -21,9 +21,7 @@ test('home stays quiet when the API is ready and shows quick entries', async ({ 
   await page.goto('/');
   await expect(page.getByRole('heading', { name: 'Hôm nay luyện gì' })).toBeVisible();
   await expect(page.locator('.api-status-banner')).toHaveCount(0);
-  await expect(page.locator('.home-screen__continue-level')).toContainText(
-    /Cấp 1 · Nền tảng · \d+\/6 đơn vị/,
-  );
+  await expect(page.locator('.home-screen__continue-level')).toContainText(/Cấp 1 · \d+\/6 đơn vị/);
   await expect(page.getByRole('link', { name: /Luyện ngay/ }).first()).toBeVisible();
   await expect(page.getByRole('heading', { name: 'Hôm nay luyện gì' })).toBeVisible();
   await expect(page.getByRole('progressbar', { name: 'Tiến độ mục tiêu hôm nay' })).toBeVisible();
