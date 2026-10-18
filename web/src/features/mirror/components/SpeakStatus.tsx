@@ -56,7 +56,11 @@ export const SpeakStatus = ({
     return (
       <div className={cx('speak-check__result', `speak-check__result--${outcome.kind}`)}>
         <p className="speak-check__headline">
-          {isMastered ? copy.speak.mastered : copy.speak.headline[outcome.kind]}
+          {isMastered
+            ? copy.speak.mastered
+            : outcome.sound === 'check' && !outcome.isPass
+              ? copy.speak.headlineClose
+              : copy.speak.headline[outcome.kind]}
         </p>
         <p className="speak-check__pills">
           <span className={cx('speak-check__pill', outcome.sound === 'ok' && 'is-ok')}>

@@ -6,6 +6,7 @@ import {
   featureVerdicts,
   matchMouth,
   mouthHitRate,
+  nextStreak,
   speakOutcome,
 } from './mouth-match.util';
 
@@ -87,5 +88,22 @@ describe('speaking check', () => {
       kind: 'both',
       isPass: true,
     });
+  });
+});
+
+describe('nextStreak', () => {
+  const outcome = (sound: 'ok' | 'check' | 'error' | null, mouthRate: number | null) =>
+    speakOutcome({ sound, mouthRate, canJudgeMouth: true });
+
+  it('counts a pass and resets only on a clearly wrong sound', () => {
+    expect(nextStreak(1, outcome('ok', 1))).toBe(2);
+    expect(nextStreak(2, outcome('error', 1))).toBe(0);
+    expect(nextStreak(2, outcome(null, 1))).toBe(0);
+  });
+
+  it('keeps the streak when the scorer is unsure or only the mouth is off', () => {
+    expect(nextStreak(2, outcome('check', 1))).toBe(2);
+    expect(nextStreak(2, outcome('ok', 0))).toBe(2);
+    expect(nextStreak(2, outcome('ok', null))).toBe(2);
   });
 });

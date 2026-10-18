@@ -92,3 +92,13 @@ export const speakOutcome = ({
             : 'neither';
   return { kind, sound, mouthRate, isPass: kind === 'both' };
 };
+
+/**
+ * Mastery streak after one attempt. Only a clearly wrong sound resets it: `check` means the
+ * scorer is unsure (a native voice gets it on ~18 % of words, data/eval/sound_sweep.json), and a
+ * right sound with the mouth off or out of view is progress, so both keep the streak as it was.
+ */
+export const nextStreak = (streak: number, outcome: SpeakOutcome): number => {
+  if (outcome.isPass) return streak + 1;
+  return outcome.sound === 'error' || outcome.sound === null ? 0 : streak;
+};

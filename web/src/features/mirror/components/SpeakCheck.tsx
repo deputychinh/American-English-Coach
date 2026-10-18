@@ -20,7 +20,7 @@ import type { MouthTracker } from '@/interfaces/tracker.interface';
 import type { AutoStopReason } from '@/interfaces/vad.interface';
 import { cx } from '@/utils/cx.util';
 import { targetVerdict } from '@/utils/drill.util';
-import { mouthHitRate, speakOutcome } from '@/utils/mouth-match.util';
+import { mouthHitRate, nextStreak, speakOutcome } from '@/utils/mouth-match.util';
 import { nativeHaptic } from '@/utils/native.util';
 
 import './SpeakCheck.css';
@@ -124,13 +124,13 @@ export const SpeakCheck = ({
         mouthRate: mouthHitRate(frames, targets),
         canJudgeMouth,
       });
-      const nextStreak = next.isPass ? streak + 1 : 0;
+      const streakAfter = nextStreak(streak, next);
       silentRef.current = 0;
       setOutcome(next);
-      setStreak(nextStreak);
+      setStreak(streakAfter);
       setPhase('result');
       void nativeHaptic(next.isPass ? 'success' : 'warning');
-      if (isRepeat && nextStreak < MASTERY_STREAK) scheduleNext();
+      if (isRepeat && streakAfter < MASTERY_STREAK) scheduleNext();
     } catch (cause) {
       setError(cause instanceof Error ? cause.message : String(cause));
       setPhase('result');
