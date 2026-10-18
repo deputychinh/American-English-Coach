@@ -27,17 +27,17 @@ CANDIDATES: dict[str, tuple[list[str], list[tuple[str, str]], list[tuple[str, st
         [("Please keep the green tea.", "statement"), ("Do we need three seats?", "question")],
     ),
     "v02": (
-        ["sit", "ship", "big", "fish", "live", "give", "little", "fill", "hit", "ill"],
+        ["sit", "ship", "big", "fish", "milk", "give", "little", "fill", "hit", "ill"],
         [("sit", "seat"), ("ship", "sheep"), ("fill", "feel"), ("hit", "heat")],
         [("Sit in this big chair.", "statement"), ("Give him a little fish.", "statement")],
     ),
     "v03": (
-        ["bed", "red", "ten", "head", "said", "get", "friend", "pen", "yes", "next"],
+        ["bed", "red", "ten", "head", "said", "egg", "friend", "pen", "yes", "next"],
         [("bed", "bad"), ("pen", "pan"), ("men", "man"), ("said", "sad")],
         [("Ten red pens are on the bed.", "statement"), ("Did my friend say yes?", "question")],
     ),
     "v04": (
-        ["cat", "bad", "hat", "man", "apple", "black", "happy", "hand", "bag", "that"],
+        ["cat", "bad", "hat", "man", "apple", "black", "happy", "hand", "bag", "map"],
         [("cat", "cut"), ("bad", "bed"), ("hat", "hot"), ("man", "men")],
         [
             ("The black cat sat on the bag.", "statement"),
@@ -50,7 +50,7 @@ CANDIDATES: dict[str, tuple[list[str], list[tuple[str, str]], list[tuple[str, st
         [("My father parks the car.", "statement"), ("Is the farm dark at night?", "question")],
     ),
     "v06": (
-        ["hot", "not", "lot", "job", "clock", "shop", "rock", "doctor", "problem", "stop"],
+        ["hot", "not", "box", "father", "clock", "shop", "rock", "calm", "problem", "stop"],
         [("hot", "hut"), ("not", "nut"), ("cot", "cut"), ("shop", "ship")],
         [
             ("I got a lot of hot coffee.", "statement"),
@@ -58,12 +58,12 @@ CANDIDATES: dict[str, tuple[list[str], list[tuple[str, str]], list[tuple[str, st
         ],
     ),
     "v07": (
-        ["law", "saw", "talk", "walk", "all", "call", "door", "more", "four", "draw"],
+        ["thought", "saw", "talk", "ball", "all", "call", "door", "more", "four", "draw"],
         [("law", "low"), ("caught", "coat"), ("ball", "bowl"), ("call", "coal")],
         [("We all walk and talk.", "statement"), ("Can you call me before four?", "question")],
     ),
     "v08": (
-        ["book", "look", "good", "foot", "put", "cook", "would", "should", "full", "push"],
+        ["book", "look", "wood", "foot", "put", "cook", "would", "should", "full", "push"],
         [("pull", "pool"), ("full", "fool"), ("look", "luke"), ("could", "cooed")],
         [("Look at the good book.", "statement"), ("Put your foot here and push.", "statement")],
     ),
@@ -83,7 +83,7 @@ CANDIDATES: dict[str, tuple[list[str], list[tuple[str, str]], list[tuple[str, st
         [("The girl learns at work first.", "statement"), ("Turn to the first word.", "statement")],
     ),
     "v12": (
-        ["about", "banana", "sofa", "today", "again", "seven", "famous", "pencil", "open", "ago"],
+        ["about", "banana", "sofa", "lemon", "again", "seven", "famous", "pencil", "open", "ago"],
         [("about", "a bout"), ("today", "to day")],
         [
             ("Tell me about the banana today.", "statement"),
@@ -116,7 +116,7 @@ CANDIDATES: dict[str, tuple[list[str], list[tuple[str, str]], list[tuple[str, st
         [("Go down to the town now.", "statement"), ("How loud is the brown cow?", "wh_question")],
     ),
     "d06": (
-        ["near", "beard", "ear", "year", "beer", "clear", "dear", "fear", "cheer", "steer"],
+        ["near", "beard", "deer", "year", "beer", "clear", "dear", "fear", "cheer", "steer"],
         [("near", "knee"), ("beard", "he"), ("beer", "bee"), ("fear", "fee")],
         [
             ("Come near the clear water.", "statement"),
@@ -139,7 +139,7 @@ CANDIDATES: dict[str, tuple[list[str], list[tuple[str, str]], list[tuple[str, st
             "sure",
             "cure",
             "europe",
-            "during",
+            "mature",
             "tourist",
             "assure",
             "secure",
@@ -211,7 +211,7 @@ CANDIDATES: dict[str, tuple[list[str], list[tuple[str, str]], list[tuple[str, st
         ],
     ),
     "c10": (
-        ["this", "that", "the", "they", "mother", "father", "brother", "with", "breathe", "smooth"],
+        ["this", "that", "the", "they", "mother", "father", "brother", "them", "breathe", "smooth"],
         [("they", "day"), ("than", "dan"), ("breathe", "breeze"), ("then", "den")],
         [
             ("This is my mother and that is my father.", "statement"),
@@ -343,7 +343,7 @@ CANDIDATES: dict[str, tuple[list[str], list[tuple[str, str]], list[tuple[str, st
         ],
     ),
     "c23": (
-        ["yes", "you", "year", "yellow", "young", "use", "music", "few", "new", "yard"],
+        ["yes", "you", "year", "yellow", "young", "use", "music", "few", "cute", "yard"],
         [("yes", "less"), ("year", "ear"), ("yet", "jet"), ("yam", "jam")],
         [("You use new music every year.", "statement"), ("The young man says yes.", "statement")],
     ),
@@ -408,10 +408,17 @@ def main() -> int:
             entry = dictionary.lookup(word)
             return entry is not None and any(contains(v, pat) for v in entry.variants)
 
+        def always_has(word: str, pat: str = pattern) -> bool:
+            # The scorer picks the variant closest to what it heard; a drill word whose other
+            # variant lacks the target ("ear" IH R / IY R, "law" AO / AA) then has nothing to
+            # score and the mirror said "not heard" to a learner who said it right.
+            entry = dictionary.lookup(word)
+            return entry is not None and all(contains(v, pat) for v in entry.variants)
+
         kept_words = [
             {"word": w, "position": position(dictionary.lookup(w).primary, pattern)}  # type: ignore[union-attr]
             for w in words
-            if has(w)
+            if always_has(w)
         ]
         kept_pairs = [
             [a, b] for a, b in pairs if has(a) and dictionary.lookup(b) is not None and not has(b)
@@ -421,7 +428,7 @@ def main() -> int:
             tokens = dictionary.tokenize(text)
             if all(dictionary.lookup(t) for t in tokens) and any(has(t) for t in tokens):
                 kept_sentences.append({"text": text, "kind": kind})
-        dropped = [w for w in words if not has(w)]
+        dropped = [w for w in words if not always_has(w)]
         if len(kept_words) < MIN_WORDS or len(kept_sentences) < MIN_SENTENCES:
             problems.append(
                 f"{row['id']} {pattern}: words={len(kept_words)} "

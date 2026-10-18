@@ -89,7 +89,7 @@
         "position": "medial"
       },
       {
-        "word": "live",
+        "word": "milk",
         "position": "medial"
       },
       {
@@ -159,8 +159,8 @@
         "position": "medial"
       },
       {
-        "word": "get",
-        "position": "medial"
+        "word": "egg",
+        "position": "initial"
       },
       {
         "word": "friend",
@@ -241,7 +241,7 @@
         "position": "medial"
       },
       {
-        "word": "that",
+        "word": "map",
         "position": "medial"
       }
     ],
@@ -345,11 +345,11 @@
         "position": "medial"
       },
       {
-        "word": "lot",
+        "word": "box",
         "position": "medial"
       },
       {
-        "word": "job",
+        "word": "father",
         "position": "medial"
       },
       {
@@ -365,7 +365,7 @@
         "position": "medial"
       },
       {
-        "word": "doctor",
+        "word": "calm",
         "position": "medial"
       },
       {
@@ -403,8 +403,8 @@
     "group": "vowel",
     "words": [
       {
-        "word": "law",
-        "position": "final"
+        "word": "thought",
+        "position": "medial"
       },
       {
         "word": "saw",
@@ -415,7 +415,7 @@
         "position": "medial"
       },
       {
-        "word": "walk",
+        "word": "ball",
         "position": "medial"
       },
       {
@@ -477,7 +477,7 @@
         "position": "medial"
       },
       {
-        "word": "good",
+        "word": "wood",
         "position": "medial"
       },
       {
@@ -745,7 +745,7 @@
         "position": "final"
       },
       {
-        "word": "today",
+        "word": "lemon",
         "position": "medial"
       },
       {
@@ -1132,8 +1132,8 @@
         "position": "medial"
       },
       {
-        "word": "ear",
-        "position": "medial"
+        "word": "deer",
+        "position": "final"
       },
       {
         "word": "year",
@@ -1280,8 +1280,8 @@
         "position": "medial"
       },
       {
-        "word": "during",
-        "position": "medial"
+        "word": "mature",
+        "position": "final"
       },
       {
         "word": "tourist",
@@ -1945,8 +1945,8 @@
         "position": "medial"
       },
       {
-        "word": "with",
-        "position": "final"
+        "word": "them",
+        "position": "initial"
       },
       {
         "word": "breathe",
@@ -2812,7 +2812,7 @@
         "position": "medial"
       },
       {
-        "word": "new",
+        "word": "cute",
         "position": "medial"
       },
       {
