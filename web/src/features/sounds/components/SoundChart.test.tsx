@@ -48,7 +48,8 @@ describe('SoundChart', () => {
     );
     expect(screen.getByRole('heading', { name: /^Phụ âm/ })).toBeInTheDocument();
     expect(document.querySelectorAll('.confidence-badge')).toHaveLength(3);
-    expect(screen.getByRole('heading', { name: '/θ/' })).toBeInTheDocument();
+    // The detail sheet opens a render after the list (from the id param): wait for it, CI is slower.
+    expect(await screen.findByRole('heading', { name: '/θ/' })).toBeInTheDocument();
     expect(screen.getByText('Lưỡi giữa răng.')).toBeInTheDocument();
     expect(screen.getByRole('link', { name: 'Soi gương âm này' })).toHaveAttribute(
       'href',
