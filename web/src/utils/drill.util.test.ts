@@ -18,6 +18,7 @@ const drill: SoundDrill = {
   group: 'consonant',
   viseme_group: VisemeGroup.V3,
   viseme_confidence: 'medium',
+  scorer_reliability: 'high',
   transition_vi: null,
   words: [
     { word: 'think', position: 'initial' },

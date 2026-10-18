@@ -97,6 +97,8 @@ export const enPractice: Pick<Copy, 'practice' | 'verdict' | 'prosody'> = {
         `${counts.ok} on target · ${counts.check} to listen again · ${counts.error} wrong · ${counts.skipped} skipped`,
       allDone: 'Every recording hit the target sound. Excellent!',
       retryFailed: 'Redo the missed words',
+      scorerUnsure:
+        'The scorer often mixes this sound up with a nearby one, so “listen again” is not always wrong: replay your recording and compare it with the model.',
       mirror: 'Mirror this sound',
       backToSounds: 'Choose another sound',
       restart: 'Start over',

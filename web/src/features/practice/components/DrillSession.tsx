@@ -55,6 +55,9 @@ const DrillSummary = ({
     <section className="drill-session__summary" aria-labelledby="drill-summary-title">
       <h2 id="drill-summary-title">{copy.practice.drill.summaryTitle}</h2>
       <p>{copy.practice.drill.tally(tally)}</p>
+      {drill.scorer_reliability === 'low' && tally.check > 0 ? (
+        <p className="drill-session__note">{copy.practice.drill.scorerUnsure}</p>
+      ) : null}
       {tally.failedIds.length === 0 ? <p>{copy.practice.drill.allDone}</p> : null}
       <div className="drill-session__actions">
         {tally.failedIds.length > 0 ? (

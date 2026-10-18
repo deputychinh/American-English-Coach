@@ -18,6 +18,8 @@ interface SpeakStatusProps {
   hasSpeech: boolean;
   /** Live mouth feedback shown while idle. */
   live: ReactNode;
+  /** The scorer often confuses this sound: an unsure verdict says so and suggests comparing. */
+  isScorerUnsure?: boolean;
 }
 
 /** The deck's single status line: listening, scoring, the combined verdict or the live cue. */
@@ -31,6 +33,7 @@ export const SpeakStatus = ({
   canJudgeMouth,
   hasSpeech,
   live,
+  isScorerUnsure = false,
 }: SpeakStatusProps): ReactElement => {
   const copy = useCopy();
   if (phase === 'listening')
@@ -59,7 +62,9 @@ export const SpeakStatus = ({
           {isMastered
             ? copy.speak.mastered
             : outcome.sound === 'check' && !outcome.isPass
-              ? copy.speak.headlineClose
+              ? isScorerUnsure
+                ? copy.speak.headlineScorerUnsure(ipa)
+                : copy.speak.headlineClose
               : copy.speak.headline[outcome.kind]}
         </p>
         <p className="speak-check__pills">

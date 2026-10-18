@@ -74,8 +74,8 @@ export const MouthMirror = (): ReactElement => {
     [content.data, sound],
   );
   const card = content.data?.phonemes.find((item) => item.arpabet === sound) ?? null;
-  const drillId =
-    content.data?.sounds.find((item) => targetPhoneOf(item.arpabet) === sound)?.id ?? null;
+  const drillRow = content.data?.sounds.find((item) => targetPhoneOf(item.arpabet) === sound);
+  const drillId = drillRow?.id ?? null;
   const loadDrill = useCallback(
     () => (drillId ? getSound(drillId) : Promise.resolve(null)),
     [drillId],
@@ -168,6 +168,7 @@ export const MouthMirror = (): ReactElement => {
                     words={drillWords}
                     symbol={sound}
                     ipa={card?.us ?? drillIpa}
+                    isScorerUnsure={drillRow?.scorer_reliability === 'low'}
                   />
                 )
               : null

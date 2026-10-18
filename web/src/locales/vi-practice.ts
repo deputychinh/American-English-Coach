@@ -91,6 +91,8 @@ export const viPractice = {
         `${counts.ok} lần đạt · ${counts.check} lần cần nghe lại · ${counts.error} lần sai · ${counts.skipped} bỏ qua`,
       allDone: 'Mọi lần thu đều đạt âm đích. Tuyệt!',
       retryFailed: 'Luyện lại các từ chưa đạt',
+      scorerUnsure:
+        'Máy chấm còn hay nhầm âm này với âm gần nó, nên “cần nghe lại” chưa chắc là sai: nghe lại bản ghi để tự so với mẫu.',
       mirror: 'Soi gương âm này',
       backToSounds: 'Chọn âm khác',
       restart: 'Luyện lại từ đầu',

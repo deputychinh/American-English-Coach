@@ -35,6 +35,8 @@ export const enSpeak: Pick<Copy, 'speak'> = {
       mouth: 'The mouth shape is right but the sound is off: play the model and try again.',
       neither: 'Play the model, match the ghost lips, then try again.',
     },
+    headlineScorerUnsure: (ipa: string): string =>
+      `The scorer often mixes up /${ipa}/ with a nearby sound: play “Mine” then “Model” to compare.`,
     headlineClose: 'Almost: say it a little more clearly, your streak is kept.',
     streak: (count: number, total: number): string => `${count}/${total} correct in a row`,
     mastered: 'You have got this sound!',

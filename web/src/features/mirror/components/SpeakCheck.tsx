@@ -36,6 +36,8 @@ interface SpeakCheckProps {
   ipa: string;
   /** Live mouth feedback (cue and match dial) shown while idle. */
   live?: ReactNode;
+  /** The scorer often confuses this sound on native speech (content/scorer_reliability.json). */
+  isScorerUnsure?: boolean;
 }
 
 /**
@@ -51,6 +53,7 @@ export const SpeakCheck = ({
   symbol,
   ipa,
   live = null,
+  isScorerUnsure = false,
 }: SpeakCheckProps): ReactElement => {
   const copy = useCopy();
   const reference = useReferenceAudio();
@@ -245,6 +248,7 @@ export const SpeakCheck = ({
           canJudgeMouth={canJudgeMouth}
           hasSpeech={recorder.hasSpeech}
           live={live}
+          isScorerUnsure={isScorerUnsure}
         />
         {phase === 'result' && isQueued ? (
           <p className="speak-check__next">{copy.speak.nextAttempt}</p>

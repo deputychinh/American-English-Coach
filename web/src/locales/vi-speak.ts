@@ -33,6 +33,8 @@ export const viSpeak = {
       mouth: 'Khẩu hình đúng nhưng âm chưa chuẩn: nghe mẫu rồi nói lại.',
       neither: 'Nghe mẫu, đặt khẩu hình theo bóng mờ rồi nói lại.',
     },
+    headlineScorerUnsure: (ipa: string): string =>
+      `Máy chấm còn hay nhầm âm /${ipa}/ với âm gần nó: bấm “Của bạn” rồi “Mẫu” để tự so.`,
     headlineClose: 'Gần đúng rồi: nói lại rõ hơn một chút, chuỗi đúng vẫn được giữ.',
     streak: (count: number, total: number): string => `${count}/${total} lần đúng liên tiếp`,
     mastered: 'Đã nắm được âm này!',
