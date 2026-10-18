@@ -2,131 +2,186 @@
 
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { type ReactElement, useEffect } from 'react';
+import { type ReactElement, useCallback, useEffect, useMemo } from 'react';
 
-import { Card } from '@/components/Card/Card';
 import { Icon } from '@/components/Icon/Icon';
-import { ListRow } from '@/components/ListRow/ListRow';
-import { SectionHeader } from '@/components/SectionHeader/SectionHeader';
-import { Stat } from '@/components/Stat/Stat';
+import { WeekStrip } from '@/components/WeekStrip/WeekStrip';
+import { DEFAULT_DAILY_GOAL } from '@/constants/plan.constant';
 import { IconName } from '@/enums/icon-name.enum';
+import { Language } from '@/enums/language.enum';
+import { StorageKey } from '@/enums/storage-key.enum';
+import {
+  flattenUnits,
+  getCurriculum,
+  nextStepOf,
+} from '@/features/curriculum/services/curriculum.service';
 import { ApiStatusBanner } from '@/features/health/components/ApiStatusBanner';
+import { listenAccuracy, readListenResults } from '@/features/listen/services/listen.service';
 import { isOnboarded } from '@/features/onboarding/services/onboarding.service';
-import { PlanCard } from '@/features/plan/components/PlanCard';
-import { getProgress } from '@/features/progress/services/progress.service';
+import { getPlan } from '@/features/plan/services/plan.service';
 import { useActiveProfile } from '@/hooks/useActiveProfile';
 import { useAsync } from '@/hooks/useAsync';
-import { useCopy } from '@/hooks/useCopy';
-import { formatDateTime, formatPercent } from '@/utils/format.util';
+import { useCopy, useLanguage } from '@/hooks/useCopy';
+import { useStoredState } from '@/hooks/useStoredState';
 
 import './HomeScreen.css';
 
-const QUICK = [
-  { key: 'course', href: '/course', icon: IconName.Sparkles },
-  { key: 'sounds', href: '/practice', icon: IconName.Practice },
-  { key: 'pairs', href: '/practice', hash: 'items', icon: IconName.Sounds },
-  { key: 'chart', href: '/sounds', icon: IconName.Info },
+const TILES = [
   { key: 'mirror', href: '/mirror', icon: IconName.Mirror },
-  { key: 'progress', href: '/progress', icon: IconName.Progress },
+  { key: 'listen', href: '/listen', icon: IconName.Volume },
+  { key: 'chart', href: '/sounds', icon: IconName.Sounds },
+  { key: 'path', href: '/curriculum', icon: IconName.Sparkles },
 ] as const;
 
+const RING = 2 * Math.PI * 26;
+
+/** "Today": greeting and streak, the daily goal, one big continue card, focus sounds, shortcuts. */
 export const HomeScreen = (): ReactElement => {
   const copy = useCopy();
+  const language = useLanguage();
   const router = useRouter();
   const profile = useActiveProfile();
+  const [goal] = useStoredState<number>(StorageKey.DailyGoal, DEFAULT_DAILY_GOAL);
   useEffect(() => {
     if (!isOnboarded()) router.replace('/welcome');
   }, [router]);
-  const progress = useAsync(getProgress);
-  const phonemes = progress.data?.phonemes ?? [];
-  const totals = phonemes.reduce(
-    (sum, stat) => ({ total: sum.total + stat.total, ok: sum.ok + stat.ok }),
-    { total: 0, ok: 0 },
-  );
-  const last = progress.data?.recent[0] ?? null;
-  const quickCopy: Record<(typeof QUICK)[number]['key'], { title: string; hint: string }> = {
-    course: { title: copy.home.course, hint: copy.home.courseHint },
-    sounds: { title: copy.home.sounds, hint: copy.home.soundsHint },
-    pairs: { title: copy.home.pairs, hint: copy.home.pairsHint },
-    chart: { title: copy.home.chart, hint: copy.home.chartHint },
-    mirror: { title: copy.home.mirror, hint: copy.home.mirrorHint },
-    progress: { title: copy.home.progress, hint: copy.home.progressHint },
-  };
+  const loadPlan = useCallback(() => getPlan(goal), [goal]);
+  const plan = useAsync(loadPlan);
+  const curriculum = useAsync(getCurriculum);
+
+  const current = useMemo(() => {
+    if (!curriculum.data) return null;
+    const units = flattenUnits(curriculum.data);
+    return units.find((unit) => unit.id === curriculum.data?.current_unit) ?? units[0] ?? null;
+  }, [curriculum.data]);
+  const next = current
+    ? nextStepOf(current, listenAccuracy(readListenResults(), current.id))
+    : null;
+  const listenHref = current ? { pathname: '/listen', query: { unit: current.id } } : '/listen';
+
+  const done = plan.data?.runs_today ?? 0;
+  const target = plan.data?.goal_runs ?? goal;
+  const share = target > 0 ? Math.min(1, done / target) : 0;
+  const name = profile.name && profile.name !== 'default' ? profile.name : null;
 
   return (
     <div className="home-screen">
-      <section className="home-screen__hero" aria-labelledby="hero-title">
-        <div className="home-screen__hero-text">
-          <h1 id="hero-title" className="home-screen__title">
-            {copy.appName}
+      <header className="home-screen__top">
+        <div className="home-screen__hello">
+          <h1 className="home-screen__title">
+            {name ? copy.today.greeting(name) : copy.today.greetingNoName}
           </h1>
-          <p className="home-screen__tagline">{copy.tagline}</p>
-          <Link
-            href={{ pathname: '/settings', hash: 'profiles' }}
-            className="badge badge--subtle home-screen__profile"
-            title={copy.home.changeProfile}
-          >
-            {copy.home.profileBadge(profile.name)}
-          </Link>
-          <div className="home-screen__cta">
-            <Link href="/practice" className="button button--primary button--large">
-              <Icon name={IconName.Practice} />
-              {copy.home.heroCta}
-            </Link>
-            <Link href="/mirror" className="button button--ghost button--large">
-              <Icon name={IconName.Mirror} />
-              {copy.home.heroSecondary}
-            </Link>
-          </div>
+          {plan.data && plan.data.streak_days > 0 ? (
+            <span className="home-screen__streak">
+              <Icon name={IconName.Sparkles} />
+              {copy.today.streak(plan.data.streak_days)}
+            </span>
+          ) : null}
         </div>
-        <ApiStatusBanner />
+        <Link href="/settings" className="home-screen__settings" aria-label={copy.today.settings}>
+          <Icon name={IconName.Settings} />
+        </Link>
+      </header>
+
+      <ApiStatusBanner />
+
+      <section className="home-screen__goal" aria-labelledby="today-title">
+        <span className="home-screen__ring-box" aria-hidden="true">
+          <svg className="home-screen__ring" viewBox="0 0 64 64">
+            <circle className="home-screen__ring-track" cx="32" cy="32" r="26" />
+            <circle
+              className="home-screen__ring-value"
+              cx="32"
+              cy="32"
+              r="26"
+              style={{ strokeDasharray: RING, strokeDashoffset: RING * (1 - share) }}
+            />
+          </svg>
+          <span className="home-screen__ring-count">
+            {done}/{target}
+          </span>
+        </span>
+        <div className="home-screen__goal-text">
+          <h2 id="today-title" className="home-screen__goal-title">
+            {copy.plan.title}
+          </h2>
+          <div
+            className="home-screen__goal-value"
+            role="progressbar"
+            aria-label={copy.plan.goalAria}
+            aria-valuemin={0}
+            aria-valuemax={target}
+            aria-valuenow={Math.min(done, target)}
+          >
+            {done >= target && target > 0 ? copy.today.goalDone : copy.today.goal(done, target)}
+          </div>
+          {plan.data ? (
+            <WeekStrip days={plan.data.week} today={plan.data.today} label={copy.plan.weekAria} />
+          ) : null}
+        </div>
       </section>
 
-      <section className="home-screen__stats" aria-label={copy.progress.machine}>
-        <Stat label={copy.home.statRuns} value={String(progress.data?.runs ?? 0)} />
-        <Stat
-          label={copy.home.statOkRate}
-          value={totals.total ? formatPercent(totals.ok, totals.total) : '–'}
-          tone={totals.total && totals.ok / totals.total >= 0.8 ? 'success' : 'neutral'}
-        />
-        <Stat label={copy.home.statSounds} value={String(phonemes.length)} />
-      </section>
+      {current && next ? (
+        <Link href={next.href} className="home-screen__continue">
+          <span className="home-screen__continue-label">{copy.today.continueLabel}</span>
+          <span className="home-screen__continue-title">
+            {copy.today.unitLine(
+              current.index,
+              language === Language.En ? current.title_en : current.title_vi,
+            )}
+          </span>
+          <span className="home-screen__continue-step">{copy.today.next[next.kind]}</span>
+          <span className="home-screen__continue-cta">
+            {copy.home.heroCta}
+            <Icon name={IconName.ArrowRight} />
+          </span>
+        </Link>
+      ) : null}
 
-      <PlanCard headingId="today-title" />
-
-      <section aria-labelledby="quick-title" className="home-screen__quick">
-        <SectionHeader id="quick-title" title={copy.home.quick} />
-        <ul className="home-screen__grid">
-          {QUICK.map((entry) => (
-            <li key={entry.key}>
-              <Link
-                href={'hash' in entry ? { pathname: entry.href, hash: entry.hash } : entry.href}
-                className="home-screen__card"
-              >
-                <span className="home-screen__card-icon" aria-hidden="true">
-                  <Icon name={entry.icon} />
-                </span>
-                <span className="home-screen__card-title">{quickCopy[entry.key].title}</span>
-                <span className="home-screen__muted">{quickCopy[entry.key].hint}</span>
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      <Card as="section" aria-labelledby="last-title">
-        <SectionHeader id="last-title" title={copy.home.lastSession} />
-        {last ? (
-          <ListRow
-            title={last.text}
-            subtitle={`${formatDateTime(last.created_at)} · ${copy.practice.summary(last.ok, last.check, last.error)}`}
-            trailing={copy.progress.view}
-            href={{ pathname: '/practice', query: { run: last.id } }}
-          />
+      <section className="home-screen__focus" aria-labelledby="focus-title">
+        <h2 id="focus-title" className="home-screen__section-title">
+          {copy.today.focusTitle}
+        </h2>
+        {plan.data && plan.data.focus.length > 0 ? (
+          <ul className="home-screen__chips">
+            {plan.data.focus.map((focus) => (
+              <li key={focus.phoneme}>
+                <Link
+                  className={`home-screen__chip home-screen__chip--${focus.reason}`}
+                  href={
+                    focus.sound_id
+                      ? { pathname: '/practice', query: { sound: focus.sound_id } }
+                      : { pathname: '/mirror', query: { sound: focus.phoneme } }
+                  }
+                >
+                  <span className="home-screen__chip-ipa">/{focus.ipa}/</span>
+                  <span className="home-screen__chip-reason">
+                    {copy.plan.reasonLabel[focus.reason]}
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
         ) : (
-          <p className="home-screen__muted">{copy.home.noSession}</p>
+          <p className="home-screen__muted">{copy.today.focusEmpty}</p>
         )}
-      </Card>
+      </section>
+
+      <ul className="home-screen__tiles">
+        {TILES.map((tile) => (
+          <li key={tile.key}>
+            <Link
+              href={tile.key === 'listen' ? listenHref : tile.href}
+              className="home-screen__tile"
+            >
+              <span className="home-screen__tile-icon" aria-hidden="true">
+                <Icon name={tile.icon} />
+              </span>
+              {copy.today.tiles[tile.key]}
+            </Link>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };

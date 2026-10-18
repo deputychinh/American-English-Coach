@@ -87,9 +87,11 @@
     box-shadow var(--duration-fast) var(--ease-standard);
 }
 
-.sound-chart__card:hover {
-  color: var(--color-text);
-  border-color: var(--color-primary);
+@media (hover: hover) {
+  .sound-chart__card:hover {
+    color: var(--color-text);
+    border-color: var(--color-primary);
+  }
 }
 
 .sound-chart__card.is-selected {

@@ -6,7 +6,7 @@ import { type ReactElement, useEffect, useMemo, useState } from 'react';
 
 import { Button } from '@/components/Button/Button';
 import { ErrorState } from '@/components/ErrorState/ErrorState';
-import { PageIntro } from '@/components/PageIntro/PageIntro';
+import { LessonHeader } from '@/components/LessonHeader/LessonHeader';
 import { Skeleton } from '@/components/Skeleton/Skeleton';
 import { Stat } from '@/components/Stat/Stat';
 import { AsyncStatus } from '@/enums/async-status.enum';
@@ -19,6 +19,7 @@ import { buildQuestions, saveListenResult } from '@/features/listen/services/lis
 import { useReferenceAudio } from '@/features/practice/hooks/useReferenceAudio';
 import { useAsync } from '@/hooks/useAsync';
 import { useCopy } from '@/hooks/useCopy';
+import { useFocusMode, useImmersive } from '@/hooks/useImmersive';
 import type { CurriculumUnit, MinimalPair, Sentence } from '@/interfaces/practice.interface';
 
 import './ListenScreen.css';
@@ -43,6 +44,8 @@ export const ListenScreen = (): ReactElement => {
   const unitId = params.get('unit') ?? 'u01';
   const content = useAsync(loadAll);
   const audio = useReferenceAudio();
+  useFocusMode();
+  useImmersive();
   const [index, setIndex] = useState(0);
   const [chosen, setChosen] = useState<number | null>(null);
   const [correct, setCorrect] = useState(0);
@@ -103,58 +106,61 @@ export const ListenScreen = (): ReactElement => {
 
   return (
     <div className="listen-screen">
-      <PageIntro title={copy.listen.title} lead={copy.listen.lead(unit.title_vi)}>
-        <Link href="/curriculum" className="button button--ghost">
-          {copy.listen.backToPath}
-        </Link>
-      </PageIntro>
-      {isFinished ? (
-        <section className="listen-screen__summary" aria-labelledby="listen-summary">
-          <h2 id="listen-summary" className="listen-screen__summary-title">
-            {copy.listen.summaryTitle}
-          </h2>
-          <div className="listen-screen__stats">
-            <Stat
-              label={copy.listen.accuracy}
-              value={`${String(Math.round((correct / questions.length) * 100))}%`}
-              tone={correct / questions.length >= 0.8 ? 'success' : 'warning'}
-            />
-            <Stat
-              label={copy.listen.answered}
-              value={`${String(correct)}/${String(questions.length)}`}
-            />
-          </div>
-          <p className="listen-screen__advice">
-            {correct / questions.length >= 0.8 ? copy.listen.adviceGood : copy.listen.adviceAgain}
-          </p>
-          <div className="listen-screen__actions">
-            {firstItem ? (
-              <Link href={courseItemHref(firstItem)} className="button button--primary">
-                {copy.listen.continuePractice}
-              </Link>
-            ) : null}
-            <Button variant={ButtonVariant.Ghost} onClick={restart}>
-              {copy.listen.again}
-            </Button>
-          </div>
-        </section>
-      ) : question ? (
-        <ListenQuestionCard
-          question={question}
-          index={index}
-          total={questions.length}
-          chosen={chosen}
-          isPlaying={audio.isPlaying}
-          audioError={audio.error}
-          onPlay={() => {
-            setHasInteracted(true);
-            play(question.prompt);
-          }}
-          onChoose={choose}
-          onNext={next}
-          isLast={index + 1 >= questions.length}
-        />
-      ) : null}
+      <LessonHeader
+        closeHref="/curriculum"
+        title={copy.listen.title}
+        subtitle={unit.title_vi}
+        progress={isFinished ? 1 : index / questions.length}
+      />
+      <div className="listen-screen__body">
+        {isFinished ? (
+          <section className="listen-screen__summary" aria-labelledby="listen-summary">
+            <h2 id="listen-summary" className="listen-screen__summary-title">
+              {copy.listen.summaryTitle}
+            </h2>
+            <div className="listen-screen__stats">
+              <Stat
+                label={copy.listen.accuracy}
+                value={`${String(Math.round((correct / questions.length) * 100))}%`}
+                tone={correct / questions.length >= 0.8 ? 'success' : 'warning'}
+              />
+              <Stat
+                label={copy.listen.answered}
+                value={`${String(correct)}/${String(questions.length)}`}
+              />
+            </div>
+            <p className="listen-screen__advice">
+              {correct / questions.length >= 0.8 ? copy.listen.adviceGood : copy.listen.adviceAgain}
+            </p>
+            <div className="listen-screen__actions">
+              {firstItem ? (
+                <Link href={courseItemHref(firstItem)} className="button button--primary">
+                  {copy.listen.continuePractice}
+                </Link>
+              ) : null}
+              <Button variant={ButtonVariant.Ghost} onClick={restart}>
+                {copy.listen.again}
+              </Button>
+            </div>
+          </section>
+        ) : question ? (
+          <ListenQuestionCard
+            question={question}
+            index={index}
+            total={questions.length}
+            chosen={chosen}
+            isPlaying={audio.isPlaying}
+            audioError={audio.error}
+            onPlay={() => {
+              setHasInteracted(true);
+              play(question.prompt);
+            }}
+            onChoose={choose}
+            onNext={next}
+            isLast={index + 1 >= questions.length}
+          />
+        ) : null}
+      </div>
     </div>
   );
 };

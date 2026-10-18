@@ -1,9 +1,13 @@
 .listen-screen {
   display: flex;
   flex-direction: column;
-  gap: var(--gap-stack);
+  gap: var(--space-3);
   max-inline-size: 560px;
   margin-inline: auto;
+}
+
+.listen-screen__body {
+  padding-inline: var(--padding-page-x);
 }
 
 .listen-screen__summary {

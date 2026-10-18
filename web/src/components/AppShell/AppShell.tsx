@@ -18,9 +18,9 @@ import { IconName } from '@/enums/icon-name.enum';
 import { StorageKey } from '@/enums/storage-key.enum';
 import { Theme } from '@/enums/theme.enum';
 import { useCopy } from '@/hooks/useCopy';
-import { useIsImmersive } from '@/hooks/useImmersive';
+import { useIsFocusMode, useIsImmersive } from '@/hooks/useImmersive';
 import { cx } from '@/utils/cx.util';
-import { nativeConfigureChrome } from '@/utils/native.util';
+import { nativeConfigureChrome, nativeHaptic } from '@/utils/native.util';
 import { writeStorage } from '@/utils/storage.util';
 
 import './AppShell.css';
@@ -50,6 +50,18 @@ export const AppShell = ({ children }: AppShellProps): ReactElement => {
   const pathname = usePathname();
   const theme = useSyncExternalStore(subscribeTheme, readTheme, () => Theme.Light);
   const isImmersive = useIsImmersive();
+  const isFocus = useIsFocusMode();
+
+  // A light tap on every control in the iOS app, like native buttons.
+  useEffect(() => {
+    const onTap = (event: MouseEvent): void => {
+      const target = event.target instanceof Element ? event.target : null;
+      if (target?.closest('button:not(:disabled), .button, [role="tab"], summary'))
+        void nativeHaptic('light');
+    };
+    document.addEventListener('click', onTap, true);
+    return () => document.removeEventListener('click', onTap, true);
+  }, []);
 
   useEffect(() => {
     void nativeConfigureChrome(theme === Theme.Dark);
@@ -77,7 +89,13 @@ export const AppShell = ({ children }: AppShellProps): ReactElement => {
   };
 
   return (
-    <div className={cx('app-shell', isImmersive && 'app-shell--immersive')}>
+    <div
+      className={cx(
+        'app-shell',
+        isImmersive && 'app-shell--immersive',
+        isFocus && 'app-shell--focus',
+      )}
+    >
       <a className="skip-link" href="#main">
         {copy.skipToContent}
       </a>

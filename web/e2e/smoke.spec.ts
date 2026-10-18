@@ -21,12 +21,15 @@ test('home shows the API status and quick entries', async ({ page }, info) => {
   await page.goto('/');
   await expect(page.locator('.api-status-banner')).toContainText(/Máy chấm/);
   await expect(page.getByRole('link', { name: /Luyện ngay/ }).first()).toBeVisible();
-  await expect(page.locator('.stat')).toHaveCount(3);
   await expect(page.getByRole('heading', { name: 'Hôm nay luyện gì' })).toBeVisible();
   await expect(page.getByRole('progressbar', { name: 'Tiến độ mục tiêu hôm nay' })).toBeVisible();
   await expect(page.locator('.week-strip__day')).toHaveCount(7);
-  await expect(page.getByRole('link', { name: /Luyện ngay/ }).nth(1)).toBeVisible();
-  await expect(page.getByRole('link', { name: /Luyện cặp âm/ })).toBeVisible();
+  await expect(page.locator('.home-screen__continue')).toHaveAttribute(
+    'href',
+    /listen\/?\?unit=u01/,
+  );
+  await expect(page.locator('.home-screen__tile')).toHaveCount(4);
+  await expect(page.getByRole('link', { name: 'Cài đặt' })).toBeVisible();
   await shot(page, 'home', info.project.name);
 });
 
@@ -201,7 +204,7 @@ test('profiles can be created, switched, renamed and deleted from settings', asy
   const row = card.locator('.profiles-card__row', { hasText: name });
   await expect(row).toHaveAttribute('aria-current', 'true');
   await page.goto('/');
-  await expect(page.getByRole('link', { name: `Hồ sơ: ${name}` })).toBeVisible();
+  await expect(page.getByRole('heading', { name: `Chào ${name}` })).toBeVisible();
   await page.goto('/settings/');
   await card
     .locator('.profiles-card__row', { hasText: 'Người học' })

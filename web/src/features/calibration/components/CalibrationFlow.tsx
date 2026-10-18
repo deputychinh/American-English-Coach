@@ -6,17 +6,19 @@ import { type ReactElement, useEffect, useState } from 'react';
 
 import { Button } from '@/components/Button/Button';
 import { ErrorState } from '@/components/ErrorState/ErrorState';
+import { Icon } from '@/components/Icon/Icon';
 import { PageIntro } from '@/components/PageIntro/PageIntro';
 import { Skeleton } from '@/components/Skeleton/Skeleton';
 import { AsyncStatus } from '@/enums/async-status.enum';
 import { ButtonVariant } from '@/enums/button-variant.enum';
+import { IconName } from '@/enums/icon-name.enum';
 import { getVisemes } from '@/features/content/services/content.service';
 import { CameraStage } from '@/features/mirror/components/CameraStage';
 import { useMouthTracker } from '@/features/mirror/hooks/useMouthTracker';
 import { saveCalibration } from '@/features/mirror/services/calibration.service';
 import { useAsync } from '@/hooks/useAsync';
 import { useCopy } from '@/hooks/useCopy';
-import { useImmersive } from '@/hooks/useImmersive';
+import { useFocusMode, useImmersive } from '@/hooks/useImmersive';
 import { useKeepAwake } from '@/hooks/useKeepAwake';
 import type { MouthFeatures } from '@/interfaces/mouth.interface';
 import { calibrationFromSamples } from '@/utils/calibration.util';
@@ -35,6 +37,7 @@ export const CalibrationFlow = (): ReactElement => {
   const content = useAsync(getVisemes);
   useKeepAwake();
   useImmersive();
+  useFocusMode();
   const tracker = useMouthTracker({ enabled: true, calibration: null });
   const [stepIndex, setStepIndex] = useState(-1);
   const [attempt, setAttempt] = useState(0);
@@ -180,6 +183,15 @@ export const CalibrationFlow = (): ReactElement => {
       <CameraStage
         tracker={tracker}
         topStart={dots}
+        topEnd={
+          <Link
+            href={next ?? '/mirror'}
+            className="calibration-flow__close"
+            aria-label={copy.common.close}
+          >
+            <Icon name={IconName.Close} />
+          </Link>
+        }
         bottom={panel}
         prompt={step ? step.prompt_vi : null}
       />

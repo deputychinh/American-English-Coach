@@ -16,6 +16,7 @@ import {
 } from '@/features/onboarding/services/onboarding.service';
 import { createProfile, setActiveProfile } from '@/features/settings/services/profile.service';
 import { useCopy } from '@/hooks/useCopy';
+import { useFocusMode } from '@/hooks/useImmersive';
 import type { MediaPermissions, PermissionOutcome } from '@/interfaces/onboarding.interface';
 import { cx } from '@/utils/cx.util';
 
@@ -28,6 +29,7 @@ type Step = (typeof STEPS)[number];
 export const WelcomeFlow = (): ReactElement => {
   const copy = useCopy().onboarding;
   const router = useRouter();
+  useFocusMode();
   const [step, setStep] = useState<Step>('intro');
   const [permissions, setPermissions] = useState<MediaPermissions | null>(null);
   const [isAsking, setIsAsking] = useState(false);

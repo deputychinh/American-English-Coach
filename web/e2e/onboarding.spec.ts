@@ -23,7 +23,7 @@ test('a first visit is guided through permissions, profile and calibration', asy
   await expect(page.getByRole('heading', { name: /Hiệu chỉnh khẩu hình/ })).toBeVisible();
   await page.getByRole('button', { name: 'Để sau, vào trang chủ' }).click();
   await expect(page).toHaveURL(/\/$/);
-  await expect(page.getByRole('link', { name: `Hồ sơ: ${name}` })).toBeVisible();
+  await expect(page.getByRole('heading', { name: `Chào ${name}` })).toBeVisible();
   // Clean up the profile created for this run.
   await page.goto('/settings/');
   const row = page.locator('.profiles-card__row', { hasText: name });

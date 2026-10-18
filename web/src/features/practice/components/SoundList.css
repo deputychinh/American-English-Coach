@@ -32,9 +32,11 @@
   transition: border-color var(--duration-fast) var(--ease-standard);
 }
 
-.sound-list__card:hover {
-  color: var(--color-text);
-  border-color: var(--color-primary);
+@media (hover: hover) {
+  .sound-list__card:hover {
+    color: var(--color-text);
+    border-color: var(--color-primary);
+  }
 }
 
 .sound-list__ipa {

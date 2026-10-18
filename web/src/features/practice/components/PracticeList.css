@@ -58,8 +58,10 @@
   color: var(--color-text);
 }
 
-.practice-list__sentence:hover {
-  color: var(--color-primary);
+@media (hover: hover) {
+  .practice-list__sentence:hover {
+    color: var(--color-primary);
+  }
 }
 
 .practice-list__kind {

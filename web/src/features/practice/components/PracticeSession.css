@@ -4,46 +4,6 @@
   block-size: calc(100dvh - var(--tabbar-height) - var(--safe-bottom));
 }
 
-.practice-session__bar {
-  display: flex;
-  gap: var(--space-2);
-  align-items: center;
-  padding: calc(var(--safe-top) + var(--space-2)) var(--padding-page-x) var(--space-2);
-  border-block-end: 1px solid var(--color-border);
-}
-
-.practice-session__back {
-  display: inline-flex;
-  flex: none;
-  align-items: center;
-  justify-content: center;
-  inline-size: var(--size-touch-target);
-  block-size: var(--size-touch-target);
-  font-size: var(--text-xl);
-  color: var(--color-text);
-  border-radius: var(--radius-full);
-}
-
-.practice-session__heading {
-  display: flex;
-  flex: 1 1 auto;
-  flex-direction: column;
-  min-inline-size: 0;
-}
-
-.practice-session__title {
-  overflow: hidden;
-  font-size: var(--text-md);
-  font-weight: var(--weight-semibold);
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-
-.practice-session__kind {
-  font-size: var(--text-xs);
-  color: var(--color-text-muted);
-}
-
 .practice-session__toggle.is-on {
   color: var(--color-on-primary);
   background: var(--color-primary);
@@ -204,10 +164,6 @@
     background: var(--color-surface);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-xl);
-  }
-
-  .practice-session__bar {
-    padding-block-start: var(--space-2);
   }
 
   .practice-session__stage {

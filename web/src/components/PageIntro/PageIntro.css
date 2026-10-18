@@ -26,3 +26,24 @@
   flex-wrap: wrap;
   gap: var(--gap-inline);
 }
+
+/* Phones: iOS large title, a two-line lead and small pill actions; never a full screen of text. */
+@media (--bp-below-md) {
+  .page-intro {
+    gap: var(--space-3);
+  }
+
+  .page-intro__title {
+    font-size: var(--text-3xl);
+    font-weight: var(--weight-bold);
+    letter-spacing: -0.02em;
+  }
+
+  .page-intro__lead {
+    display: -webkit-box;
+    overflow: hidden;
+    font-size: var(--text-sm);
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+}

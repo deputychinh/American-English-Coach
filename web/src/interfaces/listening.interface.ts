@@ -32,3 +32,9 @@ export interface ListenQuestionCardProps {
   onNext: () => void;
   isLast: boolean;
 }
+
+/** Where "continue" sends the learner within a unit. */
+export interface NextStep {
+  kind: 'listen' | 'practice' | 'shadow' | 'done';
+  href: { pathname: string; query: Record<string, string> };
+}

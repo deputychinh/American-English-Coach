@@ -31,9 +31,11 @@
   background: var(--color-primary);
 }
 
-.button--primary:hover:not(:disabled) {
-  color: var(--color-on-primary);
-  background: var(--color-primary-hover);
+@media (hover: hover) {
+  .button--primary:hover:not(:disabled) {
+    color: var(--color-on-primary);
+    background: var(--color-primary-hover);
+  }
 }
 
 /* "Add to cart" beside "Buy now": tinted fill, brand outline. */
@@ -43,9 +45,11 @@
   border-color: var(--color-primary);
 }
 
-.button--secondary:hover:not(:disabled) {
-  color: var(--color-on-primary-subtle);
-  background: var(--color-saffron-100);
+@media (hover: hover) {
+  .button--secondary:hover:not(:disabled) {
+    color: var(--color-on-primary-subtle);
+    background: var(--color-saffron-100);
+  }
 }
 
 .button--ghost {
@@ -54,9 +58,11 @@
   border-color: var(--color-border-control);
 }
 
-.button--ghost:hover:not(:disabled) {
-  color: var(--color-primary);
-  border-color: var(--color-primary);
+@media (hover: hover) {
+  .button--ghost:hover:not(:disabled) {
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+  }
 }
 
 .button--large {

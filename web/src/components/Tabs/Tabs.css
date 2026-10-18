@@ -26,8 +26,10 @@
     color var(--duration-fast) var(--ease-standard);
 }
 
-.tabs__tab:hover {
-  color: var(--color-text);
+@media (hover: hover) {
+  .tabs__tab:hover {
+    color: var(--color-text);
+  }
 }
 
 .tabs__tab.is-active {

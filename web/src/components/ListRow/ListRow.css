@@ -13,8 +13,10 @@
   border-block-end: 0;
 }
 
-.list-row--link:hover {
-  color: var(--color-text);
+@media (hover: hover) {
+  .list-row--link:hover {
+    color: var(--color-text);
+  }
 }
 
 .list-row__leading {
@@ -39,8 +41,10 @@
   font-weight: var(--weight-medium);
 }
 
-.list-row--link:hover .list-row__title {
-  color: var(--color-primary);
+@media (hover: hover) {
+  .list-row--link:hover .list-row__title {
+    color: var(--color-primary);
+  }
 }
 
 .list-row__subtitle {

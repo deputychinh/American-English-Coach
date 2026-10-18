@@ -30,3 +30,32 @@ export const useImmersive = (): void => {
 /** Whether any mounted screen asked for the immersive shell (false during SSR). */
 export const useIsImmersive = (): boolean =>
   useSyncExternalStore(subscribeImmersive, readImmersive, () => false);
+
+// Lesson screens (practice, listening, calibration, first run) also hide the tab bar on phones,
+// like a full-screen lesson player; they bring their own close button.
+let focusCount = 0;
+const focusListeners = new Set<() => void>();
+const notifyFocus = (): void => focusListeners.forEach((listener) => listener());
+
+const subscribeFocus = (listener: () => void): (() => void) => {
+  focusListeners.add(listener);
+  return () => focusListeners.delete(listener);
+};
+
+const readFocus = (): boolean => focusCount > 0;
+
+/** Marks the current screen as a full-screen lesson for as long as it is mounted. */
+export const useFocusMode = (): void => {
+  useEffect(() => {
+    focusCount += 1;
+    notifyFocus();
+    return () => {
+      focusCount -= 1;
+      notifyFocus();
+    };
+  }, []);
+};
+
+/** Whether a mounted screen asked for the lesson player (false during SSR). */
+export const useIsFocusMode = (): boolean =>
+  useSyncExternalStore(subscribeFocus, readFocus, () => false);

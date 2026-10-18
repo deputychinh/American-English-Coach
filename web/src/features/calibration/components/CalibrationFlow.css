@@ -23,6 +23,18 @@
   color: var(--color-on-scrim-muted);
 }
 
+.calibration-flow__close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: var(--size-touch-target);
+  block-size: var(--size-touch-target);
+  font-size: var(--text-xl);
+  color: var(--color-on-scrim);
+  background: var(--color-scrim-strong);
+  border-radius: var(--radius-full);
+}
+
 .calibration-flow__steps {
   display: flex;
   gap: var(--space-2);

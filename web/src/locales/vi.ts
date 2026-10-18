@@ -1,4 +1,5 @@
 import { viCourse } from './vi-course';
+import { viHome } from './vi-home';
 import { viListen } from './vi-listen';
 import { viPractice } from './vi-practice';
 import { viSettings } from './vi-settings';
@@ -101,6 +102,7 @@ export const vi = {
   course: viCourse.course,
   curriculum: viCourse.curriculum,
   listen: viListen.listen,
+  today: viHome.today,
   onboarding: viCourse.onboarding,
   plan: viSettings.plan,
   practice: viPractice.practice,

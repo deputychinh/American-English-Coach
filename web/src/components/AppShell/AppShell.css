@@ -32,8 +32,10 @@
   color: var(--color-on-brand);
 }
 
-.app-shell__brand:hover {
-  color: var(--color-on-brand);
+@media (hover: hover) {
+  .app-shell__brand:hover {
+    color: var(--color-on-brand);
+  }
 }
 
 .app-shell__logo {
@@ -70,9 +72,11 @@
     color var(--duration-fast) var(--ease-standard);
 }
 
-.app-shell__link:hover {
-  color: var(--color-on-brand);
-  background: var(--color-brand-hover);
+@media (hover: hover) {
+  .app-shell__link:hover {
+    color: var(--color-on-brand);
+    background: var(--color-brand-hover);
+  }
 }
 
 .app-shell__link.is-active {
@@ -98,10 +102,12 @@
   border-radius: var(--radius-full);
 }
 
-.app-shell__settings:hover,
-.app-shell__settings.is-active {
-  color: var(--color-on-brand);
-  background: var(--color-brand-hover);
+@media (hover: hover) {
+  .app-shell__settings:hover,
+  .app-shell__settings.is-active {
+    color: var(--color-on-brand);
+    background: var(--color-brand-hover);
+  }
 }
 
 .app-shell__banner {
@@ -173,8 +179,10 @@
   transition: color var(--duration-fast) var(--ease-standard);
 }
 
-.app-shell__tab:hover {
-  color: var(--color-text);
+@media (hover: hover) {
+  .app-shell__tab:hover {
+    color: var(--color-text);
+  }
 }
 
 .app-shell__tab.is-active {
@@ -195,11 +203,17 @@
     display: none;
   }
 
-  .app-shell__main {
-    padding-block-end: calc(var(--space-8) + var(--tabbar-height) + var(--safe-bottom));
+  /* iOS pattern: each screen carries its own title; no brand bar on phones. */
+  .app-shell__header {
+    display: none;
   }
 
-  .app-shell--immersive .app-shell__header {
+  .app-shell__main {
+    padding-block: calc(var(--safe-top) + var(--space-4))
+      calc(var(--space-8) + var(--tabbar-height) + var(--safe-bottom));
+  }
+
+  .app-shell--focus .app-shell__tabbar {
     display: none;
   }
 

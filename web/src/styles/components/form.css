@@ -24,9 +24,11 @@
   padding-inline-end: var(--space-8);
 }
 
-.input:hover,
-.select:hover {
-  border-color: var(--color-text-muted);
+@media (hover: hover) {
+  .input:hover,
+  .select:hover {
+    border-color: var(--color-text-muted);
+  }
 }
 
 .input:focus-visible,

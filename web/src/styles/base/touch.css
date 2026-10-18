@@ -1,0 +1,71 @@
+/*
+ * Touch-first behaviour (Apple HIG): no grey tap flash, no 300 ms double-tap delay, a visible
+ * pressed state on every control, no text selection or callout on controls, and targets of at
+ * least 44 px on touch screens. Hover styles live under `(hover: hover)` in each component.
+ */
+html {
+  -webkit-tap-highlight-color: transparent;
+  text-size-adjust: 100%;
+}
+
+a,
+button,
+summary,
+label,
+input,
+select,
+textarea,
+[role='button'],
+[role='tab'] {
+  touch-action: manipulation;
+}
+
+button,
+summary,
+[role='button'],
+[role='tab'],
+.button {
+  -webkit-touch-callout: none;
+  user-select: none;
+}
+
+button:not(:disabled),
+summary,
+.button {
+  transition:
+    transform var(--duration-fast) var(--ease-standard),
+    opacity var(--duration-fast) var(--ease-standard),
+    background-color var(--duration-fast) var(--ease-standard);
+}
+
+button:active:not(:disabled),
+summary:active,
+.button:active {
+  opacity: 0.85;
+  transform: scale(0.97);
+}
+
+/* Lesson screens hide the tab bar; layouts that subtract its height must see 0. */
+.app-shell--focus {
+  --tabbar-height: 0px;
+}
+
+@media (pointer: coarse) {
+  .button--small {
+    min-block-size: var(--size-touch-target);
+  }
+
+  input,
+  select,
+  textarea {
+    font-size: max(16px, 1em);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  button:active:not(:disabled),
+  summary:active,
+  .button:active {
+    transform: none;
+  }
+}

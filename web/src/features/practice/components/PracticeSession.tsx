@@ -1,12 +1,12 @@
 'use client';
 
-import Link from 'next/link';
 import { type ReactElement, type ReactNode, useCallback, useState } from 'react';
 
 import { ConfidenceBadge } from '@/components/ConfidenceBadge/ConfidenceBadge';
 import { ErrorState } from '@/components/ErrorState/ErrorState';
 import { Icon } from '@/components/Icon/Icon';
 import { IconButton } from '@/components/IconButton/IconButton';
+import { LessonHeader } from '@/components/LessonHeader/LessonHeader';
 import { Sheet } from '@/components/Sheet/Sheet';
 import { Skeleton } from '@/components/Skeleton/Skeleton';
 import { IconName } from '@/enums/icon-name.enum';
@@ -22,7 +22,7 @@ import { useReferenceAudio } from '@/features/practice/hooks/useReferenceAudio';
 import { assess } from '@/features/practice/services/assessment.service';
 import { MouthTutorButton } from '@/features/tutor/components/MouthTutorButton';
 import { useCopy } from '@/hooks/useCopy';
-import { useImmersive } from '@/hooks/useImmersive';
+import { useFocusMode, useImmersive } from '@/hooks/useImmersive';
 import { useKeepAwake } from '@/hooks/useKeepAwake';
 import { useStoredState } from '@/hooks/useStoredState';
 import type { Point2 } from '@/interfaces/mouth.interface';
@@ -48,6 +48,8 @@ interface PracticeSessionProps {
   extraActions?: ReactNode;
   /** Drill progress line shown under the top bar, inside the one-screen layout. */
   banner?: ReactNode;
+  /** 0..1 position in a drill, drawn as the lesson progress bar. */
+  progress?: number;
 }
 
 /**
@@ -62,6 +64,7 @@ export const PracticeSession = ({
   onResult,
   extraActions,
   banner,
+  progress,
 }: PracticeSessionProps): ReactElement => {
   const copy = useCopy();
   const [status, setStatus] = useState(PracticeStatus.Idle);
@@ -73,6 +76,7 @@ export const PracticeSession = ({
   const recorder = useRecorder();
   useKeepAwake();
   useImmersive();
+  useFocusMode();
   const reference = useReferenceAudio();
   const calibration = useCalibration();
   const tracker = useMouthTracker({ enabled: cameraOn, calibration: calibration.value });
@@ -131,25 +135,21 @@ export const PracticeSession = ({
 
   return (
     <div className={cx('practice-session', cameraOn && 'practice-session--camera')}>
-      <header className="practice-session__bar">
-        <Link href="/practice" className="practice-session__back" aria-label={copy.practice.back}>
-          <Icon name={IconName.ChevronLeft} />
-        </Link>
-        <div className="practice-session__heading">
-          <h1 className="practice-session__title">{item.title}</h1>
-          <p className="practice-session__kind">
-            {kindLabel}
-            {targetIpa ? ` · ${copy.practice.targetLabel} /${targetIpa}/` : ''}
-          </p>
-        </div>
-        <IconButton
-          icon={IconName.Camera}
-          label={cameraOn ? copy.practice.cameraOff : copy.practice.cameraOn}
-          aria-pressed={cameraOn}
-          className={cx('practice-session__toggle', cameraOn && 'is-on')}
-          onClick={() => setCameraOn(!cameraOn)}
-        />
-      </header>
+      <LessonHeader
+        closeHref="/practice"
+        title={item.title}
+        subtitle={`${kindLabel}${targetIpa ? ` · ${copy.practice.targetLabel} /${targetIpa}/` : ''}`}
+        progress={progress}
+        trailing={
+          <IconButton
+            icon={IconName.Camera}
+            label={cameraOn ? copy.practice.cameraOff : copy.practice.cameraOn}
+            aria-pressed={cameraOn}
+            className={cx('practice-session__toggle', cameraOn && 'is-on')}
+            onClick={() => setCameraOn(!cameraOn)}
+          />
+        }
+      />
       {banner}
 
       <section className="practice-session__stage" aria-label={copy.practice.promptAria}>

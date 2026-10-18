@@ -45,10 +45,12 @@
   border-radius: var(--radius-full);
 }
 
-.mouth-mirror__control:hover,
-.mouth-mirror__icon-link:hover {
-  color: var(--color-on-scrim);
-  background: var(--color-scrim-strong);
+@media (hover: hover) {
+  .mouth-mirror__control:hover,
+  .mouth-mirror__icon-link:hover {
+    color: var(--color-on-scrim);
+    background: var(--color-scrim-strong);
+  }
 }
 
 .mouth-mirror__gate {
