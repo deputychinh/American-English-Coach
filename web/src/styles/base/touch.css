@@ -51,8 +51,15 @@ summary:active,
 }
 
 @media (pointer: coarse) {
-  .button--small {
+  .button--small,
+  .tabs__tab,
+  .ipa-pill:any-link {
     min-block-size: var(--size-touch-target);
+  }
+
+  .ipa-pill:any-link {
+    display: inline-flex;
+    align-items: center;
   }
 
   input,

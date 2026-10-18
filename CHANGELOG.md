@@ -6,6 +6,9 @@ Theo [Keep a Changelog](https://keepachangelog.com/vi/1.1.0/); phiên bản theo
 
 ### Thêm
 
+- Trải nghiệm di động làm lại (`docs/design/mobile-ux-overhaul.md`): chạm kiểu app (trạng thái nhấn, không trễ, vùng chạm 44 px, rung nhẹ trong app iOS); bỏ thanh thương hiệu trên điện thoại; trình phát bài học toàn màn có nút đóng cho Luyện tập, Nghe, Hiệu chỉnh, màn bắt đầu; trang chủ "Hôm nay" vừa một màn; danh sách dày với sheet cho 44 âm, lộ trình, khóa 14 ngày, cài đặt và tiến độ.
+- Gương có "Nói thử": chấm âm đích và khẩu hình cùng lúc, 3 lần đúng liên tiếp mới tính là nắm được âm.
+
 - Màn Gương làm lại cho điện thoại theo mẫu ứng dụng camera (`docs/design/mobile-mirror.md`): camera cạnh-sát-cạnh, "bóng mờ" mẫu môi căn theo miệng thật, vòng điểm khớp 0–100 % ba màu, một gợi ý chỉnh duy nhất bằng câu tự nhiên, chip trạng thái từng đặc trưng, chi tiết thu gọn, sheet chọn âm 44 âm có tìm kiếm; rung và âm báo khi giữ đúng. Hiệu chỉnh dùng cùng sân khấu camera. Trên điện thoại, màn camera ẩn header/footer; các màn khác bỏ footer (link chính sách nằm trong Cài đặt).
 - Lộ trình phát âm chuẩn (`content/curriculum.json`, `GET /curriculum`, trang `/curriculum/`): cấp 1 với 6 đơn vị, mỗi đơn vị 5 bước (xem khẩu hình, nghe phân biệt, luyện có chấm, shadowing, hội thoại); tiến độ theo hồ sơ; nội dung được kiểm tra chéo với âm, cặp và câu khi khởi động.
 - Bài nghe phân biệt (`/listen/?unit=…`, chạy offline): nghe chọn từ trong cặp tối thiểu, chọn âm tiết mạnh, chọn từ trọng tâm; phản hồi tức thì, tổng kết độ chính xác lưu trên máy và hiện ở bước 2 của đơn vị.

@@ -31,3 +31,21 @@ Ngày 2026-10-18. Phản hồi của chủ dự án sau khi dùng trên iPhone: 
 4. **Gương có ghi âm**: nút mic trên camera, chấm âm đích + khẩu hình trong lúc nói, kết luận gộp, đếm 3 lần đạt liên tiếp.
 5. **Danh sách gọn**: lưới 44 âm dày với sheet chi tiết; lộ trình dạng hàng đơn vị + sheet 5 bước; tiến độ và cài đặt dạng nhóm hàng kiểu iOS.
 6. **Kiểm chứng**: đo lại bảng trên (mục tiêu: trang không phải danh sách ≤ 1,2 màn; 0 nút < 44 px), e2e, axe, ảnh chụp trước/sau, cài lên iPhone.
+
+## Kết quả (2026-10-18)
+
+| Trang                              | Trước (màn) | Sau (màn) | Cách làm                                                        |
+| ---------------------------------- | ----------- | --------- | --------------------------------------------------------------- |
+| Trang chủ                          | 3,1         | 1,0       | "Hôm nay": vòng mục tiêu, thẻ Tiếp tục, âm cần luyện, 4 lối tắt |
+| Luyện tập (danh sách)              | 4,6         | 1,0       | Lưới ô dày, phân đoạn Nguyên âm / Phụ âm                        |
+| Bảng 44 âm                         | 4,6         | 1,6       | Lưới 5 cột, chi tiết âm mở trong sheet                          |
+| Chi tiết âm                        | 5,3         | 1,6       | Sheet thay vì kéo dài trang                                     |
+| Tiến độ                            | 2,4         | 1,6       | Phân đoạn "Theo từng âm" / "Lần thu gần đây"                    |
+| Cài đặt                            | 3,9         | 1,2       | Hàng nhóm kiểu iOS, mỗi mục mở sheet                            |
+| Lộ trình                           | 2,3         | 1,2       | Hàng đơn vị, 5 bước mở trong sheet                              |
+| Khóa 14 ngày                       | 2,6         | 1,9       | Hàng ngày, mục luyện mở trong sheet                             |
+| Gương, Hiệu chỉnh, Luyện tập, Nghe | 1,0         | 1,0       | Trình phát bài học toàn màn, không thanh tab                    |
+
+Gương có ghi âm: một lần chỉ đạt khi âm đích đúng **và** (với âm camera thấy được) khẩu hình được nhìn thấy và nằm trong vùng mục tiêu ≥ 30 % thời gian nói; 3 lần đạt liên tiếp là "đã nắm được âm". Kiểm chứng: `make ci` (backend 113 test, web 118 test), e2e 60/60 gồm axe.
+
+Còn lại cần kiểm tra trên iPhone thật: cảm giác rung khi chạm, độ trùng của bóng mờ, ngưỡng 30 % khẩu hình.
