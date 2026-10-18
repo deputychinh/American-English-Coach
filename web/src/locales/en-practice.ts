@@ -71,6 +71,7 @@ export const enPractice: Pick<Copy, 'practice' | 'verdict' | 'prosody'> = {
     serverError: (status: number): string => `The scoring server answered ${status}`,
     referenceFailedOffline: 'Could not play the model voice (is the scoring server running?)',
     referenceFailed: 'Could not play the model voice',
+    referenceUnpaired: 'Could not play the model voice: pair this phone in Settings.',
     sentenceTitle: (label: string, index: number): string => `${label} · sentence ${index}`,
     errorTitle: 'Could not score',
     loadingRun: 'Loading the saved result…',

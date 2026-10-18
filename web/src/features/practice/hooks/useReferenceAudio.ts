@@ -2,13 +2,31 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 
-import { referenceAudioUrl } from '@/features/practice/services/assessment.service';
+import { REFERENCE_CACHE_LIMIT, SILENT_WAV_DATA_URI } from '@/constants/recorder.constant';
+import { fetchReferenceAudio } from '@/features/practice/services/assessment.service';
 import type { ReferenceAudio } from '@/interfaces/hooks.interface';
 import { getCopy } from '@/locales';
 
-/** Plays the cached reference WAV for a prompt; one element lives as long as the component. */
+/** Object URLs of clips already downloaded this session, oldest first. */
+const clipUrls = new Map<string, string>();
+
+const clipUrl = async (text: string): Promise<string> => {
+  const cached = clipUrls.get(text);
+  if (cached) return cached;
+  const url = URL.createObjectURL(await fetchReferenceAudio(text));
+  clipUrls.set(text, url);
+  const oldest = clipUrls.keys().next().value;
+  if (clipUrls.size > REFERENCE_CACHE_LIMIT && oldest !== undefined) {
+    URL.revokeObjectURL(clipUrls.get(oldest) ?? '');
+    clipUrls.delete(oldest);
+  }
+  return url;
+};
+
+/** Plays the reference pronunciation of a prompt; one element lives as long as the component. */
 export const useReferenceAudio = (): ReferenceAudio => {
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const requestRef = useRef(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -16,6 +34,7 @@ export const useReferenceAudio = (): ReferenceAudio => {
     const audio = new Audio();
     audioRef.current = audio;
     return () => {
+      requestRef.current += 1;
       audio.pause();
       audioRef.current = null;
     };
@@ -24,18 +43,31 @@ export const useReferenceAudio = (): ReferenceAudio => {
   const play = useCallback((text: string) => {
     const audio = audioRef.current;
     if (!audio) return;
-    audio.src = referenceAudioUrl(text);
-    audio.onended = () => setIsPlaying(false);
-    audio.onerror = () => {
-      setIsPlaying(false);
-      setError(getCopy().practice.referenceFailedOffline);
-    };
+    requestRef.current += 1;
+    const request = requestRef.current;
     setError(null);
     setIsPlaying(true);
-    audio.play().catch(() => {
+    // Safari only lets an element play from a tap: start it silently now, swap the clip in later.
+    if (!clipUrls.has(text)) {
+      audio.src = SILENT_WAV_DATA_URI;
+      audio.play().catch(() => undefined);
+    }
+    const fail = (message: string): void => {
+      if (request !== requestRef.current) return;
       setIsPlaying(false);
-      setError(getCopy().practice.referenceFailed);
-    });
+      setError(message);
+    };
+    clipUrl(text)
+      .then((url) => {
+        if (request !== requestRef.current) return undefined;
+        audio.src = url;
+        audio.onended = () => setIsPlaying(false);
+        audio.onerror = () => fail(getCopy().practice.referenceFailed);
+        return audio.play();
+      })
+      .catch((cause: unknown) =>
+        fail(cause instanceof Error ? cause.message : getCopy().practice.referenceFailed),
+      );
   }, []);
 
   return { play, isPlaying, error };

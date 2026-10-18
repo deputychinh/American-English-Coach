@@ -36,3 +36,22 @@ export const assess = async ({
 /** URL of the cached reference pronunciation (macOS voice on the API host). */
 export const referenceAudioUrl = (text: string): string =>
   `${resolveApiBaseUrl(env.apiBaseUrl)}/api/v1/audio?text=${encodeURIComponent(text)}`;
+
+/**
+ * Downloads the reference pronunciation. It goes through `fetch` and not `<audio src>` because a
+ * media element cannot send the pairing token: on a paired phone every clip came back 401.
+ * Errors carry the learner-facing message.
+ */
+export const fetchReferenceAudio = async (text: string): Promise<Blob> => {
+  const copy = getCopy().practice;
+  const response = await fetch(referenceAudioUrl(text), {
+    headers: deviceHeaders(),
+    signal: AbortSignal.timeout(20_000),
+  }).catch(() => {
+    throw new Error(copy.referenceFailedOffline);
+  });
+  noteUnauthorized(response);
+  if (response.status === 401) throw new Error(copy.referenceUnpaired);
+  if (!response.ok) throw new Error(copy.referenceFailed);
+  return response.blob();
+};

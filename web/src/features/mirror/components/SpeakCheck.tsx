@@ -308,7 +308,9 @@ export const SpeakCheck = ({
       >
         {isRepeat ? copy.speak.repeatOn : copy.speak.repeatOff}
       </button>
-      {recorder.error ? <p className="speak-check__line">{recorder.error}</p> : null}
+      {recorder.error || reference.error ? (
+        <p className="speak-check__line">{recorder.error ?? reference.error}</p>
+      ) : null}
     </section>
   );
 };

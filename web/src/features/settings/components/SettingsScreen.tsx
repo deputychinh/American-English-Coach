@@ -63,7 +63,8 @@ export const SettingsScreen = (): ReactElement => {
   const [chosenRow, setChosenRow] = useState<string | null | undefined>(undefined);
   const openRow = chosenRow === undefined ? hashRow : chosenRow;
   // Read again whenever a sheet closes, so the row shows the state the pairing sheet left.
-  const paired = openRow === null ? pairedDevice() : null;
+  // Read on every render (a cheap storage read) so the row is right while any sheet is open.
+  const paired = pairedDevice();
   const [server, setServer] = useStoredState<string>(StorageKey.ApiBaseUrl, '');
   const [draft, setDraft] = useState<string | null>(null);
   const [serverStatus, setServerStatus] = useState<string | null>(null);

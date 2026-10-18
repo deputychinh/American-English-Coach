@@ -22,3 +22,10 @@ export const SILENCE_MS_WORD = 450;
 
 /** Sentences keep the longer default so a pause between thought groups does not end the take. */
 export const SILENCE_MS_SENTENCE = VAD_DEFAULTS.silenceMs;
+
+/** Reference clips kept as object URLs per session (a unit uses a few dozen words). */
+export const REFERENCE_CACHE_LIMIT = 48;
+
+/** A 1 ms silent WAV that unlocks an audio element inside the tap, before the clip arrives. */
+export const SILENT_WAV_DATA_URI =
+  'data:audio/wav;base64,UklGRjQAAABXQVZFZm10IBAAAAABAAEAQB8AAIA+AAACABAAZGF0YRAAAAAAAAAAAAAAAAAAAAAAAAAA';

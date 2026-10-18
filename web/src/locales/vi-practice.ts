@@ -66,6 +66,7 @@ export const viPractice = {
     serverError: (status: number): string => `Máy chấm trả lỗi ${status}`,
     referenceFailedOffline: 'Không phát được giọng mẫu (máy chấm chưa chạy?)',
     referenceFailed: 'Không phát được giọng mẫu',
+    referenceUnpaired: 'Chưa phát được giọng mẫu: ghép nối điện thoại trong Cài đặt.',
     sentenceTitle: (label: string, index: number): string => `${label} · câu ${index}`,
     errorTitle: 'Chưa chấm được',
     loadingRun: 'Đang tải kết quả đã lưu…',
