@@ -31,3 +31,5 @@ export interface SpeakOutcome {
   mouthRate: number | null;
   isPass: boolean;
 }
+
+export type SpeakPhase = 'idle' | 'listening' | 'scoring' | 'result' | 'silent';

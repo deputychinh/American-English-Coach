@@ -8,6 +8,7 @@ import { ErrorState } from '@/components/ErrorState/ErrorState';
 import { Icon } from '@/components/Icon/Icon';
 import { IconButton } from '@/components/IconButton/IconButton';
 import { PageIntro } from '@/components/PageIntro/PageIntro';
+import { Sheet } from '@/components/Sheet/Sheet';
 import { Skeleton } from '@/components/Skeleton/Skeleton';
 import { AsyncStatus } from '@/enums/async-status.enum';
 import { IconName } from '@/enums/icon-name.enum';
@@ -59,6 +60,7 @@ export const MouthMirror = (): ReactElement => {
   const [muted, setMuted] = useStoredState<boolean>(StorageKey.Muted, false);
   const [isPaused, setIsPaused] = useState(false);
   const [isPickerOpen, setIsPickerOpen] = useState(false);
+  const [isOptionsOpen, setIsOptionsOpen] = useState(false);
   const [picked, setPicked] = useState<string | null>(null);
   const sound = picked ?? params.get('sound') ?? 'UW';
   const needsCalibration = calibration.isLoaded && calibration.value === null;
@@ -80,6 +82,8 @@ export const MouthMirror = (): ReactElement => {
   );
   const drill = useAsync(loadDrill);
   const targets = useMemo(() => (target ? targetsFromApi(target.targets) : {}), [target]);
+  const drillWords = drill.data?.words.map((entry) => entry.word) ?? [];
+  const drillIpa = drill.data?.us ?? '';
 
   if (content.status === AsyncStatus.Error) {
     return <ErrorState message={content.error ?? ''} onRetry={content.reload} />;
@@ -116,32 +120,14 @@ export const MouthMirror = (): ReactElement => {
     </>
   );
   const topEnd = (
-    <>
-      <IconButton
-        icon={isPaused ? IconName.Camera : IconName.Pause}
-        label={isPaused ? copy.mirror.resume : copy.mirror.pause}
-        isOnBrand
-        className="mouth-mirror__control"
-        aria-pressed={isPaused}
-        onClick={() => setIsPaused(!isPaused)}
-      />
-      <IconButton
-        icon={muted ? IconName.VolumeOff : IconName.Volume}
-        label={muted ? copy.mirror.unmute : copy.mirror.mute}
-        isOnBrand
-        className="mouth-mirror__control"
-        aria-pressed={muted}
-        onClick={() => setMuted(!muted)}
-      />
-      <Link
-        href={{ pathname: '/calibration', query: { sound } }}
-        className="mouth-mirror__icon-link"
-        aria-label={copy.mirror.recalibrate}
-        title={copy.mirror.recalibrate}
-      >
-        <Icon name={IconName.Refresh} />
-      </Link>
-    </>
+    <IconButton
+      icon={IconName.More}
+      label={copy.speak.options}
+      isOnBrand
+      className="mouth-mirror__control"
+      aria-haspopup="dialog"
+      onClick={() => setIsOptionsOpen(true)}
+    />
   );
 
   return (
@@ -171,17 +157,20 @@ export const MouthMirror = (): ReactElement => {
           topStart={topStart}
           topEnd={topEnd}
           speak={
-            !isPaused && drill.data && drillId ? (
-              <SpeakCheck
-                key={drillId}
-                tracker={tracker}
-                targets={targets}
-                drillId={drillId}
-                words={drill.data.words.map((entry) => entry.word)}
-                symbol={sound}
-                ipa={card?.us ?? drill.data.us}
-              />
-            ) : null
+            !isPaused && drill.data && drillId
+              ? (live) => (
+                  <SpeakCheck
+                    live={live}
+                    key={drillId}
+                    tracker={tracker}
+                    targets={targets}
+                    drillId={drillId}
+                    words={drillWords}
+                    symbol={sound}
+                    ipa={card?.us ?? drillIpa}
+                  />
+                )
+              : null
           }
           tutor={
             !isPaused && target ? (
@@ -194,6 +183,46 @@ export const MouthMirror = (): ReactElement => {
           }
         />
       )}
+      <Sheet
+        isOpen={isOptionsOpen}
+        title={copy.speak.options}
+        onClose={() => setIsOptionsOpen(false)}
+        isHalf
+      >
+        <ul className="mouth-mirror__options">
+          <li>
+            <button
+              type="button"
+              className="mouth-mirror__option"
+              aria-pressed={isPaused}
+              onClick={() => setIsPaused(!isPaused)}
+            >
+              <Icon name={isPaused ? IconName.Camera : IconName.Pause} />
+              {isPaused ? copy.mirror.resume : copy.mirror.pause}
+            </button>
+          </li>
+          <li>
+            <button
+              type="button"
+              className="mouth-mirror__option"
+              aria-pressed={muted}
+              onClick={() => setMuted(!muted)}
+            >
+              <Icon name={muted ? IconName.VolumeOff : IconName.Volume} />
+              {muted ? copy.mirror.unmute : copy.mirror.mute}
+            </button>
+          </li>
+          <li>
+            <Link
+              href={{ pathname: '/calibration', query: { sound } }}
+              className="mouth-mirror__option"
+            >
+              <Icon name={IconName.Refresh} />
+              {copy.mirror.recalibrate}
+            </Link>
+          </li>
+        </ul>
+      </Sheet>
       <SoundPickerSheet
         isOpen={isPickerOpen}
         onClose={() => setIsPickerOpen(false)}

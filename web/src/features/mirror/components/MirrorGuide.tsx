@@ -38,8 +38,8 @@ interface MirrorGuideProps {
   /** Controls floating over the camera: sound chip, pause, mute, recalibrate. */
   topStart?: ReactNode;
   topEnd?: ReactNode;
-  /** "Say it" control: sound and mouth scored together. */
-  speak?: ReactNode;
+  /** "Say it" deck: sound and mouth scored together; receives the live mouth feedback. */
+  speak?: ((live: ReactNode) => ReactNode) | null;
 }
 
 /**
@@ -103,32 +103,51 @@ export const MirrorGuide = ({
           </>
         }
         bottom={
-          <>
-            {target ? (
-              <>
-                {cue && match.worst ? (
-                  <CueChip text={cue} direction={match.worst.direction} />
-                ) : null}
-                <MatchRing
-                  isCompact={speak !== null}
-                  score={match.score}
-                  state={match.state}
-                  isHeld={hold.isHeld}
-                  holdProgress={hold.holdProgress}
-                />
-                <FeatureChips
-                  names={names}
-                  verdicts={match.verdicts}
-                  labels={copy.mirror.features}
-                  isIdle={!usable}
-                  isOnScrim
-                />
-              </>
-            ) : (
-              <p className="mirror-guide__audio-only">{copy.mirror.audioOnly}</p>
-            )}
-            {speak}
-          </>
+          speak ? (
+            speak(
+              target ? (
+                <div className="mirror-guide__live">
+                  <MatchRing
+                    isCompact
+                    score={match.score}
+                    state={match.state}
+                    isHeld={hold.isHeld}
+                    holdProgress={hold.holdProgress}
+                  />
+                  {cue && match.worst ? (
+                    <CueChip text={cue} direction={match.worst.direction} />
+                  ) : null}
+                </div>
+              ) : (
+                <p className="mirror-guide__audio-only">{copy.mirror.audioOnly}</p>
+              ),
+            )
+          ) : (
+            <>
+              {target ? (
+                <>
+                  {cue && match.worst ? (
+                    <CueChip text={cue} direction={match.worst.direction} />
+                  ) : null}
+                  <MatchRing
+                    score={match.score}
+                    state={match.state}
+                    isHeld={hold.isHeld}
+                    holdProgress={hold.holdProgress}
+                  />
+                  <FeatureChips
+                    names={names}
+                    verdicts={match.verdicts}
+                    labels={copy.mirror.features}
+                    isIdle={!usable}
+                    isOnScrim
+                  />
+                </>
+              ) : (
+                <p className="mirror-guide__audio-only">{copy.mirror.audioOnly}</p>
+              )}
+            </>
+          )
         }
       />
       <p className="visually-hidden" role="status" aria-live="polite">
@@ -162,6 +181,14 @@ export const MirrorGuide = ({
               )}
             </div>
           </div>
+          {speak && names.length > 0 ? (
+            <FeatureChips
+              names={names}
+              verdicts={match.verdicts}
+              labels={copy.mirror.features}
+              isIdle={!usable}
+            />
+          ) : null}
           {names.length > 0 ? (
             <div className="mirror-guide__bars">
               {names.map((name) => (

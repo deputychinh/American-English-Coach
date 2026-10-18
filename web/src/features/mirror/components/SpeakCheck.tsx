@@ -1,20 +1,21 @@
 'use client';
 
-import Link from 'next/link';
-import { type ReactElement, useCallback, useState } from 'react';
+import { type ReactElement, type ReactNode, useCallback, useEffect, useRef, useState } from 'react';
 
 import { Icon } from '@/components/Icon/Icon';
 import { IconButton } from '@/components/IconButton/IconButton';
-import { MASTERY_STREAK } from '@/constants/mirror.constant';
+import { MASTERY_STREAK, MAX_SILENT_ATTEMPTS, REPEAT_DELAY_MS } from '@/constants/mirror.constant';
 import { IconName } from '@/enums/icon-name.enum';
 import { RecorderStatus } from '@/enums/recorder-status.enum';
+import { SpeakStatus } from '@/features/mirror/components/SpeakStatus';
 import { useRecorder } from '@/features/practice/hooks/useRecorder';
 import { useReferenceAudio } from '@/features/practice/hooks/useReferenceAudio';
 import { assess } from '@/features/practice/services/assessment.service';
 import { useCopy } from '@/hooks/useCopy';
-import type { SpeakOutcome } from '@/interfaces/mouth-match.interface';
+import type { SpeakOutcome, SpeakPhase } from '@/interfaces/mouth-match.interface';
 import type { TargetMap } from '@/interfaces/mouth.interface';
 import type { MouthTracker } from '@/interfaces/tracker.interface';
+import type { AutoStopReason } from '@/interfaces/vad.interface';
 import { cx } from '@/utils/cx.util';
 import { targetVerdict } from '@/utils/drill.util';
 import { mouthHitRate, speakOutcome } from '@/utils/mouth-match.util';
@@ -31,9 +32,15 @@ interface SpeakCheckProps {
   /** ARPAbet symbol of the target phone and its IPA. */
   symbol: string;
   ipa: string;
+  /** Live mouth feedback (cue and match dial) shown while idle. */
+  live?: ReactNode;
 }
 
-/** "Say it in the mirror": the sound and the mouth shape are scored together on one attempt. */
+/**
+ * The mirror's control deck: the word, one status line and three controls. Recording ends by
+ * itself when the learner stops talking; with auto repeat the next attempt starts on its own
+ * until the sound is mastered, so the learner can keep saying the word with their face in view.
+ */
 export const SpeakCheck = ({
   tracker,
   targets,
@@ -41,31 +48,50 @@ export const SpeakCheck = ({
   words,
   symbol,
   ipa,
+  live = null,
 }: SpeakCheckProps): ReactElement => {
   const copy = useCopy();
-  const recorder = useRecorder();
   const reference = useReferenceAudio();
   const [index, setIndex] = useState(0);
-  const [isScoring, setIsScoring] = useState(false);
+  const [phase, setPhase] = useState<SpeakPhase>('idle');
   const [outcome, setOutcome] = useState<SpeakOutcome | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [streak, setStreak] = useState(0);
   const [lastUrl, setLastUrl] = useState<string | null>(null);
+  const [isRepeat, setIsRepeat] = useState(true);
+  const [isQueued, setIsQueued] = useState(false);
+  const silentRef = useRef(0);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const autoStopRef = useRef<(reason: AutoStopReason) => void>(() => undefined);
+  const recorder = useRecorder({ onAutoStop: (reason) => autoStopRef.current(reason) });
   const word = words[index % Math.max(1, words.length)] ?? '';
-  const isRecording = recorder.status === RecorderStatus.Recording;
   const isMastered = streak >= MASTERY_STREAK;
+  const canJudgeMouth = Object.keys(targets).length > 0;
+
+  const clearTimer = (): void => {
+    if (timerRef.current) clearTimeout(timerRef.current);
+    timerRef.current = null;
+    setIsQueued(false);
+  };
 
   const start = useCallback(async () => {
-    setOutcome(null);
+    clearTimer();
     setError(null);
+    setPhase('listening');
     await recorder.start();
   }, [recorder]);
 
-  const stop = useCallback(async () => {
+  const scheduleNext = useCallback(() => {
+    clearTimer();
+    setIsQueued(true);
+    timerRef.current = setTimeout(() => void start(), REPEAT_DELAY_MS);
+  }, [start]);
+
+  const finish = useCallback(async () => {
     const captured = await recorder.stop();
     if (!captured) return;
     setLastUrl(captured.url);
-    setIsScoring(true);
+    setPhase('scoring');
     const frames = tracker
       .framesBetween(captured.startedAt, captured.startedAt + captured.durationSeconds)
       .map(({ t, features, quality }) => ({ t, features, quality }));
@@ -85,130 +111,184 @@ export const SpeakCheck = ({
       const next = speakOutcome({
         sound: targetVerdict(result, symbol),
         mouthRate: mouthHitRate(frames, targets),
-        canJudgeMouth: Object.keys(targets).length > 0,
+        canJudgeMouth,
       });
+      const nextStreak = next.isPass ? streak + 1 : 0;
+      silentRef.current = 0;
       setOutcome(next);
-      setStreak((count) => (next.isPass ? count + 1 : 0));
+      setStreak(nextStreak);
+      setPhase('result');
       void nativeHaptic(next.isPass ? 'success' : 'warning');
+      if (isRepeat && nextStreak < MASTERY_STREAK) scheduleNext();
     } catch (cause) {
       setError(cause instanceof Error ? cause.message : String(cause));
-    } finally {
-      setIsScoring(false);
+      setPhase('result');
     }
-  }, [drillId, ipa, recorder, symbol, targets, tracker, word]);
+  }, [
+    canJudgeMouth,
+    drillId,
+    ipa,
+    isRepeat,
+    recorder,
+    scheduleNext,
+    streak,
+    symbol,
+    targets,
+    tracker,
+    word,
+  ]);
 
+  useEffect(() => {
+    autoStopRef.current = (reason) => {
+      if (reason === 'end') {
+        void finish();
+        return;
+      }
+      void recorder.stop();
+      silentRef.current += 1;
+      setPhase('silent');
+      if (isRepeat && silentRef.current < MAX_SILENT_ATTEMPTS) scheduleNext();
+    };
+  }, [finish, isRepeat, recorder, scheduleNext]);
+
+  useEffect(
+    () => () => {
+      if (timerRef.current) clearTimeout(timerRef.current);
+    },
+    [],
+  );
+
+  const isRecording = recorder.status === RecorderStatus.Recording;
   const step = (delta: number): void => {
+    clearTimer();
+    if (isRecording) void recorder.stop();
     setIndex((value) => (value + delta + words.length) % Math.max(1, words.length));
     setOutcome(null);
     setError(null);
     setLastUrl(null);
+    setPhase('idle');
+  };
+  const onMic = (): void => {
+    if (isRecording) {
+      void finish();
+      return;
+    }
+    silentRef.current = 0;
+    void start();
+  };
+  const toggleRepeat = (): void => {
+    if (isRepeat) clearTimer();
+    setIsRepeat(!isRepeat);
   };
 
-  const soundLabel = outcome?.sound ? copy.speak.verdict[outcome.sound] : copy.speak.verdict.none;
-  const canJudgeMouth = Object.keys(targets).length > 0;
-  const mouthLabel = !canJudgeMouth
-    ? copy.speak.mouthNotNeeded
-    : outcome?.mouthRate === null || outcome?.mouthRate === undefined
-      ? copy.speak.mouthNone
-      : outcome.kind === 'both' || outcome.kind === 'mouth'
-        ? copy.speak.mouthOk
-        : copy.speak.mouthOff;
+  const level = Math.min(1, recorder.level * 6);
 
   return (
-    <div className="speak-check">
-      {outcome || error ? (
-        <div
-          className={cx('speak-check__result', outcome && `speak-check__result--${outcome.kind}`)}
-          role="status"
-          aria-live="polite"
-        >
-          {error ? (
-            <p className="speak-check__headline">{error}</p>
-          ) : outcome ? (
-            <>
-              <p className="speak-check__headline">
-                {isMastered ? copy.speak.mastered : copy.speak.headline[outcome.kind]}
-              </p>
-              <p className="speak-check__lines">
-                <span className={cx('speak-check__pill', outcome.sound === 'ok' && 'is-ok')}>
-                  {copy.speak.sound(ipa)}: {soundLabel}
-                </span>
-                <span
-                  className={cx(
-                    'speak-check__pill',
-                    (outcome.kind === 'both' || outcome.kind === 'mouth') && 'is-ok',
-                  )}
-                >
-                  {copy.speak.mouth}: {mouthLabel}
-                </span>
-              </p>
-              <p className="speak-check__streak">
-                <span className="speak-check__dots" aria-hidden="true">
-                  {Array.from({ length: MASTERY_STREAK }, (_, dot) => (
-                    <span key={dot} className={cx('speak-check__dot', dot < streak && 'is-on')} />
-                  ))}
-                </span>
-                {copy.speak.streak(Math.min(streak, MASTERY_STREAK), MASTERY_STREAK)}
-              </p>
-              {isMastered ? (
-                <Link
-                  href={{ pathname: '/practice', query: { sound: drillId } }}
-                  className="speak-check__link"
-                >
-                  {copy.speak.practiceSentences}
-                </Link>
-              ) : null}
-            </>
-          ) : null}
-        </div>
-      ) : null}
-      <p className="speak-check__word" aria-label={`${copy.speak.say}: ${word}`}>
-        {word}
-      </p>
-      <div className="speak-check__row">
+    <section className="speak-check" aria-label={copy.speak.say}>
+      <div className="speak-check__word-row">
         <IconButton
           icon={IconName.ChevronLeft}
           label={copy.speak.prev}
           className="speak-check__nav"
-          disabled={isRecording || isScoring || words.length < 2}
+          disabled={phase === 'scoring' || words.length < 2}
           onClick={() => step(-1)}
         />
+        <div className="speak-check__word-box">
+          <p className="speak-check__word" aria-label={`${copy.speak.say}: ${word}`}>
+            {word}
+          </p>
+          <p
+            className="speak-check__streak"
+            role="img"
+            aria-label={copy.speak.streak(Math.min(streak, MASTERY_STREAK), MASTERY_STREAK)}
+          >
+            {Array.from({ length: MASTERY_STREAK }, (_, dot) => (
+              <span key={dot} className={cx('speak-check__dot', dot < streak && 'is-on')} />
+            ))}
+          </p>
+        </div>
         <IconButton
-          icon={IconName.Play}
-          label={copy.speak.listen}
+          icon={IconName.ChevronRight}
+          label={copy.speak.next}
+          className="speak-check__nav"
+          disabled={phase === 'scoring' || words.length < 2}
+          onClick={() => step(1)}
+        />
+      </div>
+
+      <div className="speak-check__status" role="status" aria-live="polite">
+        <SpeakStatus
+          phase={phase}
+          outcome={outcome}
+          error={error}
+          ipa={ipa}
+          drillId={drillId}
+          isMastered={isMastered}
+          canJudgeMouth={canJudgeMouth}
+          hasSpeech={recorder.hasSpeech}
+          live={live}
+        />
+        {phase === 'result' && isQueued ? (
+          <p className="speak-check__next">{copy.speak.nextAttempt}</p>
+        ) : null}
+      </div>
+
+      <div className="speak-check__controls">
+        <button
+          type="button"
           className="speak-check__side"
           disabled={reference.isPlaying || isRecording}
           onClick={() => reference.play(word)}
-        />
+        >
+          <span className="speak-check__side-icon" aria-hidden="true">
+            <Icon name={IconName.Play} />
+          </span>
+          {copy.speak.model}
+        </button>
         <button
           type="button"
           className={cx('speak-check__mic', isRecording && 'is-recording')}
-          disabled={isScoring || word === ''}
+          disabled={phase === 'scoring' || word === ''}
           aria-label={
-            isScoring ? copy.speak.scoring : isRecording ? copy.speak.stop : copy.speak.record
+            phase === 'scoring'
+              ? copy.speak.scoring
+              : isRecording
+                ? copy.speak.stop
+                : copy.speak.record
           }
-          onClick={() => void (isRecording ? stop() : start())}
+          onClick={onMic}
         >
+          <span
+            className="speak-check__mic-ring"
+            aria-hidden="true"
+            style={{ transform: `scale(${String(1 + (isRecording ? level * 0.35 : 0))})` }}
+          />
           <Icon name={isRecording ? IconName.Stop : IconName.Practice} />
         </button>
-        <IconButton
-          icon={IconName.Volume}
-          label={copy.speak.replay}
+        <button
+          type="button"
           className="speak-check__side"
           disabled={!lastUrl || isRecording}
           onClick={() => {
             if (lastUrl) void new Audio(lastUrl).play();
           }}
-        />
-        <IconButton
-          icon={IconName.ChevronRight}
-          label={copy.speak.next}
-          className="speak-check__nav"
-          disabled={isRecording || isScoring || words.length < 2}
-          onClick={() => step(1)}
-        />
+        >
+          <span className="speak-check__side-icon" aria-hidden="true">
+            <Icon name={IconName.Replay} />
+          </span>
+          {copy.speak.mine}
+        </button>
       </div>
-      {recorder.error ? <p className="speak-check__error">{recorder.error}</p> : null}
-    </div>
+
+      <button
+        type="button"
+        className={cx('speak-check__repeat', isRepeat && 'is-on')}
+        aria-pressed={isRepeat}
+        onClick={toggleRepeat}
+      >
+        {isRepeat ? copy.speak.repeatOn : copy.speak.repeatOff}
+      </button>
+      {recorder.error ? <p className="speak-check__line">{recorder.error}</p> : null}
+    </section>
   );
 };

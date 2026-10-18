@@ -2,6 +2,16 @@
 export const viSpeak = {
   speak: {
     say: 'Nói từ này',
+    idleHint: 'Bấm mic rồi đọc từ trên, nói xong app tự chấm',
+    listening: 'Đang nghe… nói xong app tự chấm',
+    hearing: 'Đang nghe bạn nói…',
+    noSpeech: 'Chưa nghe thấy tiếng. Nói to và gần micro hơn.',
+    nextAttempt: 'Chuẩn bị lần tiếp theo…',
+    model: 'Mẫu',
+    mine: 'Của bạn',
+    repeatOn: 'Tự nói lại: Bật',
+    repeatOff: 'Tự nói lại: Tắt',
+    options: 'Tùy chọn',
     record: 'Nói thử',
     stop: 'Dừng và chấm',
     scoring: 'Đang chấm…',
@@ -19,7 +29,7 @@ export const viSpeak = {
     headline: {
       both: 'Đúng cả âm và khẩu hình!',
       sound: 'Âm đúng, chỉnh thêm khẩu hình theo gợi ý.',
-      noFace: 'Âm đúng nhưng camera chưa thấy miệng: đưa mặt vào khung rồi nói lại.',
+      noFace: 'Âm đúng, nhưng camera chưa thấy miệng bạn.',
       mouth: 'Khẩu hình đúng nhưng âm chưa chuẩn: nghe mẫu rồi nói lại.',
       neither: 'Nghe mẫu, đặt khẩu hình theo bóng mờ rồi nói lại.',
     },

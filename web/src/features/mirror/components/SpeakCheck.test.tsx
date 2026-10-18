@@ -1,28 +1,36 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { act, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { RecorderStatus } from '@/enums/recorder-status.enum';
 import { TrackerStatus } from '@/enums/tracker-status.enum';
 import type { MouthTracker } from '@/interfaces/tracker.interface';
+import type { AutoStopReason, RecorderOptions } from '@/interfaces/vad.interface';
 import { assessmentFixture } from '@/test-utils/assessment.fixture';
 
 import { SpeakCheck } from './SpeakCheck';
 
+const auto: { stop: ((reason: AutoStopReason) => void) | undefined } = { stop: undefined };
 const recorder = {
   status: RecorderStatus.Idle,
   level: 0,
   seconds: 0,
   error: null as string | null,
+  hasSpeech: false,
   start: vi.fn(() => {
     recorder.status = RecorderStatus.Recording;
     return Promise.resolve();
   }),
   stop: vi.fn(() => {
     recorder.status = RecorderStatus.Idle;
-    return Promise.resolve({ blob: new Blob(), url: '', startedAt: 1, durationSeconds: 1 });
+    return Promise.resolve({ blob: new Blob(), url: 'blob:x', startedAt: 1, durationSeconds: 1 });
   }),
 };
-vi.mock('@/features/practice/hooks/useRecorder', () => ({ useRecorder: () => recorder }));
+vi.mock('@/features/practice/hooks/useRecorder', () => ({
+  useRecorder: (options: RecorderOptions = {}) => {
+    auto.stop = options.onAutoStop;
+    return recorder;
+  },
+}));
 vi.mock('@/features/practice/hooks/useReferenceAudio', () => ({
   useReferenceAudio: () => ({ play: vi.fn(), isPlaying: false, error: null }),
 }));
@@ -59,7 +67,6 @@ const tracker: MouthTracker = {
   snapshotMouth: () => Promise.resolve(null),
 };
 
-/** A result whose TH phone carries the given verdict. */
 const resultWith = (verdict: 'ok' | 'error') => {
   const result = assessmentFixture();
   for (const word of result.words)
@@ -67,76 +74,69 @@ const resultWith = (verdict: 'ok' | 'error') => {
   return result;
 };
 
+const deck = (
+  <SpeakCheck
+    tracker={tracker}
+    targets={{ roundness: { min: 0.6 }, width: { max: 0.45 } }}
+    drillId="c09"
+    words={['think', 'three']}
+    symbol="TH"
+    ipa="θ"
+  />
+);
+
 describe('SpeakCheck', () => {
   beforeEach(() => {
     assess.mockReset();
     recorder.status = RecorderStatus.Idle;
+    recorder.start.mockClear();
   });
 
-  it('scores sound and mouth together and counts a streak towards mastery', async () => {
+  it('scores sound and mouth together and counts three passes as mastery', async () => {
     const user = userEvent.setup();
     assess.mockResolvedValue(resultWith('ok'));
-    const { rerender } = render(
-      <SpeakCheck
-        tracker={tracker}
-        targets={{ roundness: { min: 0.6 }, width: { max: 0.45 } }}
-        drillId="c09"
-        words={['think', 'three']}
-        symbol="TH"
-        ipa="θ"
-      />,
-    );
+    const { rerender } = render(deck);
+    await user.click(screen.getByRole('button', { name: 'Tự nói lại: Bật' }));
     expect(screen.getByText('think')).toBeInTheDocument();
     for (let attempt = 0; attempt < 3; attempt += 1) {
       await user.click(screen.getByRole('button', { name: 'Nói thử' }));
-      rerender(
-        <SpeakCheck
-          tracker={tracker}
-          targets={{ roundness: { min: 0.6 }, width: { max: 0.45 } }}
-          drillId="c09"
-          words={['think', 'three']}
-          symbol="TH"
-          ipa="θ"
-        />,
-      );
+      rerender(deck);
       await user.click(screen.getByRole('button', { name: 'Dừng và chấm' }));
-      await waitFor(() => expect(screen.getByRole('status')).toBeInTheDocument());
+      await waitFor(() => expect(screen.getByText(/Âm \/θ\/: Đạt/)).toBeInTheDocument());
     }
     expect(screen.getByRole('status')).toHaveTextContent('Đã nắm được âm này!');
-    expect(screen.getByRole('status')).toHaveTextContent('3/3 lần đúng liên tiếp');
+    expect(screen.getByLabelText('3/3 lần đúng liên tiếp')).toBeInTheDocument();
     expect(assess.mock.calls[0]?.[0]).toMatchObject({
       item: { id: 'sound:c09:mirror:think', text: 'think', focus: ['TH'] },
     });
+    expect(screen.getByRole('button', { name: /Của bạn/ })).toBeEnabled();
   });
 
-  it('says the mouth is right but the sound is not, and resets the streak', async () => {
+  it('stops by itself when the learner finishes speaking and queues the next try', async () => {
     const user = userEvent.setup();
     assess.mockResolvedValue(resultWith('error'));
-    const { rerender } = render(
-      <SpeakCheck
-        tracker={tracker}
-        targets={{ roundness: { min: 0.6 } }}
-        drillId="c09"
-        words={['think']}
-        symbol="TH"
-        ipa="θ"
-      />,
-    );
+    render(deck);
     await user.click(screen.getByRole('button', { name: 'Nói thử' }));
-    rerender(
-      <SpeakCheck
-        tracker={tracker}
-        targets={{ roundness: { min: 0.6 } }}
-        drillId="c09"
-        words={['think']}
-        symbol="TH"
-        ipa="θ"
-      />,
-    );
-    await user.click(screen.getByRole('button', { name: 'Dừng và chấm' }));
+    await act(async () => {
+      auto.stop?.('end');
+      await Promise.resolve();
+    });
     await waitFor(() =>
       expect(screen.getByRole('status')).toHaveTextContent('Khẩu hình đúng nhưng âm chưa chuẩn'),
     );
-    expect(screen.getByRole('status')).toHaveTextContent('0/3 lần đúng liên tiếp');
+    expect(screen.getByRole('status')).toHaveTextContent('Chuẩn bị lần tiếp theo');
+    expect(screen.getByLabelText('0/3 lần đúng liên tiếp')).toBeInTheDocument();
+  });
+
+  it('says when nothing was heard', async () => {
+    const user = userEvent.setup();
+    render(deck);
+    await user.click(screen.getByRole('button', { name: 'Nói thử' }));
+    await act(async () => {
+      auto.stop?.('no-speech');
+      await Promise.resolve();
+    });
+    expect(screen.getByRole('status')).toHaveTextContent('Chưa nghe thấy tiếng');
+    expect(assess).not.toHaveBeenCalled();
   });
 });

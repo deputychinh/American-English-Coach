@@ -3,6 +3,7 @@ import type { RecorderStatus } from '@/enums/recorder-status.enum';
 import type { TrackerStatus } from '@/enums/tracker-status.enum';
 import type { Calibration, MouthFeatures, TrackedFrame } from '@/interfaces/mouth.interface';
 import type { PracticeItem, Recording } from '@/interfaces/practice.interface';
+import type { VadState } from '@/interfaces/vad.interface';
 
 export interface AsyncState<T> {
   status: AsyncStatus;
@@ -19,6 +20,8 @@ export interface Recorder {
   level: number;
   seconds: number;
   error: string | null;
+  /** Voice detected in the current recording (end-of-speech detection is armed). */
+  hasSpeech: boolean;
   start: () => Promise<void>;
   stop: () => Promise<Recording | null>;
 }
@@ -30,6 +33,9 @@ export interface RecorderSession {
   chunks: Float32Array[];
   startedAt: number | null;
   timer: ReturnType<typeof setTimeout> | null;
+  /** Voice-activity state; null when auto-stop is not requested. */
+  vad: VadState | null;
+  isAutoStopped: boolean;
 }
 
 export interface ReferenceAudio {

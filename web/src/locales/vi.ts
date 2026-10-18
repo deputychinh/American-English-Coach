@@ -116,7 +116,7 @@ export const vi = {
     audioOnly:
       'Với âm này lưỡi nằm trong miệng nên camera không thấy; luyện bằng tai và hình minh họa.',
     loadingModel: 'Đang tải bộ nhận diện khuôn mặt…',
-    noFace: 'Không thấy khuôn mặt. Ngồi thẳng, đủ sáng, cách camera khoảng 50 cm.',
+    noFace: 'Chưa thấy mặt · ngồi thẳng, đủ sáng, cách 50 cm',
     turnStraight: 'Quay mặt thẳng vào camera.',
     hold: 'Giữ nguyên…',
     good: 'Đúng rồi! Giữ khẩu hình này khi phát âm.',

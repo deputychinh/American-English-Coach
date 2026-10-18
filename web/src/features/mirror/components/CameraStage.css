@@ -87,14 +87,16 @@
 
 .camera-stage__notice {
   position: absolute;
+  left: 50%;
   z-index: var(--z-raised);
-  padding: var(--space-2) var(--space-3);
-  font-size: var(--text-sm);
+  max-inline-size: calc(100% - var(--space-8));
+  padding: var(--space-1) var(--space-3);
+  font-size: var(--text-xs);
   text-align: center;
   background: var(--color-scrim-strong);
-  border-radius: var(--radius-md);
-  inset-block-start: calc(var(--safe-top) + 72px);
-  inset-inline: var(--space-4);
+  border-radius: var(--radius-full);
+  inset-block-start: calc(var(--safe-top) + 68px);
+  transform: translateX(-50%);
 }
 
 .camera-stage__bottom {

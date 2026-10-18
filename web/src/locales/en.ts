@@ -122,7 +122,7 @@ export const en: Copy = {
     audioOnly:
       'For this sound the tongue stays inside the mouth, so the camera cannot see it; practise by ear and with the illustration.',
     loadingModel: 'Loading the face tracker…',
-    noFace: 'No face detected. Sit upright, in good light, about 50 cm from the camera.',
+    noFace: 'No face yet · sit straight, good light, 50 cm away',
     turnStraight: 'Face the camera directly.',
     hold: 'Hold it…',
     good: 'That is it! Keep this shape while you say the sound.',

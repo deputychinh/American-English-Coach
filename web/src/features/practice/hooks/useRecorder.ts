@@ -11,8 +11,10 @@ import {
 import { RecorderStatus } from '@/enums/recorder-status.enum';
 import type { Recorder, RecorderSession } from '@/interfaces/hooks.interface';
 import type { Recording } from '@/interfaces/practice.interface';
+import type { RecorderOptions } from '@/interfaces/vad.interface';
 import { getCopy } from '@/locales';
 import { nativeHaptic } from '@/utils/native.util';
+import { initialVad, vadStep } from '@/utils/vad.util';
 import { concatChunks, encodeWav, resample, rmsLevel } from '@/utils/wav-encoder.util';
 
 const permissionMessage = (error: unknown): string => {
@@ -32,11 +34,17 @@ const openContext = (): AudioContext => {
 };
 
 /** Captures mono PCM through an AudioWorklet (ScriptProcessor fallback) and encodes 16 kHz WAV. */
-export const useRecorder = (): Recorder => {
+export const useRecorder = ({ onAutoStop }: RecorderOptions = {}): Recorder => {
   const [status, setStatus] = useState(RecorderStatus.Idle);
   const [level, setLevel] = useState(0);
   const [seconds, setSeconds] = useState(0);
   const [error, setError] = useState<string | null>(null);
+  const [hasSpeech, setHasSpeech] = useState(false);
+  const onAutoStopRef = useRef(onAutoStop);
+
+  useEffect(() => {
+    onAutoStopRef.current = onAutoStop;
+  }, [onAutoStop]);
   const sessionRef = useRef<RecorderSession | null>(null);
   const stopRef = useRef<() => Promise<Recording | null>>(() => Promise.resolve(null));
 
@@ -47,7 +55,19 @@ export const useRecorder = (): Recorder => {
       session.startedAt = performance.now() / 1000 - chunk.length / sampleRate;
     }
     session.chunks.push(chunk);
-    setLevel(rmsLevel(chunk));
+    const level = rmsLevel(chunk);
+    setLevel(level);
+    if (session.vad && !session.isAutoStopped) {
+      const step = vadStep(session.vad, { level, now: performance.now() });
+      session.vad = step.state;
+      if (step.event === 'speech') setHasSpeech(true);
+      if (step.event === 'end' || step.event === 'no-speech') {
+        session.isAutoStopped = true;
+        const reason = step.event;
+        // Leave the audio callback before the caller stops and scores the recording.
+        setTimeout(() => onAutoStopRef.current?.(reason), 0);
+      }
+    }
     setSeconds((performance.now() / 1000 - (session.startedAt ?? 0)) | 0);
   }, []);
 
@@ -104,6 +124,7 @@ export const useRecorder = (): Recorder => {
     if (sessionRef.current) return;
     setError(null);
     setSeconds(0);
+    setHasSpeech(false);
     if (!navigator.mediaDevices?.getUserMedia) {
       setError(getCopy().practice.noMedia);
       setStatus(RecorderStatus.Error);
@@ -123,6 +144,8 @@ export const useRecorder = (): Recorder => {
         chunks: [],
         startedAt: null,
         timer: null,
+        vad: onAutoStopRef.current ? initialVad(performance.now()) : null,
+        isAutoStopped: false,
       };
       sessionRef.current = session;
       session.node = await attachNode(context, source);
@@ -142,5 +165,5 @@ export const useRecorder = (): Recorder => {
     [],
   );
 
-  return { status, level, seconds, error, start, stop };
+  return { status, level, seconds, error, hasSpeech, start, stop };
 };

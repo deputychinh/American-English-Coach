@@ -33,4 +33,7 @@ export const ICON_PATHS: Record<IconName, string> = {
   [IconName.VolumeOff]: 'M11 5 6 9H3v6h3l5 4V5zM22 9l-6 6M16 9l6 6',
   [IconName.ChevronDown]: 'm6 9 6 6 6-6',
   [IconName.ChevronRight]: 'm9 6 6 6-6 6',
+  [IconName.More]:
+    'M4 12a2 2 0 1 0 4 0 2 2 0 1 0-4 0M10 12a2 2 0 1 0 4 0 2 2 0 1 0-4 0M16 12a2 2 0 1 0 4 0 2 2 0 1 0-4 0',
+  [IconName.Replay]: 'M3 12a9 9 0 1 0 3-6.7L3 8M3 3v5h5M10 9v6l5-3z',
 };

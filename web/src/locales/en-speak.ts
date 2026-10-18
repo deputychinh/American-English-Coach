@@ -4,6 +4,16 @@ import type { Copy } from '@/interfaces/copy.interface';
 export const enSpeak: Pick<Copy, 'speak'> = {
   speak: {
     say: 'Say this word',
+    idleHint: 'Tap the mic and read the word; it scores when you stop talking',
+    listening: 'Listening… it scores when you stop talking',
+    hearing: 'Hearing you…',
+    noSpeech: 'No voice heard. Speak louder and closer to the mic.',
+    nextAttempt: 'Get ready for the next try…',
+    model: 'Model',
+    mine: 'Yours',
+    repeatOn: 'Auto repeat: on',
+    repeatOff: 'Auto repeat: off',
+    options: 'Options',
     record: 'Try it',
     stop: 'Stop and score',
     scoring: 'Scoring…',
@@ -21,8 +31,7 @@ export const enSpeak: Pick<Copy, 'speak'> = {
     headline: {
       both: 'Sound and mouth shape both correct!',
       sound: 'The sound is right; adjust your mouth as the cue says.',
-      noFace:
-        'The sound is right but the camera could not see your mouth: face the camera and try again.',
+      noFace: 'Right sound, but the camera could not see your mouth.',
       mouth: 'The mouth shape is right but the sound is off: play the model and try again.',
       neither: 'Play the model, match the ghost lips, then try again.',
     },

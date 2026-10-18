@@ -102,8 +102,12 @@ test('mirror asks for calibration first, then calibration page opens the camera'
   await expect(notice.or(guide)).toBeVisible();
   await expect(page.locator('.feature-chips').or(notice)).toBeVisible();
   await shot(page, 'mirror', info.project.name);
-  const enter = (await notice.count()) > 0 ? 'Hiệu chỉnh ngay' : 'Hiệu chỉnh lại';
-  await page.getByRole('link', { name: enter }).click();
+  if ((await notice.count()) > 0) {
+    await page.getByRole('link', { name: 'Hiệu chỉnh ngay' }).click();
+  } else {
+    await page.getByRole('button', { name: 'Tùy chọn' }).click();
+    await page.getByRole('link', { name: 'Hiệu chỉnh lại' }).click();
+  }
   await expect(page.getByRole('button', { name: 'Bắt đầu' })).toBeVisible();
   await expect(page.locator('video')).toBeVisible();
   await shot(page, 'calibration', info.project.name);
@@ -131,11 +135,12 @@ test('the mirror scores a spoken word with sound and mouth together', async ({ p
   await page.getByRole('button', { name: 'Nói thử' }).click();
   const stop = page.getByRole('button', { name: 'Dừng và chấm' });
   await expect(stop).toBeVisible();
-  await page.waitForTimeout(1800);
-  await stop.click();
+  await page.waitForTimeout(2500);
+  // The deck stops by itself at the end of speech; the fake microphone may loop without a pause.
+  if (await stop.isVisible()) await stop.click();
   await expect(page.locator('.speak-check__result')).toContainText(/Âm \/θ\//, { timeout: 60_000 });
   await expect(page.locator('.speak-check__result')).toContainText(/Khẩu hình/);
-  await expect(page.locator('.speak-check__result')).toContainText(/lần đúng liên tiếp/);
+  await expect(page.getByRole('button', { name: /Của bạn/ })).toBeEnabled();
 });
 
 test('progress shows stats, the ranked table and a link to settings', async ({ page }, info) => {
