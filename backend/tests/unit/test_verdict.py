@@ -32,9 +32,12 @@ def test_audio_verdict_rule(op: AlignmentOp, gop: float, enabled: bool, expected
         ("IH", "IY", None, False),
         ("UH", "AA", "R", False),
         ("TH", "T", "R", False),
+        ("AO", "AA", "L", True),
+        ("AO", "AA", None, True),
+        ("AA", "AO", None, False),
     ],
 )
-def test_tense_and_lax_vowels_are_free_variants_only_before_r(
+def test_free_variants_are_merged_vowels_and_tense_lax_pairs_before_r(
     expected: str, heard: str, next_symbol: str | None, free: bool
 ) -> None:
     assert is_free_variant(expected, heard, next_symbol) is free

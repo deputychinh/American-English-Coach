@@ -32,6 +32,13 @@ FREE_VARIANTS_BEFORE_R: Final[dict[str, frozenset[str]]] = {
 }
 
 
+# Most American speakers merge the vowels of caught and cot; the merged AA is standard, so a
+# learner (or a native voice: all, call, talk, draw in the sweep) is not wrong to use it.
+FREE_VARIANTS: Final[dict[str, frozenset[str]]] = {"AO": frozenset({"AA"})}
+
+
 def is_free_variant(expected: str, heard: str, next_symbol: str | None) -> bool:
     """True when `heard` is an accepted way of saying `expected` in this context."""
+    if heard in FREE_VARIANTS.get(expected, frozenset()):
+        return True
     return next_symbol == "R" and heard in FREE_VARIANTS_BEFORE_R.get(expected, frozenset())

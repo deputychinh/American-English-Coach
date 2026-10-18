@@ -29,6 +29,11 @@ Theo [Keep a Changelog](https://keepachangelog.com/vi/1.1.0/); phiên bản theo
 - Giọng mẫu im lặng trên iPhone đã ghép nối: thẻ `<audio>` không gửi được token nên mọi lần "Nghe mẫu" bị máy chấm trả 401. App giờ tải giọng mẫu bằng `fetch` có token (giữ trong bộ nhớ theo phiên) và báo rõ khi chưa ghép nối hoặc máy chấm không chạy, kể cả ở màn Gương.
 - Chấm quá gắt khi bật camera: chỉ những âm camera nhìn rõ (P/B/M, F/V, nguyên âm tròn môi) mới được đổi "xem lại" thành "sai"; nhóm độ tin cậy trung bình chỉ thêm gợi ý khẩu hình; âm camera gần như không thấy (T/D/N/L, K/G, R…) không còn bị khẩu hình chi phối.
 - Cài đặt: dòng "Ghép nối điện thoại" không còn ghi "Chưa ghép nối" trong lúc một sheet đang mở.
+- Chấm công bằng hơn với giọng Mỹ chuẩn (đo bằng `make sweep`: 440 từ luyện × 2 giọng macOS):
+  - Chấp nhận các biến thể hợp lệ: trước /r/ không phân biệt /ɪ/~/i/, /ɛ/~/e/, /ʊ/~/u/~/ɔ/~/ɝ/ (tour, sure, near, air), và /ɔ/ gộp với /ɑ/ (caught–cot).
+  - Bỏ 14 từ luyện mà một biến thể phiên âm không có âm đích ("ear", "law", "with"…), vì máy chấm không tìm thấy âm để chấm. Đã thay bằng từ khác đã kiểm.
+  - "Gần đúng" được nửa điểm trên vòng điểm và không còn làm mất chuỗi 3 lần đúng ở màn Gương. Chỉ "Chưa đúng" thật mới reset chuỗi.
+- e2e kiểm giọng mẫu ở mọi màn có nút phát: bảng âm, Nghe, Xếp lớp, Gương, Luyện tập.
 - e2e chạy ở "chế độ điện thoại" (`COACH_TRUST_LOOPBACK=false` + ghép nối thật trong global setup) trên CI, nên request quên token sẽ hỏng ngay trên CI thay vì trên máy người học.
 
 ## [1.1.0] - 2026-10-17
