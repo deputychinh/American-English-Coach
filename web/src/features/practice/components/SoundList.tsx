@@ -1,7 +1,10 @@
+'use client';
+
 import Link from 'next/link';
-import type { ReactElement } from 'react';
+import { type ReactElement, useState } from 'react';
 
 import { ConfidenceBadge } from '@/components/ConfidenceBadge/ConfidenceBadge';
+import { Tabs } from '@/components/Tabs/Tabs';
 import { useCopy } from '@/hooks/useCopy';
 import type { SoundDrillSummary } from '@/interfaces/practice.interface';
 
@@ -12,47 +15,42 @@ interface SoundListProps {
   labels?: Record<string, string>;
 }
 
-const GROUP_ORDER = ['vowel', 'diphthong', 'consonant'];
+type SoundGroup = 'vowels' | 'consonants';
 
-const grouped = (sounds: SoundDrillSummary[]): [string, SoundDrillSummary[]][] =>
-  GROUP_ORDER.map((group): [string, SoundDrillSummary[]] => [
-    group,
-    sounds.filter((sound) => sound.group.toLowerCase() === group),
-  ]).filter(([, items]) => items.length > 0);
+const inGroup = (sound: SoundDrillSummary, group: SoundGroup): boolean =>
+  (sound.group.toLowerCase() === 'consonant') === (group === 'consonants');
 
-/** All 44 chart sounds, each opening a drill; the badge says how much the camera can see. */
+/** The 44 chart sounds as a dense grid, vowels or consonants; each tile opens a drill. */
 export const SoundList = ({ sounds, labels }: SoundListProps): ReactElement => {
   const copy = useCopy();
-  const groupLabel = copy.sounds.groups as Record<string, string>;
+  const [group, setGroup] = useState<SoundGroup>('vowels');
   return (
     <div className="sound-list">
-      {grouped(sounds).map(([group, items]) => (
-        <section key={group} aria-labelledby={`sound-list-${group}`}>
-          <h2 id={`sound-list-${group}`} className="sound-list__heading">
-            {groupLabel[group] ?? group}
-          </h2>
-          <ul className="sound-list__grid">
-            {items.map((sound) => (
-              <li key={sound.id}>
-                <Link
-                  href={{ pathname: '/practice', query: { sound: sound.id } }}
-                  className="sound-list__card"
-                >
-                  <span className="sound-list__ipa">/{sound.us}/</span>
-                  <span className="sound-list__meta">
-                    {copy.sounds.drillSize(
-                      sound.word_count,
-                      sound.pair_count,
-                      sound.sentence_count,
-                    )}
-                  </span>
-                  <ConfidenceBadge confidence={sound.viseme_confidence} labels={labels} />
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </section>
-      ))}
+      <Tabs
+        label={copy.practice.bySound}
+        value={group}
+        options={[
+          { id: 'vowels', label: copy.sounds.vowels },
+          { id: 'consonants', label: copy.sounds.groups.consonant },
+        ]}
+        onChange={setGroup}
+      />
+      <ul className="sound-list__grid">
+        {sounds.map((sound) => (
+          <li key={sound.id} className={inGroup(sound, group) ? undefined : 'sound-list__hidden'}>
+            <Link
+              href={{ pathname: '/practice', query: { sound: sound.id } }}
+              className="sound-list__card"
+            >
+              <span className="sound-list__ipa">/{sound.us}/</span>
+              <ConfidenceBadge confidence={sound.viseme_confidence} labels={labels} isCompact />
+              <span className="visually-hidden">
+                {copy.sounds.drillSize(sound.word_count, sound.pair_count, sound.sentence_count)}
+              </span>
+            </Link>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };

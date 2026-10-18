@@ -5,7 +5,11 @@ import { jsonResponse, mockApi } from '@/test-utils/api-mock';
 import { SoundChart } from './SoundChart';
 
 const params = { get: vi.fn<(key: string) => string | null>(() => null) };
-vi.mock('next/navigation', () => ({ useSearchParams: () => params, usePathname: () => '/sounds' }));
+vi.mock('next/navigation', () => ({
+  useSearchParams: () => params,
+  usePathname: () => '/sounds',
+  useRouter: () => ({ replace: vi.fn(), push: vi.fn() }),
+}));
 
 const cards = [
   {

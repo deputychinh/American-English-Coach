@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { type ReactElement, useState } from 'react';
 
 import { ConfidenceBadge } from '@/components/ConfidenceBadge/ConfidenceBadge';
@@ -9,6 +9,7 @@ import { EmptyState } from '@/components/EmptyState/EmptyState';
 import { ErrorState } from '@/components/ErrorState/ErrorState';
 import { Icon } from '@/components/Icon/Icon';
 import { PageIntro } from '@/components/PageIntro/PageIntro';
+import { Sheet } from '@/components/Sheet/Sheet';
 import { Skeleton } from '@/components/Skeleton/Skeleton';
 import { Tabs } from '@/components/Tabs/Tabs';
 import { AsyncStatus } from '@/enums/async-status.enum';
@@ -45,6 +46,7 @@ export const SoundChart = (): ReactElement => {
   const copy = useCopy();
   const groupLabel: Record<string, string> = copy.sounds.groups;
   const { status, data, error, reload } = useAsync(getPhonemes);
+  const router = useRouter();
   const selectedId = useSearchParams().get('id');
   const selected = data?.find((card) => card.id === selectedId) ?? null;
   const [query, setQuery] = useState('');
@@ -83,7 +85,7 @@ export const SoundChart = (): ReactElement => {
       {status === AsyncStatus.Loading ? <Skeleton lines={6} /> : null}
       {status === AsyncStatus.Error ? <ErrorState message={error ?? ''} onRetry={reload} /> : null}
       {data ? (
-        <div className={cx('sound-chart__layout', selected && 'has-detail')}>
+        <div className="sound-chart__layout">
           <div className="sound-chart__groups">
             {visible.length === 0 ? <EmptyState message={copy.sounds.emptySearch} /> : null}
             {groupsOf(visible).map(([group, cards]) => (
@@ -109,7 +111,7 @@ export const SoundChart = (): ReactElement => {
                       >
                         <span className="sound-chart__ipa">/{card.us}/</span>
                         <span className="sound-chart__example">{card.example}</span>
-                        <ConfidenceBadge confidence={card.viseme_confidence} />
+                        <ConfidenceBadge confidence={card.viseme_confidence} isCompact />
                       </Link>
                     </li>
                   ))}
@@ -117,7 +119,13 @@ export const SoundChart = (): ReactElement => {
               </section>
             ))}
           </div>
-          {selected ? <SoundDetail card={selected} /> : null}
+          <Sheet
+            isOpen={selected !== null}
+            title={copy.sounds.title}
+            onClose={() => router.replace('/sounds', { scroll: false })}
+          >
+            {selected ? <SoundDetail card={selected} /> : null}
+          </Sheet>
         </div>
       ) : null}
     </div>

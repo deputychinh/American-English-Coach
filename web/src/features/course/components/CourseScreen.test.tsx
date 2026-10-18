@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 
 import { jsonResponse, mockApi } from '@/test-utils/api-mock';
 
@@ -41,11 +41,9 @@ describe('CourseScreen', () => {
     render(<CourseScreen />);
     await waitFor(() => expect(screen.getByText('Ngày 2 · Ngày 2 VI')).toBeInTheDocument());
     expect(screen.getByText('1/3')).toBeInTheDocument();
-    const details = document.querySelectorAll('details');
-    expect(details[1]).toHaveAttribute('open');
-    expect(details[0]).not.toHaveAttribute('open');
     expect(screen.getAllByText(/Đang học/)).toHaveLength(1);
-    const current = details[1] as HTMLElement;
+    fireEvent.click(screen.getByRole('button', { name: /Ngày 2 · Ngày 2 VI/ }));
+    const current = screen.getByRole('dialog', { hidden: true });
     const links = current.querySelectorAll('a');
     expect(links[0]).toHaveAttribute('href', expect.stringContaining('sound=c09'));
     expect(links[1]).toHaveAttribute('href', expect.stringContaining('item=pair%3Athink-sink%3A0'));

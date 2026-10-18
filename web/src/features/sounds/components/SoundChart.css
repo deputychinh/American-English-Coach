@@ -1,7 +1,7 @@
 .sound-chart {
   display: flex;
   flex-direction: column;
-  gap: var(--space-6);
+  gap: var(--space-4);
 }
 
 .sound-chart__layout {
@@ -53,19 +53,19 @@
 .sound-chart__groups {
   display: flex;
   flex-direction: column;
-  gap: var(--space-6);
+  gap: var(--space-4);
 }
 
 .sound-chart__group-title {
-  font-size: var(--text-lg);
+  font-size: var(--text-sm);
   color: var(--color-text-muted);
-  margin-block-end: var(--space-3);
+  margin-block-end: var(--space-2);
 }
 
 .sound-chart__list {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(132px, 100%), 1fr));
-  gap: var(--space-3);
+  grid-template-columns: repeat(auto-fill, minmax(76px, 1fr));
+  gap: var(--space-2);
   padding: 0;
   list-style: none;
 }
@@ -73,10 +73,10 @@
 .sound-chart__card {
   display: flex;
   flex-direction: column;
-  gap: var(--space-2);
-  align-items: flex-start;
-  min-block-size: 104px;
-  padding: var(--space-3);
+  gap: var(--space-1);
+  align-items: center;
+  min-block-size: 76px;
+  padding: var(--space-2) var(--space-1);
   text-decoration: none;
   color: var(--color-text);
   background: var(--color-surface);
@@ -102,7 +102,7 @@
 .sound-chart__ipa {
   padding: 0 var(--space-2);
   font-family: var(--font-ipa);
-  font-size: var(--text-2xl);
+  font-size: var(--text-xl);
   font-weight: var(--weight-semibold);
   line-height: var(--leading-snug);
   color: var(--color-ipa-text);
@@ -111,17 +111,15 @@
 }
 
 .sound-chart__example {
-  font-size: var(--text-sm);
+  overflow: hidden;
+  max-inline-size: 100%;
+  font-size: var(--text-xs);
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .sound-chart__badge {
   font-size: var(--text-2xs);
   text-transform: uppercase;
   color: var(--color-text-muted);
-}
-
-@media (--bp-lg) {
-  .sound-chart__layout.has-detail {
-    grid-template-columns: minmax(0, 2fr) minmax(300px, 1fr);
-  }
 }

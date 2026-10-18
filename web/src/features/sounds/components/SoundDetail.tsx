@@ -29,9 +29,6 @@ export const SoundDetail = ({ card }: SoundDetailProps): ReactElement => {
         <h2 id="sound-detail-title" className="sound-detail__ipa">
           /{card.us}/
         </h2>
-        <Link href="/sounds" scroll={false} className="sound-detail__close">
-          {copy.sounds.close}
-        </Link>
       </div>
       {card.symbol !== card.us ? (
         <p className="sound-detail__muted">{copy.sounds.chartSays(card.symbol, card.arpabet)}</p>

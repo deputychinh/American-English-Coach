@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 
 import { jsonResponse, mockApi } from '@/test-utils/api-mock';
 
@@ -82,10 +82,9 @@ describe('CurriculumScreen', () => {
     render(<CurriculumScreen />);
     await waitFor(() => expect(screen.getByText('Cấp 1 · Nền tảng')).toBeInTheDocument());
     expect(screen.getByText('1/2')).toBeInTheDocument();
-    const details = document.querySelectorAll('details');
-    expect(details[0]).not.toHaveAttribute('open');
-    expect(details[1]).toHaveAttribute('open');
-    const current = details[1] as HTMLElement;
+    expect(screen.getByRole('button', { name: /Đơn vị 2 VI.*Đang học/ })).toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button', { name: /Đơn vị 2 VI/ }));
+    const current = screen.getByRole('dialog', { hidden: true });
     expect(current).toHaveTextContent('Người Việt hay mắc');
     expect(current).toHaveTextContent('1 cặp từ · 1 từ trọng âm');
     const links = current.querySelectorAll('a');

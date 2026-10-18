@@ -165,8 +165,8 @@ test('the course lists 14 days with the current one open', async ({ page }, info
   await page.goto('/course/');
   await expect(page.getByRole('heading', { name: /Khóa 14 ngày/ })).toBeVisible();
   await expect(page.locator('.course-screen__day')).toHaveCount(14);
-  await expect(page.locator('details[open]')).toHaveCount(1);
-  await expect(page.locator('details[open] .course-screen__item').first()).toHaveAttribute(
+  await page.locator('.course-screen__day--current').click();
+  await expect(page.getByRole('dialog').locator('.course-screen__item').first()).toHaveAttribute(
     'href',
     /practice/,
   );
@@ -179,12 +179,10 @@ test('the curriculum lists levels and opens the current unit with five steps', a
   await page.goto('/curriculum/');
   await expect(page.getByRole('heading', { name: 'Lộ trình phát âm chuẩn' })).toBeVisible();
   await expect(page.locator('.curriculum-screen__unit')).toHaveCount(6);
-  await expect(page.locator('details[open]')).toHaveCount(1);
-  await expect(page.locator('details[open] .unit-steps__step')).toHaveCount(5);
-  await expect(page.locator('details[open] .unit-steps__chip').first()).toHaveAttribute(
-    'href',
-    /sounds/,
-  );
+  await page.locator('.curriculum-screen__unit--current').click();
+  const sheet = page.getByRole('dialog');
+  await expect(sheet.locator('.unit-steps__step')).toHaveCount(5);
+  await expect(sheet.locator('.unit-steps__chip').first()).toHaveAttribute('href', /sounds/);
   await shot(page, 'curriculum', info.project.name);
 });
 
@@ -205,7 +203,7 @@ test('the listening step asks one question at a time and ends with a summary', a
   await expect(page.getByRole('heading', { name: 'Kết quả nghe' })).toBeVisible();
   await expect(page.getByRole('link', { name: 'Sang bước luyện có chấm' })).toBeVisible();
   await page.goto('/curriculum/');
-  await page.locator('.curriculum-screen__summary').filter({ hasText: '/θ/' }).click();
+  await page.locator('.curriculum-screen__unit').filter({ hasText: '/θ/' }).click();
   await expect(page.getByRole('link', { name: /Đã nghe · \d+%/ })).toBeVisible();
 });
 
