@@ -57,7 +57,7 @@
   },
   {
     "id": "s9",
-    "text": "My teacher thinks maths is fun.",
+    "text": "My teacher thinks math is fun.",
     "focus": ["TH", "S"],
     "kind": "statement",
     "title_vi": "/θ/ trong cụm phụ âm"
@@ -68,5 +68,187 @@
     "focus": ["T", "P"],
     "kind": "question",
     "title_vi": "Câu hỏi lịch sự"
+  },
+  {
+    "id": "s11",
+    "text": "I want to go to the store with my friends.",
+    "focus": ["T", "S"],
+    "kind": "statement",
+    "title_vi": "Từ nội dung mạnh, từ chức năng yếu"
+  },
+  {
+    "id": "s12",
+    "text": "Can you help me with this?",
+    "focus": ["HH", "DH"],
+    "kind": "question",
+    "title_vi": "Nhịp câu hỏi ngắn"
+  },
+  {
+    "id": "s13",
+    "text": "Students study Spanish at school on Friday.",
+    "focus": ["S", "T"],
+    "kind": "statement",
+    "title_vi": "Cụm /st/ /sp/ /sk/"
+  },
+  {
+    "id": "s14",
+    "text": "She asked, laughed, and walked away.",
+    "focus": ["T", "K"],
+    "kind": "statement",
+    "title_vi": "Đuôi -ed /t/"
+  },
+  {
+    "id": "s15",
+    "text": "We wanted the painted fence fixed.",
+    "focus": ["D", "T"],
+    "kind": "statement",
+    "title_vi": "Đuôi -ed /ɪd/ và cụm cuối"
+  },
+  {
+    "id": "s16",
+    "text": "Really, the red car is far from here.",
+    "focus": ["R", "ER"],
+    "kind": "statement",
+    "title_vi": "/r/ đầu và cuối"
+  },
+  {
+    "id": "s17",
+    "text": "Laura will later lead the rally.",
+    "focus": ["L", "R"],
+    "kind": "statement",
+    "title_vi": "/l/ và /r/"
+  },
+  {
+    "id": "s18",
+    "text": "We have five very wide windows.",
+    "focus": ["V", "W"],
+    "kind": "statement",
+    "title_vi": "/v/ và /w/"
+  },
+  {
+    "id": "s19",
+    "text": "Where do you live?",
+    "focus": ["W", "V"],
+    "kind": "question",
+    "title_vi": "Câu hỏi Wh: ngữ điệu xuống"
+  },
+  {
+    "id": "s20",
+    "text": "Are you coming tonight?",
+    "focus": ["K", "T"],
+    "kind": "question",
+    "title_vi": "Câu hỏi Yes/No: ngữ điệu lên"
+  },
+  {
+    "id": "s21",
+    "text": "Bananas are good for you.",
+    "focus": ["AH", "G"],
+    "kind": "statement",
+    "title_vi": "Schwa và từ chức năng yếu"
+  },
+  {
+    "id": "s22",
+    "text": "I can do it, but I can't do it today.",
+    "focus": ["K", "T"],
+    "kind": "statement",
+    "title_vi": "can và can't"
+  },
+  {
+    "id": "s23",
+    "text": "Put it on a little plate of butter.",
+    "focus": ["T", "P"],
+    "kind": "statement",
+    "title_vi": "Nối âm và flap /t/"
+  },
+  {
+    "id": "s24",
+    "text": "Turn it off and pick it up.",
+    "focus": ["T", "K"],
+    "kind": "statement",
+    "title_vi": "Nối phụ âm với nguyên âm"
+  },
+  {
+    "id": "s25",
+    "text": "I would like to buy a boat today.",
+    "focus": ["AY", "OW"],
+    "kind": "statement",
+    "title_vi": "Nguyên âm đôi"
+  },
+  {
+    "id": "s26",
+    "text": "Joy found a toy on the way home.",
+    "focus": ["OY", "AW"],
+    "kind": "statement",
+    "title_vi": "/ɔɪ/ /aʊ/ /eɪ/"
+  },
+  {
+    "id": "s27",
+    "text": "The girl bought a hot dog at the small bar.",
+    "focus": ["ER", "AO"],
+    "kind": "statement",
+    "title_vi": "/ɝ/ /ɔ/ /ɑ/"
+  },
+  {
+    "id": "s28",
+    "text": "The photographer took a photograph of the economy.",
+    "focus": ["F", "T"],
+    "kind": "statement",
+    "title_vi": "Trọng âm từ dài"
+  },
+  {
+    "id": "s29",
+    "text": "Do you want tea, coffee, or juice?",
+    "focus": ["T", "JH"],
+    "kind": "question",
+    "title_vi": "Ngữ điệu liệt kê"
+  },
+  {
+    "id": "s30",
+    "text": "I said fifteen, not fifty.",
+    "focus": ["F", "T"],
+    "kind": "statement",
+    "title_vi": "Nhấn tương phản"
+  },
+  {
+    "id": "s31",
+    "text": "When I got home, I made dinner, and then I called my mother.",
+    "focus": ["D", "M"],
+    "kind": "statement",
+    "title_vi": "Nhóm ý và ngắt nghỉ"
+  },
+  {
+    "id": "s32",
+    "text": "I did not say he stole the money.",
+    "focus": ["S", "T"],
+    "kind": "statement",
+    "title_vi": "Nhấn tương phản đổi nghĩa"
+  },
+  {
+    "id": "s33",
+    "text": "What are you going to do tonight?",
+    "focus": ["G", "T"],
+    "kind": "question",
+    "title_vi": "Chuỗi giảm âm tự nhiên"
+  },
+  {
+    "id": "s34",
+    "text": "He is singing a young song in the hall.",
+    "focus": ["NG", "HH"],
+    "kind": "statement",
+    "title_vi": "/ŋ/ /h/ /j/"
+  },
+  {
+    "id": "s35",
+    "text": "Every morning, I take the bus to work and drink a cup of coffee.",
+    "focus": ["T", "K"],
+    "kind": "statement",
+    "title_vi": "Đoạn shadowing"
+  },
+  {
+    "id": "s36",
+    "text": "Let me tell you about my hometown and why I love it.",
+    "focus": ["T", "L"],
+    "kind": "statement",
+    "title_vi": "Mở đầu bài nói một phút"
   }
 ]

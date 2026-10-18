@@ -1,10 +1,10 @@
 .speak-check {
   display: flex;
   flex-direction: column;
-  gap: var(--space-3);
+  gap: var(--space-2);
   align-items: stretch;
   inline-size: 100%;
-  padding: var(--space-3) var(--space-4) var(--space-3);
+  padding: var(--space-2) var(--space-3);
   color: var(--color-on-scrim);
   background: var(--color-scrim-strong);
   border: 1px solid var(--color-on-scrim-muted);
@@ -25,16 +25,16 @@
 
 .speak-check__word-box {
   display: flex;
-  flex-direction: column;
-  gap: var(--space-1);
+  gap: var(--space-2);
   align-items: center;
+  justify-content: center;
   min-inline-size: 0;
 }
 
 .speak-check__word {
   overflow: hidden;
   max-inline-size: 100%;
-  font-size: var(--text-2xl);
+  font-size: var(--text-xl);
   font-weight: var(--weight-bold);
   line-height: var(--leading-tight);
   white-space: nowrap;
@@ -47,8 +47,8 @@
 }
 
 .speak-check__dot {
-  inline-size: 8px;
-  block-size: 8px;
+  inline-size: 6px;
+  block-size: 6px;
   background: var(--color-on-scrim-muted);
   border-radius: var(--radius-full);
   opacity: 0.5;
@@ -65,7 +65,7 @@
   gap: var(--space-1);
   align-items: center;
   justify-content: center;
-  min-block-size: 44px;
+  min-block-size: 32px;
   text-align: center;
 }
 
@@ -136,7 +136,7 @@
 .speak-check__controls {
   display: grid;
   grid-template-columns: 1fr auto 1fr;
-  gap: var(--space-4);
+  gap: var(--space-3);
   place-items: center center;
 }
 
@@ -164,9 +164,9 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  inline-size: 44px;
-  block-size: 44px;
-  font-size: var(--text-lg);
+  inline-size: 40px;
+  block-size: 40px;
+  font-size: var(--text-md);
   background: rgb(255 255 255 / 14%);
   border-radius: var(--radius-full);
 }
@@ -176,9 +176,9 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  inline-size: 60px;
-  block-size: 60px;
-  font-size: var(--text-2xl);
+  inline-size: 52px;
+  block-size: 52px;
+  font-size: var(--text-xl);
   color: var(--color-on-primary);
   background: var(--color-primary);
   border: 0;
@@ -197,7 +197,7 @@
 
 .speak-check__mic-ring {
   position: absolute;
-  inset: -6px;
+  inset: -5px;
   border: 2px solid var(--color-on-scrim-muted);
   border-radius: var(--radius-full);
   transition: transform var(--duration-fast) linear;
@@ -210,10 +210,10 @@
 
 .speak-check__repeat {
   align-self: center;
-  min-block-size: 32px;
-  padding: var(--space-1) var(--space-3);
+  min-block-size: 26px;
+  padding: 0 var(--space-3);
   font: inherit;
-  font-size: var(--text-xs);
+  font-size: var(--text-2xs);
   font-weight: var(--weight-medium);
   color: var(--color-on-scrim-muted);
   background: transparent;

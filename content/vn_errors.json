@@ -317,5 +317,137 @@
     "viseme_group": null,
     "hint_vi": "Âm /ɹ/ Mỹ đang nghe như /l/. Cuộn nhẹ lưỡi về sau, không chạm lợi; môi hơi tròn.",
     "mouth_tip_vi": "Môi hơi tròn, không dẹt."
+  },
+  {
+    "id": "initial_cluster_s_dropped",
+    "expected": "S",
+    "heard": [],
+    "kind": "deletion",
+    "priority": 3,
+    "final_only": false,
+    "viseme_group": "V6",
+    "hint_vi": "Âm /s/ đầu cụm (st-, sp-, sk-) bị bỏ hoặc thêm nguyên âm phía trước. Xì /s/ nhẹ rồi nối thẳng sang âm kế.",
+    "mouth_tip_vi": "Răng gần khép, bắt đầu bằng tiếng xì."
+  },
+  {
+    "id": "ng_to_n",
+    "expected": "NG",
+    "heard": ["N"],
+    "kind": "substitution",
+    "priority": 3,
+    "final_only": true,
+    "viseme_group": "V12",
+    "hint_vi": "/ŋ/ cuối (sing) bị thành /n/ (sin). Nâng lưỡi sau chạm vòm mềm, đầu lưỡi không chạm răng.",
+    "mouth_tip_vi": "Miệng hơi mở, đầu lưỡi nằm thấp."
+  },
+  {
+    "id": "h_dropped",
+    "expected": "HH",
+    "heard": [],
+    "kind": "deletion",
+    "priority": 3,
+    "final_only": false,
+    "viseme_group": "V12",
+    "hint_vi": "/h/ đầu từ bị nuốt (hat thành at). Thở một hơi nhẹ ra trước nguyên âm.",
+    "mouth_tip_vi": "Miệng mở sẵn theo nguyên âm, chỉ thêm luồng hơi."
+  },
+  {
+    "id": "ey_to_eh",
+    "expected": "EY",
+    "heard": ["EH"],
+    "kind": "substitution",
+    "priority": 3,
+    "final_only": false,
+    "viseme_group": "V8",
+    "hint_vi": "/eɪ/ (late) bị ngắn thành /e/ (let). Bắt đầu ở /e/ rồi trượt lên /ɪ/.",
+    "mouth_tip_vi": "Miệng khép dần và kéo ngang về cuối âm."
+  },
+  {
+    "id": "ow_to_ao",
+    "expected": "OW",
+    "heard": ["AO"],
+    "kind": "substitution",
+    "priority": 3,
+    "final_only": false,
+    "viseme_group": "V4",
+    "hint_vi": "/oʊ/ (boat) bị thành /ɔ/ (bought). Kết thúc bằng môi tròn như /u/.",
+    "mouth_tip_vi": "Môi tròn rõ ở cuối âm."
+  },
+  {
+    "id": "ao_to_aa",
+    "expected": "AO",
+    "heard": ["AA"],
+    "kind": "substitution",
+    "priority": 4,
+    "final_only": false,
+    "viseme_group": "V10",
+    "hint_vi": "/ɔ/ (caught) và /ɑ/ (cot) lẫn nhau. Với /ɔ/ môi hơi tròn.",
+    "mouth_tip_vi": "Môi tròn nhẹ, không kéo ngang."
+  },
+  {
+    "id": "er_to_eh",
+    "expected": "ER",
+    "heard": ["EH", "AH"],
+    "kind": "substitution",
+    "priority": 3,
+    "final_only": false,
+    "viseme_group": "V10",
+    "hint_vi": "/ɝ/ (bird) bị thành /e/ hoặc /ơ/ không có /r/. Cuộn nhẹ đầu lưỡi ra sau.",
+    "mouth_tip_vi": "Môi hơi chu, hàm gần như không mở thêm."
+  },
+  {
+    "id": "aa_to_ae",
+    "expected": "AA",
+    "heard": ["AE"],
+    "kind": "substitution",
+    "priority": 4,
+    "final_only": false,
+    "viseme_group": "V7",
+    "hint_vi": "/ɑ/ (hot) bị thành /æ/ (hat). Hạ hàm thấp, lưỡi lùi về sau.",
+    "mouth_tip_vi": "Hàm mở lớn, môi thả lỏng."
+  },
+  {
+    "id": "aw_to_ow",
+    "expected": "AW",
+    "heard": ["OW", "AA"],
+    "kind": "substitution",
+    "priority": 4,
+    "final_only": false,
+    "viseme_group": "V7",
+    "hint_vi": "/aʊ/ (found) bị thành /oʊ/. Bắt đầu mở rộng như /a/ rồi mới tròn môi.",
+    "mouth_tip_vi": "Hàm mở lớn trước, môi tròn sau."
+  },
+  {
+    "id": "ay_to_ey",
+    "expected": "AY",
+    "heard": ["EY", "AA"],
+    "kind": "substitution",
+    "priority": 4,
+    "final_only": false,
+    "viseme_group": "V7",
+    "hint_vi": "/aɪ/ (my) bị thành /eɪ/ (may) hoặc /a/ ngắn. Mở rộng rồi trượt lên /ɪ/.",
+    "mouth_tip_vi": "Hàm mở lớn ở đầu, khép dần về cuối."
+  },
+  {
+    "id": "oy_to_ay",
+    "expected": "OY",
+    "heard": ["AY", "AO"],
+    "kind": "substitution",
+    "priority": 4,
+    "final_only": false,
+    "viseme_group": "V4",
+    "hint_vi": "/ɔɪ/ (boy) bị thành /aɪ/ (buy). Môi tròn ở đầu rồi kéo ngang lên /ɪ/.",
+    "mouth_tip_vi": "Bắt đầu môi tròn, kết thúc môi hơi ngang."
+  },
+  {
+    "id": "y_dropped",
+    "expected": "Y",
+    "heard": [],
+    "kind": "deletion",
+    "priority": 4,
+    "final_only": false,
+    "viseme_group": "V8",
+    "hint_vi": "/j/ đầu từ bị bỏ (year thành ear). Nâng lưỡi cao gần vòm cứng rồi trượt sang nguyên âm.",
+    "mouth_tip_vi": "Môi hơi kéo ngang lúc bắt đầu."
   }
 ]

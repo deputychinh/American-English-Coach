@@ -68,14 +68,14 @@
 }
 
 .match-ring--compact .match-ring__svg {
-  inline-size: 48px;
-  block-size: 48px;
+  inline-size: 36px;
+  block-size: 36px;
 }
 
 .match-ring--compact .match-ring__percent {
-  top: 24px;
-  left: 24px;
-  font-size: var(--text-xs);
+  top: 18px;
+  left: 18px;
+  font-size: var(--text-2xs);
   transform: translate(-50%, -50%);
 }
 

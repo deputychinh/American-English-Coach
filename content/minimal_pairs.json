@@ -110,5 +110,159 @@
     "words": ["worked", "work"],
     "error_id": "final_t_dropped",
     "title_vi": "Đuôi -ed /t/"
+  },
+  {
+    "id": "street-treat",
+    "focus": "S",
+    "words": ["street", "treat"],
+    "error_id": "initial_cluster_s_dropped",
+    "title_vi": "cụm /str/"
+  },
+  {
+    "id": "spin-pin",
+    "focus": "S",
+    "words": ["spin", "pin"],
+    "error_id": "initial_cluster_s_dropped",
+    "title_vi": "cụm /sp/"
+  },
+  {
+    "id": "scar-car",
+    "focus": "S",
+    "words": ["scar", "car"],
+    "error_id": "initial_cluster_s_dropped",
+    "title_vi": "cụm /sk/"
+  },
+  {
+    "id": "played-play",
+    "focus": "D",
+    "words": ["played", "play"],
+    "error_id": "final_d_dropped",
+    "title_vi": "đuôi -ed /d/"
+  },
+  {
+    "id": "wanted-want",
+    "focus": "D",
+    "words": ["wanted", "want"],
+    "error_id": "final_d_dropped",
+    "title_vi": "đuôi -ed /ɪd/"
+  },
+  {
+    "id": "best-bet",
+    "focus": "S",
+    "words": ["best", "bet"],
+    "error_id": "final_s_dropped",
+    "title_vi": "cụm cuối /st/"
+  },
+  {
+    "id": "lock-rock",
+    "focus": "L",
+    "words": ["lock", "rock"],
+    "error_id": "r_to_l",
+    "title_vi": "/l/ và /r/"
+  },
+  {
+    "id": "collect-correct",
+    "focus": "L",
+    "words": ["collect", "correct"],
+    "error_id": "r_to_l",
+    "title_vi": "/l/ và /r/ giữa từ"
+  },
+  {
+    "id": "fan-van",
+    "focus": "V",
+    "words": ["fan", "van"],
+    "error_id": "v_to_w",
+    "title_vi": "/f/ và /v/"
+  },
+  {
+    "id": "wine-vine",
+    "focus": "W",
+    "words": ["wine", "vine"],
+    "error_id": "w_to_v",
+    "title_vi": "/w/ và /v/"
+  },
+  {
+    "id": "late-let",
+    "focus": "EY",
+    "words": ["late", "let"],
+    "error_id": "ey_to_eh",
+    "title_vi": "/eɪ/ và /e/"
+  },
+  {
+    "id": "my-may",
+    "focus": "AY",
+    "words": ["my", "may"],
+    "error_id": "ay_to_ey",
+    "title_vi": "/aɪ/ và /eɪ/"
+  },
+  {
+    "id": "boy-buy",
+    "focus": "OY",
+    "words": ["boy", "buy"],
+    "error_id": "oy_to_ay",
+    "title_vi": "/ɔɪ/ và /aɪ/"
+  },
+  {
+    "id": "found-phoned",
+    "focus": "AW",
+    "words": ["found", "phoned"],
+    "error_id": "aw_to_ow",
+    "title_vi": "/aʊ/ và /oʊ/"
+  },
+  {
+    "id": "boat-bought",
+    "focus": "OW",
+    "words": ["boat", "bought"],
+    "error_id": "ow_to_ao",
+    "title_vi": "/oʊ/ và /ɔ/"
+  },
+  {
+    "id": "caught-cot",
+    "focus": "AO",
+    "words": ["caught", "cot"],
+    "error_id": "ao_to_aa",
+    "title_vi": "/ɔ/ và /ɑ/"
+  },
+  {
+    "id": "hot-hat",
+    "focus": "AA",
+    "words": ["hot", "hat"],
+    "error_id": "aa_to_ae",
+    "title_vi": "/ɑ/ và /æ/"
+  },
+  {
+    "id": "bird-bed",
+    "focus": "ER",
+    "words": ["bird", "bed"],
+    "error_id": "er_to_eh",
+    "title_vi": "/ɝ/ và /e/"
+  },
+  {
+    "id": "hat-at",
+    "focus": "HH",
+    "words": ["hat", "at"],
+    "error_id": "h_dropped",
+    "title_vi": "/h/ đầu từ"
+  },
+  {
+    "id": "sing-sin",
+    "focus": "NG",
+    "words": ["sing", "sin"],
+    "error_id": "ng_to_n",
+    "title_vi": "/ŋ/ và /n/ cuối"
+  },
+  {
+    "id": "year-ear",
+    "focus": "Y",
+    "words": ["year", "ear"],
+    "error_id": "y_dropped",
+    "title_vi": "/j/ đầu từ"
+  },
+  {
+    "id": "can-cant",
+    "focus": "T",
+    "words": ["can", "can't"],
+    "error_id": "final_t_dropped",
+    "title_vi": "can và can't"
   }
 ]
