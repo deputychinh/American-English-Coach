@@ -2,6 +2,7 @@ import { expect, type Page, test } from '@playwright/test';
 
 import { apiHeaders } from './api-headers';
 import { e2eDeviceToken } from './env';
+import { expectModelVoice, watchModelVoice } from './model-voice';
 
 test.beforeEach(async ({ page }) => {
   // Every journey here starts as a returning learner; e2e/onboarding.spec.ts covers the first run.
@@ -41,6 +42,7 @@ test('home stays quiet when the API is ready and shows quick entries', async ({ 
 test('sounds chart renders 44 cards with camera badges and a detail panel', async ({
   page,
 }, info) => {
+  const clips = watchModelVoice(page);
   await page.goto('/sounds/?id=v01');
   await expect(page.locator('.sound-chart__card')).toHaveCount(44);
   await expect(page.locator('.sound-chart__card .confidence-badge')).toHaveCount(44);
@@ -49,6 +51,11 @@ test('sounds chart renders 44 cards with camera badges and a detail panel', asyn
     'href',
     /sound=v01/,
   );
+  await page
+    .getByRole('button', { name: /^Nghe mẫu: / })
+    .first()
+    .click();
+  await expectModelVoice(page, clips);
   await shot(page, 'sounds', info.project.name);
 });
 
@@ -85,13 +92,12 @@ test('a sound drill records, scores the target phone and advances', async ({ pag
 test('practice records with the fake microphone and shows a result card', async ({
   page,
 }, info) => {
+  const clips = watchModelVoice(page);
   await page.goto('/practice/?item=pair:think-sink:0');
   await expect(page.getByRole('button', { name: 'Thu âm' })).toBeVisible();
   // The model voice must come through on a paired phone too (it went silent with a 401 once).
-  const clip = page.waitForResponse((response) => response.url().includes('/api/v1/audio'));
   await page.getByRole('button', { name: 'Nghe mẫu' }).click();
-  expect((await clip).status()).toBe(200);
-  await expect(page.getByText(/phát được giọng mẫu/)).toHaveCount(0);
+  await expectModelVoice(page, clips);
   await page.getByRole('button', { name: 'Thu âm' }).click();
   await expect(page.getByRole('button', { name: /Dừng/ })).toBeVisible();
   await page.waitForTimeout(1800);
@@ -148,9 +154,12 @@ test('the mirror scores a spoken word with sound and mouth together', async ({ p
       },
     },
   });
+  const clips = watchModelVoice(page);
   await page.goto('/mirror/?sound=TH');
   const word = page.locator('.speak-check__word');
   await expect(word).not.toBeEmpty();
+  await page.getByRole('button', { name: 'Nghe mẫu' }).click();
+  await expectModelVoice(page, clips);
   await page.getByRole('button', { name: 'Tự nói lại: Bật' }).click();
   await page.getByRole('button', { name: 'Nói thử' }).click();
   const stop = page.getByRole('button', { name: 'Dừng và chấm' });
@@ -232,7 +241,10 @@ test('a new learner takes the placement check and lands on a level', async ({ pa
   await page.goto('/');
   await page.getByRole('link', { name: /Bạn mới bắt đầu\?/ }).click();
   await expect(page).toHaveURL(/placement/);
+  const clips = watchModelVoice(page);
   await page.getByRole('button', { name: 'Bắt đầu kiểm tra' }).click();
+  await page.getByRole('button', { name: 'Phát âm thanh' }).click();
+  await expectModelVoice(page, clips);
   const options = page.locator('.listen-question-card__option');
   for (let i = 0; i < 16; i += 1) {
     if ((await page.locator('.placement-screen__level').count()) > 0) break;
@@ -249,8 +261,11 @@ test('a new learner takes the placement check and lands on a level', async ({ pa
 test('the listening step asks one question at a time and ends with a summary', async ({
   page,
 }, info) => {
+  const clips = watchModelVoice(page);
   await page.goto('/listen/?unit=u03');
   await expect(page.getByRole('heading', { name: 'Nghe phân biệt' })).toBeVisible();
+  await page.getByRole('button', { name: 'Phát âm thanh' }).click();
+  await expectModelVoice(page, clips);
   const options = page.locator('.listen-question-card__option');
   await expect(options.first()).toBeVisible();
   await shot(page, 'listen', info.project.name);
