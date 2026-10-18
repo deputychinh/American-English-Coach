@@ -7,6 +7,7 @@ import { type ReactElement, useCallback, useEffect, useMemo } from 'react';
 import { Icon } from '@/components/Icon/Icon';
 import { WeekStrip } from '@/components/WeekStrip/WeekStrip';
 import { DEFAULT_DAILY_GOAL } from '@/constants/plan.constant';
+import { AsyncStatus } from '@/enums/async-status.enum';
 import { IconName } from '@/enums/icon-name.enum';
 import { Language } from '@/enums/language.enum';
 import { StorageKey } from '@/enums/storage-key.enum';
@@ -98,7 +99,7 @@ export const HomeScreen = (): ReactElement => {
             />
           </svg>
           <span className="home-screen__ring-count">
-            {done}/{target}
+            {done >= target && target > 0 ? '✓' : `${String(done)}/${String(target)}`}
           </span>
         </span>
         <div className="home-screen__goal-text">
@@ -121,6 +122,17 @@ export const HomeScreen = (): ReactElement => {
         </div>
       </section>
 
+      {curriculum.status === AsyncStatus.Error ? (
+        <Link href="/practice" className="home-screen__continue">
+          <span className="home-screen__continue-label">{copy.today.continueLabel}</span>
+          <span className="home-screen__continue-title">{copy.home.sounds}</span>
+          <span className="home-screen__continue-step">{copy.home.soundsHint}</span>
+          <span className="home-screen__continue-cta">
+            {copy.home.heroCta}
+            <Icon name={IconName.ArrowRight} />
+          </span>
+        </Link>
+      ) : null}
       {current && next ? (
         <Link href={next.href} className="home-screen__continue">
           <span className="home-screen__continue-label">{copy.today.continueLabel}</span>

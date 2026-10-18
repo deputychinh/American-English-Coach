@@ -32,7 +32,8 @@
   font-weight: var(--weight-semibold);
   font-variant-numeric: tabular-nums;
   color: var(--color-text-muted);
-  background: var(--color-ink-100);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
   border: 2px solid transparent;
   border-radius: var(--radius-full);
 }
