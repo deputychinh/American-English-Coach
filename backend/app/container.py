@@ -1,10 +1,14 @@
 """Composition root: builds every collaborator once from settings (constructor injection)."""
 
+import logging
 from dataclasses import dataclass
 from functools import cached_property
 from pathlib import Path
 
+import numpy as np
+
 from app.config import Settings
+from app.constants import SAMPLE_RATE
 from app.db.engine import SessionFactory, create_sqlite_engine
 from app.domain.error_catalog import ErrorCatalog
 from app.domain.ports import PhonemeRecognizer
@@ -53,6 +57,9 @@ class TutorRateLimiter:
         window.append(now)
         self._hits[key] = window
         return True
+
+
+logger = logging.getLogger(__name__)
 
 
 @dataclass
@@ -200,6 +207,20 @@ class AppContainer:
         return TutorService(
             client, self.results, self.settings.llm_model, self.settings.llm_vision_model
         )
+
+    def warm_up(self) -> None:
+        """Loads the phoneme model and runs one silent inference (first device kernels included).
+
+        Called from a background thread at start; a missing or broken model is logged and left for
+        the first request to report, so the API still comes up.
+        """
+        if not self.settings.warm_up or not self.model_ready():
+            return
+        try:
+            self.recognizer.log_posteriors(np.zeros(SAMPLE_RATE, dtype=np.float32))
+            logger.info("phoneme model warmed up")
+        except Exception:  # warm-up is best effort; the request path reports errors
+            logger.warning("phoneme model warm-up failed", exc_info=True)
 
     def model_ready(self) -> bool:
         """Whether the model files are present (loading happens on first use)."""

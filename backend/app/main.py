@@ -1,6 +1,7 @@
 """FastAPI application factory."""
 
 import logging
+import threading
 from collections.abc import AsyncIterator, Awaitable, Callable
 from contextlib import asynccontextmanager
 from http import HTTPStatus
@@ -135,6 +136,7 @@ def create_app(
                 "pairing code for phones on this network",
                 extra={"pairing_code": container.pairing_code, "host": resolved.host},
             )
+        threading.Thread(target=container.warm_up, name="model-warm-up", daemon=True).start()
         logger.info("coach api ready")
         yield
 

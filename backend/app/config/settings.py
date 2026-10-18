@@ -29,6 +29,8 @@ class Settings(BaseSettings):
     device: str = Field(default="auto", pattern="^(auto|cpu|mps|cuda)$")
     # `fake` runs the API without the model (CI, demos); results are tagged fake-recognizer@ci.
     recognizer: str = Field(default="wav2vec2", pattern="^(wav2vec2|fake)$")
+    # Load the phoneme model in the background at start so the first scoring is not a cold load.
+    warm_up: bool = True
     log_json: bool = True
     # Fixed pairing code (6 digits) for phones; empty = a new code each start, printed in the log.
     pairing_code: str = Field(default="", pattern=r"^(\d{6})?$")
