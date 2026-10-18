@@ -12,7 +12,7 @@ import { IconName } from '@/enums/icon-name.enum';
 import { PracticeStatus } from '@/enums/practice-status.enum';
 import { RecorderStatus } from '@/enums/recorder-status.enum';
 import { StorageKey } from '@/enums/storage-key.enum';
-import { CameraStage } from '@/features/mirror/components/CameraStage';
+import { MirrorGuide } from '@/features/mirror/components/MirrorGuide';
 import { useCalibration } from '@/features/mirror/hooks/useCalibration';
 import { useMouthTracker } from '@/features/mirror/hooks/useMouthTracker';
 import { ResultCard } from '@/features/practice/components/ResultCard';
@@ -173,7 +173,14 @@ export const PracticeSession = ({
       <section className="practice-session__stage" aria-label={copy.practice.promptAria}>
         {cameraOn ? (
           <div className="practice-session__pip">
-            <CameraStage tracker={tracker} ghost={targetGroup?.group ?? null} isCompact />
+            <MirrorGuide
+              isCompact
+              sound={targetIpa ?? item.focus[0] ?? ''}
+              target={targetGroup}
+              tracker={tracker}
+              muted={recorder.status === RecorderStatus.Recording}
+              transitionVi={transitionVi}
+            />
           </div>
         ) : null}
         <p className="practice-session__text">{item.text}</p>
@@ -221,7 +228,9 @@ export const PracticeSession = ({
               {copy.practice.openResult}
             </button>
           ) : (
-            <p className="practice-session__line">{copy.speak.idleHint}</p>
+            <p className="practice-session__line practice-session__line--idle">
+              {copy.speak.idleHint}
+            </p>
           )}
         </div>
         <div className="practice-session__controls">

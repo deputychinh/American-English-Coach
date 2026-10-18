@@ -169,13 +169,28 @@
 }
 
 .camera-stage--compact {
-  block-size: 220px;
+  block-size: min(300px, 34dvh);
   border-radius: var(--radius-lg);
+}
+
+/* Short phones (iPhone SE): leave room for the word and the hint under the preview. */
+@media (max-height: 700px) {
+  .camera-stage--compact {
+    block-size: 30dvh;
+  }
+}
+
+.camera-stage--compact .camera-stage__top {
+  padding: var(--space-2);
+}
+
+.camera-stage--compact .camera-stage__bottom {
+  padding: var(--space-6) var(--space-2) var(--space-2);
 }
 
 .camera-stage--compact .camera-stage__notice {
   font-size: var(--text-xs);
-  inset-block: auto var(--space-2);
+  inset-block-start: var(--space-3);
 }
 
 .camera-stage--compact .camera-stage__guide {

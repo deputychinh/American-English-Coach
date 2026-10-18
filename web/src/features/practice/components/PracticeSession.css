@@ -15,7 +15,9 @@
   flex-direction: column;
   gap: var(--space-4);
   align-items: center;
-  justify-content: center;
+
+  /* `safe`: when the content is taller than the stage it starts at the top instead of being cut. */
+  justify-content: safe center;
   overflow-y: auto;
   min-block-size: 0;
   padding: var(--space-4) var(--padding-page-x);
@@ -23,7 +25,7 @@
 }
 
 .practice-session__pip {
-  inline-size: min(100%, 320px);
+  inline-size: 100%;
 }
 
 .practice-session__text {
@@ -34,8 +36,33 @@
   overflow-wrap: anywhere;
 }
 
+.practice-session--camera .practice-session__stage {
+  gap: var(--space-3);
+  padding-block: var(--space-3);
+}
+
 .practice-session--camera .practice-session__text {
   font-size: var(--text-3xl);
+}
+
+/* Short phones (iPhone SE): smaller word so camera, word and hint fit without scrolling. */
+@media (max-height: 700px) {
+  .practice-session--camera .practice-session__text {
+    font-size: var(--text-2xl);
+  }
+
+  /* The mouth hint also lives in the camera's ⓘ sheet; short phones keep the face in view. */
+  .practice-session--camera .practice-session__target {
+    display: none;
+  }
+
+  .practice-session__line--idle {
+    display: block;
+    overflow: hidden;
+    max-inline-size: 100%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
 }
 
 .practice-session__target {

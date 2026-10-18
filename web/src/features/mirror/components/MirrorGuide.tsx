@@ -41,6 +41,8 @@ interface MirrorGuideProps {
   topEnd?: ReactNode;
   /** "Say it" deck: sound and mouth scored together; receives the live mouth feedback. */
   speak?: ((live: ReactNode) => ReactNode) | null;
+  /** The same mirror shrunk into the practice screen: dial and one cue, details in the sheet. */
+  isCompact?: boolean;
 }
 
 /**
@@ -58,6 +60,7 @@ export const MirrorGuide = ({
   topStart = null,
   topEnd = null,
   speak = null,
+  isCompact = false,
 }: MirrorGuideProps): ReactElement => {
   const copy = useCopy();
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);
@@ -83,8 +86,12 @@ export const MirrorGuide = ({
           : copy.mirror.match.noFace;
 
   return (
-    <div className={cx('mirror-guide', hold.isHeld && 'is-held')}>
+    <div
+      className={cx('mirror-guide', isCompact && 'mirror-guide--compact', hold.isHeld && 'is-held')}
+    >
       <CameraStage
+        isCompact={isCompact}
+        isFaceNoticeHidden={isCompact && target !== null}
         tracker={tracker}
         ghost={target?.group ?? null}
         isOnTarget={hold.isOnTarget}
@@ -104,7 +111,22 @@ export const MirrorGuide = ({
           </>
         }
         bottom={
-          speak ? (
+          isCompact ? (
+            target && tracker.status !== TrackerStatus.Error ? (
+              <div className="mirror-guide__live">
+                <MatchRing
+                  isCompact
+                  score={match.score}
+                  state={match.state}
+                  isHeld={hold.isHeld}
+                  holdProgress={hold.holdProgress}
+                />
+                {cue && match.worst ? (
+                  <CueChip text={cue} direction={match.worst.direction} />
+                ) : null}
+              </div>
+            ) : null
+          ) : speak ? (
             speak(
               tracker.status === TrackerStatus.Error ? (
                 <p className="mirror-guide__audio-only">{copy.practice.cameraErrorHint}</p>

@@ -36,6 +36,8 @@ interface CameraStageProps {
   prompt?: string | null;
   /** Small inset preview (practice screen) instead of the full-screen stage. */
   isCompact?: boolean;
+  /** Hide the "no face" chip when something else on the stage already says it (match dial). */
+  isFaceNoticeHidden?: boolean;
 }
 
 /** Edge-to-edge mirrored camera with the lip outline, a ghost target and floating controls. */
@@ -49,6 +51,7 @@ export const CameraStage = ({
   bottom = null,
   prompt = null,
   isCompact = false,
+  isFaceNoticeHidden = false,
 }: CameraStageProps): ReactElement => {
   const copy = useCopy();
   const { attachVideo, attachCanvas, status, error, latest, isFaceVisible } = tracker;
@@ -104,9 +107,11 @@ export const CameraStage = ({
     status === TrackerStatus.Loading
       ? copy.mirror.loadingModel
       : isReady && !isFaceVisible
-        ? isCompact
-          ? copy.mirror.match.noFace
-          : copy.mirror.noFace
+        ? isFaceNoticeHidden
+          ? null
+          : isCompact
+            ? copy.mirror.match.noFace
+            : copy.mirror.noFace
         : latest && latest.quality < 0.5
           ? copy.mirror.turnStraight
           : null;
