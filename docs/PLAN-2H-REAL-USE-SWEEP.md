@@ -26,15 +26,17 @@ Plan này lấp hai khoảng trống đó.
 
 ## Kết quả (01:17)
 
-| Chỉ số                                     | Trước                                           | Sau                                 |
-| ------------------------------------------ | ----------------------------------------------- | ----------------------------------- |
-| Lượt chấm được trên 880 (440 từ × 2 giọng) | 852 (14 từ không có âm đích trong một biến thể) | 880                                 |
-| Báo nhầm âm đích trên giọng chuẩn          | 18,0%                                           | 16,1%                               |
-| /ʊr/ (tour, sure, pure)                    | 17/19                                           | 5/20                                |
-| /ɔ/ (all, call, talk)                      | 11/16                                           | 6/20                                |
-| /t/                                        | 7/20                                            | 0/20                                |
-| /p/                                        | 6/20                                            | 3/20                                |
-| Bộ thử thay âm (`synthetic_contrast`)      |                                                 | không đổi khi bật/tắt luật biến thể |
+| Chỉ số                                                                               | Trước                                           | Sau                                 |
+| ------------------------------------------------------------------------------------ | ----------------------------------------------- | ----------------------------------- |
+| Lượt chấm được trên 880 (440 từ × 2 giọng)                                           | 852 (14 từ không có âm đích trong một biến thể) | 880                                 |
+| Báo nhầm âm đích trên giọng chuẩn                                                    | 18,0%                                           | 16,1%                               |
+| /ʊr/ (tour, sure, pure)                                                              | 17/19                                           | 5/20                                |
+| /ɔ/ (all, call, talk)                                                                | 11/16                                           | 6/20                                |
+| /t/                                                                                  | 7/20                                            | 0/20                                |
+| /p/                                                                                  | 6/20                                            | 3/20                                |
+| Bộ thử thay âm (`synthetic_contrast`)                                                |                                                 | không đổi khi bật/tắt luật biến thể |
+| speechocean762 (người học thật, 250 câu, 4 757 âm): báo nhầm âm chuyên gia chấm đúng | 12,5%                                           | 12,3%                               |
+| speechocean762: tỉ lệ bắt âm chuyên gia chấm sai                                     | 44,1%                                           | 43,6% (bỏ lọt thêm ~4/869 âm)       |
 
 Đã làm:
 
