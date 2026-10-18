@@ -1,6 +1,7 @@
 export enum StorageKey {
   Theme = 'coach.theme',
-  CameraDefault = 'coach.camera',
+  // v2: the practice camera now starts on for everyone; the old key held the opt-in default.
+  CameraDefault = 'coach.camera.v2',
   Muted = 'coach.muted',
   Calibration = 'coach.calibration',
   ApiBaseUrl = 'coach.apiBaseUrl',

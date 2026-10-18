@@ -74,9 +74,10 @@ describe('PracticeScreen', () => {
     );
     expect(screen.getByText('think')).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Thu âm' })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: 'Bật camera' })).toHaveAttribute(
+    // The camera starts on: the toggle offers to turn it off.
+    expect(screen.getByRole('button', { name: 'Tắt camera' })).toHaveAttribute(
       'aria-pressed',
-      'false',
+      'true',
     );
     expect(screen.getByRole('button', { name: 'Nghe mẫu' })).toBeInTheDocument();
   });

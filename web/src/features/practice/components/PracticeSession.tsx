@@ -7,6 +7,7 @@ import { Icon } from '@/components/Icon/Icon';
 import { IconButton } from '@/components/IconButton/IconButton';
 import { LessonHeader } from '@/components/LessonHeader/LessonHeader';
 import { Sheet } from '@/components/Sheet/Sheet';
+import { SILENCE_MS_SENTENCE, SILENCE_MS_WORD } from '@/constants/recorder.constant';
 import { IconName } from '@/enums/icon-name.enum';
 import { PracticeStatus } from '@/enums/practice-status.enum';
 import { RecorderStatus } from '@/enums/recorder-status.enum';
@@ -71,10 +72,13 @@ export const PracticeSession = ({
   const [result, setResult] = useState<AssessmentResponse | null>(null);
   const [isResultOpen, setIsResultOpen] = useState(false);
   const [recording, setRecording] = useState<Recording | null>(null);
-  const [cameraOn, setCameraOn] = useStoredState<boolean>(StorageKey.CameraDefault, false);
+  const [cameraOn, setCameraOn] = useStoredState<boolean>(StorageKey.CameraDefault, true);
   const [isSilent, setIsSilent] = useState(false);
   const autoStopRef = useRef<(reason: AutoStopReason) => void>(() => undefined);
-  const recorder = useRecorder({ onAutoStop: (reason) => autoStopRef.current(reason) });
+  const recorder = useRecorder({
+    onAutoStop: (reason) => autoStopRef.current(reason),
+    silenceMs: item.kind === 'word' ? SILENCE_MS_WORD : SILENCE_MS_SENTENCE,
+  });
   useKeepAwake();
   useImmersive();
   useFocusMode();

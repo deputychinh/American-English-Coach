@@ -7,6 +7,20 @@
   background: var(--color-stage);
 }
 
+.camera-stage__frame {
+  position: absolute;
+  inset: 0;
+}
+
+/* Sized from the video's aspect ratio (inline width/height), centred, panned and zoomed. */
+.camera-stage__frame.is-sized {
+  inset: auto;
+  top: 50%;
+  left: 50%;
+  transition: transform 260ms linear;
+  transform-origin: center;
+}
+
 .camera-stage__video,
 .camera-stage__overlay {
   position: absolute;
@@ -161,7 +175,7 @@
 
 .camera-stage--compact .camera-stage__notice {
   font-size: var(--text-xs);
-  inset-block-start: var(--space-2);
+  inset-block: auto var(--space-2);
 }
 
 .camera-stage--compact .camera-stage__guide {

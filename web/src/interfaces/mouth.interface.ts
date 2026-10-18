@@ -88,3 +88,23 @@ export interface GhostPlacement {
   topPercent: number;
   widthPercent: number;
 }
+
+export interface BoxSize {
+  width: number;
+  height: number;
+}
+
+/** Pan and zoom (in stage pixels) that bring the mouth to the middle of a small preview. */
+export interface MouthZoom {
+  scale: number;
+  x: number;
+  y: number;
+}
+
+/** One axis of a pan: offset, frame and stage lengths in pixels, and the zoom. */
+export interface ZoomShift {
+  shift: number;
+  frame: number;
+  stage: number;
+  scale: number;
+}

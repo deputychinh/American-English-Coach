@@ -53,10 +53,7 @@ export const SettingsScreen = (): ReactElement => {
   // External-store read: the static HTML says false, the shell flips it after hydration.
   const isPairingFirst = useSyncExternalStore(subscribeNever, isNativeShell, () => false);
 
-  const [cameraDefault, setCameraDefault] = useStoredState<boolean>(
-    StorageKey.CameraDefault,
-    false,
-  );
+  const [cameraDefault, setCameraDefault] = useStoredState<boolean>(StorageKey.CameraDefault, true);
   const [muted, setMuted] = useStoredState<boolean>(StorageKey.Muted, false);
   const [goal] = useStoredState<number>(StorageKey.DailyGoal, DEFAULT_DAILY_GOAL);
   const profile = useActiveProfile();

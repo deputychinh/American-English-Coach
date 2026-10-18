@@ -57,3 +57,7 @@ export const TONGUE_RED_MARGIN = 20;
 /** One-off mouth snapshot sent to the tutor on request. */
 export const SNAPSHOT_MAX_WIDTH = 512;
 export const SNAPSHOT_PADDING = 0.6;
+
+/** Inset preview zooms until the mouth spans this share of the preview width. */
+export const MOUTH_ZOOM_SHARE = 0.42;
+export const MOUTH_ZOOM_MAX = 3.5;
