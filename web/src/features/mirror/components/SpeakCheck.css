@@ -125,6 +125,18 @@
   background: rgb(13 148 136 / 40%);
 }
 
+/* Unsure, the same amber as "Gần đúng" on the result card, never the red of a wrong sound. */
+.speak-check__pill.is-close {
+  color: var(--color-amber-100);
+  background: rgb(217 119 6 / 40%);
+}
+
+/* The camera did not see the mouth: not the learner's mistake, so no red. */
+.speak-check__pill.is-muted {
+  color: rgb(255 255 255 / 85%);
+  background: rgb(255 255 255 / 16%);
+}
+
 .speak-check__link {
   font-size: var(--text-sm);
   font-weight: var(--weight-semibold);

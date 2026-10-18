@@ -68,10 +68,22 @@ export const SpeakStatus = ({
               : copy.speak.headline[outcome.kind]}
         </p>
         <p className="speak-check__pills">
-          <span className={cx('speak-check__pill', outcome.sound === 'ok' && 'is-ok')}>
+          <span
+            className={cx(
+              'speak-check__pill',
+              outcome.sound === 'ok' && 'is-ok',
+              outcome.sound === 'check' && 'is-close',
+            )}
+          >
             {copy.speak.sound(ipa)}: {soundLabel}
           </span>
-          <span className={cx('speak-check__pill', isMouthOk && 'is-ok')}>
+          <span
+            className={cx(
+              'speak-check__pill',
+              isMouthOk && 'is-ok',
+              !isMouthOk && outcome.mouthRate === null && 'is-muted',
+            )}
+          >
             {copy.speak.mouth}: {mouthLabel}
           </span>
         </p>
