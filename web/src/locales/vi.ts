@@ -104,6 +104,7 @@ export const vi = {
   curriculum: viCourse.curriculum,
   listen: viListen.listen,
   today: viHome.today,
+  placement: viHome.placement,
   speak: viSpeak.speak,
   onboarding: viCourse.onboarding,
   plan: viSettings.plan,

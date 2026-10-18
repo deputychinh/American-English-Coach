@@ -16,6 +16,7 @@ const ROUTES = [
   '/privacy/',
   '/curriculum/',
   '/listen/',
+  '/placement/',
 ];
 const FILES = [
   '/manifest.webmanifest',

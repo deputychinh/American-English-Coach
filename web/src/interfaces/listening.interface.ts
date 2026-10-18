@@ -38,3 +38,16 @@ export interface NextStep {
   kind: 'listen' | 'practice' | 'shadow' | 'done';
   href: { pathname: string; query: Record<string, string> };
 }
+
+/** A placement question tagged with the level it comes from. */
+export interface PlacementQuestion extends ListenQuestion {
+  level: string;
+}
+
+/** Stored placement outcome: start at this level's first unit. */
+export interface PlacementResult {
+  level: string;
+  unitId: string;
+  scores: Record<string, number>;
+  finishedAt: string;
+}

@@ -25,6 +25,7 @@ const SHELL = [
   '/privacy/',
   '/curriculum/',
   '/listen/',
+  '/placement/',
   '/manifest.webmanifest',
   '/theme.js',
   '/icons/icon.svg',

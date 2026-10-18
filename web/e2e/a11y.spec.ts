@@ -14,6 +14,7 @@ const ROUTES = [
   '/course/',
   '/curriculum/',
   '/listen/?unit=u03',
+  '/placement/',
   '/privacy/',
 ];
 

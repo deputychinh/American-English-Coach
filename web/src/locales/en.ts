@@ -110,6 +110,7 @@ export const en: Copy = {
   curriculum: enCourse.curriculum,
   listen: enListen.listen,
   today: enHome.today,
+  placement: enHome.placement,
   speak: enSpeak.speak,
   onboarding: enCourse.onboarding,
   plan: enSettings.plan,
