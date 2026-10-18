@@ -138,7 +138,8 @@ test('the mirror scores a spoken word with sound and mouth together', async ({ p
   await expect(stop).toBeVisible();
   await page.waitForTimeout(2500);
   // The deck stops by itself at the end of speech; the fake microphone may loop without a pause.
-  if (await stop.isVisible()) await stop.click();
+  // The deck may stop by itself between the check and the tap; either way it scores.
+  await stop.click({ timeout: 2000 }).catch(() => undefined);
   await expect(page.locator('.speak-check__result')).toContainText(/Âm \/θ\//, { timeout: 60_000 });
   await expect(page.locator('.speak-check__result')).toContainText(/Khẩu hình/);
   await expect(page.getByRole('button', { name: 'Nghe lại bản ghi của bạn' })).toBeEnabled();
