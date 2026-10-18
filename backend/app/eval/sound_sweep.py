@@ -23,6 +23,11 @@ from app.services.assessment_service import AssessmentInput
 
 logger = logging.getLogger(__name__)
 REPO = Path(__file__).resolve().parents[3]
+RELIABILITY_FILE = REPO / "content" / "scorer_reliability.json"
+# Native-voice false-alarm rate bands: below 15 % the scorer is trusted, from 35 % the app tells
+# the learner the scorer often confuses the sound and to compare recordings by ear.
+HIGH_MAX_RATE = 0.15
+MEDIUM_MAX_RATE = 0.35
 
 
 @dataclass(frozen=True, slots=True)
@@ -91,11 +96,38 @@ def summarize(trials: list[WordTrial]) -> list[dict[str, object]]:
     return sorted(rows, key=lambda row: (-float(str(row["rate"])), str(row["sound"])))
 
 
+def reliability(rate: float) -> str:
+    """Band of a native-voice false-alarm rate."""
+    if rate < HIGH_MAX_RATE:
+        return "high"
+    return "medium" if rate < MEDIUM_MAX_RATE else "low"
+
+
+def write_reliability(sounds: list[dict[str, object]], voices: list[str]) -> None:
+    """Content file the API serves: how far the scorer can be trusted on each sound."""
+    payload = {
+        "source": f"make sweep: drill words with {', '.join(voices)}",
+        "sounds": {
+            str(row["sound"]): {
+                "native_false_alarm_rate": row["rate"],
+                "level": reliability(float(str(row["rate"]))),
+            }
+            for row in sorted(sounds, key=lambda row: str(row["sound"]))
+        },
+    }
+    RELIABILITY_FILE.write_text(
+        json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+    )
+
+
 def main() -> None:
     """Run the sweep over content/sound_drills.json and write the report."""
     parser = argparse.ArgumentParser()
     parser.add_argument("--out", type=Path, default=REPO / "data" / "eval" / "sound_sweep.json")
     parser.add_argument("--sound", action="append", help="limit to these drill ids (repeatable)")
+    parser.add_argument(
+        "--write-content", action="store_true", help=f"also write {RELIABILITY_FILE.name}"
+    )
     args = parser.parse_args()
     (REPO / "data" / "eval" / "say").mkdir(parents=True, exist_ok=True)
     drills = json.loads((REPO / "content" / "sound_drills.json").read_text(encoding="utf-8"))
@@ -129,6 +161,8 @@ def main() -> None:
         "sounds": sounds,
         "trials": [asdict(t) for t in trials],
     }
+    if args.write_content and not args.sound:
+        write_reliability(sounds, voices)
     args.out.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     logger.info(json.dumps(report["total"]))
     for row in sounds[:15]:

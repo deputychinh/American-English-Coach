@@ -71,7 +71,7 @@ eval: ## Mispronunciation-detection evaluation on speechocean762 (needs data/dat
 	$(BACKEND) uv run python -m app.eval.speechocean
 
 sweep: ## Score every drill word with native macOS voices; false alarms per sound in data/eval/sound_sweep.json (~11 min)
-	$(BACKEND) uv run python -m app.eval.sound_sweep
+	$(BACKEND) uv run python -m app.eval.sound_sweep --write-content
 
 pilot-export: ## Export flagged phones from the learner DB to data/pilot.csv for human labelling
 	$(BACKEND) uv run python -m app.eval.pilot export --out ../data/pilot.csv

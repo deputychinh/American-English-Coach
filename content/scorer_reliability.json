@@ -1,0 +1,181 @@
+{
+  "source": "make sweep: drill words with Samantha, Eddy (English (US))",
+  "sounds": {
+    "c01": {
+      "native_false_alarm_rate": 0.3,
+      "level": "medium"
+    },
+    "c02": {
+      "native_false_alarm_rate": 0.25,
+      "level": "medium"
+    },
+    "c03": {
+      "native_false_alarm_rate": 0.35,
+      "level": "low"
+    },
+    "c04": {
+      "native_false_alarm_rate": 0.1,
+      "level": "high"
+    },
+    "c05": {
+      "native_false_alarm_rate": 0.4,
+      "level": "low"
+    },
+    "c06": {
+      "native_false_alarm_rate": 0.15,
+      "level": "medium"
+    },
+    "c07": {
+      "native_false_alarm_rate": 0.45,
+      "level": "low"
+    },
+    "c08": {
+      "native_false_alarm_rate": 0.1,
+      "level": "high"
+    },
+    "c09": {
+      "native_false_alarm_rate": 0.25,
+      "level": "medium"
+    },
+    "c10": {
+      "native_false_alarm_rate": 0.25,
+      "level": "medium"
+    },
+    "c11": {
+      "native_false_alarm_rate": 0.05,
+      "level": "high"
+    },
+    "c12": {
+      "native_false_alarm_rate": 0.05,
+      "level": "high"
+    },
+    "c13": {
+      "native_false_alarm_rate": 0.0,
+      "level": "high"
+    },
+    "c14": {
+      "native_false_alarm_rate": 0.2,
+      "level": "medium"
+    },
+    "c15": {
+      "native_false_alarm_rate": 0.05,
+      "level": "high"
+    },
+    "c16": {
+      "native_false_alarm_rate": 0.35,
+      "level": "low"
+    },
+    "c17": {
+      "native_false_alarm_rate": 0.25,
+      "level": "medium"
+    },
+    "c18": {
+      "native_false_alarm_rate": 0.0,
+      "level": "high"
+    },
+    "c19": {
+      "native_false_alarm_rate": 0.0,
+      "level": "high"
+    },
+    "c20": {
+      "native_false_alarm_rate": 0.15,
+      "level": "medium"
+    },
+    "c21": {
+      "native_false_alarm_rate": 0.2,
+      "level": "medium"
+    },
+    "c22": {
+      "native_false_alarm_rate": 0.05,
+      "level": "high"
+    },
+    "c23": {
+      "native_false_alarm_rate": 0.25,
+      "level": "medium"
+    },
+    "c24": {
+      "native_false_alarm_rate": 0.05,
+      "level": "high"
+    },
+    "d01": {
+      "native_false_alarm_rate": 0.0,
+      "level": "high"
+    },
+    "d02": {
+      "native_false_alarm_rate": 0.0,
+      "level": "high"
+    },
+    "d03": {
+      "native_false_alarm_rate": 0.5,
+      "level": "low"
+    },
+    "d04": {
+      "native_false_alarm_rate": 0.1,
+      "level": "high"
+    },
+    "d05": {
+      "native_false_alarm_rate": 0.25,
+      "level": "medium"
+    },
+    "d06": {
+      "native_false_alarm_rate": 0.0,
+      "level": "high"
+    },
+    "d07": {
+      "native_false_alarm_rate": 0.0,
+      "level": "high"
+    },
+    "d08": {
+      "native_false_alarm_rate": 0.25,
+      "level": "medium"
+    },
+    "v01": {
+      "native_false_alarm_rate": 0.05,
+      "level": "high"
+    },
+    "v02": {
+      "native_false_alarm_rate": 0.25,
+      "level": "medium"
+    },
+    "v03": {
+      "native_false_alarm_rate": 0.0,
+      "level": "high"
+    },
+    "v04": {
+      "native_false_alarm_rate": 0.0,
+      "level": "high"
+    },
+    "v05": {
+      "native_false_alarm_rate": 0.0,
+      "level": "high"
+    },
+    "v06": {
+      "native_false_alarm_rate": 0.0,
+      "level": "high"
+    },
+    "v07": {
+      "native_false_alarm_rate": 0.3,
+      "level": "medium"
+    },
+    "v08": {
+      "native_false_alarm_rate": 0.8,
+      "level": "low"
+    },
+    "v09": {
+      "native_false_alarm_rate": 0.15,
+      "level": "medium"
+    },
+    "v10": {
+      "native_false_alarm_rate": 0.65,
+      "level": "low"
+    },
+    "v11": {
+      "native_false_alarm_rate": 0.0,
+      "level": "high"
+    },
+    "v12": {
+      "native_false_alarm_rate": 0.05,
+      "level": "high"
+    }
+  }
+}

@@ -111,6 +111,11 @@ class SoundDrill(BaseModel):
     group: str
     viseme_group: VisemeGroup | None
     viseme_confidence: str | None
+    scorer_reliability: str = Field(
+        default="unknown",
+        description="How far the sound scorer can be trusted on this sound: high, medium, low "
+        "(native-voice false alarms, content/scorer_reliability.json) or unknown.",
+    )
     transition_vi: str | None
     words: list[DrillWord]
     pairs: list[list[str]]
@@ -127,6 +132,11 @@ class SoundDrillSummary(BaseModel):
     group: str
     viseme_group: VisemeGroup | None
     viseme_confidence: str | None
+    scorer_reliability: str = Field(
+        default="unknown",
+        description="How far the sound scorer can be trusted on this sound: high, medium, low "
+        "(native-voice false alarms, content/scorer_reliability.json) or unknown.",
+    )
     word_count: int
     pair_count: int
     sentence_count: int

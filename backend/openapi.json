@@ -1553,6 +1553,12 @@
             "title": "Pairs",
             "type": "array"
           },
+          "scorer_reliability": {
+            "default": "unknown",
+            "description": "How far the sound scorer can be trusted on this sound: high, medium, low (native-voice false alarms, content/scorer_reliability.json) or unknown.",
+            "title": "Scorer Reliability",
+            "type": "string"
+          },
           "sentences": {
             "items": {
               "$ref": "#/components/schemas/DrillSentence"
@@ -1647,6 +1653,12 @@
           "pair_count": {
             "title": "Pair Count",
             "type": "integer"
+          },
+          "scorer_reliability": {
+            "default": "unknown",
+            "description": "How far the sound scorer can be trusted on this sound: high, medium, low (native-voice false alarms, content/scorer_reliability.json) or unknown.",
+            "title": "Scorer Reliability",
+            "type": "string"
           },
           "sentence_count": {
             "title": "Sentence Count",

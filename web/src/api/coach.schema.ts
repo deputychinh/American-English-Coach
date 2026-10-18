@@ -1281,6 +1281,12 @@ export interface components {
       id: string;
       /** Pairs */
       pairs: string[][];
+      /**
+       * Scorer Reliability
+       * @description How far the sound scorer can be trusted on this sound: high, medium, low (native-voice false alarms, content/scorer_reliability.json) or unknown.
+       * @default unknown
+       */
+      scorer_reliability: string;
       /** Sentences */
       sentences: components['schemas']['DrillSentence'][];
       /** Symbol */
@@ -1313,6 +1319,12 @@ export interface components {
       id: string;
       /** Pair Count */
       pair_count: number;
+      /**
+       * Scorer Reliability
+       * @description How far the sound scorer can be trusted on this sound: high, medium, low (native-voice false alarms, content/scorer_reliability.json) or unknown.
+       * @default unknown
+       */
+      scorer_reliability: string;
       /** Sentence Count */
       sentence_count: number;
       /** Symbol */

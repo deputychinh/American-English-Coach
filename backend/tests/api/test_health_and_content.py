@@ -40,9 +40,13 @@ def test_every_sound_has_a_drill_and_a_tracked_viseme_group(client: TestClient) 
     # Every card shows an example word under the symbol, as the 44-sound chart does.
     assert all(s["example"] for s in summaries)
     assert next(s for s in summaries if s["arpabet"] == "IY")["example"] == "see"
+    # Every sound says how far the scorer can be trusted on it (make sweep).
+    assert {s["scorer_reliability"] for s in summaries} <= {"high", "medium", "low"}
+    assert next(s for s in summaries if s["id"] == "v08")["scorer_reliability"] == "low"
     drill = client.get("/api/v1/content/sounds/c09").json()
     assert drill["symbol"] == "θ"
     assert drill["viseme_group"] == "V3"
+    assert drill["scorer_reliability"] in {"high", "medium", "low"}
     assert {"word": "think", "position": "initial"} in drill["words"]
     assert ["think", "sink"] in drill["pairs"]
     assert client.get("/api/v1/content/sounds/zzz").status_code == 404

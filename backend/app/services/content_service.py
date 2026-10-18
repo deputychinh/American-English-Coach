@@ -31,10 +31,20 @@ class ContentService:
         self._pairs = [MinimalPair(**item) for item in self._read_json("minimal_pairs.json")]
         self._sentences = [Sentence(**item) for item in self._read_json("sentences.json")]
         self._drills = {str(item["id"]): item for item in self._read_json("sound_drills.json")}
+        self._reliability = self._load_reliability()
 
     def _read_json(self, name: str) -> list[dict[str, object]]:
         items: list[dict[str, object]] = json.loads((self._dir / name).read_text(encoding="utf-8"))
         return items
+
+    def _load_reliability(self) -> dict[str, str]:
+        path = self._dir / "scorer_reliability.json"
+        if not path.exists():
+            return {}
+        sounds: dict[str, dict[str, object]] = json.loads(path.read_text(encoding="utf-8"))[
+            "sounds"
+        ]
+        return {sound_id: str(row["level"]) for sound_id, row in sounds.items()}
 
     def _load_phonemes(self) -> list[PhonemeCard]:
         with (self._dir / "phonemes.tsv").open(encoding="utf-8") as source:
@@ -71,6 +81,7 @@ class ContentService:
                 group=str(d["group"]),
                 viseme_group=self._visemes.group_of(_first_phone(str(d["arpabet"]))),
                 viseme_confidence=self._confidence(_first_phone(str(d["arpabet"]))),
+                scorer_reliability=self._reliability.get(str(d["id"]), "unknown"),
                 word_count=len(d["words"]),  # type: ignore[arg-type]
                 pair_count=len(d["pairs"]),  # type: ignore[arg-type]
                 sentence_count=len(d["sentences"]),  # type: ignore[arg-type]
@@ -111,6 +122,7 @@ class ContentService:
             group=str(item["group"]),
             viseme_group=self._visemes.group_of(symbol),
             viseme_confidence=self._confidence(symbol),
+            scorer_reliability=self._reliability.get(str(item["id"]), "unknown"),
             transition_vi=self._visemes.transition_of(symbol),
             words=item["words"],
             pairs=item["pairs"],
