@@ -1,5 +1,7 @@
 """The audio verdict rule, shared by the assessment service and the evaluation scripts."""
 
+from typing import Final
+
 from app.constants import GOP_CHECK_THRESHOLD, GOP_OK_THRESHOLD
 from app.enums import AlignmentOp, Verdict
 
@@ -17,3 +19,19 @@ def audio_verdict(op: AlignmentOp, gop: float, known_enabled: bool) -> Verdict:
     if gop >= GOP_OK_THRESHOLD:
         return Verdict.OK
     return Verdict.ERROR if known_enabled else Verdict.CHECK
+
+
+# Before /r/ General American does not keep tense and lax vowels apart, and the cure vowel is
+# said several ways: near IH R ~ IY R, air EH R ~ EY R, tour UH R ~ UW R ~ AO R, sure UH R ~ ER.
+# Hearing another member of the set is a free variant, not an error (data/eval/sound_sweep.json:
+# a native voice was flagged on 17 of 19 cure-vowel words before this rule).
+FREE_VARIANTS_BEFORE_R: Final[dict[str, frozenset[str]]] = {
+    "IH": frozenset({"IY"}),
+    "EH": frozenset({"EY", "AE"}),
+    "UH": frozenset({"UW", "AO", "OW", "ER"}),
+}
+
+
+def is_free_variant(expected: str, heard: str, next_symbol: str | None) -> bool:
+    """True when `heard` is an accepted way of saying `expected` in this context."""
+    return next_symbol == "R" and heard in FREE_VARIANTS_BEFORE_R.get(expected, frozenset())

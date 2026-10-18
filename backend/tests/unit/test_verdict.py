@@ -1,6 +1,6 @@
 import pytest
 
-from app.domain.verdict import audio_verdict
+from app.domain.verdict import audio_verdict, is_free_variant
 from app.enums import AlignmentOp, Verdict
 
 
@@ -19,3 +19,22 @@ from app.enums import AlignmentOp, Verdict
 )
 def test_audio_verdict_rule(op: AlignmentOp, gop: float, enabled: bool, expected: Verdict) -> None:
     assert audio_verdict(op, gop, enabled) is expected
+
+
+@pytest.mark.parametrize(
+    ("expected", "heard", "next_symbol", "free"),
+    [
+        ("UH", "UW", "R", True),
+        ("UH", "ER", "R", True),
+        ("IH", "IY", "R", True),
+        ("EH", "EY", "R", True),
+        ("UH", "UW", "K", False),
+        ("IH", "IY", None, False),
+        ("UH", "AA", "R", False),
+        ("TH", "T", "R", False),
+    ],
+)
+def test_tense_and_lax_vowels_are_free_variants_only_before_r(
+    expected: str, heard: str, next_symbol: str | None, free: bool
+) -> None:
+    assert is_free_variant(expected, heard, next_symbol) is free

@@ -15,7 +15,7 @@ from app.domain.phoneme_inventory import ARPABET_IPA, Phone, espeak_to_arpabet
 from app.domain.ports import PhonemeRecognizer
 from app.domain.pronouncing import PronouncingDictionary, WordPronunciations
 from app.domain.prosody import ProsodyAnalyzer, SyllableNucleus
-from app.domain.verdict import audio_verdict
+from app.domain.verdict import audio_verdict, is_free_variant
 from app.domain.viseme import VisemeCatalog
 from app.enums import AlignmentOp, Verdict, VisualVerdict
 from app.ml.audio import AudioDecoder
@@ -151,7 +151,18 @@ class AssessmentService:
             op, heard = heard_by_index[index]
             segment = segments[index]
             known = self._catalog.find(item.phone.symbol, heard, op, item.is_final)
-            audio_verdict = self._audio_verdict(op, segment.gop, known)
+            following = expected[index + 1] if index + 1 < len(expected) else None
+            next_symbol = (
+                following.phone.symbol
+                if following and following.word_index == item.word_index
+                else None
+            )
+            if op is AlignmentOp.SUBSTITUTION and is_free_variant(
+                item.phone.symbol, heard, next_symbol
+            ):
+                known, audio_verdict = None, Verdict.OK
+            else:
+                audio_verdict = self._audio_verdict(op, segment.gop, known)
             visual = self._visual(item.phone.symbol, segment, data)
             verdict, show_hint = FusionRules.fuse(
                 audio_verdict, visual, self._visemes.confidence_of(item.phone.symbol)
