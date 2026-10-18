@@ -23,7 +23,7 @@ from app.domain.ctc_decoder import greedy_decode
 from app.domain.error_catalog import ErrorCatalog
 from app.domain.gop_scorer import GopScorer
 from app.domain.phoneme_inventory import ARPABET, espeak_to_arpabet
-from app.domain.verdict import audio_verdict
+from app.domain.verdict import audio_verdict, is_free_variant
 from app.enums import AlignmentOp
 from app.ml.audio import AudioDecoder
 from app.ml.recognizer import Wav2Vec2Recognizer
@@ -115,6 +115,15 @@ class Evaluator:
         for i, symbol in enumerate(expected):
             known = self._catalog.find(symbol, pairs[i].actual, pairs[i].op, finals[i])
             verdict = self._verdict(pairs[i].op, segments[i].gop, known is not None)
+            # Same free-variant rule as the assessment service, so the numbers describe the app.
+            if pairs[i].op is AlignmentOp.SUBSTITUTION and is_free_variant(
+                symbol,
+                pairs[i].actual,
+                expected[i + 1] if not finals[i] else None,
+                is_initial=i == 0 or finals[i - 1],
+                is_final=finals[i],
+            ):
+                known, verdict = None, "ok"
             observations.append(
                 PhoneObservation(
                     index,
@@ -197,6 +206,16 @@ def per_error(
     return result
 
 
+def detection(observations: list[PhoneObservation]) -> dict[str, float | int]:
+    """Share of expert-mispronounced phones we did not call `ok` (what a free variant can cost)."""
+    wrong = [o for o in observations if o.expert < CORRECT_SCORE]
+    flagged = sum(1 for o in wrong if o.verdict != "ok")
+    return {
+        "expert_wrong_phones": len(wrong),
+        "flagged_rate": round(flagged / len(wrong), 3) if wrong else 0.0,
+    }
+
+
 def false_alarms(observations: list[PhoneObservation]) -> dict[str, float | int]:
     """Share of expert-correct phones we did not call `ok`, and share we would call `error`."""
     correct = [o for o in observations if o.expert >= CORRECT_SCORE]
@@ -240,6 +259,7 @@ def main() -> None:
         "thresholds": {"gop_ok": GOP_OK_THRESHOLD, "gop_check": GOP_CHECK_THRESHOLD},
         "correlation": correlations(observations),
         "false_alarms": false_alarms(observations),
+        "detection": detection(observations),
         "per_error": errors,
         "enabled_errors": enabled,
         "gate": {"precision": ERROR_PRECISION_GATE, "min_support": MIN_SUPPORT},
