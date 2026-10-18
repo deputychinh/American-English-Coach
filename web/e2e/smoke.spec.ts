@@ -17,9 +17,13 @@ const shot = async (page: Page, name: string, project: string): Promise<void> =>
   }
 };
 
-test('home shows the API status and quick entries', async ({ page }, info) => {
+test('home stays quiet when the API is ready and shows quick entries', async ({ page }, info) => {
   await page.goto('/');
-  await expect(page.locator('.api-status-banner')).toContainText(/Máy chấm/);
+  await expect(page.getByRole('heading', { name: 'Hôm nay luyện gì' })).toBeVisible();
+  await expect(page.locator('.api-status-banner')).toHaveCount(0);
+  await expect(page.locator('.home-screen__continue-level')).toContainText(
+    /Cấp 1 · Nền tảng · \d+\/6 đơn vị/,
+  );
   await expect(page.getByRole('link', { name: /Luyện ngay/ }).first()).toBeVisible();
   await expect(page.getByRole('heading', { name: 'Hôm nay luyện gì' })).toBeVisible();
   await expect(page.getByRole('progressbar', { name: 'Tiến độ mục tiêu hôm nay' })).toBeVisible();
@@ -202,6 +206,24 @@ test('the curriculum lists levels and opens the current unit with five steps', a
   await expect(sheet.locator('.unit-steps__step')).toHaveCount(5);
   await expect(sheet.locator('.unit-steps__chip').first()).toHaveAttribute('href', /sounds/);
   await shot(page, 'curriculum', info.project.name);
+});
+
+test('a new learner takes the placement check and lands on a level', async ({ page }) => {
+  await page.goto('/');
+  await page.getByRole('link', { name: /Bạn mới bắt đầu\?/ }).click();
+  await expect(page).toHaveURL(/placement/);
+  await page.getByRole('button', { name: 'Bắt đầu kiểm tra' }).click();
+  const options = page.locator('.listen-question-card__option');
+  for (let i = 0; i < 16; i += 1) {
+    if ((await page.locator('.placement-screen__level').count()) > 0) break;
+    await options.first().click();
+    await page.getByRole('button', { name: /Câu tiếp theo|Xem kết quả/ }).click();
+  }
+  await expect(page.locator('.placement-screen__level')).toHaveText(/Cấp \d/);
+  await expect(page.locator('.placement-screen__score')).toHaveCount(4);
+  await page.getByRole('link', { name: 'Bắt đầu học' }).click();
+  await expect(page.locator('.home-screen__placement')).toHaveCount(0);
+  await expect(page.locator('.home-screen__continue')).toHaveAttribute('href', /unit=u\d\d/);
 });
 
 test('the listening step asks one question at a time and ends with a summary', async ({

@@ -25,13 +25,21 @@ const describe = (
   return { text: copy.status.ready, tone: 'success' };
 };
 
-export const ApiStatusBanner = (): ReactElement => {
+interface ApiStatusBannerProps {
+  /** Render nothing while checking and when the server is ready (home only shows problems). */
+  isQuietWhenReady?: boolean;
+}
+
+export const ApiStatusBanner = ({
+  isQuietWhenReady = false,
+}: ApiStatusBannerProps): ReactElement | null => {
   const copy = useCopy();
   const { status, data } = useAsync(getHealth);
   const isLoading = status === AsyncStatus.Loading || status === AsyncStatus.Idle;
   const { text, tone, isUnconfigured } = isLoading
     ? { text: copy.status.checking, tone: 'neutral' }
     : describe(data, copy);
+  if (isQuietWhenReady && (isLoading || tone === 'success')) return null;
   return (
     <p className={cx('api-status-banner', `api-status-banner--${tone}`)} role="status">
       <span className="api-status-banner__dot" aria-hidden="true" />

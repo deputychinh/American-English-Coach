@@ -19,6 +19,7 @@ import {
 import { ApiStatusBanner } from '@/features/health/components/ApiStatusBanner';
 import { listenAccuracy, readListenResults } from '@/features/listen/services/listen.service';
 import { isOnboarded } from '@/features/onboarding/services/onboarding.service';
+import { continueUnit, readPlacement } from '@/features/placement/services/placement.service';
 import { getPlan } from '@/features/plan/services/plan.service';
 import { useActiveProfile } from '@/hooks/useActiveProfile';
 import { useAsync } from '@/hooks/useAsync';
@@ -50,11 +51,24 @@ export const HomeScreen = (): ReactElement => {
   const plan = useAsync(loadPlan);
   const curriculum = useAsync(getCurriculum);
 
-  const current = useMemo(() => {
-    if (!curriculum.data) return null;
-    const units = flattenUnits(curriculum.data);
-    return units.find((unit) => unit.id === curriculum.data?.current_unit) ?? units[0] ?? null;
-  }, [curriculum.data]);
+  const placement = useMemo(() => readPlacement(), []);
+  const current = useMemo(
+    () =>
+      curriculum.data
+        ? continueUnit({
+            units: flattenUnits(curriculum.data),
+            currentId: curriculum.data.current_unit,
+            placement,
+          })
+        : null,
+    [curriculum.data, placement],
+  );
+  const level = curriculum.data?.levels.find((item) => item.id === current?.level) ?? null;
+  const isNewLearner =
+    placement === null &&
+    curriculum.data !== null &&
+    curriculum.data.completed_units === 0 &&
+    (current?.progress.done_items ?? 0) === 0;
   const next = current
     ? nextStepOf(current, listenAccuracy(readListenResults(), current.id))
     : null;
@@ -84,7 +98,7 @@ export const HomeScreen = (): ReactElement => {
         </Link>
       </header>
 
-      <ApiStatusBanner />
+      <ApiStatusBanner isQuietWhenReady />
 
       <section className="home-screen__goal" aria-labelledby="today-title">
         <span className="home-screen__ring-box" aria-hidden="true">
@@ -143,10 +157,42 @@ export const HomeScreen = (): ReactElement => {
             )}
           </span>
           <span className="home-screen__continue-step">{copy.today.next[next.kind]}</span>
+          {level ? (
+            <span className="home-screen__continue-level">
+              <span>
+                {copy.today.levelLine(
+                  copy.curriculum.levelTitle(
+                    level.id,
+                    language === Language.En ? level.title_en : level.title_vi,
+                  ),
+                  level.done_units,
+                  level.units.length,
+                )}
+              </span>
+              <span className="home-screen__continue-bar" aria-hidden="true">
+                <span
+                  className="home-screen__continue-fill"
+                  style={{
+                    inlineSize: `${String(Math.round((level.done_units / Math.max(1, level.units.length)) * 100))}%`,
+                  }}
+                />
+              </span>
+            </span>
+          ) : null}
           <span className="home-screen__continue-cta">
             {copy.home.heroCta}
             <Icon name={IconName.ArrowRight} />
           </span>
+        </Link>
+      ) : null}
+
+      {isNewLearner ? (
+        <Link href="/placement" className="home-screen__placement">
+          <span className="home-screen__placement-text">
+            <span className="home-screen__placement-title">{copy.placement.homeTitle}</span>
+            <span className="home-screen__muted">{copy.placement.homeHint}</span>
+          </span>
+          <span className="home-screen__placement-cta">{copy.placement.homeCta}</span>
         </Link>
       ) : null}
 
