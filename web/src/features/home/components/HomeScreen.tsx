@@ -64,14 +64,14 @@ export const HomeScreen = (): ReactElement => {
     [curriculum.data, placement],
   );
   const level = curriculum.data?.levels.find((item) => item.id === current?.level) ?? null;
+  const listened = readListenResults();
   const isNewLearner =
     placement === null &&
+    Object.keys(listened).length === 0 &&
     curriculum.data !== null &&
     curriculum.data.completed_units === 0 &&
     (current?.progress.done_items ?? 0) === 0;
-  const next = current
-    ? nextStepOf(current, listenAccuracy(readListenResults(), current.id))
-    : null;
+  const next = current ? nextStepOf(current, listenAccuracy(listened, current.id)) : null;
   const listenHref = current ? { pathname: '/listen', query: { unit: current.id } } : '/listen';
 
   const done = plan.data?.runs_today ?? 0;
@@ -157,42 +157,44 @@ export const HomeScreen = (): ReactElement => {
             )}
           </span>
           <span className="home-screen__continue-step">{copy.today.next[next.kind]}</span>
-          {level ? (
-            <span className="home-screen__continue-level">
-              <span>
-                {copy.today.levelLine(
-                  copy.curriculum.levelTitle(
-                    level.id,
-                    language === Language.En ? level.title_en : level.title_vi,
-                  ),
-                  level.done_units,
-                  level.units.length,
-                )}
+          <span className="home-screen__continue-footer">
+            {level ? (
+              <span className="home-screen__continue-level">
+                <span>
+                  {copy.today.levelLine(
+                    copy.curriculum.levelTitle(
+                      level.id,
+                      language === Language.En ? level.title_en : level.title_vi,
+                    ),
+                    level.done_units,
+                    level.units.length,
+                  )}
+                </span>
+                <span className="home-screen__continue-bar" aria-hidden="true">
+                  <span
+                    className="home-screen__continue-fill"
+                    style={{
+                      inlineSize: `${String(Math.round((level.done_units / Math.max(1, level.units.length)) * 100))}%`,
+                    }}
+                  />
+                </span>
               </span>
-              <span className="home-screen__continue-bar" aria-hidden="true">
-                <span
-                  className="home-screen__continue-fill"
-                  style={{
-                    inlineSize: `${String(Math.round((level.done_units / Math.max(1, level.units.length)) * 100))}%`,
-                  }}
-                />
-              </span>
+            ) : null}
+            <span className="home-screen__continue-cta">
+              {copy.home.heroCta}
+              <Icon name={IconName.ArrowRight} />
             </span>
-          ) : null}
-          <span className="home-screen__continue-cta">
-            {copy.home.heroCta}
-            <Icon name={IconName.ArrowRight} />
           </span>
         </Link>
       ) : null}
 
       {isNewLearner ? (
         <Link href="/placement" className="home-screen__placement">
-          <span className="home-screen__placement-text">
-            <span className="home-screen__placement-title">{copy.placement.homeTitle}</span>
-            <span className="home-screen__muted">{copy.placement.homeHint}</span>
+          <span className="home-screen__placement-title">{copy.placement.homeTitle}</span>
+          <span className="home-screen__placement-cta">
+            {copy.placement.homeCta}
+            <Icon name={IconName.ArrowRight} />
           </span>
-          <span className="home-screen__placement-cta">{copy.placement.homeCta}</span>
         </Link>
       ) : null}
 
