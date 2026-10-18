@@ -3,6 +3,11 @@
   flex-direction: column;
 }
 
+.mirror-guide--compact {
+  flex: 1 1 auto;
+  min-block-size: 0;
+}
+
 .mirror-guide__audio-only {
   max-inline-size: 34ch;
   padding: var(--space-2) var(--space-4);

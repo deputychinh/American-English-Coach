@@ -10,7 +10,7 @@ import {
 
 import type { VisemeGroup } from '@/api/coach.schema';
 import { Icon } from '@/components/Icon/Icon';
-import { GHOST_SCALE } from '@/constants/mirror.constant';
+import { FRAME_BLEED_PX, GHOST_SCALE } from '@/constants/mirror.constant';
 import { IconName } from '@/enums/icon-name.enum';
 import { TrackerStatus } from '@/enums/tracker-status.enum';
 import { TargetShape } from '@/features/mirror/components/TargetShape';
@@ -96,11 +96,20 @@ export const CameraStage = ({
     isCompact && frame && stage && latest && isFaceVisible
       ? mouthZoom({ outline: latest.outline, stage, frame })
       : null;
+  // 2 px of bleed: a frame exactly flush with the stage lands on half pixels when centred and
+  // WebKit draws the stage background through as a dotted hairline along the edges.
+  const frameWidth = frame ? Math.ceil(frame.width) + FRAME_BLEED_PX : 0;
+  const frameHeight = frame ? Math.ceil(frame.height) + FRAME_BLEED_PX : 0;
+  // Centred with negative margins so only the mouth zoom animates, never the first placement.
   const frameStyle: CSSProperties | undefined = frame
     ? {
-        width: `${String(frame.width)}px`,
-        height: `${String(frame.height)}px`,
-        transform: `translate(-50%, -50%) translate(${String(zoom?.x ?? 0)}px, ${String(zoom?.y ?? 0)}px) scale(${String(zoom?.scale ?? 1)})`,
+        width: `${String(frameWidth)}px`,
+        height: `${String(frameHeight)}px`,
+        marginLeft: `${String(Math.floor(-frameWidth / 2))}px`,
+        marginTop: `${String(Math.floor(-frameHeight / 2))}px`,
+        transform: zoom
+          ? `translate(${String(zoom.x)}px, ${String(zoom.y)}px) scale(${String(zoom.scale)})`
+          : undefined,
       }
     : undefined;
   const notice =

@@ -1,5 +1,0 @@
-.practice-screen__tabs {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--gap-inline);
-}

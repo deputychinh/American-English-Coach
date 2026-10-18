@@ -24,8 +24,14 @@
   text-align: center;
 }
 
+/* The camera takes whatever height the word and hint leave, so the stage never scrolls. */
 .practice-session__pip {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
   inline-size: 100%;
+  min-block-size: 168px;
+  max-block-size: 440px;
 }
 
 .practice-session__text {
@@ -38,6 +44,7 @@
 
 .practice-session--camera .practice-session__stage {
   gap: var(--space-3);
+  justify-content: flex-start;
   padding-block: var(--space-3);
 }
 

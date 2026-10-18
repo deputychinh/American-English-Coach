@@ -61,3 +61,6 @@ export const SNAPSHOT_PADDING = 0.6;
 /** Inset preview zooms until the mouth spans this share of the preview width. */
 export const MOUTH_ZOOM_SHARE = 0.42;
 export const MOUTH_ZOOM_MAX = 3.5;
+
+/** Extra pixels on the camera frame so it always overlaps the stage edges. */
+export const FRAME_BLEED_PX = 2;

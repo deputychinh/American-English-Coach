@@ -180,6 +180,15 @@ export const PracticeSession = ({
               tracker={tracker}
               muted={recorder.status === RecorderStatus.Recording}
               transitionVi={transitionVi}
+              tutor={
+                targetGroup ? (
+                  <MouthTutorButton
+                    tracker={tracker}
+                    soundIpa={targetIpa ?? item.focus[0] ?? ''}
+                    targetVi={targetGroup.hint_vi}
+                  />
+                ) : null
+              }
             />
           </div>
         ) : null}
@@ -189,13 +198,6 @@ export const PracticeSession = ({
             <p className="practice-session__hint">{targetGroup.hint_vi}</p>
             {transitionVi ? <p className="practice-session__muted">{transitionVi}</p> : null}
           </div>
-        ) : null}
-        {cameraOn && targetGroup ? (
-          <MouthTutorButton
-            tracker={tracker}
-            soundIpa={targetIpa ?? item.focus[0] ?? ''}
-            targetVi={targetGroup.hint_vi}
-          />
         ) : null}
         {reference.error ? <p className="practice-session__error">{reference.error}</p> : null}
         {recorder.error ? <ErrorState message={recorder.error} /> : null}

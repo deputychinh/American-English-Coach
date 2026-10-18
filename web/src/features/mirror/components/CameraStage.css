@@ -169,15 +169,10 @@
 }
 
 .camera-stage--compact {
-  block-size: min(300px, 34dvh);
+  flex: 1 1 auto;
+  block-size: auto;
+  min-block-size: 0;
   border-radius: var(--radius-lg);
-}
-
-/* Short phones (iPhone SE): leave room for the word and the hint under the preview. */
-@media (max-height: 700px) {
-  .camera-stage--compact {
-    block-size: 30dvh;
-  }
 }
 
 .camera-stage--compact .camera-stage__top {
