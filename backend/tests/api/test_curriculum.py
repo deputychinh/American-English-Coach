@@ -39,6 +39,8 @@ def test_curriculum_progress_follows_the_profile_runs(client: TestClient) -> Non
         "done_ids": [],
     }
     assert u03["steps"][1]["pairs"][0] == "think-sink"
+    assert fresh["labels"]["sound:c09"] == "/θ/"
+    assert fresh["labels"]["pair:think-sink"] == "think / sink"
 
     post(client, "think")  # item pair:think-sink:0
     after = client.get("/api/v1/curriculum").json()

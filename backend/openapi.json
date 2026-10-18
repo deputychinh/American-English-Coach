@@ -372,6 +372,13 @@
             "title": "Current Unit",
             "type": "string"
           },
+          "labels": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "title": "Labels",
+            "type": "object"
+          },
           "levels": {
             "items": {
               "$ref": "#/components/schemas/LevelModel"
@@ -384,7 +391,7 @@
             "type": "integer"
           }
         },
-        "required": ["levels", "current_unit", "completed_units", "total_units"],
+        "required": ["levels", "labels", "current_unit", "completed_units", "total_units"],
         "title": "CurriculumResponse",
         "type": "object"
       },

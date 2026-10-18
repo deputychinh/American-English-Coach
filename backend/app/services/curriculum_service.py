@@ -45,6 +45,11 @@ class CurriculumService:
             (content_dir / CURRICULUM_FILE).read_bytes()
         )
         self._validate(content)
+        self._labels = {
+            **{f"sound:{d.id}": f"/{d.us}/" for d in content.drills()},
+            **{f"pair:{p.id}": " / ".join(p.words) for p in content.pairs()},
+            **{f"sentence:{t.id}": t.text for t in content.sentences()},
+        }
 
     def _validate(self, content: ContentService) -> None:
         catalog = _Catalog(
@@ -86,6 +91,7 @@ class CurriculumService:
         current = next_day([u.progress.is_done for u in units])
         return CurriculumResponse(
             levels=levels,
+            labels=self._labels,
             current_unit=units[current].id if units else "",
             completed_units=sum(1 for u in units if u.progress.is_done),
             total_units=len(units),

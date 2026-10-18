@@ -132,6 +132,8 @@ class CurriculumResponse(BaseModel):
     """All levels plus which unit to do next."""
 
     levels: list[LevelModel]
+    labels: dict[str, str]
+    """Display label per `kind:id` (\"sound:c09\" → \"/θ/\") for every referenced item."""
     current_unit: str
     completed_units: int
     total_units: int

@@ -122,7 +122,7 @@ export const CurriculumScreen = (): ReactElement => {
                 <p className="curriculum-screen__error">
                   <strong>{copy.curriculum.vnError}:</strong> {open.vn_error_vi}
                 </p>
-                <UnitSteps unit={open} />
+                <UnitSteps unit={open} labels={data.labels} />
               </div>
             ) : null}
           </Sheet>

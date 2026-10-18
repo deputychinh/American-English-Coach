@@ -124,7 +124,7 @@
   gap: var(--space-1);
   padding: var(--space-4) var(--space-5);
   text-decoration: none;
-  color: var(--color-on-primary);
+  color: var(--color-on-brand);
   background: linear-gradient(135deg, var(--color-brand-from), var(--color-brand-to));
   border-radius: var(--radius-xl);
   box-shadow: var(--shadow-md);

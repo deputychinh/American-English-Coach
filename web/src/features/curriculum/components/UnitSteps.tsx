@@ -12,13 +12,15 @@ import { cx } from '@/utils/cx.util';
 
 interface UnitStepsProps {
   unit: CurriculumUnit;
+  /** Display label per `kind:id`; ids are shown when a label is missing. */
+  labels?: Record<string, string>;
 }
 
 const stepKey = (step: CurriculumStep): keyof ReturnType<typeof useCopy>['curriculum']['steps'] =>
   step.kind;
 
 /** The five steps of a unit: links where a screen exists, labelled badges where one is coming. */
-export const UnitSteps = ({ unit }: UnitStepsProps): ReactElement => {
+export const UnitSteps = ({ unit, labels = {} }: UnitStepsProps): ReactElement => {
   const copy = useCopy();
   const doneIds = new Set(unit.progress.done_ids);
   const listened = listenAccuracy(readListenResults(), unit.id);
@@ -41,7 +43,7 @@ export const UnitSteps = ({ unit }: UnitStepsProps): ReactElement => {
                         href={{ pathname: '/sounds', query: { id: sound } }}
                         className="unit-steps__chip"
                       >
-                        {sound}
+                        {labels[`sound:${sound}`] ?? sound}
                       </Link>
                     </li>
                   ))}
@@ -81,7 +83,8 @@ export const UnitSteps = ({ unit }: UnitStepsProps): ReactElement => {
                         href={courseItemHref(item)}
                         className={cx('unit-steps__chip', isDone && 'is-done')}
                       >
-                        {copy.course.kind[item.kind]} · {item.id}
+                        {copy.course.kind[item.kind]} ·{' '}
+                        {labels[`${item.kind}:${item.id}`] ?? item.id}
                         {isDone ? (
                           <span className="visually-hidden"> {copy.curriculum.itemDone}</span>
                         ) : null}
@@ -99,7 +102,7 @@ export const UnitSteps = ({ unit }: UnitStepsProps): ReactElement => {
                       href={{ pathname: '/practice', query: { item: `sentence:${sentence}` } }}
                       className="unit-steps__chip"
                     >
-                      {copy.course.kind.sentence} · {sentence}
+                      {labels[`sentence:${sentence}`] ?? sentence}
                     </Link>
                   </li>
                 ))}

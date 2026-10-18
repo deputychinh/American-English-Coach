@@ -77,7 +77,11 @@ export const SoundPickerSheet = ({
                 >
                   <span className="sound-picker-sheet__ipa">/{card.us}/</span>
                   <span className="sound-picker-sheet__word">{card.example}</span>
-                  <ConfidenceBadge confidence={confidenceOf(card.arpabet)} labels={labels} />
+                  <ConfidenceBadge
+                    confidence={confidenceOf(card.arpabet)}
+                    labels={labels}
+                    isCompact
+                  />
                 </button>
               </li>
             ))}

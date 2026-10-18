@@ -102,3 +102,7 @@
 .settings-screen__inline-label {
   font-weight: var(--weight-medium);
 }
+
+.settings-screen__field .settings-screen__input {
+  flex: none;
+}

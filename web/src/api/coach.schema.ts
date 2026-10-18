@@ -718,6 +718,10 @@ export interface components {
       completed_units: number;
       /** Current Unit */
       current_unit: string;
+      /** Labels */
+      labels: {
+        [key: string]: string;
+      };
       /** Levels */
       levels: components['schemas']['LevelModel'][];
       /** Total Units */
