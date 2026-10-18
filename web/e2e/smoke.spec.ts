@@ -195,7 +195,8 @@ test('the curriculum lists levels and opens the current unit with five steps', a
 }, info) => {
   await page.goto('/curriculum/');
   await expect(page.getByRole('heading', { name: 'Lộ trình phát âm chuẩn' })).toBeVisible();
-  await expect(page.locator('.curriculum-screen__unit')).toHaveCount(6);
+  await expect(page.locator('.curriculum-screen__unit')).toHaveCount(24);
+  await expect(page.getByRole('heading', { name: 'Cấp 4 · Thuần thục' })).toBeAttached();
   await page.locator('.curriculum-screen__unit--current').click();
   const sheet = page.getByRole('dialog');
   await expect(sheet.locator('.unit-steps__step')).toHaveCount(5);

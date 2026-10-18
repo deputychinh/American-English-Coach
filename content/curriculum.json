@@ -411,6 +411,1191 @@
           ]
         }
       ]
+    },
+    {
+      "id": "L2",
+      "title_vi": "Rõ ràng",
+      "title_en": "Clear",
+      "goal_vi": "Câu ngắn đúng nhịp, cụm phụ âm trọn vẹn, đuôi -ed, /r l/ và /v w f/, từ trọng tâm.",
+      "units": [
+        {
+          "id": "u07",
+          "title_vi": "Nhịp câu: từ nội dung mạnh, từ chức năng yếu",
+          "title_en": "Sentence rhythm",
+          "goal_vi": "Nói mạnh danh từ, động từ, tính từ; đọc lướt to, for, a, the, can.",
+          "vn_error_vi": "Người Việt đọc đều từng từ như từng âm tiết có thanh, nên câu tiếng Anh nghe cứng và chậm.",
+          "minutes": 12,
+          "days": 5,
+          "focus_sounds": ["v12"],
+          "steps": [
+            {
+              "kind": "describe",
+              "sounds": ["v12"],
+              "notes_vi": "Câu tiếng Anh có nhịp: từ mang nghĩa được nhấn, từ chức năng rút ngắn về schwa /ə/. Vỗ tay theo từ nội dung."
+            },
+            {
+              "kind": "discriminate",
+              "pairs": [],
+              "stress": [
+                {
+                  "word": "pencil",
+                  "syllables": ["PEN", "cil"],
+                  "stressed": 0
+                },
+                {
+                  "word": "forget",
+                  "syllables": ["for", "GET"],
+                  "stressed": 1
+                },
+                {
+                  "word": "window",
+                  "syllables": ["WIN", "dow"],
+                  "stressed": 0
+                }
+              ],
+              "focus": [
+                {
+                  "sentence": "s11",
+                  "word": "store"
+                },
+                {
+                  "sentence": "s12",
+                  "word": "help"
+                }
+              ]
+            },
+            {
+              "kind": "controlled",
+              "items": [
+                {
+                  "kind": "sound",
+                  "id": "v12"
+                },
+                {
+                  "kind": "sentence",
+                  "id": "s11"
+                },
+                {
+                  "kind": "sentence",
+                  "id": "s12"
+                }
+              ]
+            },
+            {
+              "kind": "guided",
+              "sentences": ["s11", "s12"]
+            },
+            {
+              "kind": "communicate",
+              "scenario_vi": "Rủ một người bạn đi đâu đó cuối tuần bằng ba câu ngắn.",
+              "target_words": ["want", "store", "weekend", "friends"]
+            }
+          ]
+        },
+        {
+          "id": "u08",
+          "title_vi": "Cụm phụ âm đầu /st sp sk/",
+          "title_en": "Initial clusters",
+          "goal_vi": "Nói liền /s/ với phụ âm sau, không thêm nguyên âm \"ét\" phía trước.",
+          "vn_error_vi": "Tiếng Việt không có cụm phụ âm đầu nên hay đọc street thành \"sờ-trít\" hoặc bỏ /s/.",
+          "minutes": 12,
+          "days": 5,
+          "focus_sounds": ["c11"],
+          "steps": [
+            {
+              "kind": "describe",
+              "sounds": ["c11"],
+              "notes_vi": "Bắt đầu bằng tiếng xì /s/ rồi chuyển ngay sang /t/, /p/, /k/ mà không ngắt hơi."
+            },
+            {
+              "kind": "discriminate",
+              "pairs": ["street-treat", "spin-pin", "scar-car"],
+              "stress": [],
+              "focus": [
+                {
+                  "sentence": "s13",
+                  "word": "Spanish"
+                }
+              ]
+            },
+            {
+              "kind": "controlled",
+              "items": [
+                {
+                  "kind": "sound",
+                  "id": "c11"
+                },
+                {
+                  "kind": "pair",
+                  "id": "street-treat"
+                },
+                {
+                  "kind": "pair",
+                  "id": "spin-pin"
+                },
+                {
+                  "kind": "pair",
+                  "id": "scar-car"
+                },
+                {
+                  "kind": "sentence",
+                  "id": "s13"
+                }
+              ]
+            },
+            {
+              "kind": "guided",
+              "sentences": ["s13"]
+            },
+            {
+              "kind": "communicate",
+              "scenario_vi": "Kể lịch học trong tuần của bạn.",
+              "target_words": ["student", "study", "school", "start"]
+            }
+          ]
+        },
+        {
+          "id": "u09",
+          "title_vi": "Cụm phụ âm cuối và đuôi -ed",
+          "title_en": "Final clusters and -ed",
+          "goal_vi": "Giữ trọn cụm cuối /st ld ft/ và đọc đúng ba cách của -ed: /t/, /d/, /ɪd/.",
+          "vn_error_vi": "Âm cuối tiếng Việt chỉ có một phụ âm nên best thành \"bét\", played thành \"pờ-lây\".",
+          "minutes": 12,
+          "days": 5,
+          "focus_sounds": ["c03", "c04"],
+          "steps": [
+            {
+              "kind": "describe",
+              "sounds": ["c03", "c04"],
+              "notes_vi": "-ed đọc /t/ sau âm vô thanh (walked), /d/ sau âm hữu thanh (played), /ɪd/ sau /t d/ (wanted)."
+            },
+            {
+              "kind": "discriminate",
+              "pairs": ["played-play", "wanted-want", "best-bet", "worked-work"],
+              "stress": [],
+              "focus": [
+                {
+                  "sentence": "s14",
+                  "word": "laughed"
+                }
+              ]
+            },
+            {
+              "kind": "controlled",
+              "items": [
+                {
+                  "kind": "sound",
+                  "id": "c03"
+                },
+                {
+                  "kind": "sound",
+                  "id": "c04"
+                },
+                {
+                  "kind": "pair",
+                  "id": "played-play"
+                },
+                {
+                  "kind": "pair",
+                  "id": "wanted-want"
+                },
+                {
+                  "kind": "pair",
+                  "id": "best-bet"
+                },
+                {
+                  "kind": "sentence",
+                  "id": "s14"
+                },
+                {
+                  "kind": "sentence",
+                  "id": "s15"
+                }
+              ]
+            },
+            {
+              "kind": "guided",
+              "sentences": ["s14", "s15"]
+            },
+            {
+              "kind": "communicate",
+              "scenario_vi": "Kể ba việc bạn đã làm hôm qua bằng động từ có -ed.",
+              "target_words": ["worked", "played", "watched", "wanted"]
+            }
+          ]
+        },
+        {
+          "id": "u10",
+          "title_vi": "/r/ và /l/",
+          "title_en": "R and L",
+          "goal_vi": "Phân biệt /r/ (lưỡi cong, không chạm) với /l/ (đầu lưỡi chạm lợi trên), cả ở đầu và cuối từ.",
+          "vn_error_vi": "light và right, collect và correct hay bị lẫn; /r/ cuối kiểu Mỹ (car, far) thường bị bỏ.",
+          "minutes": 12,
+          "days": 5,
+          "focus_sounds": ["c21", "c22"],
+          "steps": [
+            {
+              "kind": "describe",
+              "sounds": ["c21", "c22"],
+              "notes_vi": "/l/: đầu lưỡi chạm phần lợi sau răng trên. /r/: cong lưỡi ra sau, không chạm, môi hơi tròn."
+            },
+            {
+              "kind": "discriminate",
+              "pairs": ["right-light", "lock-rock", "collect-correct"],
+              "stress": [],
+              "focus": [
+                {
+                  "sentence": "s16",
+                  "word": "far"
+                }
+              ]
+            },
+            {
+              "kind": "controlled",
+              "items": [
+                {
+                  "kind": "sound",
+                  "id": "c21"
+                },
+                {
+                  "kind": "sound",
+                  "id": "c22"
+                },
+                {
+                  "kind": "pair",
+                  "id": "right-light"
+                },
+                {
+                  "kind": "pair",
+                  "id": "lock-rock"
+                },
+                {
+                  "kind": "sentence",
+                  "id": "s16"
+                },
+                {
+                  "kind": "sentence",
+                  "id": "s17"
+                }
+              ]
+            },
+            {
+              "kind": "guided",
+              "sentences": ["s16", "s17"]
+            },
+            {
+              "kind": "communicate",
+              "scenario_vi": "Tả đường từ nhà bạn tới một nơi quen thuộc.",
+              "target_words": ["left", "right", "road", "light"]
+            }
+          ]
+        },
+        {
+          "id": "u11",
+          "title_vi": "/v/ /w/ /f/",
+          "title_en": "V, W and F",
+          "goal_vi": "/v/ và /f/ đặt môi dưới chạm răng trên; /w/ tròn môi, không chạm răng.",
+          "vn_error_vi": "very thành \"wery\", wine thành \"vine\"; /v/ cuối (live, five) bị bỏ hoặc thành /p/.",
+          "minutes": 12,
+          "days": 5,
+          "focus_sounds": ["c07", "c08", "c24"],
+          "steps": [
+            {
+              "kind": "describe",
+              "sounds": ["c07", "c08", "c24"],
+              "notes_vi": "/f/ không rung, /v/ rung cổ họng, cả hai môi dưới chạm răng trên. /w/ chu môi tròn rồi mở ra."
+            },
+            {
+              "kind": "discriminate",
+              "pairs": ["vest-west", "very-wary", "fan-van", "wine-vine"],
+              "stress": [],
+              "focus": [
+                {
+                  "sentence": "s18",
+                  "word": "windows"
+                }
+              ]
+            },
+            {
+              "kind": "controlled",
+              "items": [
+                {
+                  "kind": "sound",
+                  "id": "c08"
+                },
+                {
+                  "kind": "sound",
+                  "id": "c24"
+                },
+                {
+                  "kind": "pair",
+                  "id": "vest-west"
+                },
+                {
+                  "kind": "pair",
+                  "id": "fan-van"
+                },
+                {
+                  "kind": "pair",
+                  "id": "wine-vine"
+                },
+                {
+                  "kind": "sentence",
+                  "id": "s18"
+                },
+                {
+                  "kind": "sentence",
+                  "id": "s3"
+                }
+              ]
+            },
+            {
+              "kind": "guided",
+              "sentences": ["s18", "s3"]
+            },
+            {
+              "kind": "communicate",
+              "scenario_vi": "Nói về căn phòng của bạn.",
+              "target_words": ["window", "view", "wall", "very"]
+            }
+          ]
+        },
+        {
+          "id": "u12",
+          "title_vi": "Từ trọng tâm và ngữ điệu lên xuống",
+          "title_en": "Focus words and intonation",
+          "goal_vi": "Nhấn từ mang thông tin mới; câu kể và câu hỏi Wh xuống giọng, câu hỏi Yes/No lên giọng.",
+          "vn_error_vi": "Người Việt dùng thanh điệu cho từng từ nên cả câu đều phẳng, khó nghe ra thông tin chính.",
+          "minutes": 10,
+          "days": 4,
+          "focus_sounds": [],
+          "steps": [
+            {
+              "kind": "describe",
+              "sounds": [],
+              "notes_vi": "Mỗi nhóm ý có một từ trọng tâm: cao và dài nhất. Cuối câu kể giọng đi xuống, cuối câu hỏi Yes/No giọng đi lên."
+            },
+            {
+              "kind": "discriminate",
+              "pairs": [],
+              "stress": [],
+              "focus": [
+                {
+                  "sentence": "s19",
+                  "word": "live"
+                },
+                {
+                  "sentence": "s20",
+                  "word": "tonight"
+                },
+                {
+                  "sentence": "s10",
+                  "word": "repeat"
+                }
+              ]
+            },
+            {
+              "kind": "controlled",
+              "items": [
+                {
+                  "kind": "sentence",
+                  "id": "s19"
+                },
+                {
+                  "kind": "sentence",
+                  "id": "s20"
+                },
+                {
+                  "kind": "sentence",
+                  "id": "s10"
+                }
+              ]
+            },
+            {
+              "kind": "guided",
+              "sentences": ["s19", "s20"]
+            },
+            {
+              "kind": "communicate",
+              "scenario_vi": "Hỏi và trả lời ba câu với một người mới quen.",
+              "target_words": ["where", "live", "work", "name"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "L3",
+      "title_vi": "Tự nhiên",
+      "title_en": "Natural",
+      "goal_vi": "Giảm âm và schwa, nối âm, nguyên âm đôi trọn vẹn, trọng âm từ dài, ngữ điệu hội thoại.",
+      "units": [
+        {
+          "id": "u13",
+          "title_vi": "Schwa và giảm âm",
+          "title_en": "Schwa and reductions",
+          "goal_vi": "Đọc âm tiết không nhấn và từ chức năng về /ə/; phân biệt can /kən/ với can't /kæn(t)/.",
+          "vn_error_vi": "Người Việt đọc rõ mọi nguyên âm (ba-na-na), nên câu dài và nặng; can và can't nghe như nhau.",
+          "minutes": 12,
+          "days": 5,
+          "focus_sounds": ["v12"],
+          "steps": [
+            {
+              "kind": "describe",
+              "sounds": ["v12"],
+              "notes_vi": "Schwa /ə/ là âm phổ biến nhất tiếng Anh: miệng thả lỏng, ngắn, không nhấn. Từ chức năng (to, for, of, can) thường về schwa."
+            },
+            {
+              "kind": "discriminate",
+              "pairs": ["can-cant"],
+              "stress": [
+                {
+                  "word": "banana",
+                  "syllables": ["ba", "NA", "na"],
+                  "stressed": 1
+                },
+                {
+                  "word": "about",
+                  "syllables": ["a", "BOUT"],
+                  "stressed": 1
+                },
+                {
+                  "word": "problem",
+                  "syllables": ["PROB", "lem"],
+                  "stressed": 0
+                }
+              ],
+              "focus": [
+                {
+                  "sentence": "s22",
+                  "word": "can't"
+                }
+              ]
+            },
+            {
+              "kind": "controlled",
+              "items": [
+                {
+                  "kind": "sound",
+                  "id": "v12"
+                },
+                {
+                  "kind": "pair",
+                  "id": "can-cant"
+                },
+                {
+                  "kind": "sentence",
+                  "id": "s21"
+                },
+                {
+                  "kind": "sentence",
+                  "id": "s22"
+                }
+              ]
+            },
+            {
+              "kind": "guided",
+              "sentences": ["s21", "s22"]
+            },
+            {
+              "kind": "communicate",
+              "scenario_vi": "Nói ba việc bạn làm được và ba việc chưa làm được.",
+              "target_words": ["can", "can't", "about", "banana"]
+            }
+          ]
+        },
+        {
+          "id": "u14",
+          "title_vi": "Nối âm và flap /t/",
+          "title_en": "Linking and the flap T",
+          "goal_vi": "Nối phụ âm cuối với nguyên âm đầu từ sau (turn it off); /t/ giữa hai nguyên âm đọc nhanh như /d/ nhẹ (water, butter).",
+          "vn_error_vi": "Người Việt ngắt từng từ nên câu rời rạc; /t/ giữa từ hay đọc quá mạnh.",
+          "minutes": 12,
+          "days": 5,
+          "focus_sounds": ["c03"],
+          "steps": [
+            {
+              "kind": "describe",
+              "sounds": ["c03"],
+              "notes_vi": "Phụ âm cuối nhảy sang nguyên âm đầu từ sau: pick it up nghe như pi-ki-tup. Flap /t/: đầu lưỡi chạm lợi thật nhanh một lần."
+            },
+            {
+              "kind": "discriminate",
+              "pairs": [],
+              "stress": [
+                {
+                  "word": "water",
+                  "syllables": ["WA", "ter"],
+                  "stressed": 0
+                },
+                {
+                  "word": "butter",
+                  "syllables": ["BUT", "ter"],
+                  "stressed": 0
+                },
+                {
+                  "word": "city",
+                  "syllables": ["CI", "ty"],
+                  "stressed": 0
+                }
+              ],
+              "focus": [
+                {
+                  "sentence": "s24",
+                  "word": "off"
+                }
+              ]
+            },
+            {
+              "kind": "controlled",
+              "items": [
+                {
+                  "kind": "sound",
+                  "id": "c03"
+                },
+                {
+                  "kind": "sentence",
+                  "id": "s23"
+                },
+                {
+                  "kind": "sentence",
+                  "id": "s24"
+                }
+              ]
+            },
+            {
+              "kind": "guided",
+              "sentences": ["s23", "s24"]
+            },
+            {
+              "kind": "communicate",
+              "scenario_vi": "Hướng dẫn ai đó nấu một món đơn giản.",
+              "target_words": ["put it", "turn it on", "pick it up", "water"]
+            }
+          ]
+        },
+        {
+          "id": "u15",
+          "title_vi": "Nguyên âm đôi",
+          "title_en": "Diphthongs",
+          "goal_vi": "Trượt trọn vẹn từ âm đầu sang âm cuối: /eɪ aɪ ɔɪ oʊ aʊ/.",
+          "vn_error_vi": "Nguyên âm đôi bị đọc thành nguyên âm đơn: late thành let, boat thành bought, my thành may.",
+          "minutes": 12,
+          "days": 5,
+          "focus_sounds": ["d01", "d02", "d03", "d04", "d05"],
+          "steps": [
+            {
+              "kind": "describe",
+              "sounds": ["d01", "d02", "d03", "d04", "d05"],
+              "notes_vi": "Mỗi nguyên âm đôi có hai điểm: mở đầu rõ rồi trượt về /ɪ/ hoặc /ʊ/. Nhìn gương: miệng phải chuyển động trong một âm."
+            },
+            {
+              "kind": "discriminate",
+              "pairs": ["late-let", "my-may", "boy-buy", "found-phoned", "boat-bought"],
+              "stress": [],
+              "focus": [
+                {
+                  "sentence": "s25",
+                  "word": "boat"
+                }
+              ]
+            },
+            {
+              "kind": "controlled",
+              "items": [
+                {
+                  "kind": "sound",
+                  "id": "d01"
+                },
+                {
+                  "kind": "sound",
+                  "id": "d02"
+                },
+                {
+                  "kind": "sound",
+                  "id": "d04"
+                },
+                {
+                  "kind": "pair",
+                  "id": "late-let"
+                },
+                {
+                  "kind": "pair",
+                  "id": "my-may"
+                },
+                {
+                  "kind": "pair",
+                  "id": "boat-bought"
+                },
+                {
+                  "kind": "sentence",
+                  "id": "s25"
+                },
+                {
+                  "kind": "sentence",
+                  "id": "s26"
+                }
+              ]
+            },
+            {
+              "kind": "guided",
+              "sentences": ["s25", "s26"]
+            },
+            {
+              "kind": "communicate",
+              "scenario_vi": "Kể về một chuyến đi bạn thích.",
+              "target_words": ["day", "time", "boat", "town"]
+            }
+          ]
+        },
+        {
+          "id": "u16",
+          "title_vi": "/ɑ/ /ɔ/ /ɝ/",
+          "title_en": "Open back vowels and R-colored vowel",
+          "goal_vi": "Hạ hàm cho /ɑ/ (hot), tròn môi nhẹ cho /ɔ/ (caught), cong lưỡi cho /ɝ/ (bird).",
+          "vn_error_vi": "hot thành hat, bird thành bed hoặc \"bơ\" không có /r/.",
+          "minutes": 12,
+          "days": 5,
+          "focus_sounds": ["v05", "v07", "v11"],
+          "steps": [
+            {
+              "kind": "describe",
+              "sounds": ["v05", "v07", "v11"],
+              "notes_vi": "/ɑ/: hàm mở lớn, lưỡi lùi. /ɔ/: như /ɑ/ nhưng môi hơi tròn. /ɝ/: lưỡi cong ra sau, môi hơi chu, giữ suốt âm."
+            },
+            {
+              "kind": "discriminate",
+              "pairs": ["hot-hat", "caught-cot", "bird-bed"],
+              "stress": [],
+              "focus": [
+                {
+                  "sentence": "s27",
+                  "word": "girl"
+                }
+              ]
+            },
+            {
+              "kind": "controlled",
+              "items": [
+                {
+                  "kind": "sound",
+                  "id": "v05"
+                },
+                {
+                  "kind": "sound",
+                  "id": "v07"
+                },
+                {
+                  "kind": "sound",
+                  "id": "v11"
+                },
+                {
+                  "kind": "pair",
+                  "id": "hot-hat"
+                },
+                {
+                  "kind": "pair",
+                  "id": "bird-bed"
+                },
+                {
+                  "kind": "sentence",
+                  "id": "s27"
+                },
+                {
+                  "kind": "sentence",
+                  "id": "s6"
+                }
+              ]
+            },
+            {
+              "kind": "guided",
+              "sentences": ["s27", "s6"]
+            },
+            {
+              "kind": "communicate",
+              "scenario_vi": "Kể về công việc của bạn hoặc người thân.",
+              "target_words": ["work", "first", "hot", "talk"]
+            }
+          ]
+        },
+        {
+          "id": "u17",
+          "title_vi": "Trọng âm từ dài và hậu tố",
+          "title_en": "Stress in long words",
+          "goal_vi": "Đặt đúng trọng âm từ 3–4 âm tiết; biết hậu tố kéo trọng âm (-tion, -ic, -ity).",
+          "vn_error_vi": "Người Việt nhấn đều hoặc nhấn âm tiết cuối như tiếng Việt, nên PHOtograph, phoTOGrapher, photoGRAPHic khó phân biệt.",
+          "minutes": 10,
+          "days": 4,
+          "focus_sounds": [],
+          "steps": [
+            {
+              "kind": "describe",
+              "sounds": [],
+              "notes_vi": "-tion, -sion, -ic: trọng âm ngay trước hậu tố (inforMAtion, ecoNOMic). Các âm tiết không nhấn về schwa."
+            },
+            {
+              "kind": "discriminate",
+              "pairs": [],
+              "stress": [
+                {
+                  "word": "photograph",
+                  "syllables": ["PHO", "to", "graph"],
+                  "stressed": 0
+                },
+                {
+                  "word": "photographer",
+                  "syllables": ["pho", "TOG", "ra", "pher"],
+                  "stressed": 1
+                },
+                {
+                  "word": "economic",
+                  "syllables": ["e", "co", "NOM", "ic"],
+                  "stressed": 2
+                },
+                {
+                  "word": "information",
+                  "syllables": ["in", "for", "MA", "tion"],
+                  "stressed": 2
+                }
+              ],
+              "focus": [
+                {
+                  "sentence": "s28",
+                  "word": "photographer"
+                }
+              ]
+            },
+            {
+              "kind": "controlled",
+              "items": [
+                {
+                  "kind": "sentence",
+                  "id": "s28"
+                }
+              ]
+            },
+            {
+              "kind": "guided",
+              "sentences": ["s28"]
+            },
+            {
+              "kind": "communicate",
+              "scenario_vi": "Giới thiệu nghề nghiệp và ngành học của bạn.",
+              "target_words": ["photographer", "economy", "information", "university"]
+            }
+          ]
+        },
+        {
+          "id": "u18",
+          "title_vi": "Ngữ điệu câu hỏi, liệt kê, tương phản",
+          "title_en": "Intonation patterns",
+          "goal_vi": "Liệt kê: lên ở mỗi mục, xuống ở mục cuối; câu hỏi lựa chọn xuống ở lựa chọn cuối.",
+          "vn_error_vi": "Câu hỏi và câu liệt kê đọc phẳng như câu kể nên người nghe không biết bạn đang hỏi hay đang kể.",
+          "minutes": 10,
+          "days": 4,
+          "focus_sounds": [],
+          "steps": [
+            {
+              "kind": "describe",
+              "sounds": [],
+              "notes_vi": "Giọng lên nghĩa là \"chưa xong\", giọng xuống nghĩa là \"xong\". Tea↗, coffee↗, or juice↘?"
+            },
+            {
+              "kind": "discriminate",
+              "pairs": [],
+              "stress": [],
+              "focus": [
+                {
+                  "sentence": "s29",
+                  "word": "juice"
+                },
+                {
+                  "sentence": "s20",
+                  "word": "tonight"
+                }
+              ]
+            },
+            {
+              "kind": "controlled",
+              "items": [
+                {
+                  "kind": "sentence",
+                  "id": "s29"
+                },
+                {
+                  "kind": "sentence",
+                  "id": "s20"
+                },
+                {
+                  "kind": "sentence",
+                  "id": "s19"
+                }
+              ]
+            },
+            {
+              "kind": "guided",
+              "sentences": ["s29", "s20"]
+            },
+            {
+              "kind": "communicate",
+              "scenario_vi": "Gọi đồ uống ở quán cà phê và hỏi lại người phục vụ.",
+              "target_words": ["coffee", "tea", "juice", "please"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "L4",
+      "title_vi": "Thuần thục",
+      "title_en": "Fluent",
+      "goal_vi": "Nói đoạn dài có nhóm ý, nhấn tương phản, giảm âm tự nhiên; nghe hiểu tốc độ thật.",
+      "units": [
+        {
+          "id": "u19",
+          "title_vi": "Nhóm ý và ngắt nghỉ",
+          "title_en": "Thought groups and pausing",
+          "goal_vi": "Chia câu dài thành nhóm ý, ngắt ở dấu phẩy và ranh giới ý, mỗi nhóm một từ trọng tâm.",
+          "vn_error_vi": "Người Việt ngắt theo hơi thở hoặc theo từng từ, nên câu dài khó theo dõi.",
+          "minutes": 12,
+          "days": 4,
+          "focus_sounds": [],
+          "steps": [
+            {
+              "kind": "describe",
+              "sounds": [],
+              "notes_vi": "Mỗi nhóm ý 3–6 từ, có một từ trọng tâm; ngắt ngắn giữa các nhóm, không ngắt giữa nhóm."
+            },
+            {
+              "kind": "discriminate",
+              "pairs": [],
+              "stress": [],
+              "focus": [
+                {
+                  "sentence": "s31",
+                  "word": "dinner"
+                }
+              ]
+            },
+            {
+              "kind": "controlled",
+              "items": [
+                {
+                  "kind": "sentence",
+                  "id": "s31"
+                },
+                {
+                  "kind": "sentence",
+                  "id": "s35"
+                }
+              ]
+            },
+            {
+              "kind": "guided",
+              "sentences": ["s31"]
+            },
+            {
+              "kind": "communicate",
+              "scenario_vi": "Kể lại buổi tối hôm qua bằng ba nhóm ý.",
+              "target_words": ["when", "then", "after", "finally"]
+            }
+          ]
+        },
+        {
+          "id": "u20",
+          "title_vi": "Nhấn tương phản và sửa thông tin",
+          "title_en": "Contrastive stress",
+          "goal_vi": "Đặt trọng âm lên từ đang được so sánh hoặc sửa lại; hiểu nghĩa đổi khi nhấn từ khác.",
+          "vn_error_vi": "Trọng âm cố định ở cuối câu khiến người nghe không biết bạn đang sửa thông tin nào.",
+          "minutes": 10,
+          "days": 4,
+          "focus_sounds": [],
+          "steps": [
+            {
+              "kind": "describe",
+              "sounds": [],
+              "notes_vi": "I said FIFteen, not FIFty. Cùng một câu, nhấn từ khác là đổi nghĩa: I didn't say HE stole it."
+            },
+            {
+              "kind": "discriminate",
+              "pairs": [],
+              "stress": [
+                {
+                  "word": "fifteen",
+                  "syllables": ["fif", "TEEN"],
+                  "stressed": 1
+                },
+                {
+                  "word": "fifty",
+                  "syllables": ["FIF", "ty"],
+                  "stressed": 0
+                },
+                {
+                  "word": "thirteen",
+                  "syllables": ["thir", "TEEN"],
+                  "stressed": 1
+                }
+              ],
+              "focus": [
+                {
+                  "sentence": "s30",
+                  "word": "fifteen"
+                },
+                {
+                  "sentence": "s32",
+                  "word": "say"
+                }
+              ]
+            },
+            {
+              "kind": "controlled",
+              "items": [
+                {
+                  "kind": "sentence",
+                  "id": "s30"
+                },
+                {
+                  "kind": "sentence",
+                  "id": "s32"
+                }
+              ]
+            },
+            {
+              "kind": "guided",
+              "sentences": ["s30", "s32"]
+            },
+            {
+              "kind": "communicate",
+              "scenario_vi": "Sửa lại thông tin sai về giờ hẹn và số điện thoại.",
+              "target_words": ["fifteen", "fifty", "not", "actually"]
+            }
+          ]
+        },
+        {
+          "id": "u21",
+          "title_vi": "Chuỗi giảm âm tự nhiên",
+          "title_en": "Connected reductions",
+          "goal_vi": "Nghe và nói going to thành gonna, want to thành wanna, did you thành didja ở tốc độ thật.",
+          "vn_error_vi": "Người học nghe phim không kịp vì giọng thật nối và rút gọn nhiều; tự nói thì quá rõ từng chữ.",
+          "minutes": 10,
+          "days": 4,
+          "focus_sounds": ["v12"],
+          "steps": [
+            {
+              "kind": "describe",
+              "sounds": ["v12"],
+              "notes_vi": "Giảm âm chỉ xảy ra ở từ chức năng không nhấn. Trong văn trang trọng vẫn có thể nói đầy đủ; mục tiêu đầu tiên là nghe ra."
+            },
+            {
+              "kind": "discriminate",
+              "pairs": [],
+              "stress": [],
+              "focus": [
+                {
+                  "sentence": "s33",
+                  "word": "tonight"
+                }
+              ]
+            },
+            {
+              "kind": "controlled",
+              "items": [
+                {
+                  "kind": "sound",
+                  "id": "v12"
+                },
+                {
+                  "kind": "sentence",
+                  "id": "s33"
+                },
+                {
+                  "kind": "sentence",
+                  "id": "s11"
+                }
+              ]
+            },
+            {
+              "kind": "guided",
+              "sentences": ["s33", "s11"]
+            },
+            {
+              "kind": "communicate",
+              "scenario_vi": "Hỏi kế hoạch cuối tuần của một người bạn.",
+              "target_words": ["going to", "want to", "have to", "got to"]
+            }
+          ]
+        },
+        {
+          "id": "u22",
+          "title_vi": "/h/ /ŋ/ /j/ và độ dài nguyên âm",
+          "title_en": "H, NG, Y and vowel length",
+          "goal_vi": "Giữ /h/ đầu từ, /ŋ/ cuối không thành /n/, /j/ đầu từ; nguyên âm dài hơn trước phụ âm hữu thanh (bed dài hơn bet).",
+          "vn_error_vi": "hat thành at, sing thành sin, year thành ear; độ dài nguyên âm không đổi nên bet và bed nghe như nhau.",
+          "minutes": 12,
+          "days": 5,
+          "focus_sounds": ["c15", "c20", "c23"],
+          "steps": [
+            {
+              "kind": "describe",
+              "sounds": ["c15", "c20", "c23"],
+              "notes_vi": "Trước phụ âm hữu thanh (/b d g v z/) nguyên âm kéo dài hơn: đây là dấu hiệu chính để nghe ra phụ âm cuối."
+            },
+            {
+              "kind": "discriminate",
+              "pairs": ["hat-at", "sing-sin", "year-ear"],
+              "stress": [],
+              "focus": [
+                {
+                  "sentence": "s34",
+                  "word": "singing"
+                }
+              ]
+            },
+            {
+              "kind": "controlled",
+              "items": [
+                {
+                  "kind": "sound",
+                  "id": "c15"
+                },
+                {
+                  "kind": "sound",
+                  "id": "c20"
+                },
+                {
+                  "kind": "sound",
+                  "id": "c23"
+                },
+                {
+                  "kind": "pair",
+                  "id": "hat-at"
+                },
+                {
+                  "kind": "pair",
+                  "id": "sing-sin"
+                },
+                {
+                  "kind": "pair",
+                  "id": "year-ear"
+                },
+                {
+                  "kind": "sentence",
+                  "id": "s34"
+                }
+              ]
+            },
+            {
+              "kind": "guided",
+              "sentences": ["s34"]
+            },
+            {
+              "kind": "communicate",
+              "scenario_vi": "Kể về sở thích và thói quen hằng tuần.",
+              "target_words": ["hobby", "singing", "yes", "young"]
+            }
+          ]
+        },
+        {
+          "id": "u23",
+          "title_vi": "Shadowing đoạn 30–60 giây",
+          "title_en": "Shadowing",
+          "goal_vi": "Nói theo giọng mẫu gần như đồng thời, bắt chước nhịp, nối âm và ngữ điệu.",
+          "vn_error_vi": "Đọc từng từ cho đúng nhưng ghép lại thành đoạn thì mất nhịp và ngữ điệu.",
+          "minutes": 15,
+          "days": 5,
+          "focus_sounds": [],
+          "steps": [
+            {
+              "kind": "describe",
+              "sounds": [],
+              "notes_vi": "Nghe một lần, sau đó nói theo chậm hơn mẫu nửa giây. Ưu tiên nhịp và ngữ điệu trước, độ chính xác từng âm sau."
+            },
+            {
+              "kind": "discriminate",
+              "pairs": [],
+              "stress": [],
+              "focus": [
+                {
+                  "sentence": "s35",
+                  "word": "coffee"
+                }
+              ]
+            },
+            {
+              "kind": "controlled",
+              "items": [
+                {
+                  "kind": "sentence",
+                  "id": "s35"
+                },
+                {
+                  "kind": "sentence",
+                  "id": "s31"
+                },
+                {
+                  "kind": "sentence",
+                  "id": "s36"
+                }
+              ]
+            },
+            {
+              "kind": "guided",
+              "sentences": ["s35", "s31", "s36"]
+            },
+            {
+              "kind": "communicate",
+              "scenario_vi": "Shadowing đoạn mô tả buổi sáng của bạn rồi tự nói lại không nhìn chữ.",
+              "target_words": ["every morning", "then", "before", "usually"]
+            }
+          ]
+        },
+        {
+          "id": "u24",
+          "title_vi": "Nói một phút và hội thoại mở",
+          "title_en": "One-minute talk",
+          "goal_vi": "Nói liền một phút về một chủ đề quen thuộc với nhịp, nhóm ý và ngữ điệu tự nhiên.",
+          "vn_error_vi": "Khi nói tự do người Việt quay về đọc đều từng từ và bỏ âm cuối vì tập trung vào nội dung.",
+          "minutes": 15,
+          "days": 5,
+          "focus_sounds": [],
+          "steps": [
+            {
+              "kind": "describe",
+              "sounds": [],
+              "notes_vi": "Chuẩn bị ba ý chính, mỗi ý một nhóm câu ngắn. Ghi âm, nghe lại, chọn một âm và một kiểu ngữ điệu để sửa ở lần sau."
+            },
+            {
+              "kind": "discriminate",
+              "pairs": [],
+              "stress": [],
+              "focus": [
+                {
+                  "sentence": "s36",
+                  "word": "hometown"
+                }
+              ]
+            },
+            {
+              "kind": "controlled",
+              "items": [
+                {
+                  "kind": "sentence",
+                  "id": "s36"
+                }
+              ]
+            },
+            {
+              "kind": "guided",
+              "sentences": ["s36"]
+            },
+            {
+              "kind": "communicate",
+              "scenario_vi": "Nói một phút về quê hương của bạn rồi trả lời câu hỏi của gia sư AI.",
+              "target_words": ["hometown", "because", "favorite", "people"]
+            }
+          ]
+        }
+      ]
     }
   ]
 }

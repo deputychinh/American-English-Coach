@@ -16,8 +16,9 @@ CURRICULUM = Path(__file__).resolve().parents[3] / "content" / "curriculum.json"
 
 def test_curriculum_content_has_five_step_units() -> None:
     data = json.loads(CURRICULUM.read_text(encoding="utf-8"))
+    assert [level["id"] for level in data["levels"]] == ["L1", "L2", "L3", "L4"]
     units = [unit for level in data["levels"] for unit in level["units"]]
-    assert len(units) >= 6
+    assert [unit["id"] for unit in units] == [f"u{n:02d}" for n in range(1, 25)]
     assert len({unit["id"] for unit in units}) == len(units)
     for unit in units:
         assert tuple(step["kind"] for step in unit["steps"]) == STEP_ORDER
@@ -28,7 +29,7 @@ def test_curriculum_content_has_five_step_units() -> None:
 
 def test_curriculum_progress_follows_the_profile_runs(client: TestClient) -> None:
     fresh = client.get("/api/v1/curriculum").json()
-    assert fresh["total_units"] >= 6
+    assert fresh["total_units"] == 24
     assert fresh["current_unit"] == "u01"
     assert fresh["completed_units"] == 0
     u03 = next(u for lvl in fresh["levels"] for u in lvl["units"] if u["id"] == "u03")
