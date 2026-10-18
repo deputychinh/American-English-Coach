@@ -2,6 +2,7 @@
 
 import type { ReactElement } from 'react';
 
+import { CHECK_CREDIT } from '@/constants/score.constant';
 import { useCopy } from '@/hooks/useCopy';
 import { cx } from '@/utils/cx.util';
 
@@ -9,15 +10,20 @@ import './ScoreRing.css';
 
 interface ScoreRingProps {
   ok: number;
+  /** Phones the scorer was unsure about; they earn half credit. */
+  check?: number;
   total: number;
 }
 
 const CIRCUMFERENCE = 2 * Math.PI * 30;
 
-/** Share of phones on target as a dial: the number learners compare between attempts. */
-export const ScoreRing = ({ ok, total }: ScoreRingProps): ReactElement => {
+/**
+ * Share of phones on target as a dial: the number learners compare between attempts. An unsure
+ * phone earns half credit, so a native speaker with one `check` does not drop to an amber 67 %.
+ */
+export const ScoreRing = ({ ok, check = 0, total }: ScoreRingProps): ReactElement => {
   const copy = useCopy();
-  const percent = total > 0 ? Math.round((ok / total) * 100) : 0;
+  const percent = total > 0 ? Math.round(((ok + check * CHECK_CREDIT) / total) * 100) : 0;
   const tone = percent >= 80 ? 'good' : percent >= 50 ? 'fair' : 'low';
   return (
     <div

@@ -60,7 +60,11 @@ export const ResultCard = ({
       aria-labelledby="result-title"
     >
       <div className="result-card__head">
-        <ScoreRing ok={summary.ok} total={summary.ok + summary.check + summary.error} />
+        <ScoreRing
+          ok={summary.ok}
+          check={summary.check}
+          total={summary.ok + summary.check + summary.error}
+        />
         <div className="result-card__head-text">
           <h2 id="result-title" className="result-card__title visually-hidden">
             {copy.practice.resultTitle}
