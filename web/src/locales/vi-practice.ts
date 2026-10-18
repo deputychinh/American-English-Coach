@@ -76,11 +76,9 @@ export const viPractice = {
       wh_question: 'Câu hỏi wh-',
     },
     bySound: 'Theo âm',
-    bySoundLead:
-      'Đủ 44 âm. Mỗi âm có từ, cặp tối thiểu và câu đã kiểm tra bằng từ điển; camera theo dõi khẩu hình cho mọi âm.',
+    bySoundLead: 'Chọn một trong 44 âm để luyện từ, cặp tối thiểu và câu, có camera soi khẩu hình.',
     byItems: 'Cặp âm & câu',
-    byItemsLead:
-      'Chọn một cặp âm hoặc một câu. Thu âm, máy chấm từng âm; bật camera để nhận xét thêm về khẩu hình.',
+    byItemsLead: 'Chọn một cặp âm hoặc một câu, đọc to và xem máy chấm từng âm.',
     drill: {
       progress: (index: number, total: number): string => `Bài ${index} / ${total}`,
       next: 'Tiếp theo',

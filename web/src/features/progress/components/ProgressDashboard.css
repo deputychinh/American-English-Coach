@@ -98,6 +98,11 @@
 }
 
 @media (--bp-below-md) {
+  /* Phones keep sound, total and the share bar; the bar already shows ok / check / error. */
+  .progress-dashboard__detail {
+    display: none;
+  }
+
   .progress-dashboard__stats {
     grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: var(--space-2);

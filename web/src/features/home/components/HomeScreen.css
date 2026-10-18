@@ -336,3 +336,37 @@
     display: none;
   }
 }
+
+/* Short phones (iPhone SE, 667 pt): tighter header and goal card, and the shortcut tiles give
+   way (Mirror and 44 sounds are in the tab bar; Listen and Path open from the continue card). */
+@media (max-height: 700px) {
+  .home-screen {
+    gap: var(--space-3);
+  }
+
+  .home-screen__title {
+    font-size: var(--text-2xl);
+  }
+
+  .home-screen__goal {
+    gap: var(--space-3);
+    padding: var(--space-3);
+  }
+
+  .home-screen__ring {
+    inline-size: 56px;
+    block-size: 56px;
+  }
+
+  .home-screen__goal-value {
+    font-size: var(--text-lg);
+  }
+
+  .home-screen__continue {
+    padding: var(--space-3) var(--space-4);
+  }
+
+  .home-screen__tiles {
+    display: none;
+  }
+}

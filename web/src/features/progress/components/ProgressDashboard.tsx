@@ -106,13 +106,22 @@ export const ProgressDashboard = (): ReactElement => {
                         <th scope="col" className="progress-dashboard__head-cell">
                           {copy.progress.total}
                         </th>
-                        <th scope="col" className="progress-dashboard__head-cell">
+                        <th
+                          scope="col"
+                          className="progress-dashboard__head-cell progress-dashboard__detail"
+                        >
                           {copy.verdict.ok}
                         </th>
-                        <th scope="col" className="progress-dashboard__head-cell">
+                        <th
+                          scope="col"
+                          className="progress-dashboard__head-cell progress-dashboard__detail"
+                        >
                           {copy.verdict.check}
                         </th>
-                        <th scope="col" className="progress-dashboard__head-cell">
+                        <th
+                          scope="col"
+                          className="progress-dashboard__head-cell progress-dashboard__detail"
+                        >
                           {copy.verdict.error}
                         </th>
                         <th scope="col" className="progress-dashboard__head-cell">
@@ -142,9 +151,15 @@ export const ProgressDashboard = (): ReactElement => {
                             )}
                           </th>
                           <td className="progress-dashboard__cell">{stat.total}</td>
-                          <td className="progress-dashboard__cell">{stat.ok}</td>
-                          <td className="progress-dashboard__cell">{stat.check}</td>
-                          <td className="progress-dashboard__cell">{stat.error}</td>
+                          <td className="progress-dashboard__cell progress-dashboard__detail">
+                            {stat.ok}
+                          </td>
+                          <td className="progress-dashboard__cell progress-dashboard__detail">
+                            {stat.check}
+                          </td>
+                          <td className="progress-dashboard__cell progress-dashboard__detail">
+                            {stat.error}
+                          </td>
                           <td className="progress-dashboard__cell">
                             <span
                               className="progress-dashboard__bar"

@@ -2,8 +2,7 @@
 export const viCourse = {
   privacy: {
     title: 'Chính sách quyền riêng tư',
-    updated:
-      'Cập nhật ngày 17/10/2026. Ứng dụng và máy chấm là phần mềm bạn tự chạy; không có máy chủ của nhà phát triển nhận dữ liệu của bạn.',
+    updated: 'Cập nhật 17/10/2026. Dữ liệu chỉ nằm trên máy bạn và máy chấm bạn tự chạy.',
     sections: [
       {
         heading: 'Dữ liệu được xử lý ở đâu',
@@ -36,7 +35,7 @@ export const viCourse = {
   },
   course: {
     title: 'Khóa 14 ngày cho người Việt',
-    lead: 'Mỗi ngày 10–15 phút, đi từ âm cuối và /θ/ /ð/ tới nguyên âm, trọng âm và ngữ điệu. Mỗi mục là một bài có sẵn; ngày hoàn thành khi mọi mục đã có ít nhất một lần thu được chấm.',
+    lead: 'Mỗi ngày 10–15 phút, từ âm cuối và /θ/ /ð/ đến nguyên âm, trọng âm và ngữ điệu.',
     statDone: 'Ngày đã xong',
     statCurrent: 'Ngày hiện tại',
     dayShort: (index: number): string => `Ngày ${index}`,
@@ -51,7 +50,7 @@ export const viCourse = {
   },
   curriculum: {
     title: 'Lộ trình phát âm chuẩn',
-    lead: 'Bốn cấp, mỗi đơn vị 4–5 ngày × 10–15 phút theo một vòng năm bước: xem khẩu hình, nghe phân biệt, luyện có chấm, shadowing, dùng trong hội thoại. Thứ tự bài đi từ lỗi người Việt hay mắc nhất.',
+    lead: 'Bốn cấp, 24 đơn vị, mỗi đơn vị năm bước, đi từ lỗi người Việt hay mắc nhất.',
     quickPath: 'Lộ trình nhanh 14 ngày',
     statDone: 'Đơn vị đã xong',
     statCurrent: 'Đang học',

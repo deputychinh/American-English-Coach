@@ -2,6 +2,9 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-1);
+
+  /* Labels may wrap to two lines; values still line up along the bottom of the row. */
+  justify-content: space-between;
   min-inline-size: 0;
   padding: var(--space-4);
   background: var(--color-surface);

@@ -5,7 +5,7 @@ export const enCourse: Pick<Copy, 'privacy' | 'course' | 'onboarding' | 'curricu
   privacy: {
     title: 'Privacy policy',
     updated:
-      'Updated 17 October 2026. The app and the scoring server are software you run yourself; no developer server receives your data.',
+      'Updated 17 October 2026. Your data stays on your device and the scoring server you run.',
     sections: [
       {
         heading: 'Where data is processed',
@@ -38,7 +38,7 @@ export const enCourse: Pick<Copy, 'privacy' | 'course' | 'onboarding' | 'curricu
   },
   course: {
     title: '14-day course for Vietnamese learners',
-    lead: '10–15 minutes a day, from final consonants and /θ/ /ð/ to vowels, stress and intonation. Every item is an existing drill; a day is complete once each item has at least one scored recording.',
+    lead: '10–15 minutes a day, from final consonants and /θ/ /ð/ to vowels, stress and intonation.',
     statDone: 'Days completed',
     statCurrent: 'Current day',
     dayShort: (index: number): string => `Day ${index}`,
@@ -53,7 +53,7 @@ export const enCourse: Pick<Copy, 'privacy' | 'course' | 'onboarding' | 'curricu
   },
   curriculum: {
     title: 'Clear pronunciation path',
-    lead: 'Four levels; each unit is 4–5 days × 10–15 minutes in a five-step loop: see the mouth shape, listen and discriminate, scored practice, shadowing, use it in conversation. Units are ordered by the errors Vietnamese speakers make most.',
+    lead: 'Four levels, 24 units of five steps, ordered by the errors Vietnamese speakers make most.',
     quickPath: '14-day quick path',
     statDone: 'Units completed',
     statCurrent: 'In progress',

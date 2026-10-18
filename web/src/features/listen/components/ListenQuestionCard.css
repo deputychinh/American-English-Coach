@@ -18,6 +18,7 @@
   color: var(--color-text-muted);
 }
 
+/* Counter on top, the question block centred, the next button pinned at the bottom. */
 .listen-question-card__play {
   display: inline-flex;
   align-items: center;
@@ -32,6 +33,7 @@
   box-shadow: var(--shadow-md);
   cursor: pointer;
   transition: transform var(--duration-fast) var(--ease-standard);
+  margin-block-start: auto;
 }
 
 .listen-question-card__play.is-playing {

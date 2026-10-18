@@ -82,10 +82,9 @@ export const enPractice: Pick<Copy, 'practice' | 'verdict' | 'prosody'> = {
     },
     bySound: 'By sound',
     bySoundLead:
-      'All 44 sounds. Each has dictionary-checked words, minimal pairs and sentences; the camera follows your mouth for every sound.',
+      'Pick one of the 44 sounds to practise words, minimal pairs and sentences with the camera.',
     byItems: 'Pairs & sentences',
-    byItemsLead:
-      'Pick a minimal pair or a sentence. Record, get every sound scored; turn the camera on for mouth-shape feedback.',
+    byItemsLead: 'Pick a minimal pair or a sentence, say it and get every sound scored.',
     drill: {
       progress: (index: number, total: number): string => `Item ${index} / ${total}`,
       next: 'Next',

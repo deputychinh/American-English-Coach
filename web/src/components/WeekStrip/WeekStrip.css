@@ -55,3 +55,10 @@
 .week-strip__day.is-today .week-strip__dot {
   border-color: var(--color-primary);
 }
+
+@media (max-height: 700px) {
+  .week-strip__dot {
+    inline-size: 26px;
+    block-size: 26px;
+  }
+}
