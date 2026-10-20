@@ -12,6 +12,9 @@ export const MIN_VISEME_WINDOW_FRAMES = 2;
 export const FOCUS_LIMIT = 2;
 export const SCORE_NEG_INF = -1e9;
 
+/** A vowel heard after a word-final consonant ("bookə"); backend FINAL_EPENTHESIS_ID. */
+export const FINAL_EPENTHESIS_ID = 'final_epenthesis';
+
 /** Free variants (backend/app/domain/verdict.py). */
 export const FREE_VARIANTS: Record<string, string[]> = { AO: ['AA'] };
 export const FREE_VARIANTS_BEFORE_R: Record<string, string[]> = {

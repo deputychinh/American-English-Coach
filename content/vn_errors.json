@@ -55,6 +55,17 @@
     "mouth_tip_vi": "Môi dưới chạm răng trên, giữ rung."
   },
   {
+    "id": "final_epenthesis",
+    "expected": "*",
+    "heard": [],
+    "kind": "insertion",
+    "priority": 2,
+    "final_only": true,
+    "viseme_group": null,
+    "hint_vi": "Có một nguyên âm \"ơ\" chen vào sau phụ âm cuối (book thành \"búc-cơ\"). Kết thúc từ gọn ở phụ âm, đừng thả thêm hơi thành tiếng.",
+    "mouth_tip_vi": "Giữ nguyên miệng ở vị trí phụ âm cuối cho tới khi dừng hẳn."
+  },
+  {
     "id": "th_to_t_s_f",
     "expected": "TH",
     "heard": ["T", "S", "F", "D"],

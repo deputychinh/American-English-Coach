@@ -76,6 +76,23 @@ def test_dropped_final_p_is_a_deletion_with_final_only_hint(settings: Settings) 
     assert final["viseme_group"] == "V1"
 
 
+def test_a_vowel_after_the_final_consonant_is_flagged_as_epenthesis(settings: Settings) -> None:
+    with TestClient(create_app(settings, FakeRecognizer(["θ", "ɪ", "ŋ", "k", "ə"]))) as client:
+        body = post(client, "think").json()
+    final = body["words"][0]["phones"][-1]
+    assert final["symbol"] == "K"
+    assert final["verdict"] == "check"
+    assert final["error_id"] == "final_epenthesis"
+    assert "ơ" in final["hint_vi"]
+    assert [p["verdict"] for p in body["words"][0]["phones"][:3]] == ["ok", "ok", "ok"]
+
+
+def test_a_vowel_inside_the_word_is_not_epenthesis(settings: Settings) -> None:
+    with TestClient(create_app(settings, FakeRecognizer(["θ", "ɪ", "ə", "ŋ", "k"]))) as client:
+        body = post(client, "think").json()
+    assert all(p["error_id"] != "final_epenthesis" for p in body["words"][0]["phones"])
+
+
 def test_mouth_frames_raise_check_to_error_when_lips_are_off(settings: Settings) -> None:
     flat = {
         "aperture": 0.3,

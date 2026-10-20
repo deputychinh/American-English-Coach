@@ -23,6 +23,8 @@ ALIGN_DIFFERENT_CLASS_COST: Final = 1.0
 ALIGN_GAP_COST: Final = 1.0
 # Minimum precision measured on the evaluation set before an error kind may be shown as `error`.
 ERROR_PRECISION_GATE: Final = 0.85
+# A vowel heard after a word-final consonant ("book" said "bookə"); see assessment_service._judge.
+FINAL_EPENTHESIS_ID: Final = "final_epenthesis"
 DEFAULT_MODEL_ID: Final = "facebook/wav2vec2-xlsr-53-espeak-cv-ft"
 DEFAULT_VOICE: Final = "Samantha"
 PROSODY_STRESS_RATIO_MIN: Final = 1.15

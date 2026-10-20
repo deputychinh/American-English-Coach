@@ -4,20 +4,26 @@ import uuid
 from collections import Counter
 from dataclasses import dataclass
 
-from app.constants import ALIGN_GAP_COST, VISUAL_WINDOW_PAD_SECONDS
+from app.constants import ALIGN_GAP_COST, FINAL_EPENTHESIS_ID, VISUAL_WINDOW_PAD_SECONDS
 from app.db.models import DEFAULT_PROFILE_ID
 from app.domain.aligner import AlignedPair, PhonemeAligner, substitution_cost
 from app.domain.ctc_decoder import greedy_decode
 from app.domain.error_catalog import ErrorCatalog, KnownError
 from app.domain.fusion import FusionRules
 from app.domain.gop_scorer import GopScorer, PhoneSegment
-from app.domain.phoneme_inventory import ARPABET_IPA, Phone, espeak_to_arpabet
+from app.domain.phoneme_inventory import (
+    ARPABET_CLASSES,
+    ARPABET_IPA,
+    VOWELS,
+    Phone,
+    espeak_to_arpabet,
+)
 from app.domain.ports import PhonemeRecognizer
 from app.domain.pronouncing import PronouncingDictionary, WordPronunciations
 from app.domain.prosody import ProsodyAnalyzer, SyllableNucleus
 from app.domain.verdict import audio_verdict, is_free_variant
 from app.domain.viseme import VisemeCatalog
-from app.enums import AlignmentOp, Verdict, VisualVerdict
+from app.enums import AlignmentOp, PhonemeClass, Verdict, VisualVerdict
 from app.ml.audio import AudioDecoder
 from app.ml.features import ProsodyFeatureExtractor
 from app.repositories.results_repository import PhonemeRow, ResultsRepository
@@ -146,6 +152,7 @@ class AssessmentService:
         data: AssessmentInput,
     ) -> list[PhoneResult]:
         heard_by_index = _heard_by_expected(pairs)
+        inserted = _inserted_after(pairs)
         results: list[PhoneResult] = []
         for index, item in enumerate(expected):
             op, heard = heard_by_index[index]
@@ -169,6 +176,10 @@ class AssessmentService:
                 known, audio_verdict = None, Verdict.OK
             else:
                 audio_verdict = self._audio_verdict(op, segment.gop, known)
+            if audio_verdict is Verdict.OK and _is_epenthesis(item, (op, heard), inserted[index]):
+                known = self._catalog.by_id(FINAL_EPENTHESIS_ID)
+                enabled = known is not None and self._catalog.is_enabled(known)
+                audio_verdict = Verdict.ERROR if enabled else Verdict.CHECK
             visual = self._visual(item.phone.symbol, segment, data)
             verdict, show_hint = FusionRules.fuse(
                 audio_verdict, visual, self._visemes.confidence_of(item.phone.symbol)
@@ -367,6 +378,39 @@ def _heard_by_expected(pairs: list[AlignedPair]) -> list[tuple[AlignmentOp, str]
             continue
         result.append((pair.op, pair.actual))
     return result
+
+
+OBSTRUENT_CLASSES = frozenset({PhonemeClass.STOP, PhonemeClass.FRICATIVE, PhonemeClass.AFFRICATE})
+
+
+def _inserted_after(pairs: list[AlignedPair]) -> list[list[str]]:
+    """For each expected phone in order: the heard symbols inserted right after it."""
+    after: list[list[str]] = []
+    for pair in pairs:
+        if pair.op is AlignmentOp.INSERTION:
+            if after:
+                after[-1].append(pair.actual)
+            continue
+        after.append([])
+    return after
+
+
+def _is_epenthesis(
+    item: ExpectedPhone, column: tuple[AlignmentOp, str], inserted: list[str]
+) -> bool:
+    """A vowel heard after a word-final obstruent: the Vietnamese "bookə" (plan B6).
+
+    The vowel shows up inserted after the consonant, or in the consonant's own column while the
+    forced alignment still finds the consonant (the caller only asks when its verdict is ok).
+    Only stops, fricatives and affricates: after /l r m n ŋ/ native voices have a vowel-like
+    offglide the model decodes as a vowel (school, girl, beer, sing in the sweep).
+    """
+    op, heard = column
+    if not item.is_final or ARPABET_CLASSES.get(item.phone.symbol) not in OBSTRUENT_CLASSES:
+        return False
+    if op is AlignmentOp.SUBSTITUTION and heard in VOWELS:
+        return True
+    return op is not AlignmentOp.DELETION and any(symbol in VOWELS for symbol in inserted)
 
 
 def _heard_spans(expected: list[ExpectedPhone], pairs: list[AlignedPair]) -> dict[int, list[str]]:

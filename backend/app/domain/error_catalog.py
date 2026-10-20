@@ -69,6 +69,10 @@ class ErrorCatalog:
                 return error
         return None
 
+    def by_id(self, error_id: str) -> KnownError | None:
+        """A catalogued error by id (rules outside the column match, e.g. final epenthesis)."""
+        return next((error for error in self._errors if error.id == error_id), None)
+
     def is_enabled(self, error: KnownError) -> bool:
         """Only errors whose measured precision passed the gate may be shown as `error`."""
         return error.id in self._enabled

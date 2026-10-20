@@ -55,6 +55,17 @@
     "viseme_group": "V2"
   },
   {
+    "expected": "*",
+    "final_only": true,
+    "heard": [],
+    "hint_vi": "Có một nguyên âm \"ơ\" chen vào sau phụ âm cuối (book thành \"búc-cơ\"). Kết thúc từ gọn ở phụ âm, đừng thả thêm hơi thành tiếng.",
+    "id": "final_epenthesis",
+    "kind": "insertion",
+    "mouth_tip_vi": "Giữ nguyên miệng ở vị trí phụ âm cuối cho tới khi dừng hẳn.",
+    "priority": 2,
+    "viseme_group": null
+  },
+  {
     "expected": "TH",
     "final_only": false,
     "heard": ["T", "S", "F", "D"],

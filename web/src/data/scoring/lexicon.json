@@ -197,6 +197,7 @@
   "check": [["CH", "EH1", "K"]],
   "cheer": [["CH", "IH1", "R"]],
   "cheese": [["CH", "IY1", "Z"]],
+  "chen": [["CH", "EH1", "N"]],
   "chi": [["K", "AY1"]],
   "chia": [["CH", "IY1", "AH0"]],
   "chicken": [["CH", "IH1", "K", "AH0", "N"]],
@@ -591,6 +592,7 @@
     ["IH0", "N", "F", "AO1", "R", "M", "EY1", "SH", "AH0", "N"]
   ],
   "initial": [["IH2", "N", "IH1", "SH", "AH0", "L"]],
+  "insertion": [["IH2", "N", "S", "ER1", "SH", "AH0", "N"]],
   "instead": [["IH2", "N", "S", "T", "EH1", "D"]],
   "intonation": [["IH2", "N", "T", "AH0", "N", "EY1", "SH", "AH0", "N"]],
   "is": [

@@ -37,6 +37,13 @@ SUBSTITUTIONS: dict[str, list[tuple[str, str]]] = {
     "cats": [("cat", "final_s_dropped")],
     "worked": [("work", "final_t_dropped")],
     "right": [("light", "r_to_l")],
+    # Plan B6: an "uh" after the final consonant, the Vietnamese "bookə".
+    "book": [("bookuh", "final_epenthesis")],
+    "fish": [("fishuh", "final_epenthesis")],
+    "bag": [("bagguh", "final_epenthesis")],
+    "good": [("gooduh", "final_epenthesis")],
+    "cat": [("cattuh", "final_epenthesis")],
+    "map": [("mappuh", "final_epenthesis")],
 }
 
 

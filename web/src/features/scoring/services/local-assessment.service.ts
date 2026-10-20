@@ -1,5 +1,6 @@
 import {
   CTC_FRAME_SECONDS,
+  FINAL_EPENTHESIS_ID,
   FOCUS_LIMIT,
   MIN_FRAME_QUALITY,
   RISE_BY_KIND,
@@ -23,7 +24,7 @@ import { greedyDecode } from '@/utils/ctc.util';
 import { findKnownError, sortErrors } from '@/utils/error-catalog.util';
 import { createGopScorer, round3 } from '@/utils/gop.util';
 import { pronunciationsFor } from '@/utils/lexicon.util';
-import { espeakToArpabet, isVowel, phoneIpa } from '@/utils/phoneme.util';
+import { espeakToArpabet, isVowel, phoneIpa, phonemeClass } from '@/utils/phoneme.util';
 import { prosodyTracks } from '@/utils/pitch.util';
 import { analyzeProsody } from '@/utils/prosody.util';
 import { audioVerdict, fuseVerdicts, isFreeVariant } from '@/utils/score-verdict.util';
@@ -114,6 +115,36 @@ const visual = (
   return evaluateViseme(symbol, window, data.visemes);
 };
 
+/** For each expected phone in order: the heard symbols inserted right after it. */
+const insertedAfter = (pairs: AlignedPair[]): string[][] => {
+  const after: string[][] = [];
+  for (const pair of pairs) {
+    if (pair.op !== 'insertion') after.push([]);
+    else after.at(-1)?.push(pair.actual);
+  }
+  return after;
+};
+
+/** Stops, fricatives and affricates (after /l r m n ŋ/ native voices have a vowel-like glide). */
+const OBSTRUENTS = new Set(['stop', 'fricative', 'affricate']);
+
+/**
+ * A vowel heard after a word-final obstruent: the Vietnamese "bookə" (plan B6). The vowel is
+ * inserted after the consonant, or sits in its column while the forced alignment still finds it.
+ */
+const isEpenthesis = (
+  item: ExpectedPhone,
+  column: { op: AlignmentOp; heard: string; inserted: string[] },
+  data: ScoringData,
+): boolean => {
+  if (!item.isFinal || !OBSTRUENTS.has(phonemeClass(item.phone.symbol, data.inventory) ?? ''))
+    return false;
+  if (column.op === 'substitution' && isVowel(column.heard, data.inventory)) return true;
+  return (
+    column.op !== 'deletion' && column.inserted.some((symbol) => isVowel(symbol, data.inventory))
+  );
+};
+
 const judge = (
   expected: ExpectedPhone[],
   pairs: AlignedPair[],
@@ -124,6 +155,7 @@ const judge = (
   const heardByExpected: [AlignmentOp, string][] = pairs
     .filter((pair) => pair.op !== 'insertion')
     .map((pair) => [pair.op, pair.actual]);
+  const inserted = insertedAfter(pairs);
   return expected.map((item, index) => {
     const [op, heard] = heardByExpected[index] ?? ['deletion', ''];
     const segment = segments[index] ?? {
@@ -152,6 +184,13 @@ const judge = (
       audio = 'ok';
     } else {
       audio = audioVerdict(op, segment.gop, known !== null && data.enabled.includes(known.id));
+    }
+    if (
+      audio === 'ok' &&
+      isEpenthesis(item, { op, heard, inserted: inserted[index] ?? [] }, data)
+    ) {
+      known = errors.find((error) => error.id === FINAL_EPENTHESIS_ID) ?? null;
+      audio = known !== null && data.enabled.includes(known.id) ? 'error' : 'check';
     }
     const seen = visual(symbol, segment, { input, data });
     const { verdict, showHint } = fuseVerdicts(
