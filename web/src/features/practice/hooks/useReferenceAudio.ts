@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { REFERENCE_CACHE_LIMIT, SILENT_WAV_DATA_URI } from '@/constants/recorder.constant';
 import { fetchReferenceAudio } from '@/features/practice/services/assessment.service';
+import { bundledClipUrl } from '@/features/practice/services/voice-library.service';
 import type { ReferenceAudio } from '@/interfaces/hooks.interface';
 import { getCopy } from '@/locales';
 
@@ -13,6 +14,9 @@ const clipUrls = new Map<string, string>();
 const clipUrl = async (text: string): Promise<string> => {
   const cached = clipUrls.get(text);
   if (cached) return cached;
+  // The voice shipped with the app first: works offline and needs no scoring server.
+  const bundled = await bundledClipUrl(text);
+  if (bundled) return bundled;
   const url = URL.createObjectURL(await fetchReferenceAudio(text));
   clipUrls.set(text, url);
   const oldest = clipUrls.keys().next().value;

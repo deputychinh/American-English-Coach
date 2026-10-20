@@ -3,12 +3,28 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { StorageKey } from '@/enums/storage-key.enum';
 import { useReferenceAudio } from '@/features/practice/hooks/useReferenceAudio';
+import { resetVoiceLibrary } from '@/features/practice/services/voice-library.service';
 
 // The real hook, not a mock: this is the path that played nothing on a paired iPhone.
 const fetchMock = vi.fn<typeof fetch>();
 const played: string[] = [];
 
+const urlOf = (input: RequestInfo | URL | undefined): string =>
+  input instanceof Request ? input.url : input instanceof URL ? input.href : (input ?? '');
+
+/** No bundled voices unless a test provides the manifest; `audio` answers the server call. */
+const serve = (audio: () => Promise<Response>, manifest: object | null = null): void => {
+  fetchMock.mockImplementation((input) =>
+    urlOf(input).endsWith('/voice/manifest.json')
+      ? Promise.resolve(
+          manifest ? new Response(JSON.stringify(manifest)) : new Response('', { status: 404 }),
+        )
+      : audio(),
+  );
+};
+
 beforeEach(() => {
+  resetVoiceLibrary();
   vi.stubGlobal('fetch', fetchMock);
   vi.spyOn(URL, 'createObjectURL').mockImplementation(() => `blob:clip-${String(played.length)}`);
   vi.spyOn(URL, 'revokeObjectURL').mockImplementation(() => undefined);
@@ -33,18 +49,19 @@ afterEach(() => {
 
 describe('useReferenceAudio', () => {
   it('downloads the clip with the pairing token and plays it', async () => {
-    fetchMock.mockResolvedValue(new Response(new Blob(['RIFF']), { status: 200 }));
+    serve(() => Promise.resolve(new Response(new Blob(['RIFF']), { status: 200 })));
     const { result } = renderHook(() => useReferenceAudio());
     act(() => result.current.play('sheep'));
     await waitFor(() => expect(played.some((src) => src.startsWith('blob:'))).toBe(true));
-    const [url, init] = fetchMock.mock.calls[0] ?? [];
+    const [url, init] =
+      fetchMock.mock.calls.find(([u]) => urlOf(u).includes('/api/v1/audio')) ?? [];
     expect(url).toEqual(expect.stringContaining('/api/v1/audio?text=sheep'));
     expect(new Headers(init?.headers).get('X-Coach-Token')).toBe('tok-phone');
     expect(result.current.error).toBeNull();
   });
 
   it('tells an unpaired phone what to do instead of staying silent', async () => {
-    fetchMock.mockResolvedValue(new Response('{}', { status: 401 }));
+    serve(() => Promise.resolve(new Response('{}', { status: 401 })));
     const { result } = renderHook(() => useReferenceAudio());
     act(() => result.current.play('moon'));
     await waitFor(() => expect(result.current.error).toMatch(/ghép nối/));
@@ -52,9 +69,26 @@ describe('useReferenceAudio', () => {
   });
 
   it('reports a server that cannot be reached', async () => {
-    fetchMock.mockRejectedValue(new TypeError('Load failed'));
+    serve(() => Promise.reject(new TypeError('Load failed')));
     const { result } = renderHook(() => useReferenceAudio());
     act(() => result.current.play('food'));
     await waitFor(() => expect(result.current.error).toMatch(/máy chấm/));
+  });
+
+  it('plays the voice shipped with the app without calling the server', async () => {
+    serve(() => Promise.reject(new Error('the server must not be called')), {
+      model: 'gpt-4o-mini-tts',
+      disclosure: 'AI-generated voices (OpenAI TTS)',
+      primary: 'marin',
+      extra: ['cedar'],
+      clips: { ship: 'abc123def456' },
+    });
+    const { result } = renderHook(() => useReferenceAudio());
+    act(() => result.current.play('ship'));
+    await waitFor(() =>
+      expect(played).toContain('http://localhost:3000/voice/marin/abc123def456.m4a'),
+    );
+    expect(fetchMock.mock.calls.some(([u]) => urlOf(u).includes('/api/v1/audio'))).toBe(false);
+    expect(result.current.error).toBeNull();
   });
 });
