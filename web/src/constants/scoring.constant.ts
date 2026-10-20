@@ -52,4 +52,6 @@ export const PLAN_REVIEW_AFTER_DAYS = 3;
 export const PLAN_FOCUS_LIMIT = 3;
 export const PLAN_WEAK_LIMIT = 2;
 export const PLAN_WEEK_DAYS = 7;
+/** One rest day allowed per this many days without breaking the streak (backend constants). */
+export const STREAK_REST_EVERY_DAYS = 7;
 export const PLAN_STREAK_LOOKBACK_DAYS = 400;

@@ -5,6 +5,7 @@ import {
   PLAN_WEAK_LIMIT,
   PLAN_WEAK_OK_RATE,
   PLAN_WEEK_DAYS,
+  STREAK_REST_EVERY_DAYS,
 } from '@/constants/scoring.constant';
 import type { DaySummary, FocusPick, RunDay, SoundHistory } from '@/interfaces/scoring.interface';
 import { round3 } from '@/utils/gop.util';
@@ -45,15 +46,24 @@ export const weekSummary = (runs: RunDay[], today: string): DaySummary[] => {
   });
 };
 
-/** Consecutive practised days ending today, or ending yesterday if today is still open. */
+/**
+ * Practised days in the run ending today (or yesterday while today is still open). One missed
+ * day per week is a rest day: it keeps the run and does not count (backend planner.streak_days).
+ */
 export const streakDays = (practised: Set<string>, today: string): number => {
   let cursor = practised.has(today) ? today : addDays(today, -1);
   let streak = 0;
-  while (practised.has(cursor)) {
-    streak += 1;
+  let lastRest: string | null = null;
+  for (;;) {
+    if (practised.has(cursor)) streak += 1;
+    else if (
+      practised.has(addDays(cursor, -1)) &&
+      (lastRest === null || daysBetween(cursor, lastRest) >= STREAK_REST_EVERY_DAYS)
+    )
+      lastRest = cursor;
+    else return streak;
     cursor = addDays(cursor, -1);
   }
-  return streak;
 };
 
 const okRate = (history: SoundHistory): number => (history.total ? history.ok / history.total : 0);

@@ -40,6 +40,8 @@ export const viLesson = {
     doneAdvice:
       'Ngày mai quay lại ôn các mục chưa đạt; luyện ngắn mỗi ngày hiệu quả hơn một buổi dài.',
     backToCourse: 'Về lộ trình',
+    reminderLead: 'Luyện ngắn mỗi ngày giúp nhớ khẩu hình lâu hơn.',
+    reminderOffer: (time: string): string => `Nhắc tôi luyện mỗi ngày lúc ${time}`,
     restart: 'Học lại từ đầu',
   },
 };

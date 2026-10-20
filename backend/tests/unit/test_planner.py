@@ -46,8 +46,16 @@ def test_streak_counts_back_from_today_or_yesterday() -> None:
     assert streak_days(three, TODAY) == 3
     # Today not practised yet: yesterday's streak still stands.
     assert streak_days({date(2026, 10, 16), date(2026, 10, 15)}, TODAY) == 2
-    # A gap breaks it.
-    assert streak_days({date(2026, 10, 17), date(2026, 10, 15)}, TODAY) == 1
+    # One missed day is a rest day: it keeps the streak but does not count.
+    assert streak_days({date(2026, 10, 17), date(2026, 10, 15)}, TODAY) == 2
+    assert streak_days({date(2026, 10, 15), date(2026, 10, 14)}, TODAY) == 2
+    # Two missed days in a row, or two rest days within a week, break it.
+    assert streak_days({date(2026, 10, 17), date(2026, 10, 14)}, TODAY) == 1
+    week = {date(2026, 10, 17), date(2026, 10, 15), date(2026, 10, 13), date(2026, 10, 12)}
+    assert streak_days(week, TODAY) == 2
+    # A week later another rest day is allowed again.
+    later = {date(2026, 10, 17), date(2026, 10, 15)} | {date(2026, 10, d) for d in range(7, 15)}
+    assert streak_days(later - {date(2026, 10, 8)}, TODAY) == 9
 
 
 def test_focus_prefers_weak_sounds_then_review_then_new_without_repeats() -> None:

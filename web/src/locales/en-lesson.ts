@@ -40,6 +40,8 @@ export const enLesson = {
     doneAdvice:
       'Come back tomorrow for the missed items; short daily practice beats one long session.',
     backToCourse: 'Back to the course',
+    reminderLead: 'A short session every day keeps the mouth shapes in memory.',
+    reminderOffer: (time: string): string => `Remind me every day at ${time}`,
     restart: 'Start over',
   },
 };

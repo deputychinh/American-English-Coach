@@ -20,6 +20,7 @@ import { flattenUnits, getCurriculum } from '@/features/curriculum/services/curr
 import { LessonBanner } from '@/features/lesson/components/LessonBanner';
 import { LessonDescribe } from '@/features/lesson/components/LessonDescribe';
 import { LessonListen } from '@/features/lesson/components/LessonListen';
+import { LessonReminderOffer } from '@/features/lesson/components/LessonReminderOffer';
 import { LessonSummary } from '@/features/lesson/components/LessonSummary';
 import {
   advance,
@@ -163,6 +164,7 @@ export const LessonPlayer = (): ReactElement => {
             >
               {copy.lesson.restart}
             </Button>
+            <LessonReminderOffer />
           </LessonSummary>
         </div>
       </div>

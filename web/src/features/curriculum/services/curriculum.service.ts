@@ -14,29 +14,19 @@ export const getCurriculum = async (): Promise<CurriculumResponse> => {
 export const flattenUnits = (response: CurriculumResponse): CurriculumUnit[] =>
   response.levels.flatMap((level) => level.units);
 
-/** Href of a content item (kept local: course.service imports would create a cycle). */
-const itemHref = (kind: string, id: string): NextStep['href'] => {
-  if (kind === 'sound') return { pathname: '/practice', query: { sound: id } };
-  if (kind === 'pair') return { pathname: '/practice', query: { item: `pair:${id}:0` } };
-  return { pathname: '/practice', query: { item: `sentence:${id}` } };
-};
-
-/** What "continue" opens for a unit: listening first, then unscored items, then shadowing. */
+/**
+ * What "continue" says for a unit (listening first, then unscored items, then shadowing); it
+ * always opens the lesson player, which resumes at the learner's saved screen.
+ */
 export const nextStepOf = (unit: CurriculumUnit, listened: number | null): NextStep => {
-  if (listened === null)
-    return { kind: 'listen', href: { pathname: '/listen', query: { unit: unit.id } } };
+  const lesson = { pathname: '/lesson', query: { unit: unit.id } };
+  if (listened === null) return { kind: 'listen', href: lesson };
   const done = new Set(unit.progress.done_ids);
-  for (const step of unit.steps) {
-    if (!('items' in step)) continue;
-    const open = step.items.find((item) => !done.has(`${item.kind}:${item.id}`));
-    if (open) return { kind: 'practice', href: itemHref(open.kind, open.id) };
-  }
-  for (const step of unit.steps) {
-    if ('sentences' in step && step.sentences[0])
-      return {
-        kind: unit.progress.is_done ? 'done' : 'shadow',
-        href: itemHref('sentence', step.sentences[0]),
-      };
-  }
+  const isOpen = unit.steps.some(
+    (step) => 'items' in step && step.items.some((item) => !done.has(`${item.kind}:${item.id}`)),
+  );
+  if (isOpen) return { kind: 'practice', href: lesson };
+  if (unit.steps.some((step) => 'sentences' in step && step.sentences.length > 0))
+    return { kind: unit.progress.is_done ? 'done' : 'shadow', href: lesson };
   return { kind: 'done', href: { pathname: '/curriculum', query: {} } };
 };

@@ -9,6 +9,7 @@ from collections.abc import Iterable
 from dataclasses import dataclass
 from datetime import UTC, date, datetime, timedelta
 
+from app.constants import STREAK_REST_EVERY_DAYS
 from app.enums import FocusReason
 
 MIN_SAMPLES = 3
@@ -95,13 +96,24 @@ def week_summary(runs: Iterable[RunDay], today: date) -> list[DaySummary]:
 
 
 def streak_days(practised: set[date], today: date) -> int:
-    """Consecutive practised days ending today, or ending yesterday if today is still open."""
+    """Practised days in the run ending today (or yesterday while today is still open).
+
+    One missed day per week is a rest day: it does not break the run and does not count in it
+    (plan B7: a streak that punishes a single day off makes learners give up, not practise).
+    """
     cursor = today if today in practised else today - timedelta(days=1)
     streak = 0
-    while cursor in practised:
-        streak += 1
+    last_rest: date | None = None
+    while True:
+        if cursor in practised:
+            streak += 1
+        elif cursor - timedelta(days=1) in practised and (
+            last_rest is None or (last_rest - cursor).days >= STREAK_REST_EVERY_DAYS
+        ):
+            last_rest = cursor
+        else:
+            return streak
         cursor -= timedelta(days=1)
-    return streak
 
 
 def pick_focus(

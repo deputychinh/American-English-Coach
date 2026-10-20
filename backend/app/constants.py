@@ -31,3 +31,5 @@ SILENCE_PEAK: Final = 1e-4
 MIN_SYLLABLES_FOR_STRESS: Final = 2
 MIN_NUCLEI_FOR_RHYTHM: Final = 2
 MIN_CMU_FIELDS: Final = 2
+# One rest day allowed per this many days without breaking the practice streak.
+STREAK_REST_EVERY_DAYS: Final = 7

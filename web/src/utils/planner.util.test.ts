@@ -33,7 +33,16 @@ describe('planner', () => {
     expect(streakDays(new Set(), TODAY)).toBe(0);
     expect(streakDays(new Set(['2026-10-17', '2026-10-16', '2026-10-15']), TODAY)).toBe(3);
     expect(streakDays(new Set(['2026-10-16', '2026-10-15']), TODAY)).toBe(2);
-    expect(streakDays(new Set(['2026-10-17', '2026-10-15']), TODAY)).toBe(1);
+    // One missed day is a rest day; two in a row, or two within a week, break the streak.
+    expect(streakDays(new Set(['2026-10-17', '2026-10-15']), TODAY)).toBe(2);
+    expect(streakDays(new Set(['2026-10-15', '2026-10-14']), TODAY)).toBe(2);
+    expect(streakDays(new Set(['2026-10-17', '2026-10-14']), TODAY)).toBe(1);
+    expect(
+      streakDays(new Set(['2026-10-17', '2026-10-15', '2026-10-13', '2026-10-12']), TODAY),
+    ).toBe(2);
+    const later = ['2026-10-17', '2026-10-15', '2026-10-14', '2026-10-13', '2026-10-12'];
+    later.push('2026-10-11', '2026-10-10', '2026-10-09', '2026-10-07');
+    expect(streakDays(new Set(later), TODAY)).toBe(9);
   });
 
   it('prefers weak sounds, then review, then new ones, without repeats', () => {
