@@ -74,6 +74,11 @@ class ErrorCatalog:
         return error.id in self._enabled
 
     @property
+    def enabled_ids(self) -> frozenset[str]:
+        """Ids allowed at level `error` (the precision-gated list)."""
+        return self._enabled
+
+    @property
     def all(self) -> list[KnownError]:
         """Every catalogued error, highest priority first."""
         return list(self._errors)

@@ -22,7 +22,7 @@ __pycache__/
 .coverage
 
 # Local data: learner progress, recordings, cached audio, downloaded models and datasets
-data/
+/data/
 !data/.gitkeep
 
 # Legacy app build artefacts

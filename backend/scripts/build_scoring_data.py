@@ -1,0 +1,12 @@
+"""Write `web/src/data/scoring/` for the in-app scorer (see app/eval/scoring_data.py)."""
+
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+
+from app.eval.scoring_data import write_all
+
+if __name__ == "__main__":
+    for name, size in write_all().items():
+        print(name, size, "bytes")
