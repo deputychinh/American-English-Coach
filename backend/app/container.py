@@ -101,6 +101,11 @@ class AppContainer:
             from app.ml.fake_recognizer import FakeRecognizer  # noqa: PLC0415 - optional mode
 
             return FakeRecognizer(Path(__file__).resolve().parent / "resources" / "vocab.json")
+        if self.settings.recognizer == "onnx":
+            from app.ml.onnx_recognizer import OnnxRecognizer  # noqa: PLC0415 - optional mode
+
+            onnx_dir = self.settings.resolved_model_dir.parent / "onnx"
+            return OnnxRecognizer(onnx_dir / self.settings.onnx_model, onnx_dir / "vocab.json")
         from app.ml.recognizer import Wav2Vec2Recognizer  # noqa: PLC0415 - heavy import on demand
 
         return Wav2Vec2Recognizer(self.settings.resolved_model_dir, self.settings.device)

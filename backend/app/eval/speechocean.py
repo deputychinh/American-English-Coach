@@ -18,6 +18,7 @@ from numpy.typing import NDArray
 
 from app.config import Settings
 from app.constants import ERROR_PRECISION_GATE, GOP_CHECK_THRESHOLD, GOP_OK_THRESHOLD
+from app.container import AppContainer
 from app.domain.aligner import PhonemeAligner
 from app.domain.ctc_decoder import greedy_decode
 from app.domain.error_catalog import ErrorCatalog
@@ -26,7 +27,6 @@ from app.domain.phoneme_inventory import ARPABET, espeak_to_arpabet
 from app.domain.verdict import audio_verdict, is_free_variant
 from app.enums import AlignmentOp
 from app.ml.audio import AudioDecoder
-from app.ml.recognizer import Wav2Vec2Recognizer
 
 logger = logging.getLogger(__name__)
 REPO = Path(__file__).resolve().parents[3]
@@ -81,7 +81,8 @@ class Evaluator:
 
     def __init__(self, settings: Settings) -> None:
         self._decoder = AudioDecoder()
-        self._recognizer = Wav2Vec2Recognizer(settings.resolved_model_dir, settings.device)
+        # The configured recogniser (COACH_RECOGNIZER=onnx evaluates the model the iPhone runs).
+        self._recognizer = AppContainer(settings).recognizer
         self._scorer = GopScorer(self._recognizer.vocab, self._recognizer.blank_id)
         self._aligner = PhonemeAligner()
         self._catalog = ErrorCatalog.load(settings.content_dir, None)

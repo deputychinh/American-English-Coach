@@ -150,3 +150,23 @@ Mỗi hạng mục: nhánh/commit theo Conventional Commits, `make ci` xanh, e2e
 - **Giọng mẫu: TTS OpenAI**, đóng gói sẵn trong app, ghi rõ "giọng AI". Cần một API key OpenAI mới (key cũ đã lộ trong chat).
 - **v1.0 miễn phí hoàn toàn**, không tài khoản.
 - **Chưa có Apple Developer Program trả phí**: chủ dự án đăng ký trước tuần 3 để kịp TestFlight. Đến lúc đó vẫn cài lên iPhone bằng chứng chỉ phát triển hiện có.
+
+## 8. Nhật ký thực hiện
+
+### A1 · Cổng chất lượng mô hình nén: **ĐẠT** (20/10)
+
+`COACH_RECOGNIZER=onnx` (mô hình `w2v.mm8.onnx`, 356 MB, SHA-256 trong `data/models/onnx/manifest.json`):
+
+| Chỉ số                                   | PyTorch | ONNX nén | Cổng    |
+| ---------------------------------------- | ------- | -------- | ------- |
+| Báo nhầm giọng chuẩn (`make sweep`, 880) | 16,1%   | 15,7%    | ≤ 17,1% |
+| speechocean: báo nhầm âm đúng            | 12,3%   | 11,9%    |         |
+| speechocean: bắt âm sai                  | 43,6%   | 43,3%    | ≥ 42,6% |
+| speechocean: tương quan Pearson          | 0,474   | 0,476    |         |
+
+### A0 · Plugin chấm trên máy: đang làm
+
+- Plugin `web/plugins/phoneme-engine` (Swift, ONNX Runtime 1.24.2 qua SPM) đã build được cho simulator.
+- Plugin có các chức năng: tải mô hình có kiểm SHA-256 và loại khỏi iCloud backup; nạp mô hình bằng CPU hoặc CoreML; trả log-posterior; benchmark.
+- Cài đặt → "Chấm trên máy (thử nghiệm)" tải mô hình từ máy chấm đã ghép nối (`/api/v1/models`) rồi đo tốc độ.
+- Còn chờ số đo trên iPhone thật.

@@ -28,7 +28,9 @@ class Settings(BaseSettings):
     model_dir: Path | None = None
     device: str = Field(default="auto", pattern="^(auto|cpu|mps|cuda)$")
     # `fake` runs the API without the model (CI, demos); results are tagged fake-recognizer@ci.
-    recognizer: str = Field(default="wav2vec2", pattern="^(wav2vec2|fake)$")
+    recognizer: str = Field(default="wav2vec2", pattern="^(wav2vec2|fake|onnx)$")
+    # `onnx` runs the exported model the iPhone app uses (data/models/onnx/<file>), for evaluation.
+    onnx_model: str = "w2v.mm8.onnx"
     # Load the phoneme model in the background at start so the first scoring is not a cold load.
     warm_up: bool = True
     log_json: bool = True

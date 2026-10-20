@@ -29,6 +29,8 @@ dev = [
   "mypy>=1.13",
   "hypothesis>=6.115",
   "pyarrow>=26.0.0",
+  "onnxruntime>=1.24",
+  "onnx>=1.19",
 ]
 
 [tool.uv]
@@ -88,7 +90,7 @@ plugins = ["pydantic.mypy"]
 [[tool.mypy.overrides]]
 module = [
   "librosa", "librosa.*", "soundfile", "transformers", "transformers.*", "huggingface_hub",
-  "pyarrow", "pyarrow.*",
+  "pyarrow", "pyarrow.*", "onnxruntime", "onnxruntime.*", "onnx", "onnx.*",
 ]
 ignore_missing_imports = true
 
