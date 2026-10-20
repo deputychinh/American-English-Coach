@@ -1,0 +1,198 @@
+{
+  "calibration": [
+    { "id": "rest", "prompt_vi": "Khuôn miệng nghỉ, khép môi tự nhiên", "seconds": 3 },
+    { "id": "ee", "prompt_vi": "Nói \"ee\" và giữ (môi kéo ngang)", "seconds": 3 },
+    { "id": "oo", "prompt_vi": "Nói \"oo\" và giữ (môi chu tròn)", "seconds": 3 },
+    { "id": "ah", "prompt_vi": "Nói \"ah\" và giữ (mở hàm rộng)", "seconds": 3 },
+    { "id": "mmm", "prompt_vi": "Khép chặt môi \"mmm\"", "seconds": 3 },
+    {
+      "id": "th",
+      "prompt_vi": "Đặt đầu lưỡi nhẹ giữa hai hàm răng như âm 'th' và giữ",
+      "seconds": 3
+    }
+  ],
+  "confidence_labels": {
+    "high": "Camera thấy rõ",
+    "low": "Camera chỉ thấy môi/hàm; chấm bằng tai",
+    "medium": "Camera thấy một phần"
+  },
+  "features": [
+    "aperture",
+    "width",
+    "roundness",
+    "jaw",
+    "lipClosed",
+    "lowerLipTuck",
+    "teethVisible",
+    "tongueVisible"
+  ],
+  "groups": [
+    {
+      "common_error_vi": "Môi không chạm nhau ở cuối từ.",
+      "confidence": "high",
+      "group": "V1",
+      "hint_vi": "Khép kín hai môi rồi mới bật ra.",
+      "hold_ms": 150,
+      "name_vi": "Hai môi khép",
+      "sounds": ["P", "B", "M"],
+      "targets": { "aperture": { "max": 0.15 }, "lipClosed": { "min": 0.7 } }
+    },
+    {
+      "common_error_vi": "Chu môi như /w/ hoặc khép hai môi như /b/.",
+      "confidence": "high",
+      "group": "V2",
+      "hint_vi": "Đặt môi dưới dưới mép răng trên, thổi hơi.",
+      "hold_ms": 200,
+      "name_vi": "Môi dưới chạm răng trên",
+      "sounds": ["F", "V"],
+      "targets": {
+        "lipClosed": { "max": 0.4 },
+        "lowerLipTuck": { "min": 0.5 },
+        "roundness": { "max": 0.5 }
+      }
+    },
+    {
+      "common_error_vi": "Lưỡi nằm sau răng nên thành /t/ hoặc /s/. Camera ước lượng lưỡi lộ ra giữa răng bằng màu (thử nghiệm); kết luận chính vẫn dựa vào âm thanh.",
+      "confidence": "medium",
+      "group": "V3",
+      "hint_vi": "Đầu lưỡi lộ nhẹ giữa hai hàm răng.",
+      "hold_ms": 200,
+      "name_vi": "Lưỡi giữa răng",
+      "sounds": ["TH", "DH"],
+      "targets": {
+        "aperture": { "max": 0.45, "min": 0.1 },
+        "roundness": { "max": 0.5 },
+        "tongueVisible": { "min": 0.35 }
+      }
+    },
+    {
+      "common_error_vi": "Môi dẹt, không chu.",
+      "confidence": "high",
+      "group": "V4",
+      "hint_vi": "Chu môi tròn về phía trước như huýt sáo.",
+      "hold_ms": 250,
+      "name_vi": "Môi tròn, chu ra",
+      "sounds": ["W", "UW", "UH", "OW", "OY"],
+      "targets": { "jaw": { "max": 0.4 }, "roundness": { "min": 0.6 }, "width": { "max": 0.45 } }
+    },
+    {
+      "common_error_vi": "Môi dẹt như /s/.",
+      "confidence": "medium",
+      "group": "V5",
+      "hint_vi": "Môi hơi chu và loe ra, răng gần nhau.",
+      "hold_ms": 200,
+      "name_vi": "Môi hơi chu, răng gần",
+      "sounds": ["SH", "ZH", "CH", "JH"],
+      "targets": {
+        "aperture": { "max": 0.35 },
+        "roundness": { "max": 0.8, "min": 0.4 },
+        "width": { "max": 0.6 }
+      }
+    },
+    {
+      "common_error_vi": "Môi thả lỏng nên thành /ɪ/.",
+      "confidence": "medium",
+      "group": "V6",
+      "hint_vi": "Kéo khóe miệng sang hai bên như cười nhẹ, hàm gần khép.",
+      "hold_ms": 250,
+      "name_vi": "Môi kéo ngang",
+      "sounds": ["IY", "S", "Z"],
+      "targets": {
+        "aperture": { "max": 0.3 },
+        "roundness": { "max": 0.35 },
+        "teethVisible": { "min": 0.3 },
+        "width": { "min": 0.6 }
+      }
+    },
+    {
+      "common_error_vi": "Mở hàm quá ít nên /æ/ thành /ɛ/.",
+      "confidence": "medium",
+      "group": "V7",
+      "hint_vi": "Hạ hàm, mở miệng rộng; với /æ/ kéo thêm khóe miệng.",
+      "hold_ms": 250,
+      "name_vi": "Hàm mở rộng",
+      "sounds": ["AE", "AA", "AY", "AW"],
+      "targets": { "aperture": { "min": 0.5 }, "jaw": { "min": 0.55 } }
+    },
+    {
+      "common_error_vi": "Kéo ngang và căng quá thành /iː/, hoặc mở hàm quá thành /ɛ/.",
+      "confidence": "medium",
+      "group": "V8",
+      "hint_vi": "Môi hơi kéo ngang, hàm chỉ hé; thả lỏng hơn /iː/.",
+      "hold_ms": 250,
+      "name_vi": "Môi dẹt nhẹ, hàm hé",
+      "sounds": ["IH", "EY", "Y"],
+      "targets": {
+        "aperture": { "max": 0.45, "min": 0.08 },
+        "jaw": { "max": 0.45 },
+        "roundness": { "max": 0.4 },
+        "width": { "min": 0.4 }
+      }
+    },
+    {
+      "common_error_vi": "Mở quá rộng thành /æ/ hoặc hé quá ít thành /ɪ/.",
+      "confidence": "medium",
+      "group": "V9",
+      "hint_vi": "Hạ hàm vừa phải, môi không tròn không kéo ngang.",
+      "hold_ms": 250,
+      "name_vi": "Hàm mở vừa, môi trung tính",
+      "sounds": ["EH", "AH"],
+      "targets": {
+        "aperture": { "max": 0.7, "min": 0.25 },
+        "jaw": { "max": 0.65, "min": 0.25 },
+        "lipClosed": { "max": 0.2 },
+        "roundness": { "max": 0.45 }
+      }
+    },
+    {
+      "common_error_vi": "Môi dẹt hoàn toàn, hoặc với /ɹ/ đầu lưỡi chạm lợi thành /l/.",
+      "confidence": "low",
+      "group": "V10",
+      "hint_vi": "Môi tròn nhẹ, không chu mạnh như /uː/; với /ɹ/ lưỡi cuộn nhẹ về sau (camera không thấy).",
+      "hold_ms": 250,
+      "name_vi": "Môi hơi tròn, hàm mở vừa",
+      "sounds": ["AO", "ER", "R"],
+      "targets": {
+        "jaw": { "max": 0.6, "min": 0.15 },
+        "roundness": { "max": 0.85, "min": 0.3 },
+        "width": { "max": 0.6 }
+      }
+    },
+    {
+      "common_error_vi": "Khép môi (thành /m b/) hoặc đưa lưỡi ra giữa răng (thành /θ ð/). Vị trí lưỡi chủ yếu chấm bằng tai.",
+      "confidence": "low",
+      "group": "V11",
+      "hint_vi": "Miệng hé, đầu lưỡi chạm lợi sau răng trên; với /l/ đầu lưỡi có thể lộ sau răng.",
+      "hold_ms": 150,
+      "name_vi": "Đầu lưỡi lên lợi, miệng hé",
+      "sounds": ["T", "D", "N", "L"],
+      "targets": {
+        "aperture": { "max": 0.45, "min": 0.04 },
+        "lipClosed": { "max": 0.3 },
+        "roundness": { "max": 0.5 }
+      }
+    },
+    {
+      "common_error_vi": "Khép môi hoặc chu môi; âm cuối /k g ŋ/ bị bỏ. Kết luận chính dựa vào âm thanh.",
+      "confidence": "low",
+      "group": "V12",
+      "hint_vi": "Môi thả lỏng, miệng hé; âm tạo ở cuống lưỡi hoặc cổ họng nên camera chỉ theo dõi môi và hàm.",
+      "hold_ms": 150,
+      "name_vi": "Miệng hé, môi thư giãn",
+      "sounds": ["K", "G", "NG", "HH"],
+      "targets": {
+        "aperture": { "max": 0.6, "min": 0.04 },
+        "lipClosed": { "max": 0.3 },
+        "roundness": { "max": 0.5 }
+      }
+    }
+  ],
+  "transitions": {
+    "AW": "Bắt đầu hàm mở rộng (/a/), kết thúc môi chu tròn (/ʊ/).",
+    "AY": "Bắt đầu hàm mở rộng (/a/), kết thúc môi kéo ngang hàm khép (/ɪ/).",
+    "ER": "Giữ môi tròn nhẹ ổn định; âm /r/ Mỹ không có cú chạm lưỡi.",
+    "EY": "Bắt đầu hàm hé (/e/), kết thúc môi kéo ngang hơn (/ɪ/).",
+    "OW": "Bắt đầu môi tròn nhẹ (/o/), kết thúc chu tròn hơn (/ʊ/).",
+    "OY": "Bắt đầu môi tròn (/ɔ/), kết thúc môi kéo ngang (/ɪ/)."
+  }
+}

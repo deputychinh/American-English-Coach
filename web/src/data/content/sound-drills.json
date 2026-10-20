@@ -1,0 +1,1455 @@
+{
+  "c01": {
+    "arpabet": "P",
+    "group": "consonant",
+    "id": "c01",
+    "pairs": [
+      ["pen", "ben"],
+      ["pay", "bay"],
+      ["cap", "cab"],
+      ["pack", "back"]
+    ],
+    "scorer_reliability": "medium",
+    "sentences": [
+      { "kind": "statement", "text": "Put the paper cup on top." },
+      { "kind": "statement", "text": "Pay for the pen and stop." }
+    ],
+    "symbol": "p",
+    "transition_vi": null,
+    "us": "p",
+    "viseme_confidence": "high",
+    "viseme_group": "V1",
+    "words": [
+      { "position": "initial", "word": "pen" },
+      { "position": "initial", "word": "pay" },
+      { "position": "medial", "word": "happy" },
+      { "position": "medial", "word": "apple" },
+      { "position": "final", "word": "stop" },
+      { "position": "final", "word": "cup" },
+      { "position": "final", "word": "top" },
+      { "position": "final", "word": "keep" },
+      { "position": "initial", "word": "paper" },
+      { "position": "final", "word": "sleep" }
+    ]
+  },
+  "c02": {
+    "arpabet": "B",
+    "group": "consonant",
+    "id": "c02",
+    "pairs": [
+      ["bad", "pad"],
+      ["big", "pig"],
+      ["cab", "cap"],
+      ["bay", "pay"]
+    ],
+    "scorer_reliability": "medium",
+    "sentences": [
+      { "kind": "statement", "text": "The big baby has a job." },
+      { "kind": "statement", "text": "Bring the book to the table." }
+    ],
+    "symbol": "b",
+    "transition_vi": null,
+    "us": "b",
+    "viseme_confidence": "high",
+    "viseme_group": "V1",
+    "words": [
+      { "position": "initial", "word": "bad" },
+      { "position": "initial", "word": "big" },
+      { "position": "initial", "word": "baby" },
+      { "position": "medial", "word": "about" },
+      { "position": "final", "word": "job" },
+      { "position": "final", "word": "web" },
+      { "position": "final", "word": "cab" },
+      { "position": "initial", "word": "book" },
+      { "position": "initial", "word": "boy" },
+      { "position": "medial", "word": "table" }
+    ]
+  },
+  "c03": {
+    "arpabet": "T",
+    "group": "consonant",
+    "id": "c03",
+    "pairs": [
+      ["ten", "den"],
+      ["two", "do"],
+      ["tie", "die"],
+      ["cat", "cad"]
+    ],
+    "scorer_reliability": "high",
+    "sentences": [
+      { "kind": "statement", "text": "Ten cats sit on the mat." },
+      { "kind": "statement", "text": "Take the time to eat." }
+    ],
+    "symbol": "t",
+    "transition_vi": null,
+    "us": "t",
+    "viseme_confidence": "low",
+    "viseme_group": "V11",
+    "words": [
+      { "position": "initial", "word": "ten" },
+      { "position": "initial", "word": "time" },
+      { "position": "initial", "word": "tea" },
+      { "position": "final", "word": "cat" },
+      { "position": "final", "word": "eat" },
+      { "position": "final", "word": "sit" },
+      { "position": "final", "word": "hot" },
+      { "position": "final", "word": "get" },
+      { "position": "initial", "word": "table" },
+      { "position": "medial", "word": "stop" }
+    ]
+  },
+  "c04": {
+    "arpabet": "D",
+    "group": "consonant",
+    "id": "c04",
+    "pairs": [
+      ["do", "to"],
+      ["die", "tie"],
+      ["bed", "bet"],
+      ["bad", "bat"]
+    ],
+    "scorer_reliability": "high",
+    "sentences": [
+      { "kind": "statement", "text": "The dog had a good day." },
+      { "kind": "statement", "text": "Read in bed, my friend." }
+    ],
+    "symbol": "d",
+    "transition_vi": null,
+    "us": "d",
+    "viseme_confidence": "low",
+    "viseme_group": "V11",
+    "words": [
+      { "position": "initial", "word": "day" },
+      { "position": "initial", "word": "do" },
+      { "position": "initial", "word": "dog" },
+      { "position": "final", "word": "red" },
+      { "position": "final", "word": "bed" },
+      { "position": "final", "word": "good" },
+      { "position": "final", "word": "friend" },
+      { "position": "final", "word": "read" },
+      { "position": "initial", "word": "door" },
+      { "position": "medial", "word": "idea" }
+    ]
+  },
+  "c05": {
+    "arpabet": "K",
+    "group": "consonant",
+    "id": "c05",
+    "pairs": [
+      ["coat", "goat"],
+      ["cap", "gap"],
+      ["back", "bag"],
+      ["cold", "gold"]
+    ],
+    "scorer_reliability": "low",
+    "sentences": [
+      { "kind": "statement", "text": "The cat can kick the black box." },
+      { "kind": "statement", "text": "Cook and look at the clock." }
+    ],
+    "symbol": "k",
+    "transition_vi": null,
+    "us": "k",
+    "viseme_confidence": "low",
+    "viseme_group": "V12",
+    "words": [
+      { "position": "initial", "word": "cat" },
+      { "position": "initial", "word": "key" },
+      { "position": "initial", "word": "car" },
+      { "position": "final", "word": "look" },
+      { "position": "final", "word": "back" },
+      { "position": "final", "word": "make" },
+      { "position": "initial", "word": "kick" },
+      { "position": "initial", "word": "cook" },
+      { "position": "medial", "word": "school" },
+      { "position": "final", "word": "black" }
+    ]
+  },
+  "c06": {
+    "arpabet": "G",
+    "group": "consonant",
+    "id": "c06",
+    "pairs": [
+      ["goat", "coat"],
+      ["gap", "cap"],
+      ["bag", "back"],
+      ["gold", "cold"]
+    ],
+    "scorer_reliability": "medium",
+    "sentences": [
+      { "kind": "statement", "text": "The girl gave the dog a big egg." },
+      { "kind": "statement", "text": "Go get a good game." }
+    ],
+    "symbol": "ɡ",
+    "transition_vi": null,
+    "us": "ɡ",
+    "viseme_confidence": "low",
+    "viseme_group": "V12",
+    "words": [
+      { "position": "initial", "word": "go" },
+      { "position": "initial", "word": "get" },
+      { "position": "initial", "word": "good" },
+      { "position": "final", "word": "big" },
+      { "position": "final", "word": "dog" },
+      { "position": "initial", "word": "give" },
+      { "position": "initial", "word": "game" },
+      { "position": "final", "word": "bag" },
+      { "position": "final", "word": "egg" },
+      { "position": "initial", "word": "girl" }
+    ]
+  },
+  "c07": {
+    "arpabet": "F",
+    "group": "consonant",
+    "id": "c07",
+    "pairs": [
+      ["fan", "van"],
+      ["fine", "vine"],
+      ["leaf", "leave"],
+      ["safe", "save"]
+    ],
+    "scorer_reliability": "low",
+    "sentences": [
+      { "kind": "statement", "text": "Five fish in the coffee cup." },
+      { "kind": "statement", "text": "Laugh at life, not at the phone." }
+    ],
+    "symbol": "f",
+    "transition_vi": null,
+    "us": "f",
+    "viseme_confidence": "high",
+    "viseme_group": "V2",
+    "words": [
+      { "position": "initial", "word": "fan" },
+      { "position": "initial", "word": "fish" },
+      { "position": "initial", "word": "five" },
+      { "position": "medial", "word": "coffee" },
+      { "position": "final", "word": "life" },
+      { "position": "final", "word": "leaf" },
+      { "position": "final", "word": "off" },
+      { "position": "final", "word": "half" },
+      { "position": "initial", "word": "phone" },
+      { "position": "final", "word": "laugh" }
+    ]
+  },
+  "c08": {
+    "arpabet": "V",
+    "group": "consonant",
+    "id": "c08",
+    "pairs": [
+      ["van", "fan"],
+      ["vine", "fine"],
+      ["leave", "leaf"],
+      ["vest", "west"]
+    ],
+    "scorer_reliability": "high",
+    "sentences": [
+      { "kind": "statement", "text": "I love the very loud voice." },
+      { "kind": "statement", "text": "Give seven to have five." }
+    ],
+    "symbol": "v",
+    "transition_vi": null,
+    "us": "v",
+    "viseme_confidence": "high",
+    "viseme_group": "V2",
+    "words": [
+      { "position": "initial", "word": "van" },
+      { "position": "initial", "word": "very" },
+      { "position": "initial", "word": "voice" },
+      { "position": "medial", "word": "seven" },
+      { "position": "final", "word": "love" },
+      { "position": "final", "word": "live" },
+      { "position": "final", "word": "five" },
+      { "position": "final", "word": "give" },
+      { "position": "final", "word": "have" },
+      { "position": "medial", "word": "over" }
+    ]
+  },
+  "c09": {
+    "arpabet": "TH",
+    "group": "consonant",
+    "id": "c09",
+    "pairs": [
+      ["thin", "tin"],
+      ["think", "sink"],
+      ["three", "tree"],
+      ["bath", "bat"],
+      ["mouth", "mouse"]
+    ],
+    "scorer_reliability": "medium",
+    "sentences": [
+      { "kind": "statement", "text": "I think both teeth hurt this month." },
+      { "kind": "statement", "text": "Thank you for the three baths." }
+    ],
+    "symbol": "θ",
+    "transition_vi": null,
+    "us": "θ",
+    "viseme_confidence": "medium",
+    "viseme_group": "V3",
+    "words": [
+      { "position": "initial", "word": "thin" },
+      { "position": "initial", "word": "think" },
+      { "position": "initial", "word": "three" },
+      { "position": "initial", "word": "thank" },
+      { "position": "final", "word": "bath" },
+      { "position": "final", "word": "mouth" },
+      { "position": "final", "word": "month" },
+      { "position": "final", "word": "tooth" },
+      { "position": "final", "word": "both" },
+      { "position": "initial", "word": "through" }
+    ]
+  },
+  "c10": {
+    "arpabet": "DH",
+    "group": "consonant",
+    "id": "c10",
+    "pairs": [
+      ["they", "day"],
+      ["than", "dan"],
+      ["breathe", "breeze"],
+      ["then", "den"]
+    ],
+    "scorer_reliability": "medium",
+    "sentences": [
+      { "kind": "statement", "text": "This is my mother and that is my father." },
+      { "kind": "statement", "text": "They bathe with their brother." }
+    ],
+    "symbol": "ð",
+    "transition_vi": null,
+    "us": "ð",
+    "viseme_confidence": "medium",
+    "viseme_group": "V3",
+    "words": [
+      { "position": "initial", "word": "this" },
+      { "position": "initial", "word": "that" },
+      { "position": "initial", "word": "the" },
+      { "position": "initial", "word": "they" },
+      { "position": "medial", "word": "mother" },
+      { "position": "medial", "word": "father" },
+      { "position": "medial", "word": "brother" },
+      { "position": "initial", "word": "them" },
+      { "position": "final", "word": "breathe" },
+      { "position": "final", "word": "smooth" }
+    ]
+  },
+  "c11": {
+    "arpabet": "S",
+    "group": "consonant",
+    "id": "c11",
+    "pairs": [
+      ["see", "she"],
+      ["sip", "ship"],
+      ["sue", "zoo"],
+      ["bus", "buzz"],
+      ["sink", "think"]
+    ],
+    "scorer_reliability": "high",
+    "sentences": [
+      { "kind": "statement", "text": "See the sun set on the bus." },
+      { "kind": "statement", "text": "Yes, the city is nice." }
+    ],
+    "symbol": "s",
+    "transition_vi": null,
+    "us": "s",
+    "viseme_confidence": "medium",
+    "viseme_group": "V6",
+    "words": [
+      { "position": "initial", "word": "see" },
+      { "position": "initial", "word": "sun" },
+      { "position": "initial", "word": "sit" },
+      { "position": "final", "word": "bus" },
+      { "position": "final", "word": "yes" },
+      { "position": "final", "word": "class" },
+      { "position": "initial", "word": "city" },
+      { "position": "final", "word": "face" },
+      { "position": "final", "word": "nice" },
+      { "position": "final", "word": "pass" }
+    ]
+  },
+  "c12": {
+    "arpabet": "Z",
+    "group": "consonant",
+    "id": "c12",
+    "pairs": [
+      ["zoo", "sue"],
+      ["buzz", "bus"],
+      ["eyes", "ice"],
+      ["rise", "rice"],
+      ["prize", "price"]
+    ],
+    "scorer_reliability": "high",
+    "sentences": [
+      { "kind": "statement", "text": "Please visit the zoo at noon." },
+      { "kind": "statement", "text": "His nose and eyes are easy to see." }
+    ],
+    "symbol": "z",
+    "transition_vi": null,
+    "us": "z",
+    "viseme_confidence": "medium",
+    "viseme_group": "V6",
+    "words": [
+      { "position": "initial", "word": "zoo" },
+      { "position": "initial", "word": "zero" },
+      { "position": "medial", "word": "busy" },
+      { "position": "medial", "word": "music" },
+      { "position": "medial", "word": "easy" },
+      { "position": "final", "word": "nose" },
+      { "position": "final", "word": "eyes" },
+      { "position": "final", "word": "please" },
+      { "position": "final", "word": "cheese" },
+      { "position": "final", "word": "rose" }
+    ]
+  },
+  "c13": {
+    "arpabet": "SH",
+    "group": "consonant",
+    "id": "c13",
+    "pairs": [
+      ["she", "see"],
+      ["ship", "sip"],
+      ["shave", "save"],
+      ["show", "so"],
+      ["shell", "sell"]
+    ],
+    "scorer_reliability": "high",
+    "sentences": [
+      { "kind": "statement", "text": "She sells fresh fish in the shop." },
+      { "kind": "statement", "text": "Wash and push the ship." }
+    ],
+    "symbol": "ʃ",
+    "transition_vi": null,
+    "us": "ʃ",
+    "viseme_confidence": "medium",
+    "viseme_group": "V5",
+    "words": [
+      { "position": "initial", "word": "she" },
+      { "position": "initial", "word": "shop" },
+      { "position": "initial", "word": "ship" },
+      { "position": "final", "word": "fish" },
+      { "position": "final", "word": "wish" },
+      { "position": "final", "word": "push" },
+      { "position": "final", "word": "wash" },
+      { "position": "medial", "word": "nation" },
+      { "position": "initial", "word": "sure" },
+      { "position": "medial", "word": "special" }
+    ]
+  },
+  "c14": {
+    "arpabet": "ZH",
+    "group": "consonant",
+    "id": "c14",
+    "pairs": [
+      ["vision", "mission"],
+      ["pleasure", "pressure"],
+      ["leisure", "leash"]
+    ],
+    "scorer_reliability": "medium",
+    "sentences": [
+      { "kind": "statement", "text": "It is a pleasure to measure the treasure." },
+      { "kind": "question", "text": "Was that the usual television decision?" }
+    ],
+    "symbol": "ʒ",
+    "transition_vi": null,
+    "us": "ʒ",
+    "viseme_confidence": "medium",
+    "viseme_group": "V5",
+    "words": [
+      { "position": "medial", "word": "vision" },
+      { "position": "medial", "word": "measure" },
+      { "position": "medial", "word": "pleasure" },
+      { "position": "medial", "word": "usual" },
+      { "position": "medial", "word": "treasure" },
+      { "position": "medial", "word": "television" },
+      { "position": "final", "word": "garage" },
+      { "position": "medial", "word": "casual" },
+      { "position": "medial", "word": "decision" },
+      { "position": "final", "word": "beige" }
+    ]
+  },
+  "c15": {
+    "arpabet": "HH",
+    "group": "consonant",
+    "id": "c15",
+    "pairs": [
+      ["hat", "at"],
+      ["hear", "ear"],
+      ["hold", "old"],
+      ["hand", "and"]
+    ],
+    "scorer_reliability": "high",
+    "sentences": [
+      { "kind": "statement", "text": "He has a happy home." },
+      { "kind": "wh_question", "text": "Who is behind the house?" }
+    ],
+    "symbol": "h",
+    "transition_vi": null,
+    "us": "h",
+    "viseme_confidence": "low",
+    "viseme_group": "V12",
+    "words": [
+      { "position": "initial", "word": "hat" },
+      { "position": "initial", "word": "he" },
+      { "position": "initial", "word": "hello" },
+      { "position": "initial", "word": "home" },
+      { "position": "initial", "word": "happy" },
+      { "position": "initial", "word": "hand" },
+      { "position": "initial", "word": "hot" },
+      { "position": "initial", "word": "house" },
+      { "position": "initial", "word": "who" },
+      { "position": "medial", "word": "behind" }
+    ]
+  },
+  "c16": {
+    "arpabet": "CH",
+    "group": "consonant",
+    "id": "c16",
+    "pairs": [
+      ["cheap", "jeep"],
+      ["chip", "ship"],
+      ["catch", "cash"],
+      ["choke", "joke"],
+      ["cheer", "jeer"]
+    ],
+    "scorer_reliability": "low",
+    "sentences": [
+      { "kind": "statement", "text": "The teacher eats lunch in the kitchen." },
+      { "kind": "statement", "text": "Watch the child in church." }
+    ],
+    "symbol": "tʃ",
+    "transition_vi": null,
+    "us": "tʃ",
+    "viseme_confidence": "medium",
+    "viseme_group": "V5",
+    "words": [
+      { "position": "initial", "word": "cheap" },
+      { "position": "initial", "word": "chair" },
+      { "position": "initial", "word": "child" },
+      { "position": "medial", "word": "teacher" },
+      { "position": "medial", "word": "kitchen" },
+      { "position": "final", "word": "watch" },
+      { "position": "final", "word": "lunch" },
+      { "position": "initial", "word": "church" },
+      { "position": "final", "word": "much" },
+      { "position": "initial", "word": "chocolate" }
+    ]
+  },
+  "c17": {
+    "arpabet": "JH",
+    "group": "consonant",
+    "id": "c17",
+    "pairs": [
+      ["jeep", "cheap"],
+      ["joke", "choke"],
+      ["gin", "chin"],
+      ["jeer", "cheer"]
+    ],
+    "scorer_reliability": "medium",
+    "sentences": [
+      { "kind": "statement", "text": "Enjoy the orange juice on the bridge." },
+      { "kind": "question", "text": "Is the job on page one?" }
+    ],
+    "symbol": "dʒ",
+    "transition_vi": null,
+    "us": "dʒ",
+    "viseme_confidence": "medium",
+    "viseme_group": "V5",
+    "words": [
+      { "position": "initial", "word": "jeep" },
+      { "position": "initial", "word": "job" },
+      { "position": "initial", "word": "juice" },
+      { "position": "initial", "word": "jump" },
+      { "position": "final", "word": "orange" },
+      { "position": "final", "word": "bridge" },
+      { "position": "final", "word": "age" },
+      { "position": "final", "word": "language" },
+      { "position": "final", "word": "page" },
+      { "position": "medial", "word": "enjoy" }
+    ]
+  },
+  "c18": {
+    "arpabet": "M",
+    "group": "consonant",
+    "id": "c18",
+    "pairs": [
+      ["mine", "nine"],
+      ["map", "nap"],
+      ["some", "sun"],
+      ["team", "teen"]
+    ],
+    "scorer_reliability": "high",
+    "sentences": [
+      { "kind": "statement", "text": "My mother makes time for me." },
+      { "kind": "statement", "text": "Name some summer teams." }
+    ],
+    "symbol": "m",
+    "transition_vi": null,
+    "us": "m",
+    "viseme_confidence": "high",
+    "viseme_group": "V1",
+    "words": [
+      { "position": "initial", "word": "my" },
+      { "position": "initial", "word": "mother" },
+      { "position": "initial", "word": "man" },
+      { "position": "initial", "word": "make" },
+      { "position": "final", "word": "some" },
+      { "position": "final", "word": "home" },
+      { "position": "final", "word": "time" },
+      { "position": "final", "word": "name" },
+      { "position": "medial", "word": "summer" },
+      { "position": "final", "word": "team" }
+    ]
+  },
+  "c19": {
+    "arpabet": "N",
+    "group": "consonant",
+    "id": "c19",
+    "pairs": [
+      ["no", "low"],
+      ["nap", "map"],
+      ["sun", "some"],
+      ["sin", "sing"]
+    ],
+    "scorer_reliability": "high",
+    "sentences": [
+      { "kind": "statement", "text": "Nine nights, no moon." },
+      { "kind": "statement", "text": "Run to dinner at ten." }
+    ],
+    "symbol": "n",
+    "transition_vi": null,
+    "us": "n",
+    "viseme_confidence": "low",
+    "viseme_group": "V11",
+    "words": [
+      { "position": "initial", "word": "no" },
+      { "position": "initial", "word": "name" },
+      { "position": "initial", "word": "nine" },
+      { "position": "initial", "word": "night" },
+      { "position": "final", "word": "run" },
+      { "position": "final", "word": "sun" },
+      { "position": "final", "word": "ten" },
+      { "position": "final", "word": "moon" },
+      { "position": "medial", "word": "dinner" },
+      { "position": "final", "word": "open" }
+    ]
+  },
+  "c20": {
+    "arpabet": "NG",
+    "group": "consonant",
+    "id": "c20",
+    "pairs": [
+      ["sing", "sin"],
+      ["thing", "thin"],
+      ["sung", "sun"],
+      ["bang", "ban"],
+      ["wing", "win"]
+    ],
+    "scorer_reliability": "medium",
+    "sentences": [
+      { "kind": "statement", "text": "Sing a long song this morning." },
+      { "kind": "question", "text": "Is the young king strong?" }
+    ],
+    "symbol": "ŋ",
+    "transition_vi": null,
+    "us": "ŋ",
+    "viseme_confidence": "low",
+    "viseme_group": "V12",
+    "words": [
+      { "position": "final", "word": "sing" },
+      { "position": "final", "word": "ring" },
+      { "position": "final", "word": "long" },
+      { "position": "final", "word": "song" },
+      { "position": "final", "word": "thing" },
+      { "position": "final", "word": "morning" },
+      { "position": "final", "word": "bring" },
+      { "position": "final", "word": "young" },
+      { "position": "final", "word": "king" },
+      { "position": "final", "word": "strong" }
+    ]
+  },
+  "c21": {
+    "arpabet": "L",
+    "group": "consonant",
+    "id": "c21",
+    "pairs": [
+      ["light", "right"],
+      ["lead", "read"],
+      ["long", "wrong"],
+      ["collect", "correct"],
+      ["play", "pray"]
+    ],
+    "scorer_reliability": "medium",
+    "sentences": [
+      { "kind": "statement", "text": "Look at the little yellow ball." },
+      { "kind": "statement", "text": "I like to play all day." }
+    ],
+    "symbol": "l",
+    "transition_vi": null,
+    "us": "l",
+    "viseme_confidence": "low",
+    "viseme_group": "V11",
+    "words": [
+      { "position": "initial", "word": "light" },
+      { "position": "initial", "word": "like" },
+      { "position": "initial", "word": "look" },
+      { "position": "initial", "word": "little" },
+      { "position": "medial", "word": "play" },
+      { "position": "medial", "word": "yellow" },
+      { "position": "final", "word": "ball" },
+      { "position": "final", "word": "school" },
+      { "position": "final", "word": "call" },
+      { "position": "final", "word": "feel" }
+    ]
+  },
+  "c22": {
+    "arpabet": "R",
+    "group": "consonant",
+    "id": "c22",
+    "pairs": [
+      ["right", "light"],
+      ["read", "lead"],
+      ["wrong", "long"],
+      ["pray", "play"]
+    ],
+    "scorer_reliability": "high",
+    "sentences": [
+      { "kind": "statement", "text": "Run right to the red door." },
+      { "kind": "question", "text": "Sorry, can you read it three times?" }
+    ],
+    "symbol": "r",
+    "transition_vi": null,
+    "us": "ɹ",
+    "viseme_confidence": "low",
+    "viseme_group": "V10",
+    "words": [
+      { "position": "initial", "word": "right" },
+      { "position": "initial", "word": "red" },
+      { "position": "initial", "word": "run" },
+      { "position": "initial", "word": "read" },
+      { "position": "medial", "word": "very" },
+      { "position": "medial", "word": "sorry" },
+      { "position": "final", "word": "car" },
+      { "position": "final", "word": "door" },
+      { "position": "medial", "word": "three" },
+      { "position": "medial", "word": "green" }
+    ]
+  },
+  "c23": {
+    "arpabet": "Y",
+    "group": "consonant",
+    "id": "c23",
+    "pairs": [
+      ["yes", "less"],
+      ["year", "ear"],
+      ["yet", "jet"],
+      ["yam", "jam"]
+    ],
+    "scorer_reliability": "medium",
+    "sentences": [
+      { "kind": "statement", "text": "You use new music every year." },
+      { "kind": "statement", "text": "The young man says yes." }
+    ],
+    "symbol": "j",
+    "transition_vi": null,
+    "us": "j",
+    "viseme_confidence": "medium",
+    "viseme_group": "V8",
+    "words": [
+      { "position": "initial", "word": "yes" },
+      { "position": "initial", "word": "you" },
+      { "position": "initial", "word": "year" },
+      { "position": "initial", "word": "yellow" },
+      { "position": "initial", "word": "young" },
+      { "position": "initial", "word": "use" },
+      { "position": "medial", "word": "music" },
+      { "position": "medial", "word": "few" },
+      { "position": "medial", "word": "cute" },
+      { "position": "initial", "word": "yard" }
+    ]
+  },
+  "c24": {
+    "arpabet": "W",
+    "group": "consonant",
+    "id": "c24",
+    "pairs": [
+      ["west", "vest"],
+      ["wine", "vine"],
+      ["wet", "vet"],
+      ["wow", "vow"]
+    ],
+    "scorer_reliability": "high",
+    "sentences": [
+      { "kind": "statement", "text": "We want sweet water." },
+      { "kind": "question", "text": "Does the white window always work?" }
+    ],
+    "symbol": "w",
+    "transition_vi": null,
+    "us": "w",
+    "viseme_confidence": "high",
+    "viseme_group": "V4",
+    "words": [
+      { "position": "initial", "word": "we" },
+      { "position": "initial", "word": "water" },
+      { "position": "initial", "word": "want" },
+      { "position": "initial", "word": "work" },
+      { "position": "initial", "word": "world" },
+      { "position": "initial", "word": "window" },
+      { "position": "initial", "word": "white" },
+      { "position": "medial", "word": "sweet" },
+      { "position": "medial", "word": "away" },
+      { "position": "medial", "word": "always" }
+    ]
+  },
+  "d01": {
+    "arpabet": "EY",
+    "group": "diphthong",
+    "id": "d01",
+    "pairs": [
+      ["day", "die"],
+      ["late", "light"],
+      ["pain", "pine"],
+      ["main", "mine"]
+    ],
+    "scorer_reliability": "high",
+    "sentences": [
+      { "kind": "statement", "text": "They play all day." },
+      { "kind": "question", "text": "Wait, is the table late?" }
+    ],
+    "symbol": "eɪ",
+    "transition_vi": "Bắt đầu hàm hé (/e/), kết thúc môi kéo ngang hơn (/ɪ/).",
+    "us": "eɪ",
+    "viseme_confidence": "medium",
+    "viseme_group": "V8",
+    "words": [
+      { "position": "final", "word": "day" },
+      { "position": "medial", "word": "make" },
+      { "position": "medial", "word": "rain" },
+      { "position": "medial", "word": "late" },
+      { "position": "medial", "word": "name" },
+      { "position": "final", "word": "play" },
+      { "position": "initial", "word": "eight" },
+      { "position": "medial", "word": "great" },
+      { "position": "medial", "word": "table" },
+      { "position": "medial", "word": "wait" }
+    ]
+  },
+  "d02": {
+    "arpabet": "AY",
+    "group": "diphthong",
+    "id": "d02",
+    "pairs": [
+      ["my", "may"],
+      ["light", "late"],
+      ["bite", "bait"],
+      ["time", "tame"]
+    ],
+    "scorer_reliability": "high",
+    "sentences": [
+      { "kind": "statement", "text": "I like the white light." },
+      { "kind": "statement", "text": "Buy five at nine tonight." }
+    ],
+    "symbol": "aɪ",
+    "transition_vi": "Bắt đầu hàm mở rộng (/a/), kết thúc môi kéo ngang hàm khép (/ɪ/).",
+    "us": "aɪ",
+    "viseme_confidence": "medium",
+    "viseme_group": "V7",
+    "words": [
+      { "position": "final", "word": "my" },
+      { "position": "medial", "word": "time" },
+      { "position": "medial", "word": "like" },
+      { "position": "medial", "word": "five" },
+      { "position": "medial", "word": "night" },
+      { "position": "medial", "word": "white" },
+      { "position": "initial", "word": "eye" },
+      { "position": "final", "word": "buy" },
+      { "position": "medial", "word": "light" },
+      { "position": "medial", "word": "find" }
+    ]
+  },
+  "d03": {
+    "arpabet": "OY",
+    "group": "diphthong",
+    "id": "d03",
+    "pairs": [
+      ["boy", "buy"],
+      ["toy", "tie"],
+      ["boil", "bile"],
+      ["coin", "cane"]
+    ],
+    "scorer_reliability": "low",
+    "sentences": [
+      { "kind": "statement", "text": "The boy enjoys his toy." },
+      { "kind": "statement", "text": "Join us and make a choice." }
+    ],
+    "symbol": "ɔɪ",
+    "transition_vi": "Bắt đầu môi tròn (/ɔ/), kết thúc môi kéo ngang (/ɪ/).",
+    "us": "ɔɪ",
+    "viseme_confidence": "high",
+    "viseme_group": "V4",
+    "words": [
+      { "position": "final", "word": "boy" },
+      { "position": "final", "word": "toy" },
+      { "position": "medial", "word": "voice" },
+      { "position": "medial", "word": "choice" },
+      { "position": "final", "word": "enjoy" },
+      { "position": "medial", "word": "join" },
+      { "position": "medial", "word": "noise" },
+      { "position": "initial", "word": "oil" },
+      { "position": "medial", "word": "point" },
+      { "position": "medial", "word": "coin" }
+    ]
+  },
+  "d04": {
+    "arpabet": "OW",
+    "group": "diphthong",
+    "id": "d04",
+    "pairs": [
+      ["coat", "caught"],
+      ["boat", "bought"],
+      ["low", "law"],
+      ["so", "saw"]
+    ],
+    "scorer_reliability": "high",
+    "sentences": [
+      { "kind": "statement", "text": "Go home and phone me." },
+      { "kind": "statement", "text": "Show me the road to the boat." }
+    ],
+    "symbol": "əʊ",
+    "transition_vi": "Bắt đầu môi tròn nhẹ (/o/), kết thúc chu tròn hơn (/ʊ/).",
+    "us": "oʊ",
+    "viseme_confidence": "high",
+    "viseme_group": "V4",
+    "words": [
+      { "position": "final", "word": "go" },
+      { "position": "final", "word": "no" },
+      { "position": "medial", "word": "home" },
+      { "position": "medial", "word": "phone" },
+      { "position": "final", "word": "know" },
+      { "position": "initial", "word": "open" },
+      { "position": "final", "word": "show" },
+      { "position": "medial", "word": "boat" },
+      { "position": "medial", "word": "coat" },
+      { "position": "medial", "word": "road" }
+    ]
+  },
+  "d05": {
+    "arpabet": "AW",
+    "group": "diphthong",
+    "id": "d05",
+    "pairs": [
+      ["how", "hoe"],
+      ["now", "no"],
+      ["town", "tone"],
+      ["found", "fond"]
+    ],
+    "scorer_reliability": "medium",
+    "sentences": [
+      { "kind": "statement", "text": "Go down to the town now." },
+      { "kind": "wh_question", "text": "How loud is the brown cow?" }
+    ],
+    "symbol": "aʊ",
+    "transition_vi": "Bắt đầu hàm mở rộng (/a/), kết thúc môi chu tròn (/ʊ/).",
+    "us": "aʊ",
+    "viseme_confidence": "medium",
+    "viseme_group": "V7",
+    "words": [
+      { "position": "final", "word": "now" },
+      { "position": "final", "word": "how" },
+      { "position": "medial", "word": "house" },
+      { "position": "initial", "word": "out" },
+      { "position": "medial", "word": "down" },
+      { "position": "medial", "word": "town" },
+      { "position": "medial", "word": "brown" },
+      { "position": "final", "word": "cow" },
+      { "position": "medial", "word": "mouth" },
+      { "position": "medial", "word": "loud" }
+    ]
+  },
+  "d06": {
+    "arpabet": "IH R",
+    "group": "diphthong",
+    "id": "d06",
+    "pairs": [
+      ["near", "knee"],
+      ["beard", "he"],
+      ["beer", "bee"],
+      ["fear", "fee"]
+    ],
+    "scorer_reliability": "high",
+    "sentences": [
+      { "kind": "statement", "text": "Come near the clear water." },
+      { "kind": "question", "text": "Can you steer clear this year?" }
+    ],
+    "symbol": "ɪə",
+    "transition_vi": null,
+    "us": "ɪɹ",
+    "viseme_confidence": "medium",
+    "viseme_group": "V8",
+    "words": [
+      { "position": "final", "word": "near" },
+      { "position": "medial", "word": "beard" },
+      { "position": "final", "word": "deer" },
+      { "position": "final", "word": "year" },
+      { "position": "final", "word": "beer" },
+      { "position": "final", "word": "clear" },
+      { "position": "final", "word": "dear" },
+      { "position": "final", "word": "fear" },
+      { "position": "final", "word": "cheer" },
+      { "position": "final", "word": "steer" }
+    ]
+  },
+  "d07": {
+    "arpabet": "EH R",
+    "group": "diphthong",
+    "id": "d07",
+    "pairs": [
+      ["chair", "chain"],
+      ["hair", "hay"],
+      ["bear", "bay"],
+      ["care", "kay"]
+    ],
+    "scorer_reliability": "high",
+    "sentences": [
+      { "kind": "wh_question", "text": "Where is the chair over there?" },
+      { "kind": "statement", "text": "Share the air and take care." }
+    ],
+    "symbol": "eə",
+    "transition_vi": null,
+    "us": "ɛɹ",
+    "viseme_confidence": "medium",
+    "viseme_group": "V9",
+    "words": [
+      { "position": "final", "word": "chair" },
+      { "position": "final", "word": "hair" },
+      { "position": "final", "word": "there" },
+      { "position": "final", "word": "where" },
+      { "position": "final", "word": "care" },
+      { "position": "initial", "word": "air" },
+      { "position": "final", "word": "pair" },
+      { "position": "final", "word": "share" },
+      { "position": "final", "word": "bear" },
+      { "position": "final", "word": "wear" }
+    ]
+  },
+  "d08": {
+    "arpabet": "UH R",
+    "group": "diphthong",
+    "id": "d08",
+    "pairs": [
+      ["tour", "tore"],
+      ["jury", "pour"],
+      ["sure", "shore"],
+      ["pure", "peer"]
+    ],
+    "scorer_reliability": "medium",
+    "sentences": [
+      { "kind": "statement", "text": "I am sure the tour is pure fun." },
+      { "kind": "question", "text": "Is the tourist secure during the tour?" }
+    ],
+    "symbol": "ʊə",
+    "transition_vi": null,
+    "us": "ʊɹ",
+    "viseme_confidence": "high",
+    "viseme_group": "V4",
+    "words": [
+      { "position": "final", "word": "pure" },
+      { "position": "medial", "word": "jury" },
+      { "position": "final", "word": "tour" },
+      { "position": "final", "word": "sure" },
+      { "position": "final", "word": "cure" },
+      { "position": "medial", "word": "europe" },
+      { "position": "final", "word": "mature" },
+      { "position": "medial", "word": "tourist" },
+      { "position": "final", "word": "assure" },
+      { "position": "final", "word": "secure" }
+    ]
+  },
+  "v01": {
+    "arpabet": "IY",
+    "group": "vowel",
+    "id": "v01",
+    "pairs": [
+      ["seat", "sit"],
+      ["sheep", "ship"],
+      ["leave", "live"],
+      ["feel", "fill"]
+    ],
+    "scorer_reliability": "high",
+    "sentences": [
+      { "kind": "statement", "text": "Please keep the green tea." },
+      { "kind": "question", "text": "Do we need three seats?" }
+    ],
+    "symbol": "iː",
+    "transition_vi": null,
+    "us": "iː",
+    "viseme_confidence": "medium",
+    "viseme_group": "V6",
+    "words": [
+      { "position": "final", "word": "see" },
+      { "position": "medial", "word": "sheep" },
+      { "position": "initial", "word": "eat" },
+      { "position": "medial", "word": "green" },
+      { "position": "medial", "word": "teach" },
+      { "position": "medial", "word": "feel" },
+      { "position": "medial", "word": "meet" },
+      { "position": "final", "word": "key" },
+      { "position": "final", "word": "three" },
+      { "position": "medial", "word": "peace" }
+    ]
+  },
+  "v02": {
+    "arpabet": "IH",
+    "group": "vowel",
+    "id": "v02",
+    "pairs": [
+      ["sit", "seat"],
+      ["ship", "sheep"],
+      ["fill", "feel"],
+      ["hit", "heat"]
+    ],
+    "scorer_reliability": "medium",
+    "sentences": [
+      { "kind": "statement", "text": "Sit in this big chair." },
+      { "kind": "statement", "text": "Give him a little fish." }
+    ],
+    "symbol": "ɪ",
+    "transition_vi": null,
+    "us": "ɪ",
+    "viseme_confidence": "medium",
+    "viseme_group": "V8",
+    "words": [
+      { "position": "medial", "word": "sit" },
+      { "position": "medial", "word": "ship" },
+      { "position": "medial", "word": "big" },
+      { "position": "medial", "word": "fish" },
+      { "position": "medial", "word": "milk" },
+      { "position": "medial", "word": "give" },
+      { "position": "medial", "word": "little" },
+      { "position": "medial", "word": "fill" },
+      { "position": "medial", "word": "hit" },
+      { "position": "initial", "word": "ill" }
+    ]
+  },
+  "v03": {
+    "arpabet": "EH",
+    "group": "vowel",
+    "id": "v03",
+    "pairs": [
+      ["bed", "bad"],
+      ["pen", "pan"],
+      ["men", "man"],
+      ["said", "sad"]
+    ],
+    "scorer_reliability": "high",
+    "sentences": [
+      { "kind": "statement", "text": "Ten red pens are on the bed." },
+      { "kind": "question", "text": "Did my friend say yes?" }
+    ],
+    "symbol": "e",
+    "transition_vi": null,
+    "us": "ɛ",
+    "viseme_confidence": "medium",
+    "viseme_group": "V9",
+    "words": [
+      { "position": "medial", "word": "bed" },
+      { "position": "medial", "word": "red" },
+      { "position": "medial", "word": "ten" },
+      { "position": "medial", "word": "head" },
+      { "position": "medial", "word": "said" },
+      { "position": "initial", "word": "egg" },
+      { "position": "medial", "word": "friend" },
+      { "position": "medial", "word": "pen" },
+      { "position": "medial", "word": "yes" },
+      { "position": "medial", "word": "next" }
+    ]
+  },
+  "v04": {
+    "arpabet": "AE",
+    "group": "vowel",
+    "id": "v04",
+    "pairs": [
+      ["cat", "cut"],
+      ["bad", "bed"],
+      ["hat", "hot"],
+      ["man", "men"]
+    ],
+    "scorer_reliability": "high",
+    "sentences": [
+      { "kind": "statement", "text": "The black cat sat on the bag." },
+      { "kind": "statement", "text": "That man has a happy family." }
+    ],
+    "symbol": "æ",
+    "transition_vi": null,
+    "us": "æ",
+    "viseme_confidence": "medium",
+    "viseme_group": "V7",
+    "words": [
+      { "position": "medial", "word": "cat" },
+      { "position": "medial", "word": "bad" },
+      { "position": "medial", "word": "hat" },
+      { "position": "medial", "word": "man" },
+      { "position": "initial", "word": "apple" },
+      { "position": "medial", "word": "black" },
+      { "position": "medial", "word": "happy" },
+      { "position": "medial", "word": "hand" },
+      { "position": "medial", "word": "bag" },
+      { "position": "medial", "word": "map" }
+    ]
+  },
+  "v05": {
+    "arpabet": "AA",
+    "group": "vowel",
+    "id": "v05",
+    "pairs": [
+      ["car", "care"],
+      ["heart", "hurt"],
+      ["far", "fur"],
+      ["barn", "burn"]
+    ],
+    "scorer_reliability": "high",
+    "sentences": [
+      { "kind": "statement", "text": "My father parks the car." },
+      { "kind": "question", "text": "Is the farm dark at night?" }
+    ],
+    "symbol": "ɑː",
+    "transition_vi": null,
+    "us": "ɑ",
+    "viseme_confidence": "medium",
+    "viseme_group": "V7",
+    "words": [
+      { "position": "medial", "word": "father" },
+      { "position": "medial", "word": "car" },
+      { "position": "medial", "word": "star" },
+      { "position": "medial", "word": "heart" },
+      { "position": "medial", "word": "calm" },
+      { "position": "medial", "word": "dark" },
+      { "position": "medial", "word": "farm" },
+      { "position": "initial", "word": "art" },
+      { "position": "medial", "word": "park" },
+      { "position": "medial", "word": "hard" }
+    ]
+  },
+  "v06": {
+    "arpabet": "AA",
+    "group": "vowel",
+    "id": "v06",
+    "pairs": [
+      ["hot", "hut"],
+      ["not", "nut"],
+      ["cot", "cut"],
+      ["shop", "ship"]
+    ],
+    "scorer_reliability": "high",
+    "sentences": [
+      { "kind": "statement", "text": "I got a lot of hot coffee." },
+      { "kind": "statement", "text": "The doctor has a problem with the clock." }
+    ],
+    "symbol": "ɒ",
+    "transition_vi": null,
+    "us": "ɑ",
+    "viseme_confidence": "medium",
+    "viseme_group": "V7",
+    "words": [
+      { "position": "medial", "word": "hot" },
+      { "position": "medial", "word": "not" },
+      { "position": "medial", "word": "box" },
+      { "position": "medial", "word": "father" },
+      { "position": "medial", "word": "clock" },
+      { "position": "medial", "word": "shop" },
+      { "position": "medial", "word": "rock" },
+      { "position": "medial", "word": "calm" },
+      { "position": "medial", "word": "problem" },
+      { "position": "medial", "word": "stop" }
+    ]
+  },
+  "v07": {
+    "arpabet": "AO",
+    "group": "vowel",
+    "id": "v07",
+    "pairs": [
+      ["law", "low"],
+      ["caught", "coat"],
+      ["ball", "bowl"],
+      ["call", "coal"]
+    ],
+    "scorer_reliability": "medium",
+    "sentences": [
+      { "kind": "statement", "text": "We all walk and talk." },
+      { "kind": "question", "text": "Can you call me before four?" }
+    ],
+    "symbol": "ɔː",
+    "transition_vi": null,
+    "us": "ɔ",
+    "viseme_confidence": "low",
+    "viseme_group": "V10",
+    "words": [
+      { "position": "medial", "word": "thought" },
+      { "position": "final", "word": "saw" },
+      { "position": "medial", "word": "talk" },
+      { "position": "medial", "word": "ball" },
+      { "position": "initial", "word": "all" },
+      { "position": "medial", "word": "call" },
+      { "position": "medial", "word": "door" },
+      { "position": "medial", "word": "more" },
+      { "position": "medial", "word": "four" },
+      { "position": "final", "word": "draw" }
+    ]
+  },
+  "v08": {
+    "arpabet": "UH",
+    "group": "vowel",
+    "id": "v08",
+    "pairs": [
+      ["pull", "pool"],
+      ["full", "fool"],
+      ["look", "luke"],
+      ["could", "cooed"]
+    ],
+    "scorer_reliability": "low",
+    "sentences": [
+      { "kind": "statement", "text": "Look at the good book." },
+      { "kind": "statement", "text": "Put your foot here and push." }
+    ],
+    "symbol": "ʊ",
+    "transition_vi": null,
+    "us": "ʊ",
+    "viseme_confidence": "high",
+    "viseme_group": "V4",
+    "words": [
+      { "position": "medial", "word": "book" },
+      { "position": "medial", "word": "look" },
+      { "position": "medial", "word": "wood" },
+      { "position": "medial", "word": "foot" },
+      { "position": "medial", "word": "put" },
+      { "position": "medial", "word": "cook" },
+      { "position": "medial", "word": "would" },
+      { "position": "medial", "word": "should" },
+      { "position": "medial", "word": "full" },
+      { "position": "medial", "word": "push" }
+    ]
+  },
+  "v09": {
+    "arpabet": "UW",
+    "group": "vowel",
+    "id": "v09",
+    "pairs": [
+      ["pool", "pull"],
+      ["fool", "full"],
+      ["food", "foot"],
+      ["suit", "soot"]
+    ],
+    "scorer_reliability": "medium",
+    "sentences": [
+      { "kind": "statement", "text": "The moon is blue tonight." },
+      { "kind": "wh_question", "text": "Who chose the new school?" }
+    ],
+    "symbol": "uː",
+    "transition_vi": null,
+    "us": "uː",
+    "viseme_confidence": "high",
+    "viseme_group": "V4",
+    "words": [
+      { "position": "medial", "word": "food" },
+      { "position": "medial", "word": "moon" },
+      { "position": "final", "word": "blue" },
+      { "position": "medial", "word": "school" },
+      { "position": "final", "word": "two" },
+      { "position": "final", "word": "you" },
+      { "position": "final", "word": "who" },
+      { "position": "final", "word": "new" },
+      { "position": "final", "word": "true" },
+      { "position": "medial", "word": "choose" }
+    ]
+  },
+  "v10": {
+    "arpabet": "AH1,AH2",
+    "group": "vowel",
+    "id": "v10",
+    "pairs": [
+      ["cup", "cap"],
+      ["cut", "cat"],
+      ["but", "bat"],
+      ["luck", "lack"]
+    ],
+    "scorer_reliability": "low",
+    "sentences": [
+      { "kind": "statement", "text": "Come and have some fun." },
+      { "kind": "question", "text": "Does your mother love the sun?" }
+    ],
+    "symbol": "ʌ",
+    "transition_vi": null,
+    "us": "ʌ",
+    "viseme_confidence": "medium",
+    "viseme_group": "V9",
+    "words": [
+      { "position": "medial", "word": "cup" },
+      { "position": "medial", "word": "bus" },
+      { "position": "medial", "word": "love" },
+      { "position": "medial", "word": "come" },
+      { "position": "medial", "word": "money" },
+      { "position": "medial", "word": "sun" },
+      { "position": "medial", "word": "mother" },
+      { "position": "medial", "word": "much" },
+      { "position": "medial", "word": "fun" },
+      { "position": "medial", "word": "run" }
+    ]
+  },
+  "v11": {
+    "arpabet": "ER1,ER2",
+    "group": "vowel",
+    "id": "v11",
+    "pairs": [
+      ["bird", "bad"],
+      ["work", "walk"],
+      ["hurt", "heart"],
+      ["burn", "barn"]
+    ],
+    "scorer_reliability": "high",
+    "sentences": [
+      { "kind": "statement", "text": "The girl learns at work first." },
+      { "kind": "statement", "text": "Turn to the first word." }
+    ],
+    "symbol": "ɜː",
+    "transition_vi": "Giữ môi tròn nhẹ ổn định; âm /r/ Mỹ không có cú chạm lưỡi.",
+    "us": "ɝ",
+    "viseme_confidence": "low",
+    "viseme_group": "V10",
+    "words": [
+      { "position": "medial", "word": "bird" },
+      { "position": "medial", "word": "work" },
+      { "position": "medial", "word": "world" },
+      { "position": "medial", "word": "girl" },
+      { "position": "medial", "word": "first" },
+      { "position": "medial", "word": "learn" },
+      { "position": "medial", "word": "word" },
+      { "position": "medial", "word": "turn" },
+      { "position": "medial", "word": "nurse" },
+      { "position": "initial", "word": "early" }
+    ]
+  },
+  "v12": {
+    "arpabet": "AH0",
+    "group": "vowel",
+    "id": "v12",
+    "pairs": [],
+    "scorer_reliability": "high",
+    "sentences": [
+      { "kind": "statement", "text": "Tell me about the banana today." },
+      { "kind": "statement", "text": "Open the pencil box again." }
+    ],
+    "symbol": "ə",
+    "transition_vi": null,
+    "us": "ə",
+    "viseme_confidence": "medium",
+    "viseme_group": "V9",
+    "words": [
+      { "position": "initial", "word": "about" },
+      { "position": "medial", "word": "banana" },
+      { "position": "final", "word": "sofa" },
+      { "position": "medial", "word": "lemon" },
+      { "position": "initial", "word": "again" },
+      { "position": "medial", "word": "seven" },
+      { "position": "medial", "word": "famous" },
+      { "position": "medial", "word": "pencil" },
+      { "position": "medial", "word": "open" },
+      { "position": "initial", "word": "ago" }
+    ]
+  }
+}

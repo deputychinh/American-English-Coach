@@ -1,0 +1,361 @@
+{
+  "completed_days": 0,
+  "current_day": "day01",
+  "days": [
+    {
+      "done_items": 0,
+      "goal_vi": "Không nuốt âm cuối: khép môi, chạm lưỡi, dù không bật hơi.",
+      "id": "day01",
+      "index": 1,
+      "is_done": false,
+      "items": [
+        { "done": false, "id": "c01", "kind": "sound", "label": "/p/", "runs": 0 },
+        { "done": false, "id": "c03", "kind": "sound", "label": "/t/", "runs": 0 },
+        { "done": false, "id": "c05", "kind": "sound", "label": "/k/", "runs": 0 },
+        { "done": false, "id": "cap-cat", "kind": "pair", "label": "Âm cuối /p/ và /t/", "runs": 0 }
+      ],
+      "minutes": 12,
+      "title_en": "Final /p/ /t/ /k/",
+      "title_vi": "Âm cuối /p/ /t/ /k/",
+      "total_items": 4
+    },
+    {
+      "done_items": 0,
+      "goal_vi": "Đuôi số nhiều và ngôi ba phải nghe thấy.",
+      "id": "day02",
+      "index": 2,
+      "is_done": false,
+      "items": [
+        { "done": false, "id": "c11", "kind": "sound", "label": "/s/", "runs": 0 },
+        { "done": false, "id": "c12", "kind": "sound", "label": "/z/", "runs": 0 },
+        { "done": false, "id": "cats-cat", "kind": "pair", "label": "Đuôi -s số nhiều", "runs": 0 },
+        {
+          "done": false,
+          "id": "s7",
+          "kind": "sentence",
+          "label": "The cats sat on the mats.",
+          "runs": 0
+        }
+      ],
+      "minutes": 12,
+      "title_en": "Final /s/ /z/ and the -s ending",
+      "title_vi": "Âm cuối /s/ /z/ và đuôi -s",
+      "total_items": 4
+    },
+    {
+      "done_items": 0,
+      "goal_vi": "Phân biệt worked/work; đuôi -ed không thêm âm tiết.",
+      "id": "day03",
+      "index": 3,
+      "is_done": false,
+      "items": [
+        { "done": false, "id": "c04", "kind": "sound", "label": "/d/", "runs": 0 },
+        { "done": false, "id": "worked-work", "kind": "pair", "label": "Đuôi -ed /t/", "runs": 0 },
+        {
+          "done": false,
+          "id": "s5",
+          "kind": "sentence",
+          "label": "Did you finish your work?",
+          "runs": 0
+        }
+      ],
+      "minutes": 12,
+      "title_en": "Final /t/ /d/ and the -ed ending",
+      "title_vi": "Âm cuối /t/ /d/ và đuôi -ed",
+      "total_items": 3
+    },
+    {
+      "done_items": 0,
+      "goal_vi": "Đầu lưỡi lộ ra giữa hai hàm răng, không thay bằng /t/ hay /s/.",
+      "id": "day04",
+      "index": 4,
+      "is_done": false,
+      "items": [
+        { "done": false, "id": "c09", "kind": "sound", "label": "/θ/", "runs": 0 },
+        { "done": false, "id": "think-sink", "kind": "pair", "label": "/θ/ và /s/", "runs": 0 },
+        { "done": false, "id": "think-tink", "kind": "pair", "label": "/θ/ và /t/", "runs": 0 },
+        {
+          "done": false,
+          "id": "s1",
+          "kind": "sentence",
+          "label": "I think this is the third time.",
+          "runs": 0
+        }
+      ],
+      "minutes": 15,
+      "title_en": "The voiceless th /θ/",
+      "title_vi": "Âm /θ/ (th không rung)",
+      "total_items": 4
+    },
+    {
+      "done_items": 0,
+      "goal_vi": "this, the, that: lưỡi giữa răng và dây thanh rung.",
+      "id": "day05",
+      "index": 5,
+      "is_done": false,
+      "items": [
+        { "done": false, "id": "c10", "kind": "sound", "label": "/ð/", "runs": 0 },
+        { "done": false, "id": "this-dis", "kind": "pair", "label": "/ð/ và /d/", "runs": 0 },
+        {
+          "done": false,
+          "id": "s9",
+          "kind": "sentence",
+          "label": "My teacher thinks math is fun.",
+          "runs": 0
+        }
+      ],
+      "minutes": 12,
+      "title_en": "The voiced th /ð/",
+      "title_vi": "Âm /ð/ (th rung)",
+      "total_items": 3
+    },
+    {
+      "done_items": 0,
+      "goal_vi": "Môi chu, lưỡi lùi; she khác see, chip khác sip.",
+      "id": "day06",
+      "index": 6,
+      "is_done": false,
+      "items": [
+        { "done": false, "id": "c13", "kind": "sound", "label": "/ʃ/", "runs": 0 },
+        { "done": false, "id": "c16", "kind": "sound", "label": "/tʃ/", "runs": 0 },
+        { "done": false, "id": "c17", "kind": "sound", "label": "/dʒ/", "runs": 0 },
+        { "done": false, "id": "she-see", "kind": "pair", "label": "/ʃ/ và /s/", "runs": 0 },
+        { "done": false, "id": "chip-sip", "kind": "pair", "label": "/tʃ/ và /s/", "runs": 0 },
+        {
+          "done": false,
+          "id": "s2",
+          "kind": "sentence",
+          "label": "She sells fresh fish and chips.",
+          "runs": 0
+        }
+      ],
+      "minutes": 15,
+      "title_en": "/ʃ/ /tʃ/ /ʒ/ /dʒ/",
+      "title_vi": "/ʃ/ /tʃ/ /ʒ/ /dʒ/",
+      "total_items": 6
+    },
+    {
+      "done_items": 0,
+      "goal_vi": "Môi dưới chạm răng trên cho /v/ /f/; môi tròn cho /w/.",
+      "id": "day07",
+      "index": 7,
+      "is_done": false,
+      "items": [
+        { "done": false, "id": "c08", "kind": "sound", "label": "/v/", "runs": 0 },
+        { "done": false, "id": "c24", "kind": "sound", "label": "/w/", "runs": 0 },
+        { "done": false, "id": "c07", "kind": "sound", "label": "/f/", "runs": 0 },
+        { "done": false, "id": "vest-west", "kind": "pair", "label": "/v/ và /w/", "runs": 0 },
+        {
+          "done": false,
+          "id": "very-wary",
+          "kind": "pair",
+          "label": "/v/ và /w/ trong từ dài",
+          "runs": 0
+        },
+        {
+          "done": false,
+          "id": "live-life",
+          "kind": "pair",
+          "label": "Âm cuối /v/ và /f/",
+          "runs": 0
+        },
+        {
+          "done": false,
+          "id": "s3",
+          "kind": "sentence",
+          "label": "We visited a very wide valley.",
+          "runs": 0
+        }
+      ],
+      "minutes": 15,
+      "title_en": "/v/ versus /w/ and /f/",
+      "title_vi": "/v/ với /w/ và /f/",
+      "total_items": 7
+    },
+    {
+      "done_items": 0,
+      "goal_vi": "seat/sit: độ căng môi và độ dài khác nhau.",
+      "id": "day08",
+      "index": 8,
+      "is_done": false,
+      "items": [
+        { "done": false, "id": "v01", "kind": "sound", "label": "/iː/", "runs": 0 },
+        { "done": false, "id": "v02", "kind": "sound", "label": "/ɪ/", "runs": 0 },
+        { "done": false, "id": "seat-sit", "kind": "pair", "label": "/iː/ và /ɪ/", "runs": 0 }
+      ],
+      "minutes": 12,
+      "title_en": "Long and short /iː/ /ɪ/",
+      "title_vi": "Nguyên âm dài–ngắn /iː/ /ɪ/",
+      "total_items": 3
+    },
+    {
+      "done_items": 0,
+      "goal_vi": "bad/bed: hàm mở rộng hơn cho /æ/.",
+      "id": "day09",
+      "index": 9,
+      "is_done": false,
+      "items": [
+        { "done": false, "id": "v04", "kind": "sound", "label": "/æ/", "runs": 0 },
+        { "done": false, "id": "v03", "kind": "sound", "label": "/ɛ/", "runs": 0 },
+        { "done": false, "id": "v10", "kind": "sound", "label": "/ʌ/", "runs": 0 },
+        { "done": false, "id": "bad-bed", "kind": "pair", "label": "/æ/ và /ɛ/", "runs": 0 }
+      ],
+      "minutes": 12,
+      "title_en": "/æ/ /ɛ/ /ʌ/",
+      "title_vi": "/æ/ /ɛ/ /ʌ/",
+      "total_items": 4
+    },
+    {
+      "done_items": 0,
+      "goal_vi": "pool/pull; /oʊ/ là nguyên âm đôi, môi tròn dần.",
+      "id": "day10",
+      "index": 10,
+      "is_done": false,
+      "items": [
+        { "done": false, "id": "v09", "kind": "sound", "label": "/uː/", "runs": 0 },
+        { "done": false, "id": "v08", "kind": "sound", "label": "/ʊ/", "runs": 0 },
+        { "done": false, "id": "v07", "kind": "sound", "label": "/ɔ/", "runs": 0 },
+        { "done": false, "id": "d04", "kind": "sound", "label": "/oʊ/", "runs": 0 },
+        { "done": false, "id": "pool-pull", "kind": "pair", "label": "/uː/ và /ʊ/", "runs": 0 },
+        {
+          "done": false,
+          "id": "s4",
+          "kind": "sentence",
+          "label": "Please stop at the top of the steps.",
+          "runs": 0
+        }
+      ],
+      "minutes": 12,
+      "title_en": "/uː/ /ʊ/ and /ɔ/ /oʊ/",
+      "title_vi": "/uː/ /ʊ/ và /ɔ/ /oʊ/",
+      "total_items": 6
+    },
+    {
+      "done_items": 0,
+      "goal_vi": "right/light; /ɝ/ cuộn lưỡi, không chạm vòm.",
+      "id": "day11",
+      "index": 11,
+      "is_done": false,
+      "items": [
+        { "done": false, "id": "c22", "kind": "sound", "label": "/ɹ/", "runs": 0 },
+        { "done": false, "id": "c21", "kind": "sound", "label": "/l/", "runs": 0 },
+        { "done": false, "id": "v11", "kind": "sound", "label": "/ɝ/", "runs": 0 },
+        { "done": false, "id": "right-light", "kind": "pair", "label": "/ɹ/ và /l/", "runs": 0 },
+        {
+          "done": false,
+          "id": "s6",
+          "kind": "sentence",
+          "label": "I record every record I find.",
+          "runs": 0
+        }
+      ],
+      "minutes": 15,
+      "title_en": "/ɹ/ /l/ and r-coloured vowels",
+      "title_vi": "/ɹ/ /l/ và nguyên âm r",
+      "total_items": 5
+    },
+    {
+      "done_items": 0,
+      "goal_vi": "Khẩu hình chuyển động từ đầu tới cuối âm.",
+      "id": "day12",
+      "index": 12,
+      "is_done": false,
+      "items": [
+        { "done": false, "id": "d01", "kind": "sound", "label": "/eɪ/", "runs": 0 },
+        { "done": false, "id": "d02", "kind": "sound", "label": "/aɪ/", "runs": 0 },
+        { "done": false, "id": "d05", "kind": "sound", "label": "/aʊ/", "runs": 0 },
+        { "done": false, "id": "d03", "kind": "sound", "label": "/ɔɪ/", "runs": 0 },
+        {
+          "done": false,
+          "id": "s8",
+          "kind": "sentence",
+          "label": "Where did you buy that bag?",
+          "runs": 0
+        }
+      ],
+      "minutes": 12,
+      "title_en": "Diphthongs",
+      "title_vi": "Nguyên âm đôi",
+      "total_items": 5
+    },
+    {
+      "done_items": 0,
+      "goal_vi": "Âm tiết nhấn dài hơn; /ə/ ở âm tiết không nhấn.",
+      "id": "day13",
+      "index": 13,
+      "is_done": false,
+      "items": [
+        { "done": false, "id": "v12", "kind": "sound", "label": "/ə/", "runs": 0 },
+        {
+          "done": false,
+          "id": "s3",
+          "kind": "sentence",
+          "label": "We visited a very wide valley.",
+          "runs": 0
+        },
+        {
+          "done": false,
+          "id": "s6",
+          "kind": "sentence",
+          "label": "I record every record I find.",
+          "runs": 0
+        },
+        {
+          "done": false,
+          "id": "s9",
+          "kind": "sentence",
+          "label": "My teacher thinks math is fun.",
+          "runs": 0
+        }
+      ],
+      "minutes": 12,
+      "title_en": "Stress and rhythm",
+      "title_vi": "Trọng âm và nhịp",
+      "total_items": 4
+    },
+    {
+      "done_items": 0,
+      "goal_vi": "Câu hỏi yes/no lên giọng, câu hỏi wh- xuống; ôn các cặp khó nhất.",
+      "id": "day14",
+      "index": 14,
+      "is_done": false,
+      "items": [
+        {
+          "done": false,
+          "id": "s5",
+          "kind": "sentence",
+          "label": "Did you finish your work?",
+          "runs": 0
+        },
+        {
+          "done": false,
+          "id": "s8",
+          "kind": "sentence",
+          "label": "Where did you buy that bag?",
+          "runs": 0
+        },
+        {
+          "done": false,
+          "id": "s10",
+          "kind": "sentence",
+          "label": "Could you repeat that, please?",
+          "runs": 0
+        },
+        {
+          "done": false,
+          "id": "stop-stuff",
+          "kind": "pair",
+          "label": "Âm cuối /p/ và /f/",
+          "runs": 0
+        },
+        { "done": false, "id": "think-sink", "kind": "pair", "label": "/θ/ và /s/", "runs": 0 },
+        { "done": false, "id": "vest-west", "kind": "pair", "label": "/v/ và /w/", "runs": 0 }
+      ],
+      "minutes": 15,
+      "title_en": "Question intonation and review",
+      "title_vi": "Ngữ điệu câu hỏi và tổng ôn",
+      "total_items": 6
+    }
+  ],
+  "total_days": 14
+}

@@ -1,0 +1,254 @@
+[
+  {
+    "focus": ["TH", "DH"],
+    "id": "s1",
+    "kind": "statement",
+    "text": "I think this is the third time.",
+    "title_vi": "Câu luyện /θ/ /ð/"
+  },
+  {
+    "focus": ["SH", "CH"],
+    "id": "s2",
+    "kind": "statement",
+    "text": "She sells fresh fish and chips.",
+    "title_vi": "Câu luyện /ʃ/ /tʃ/"
+  },
+  {
+    "focus": ["V", "W"],
+    "id": "s3",
+    "kind": "statement",
+    "text": "We visited a very wide valley.",
+    "title_vi": "Câu luyện /v/ /w/"
+  },
+  {
+    "focus": ["P", "T"],
+    "id": "s4",
+    "kind": "statement",
+    "text": "Please stop at the top of the steps.",
+    "title_vi": "Âm cuối /p/ /t/"
+  },
+  {
+    "focus": ["SH", "K"],
+    "id": "s5",
+    "kind": "question",
+    "text": "Did you finish your work?",
+    "title_vi": "Câu hỏi yes/no: lên giọng cuối câu"
+  },
+  {
+    "focus": ["ER", "AO"],
+    "id": "s6",
+    "kind": "statement",
+    "text": "I record every record I find.",
+    "title_vi": "Trọng âm REcord và reCORD"
+  },
+  {
+    "focus": ["S", "T"],
+    "id": "s7",
+    "kind": "statement",
+    "text": "The cats sat on the mats.",
+    "title_vi": "Đuôi -s và -t"
+  },
+  {
+    "focus": ["AE", "G"],
+    "id": "s8",
+    "kind": "question",
+    "text": "Where did you buy that bag?",
+    "title_vi": "Câu hỏi wh-: xuống giọng cuối câu"
+  },
+  {
+    "focus": ["TH", "S"],
+    "id": "s9",
+    "kind": "statement",
+    "text": "My teacher thinks math is fun.",
+    "title_vi": "/θ/ trong cụm phụ âm"
+  },
+  {
+    "focus": ["T", "P"],
+    "id": "s10",
+    "kind": "question",
+    "text": "Could you repeat that, please?",
+    "title_vi": "Câu hỏi lịch sự"
+  },
+  {
+    "focus": ["T", "S"],
+    "id": "s11",
+    "kind": "statement",
+    "text": "I want to go to the store with my friends.",
+    "title_vi": "Từ nội dung mạnh, từ chức năng yếu"
+  },
+  {
+    "focus": ["HH", "DH"],
+    "id": "s12",
+    "kind": "question",
+    "text": "Can you help me with this?",
+    "title_vi": "Nhịp câu hỏi ngắn"
+  },
+  {
+    "focus": ["S", "T"],
+    "id": "s13",
+    "kind": "statement",
+    "text": "Students study Spanish at school on Friday.",
+    "title_vi": "Cụm /st/ /sp/ /sk/"
+  },
+  {
+    "focus": ["T", "K"],
+    "id": "s14",
+    "kind": "statement",
+    "text": "She asked, laughed, and walked away.",
+    "title_vi": "Đuôi -ed /t/"
+  },
+  {
+    "focus": ["D", "T"],
+    "id": "s15",
+    "kind": "statement",
+    "text": "We wanted the painted fence fixed.",
+    "title_vi": "Đuôi -ed /ɪd/ và cụm cuối"
+  },
+  {
+    "focus": ["R", "ER"],
+    "id": "s16",
+    "kind": "statement",
+    "text": "Really, the red car is far from here.",
+    "title_vi": "/r/ đầu và cuối"
+  },
+  {
+    "focus": ["L", "R"],
+    "id": "s17",
+    "kind": "statement",
+    "text": "Laura will later lead the rally.",
+    "title_vi": "/l/ và /r/"
+  },
+  {
+    "focus": ["V", "W"],
+    "id": "s18",
+    "kind": "statement",
+    "text": "We have five very wide windows.",
+    "title_vi": "/v/ và /w/"
+  },
+  {
+    "focus": ["W", "V"],
+    "id": "s19",
+    "kind": "question",
+    "text": "Where do you live?",
+    "title_vi": "Câu hỏi Wh: ngữ điệu xuống"
+  },
+  {
+    "focus": ["K", "T"],
+    "id": "s20",
+    "kind": "question",
+    "text": "Are you coming tonight?",
+    "title_vi": "Câu hỏi Yes/No: ngữ điệu lên"
+  },
+  {
+    "focus": ["AH", "G"],
+    "id": "s21",
+    "kind": "statement",
+    "text": "Bananas are good for you.",
+    "title_vi": "Schwa và từ chức năng yếu"
+  },
+  {
+    "focus": ["K", "T"],
+    "id": "s22",
+    "kind": "statement",
+    "text": "I can do it, but I can't do it today.",
+    "title_vi": "can và can't"
+  },
+  {
+    "focus": ["T", "P"],
+    "id": "s23",
+    "kind": "statement",
+    "text": "Put it on a little plate of butter.",
+    "title_vi": "Nối âm và flap /t/"
+  },
+  {
+    "focus": ["T", "K"],
+    "id": "s24",
+    "kind": "statement",
+    "text": "Turn it off and pick it up.",
+    "title_vi": "Nối phụ âm với nguyên âm"
+  },
+  {
+    "focus": ["AY", "OW"],
+    "id": "s25",
+    "kind": "statement",
+    "text": "I would like to buy a boat today.",
+    "title_vi": "Nguyên âm đôi"
+  },
+  {
+    "focus": ["OY", "AW"],
+    "id": "s26",
+    "kind": "statement",
+    "text": "Joy found a toy on the way home.",
+    "title_vi": "/ɔɪ/ /aʊ/ /eɪ/"
+  },
+  {
+    "focus": ["ER", "AO"],
+    "id": "s27",
+    "kind": "statement",
+    "text": "The girl bought a hot dog at the small bar.",
+    "title_vi": "/ɝ/ /ɔ/ /ɑ/"
+  },
+  {
+    "focus": ["F", "T"],
+    "id": "s28",
+    "kind": "statement",
+    "text": "The photographer took a photograph of the economy.",
+    "title_vi": "Trọng âm từ dài"
+  },
+  {
+    "focus": ["T", "JH"],
+    "id": "s29",
+    "kind": "question",
+    "text": "Do you want tea, coffee, or juice?",
+    "title_vi": "Ngữ điệu liệt kê"
+  },
+  {
+    "focus": ["F", "T"],
+    "id": "s30",
+    "kind": "statement",
+    "text": "I said fifteen, not fifty.",
+    "title_vi": "Nhấn tương phản"
+  },
+  {
+    "focus": ["D", "M"],
+    "id": "s31",
+    "kind": "statement",
+    "text": "When I got home, I made dinner, and then I called my mother.",
+    "title_vi": "Nhóm ý và ngắt nghỉ"
+  },
+  {
+    "focus": ["S", "T"],
+    "id": "s32",
+    "kind": "statement",
+    "text": "I did not say he stole the money.",
+    "title_vi": "Nhấn tương phản đổi nghĩa"
+  },
+  {
+    "focus": ["G", "T"],
+    "id": "s33",
+    "kind": "question",
+    "text": "What are you going to do tonight?",
+    "title_vi": "Chuỗi giảm âm tự nhiên"
+  },
+  {
+    "focus": ["NG", "HH"],
+    "id": "s34",
+    "kind": "statement",
+    "text": "He is singing a young song in the hall.",
+    "title_vi": "/ŋ/ /h/ /j/"
+  },
+  {
+    "focus": ["T", "K"],
+    "id": "s35",
+    "kind": "statement",
+    "text": "Every morning, I take the bus to work and drink a cup of coffee.",
+    "title_vi": "Đoạn shadowing"
+  },
+  {
+    "focus": ["T", "L"],
+    "id": "s36",
+    "kind": "statement",
+    "text": "Let me tell you about my hometown and why I love it.",
+    "title_vi": "Mở đầu bài nói một phút"
+  }
+]
