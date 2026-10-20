@@ -24,3 +24,23 @@ export const FREE_VARIANTS_INITIAL: Record<string, string[]> = { T: ['HH'] };
 
 /** Word pattern of the pronouncing dictionary (letters and apostrophes). */
 export const WORD_PATTERN = /[a-z']+/g;
+
+/** Prosody (backend constants.py, prosody.py and features.py). */
+export const PROSODY_STRESS_RATIO_MIN = 1.15;
+export const PROSODY_FINAL_SEMITONES = 1.5;
+export const MIN_SYLLABLES_FOR_STRESS = 2;
+export const MIN_NUCLEI_FOR_RHYTHM = 2;
+export const FINAL_WINDOW_SECONDS = 0.35;
+export const MIN_VOICED_FRAMES = 4;
+export const PITCH_SAMPLE_RATE = 16_000;
+export const PITCH_HOP = 160;
+export const PITCH_FRAME = 1024;
+export const PITCH_FMIN = 65;
+export const PITCH_FMAX = 400;
+/** Rising, falling or no expected final contour per prompt kind. */
+export const RISE_BY_KIND: Record<string, boolean | null> = {
+  question: true,
+  statement: false,
+  wh_question: false,
+  word: null,
+};

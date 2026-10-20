@@ -89,6 +89,28 @@ export interface ScoringData {
   inventory: PhoneInventory;
 }
 
+/** Frame tracks at `hopSeconds`: f0 in Hz (NaN when unvoiced) and RMS energy. */
+export interface ProsodyTracks {
+  f0: Float64Array;
+  rms: Float64Array;
+  hopSeconds: number;
+}
+
+/** A vowel segment: its word, lexical stress and time span in seconds. */
+export interface SyllableNucleus {
+  wordIndex: number;
+  stress: number;
+  start: number;
+  end: number;
+}
+
+export interface ProsodyFinding {
+  aspect: 'word_stress' | 'final_contour' | 'rhythm';
+  verdict: 'ok' | 'check';
+  detail_vi: string;
+  word_index: number | null;
+}
+
 export interface ScoringMouthFrame {
   t: number;
   features: Record<string, number>;
@@ -104,6 +126,8 @@ export interface LocalAssessmentInput {
   mouthFrames: ScoringMouthFrame[];
   audioStartedAt: number | null;
   modelVersion: string;
+  /** 16 kHz mono audio of the take, for prosody; omitted → no prosody findings. */
+  samples?: Float32Array;
 }
 
 /** Golden test data: posteriors packed to the columns the scorer reads. */
@@ -125,4 +149,16 @@ export interface GoldenScoringCase {
   mouthFrames: ScoringMouthFrame[];
   posteriors: PackedPosteriors;
   expected: Pick<AssessmentResponse, 'words' | 'summary'>;
+}
+
+/** Golden test data: a take with the server's pYIN tracks and prosody findings. */
+export interface GoldenProsodyCase {
+  text: string;
+  kind: string;
+  samples: string;
+  f0: string;
+  rms: string;
+  words: string[];
+  nuclei: SyllableNucleus[];
+  prosody: { aspect: string; verdict: string; detail_vi: string; word_index: number | null }[];
 }

@@ -2,6 +2,7 @@ import {
   CTC_FRAME_SECONDS,
   FOCUS_LIMIT,
   MIN_FRAME_QUALITY,
+  RISE_BY_KIND,
   VISUAL_WINDOW_PAD_SECONDS,
 } from '@/constants/scoring.constant';
 import type { AssessmentResponse, PhoneResult } from '@/interfaces/practice.interface';
@@ -22,14 +23,16 @@ import { greedyDecode } from '@/utils/ctc.util';
 import { findKnownError, sortErrors } from '@/utils/error-catalog.util';
 import { createGopScorer, round3 } from '@/utils/gop.util';
 import { pronunciationsFor } from '@/utils/lexicon.util';
-import { espeakToArpabet, phoneIpa } from '@/utils/phoneme.util';
+import { espeakToArpabet, isVowel, phoneIpa } from '@/utils/phoneme.util';
+import { prosodyTracks } from '@/utils/pitch.util';
+import { analyzeProsody } from '@/utils/prosody.util';
 import { audioVerdict, fuseVerdicts, isFreeVariant } from '@/utils/score-verdict.util';
 import { evaluateViseme, visemeConfidenceOf, visemeGroupOf } from '@/utils/viseme.util';
 
 /**
  * The assessment use case on the device: posteriors → phones → verdicts, fused with mouth
  * frames. A port of backend/app/services/assessment_service.py, checked case by case against it
- * (src/data/scoring/golden.json). Prosody is added separately.
+ * (src/data/scoring/golden.json); prosody against prosody-golden.json.
  */
 
 const expectedFrom = (chosen: Phone[][]): ExpectedPhone[] =>
@@ -213,6 +216,32 @@ const focusOf = (
     }));
 };
 
+/** Prosody findings from the take's audio and the aligned vowels (none without audio). */
+const prosodyOf = (
+  input: LocalAssessmentInput,
+  aligned: { expected: ExpectedPhone[]; segments: PhoneSegment[]; words: WordPronunciations[] },
+  data: ScoringData,
+): AssessmentResponse['prosody'] => {
+  if (!input.samples || input.samples.length === 0) return [];
+  const nuclei = aligned.expected.flatMap((item, index) => {
+    const segment = aligned.segments[index];
+    if (!segment || !isVowel(item.phone.symbol, data.inventory)) return [];
+    return [
+      {
+        wordIndex: item.wordIndex,
+        stress: item.phone.stress ?? 0,
+        start: segment.startFrame * CTC_FRAME_SECONDS,
+        end: segment.endFrame * CTC_FRAME_SECONDS,
+      },
+    ];
+  });
+  return analyzeProsody(prosodyTracks(input.samples), {
+    nuclei,
+    words: aligned.words.map((word) => word.word),
+    expectedRise: RISE_BY_KIND[input.kind] ?? null,
+  }) as AssessmentResponse['prosody'];
+};
+
 /** Score one attempt on the device; same response shape as the API's `POST /assess`. */
 export const assessLocally = (
   input: LocalAssessmentInput,
@@ -240,7 +269,7 @@ export const assessLocally = (
       const own = phones.filter((_, i) => expected[i]?.wordIndex === index);
       return { word: word.word, ipa: own.map((p) => p.ipa).join(''), phones: own };
     }),
-    prosody: [],
+    prosody: prosodyOf(input, { expected, segments, words }, data),
     summary: {
       ok: count('ok'),
       check: count('check'),

@@ -61,6 +61,7 @@ export const assessOnDevice = async (request: AssessRequest): Promise<Assessment
       })),
       audioStartedAt: request.audioStartedAt,
       modelVersion: ENGINE_MODEL_VERSION,
+      samples,
     },
     scoringData(),
   );

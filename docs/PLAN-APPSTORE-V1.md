@@ -164,6 +164,19 @@ Mỗi hạng mục: nhánh/commit theo Conventional Commits, `make ci` xanh, e2e
 | speechocean: bắt âm sai                  | 43,6%   | 43,3%    | ≥ 42,6% |
 | speechocean: tương quan Pearson          | 0,474   | 0,476    |         |
 
+### A2 · Máy chấm TypeScript: **XONG** (20/10)
+
+- `web/src/utils/{ctc,aligner,gop,phoneme,lexicon,score-verdict,error-catalog,viseme}.util.ts` và `features/scoring/services/local-assessment.service.ts` trả cùng `AssessmentResponse` như API.
+- Test vàng: 58 câu thật (từ, câu, thay âm cố ý với danh mục lỗi bật hết, khung khẩu hình đúng và lệch). **58/58 khớp từng âm** với bản Python.
+- Dữ liệu chấm (`web/src/data/scoring`) do `backend/scripts/build_scoring_data.py` sinh ra; có test báo khi dữ liệu cũ.
+- Cài đặt → "Dùng chấm trên máy khi luyện tập" chạy mô hình native rồi chấm bằng TypeScript, không cần mạng.
+
+### A3 · Ngữ điệu TypeScript: **XONG** (20/10)
+
+- Bộ phân tích (trọng âm từ, ngữ điệu cuối câu, nhịp) khớp chính xác 12/12 câu thật khi dùng chung track.
+- Năng lượng khớp librosa đến 5 chữ số thập phân.
+- YIN thay pYIN: 97,9% khung chung lệch < nửa cung, **25/25 nhận định khớp** (cổng: ≥ 90% và ≥ 95%).
+
 ### A0 · Plugin chấm trên máy: đang làm
 
 - Plugin `web/plugins/phoneme-engine` (Swift, ONNX Runtime 1.24.2 qua SPM) đã build được cho simulator.
