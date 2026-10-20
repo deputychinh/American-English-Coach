@@ -1,3 +1,5 @@
+import type { PracticeItem } from '@/interfaces/practice.interface';
+
 /** One listening question; `answer` indexes `options`. */
 export interface ListenQuestion {
   id: string;
@@ -48,6 +50,26 @@ export interface PlacementQuestion extends ListenQuestion {
 export interface PlacementResult {
   level: string;
   unitId: string;
+  /** Listening share right per level. */
   scores: Record<string, number>;
+  /** Speaking share of sounds said right per level; absent when the speaking part was skipped. */
+  speaking?: Record<string, number>;
+  /** What to practise first, from the speaking part. */
+  priorities?: PlacementPriority[];
   finishedAt: string;
+}
+
+/** One thing to practise first: the sound and the plain-language reason. */
+export interface PlacementPriority {
+  phoneme: string;
+  ipa: string;
+  hint: string;
+  /** How many times it came up in the speaking part. */
+  count: number;
+}
+
+/** One sentence of the speaking part and the level it belongs to. */
+export interface PlacementSentence {
+  level: string;
+  item: PracticeItem;
 }

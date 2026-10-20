@@ -247,12 +247,30 @@ test('a new learner takes the placement check and lands on a level', async ({ pa
   await expectModelVoice(page, clips);
   const options = page.locator('.listen-question-card__option');
   for (let i = 0; i < 16; i += 1) {
-    if ((await page.locator('.placement-screen__level').count()) > 0) break;
+    if ((await page.getByRole('heading', { name: 'Phần nói' }).count()) > 0) break;
     await options.first().click();
     await page.getByRole('button', { name: /Câu tiếp theo|Xem kết quả/ }).click();
   }
+  // Speaking (plan B8): read the first sentence with the fake microphone, skip the other seven.
+  await page.getByRole('button', { name: 'Bắt đầu phần nói' }).click();
+  await expect(page.locator('.placement-screen__banner')).toHaveText(/Câu 1\/8/);
+  await page.waitForLoadState('networkidle');
+  await page.getByRole('button', { name: 'Thu âm' }).click();
+  await page.waitForTimeout(2500);
+  await page
+    .getByRole('button', { name: /Dừng/ })
+    .click({ timeout: 2000 })
+    .catch(() => undefined);
+  await expect(page.locator('.verdict-chip').first()).toBeVisible({ timeout: 60_000 });
+  await page.getByRole('button', { name: 'Tiếp', exact: true }).click();
+  for (let i = 0; i < 8; i += 1) {
+    if ((await page.locator('.placement-screen__level').count()) > 0) break;
+    await page.getByRole('button', { name: 'Bỏ qua', exact: true }).click();
+  }
   await expect(page.locator('.placement-screen__level')).toHaveText(/Cấp \d/);
   await expect(page.locator('.placement-screen__score')).toHaveCount(4);
+  await expect(page.locator('.placement-screen__score').first()).toContainText('nói');
+  await expect(page.getByRole('heading', { name: '3 điều nên luyện trước' })).toBeVisible();
   await page.getByRole('link', { name: 'Bắt đầu học' }).click();
   await expect(page.locator('.home-screen__placement')).toHaveCount(0);
   await expect(page.locator('.home-screen__continue')).toHaveAttribute('href', /unit=u\d\d/);

@@ -4,15 +4,27 @@ import type { Copy } from '@/interfaces/copy.interface';
 export const enHome: Pick<Copy, 'today' | 'placement'> = {
   placement: {
     title: 'Placement check',
-    lead: 'About 3 minutes: 12 listening questions from easy to hard to find your starting level.',
-    howTo: 'Tap play, listen and pick an answer. No speaking, no penalties.',
+    lead: 'About 3 minutes: 12 listening questions, then 8 short sentences to read aloud, to find your starting level.',
+    howTo: 'Listening: tap play and pick an answer. You can skip the speaking part. No penalties.',
     start: 'Start the check',
     resultTitle: 'You should start at',
     levelLine: (title: string, percent: number): string => `${title} · ${percent}% correct`,
     goPath: 'Start learning',
     retake: 'Take it again',
+    speakTitle: 'Speaking',
+    speakLead:
+      'Read 8 short sentences aloud. Every sound is scored to find the 3 things to practise first.',
+    speakStart: 'Start speaking',
+    speakSkip: 'Skip speaking',
+    sentenceOf: (index: number, total: number): string => `Sentence ${index}/${total}`,
+    levelLineBoth: (title: string, listen: number, speak: number): string =>
+      `${title} · listening ${listen}% · speaking ${speak}%`,
+    explain: 'This is the first level where listening (and speaking, if taken) was under 80%.',
+    prioritiesTitle: '3 things to practise first',
+    practiceSound: 'Practise this sound',
+    noPriorities: 'No repeated mistakes in the speaking part. Well done!',
     homeTitle: 'New here?',
-    homeHint: 'Answer 12 listening questions in 3 minutes to start at the right level.',
+    homeHint: 'Listen and speak for 3 minutes to start at the right level.',
     homeCta: 'Placement check',
   },
   today: {

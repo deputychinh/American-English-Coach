@@ -242,12 +242,12 @@ Mỗi hạng mục: nhánh/commit theo Conventional Commits, `make ci` xanh, e2e
 
 ### B6 · Chèn nguyên âm sau phụ âm cuối: **ĐẠT** (20/10)
 
-| Chỉ số                                                 | Kết quả                           | Cổng     |
-| ------------------------------------------------------ | --------------------------------- | -------- |
-| Bộ tổng hợp ("bookuh", "fishuh"…, 2 giọng): phát hiện  | 12/12, gán đúng lỗi 11/12 (92%)   | ≥ 80%    |
-| Bộ tổng hợp: báo nhầm trên câu đúng                    | 0/12                              |          |
-| Sweep giọng chuẩn: báo nhầm âm đích                    | 16,1% → 16,1%                     | ≤ +0,5   |
-| Sweep giọng chuẩn: cờ ở âm khác                        | 257 → 258 (Eddy "beard")          |          |
+| Chỉ số                                                | Kết quả                         | Cổng   |
+| ----------------------------------------------------- | ------------------------------- | ------ |
+| Bộ tổng hợp ("bookuh", "fishuh"…, 2 giọng): phát hiện | 12/12, gán đúng lỗi 11/12 (92%) | ≥ 80%  |
+| Bộ tổng hợp: báo nhầm trên câu đúng                   | 0/12                            |        |
+| Sweep giọng chuẩn: báo nhầm âm đích                   | 16,1% → 16,1%                   | ≤ +0,5 |
+| Sweep giọng chuẩn: cờ ở âm khác                       | 257 → 258 (Eddy "beard")        |        |
 
 - Luật áp dụng khi phụ âm cuối là âm tắc, xát hoặc tắc xát, và hoặc có một nguyên âm chèn sau nó, hoặc nguyên âm nằm ngay ở ô của nó trong khi căn chỉnh cưỡng bức vẫn thấy phụ âm.
 - Sau /l r m n ŋ/, giọng chuẩn tự nhiên có đoạn chuyển giống nguyên âm (school, girl, beer, sing), nên không xét.
@@ -267,3 +267,11 @@ Mỗi hạng mục: nhánh/commit theo Conventional Commits, `make ci` xanh, e2e
 - "Xóa dữ liệu trên thiết bị này" giờ xóa thật: kết quả chấm (IndexedDB), hồ sơ, tiến độ bài học, kết quả nghe và đầu vào, nhắc luyện, ghép nối. App hỏi xác nhận trước khi xóa.
 - Chính sách quyền riêng tư (trong app và `docs/release/privacy-policy.md`) và chuỗi xin quyền trong Info.plist nay mô tả đúng việc chấm trên iPhone; có nhắc lượt tải gói chấm điểm từ GitHub.
 - App chỉ cho iPhone (`TARGETED_DEVICE_FAMILY = 1`), khóa màn hình dọc.
+
+### B8 · Kiểm tra đầu vào có phần nói: **XONG** (20/10)
+
+- Sau 12 câu nghe là phần nói: mỗi cấp 2 câu ngắn (âm cuối, TH, cụm phụ âm, V/W, schwa, nguyên âm đôi, nhấn tương phản, giảm âm). Có thể bỏ qua cả phần, hoặc từng câu.
+- Điểm mỗi cấp bằng trung bình của phần nghe và phần nói (nếu có làm). Người học bắt đầu ở cấp đầu tiên dưới 80%. Kết quả ghi rõ điểm nghe và nói của từng cấp, kèm một câu giải thích.
+- "3 điều nên luyện trước": các lỗi lặp lại nhiều nhất trong phần nói, mỗi lỗi kèm lời giải thích dễ hiểu và nút mở bài luyện âm tương ứng.
+- Ước tính thời gian: nghe 12 câu khoảng 70 giây, nói 8 câu khoảng 80 giây, tổng dưới 3 phút.
+- **Lỗi thật lộ ra khi viết e2e:** câu nghe cuối còn đang tải vẫn phát đè lên lúc người học bắt đầu nói, và bộ khử vọng của micro xóa luôn giọng người học. Giờ phần phát giọng mẫu có `stop()`; app gọi nó khi rời phần nghe và mỗi khi bắt đầu thu âm.

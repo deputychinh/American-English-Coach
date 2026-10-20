@@ -1,9 +1,16 @@
-import type { CurriculumLevel, CurriculumUnit } from '@/interfaces/practice.interface';
+import sentencesJson from '@/data/content/sentences.json';
+import type {
+  AssessmentResponse,
+  CurriculumLevel,
+  CurriculumUnit,
+} from '@/interfaces/practice.interface';
 
 import {
   buildPlacement,
+  buildSpeaking,
   continueUnit,
   placeLearner,
+  placementPriorities,
   readPlacement,
   savePlacement,
 } from './placement.service';
@@ -72,5 +79,49 @@ describe('placement', () => {
     expect(continueUnit({ units, currentId: 'u07', placement: null })?.id).toBe('u07');
     savePlacement(placed);
     expect(readPlacement()?.unitId).toBe('u07');
+  });
+
+  it('reads two sentences per level aloud and combines speaking with listening', () => {
+    const speaking = buildSpeaking({ levels, sentences: sentencesJson });
+    expect(speaking.map((s) => s.level)).toEqual(['L1', 'L1', 'L2', 'L2']);
+    expect(speaking[0]?.item).toMatchObject({ id: 'placement:s4', kind: 'statement' });
+
+    const take = (ok: number, error: number, errorId: string | null): AssessmentResponse =>
+      ({
+        summary: { ok, check: 0, error },
+        words: [
+          {
+            phones: [
+              ...Array.from({ length: error }, () => ({
+                symbol: 'T',
+                ipa: 't',
+                verdict: 'error',
+                error_id: errorId,
+                hint_vi: errorId ? 'Giữ âm /t/ cuối.' : null,
+              })),
+            ],
+          },
+        ],
+      }) as unknown as AssessmentResponse;
+    const questions = buildPlacement({ levels, pairs, sentences: [] });
+    const allRight = Object.fromEntries(questions.map((q) => [q.id, q.answer]));
+    // Listening perfect everywhere; speaking weak on L1 drags the start back to L1.
+    const placed = placeLearner({
+      levels,
+      questions,
+      answers: allRight,
+      spoken: [
+        { level: 'L1', result: take(4, 6, 'final_t_dropped') },
+        { level: 'L2', result: take(10, 0, null) },
+      ],
+    });
+    expect(placed.level).toBe('L1');
+    expect(placed.speaking).toEqual({ L1: 0.4, L2: 1 });
+    expect(placed.priorities).toEqual([
+      { phoneme: 'T', ipa: 't', hint: 'Giữ âm /t/ cuối.', count: 6 },
+    ]);
+    // Without the speaking part the listening decides alone.
+    expect(placeLearner({ levels, questions, answers: allRight }).level).toBe('L2');
+    expect(placementPriorities([take(1, 2, null)])).toEqual([]);
   });
 });
