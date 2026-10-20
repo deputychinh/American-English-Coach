@@ -4,34 +4,41 @@ import type { Copy } from '@/interfaces/copy.interface';
 export const enCourse: Pick<Copy, 'privacy' | 'course' | 'onboarding' | 'curriculum'> = {
   privacy: {
     title: 'Privacy policy',
-    updated:
-      'Updated 17 October 2026. Your data stays on your device and the scoring server you run.',
+    updated: 'Updated 20 Oct 2026. On the iPhone your voice and image are processed on the device.',
     sections: [
       {
         heading: 'Where data is processed',
         paragraphs: [
-          'Camera video is processed on the device only, to measure mouth shape; it is never stored or sent.',
-          'Mouth measurements (eight numeric features and lip-outline points) and the recording of a practice attempt go to the scoring server you run on a computer on the same network, or over HTTPS you configure. Recordings are scored and discarded; results live in an SQLite file on that server.',
-          'Learner profiles, interface choices and the daily goal are kept on the device and on your scoring server.',
-          'The AI tutor is off by default. Only when you configure a provider and press the button does the app send the scored result (text) or one mouth photo to that provider under its terms.',
+          'Recordings are scored on the iPhone by the scoring pack downloaded to it, then discarded; they are not sent anywhere.',
+          'The camera video is only processed on the device to measure the mouth; it is not stored or sent.',
+          'Scores, learner profiles, lesson progress, interface choices and the daily goal are stored on the device.',
+          'Classroom server (optional, Settings → Advanced): only when you connect one yourself are recordings and mouth measurements (eight numeric features and lip outline points) sent to the server you run on the same network, or over HTTPS you configure. Results are then stored in a SQLite file on that server.',
+          'The AI tutor exists only on a classroom server and is off by default. When you configure a provider and press the button, the scored result (text) or one mouth photo is sent to that provider under its terms.',
         ],
       },
       {
-        heading: 'There is no',
+        heading: 'Downloading the scoring pack and model voices',
         paragraphs: [
-          'Account, advertising, telemetry, behavioural analytics or sharing with third parties.',
+          'On first use the app downloads the scoring pack (about 357 MB) from GitHub. As with any file download, GitHub sees the device IP address; the app sends nothing else with it.',
+          'The model voices were generated beforehand by OpenAI text-to-speech and ship inside the app; the app sends nothing to OpenAI.',
+        ],
+      },
+      {
+        heading: 'None of these',
+        paragraphs: [
+          'Accounts, ads, telemetry, behavioural analytics or sharing with third parties.',
         ],
       },
       {
         heading: 'Permissions',
         paragraphs: [
-          'Camera and Microphone only when you turn them on; Local Network to reach the scoring server; Notifications for the optional reminder.',
+          'Camera and Microphone while you practise; Notifications for the reminder (optional, asked only when you turn it on); Local network only when you connect a classroom server.',
         ],
       },
       {
         heading: 'Deleting data',
         paragraphs: [
-          'Settings → "Clear data on this device". On the scoring server: delete the profile in Settings → Profiles, or delete data/coach.sqlite3.',
+          'Settings → Data on this device → "Clear data on this device" removes results, profiles and progress. Deleting the app also removes the scoring pack. On a classroom server: delete the profile in Settings → Profiles, or delete data/coach.sqlite3.',
         ],
       },
     ],

@@ -2,15 +2,24 @@
 export const viCourse = {
   privacy: {
     title: 'Chính sách quyền riêng tư',
-    updated: 'Cập nhật 17/10/2026. Dữ liệu chỉ nằm trên máy bạn và máy chấm bạn tự chạy.',
+    updated:
+      'Cập nhật 20/10/2026. Trên iPhone, giọng nói và hình ảnh của bạn được xử lý ngay trên máy.',
     sections: [
       {
         heading: 'Dữ liệu được xử lý ở đâu',
         paragraphs: [
+          'Bản ghi âm được chấm ngay trên iPhone bằng gói chấm điểm đã tải về máy, rồi bỏ; không gửi đi đâu.',
           'Video camera chỉ được xử lý trên thiết bị để đo khẩu hình; không lưu, không gửi đi.',
-          'Số đo khẩu hình (tám đặc trưng số và điểm viền môi) và bản ghi âm của lượt luyện được gửi tới máy chấm bạn tự chạy trên máy tính trong cùng mạng, hoặc qua HTTPS do bạn cấu hình. Bản ghi âm được chấm rồi bỏ; kết quả lưu trong tệp SQLite trên máy chấm đó.',
-          'Hồ sơ người học, lựa chọn giao diện và mục tiêu ngày lưu trên thiết bị và trên máy chấm của bạn.',
-          'Gia sư AI mặc định tắt. Chỉ khi bạn cấu hình nhà cung cấp và bấm nút, ứng dụng gửi kết quả đã chấm (văn bản) hoặc một ảnh miệng tới nhà cung cấp đó theo điều khoản của họ.',
+          'Kết quả chấm, hồ sơ người học, tiến độ bài học, lựa chọn giao diện và mục tiêu ngày lưu trên thiết bị.',
+          'Máy chấm riêng (tùy chọn, Cài đặt → Nâng cao): chỉ khi bạn tự kết nối, bản ghi âm và số đo khẩu hình (tám đặc trưng số và điểm viền môi) mới được gửi tới máy chấm bạn tự chạy trong cùng mạng, hoặc qua HTTPS do bạn cấu hình. Kết quả khi đó lưu trong tệp SQLite trên máy chấm đó.',
+          'Gia sư AI chỉ có trên máy chấm riêng và mặc định tắt. Khi bạn cấu hình nhà cung cấp và bấm nút, kết quả đã chấm (văn bản) hoặc một ảnh miệng được gửi tới nhà cung cấp đó theo điều khoản của họ.',
+        ],
+      },
+      {
+        heading: 'Tải gói chấm điểm và giọng mẫu',
+        paragraphs: [
+          'Lần đầu, ứng dụng tải gói chấm điểm (khoảng 357 MB) từ GitHub. Như mọi lượt tải tệp, GitHub nhận địa chỉ IP của thiết bị; ứng dụng không gửi kèm thông tin nào khác.',
+          'Giọng mẫu do AI của OpenAI tạo sẵn và đóng gói trong ứng dụng; ứng dụng không gửi gì tới OpenAI.',
         ],
       },
       {
@@ -22,13 +31,13 @@ export const viCourse = {
       {
         heading: 'Quyền truy cập',
         paragraphs: [
-          'Camera và Micro chỉ khi bạn bật; Mạng nội bộ để tới máy chấm; Thông báo cho nhắc luyện (tùy chọn).',
+          'Camera và Micro khi bạn luyện; Thông báo cho nhắc luyện (tùy chọn, chỉ hỏi khi bạn bật); Mạng nội bộ chỉ khi bạn kết nối máy chấm riêng.',
         ],
       },
       {
         heading: 'Xóa dữ liệu',
         paragraphs: [
-          'Cài đặt → "Xóa dữ liệu trên thiết bị này". Trên máy chấm: xóa hồ sơ trong Cài đặt → Hồ sơ, hoặc xóa tệp data/coach.sqlite3.',
+          'Cài đặt → Dữ liệu trên thiết bị → "Xóa dữ liệu trên thiết bị này" xóa kết quả, hồ sơ và tiến độ. Xóa ứng dụng sẽ xóa cả gói chấm điểm. Trên máy chấm riêng: xóa hồ sơ trong Cài đặt → Hồ sơ, hoặc xóa tệp data/coach.sqlite3.',
         ],
       },
     ],

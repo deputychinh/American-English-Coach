@@ -48,6 +48,9 @@ const indexedDbStore = (factory: IDBFactory): RunsStore => {
       const keys = await request(runs.index('profileId').getAllKeys(profileId));
       await Promise.all(keys.map((key) => request(runs.delete(key))));
     },
+    clear: async () => {
+      await request((await store('readwrite')).clear());
+    },
   };
 };
 
@@ -68,6 +71,10 @@ export const memoryStore = (): RunsStore => {
       Promise.resolve([...runs.values()].filter((r) => r.profileId === profileId)),
     removeProfile: (profileId) => {
       for (const [id, run] of runs) if (run.profileId === profileId) runs.delete(id);
+      return Promise.resolve();
+    },
+    clear: () => {
+      runs.clear();
       return Promise.resolve();
     },
   };

@@ -22,7 +22,9 @@ export const viSettings = {
     },
     clearData: 'Xóa dữ liệu trên thiết bị này',
     clearDataHint:
-      'Xóa hiệu chỉnh khẩu hình và lựa chọn đã lưu trên thiết bị. Kết quả đã chấm vẫn nằm trên máy chấm.',
+      'Xóa kết quả đã chấm, hồ sơ, tiến độ bài học, hiệu chỉnh khẩu hình và nhắc luyện trên thiết bị này. Gói chấm điểm vẫn được giữ.',
+    clearDataConfirm:
+      'Xóa toàn bộ kết quả, hồ sơ và tiến độ trên thiết bị này? Không thể hoàn tác.',
     dataCleared: 'Đã xóa dữ liệu trên thiết bị.',
     about: 'Về ứng dụng',
     version: 'Phiên bản',
@@ -77,7 +79,7 @@ export const viSettings = {
     languageEn: 'English',
     goalTitle: 'Mục tiêu và nhắc luyện',
     goalHint:
-      'Số lần thu được chấm mỗi ngày để tính một ngày đạt; chuỗi ngày liên tiếp tính theo mục tiêu này.',
+      'Số lần thu được chấm mỗi ngày để tính một ngày đạt; chuỗi ngày liên tiếp tính theo mục tiêu này. Nghỉ một ngày mỗi tuần không làm mất chuỗi.',
     goalLabel: 'Mục tiêu mỗi ngày',
     goalOption: (count: number): string => `${count} lần`,
     reminderLabel: 'Nhắc luyện hằng ngày lúc',

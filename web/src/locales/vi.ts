@@ -102,6 +102,15 @@ export const vi = {
       `Bảng 44 ghi /${symbol}/ · ARPAbet ${arpabet}`,
   },
   privacy: viCourse.privacy,
+  licenses: {
+    title: 'Giấy phép mã nguồn mở',
+    lead: 'Các thành phần bên thứ ba có trong ứng dụng và giấy phép của chúng.',
+    voiceTitle: 'Giọng mẫu do AI tạo',
+    voiceBody:
+      'Giọng đọc mẫu trong ứng dụng được tạo bằng công nghệ chuyển văn bản thành giọng nói của OpenAI, không phải giọng người thật. Giọng được tạo sẵn một lần và đóng gói trong ứng dụng; giọng nói của bạn không được gửi đi đâu.',
+    noticeTitle: 'NOTICE (Apache License 2.0)',
+    link: 'Giấy phép mã nguồn mở',
+  },
   course: viCourse.course,
   curriculum: viCourse.curriculum,
   listen: viListen.listen,

@@ -17,18 +17,18 @@ import { Theme } from '@/enums/theme.enum';
 import { EngineCard } from '@/features/engine/components/EngineCard';
 import { useModelDownload } from '@/features/engine/hooks/useModelDownload';
 import { getHealth } from '@/features/health/services/health.service';
-import { clearCalibration } from '@/features/mirror/services/calibration.service';
 import { GoalCard } from '@/features/settings/components/GoalCard';
 import { PairingCard } from '@/features/settings/components/PairingCard';
 import { ProfilesCard } from '@/features/settings/components/ProfilesCard';
 import { SettingsRow } from '@/features/settings/components/SettingsRow';
+import { clearDeviceData } from '@/features/settings/services/device-data.service';
 import { pairedDevice } from '@/features/settings/services/pairing.service';
 import { useActiveProfile } from '@/hooks/useActiveProfile';
 import { useCopy, useLanguage } from '@/hooks/useCopy';
 import { useStoredState } from '@/hooks/useStoredState';
 import { setLanguage } from '@/locales';
 import { normaliseBaseUrl, isNativeShell } from '@/utils/api-base.util';
-import { removeStorage, writeStorage } from '@/utils/storage.util';
+import { writeStorage } from '@/utils/storage.util';
 
 import './SettingsScreen.css';
 
@@ -90,12 +90,9 @@ export const SettingsScreen = (): ReactElement => {
     if (health) toast.show(copy.settings.saved, 'success');
   };
 
-  const clearData = (): void => {
-    clearCalibration();
-    removeStorage(StorageKey.CameraDefault);
-    removeStorage(StorageKey.Muted);
-    removeStorage(StorageKey.ApiBaseUrl);
-    removeStorage(StorageKey.DailyGoal);
+  const clearData = async (): Promise<void> => {
+    if (!window.confirm(copy.settings.clearDataConfirm)) return;
+    await clearDeviceData();
     toast.show(copy.settings.dataCleared, 'success');
   };
 
@@ -285,7 +282,7 @@ export const SettingsScreen = (): ReactElement => {
               hint={copy.settings.clearDataHint}
             />
             <div className="settings-screen__row">
-              <Button variant={ButtonVariant.Ghost} isSmall onClick={clearData}>
+              <Button variant={ButtonVariant.Ghost} isSmall onClick={() => void clearData()}>
                 {copy.settings.clearData}
               </Button>
               <Link href="/privacy" className="button button--ghost button--small">
@@ -307,6 +304,9 @@ export const SettingsScreen = (): ReactElement => {
             <p className="settings-screen__muted">{copy.home.privacy}</p>
             <Link href="/welcome" className="button button--ghost button--small">
               {copy.settings.replayWelcome}
+            </Link>
+            <Link href="/licenses" className="button button--ghost button--small">
+              {copy.licenses.link}
             </Link>
           </SettingsRow>
         </ul>

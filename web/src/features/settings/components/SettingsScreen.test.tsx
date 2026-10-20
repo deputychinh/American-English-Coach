@@ -5,8 +5,10 @@ import type { ReactElement } from 'react';
 import { ToastProvider } from '@/components/Toast/Toast';
 import { Language } from '@/enums/language.enum';
 import { StorageKey } from '@/enums/storage-key.enum';
+import type { StoredRun } from '@/interfaces/local-store.interface';
 import { setLanguage } from '@/locales';
 import { jsonResponse, mockApi } from '@/test-utils/api-mock';
+import { runsStore } from '@/utils/local-store.util';
 
 import { SettingsScreen } from './SettingsScreen';
 
@@ -104,14 +106,28 @@ describe('SettingsScreen', () => {
     await waitFor(() => expect(screen.getByText(/Mã không đúng/)).toBeInTheDocument());
   });
 
-  it('clears on-device data', async () => {
+  it('clears every learner record on the device after a confirm, keeping theme and language', async () => {
     const user = userEvent.setup();
     mockApi({ '/api/v1/profiles': () => jsonResponse(profiles) });
     localStorage.setItem(StorageKey.Calibration, JSON.stringify({ aperture: { min: 0, max: 1 } }));
+    localStorage.setItem(StorageKey.Lesson, JSON.stringify({ u01: { step: 2 } }));
+    localStorage.setItem(StorageKey.Theme, JSON.stringify('dark'));
+    await runsStore().put({ id: 'r1', profileId: 'default' } as StoredRun);
+    const confirm = vi
+      .spyOn(window, 'confirm')
+      .mockReturnValueOnce(false)
+      .mockReturnValueOnce(true);
     render(renderScreen());
     await user.click(screen.getByRole('button', { name: /^Dữ liệu trên thiết bị/ }));
-    await user.click(screen.getByRole('button', { name: 'Xóa dữ liệu trên thiết bị này' }));
+    const clear = screen.getByRole('button', { name: 'Xóa dữ liệu trên thiết bị này' });
+    await user.click(clear);
+    expect(localStorage.getItem(StorageKey.Lesson)).not.toBeNull();
+    await user.click(clear);
+    expect(await screen.findByText('Đã xóa dữ liệu trên thiết bị.')).toBeInTheDocument();
+    expect(confirm).toHaveBeenCalledTimes(2);
     expect(localStorage.getItem(StorageKey.Calibration)).toBeNull();
-    expect(screen.getByText('Đã xóa dữ liệu trên thiết bị.')).toBeInTheDocument();
+    expect(localStorage.getItem(StorageKey.Lesson)).toBeNull();
+    expect(localStorage.getItem(StorageKey.Theme)).not.toBeNull();
+    expect(await runsStore().get('r1')).toBeNull();
   });
 });

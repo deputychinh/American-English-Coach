@@ -108,6 +108,15 @@ export const en: Copy = {
       `Chart symbol /${symbol}/ · ARPAbet ${arpabet}`,
   },
   privacy: enCourse.privacy,
+  licenses: {
+    title: 'Open-source licences',
+    lead: 'Third-party components inside the app and their licences.',
+    voiceTitle: 'AI-generated model voices',
+    voiceBody:
+      'The model voices in the app are made with OpenAI text-to-speech; they are not human voices. They were generated once and ship inside the app; your own voice is never sent anywhere.',
+    noticeTitle: 'NOTICE (Apache License 2.0)',
+    link: 'Open-source licences',
+  },
   course: enCourse.course,
   curriculum: enCourse.curriculum,
   listen: enListen.listen,

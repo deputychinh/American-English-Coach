@@ -16,6 +16,8 @@ const ROUTES = [
   '/listen/?unit=u03',
   '/placement/',
   '/privacy/',
+  '/licenses/',
+  '/lesson/?unit=u09',
 ];
 
 test.beforeEach(async ({ page }) => {

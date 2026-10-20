@@ -24,7 +24,9 @@ export const enSettings: Pick<Copy, 'settings' | 'plan'> = {
     },
     clearData: 'Clear data on this device',
     clearDataHint:
-      'Removes the mouth calibration and saved choices on this device. Scored results stay on the scoring server.',
+      'Removes scored results, profiles, lesson progress, mouth calibration and the reminder on this device. The scoring pack stays.',
+    clearDataConfirm:
+      'Remove all results, profiles and progress on this device? This cannot be undone.',
     dataCleared: 'Data on this device cleared.',
     about: 'About',
     version: 'Version',
@@ -80,7 +82,7 @@ export const enSettings: Pick<Copy, 'settings' | 'plan'> = {
     languageEn: 'English',
     goalTitle: 'Goal and reminder',
     goalHint:
-      'Scored recordings per day that count as a practised day; the streak follows this goal.',
+      'Scored recordings per day that count as a practised day; the streak follows this goal. One day off a week keeps the streak.',
     goalLabel: 'Daily goal',
     goalOption: (count: number): string => `${count} recordings`,
     reminderLabel: 'Daily reminder at',

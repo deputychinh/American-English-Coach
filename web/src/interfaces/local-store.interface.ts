@@ -26,6 +26,8 @@ export interface RunsStore {
   get: (id: string) => Promise<StoredRun | null>;
   put: (run: StoredRun) => Promise<void>;
   removeProfile: (profileId: string) => Promise<void>;
+  /** Every run of every profile (Settings → clear the data on this device). */
+  clear: () => Promise<void>;
 }
 
 /** Verdict counts of one sound and the time (ISO) of the last run containing it. */

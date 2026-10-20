@@ -54,8 +54,6 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
@@ -69,16 +67,16 @@
 	<key>UIStatusBarStyle</key>
 	<string>UIStatusBarStyleLightContent</string>
 	<key>NSCameraUsageDescription</key>
-	<string>Camera dùng để soi khẩu hình (môi, hàm, răng, lưỡi) khi luyện phát âm. Video không rời điện thoại; chỉ các số đo được gửi tới máy chấm của bạn.</string>
+	<string>Camera dùng để soi khẩu hình (môi, hàm) khi luyện phát âm. Video được xử lý ngay trên iPhone, không được lưu và không rời máy.</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>Micro dùng để thu âm câu bạn đọc và gửi tới máy chấm trên mạng nội bộ của bạn.</string>
+	<string>Micro dùng để thu âm câu bạn đọc và chấm phát âm ngay trên iPhone. Bản ghi không được gửi đi, trừ khi bạn tự kết nối máy chấm riêng trong Cài đặt → Nâng cao.</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsLocalNetworking</key>
 		<true/>
 	</dict>
 	<key>NSLocalNetworkUsageDescription</key>
-	<string>Ứng dụng kết nối tới máy chấm phát âm chạy trên máy tính trong cùng mạng Wi‑Fi.</string>
+	<string>Chỉ dùng khi bạn tự kết nối máy chấm riêng (Cài đặt → Nâng cao) chạy trên máy tính trong cùng mạng Wi‑Fi.</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>UIRequiresFullScreen</key>
