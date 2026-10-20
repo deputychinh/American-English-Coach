@@ -143,3 +143,10 @@ Mỗi hạng mục: nhánh/commit theo Conventional Commits, `make ci` xanh, e2e
 2. **Nguồn giọng mẫu**: TTS có giấy phép thương mại (đề xuất: OpenAI `gpt-4o-mini-tts` hoặc Azure Neural, 4 giọng Mỹ, chi phí dựng một lần vài USD, phải ghi "giọng AI") hay thu giọng người thật (tốt nhất, nhưng tốn thời gian và chi phí).
 3. **Mô hình kinh doanh v1.0**: miễn phí hoàn toàn (đề xuất, duyệt nhanh, chưa cần máy chủ) hay có gói Pro ngay.
 4. **Tài khoản Apple Developer** để ký phát hành: đứng tên cá nhân hay tổ chức. App hiện ký bằng Team nào cần xác nhận lại.
+
+## 7. Quyết định đã chốt (20/10/2026, chủ dự án)
+
+- **Chấm điểm trên iPhone** (ONNX Runtime native). Cloud chỉ là phương án dự phòng nếu không qua cổng A0/A1.
+- **Giọng mẫu: TTS OpenAI**, đóng gói sẵn trong app, ghi rõ "giọng AI". Cần một API key OpenAI mới (key cũ đã lộ trong chat).
+- **v1.0 miễn phí hoàn toàn**, không tài khoản.
+- **Chưa có Apple Developer Program trả phí**: chủ dự án đăng ký trước tuần 3 để kịp TestFlight. Đến lúc đó vẫn cài lên iPhone bằng chứng chỉ phát triển hiện có.
