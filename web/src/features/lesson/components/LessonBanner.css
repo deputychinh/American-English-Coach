@@ -1,0 +1,25 @@
+.lesson-banner {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1) var(--space-2);
+  align-items: baseline;
+  justify-content: space-between;
+  padding: var(--space-1) var(--padding-page-x) var(--space-2);
+  font-size: var(--text-sm);
+  background: var(--color-bg);
+}
+
+.lesson-banner__step {
+  font-weight: var(--weight-semibold);
+}
+
+.lesson-banner__passed {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+}
+
+.lesson-banner__scenario {
+  inline-size: 100%;
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+}

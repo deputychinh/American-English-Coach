@@ -25,7 +25,7 @@ import { useFocusMode, useImmersive } from '@/hooks/useImmersive';
 import { useKeepAwake } from '@/hooks/useKeepAwake';
 import { useStoredState } from '@/hooks/useStoredState';
 import { useSwipe } from '@/hooks/useSwipe';
-import type { Point2 } from '@/interfaces/mouth.interface';
+import type { MouthFrame, Point2 } from '@/interfaces/mouth.interface';
 import type {
   AssessmentResponse,
   PracticeItem,
@@ -53,12 +53,14 @@ interface PracticeSessionProps {
   progress?: number;
   /** Swipe left on the prompt to move on (drills); off while recording or scoring. */
   onSwipeNext?: () => void;
+  /** Close link: the practice list, or the course from a lesson. */
+  closeHref?: string;
 }
 
-/**
- * One screen: a thin bar, the prompt in the middle (with an optional inset camera), the record
- * control at the bottom. The result slides up as a sheet so the prompt never scrolls away.
- */
+/** The fields the scorer reads from a tracked frame (the outline stays on the device). */
+const toPayload = ({ t, features, quality }: MouthFrame): MouthFrame => ({ t, features, quality });
+
+/** One screen: bar, prompt (optional inset camera), record control; the result is a sheet. */
 export const PracticeSession = ({
   item,
   targetGroup = null,
@@ -69,6 +71,7 @@ export const PracticeSession = ({
   banner,
   progress,
   onSwipeNext,
+  closeHref = '/practice',
 }: PracticeSessionProps): ReactElement => {
   const copy = useCopy();
   const [status, setStatus] = useState(PracticeStatus.Idle);
@@ -106,11 +109,7 @@ export const PracticeSession = ({
     setStatus(PracticeStatus.Scoring);
     const endedAt = captured.startedAt + captured.durationSeconds;
     const frames = cameraOn
-      ? tracker.framesBetween(captured.startedAt, endedAt).map(({ t, features, quality }) => ({
-          t,
-          features,
-          quality,
-        }))
+      ? tracker.framesBetween(captured.startedAt, endedAt).map(toPayload)
       : [];
     try {
       const response = await assess({
@@ -162,7 +161,7 @@ export const PracticeSession = ({
   return (
     <div className={cx('practice-session', cameraOn && 'practice-session--camera')}>
       <LessonHeader
-        closeHref="/practice"
+        closeHref={closeHref}
         title={item.title}
         subtitle={`${kindLabel}${targetIpa ? ` · ${copy.practice.targetLabel} /${targetIpa}/` : ''}`}
         progress={progress}

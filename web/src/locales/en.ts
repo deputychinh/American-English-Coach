@@ -3,6 +3,7 @@ import type { Copy } from '@/interfaces/copy.interface';
 import { enCourse } from './en-course';
 import { enEngine } from './en-engine';
 import { enHome } from './en-home';
+import { enLesson } from './en-lesson';
 import { enListen } from './en-listen';
 import { enPractice } from './en-practice';
 import { enSettings } from './en-settings';
@@ -243,6 +244,7 @@ export const en: Copy = {
   },
   settings: enSettings.settings,
   engine: enEngine.engine,
+  lesson: enLesson.lesson,
   unauthorized: {
     message: 'The scoring server requires this device to be paired.',
     action: 'Open settings',

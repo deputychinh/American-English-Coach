@@ -1,6 +1,7 @@
 import { viCourse } from './vi-course';
 import { viEngine } from './vi-engine';
 import { viHome } from './vi-home';
+import { viLesson } from './vi-lesson';
 import { viListen } from './vi-listen';
 import { viPractice } from './vi-practice';
 import { viSettings } from './vi-settings';
@@ -236,6 +237,7 @@ export const vi = {
   },
   settings: viSettings.settings,
   engine: viEngine.engine,
+  lesson: viLesson.lesson,
   unauthorized: {
     message: 'Máy chấm yêu cầu ghép nối thiết bị này.',
     action: 'Mở cài đặt',

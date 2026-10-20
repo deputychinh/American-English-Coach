@@ -19,4 +19,5 @@ export enum StorageKey {
   Onboarded = 'coach.onboarded',
   Listening = 'coach.listening',
   Placement = 'coach.placement',
+  Lesson = 'coach.lesson',
 }

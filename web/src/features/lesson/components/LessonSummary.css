@@ -1,0 +1,26 @@
+.lesson-summary {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-5) var(--space-4);
+  text-align: center;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+}
+
+.lesson-summary__title {
+  font-size: var(--text-xl);
+  font-weight: var(--weight-semibold);
+}
+
+.lesson-summary__line {
+  color: var(--color-text-muted);
+}
+
+.lesson-summary__actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-inline);
+  margin-block-start: var(--space-2);
+}

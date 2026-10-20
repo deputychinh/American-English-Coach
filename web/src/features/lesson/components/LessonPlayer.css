@@ -1,0 +1,17 @@
+.lesson-player {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  max-inline-size: 560px;
+  margin-inline: auto;
+}
+
+.lesson-player--speak {
+  gap: 0;
+  max-inline-size: none;
+}
+
+.lesson-player__body {
+  padding-inline: var(--padding-page-x);
+  padding-block-end: var(--space-6);
+}

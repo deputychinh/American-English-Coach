@@ -203,3 +203,22 @@ Mỗi hạng mục: nhánh/commit theo Conventional Commits, `make ci` xanh, e2e
 - Plugin có các chức năng: tải mô hình có kiểm SHA-256 và loại khỏi iCloud backup; nạp mô hình bằng CPU hoặc CoreML; trả log-posterior; benchmark.
 - Cài đặt → "Chấm trên máy (thử nghiệm)" tải mô hình từ máy chấm đã ghép nối (`/api/v1/models`) rồi đo tốc độ.
 - Còn chờ số đo trên iPhone thật.
+
+### B1 · Trình chạy bài học 5 bước: **XONG** (20/10)
+
+- Màn `/lesson?unit=uXX` đi tuần tự qua 5 bước:
+  - **Làm quen âm:** thẻ âm, mẹo đặt miệng, nghe từ ví dụ và từ dễ nhầm.
+  - **Nghe phân biệt:** dùng lại bộ câu hỏi của bước nghe.
+  - **Luyện từng từ:** 3 từ đầu của mỗi âm, cả hai từ của mỗi cặp, các câu.
+  - **Nói theo câu mẫu.**
+  - **Dùng khi giao tiếp:** hiện tình huống và các từ mục tiêu.
+- **Cổng 2/3:** cuối bước luyện, nếu nói đạt (không có âm lỗi) dưới 2/3 số mục thì app mời luyện lại riêng các mục chưa đạt, hoặc vẫn đi tiếp.
+- **Tiếp tục đúng chỗ:** vị trí lưu sau mỗi màn (`coach.lesson`), nên tắt app rồi mở lại sẽ về đúng màn đó. Trong sheet đơn vị ở Lộ trình, nút đổi giữa "Bắt đầu bài học", "Học tiếp · bước n/5" và "Học lại bài này".
+- **Đếm vào tiến độ:** các mục dùng đúng id của màn luyện, nên lượt nói trong bài học được tính vào tiến độ đơn vị và lộ trình.
+- **Kiểm chứng:**
+  - Unit test: cả 24 đơn vị đều dựng đủ 5 bước, bước nào cũng có nội dung.
+  - Component test: đi hết bài, kể cả cổng và nhánh luyện lại.
+  - e2e `lesson.spec.ts`: thu âm thật, tải lại trang giữa bước 3, đi đến màn "Xong bài học!". Đạt 8/8 lần chạy lặp.
+- **Hai lỗi thu âm có thật, lộ ra khi viết e2e:**
+  - **Tiếng động ngắn làm dừng bản ghi:** một tiếng động ngắn lúc mới bấm thu (tiếng chạm, tiếng ho, đuôi một từ) làm bản ghi tự dừng, và máy chấm báo "quá ngắn". Giờ đoạn có tiếng dưới 250 ms bị bỏ qua và app tiếp tục nghe (`minSpeechMs`, bằng ngưỡng `MIN_SPEECH_SECONDS` của máy chấm). Đây có thể là nguyên nhân của ca e2e hỏng ngẫu nhiên 1/296 trước đây.
+  - **Bản ghi 15 giây bị bỏ:** khi chạm giới hạn 15 giây, bản ghi bị bỏ mà không báo gì. Giờ app gửi chấm như một lần nói xong bình thường.

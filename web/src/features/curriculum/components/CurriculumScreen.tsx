@@ -14,6 +14,7 @@ import { IconName } from '@/enums/icon-name.enum';
 import { Language } from '@/enums/language.enum';
 import { UnitSteps } from '@/features/curriculum/components/UnitSteps';
 import { getCurriculum } from '@/features/curriculum/services/curriculum.service';
+import { LessonStartLink } from '@/features/lesson/components/LessonStartLink';
 import { useAsync } from '@/hooks/useAsync';
 import { useCopy, useLanguage } from '@/hooks/useCopy';
 import type { CurriculumUnit } from '@/interfaces/practice.interface';
@@ -122,6 +123,7 @@ export const CurriculumScreen = (): ReactElement => {
                 <p className="curriculum-screen__error">
                   <strong>{copy.curriculum.vnError}:</strong> {open.vn_error_vi}
                 </p>
+                <LessonStartLink unit={open} />
                 <UnitSteps unit={open} labels={data.labels} />
               </div>
             ) : null}

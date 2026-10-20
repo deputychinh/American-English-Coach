@@ -87,7 +87,11 @@ describe('CurriculumScreen', () => {
     const current = screen.getByRole('dialog', { hidden: true });
     expect(current).toHaveTextContent('Người Việt hay mắc');
     expect(current).toHaveTextContent('1 cặp từ · 1 từ trọng âm');
-    const links = current.querySelectorAll('a');
+    expect(screen.getByRole('link', { name: 'Bắt đầu bài học', hidden: true })).toHaveAttribute(
+      'href',
+      '/lesson?unit=u02',
+    );
+    const links = current.querySelectorAll('.unit-steps a');
     expect(links[0]).toHaveAttribute('href', expect.stringContaining('/sounds'));
     expect(links[1]).toHaveAttribute('href', expect.stringContaining('/listen?unit=u02'));
     expect(links[2]).toHaveAttribute('href', expect.stringContaining('sound=c09'));
