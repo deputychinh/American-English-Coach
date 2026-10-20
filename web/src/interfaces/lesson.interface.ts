@@ -21,11 +21,21 @@ export interface LessonListenStep {
   questions: ListenQuestion[];
 }
 
-/** Steps 3–5: scored speaking; `scenario` only on the communicative step. */
+/** A role-play line said by the app's voice, with its Vietnamese meaning. */
+export interface LessonPartnerLine {
+  text: string;
+  vi: string;
+}
+
+/** Steps 3–5: scored speaking; `scenario` and the role-play only on the communicative step. */
 export interface LessonSpeakStep {
   kind: 'controlled' | 'guided' | 'communicate';
   items: PracticeItem[];
   scenario?: string;
+  /** Per item: the partner line said just before it (null when the learner speaks first). */
+  partner?: (LessonPartnerLine | null)[];
+  /** Per item: what the learner's line means, in Vietnamese. */
+  meaning?: string[];
 }
 
 export type LessonStep = LessonDescribeStep | LessonListenStep | LessonSpeakStep;

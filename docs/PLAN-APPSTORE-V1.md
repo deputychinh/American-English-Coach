@@ -222,3 +222,48 @@ Mỗi hạng mục: nhánh/commit theo Conventional Commits, `make ci` xanh, e2e
 - **Hai lỗi thu âm có thật, lộ ra khi viết e2e:**
   - **Tiếng động ngắn làm dừng bản ghi:** một tiếng động ngắn lúc mới bấm thu (tiếng chạm, tiếng ho, đuôi một từ) làm bản ghi tự dừng, và máy chấm báo "quá ngắn". Giờ đoạn có tiếng dưới 250 ms bị bỏ qua và app tiếp tục nghe (`minSpeechMs`, bằng ngưỡng `MIN_SPEECH_SECONDS` của máy chấm). Đây có thể là nguyên nhân của ca e2e hỏng ngẫu nhiên 1/296 trước đây.
   - **Bản ghi 15 giây bị bỏ:** khi chạm giới hạn 15 giây, bản ghi bị bỏ mà không báo gì. Giờ app gửi chấm như một lần nói xong bình thường.
+
+### B3 · Shadowing có đường nét ngữ điệu: **XONG phần lõi** (20/10)
+
+- Sau mỗi câu, kết quả có biểu đồ đường nét cao độ:
+  - Đường của người học (cam) và giọng mẫu (xám, nét đứt) cùng một trục thời gian, chuẩn hóa theo đoạn có tiếng.
+  - Cao độ tính bằng nửa cung so với trung vị của từng người, nên giọng nam và nữ so được với nhau theo dáng đường.
+- Dưới biểu đồ có một câu mô tả bằng chữ, dùng làm nhãn cho trình đọc màn hình, ví dụ: "Cuối câu: mẫu đi lên, bạn đi xuống. Dáng cuối câu chưa khớp".
+- Khi chưa có giọng mẫu (offline, chưa có clip đóng gói) thì chỉ vẽ đường của người học.
+- Code: `utils/contour.util.ts`, `features/practice/services/pitch-contour.service.ts`, `PitchCompare`. Dò cao độ dùng YIN của A3.
+- Còn lại: căn theo âm tiết thay vì chuẩn hóa thời gian, và vạch nhóm ý. Làm khi có giọng mẫu đóng gói (A5).
+
+### B4 · Nhập vai theo kịch bản: **XONG** (20/10)
+
+- Mỗi đơn vị có 1 hội thoại 6 lượt (`content/curriculum.json` → `dialogue`). Giọng mẫu đọc câu của "bạn kia"; người học nói câu của mình và được chấm.
+- Câu của người học trong mọi đơn vị dùng ít nhất 3 từ mục tiêu, và mọi từ đều có trong CMUdict. Hai điều này có test backend kiểm.
+- Kiểu ngữ điệu của mỗi câu (kể, hỏi có/không, hỏi wh-) suy từ câu cuối của lượt nói.
+- Danh sách câu cần tạo giọng mẫu (A5) đã gồm cả hai vai: 770 câu.
+
+### B6 · Chèn nguyên âm sau phụ âm cuối: **ĐẠT** (20/10)
+
+| Chỉ số                                                 | Kết quả                           | Cổng     |
+| ------------------------------------------------------ | --------------------------------- | -------- |
+| Bộ tổng hợp ("bookuh", "fishuh"…, 2 giọng): phát hiện  | 12/12, gán đúng lỗi 11/12 (92%)   | ≥ 80%    |
+| Bộ tổng hợp: báo nhầm trên câu đúng                    | 0/12                              |          |
+| Sweep giọng chuẩn: báo nhầm âm đích                    | 16,1% → 16,1%                     | ≤ +0,5   |
+| Sweep giọng chuẩn: cờ ở âm khác                        | 257 → 258 (Eddy "beard")          |          |
+
+- Luật áp dụng khi phụ âm cuối là âm tắc, xát hoặc tắc xát, và hoặc có một nguyên âm chèn sau nó, hoặc nguyên âm nằm ngay ở ô của nó trong khi căn chỉnh cưỡng bức vẫn thấy phụ âm.
+- Sau /l r m n ŋ/, giọng chuẩn tự nhiên có đoạn chuyển giống nguyên âm (school, girl, beer, sing), nên không xét.
+- Bản TypeScript khớp bản Python trên bộ golden 64 ca.
+
+### B7 · Kế hoạch hằng ngày và nhắc luyện: **XONG** (20/10)
+
+- Thẻ "Tiếp tục" ở Trang chủ mở thẳng trình chạy bài học của đơn vị hiện tại.
+- Màn "Xong bài học!" trên iOS có một nút bật nhắc luyện lúc 19:30. App chỉ xin quyền thông báo lúc này hoặc khi người học tự bật trong Cài đặt, không bao giờ ở lần mở đầu.
+- Chuỗi ngày: nghỉ một ngày mỗi tuần không làm mất chuỗi, và ngày nghỉ không được tính vào chuỗi. Có ở cả backend và planner trên máy.
+
+### D (một phần) · Tuân thủ: **đã làm** (20/10)
+
+- Trang "Giấy phép mã nguồn mở" (Cài đặt → Về ứng dụng):
+  - Liệt kê thành phần bên thứ ba, kèm NOTICE Apache-2.0 của mô hình.
+  - Công bố giọng mẫu do AI tạo (theo chính sách sử dụng của OpenAI).
+- "Xóa dữ liệu trên thiết bị này" giờ xóa thật: kết quả chấm (IndexedDB), hồ sơ, tiến độ bài học, kết quả nghe và đầu vào, nhắc luyện, ghép nối. App hỏi xác nhận trước khi xóa.
+- Chính sách quyền riêng tư (trong app và `docs/release/privacy-policy.md`) và chuỗi xin quyền trong Info.plist nay mô tả đúng việc chấm trên iPhone; có nhắc lượt tải gói chấm điểm từ GitHub.
+- App chỉ cho iPhone (`TARGETED_DEVICE_FAMILY = 1`), khóa màn hình dọc.

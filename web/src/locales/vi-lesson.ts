@@ -33,6 +33,8 @@ export const viLesson = {
     retryFailed: 'Luyện lại mục chưa đạt',
     goOn: 'Vẫn đi tiếp',
     nextStep: 'Sang bước tiếp theo',
+    yourTurn: 'Đến lượt bạn',
+    playPartner: (line: string): string => `Nghe lại: ${line}`,
     scenario: 'Tình huống',
     doneTitle: 'Xong bài học!',
     doneListen: (percent: number): string => `Nghe đúng ${percent}%`,

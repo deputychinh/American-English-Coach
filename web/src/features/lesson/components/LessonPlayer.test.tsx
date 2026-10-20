@@ -82,8 +82,12 @@ describe('LessonPlayer', () => {
 
     expect(screen.getByText(/Bước 4\/5/)).toBeInTheDocument();
     while (screen.queryByRole('button', { name: 'Bỏ qua' })) {
-      if (screen.queryByText(/Bước 5\/5/))
-        expect(screen.getByText('Tình huống:')).toBeInTheDocument();
+      if (screen.queryByText(/Bước 5\/5 · Dùng khi giao tiếp · 1\//)) {
+        // Role-play: the partner's line (played by the model voice) and what to answer.
+        expect(screen.getByText('What did you do yesterday?')).toBeInTheDocument();
+        expect(screen.getByText('Đến lượt bạn:')).toBeInTheDocument();
+        expect(screen.getByTestId('prompt')).toHaveTextContent('I worked until five.');
+      }
       await user.click(screen.getByRole('button', { name: 'Bỏ qua' }));
     }
     expect(screen.getByRole('heading', { name: 'Xong bài học!' })).toBeInTheDocument();

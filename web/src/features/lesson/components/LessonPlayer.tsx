@@ -268,6 +268,8 @@ export const LessonPlayer = (): ReactElement => {
             label={`${stepLabel(position.step)} · ${copy.lesson.itemOf(position.index + 1, size)}`}
             passed={copy.lesson.passedCount(passed, size)}
             scenario={step.scenario}
+            partner={step.partner?.[position.index] ?? null}
+            meaning={step.meaning?.[position.index]}
           />
         }
         extraActions={

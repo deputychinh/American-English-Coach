@@ -1,9 +1,9 @@
 """Every text the app plays as a model voice, gathered from the content files.
 
 Words of the 44-sound chart (example and contrast), drill words, pairs and sentences, minimal
-pairs, practice sentences, and the listening material of the curriculum (pairs, stress words,
-focus sentences). The voice builder renders exactly this list; a test keeps it in step with the
-content.
+pairs, practice sentences, the listening material of the curriculum (pairs, stress words,
+focus sentences) and both sides of each unit's role-play. The voice builder renders exactly
+this list; a test keeps it in step with the content.
 """
 
 import json
@@ -37,6 +37,8 @@ def reference_texts() -> list[str]:
     for level in _json("curriculum.json")["levels"]:
         for unit in level["units"]:
             for step in unit["steps"]:
+                if step["kind"] == "communicate":
+                    texts.update(turn["text"] for turn in step.get("dialogue", []))
                 if step["kind"] != "discriminate":
                     continue
                 texts.update(word for pair_id in step["pairs"] for word in pairs[pair_id])

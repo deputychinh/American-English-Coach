@@ -14,6 +14,7 @@ import type {
 
 import {
   advance,
+  lineKind,
   buildLesson,
   isLessonDone,
   lessonProgress,
@@ -67,13 +68,17 @@ describe('lesson plan', () => {
     expect(ids).toContain('pair:played-play:1');
     expect(ids).toContain('sentence:s14');
     const communicate = plan.steps[4];
-    expect(communicate).toMatchObject({
-      kind: 'communicate',
-      scenario: expect.any(String) as string,
-    });
-    expect(
-      communicate && 'items' in communicate ? communicate.items.map((i) => i.text) : [],
-    ).toEqual(['worked', 'played', 'watched', 'wanted']);
+    if (!communicate || !('items' in communicate)) throw new Error('no communicate step');
+    // The role-play: three learner lines, each after the partner line it answers.
+    expect(communicate.items.map((i) => i.id)).toEqual([
+      'dialogue:u09:1',
+      'dialogue:u09:3',
+      'dialogue:u09:5',
+    ]);
+    expect(communicate.items[0]?.text).toBe('I worked until five.');
+    expect(communicate.partner?.[0]?.text).toBe('What did you do yesterday?');
+    expect(communicate.meaning?.[0]).toBe('Mình làm việc đến năm giờ.');
+    expect(communicate.scenario).toMatch(/-ed/);
   });
 
   it('walks screen by screen, stops at the controlled gate and then finishes', () => {
@@ -112,5 +117,12 @@ describe('lesson plan', () => {
     expect(retry.index).toBe(1);
     position = recordTake(retry, third.id, false);
     expect(advance(plan, { ...position, index: 1 }, true).index).toBe(3);
+  });
+
+  it('reads the tune a role-play line needs from its last sentence', () => {
+    expect(lineKind('I worked until five.')).toBe('statement');
+    expect(lineKind('Do you want to come?')).toBe('question');
+    expect(lineKind("Welcome! What's your name?")).toBe('wh_question');
+    expect(lineKind('Iced, please. Do you have juice?')).toBe('question');
   });
 });

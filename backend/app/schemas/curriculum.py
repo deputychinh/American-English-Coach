@@ -53,12 +53,21 @@ class GuidedStep(BaseModel):
     sentences: list[str] = Field(min_length=1)
 
 
+class DialogueTurn(BaseModel):
+    """One line of a scripted role-play: the partner's is played, the learner's is scored."""
+
+    role: Literal["partner", "you"]
+    text: str
+    vi: str
+
+
 class CommunicateStep(BaseModel):
-    """Step 5: use the target in free speech."""
+    """Step 5: use the target in a short scripted conversation (plan B4)."""
 
     kind: Literal["communicate"]
     scenario_vi: str
     target_words: list[str] = Field(min_length=1)
+    dialogue: list[DialogueTurn] = Field(default_factory=list)
 
 
 Step = Annotated[

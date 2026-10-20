@@ -25,6 +25,20 @@ const soundItems = (drill: SoundDrill | undefined): PracticeItem[] =>
 const resolveAll = (params: string[], content: LessonContent): PracticeItem[] =>
   params.flatMap((param) => resolvePracticeItem(param, content) ?? []);
 
+const WH_WORDS = new Set(['what', 'where', 'when', 'who', 'whose', 'why', 'how', 'which']);
+
+/** Statement, yes/no or wh-question, from the last sentence of a line (sets the expected tune). */
+export const lineKind = (text: string): PracticeItem['kind'] => {
+  const last =
+    text
+      .trim()
+      .split(/(?<=[.!])\s+/)
+      .at(-1) ?? '';
+  if (!last.endsWith('?')) return 'statement';
+  const first = (last.toLowerCase().match(/[a-z]+/) ?? [''])[0];
+  return WH_WORDS.has(first) ? 'wh_question' : 'question';
+};
+
 const toStep = (step: CurriculumUnit['steps'][number], content: LessonContent): LessonStep => {
   if ('notes_vi' in step) {
     const cards = step.sounds.flatMap((id) => content.phonemes.find((c) => c.id === id) ?? []);
@@ -49,13 +63,37 @@ const toStep = (step: CurriculumUnit['steps'][number], content: LessonContent): 
       ),
     };
   }
+  const dialogue = step.dialogue ?? [];
+  if (dialogue.length === 0) {
+    return {
+      kind: 'communicate',
+      scenario: step.scenario_vi,
+      items: resolveAll(
+        step.target_words.map((word) => `word:${word}`),
+        content,
+      ),
+    };
+  }
+  // Plan B4: the app's voice says the partner lines, the learner's lines are scored.
+  const turns = dialogue.map((turn, index) => ({ ...turn, index }));
+  const mine = turns.filter((turn) => String(turn.role) === 'you');
   return {
     kind: 'communicate',
     scenario: step.scenario_vi,
-    items: resolveAll(
-      step.target_words.map((word) => `word:${word}`),
-      content,
-    ),
+    items: mine.map((turn) => ({
+      id: `dialogue:${content.unit.id}:${String(turn.index)}`,
+      text: turn.text,
+      kind: lineKind(turn.text),
+      title: content.unit.title_vi,
+      focus: [],
+    })),
+    partner: mine.map((turn) => {
+      const before = turns[turn.index - 1];
+      return before && String(before.role) === 'partner'
+        ? { text: before.text, vi: before.vi }
+        : null;
+    }),
+    meaning: mine.map((turn) => turn.vi),
   };
 };
 

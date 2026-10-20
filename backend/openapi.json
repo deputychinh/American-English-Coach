@@ -181,8 +181,15 @@
         "type": "object"
       },
       "CommunicateStep": {
-        "description": "Step 5: use the target in free speech.",
+        "description": "Step 5: use the target in a short scripted conversation (plan B4).",
         "properties": {
+          "dialogue": {
+            "items": {
+              "$ref": "#/components/schemas/DialogueTurn"
+            },
+            "title": "Dialogue",
+            "type": "array"
+          },
           "kind": {
             "const": "communicate",
             "title": "Kind",
@@ -417,6 +424,27 @@
         },
         "required": ["kind", "sounds", "notes_vi"],
         "title": "DescribeStep",
+        "type": "object"
+      },
+      "DialogueTurn": {
+        "description": "One line of a scripted role-play: the partner's is played, the learner's is scored.",
+        "properties": {
+          "role": {
+            "enum": ["partner", "you"],
+            "title": "Role",
+            "type": "string"
+          },
+          "text": {
+            "title": "Text",
+            "type": "string"
+          },
+          "vi": {
+            "title": "Vi",
+            "type": "string"
+          }
+        },
+        "required": ["role", "text", "vi"],
+        "title": "DialogueTurn",
         "type": "object"
       },
       "DiscriminateStep": {

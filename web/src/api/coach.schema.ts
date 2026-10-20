@@ -651,9 +651,11 @@ export interface components {
     };
     /**
      * CommunicateStep
-     * @description Step 5: use the target in free speech.
+     * @description Step 5: use the target in a short scripted conversation (plan B4).
      */
     CommunicateStep: {
+      /** Dialogue */
+      dialogue?: components['schemas']['DialogueTurn'][];
       /**
        * @description discriminator enum property added by openapi-typescript
        * @enum {string}
@@ -781,6 +783,21 @@ export interface components {
       notes_vi: string;
       /** Sounds */
       sounds: string[];
+    };
+    /**
+     * DialogueTurn
+     * @description One line of a scripted role-play: the partner's is played, the learner's is scored.
+     */
+    DialogueTurn: {
+      /**
+       * Role
+       * @enum {string}
+       */
+      role: DialogueTurnRole;
+      /** Text */
+      text: string;
+      /** Vi */
+      vi: string;
     };
     /**
      * DiscriminateStep
@@ -2405,6 +2422,10 @@ export enum CourseItemRefKind {
 }
 export enum DescribeStepKind {
   describe = 'describe',
+}
+export enum DialogueTurnRole {
+  partner = 'partner',
+  you = 'you',
 }
 export enum DiscriminateStepKind {
   discriminate = 'discriminate',

@@ -33,6 +33,8 @@ export const enLesson = {
     retryFailed: 'Practise the missed items',
     goOn: 'Move on anyway',
     nextStep: 'Next step',
+    yourTurn: 'Your turn',
+    playPartner: (line: string): string => `Play again: ${line}`,
     scenario: 'Situation',
     doneTitle: 'Lesson complete!',
     doneListen: (percent: number): string => `${percent}% heard correctly`,

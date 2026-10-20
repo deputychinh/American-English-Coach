@@ -70,7 +70,7 @@ test('a learner goes through all five steps of a unit and resumes after a reload
   await expect(banner(page)).toHaveText(/Bước 4\/5/);
   await skipStep(page, /Bước 4\//);
   await expect(banner(page)).toHaveText(/Bước 5\/5/);
-  await expect(page.locator('.lesson-banner__scenario')).toBeVisible();
+  await expect(page.locator('.lesson-banner__partner')).toContainText('What did you do yesterday?');
   await skipStep(page, /Bước 5\//);
 
   await expect(page.getByRole('heading', { name: 'Xong bài học!' })).toBeVisible();

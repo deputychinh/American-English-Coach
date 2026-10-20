@@ -27,6 +27,21 @@ def test_curriculum_content_has_five_step_units() -> None:
         assert discriminate["pairs"] or discriminate["stress"] or discriminate["focus"]
 
 
+def test_every_unit_ends_with_a_scored_role_play_on_its_target_words(settings: Settings) -> None:
+    data = json.loads(CURRICULUM.read_text(encoding="utf-8"))
+    dictionary = AppContainer(settings).dictionary
+    for unit in (unit for level in data["levels"] for unit in level["units"]):
+        step = unit["steps"][-1]
+        turns = step["dialogue"]
+        assert [t["role"] for t in turns] == ["partner", "you"] * 3, unit["id"]
+        mine = " ".join(t["text"] for t in turns if t["role"] == "you").lower()
+        used = [w for w in step["target_words"] if w.lower() in mine]
+        assert len(used) >= 3, (unit["id"], used)
+        for turn in turns:
+            assert turn["vi"], unit["id"]
+            dictionary.for_text(turn["text"])  # every word has a reference pronunciation
+
+
 def test_curriculum_progress_follows_the_profile_runs(client: TestClient) -> None:
     fresh = client.get("/api/v1/curriculum").json()
     assert fresh["total_units"] == 24

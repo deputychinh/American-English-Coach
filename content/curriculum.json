@@ -84,7 +84,39 @@
             {
               "kind": "communicate",
               "scenario_vi": "Giới thiệu bản thân bằng ba câu, mỗi câu có một từ hai âm tiết.",
-              "target_words": ["today", "happy", "about", "begin"]
+              "target_words": ["today", "happy", "about", "begin"],
+              "dialogue": [
+                {
+                  "role": "partner",
+                  "text": "Hi! I'm Anna. What's your name?",
+                  "vi": "Chào bạn! Mình là Anna. Bạn tên gì?"
+                },
+                {
+                  "role": "you",
+                  "text": "Hi, I'm Minh. I'm happy to meet you.",
+                  "vi": "Chào, mình là Minh. Rất vui được gặp bạn."
+                },
+                {
+                  "role": "partner",
+                  "text": "Nice to meet you too. What are you doing today?",
+                  "vi": "Mình cũng rất vui. Hôm nay bạn làm gì?"
+                },
+                {
+                  "role": "you",
+                  "text": "Today I begin my English class.",
+                  "vi": "Hôm nay mình bắt đầu lớp tiếng Anh."
+                },
+                {
+                  "role": "partner",
+                  "text": "Great! What is it about?",
+                  "vi": "Tuyệt! Lớp học về gì vậy?"
+                },
+                {
+                  "role": "you",
+                  "text": "It's about speaking clearly.",
+                  "vi": "Về cách nói cho rõ ràng."
+                }
+              ]
             }
           ]
         },
@@ -150,7 +182,39 @@
             {
               "kind": "communicate",
               "scenario_vi": "Kể ba đồ vật trên bàn làm việc của bạn, dùng từ kết thúc bằng /p/ /t/ /k/.",
-              "target_words": ["cup", "desk", "book", "laptop"]
+              "target_words": ["cup", "desk", "book", "laptop"],
+              "dialogue": [
+                {
+                  "role": "partner",
+                  "text": "What's on your desk right now?",
+                  "vi": "Trên bàn làm việc của bạn đang có gì?"
+                },
+                {
+                  "role": "you",
+                  "text": "A laptop and a cup of coffee.",
+                  "vi": "Một cái laptop và một cốc cà phê."
+                },
+                {
+                  "role": "partner",
+                  "text": "Anything else?",
+                  "vi": "Còn gì nữa không?"
+                },
+                {
+                  "role": "you",
+                  "text": "There's a book next to my laptop.",
+                  "vi": "Có một cuốn sách cạnh laptop."
+                },
+                {
+                  "role": "partner",
+                  "text": "Is your desk always that tidy?",
+                  "vi": "Bàn của bạn lúc nào cũng gọn vậy à?"
+                },
+                {
+                  "role": "you",
+                  "text": "Not really. My desk is a mess at night.",
+                  "vi": "Không hẳn. Tối đến bàn mình bừa lắm."
+                }
+              ]
             }
           ]
         },
@@ -212,7 +276,39 @@
             {
               "kind": "communicate",
               "scenario_vi": "Kể về gia đình bạn bằng các từ có TH.",
-              "target_words": ["mother", "father", "brother", "three", "birthday"]
+              "target_words": ["mother", "father", "brother", "three", "birthday"],
+              "dialogue": [
+                {
+                  "role": "partner",
+                  "text": "Tell me about your family.",
+                  "vi": "Kể cho mình nghe về gia đình bạn đi."
+                },
+                {
+                  "role": "you",
+                  "text": "I live with my mother and father.",
+                  "vi": "Mình sống với bố mẹ."
+                },
+                {
+                  "role": "partner",
+                  "text": "Do you have any brothers or sisters?",
+                  "vi": "Bạn có anh chị em không?"
+                },
+                {
+                  "role": "you",
+                  "text": "I have three brothers.",
+                  "vi": "Mình có ba anh em trai."
+                },
+                {
+                  "role": "partner",
+                  "text": "Wow, a big family! When is your birthday?",
+                  "vi": "Ồ, gia đình đông thật! Sinh nhật bạn khi nào?"
+                },
+                {
+                  "role": "you",
+                  "text": "My birthday is on the third of March.",
+                  "vi": "Sinh nhật mình là ngày ba tháng Ba."
+                }
+              ]
             }
           ]
         },
@@ -278,7 +374,39 @@
             {
               "kind": "communicate",
               "scenario_vi": "Mô tả một bữa ăn bạn thích.",
-              "target_words": ["eat", "chicken", "soup", "good"]
+              "target_words": ["eat", "chicken", "soup", "good"],
+              "dialogue": [
+                {
+                  "role": "partner",
+                  "text": "What do you like to eat for dinner?",
+                  "vi": "Bạn thích ăn gì vào bữa tối?"
+                },
+                {
+                  "role": "you",
+                  "text": "I like to eat chicken soup.",
+                  "vi": "Mình thích ăn súp gà."
+                },
+                {
+                  "role": "partner",
+                  "text": "Is it hard to make?",
+                  "vi": "Món đó có khó nấu không?"
+                },
+                {
+                  "role": "you",
+                  "text": "No, it's easy and very good.",
+                  "vi": "Không, dễ mà ngon lắm."
+                },
+                {
+                  "role": "partner",
+                  "text": "Can you cook it for me sometime?",
+                  "vi": "Hôm nào nấu cho mình ăn nhé?"
+                },
+                {
+                  "role": "you",
+                  "text": "Sure. Come over and eat with us.",
+                  "vi": "Được thôi. Sang ăn cùng nhà mình nhé."
+                }
+              ]
             }
           ]
         },
@@ -340,7 +468,39 @@
             {
               "kind": "communicate",
               "scenario_vi": "Kể một ngày vui hoặc tệ của bạn.",
-              "target_words": ["bad", "happy", "lunch", "friend"]
+              "target_words": ["bad", "happy", "lunch", "friend"],
+              "dialogue": [
+                {
+                  "role": "partner",
+                  "text": "How was your day?",
+                  "vi": "Hôm nay của bạn thế nào?"
+                },
+                {
+                  "role": "you",
+                  "text": "The morning was bad.",
+                  "vi": "Buổi sáng tệ lắm."
+                },
+                {
+                  "role": "partner",
+                  "text": "Oh no. Did it get better?",
+                  "vi": "Ôi. Sau đó có khá hơn không?"
+                },
+                {
+                  "role": "you",
+                  "text": "Yes, I had lunch with a friend.",
+                  "vi": "Có, mình ăn trưa với một người bạn."
+                },
+                {
+                  "role": "partner",
+                  "text": "That's good to hear.",
+                  "vi": "Nghe vậy mừng quá."
+                },
+                {
+                  "role": "you",
+                  "text": "Now I feel happy again.",
+                  "vi": "Giờ mình thấy vui trở lại rồi."
+                }
+              ]
             }
           ]
         },
@@ -406,7 +566,39 @@
             {
               "kind": "communicate",
               "scenario_vi": "Nói về việc nhà hằng ngày với động từ ngôi ba số ít.",
-              "target_words": ["washes", "watches", "dishes", "shoes"]
+              "target_words": ["washes", "watches", "dishes", "shoes"],
+              "dialogue": [
+                {
+                  "role": "partner",
+                  "text": "Who does the chores in your house?",
+                  "vi": "Ở nhà bạn ai làm việc nhà?"
+                },
+                {
+                  "role": "you",
+                  "text": "My brother washes the dishes.",
+                  "vi": "Anh trai mình rửa bát."
+                },
+                {
+                  "role": "partner",
+                  "text": "And what does your sister do?",
+                  "vi": "Còn chị gái bạn làm gì?"
+                },
+                {
+                  "role": "you",
+                  "text": "She cleans our shoes every Sunday.",
+                  "vi": "Chị ấy lau giày cho cả nhà mỗi Chủ nhật."
+                },
+                {
+                  "role": "partner",
+                  "text": "What does your dad do after dinner?",
+                  "vi": "Bố bạn làm gì sau bữa tối?"
+                },
+                {
+                  "role": "you",
+                  "text": "He watches the news on TV.",
+                  "vi": "Bố xem thời sự trên ti vi."
+                }
+              ]
             }
           ]
         }
@@ -488,7 +680,39 @@
             {
               "kind": "communicate",
               "scenario_vi": "Rủ một người bạn đi đâu đó cuối tuần bằng ba câu ngắn.",
-              "target_words": ["want", "store", "weekend", "friends"]
+              "target_words": ["want", "store", "weekend", "friends"],
+              "dialogue": [
+                {
+                  "role": "partner",
+                  "text": "What are you doing this weekend?",
+                  "vi": "Cuối tuần này bạn làm gì?"
+                },
+                {
+                  "role": "you",
+                  "text": "I want to go to the new store.",
+                  "vi": "Mình muốn đi cửa hàng mới mở."
+                },
+                {
+                  "role": "partner",
+                  "text": "Oh, the one near the park?",
+                  "vi": "À, cái gần công viên hả?"
+                },
+                {
+                  "role": "you",
+                  "text": "Yes. Do you want to come?",
+                  "vi": "Ừ. Bạn có muốn đi cùng không?"
+                },
+                {
+                  "role": "partner",
+                  "text": "Sure! Can I bring my friends?",
+                  "vi": "Có chứ! Mình rủ thêm bạn được không?"
+                },
+                {
+                  "role": "you",
+                  "text": "Of course. Bring your friends.",
+                  "vi": "Tất nhiên. Rủ bạn bè đi cùng nhé."
+                }
+              ]
             }
           ]
         },
@@ -550,7 +774,39 @@
             {
               "kind": "communicate",
               "scenario_vi": "Kể lịch học trong tuần của bạn.",
-              "target_words": ["student", "study", "school", "start"]
+              "target_words": ["student", "study", "school", "start"],
+              "dialogue": [
+                {
+                  "role": "partner",
+                  "text": "Are you a student?",
+                  "vi": "Bạn là sinh viên à?"
+                },
+                {
+                  "role": "you",
+                  "text": "Yes, I'm a student at a language school.",
+                  "vi": "Đúng, mình học ở một trường ngoại ngữ."
+                },
+                {
+                  "role": "partner",
+                  "text": "When do your classes start?",
+                  "vi": "Lớp của bạn bắt đầu lúc mấy giờ?"
+                },
+                {
+                  "role": "you",
+                  "text": "They start at eight every morning.",
+                  "vi": "Tám giờ mỗi sáng."
+                },
+                {
+                  "role": "partner",
+                  "text": "When do you study at home?",
+                  "vi": "Bạn học ở nhà lúc nào?"
+                },
+                {
+                  "role": "you",
+                  "text": "I study for an hour after dinner.",
+                  "vi": "Mình học một tiếng sau bữa tối."
+                }
+              ]
             }
           ]
         },
@@ -620,7 +876,39 @@
             {
               "kind": "communicate",
               "scenario_vi": "Kể ba việc bạn đã làm hôm qua bằng động từ có -ed.",
-              "target_words": ["worked", "played", "watched", "wanted"]
+              "target_words": ["worked", "played", "watched", "wanted"],
+              "dialogue": [
+                {
+                  "role": "partner",
+                  "text": "What did you do yesterday?",
+                  "vi": "Hôm qua bạn làm gì?"
+                },
+                {
+                  "role": "you",
+                  "text": "I worked until five.",
+                  "vi": "Mình làm việc đến năm giờ."
+                },
+                {
+                  "role": "partner",
+                  "text": "And after work?",
+                  "vi": "Còn sau giờ làm?"
+                },
+                {
+                  "role": "you",
+                  "text": "I played soccer with my friends.",
+                  "vi": "Mình đá bóng với bạn bè."
+                },
+                {
+                  "role": "partner",
+                  "text": "Did you watch anything last night?",
+                  "vi": "Tối qua bạn có xem gì không?"
+                },
+                {
+                  "role": "you",
+                  "text": "Yes, I watched the movie I wanted to see.",
+                  "vi": "Có, mình xem bộ phim mình muốn xem."
+                }
+              ]
             }
           ]
         },
@@ -686,7 +974,39 @@
             {
               "kind": "communicate",
               "scenario_vi": "Tả đường từ nhà bạn tới một nơi quen thuộc.",
-              "target_words": ["left", "right", "road", "light"]
+              "target_words": ["left", "right", "road", "light"],
+              "dialogue": [
+                {
+                  "role": "partner",
+                  "text": "Excuse me, how do I get to the post office?",
+                  "vi": "Xin lỗi, đường tới bưu điện đi thế nào?"
+                },
+                {
+                  "role": "you",
+                  "text": "Go straight down this road.",
+                  "vi": "Đi thẳng con đường này."
+                },
+                {
+                  "role": "partner",
+                  "text": "And then?",
+                  "vi": "Rồi sao nữa?"
+                },
+                {
+                  "role": "you",
+                  "text": "Turn left at the traffic light.",
+                  "vi": "Đến đèn giao thông thì rẽ trái."
+                },
+                {
+                  "role": "partner",
+                  "text": "Is it far from there?",
+                  "vi": "Từ đó có xa không?"
+                },
+                {
+                  "role": "you",
+                  "text": "No, it's right on the corner.",
+                  "vi": "Không, nó ở ngay góc đường."
+                }
+              ]
             }
           ]
         },
@@ -756,7 +1076,39 @@
             {
               "kind": "communicate",
               "scenario_vi": "Nói về căn phòng của bạn.",
-              "target_words": ["window", "view", "wall", "very"]
+              "target_words": ["window", "view", "wall", "very"],
+              "dialogue": [
+                {
+                  "role": "partner",
+                  "text": "What's your room like?",
+                  "vi": "Phòng bạn trông thế nào?"
+                },
+                {
+                  "role": "you",
+                  "text": "It's small but very bright.",
+                  "vi": "Nhỏ nhưng rất sáng."
+                },
+                {
+                  "role": "partner",
+                  "text": "Does it have a window?",
+                  "vi": "Có cửa sổ không?"
+                },
+                {
+                  "role": "you",
+                  "text": "Yes, a big window with a nice view.",
+                  "vi": "Có, một cửa sổ lớn nhìn ra cảnh đẹp."
+                },
+                {
+                  "role": "partner",
+                  "text": "What's on the walls?",
+                  "vi": "Trên tường có gì?"
+                },
+                {
+                  "role": "you",
+                  "text": "There's a world map on one wall.",
+                  "vi": "Có một tấm bản đồ thế giới trên một bức tường."
+                }
+              ]
             }
           ]
         },
@@ -818,7 +1170,39 @@
             {
               "kind": "communicate",
               "scenario_vi": "Hỏi và trả lời ba câu với một người mới quen.",
-              "target_words": ["where", "live", "work", "name"]
+              "target_words": ["where", "live", "work", "name"],
+              "dialogue": [
+                {
+                  "role": "partner",
+                  "text": "Hi there! I'm new here.",
+                  "vi": "Chào bạn! Mình mới đến đây."
+                },
+                {
+                  "role": "you",
+                  "text": "Welcome! What's your name?",
+                  "vi": "Chào mừng bạn! Bạn tên gì?"
+                },
+                {
+                  "role": "partner",
+                  "text": "I'm Tom. I just moved to this city.",
+                  "vi": "Mình là Tom. Mình vừa chuyển đến thành phố này."
+                },
+                {
+                  "role": "you",
+                  "text": "Where do you live now?",
+                  "vi": "Giờ bạn sống ở đâu?"
+                },
+                {
+                  "role": "partner",
+                  "text": "Near the river. What about you?",
+                  "vi": "Gần bờ sông. Còn bạn?"
+                },
+                {
+                  "role": "you",
+                  "text": "I live and work downtown.",
+                  "vi": "Mình sống và làm việc ở trung tâm."
+                }
+              ]
             }
           ]
         }
@@ -900,7 +1284,39 @@
             {
               "kind": "communicate",
               "scenario_vi": "Nói ba việc bạn làm được và ba việc chưa làm được.",
-              "target_words": ["can", "can't", "about", "banana"]
+              "target_words": ["can", "can't", "about", "banana"],
+              "dialogue": [
+                {
+                  "role": "partner",
+                  "text": "What can you cook?",
+                  "vi": "Bạn nấu được món gì?"
+                },
+                {
+                  "role": "you",
+                  "text": "I can make banana bread.",
+                  "vi": "Mình làm được bánh mì chuối."
+                },
+                {
+                  "role": "partner",
+                  "text": "Nice! Can you make noodle soup too?",
+                  "vi": "Hay quá! Bạn nấu được cả phở không?"
+                },
+                {
+                  "role": "you",
+                  "text": "No, I can't make it yet.",
+                  "vi": "Không, mình chưa nấu được."
+                },
+                {
+                  "role": "partner",
+                  "text": "Maybe we can learn together.",
+                  "vi": "Hay là mình cùng học nhé."
+                },
+                {
+                  "role": "you",
+                  "text": "Sounds good. Let's talk about it later.",
+                  "vi": "Hay đấy. Để lúc khác mình bàn tiếp."
+                }
+              ]
             }
           ]
         },
@@ -970,7 +1386,39 @@
             {
               "kind": "communicate",
               "scenario_vi": "Hướng dẫn ai đó nấu một món đơn giản.",
-              "target_words": ["put it", "turn it on", "pick it up", "water"]
+              "target_words": ["put it", "turn it on", "pick it up", "water"],
+              "dialogue": [
+                {
+                  "role": "partner",
+                  "text": "Can you show me how to make tea?",
+                  "vi": "Bạn chỉ mình cách pha trà nhé?"
+                },
+                {
+                  "role": "you",
+                  "text": "Sure. First, boil some water.",
+                  "vi": "Được. Đầu tiên, đun ít nước."
+                },
+                {
+                  "role": "partner",
+                  "text": "Okay, the kettle is full.",
+                  "vi": "Rồi, ấm đầy nước rồi."
+                },
+                {
+                  "role": "you",
+                  "text": "Put it on the stove and turn it on.",
+                  "vi": "Đặt lên bếp rồi bật lửa."
+                },
+                {
+                  "role": "partner",
+                  "text": "It's boiling now.",
+                  "vi": "Nước sôi rồi."
+                },
+                {
+                  "role": "you",
+                  "text": "Pick it up and pour it slowly.",
+                  "vi": "Nhấc ấm lên và rót từ từ."
+                }
+              ]
             }
           ]
         },
@@ -1044,7 +1492,39 @@
             {
               "kind": "communicate",
               "scenario_vi": "Kể về một chuyến đi bạn thích.",
-              "target_words": ["day", "time", "boat", "town"]
+              "target_words": ["day", "time", "boat", "town"],
+              "dialogue": [
+                {
+                  "role": "partner",
+                  "text": "What was your favorite trip?",
+                  "vi": "Chuyến đi bạn thích nhất là chuyến nào?"
+                },
+                {
+                  "role": "you",
+                  "text": "We visited a small town by the sea.",
+                  "vi": "Bọn mình đến một thị trấn nhỏ ven biển."
+                },
+                {
+                  "role": "partner",
+                  "text": "What did you do there?",
+                  "vi": "Ở đó bạn làm gì?"
+                },
+                {
+                  "role": "you",
+                  "text": "We took a boat to an island.",
+                  "vi": "Bọn mình đi thuyền ra một hòn đảo."
+                },
+                {
+                  "role": "partner",
+                  "text": "Sounds lovely.",
+                  "vi": "Nghe thích quá."
+                },
+                {
+                  "role": "you",
+                  "text": "Yes, we had a great time every day.",
+                  "vi": "Đúng vậy, ngày nào cũng vui."
+                }
+              ]
             }
           ]
         },
@@ -1114,7 +1594,39 @@
             {
               "kind": "communicate",
               "scenario_vi": "Kể về công việc của bạn hoặc người thân.",
-              "target_words": ["work", "first", "hot", "talk"]
+              "target_words": ["work", "first", "hot", "talk"],
+              "dialogue": [
+                {
+                  "role": "partner",
+                  "text": "What does your sister do?",
+                  "vi": "Chị gái bạn làm nghề gì?"
+                },
+                {
+                  "role": "you",
+                  "text": "She's a nurse. She loves her work.",
+                  "vi": "Chị ấy là y tá. Chị rất yêu công việc."
+                },
+                {
+                  "role": "partner",
+                  "text": "Is it her first job?",
+                  "vi": "Đó là công việc đầu tiên của chị à?"
+                },
+                {
+                  "role": "you",
+                  "text": "Yes, it's her first job.",
+                  "vi": "Đúng, công việc đầu tiên."
+                },
+                {
+                  "role": "partner",
+                  "text": "Is the work hard?",
+                  "vi": "Công việc có vất vả không?"
+                },
+                {
+                  "role": "you",
+                  "text": "It's hot and busy in the summer.",
+                  "vi": "Mùa hè thì nóng và bận lắm."
+                }
+              ]
             }
           ]
         },
@@ -1181,7 +1693,39 @@
             {
               "kind": "communicate",
               "scenario_vi": "Giới thiệu nghề nghiệp và ngành học của bạn.",
-              "target_words": ["photographer", "economy", "information", "university"]
+              "target_words": ["photographer", "economy", "information", "university"],
+              "dialogue": [
+                {
+                  "role": "partner",
+                  "text": "What do you do?",
+                  "vi": "Bạn làm nghề gì?"
+                },
+                {
+                  "role": "you",
+                  "text": "I'm a photographer at a newspaper.",
+                  "vi": "Mình là nhiếp ảnh gia ở một tờ báo."
+                },
+                {
+                  "role": "partner",
+                  "text": "Did you study photography?",
+                  "vi": "Bạn học nhiếp ảnh à?"
+                },
+                {
+                  "role": "you",
+                  "text": "No, I studied business at the university.",
+                  "vi": "Không, mình học kinh doanh ở đại học."
+                },
+                {
+                  "role": "partner",
+                  "text": "Does that help in your job?",
+                  "vi": "Điều đó có giúp ích cho công việc không?"
+                },
+                {
+                  "role": "you",
+                  "text": "Yes, I often take photos about the economy.",
+                  "vi": "Có, mình hay chụp ảnh về kinh tế."
+                }
+              ]
             }
           ]
         },
@@ -1239,7 +1783,39 @@
             {
               "kind": "communicate",
               "scenario_vi": "Gọi đồ uống ở quán cà phê và hỏi lại người phục vụ.",
-              "target_words": ["coffee", "tea", "juice", "please"]
+              "target_words": ["coffee", "tea", "juice", "please"],
+              "dialogue": [
+                {
+                  "role": "partner",
+                  "text": "Hi! What can I get you?",
+                  "vi": "Chào bạn! Bạn dùng gì ạ?"
+                },
+                {
+                  "role": "you",
+                  "text": "Can I have a coffee, please?",
+                  "vi": "Cho mình một cà phê nhé?"
+                },
+                {
+                  "role": "partner",
+                  "text": "Sure. Hot or iced?",
+                  "vi": "Vâng. Nóng hay đá ạ?"
+                },
+                {
+                  "role": "you",
+                  "text": "Iced, please. Do you have juice?",
+                  "vi": "Đá nhé. Quán có nước ép không?"
+                },
+                {
+                  "role": "partner",
+                  "text": "Yes, we have orange and apple.",
+                  "vi": "Có ạ, có cam và táo."
+                },
+                {
+                  "role": "you",
+                  "text": "Orange, please. And one green tea.",
+                  "vi": "Cho mình cam. Thêm một trà xanh nữa."
+                }
+              ]
             }
           ]
         }
@@ -1297,7 +1873,39 @@
             {
               "kind": "communicate",
               "scenario_vi": "Kể lại buổi tối hôm qua bằng ba nhóm ý.",
-              "target_words": ["when", "then", "after", "finally"]
+              "target_words": ["when", "then", "after", "finally"],
+              "dialogue": [
+                {
+                  "role": "partner",
+                  "text": "What did you do last night?",
+                  "vi": "Tối qua bạn làm gì?"
+                },
+                {
+                  "role": "you",
+                  "text": "When I got home, I cooked dinner.",
+                  "vi": "Về đến nhà, mình nấu bữa tối."
+                },
+                {
+                  "role": "partner",
+                  "text": "And then?",
+                  "vi": "Rồi sao nữa?"
+                },
+                {
+                  "role": "you",
+                  "text": "Then I called my mom.",
+                  "vi": "Rồi mình gọi điện cho mẹ."
+                },
+                {
+                  "role": "partner",
+                  "text": "Did you go to bed early?",
+                  "vi": "Bạn có đi ngủ sớm không?"
+                },
+                {
+                  "role": "you",
+                  "text": "After a long shower, I finally went to sleep.",
+                  "vi": "Tắm một lúc lâu xong, cuối cùng mình đi ngủ."
+                }
+              ]
             }
           ]
         },
@@ -1367,7 +1975,39 @@
             {
               "kind": "communicate",
               "scenario_vi": "Sửa lại thông tin sai về giờ hẹn và số điện thoại.",
-              "target_words": ["fifteen", "fifty", "not", "actually"]
+              "target_words": ["fifteen", "fifty", "not", "actually"],
+              "dialogue": [
+                {
+                  "role": "partner",
+                  "text": "So we're meeting at three fifty, right?",
+                  "vi": "Vậy mình gặp nhau lúc ba giờ năm mươi nhé?"
+                },
+                {
+                  "role": "you",
+                  "text": "Actually, it's three fifteen, not fifty.",
+                  "vi": "Thật ra là ba giờ mười lăm, không phải năm mươi."
+                },
+                {
+                  "role": "partner",
+                  "text": "Oh, sorry. And it's in room fifty?",
+                  "vi": "Ồ, xin lỗi. Ở phòng năm mươi đúng không?"
+                },
+                {
+                  "role": "you",
+                  "text": "No, room fifteen. One five.",
+                  "vi": "Không, phòng mười lăm. Một năm."
+                },
+                {
+                  "role": "partner",
+                  "text": "Got it. Three fifteen, room fifteen.",
+                  "vi": "Rõ rồi. Ba giờ mười lăm, phòng mười lăm."
+                },
+                {
+                  "role": "you",
+                  "text": "That's right. See you then.",
+                  "vi": "Đúng rồi. Hẹn gặp bạn."
+                }
+              ]
             }
           ]
         },
@@ -1421,7 +2061,39 @@
             {
               "kind": "communicate",
               "scenario_vi": "Hỏi kế hoạch cuối tuần của một người bạn.",
-              "target_words": ["going to", "want to", "have to", "got to"]
+              "target_words": ["going to", "want to", "have to", "got to"],
+              "dialogue": [
+                {
+                  "role": "partner",
+                  "text": "What are you going to do this weekend?",
+                  "vi": "Cuối tuần này bạn định làm gì?"
+                },
+                {
+                  "role": "you",
+                  "text": "I'm going to visit my parents.",
+                  "vi": "Mình sẽ về thăm bố mẹ."
+                },
+                {
+                  "role": "partner",
+                  "text": "Do you want to see a movie on Sunday?",
+                  "vi": "Chủ nhật bạn có muốn đi xem phim không?"
+                },
+                {
+                  "role": "you",
+                  "text": "I want to, but I have to study.",
+                  "vi": "Mình muốn lắm, nhưng mình phải học."
+                },
+                {
+                  "role": "partner",
+                  "text": "Too bad. Maybe next week?",
+                  "vi": "Tiếc quá. Tuần sau nhé?"
+                },
+                {
+                  "role": "you",
+                  "text": "Sure. I've got to go now. Bye!",
+                  "vi": "Ừ. Giờ mình phải đi rồi. Tạm biệt!"
+                }
+              ]
             }
           ]
         },
@@ -1491,7 +2163,39 @@
             {
               "kind": "communicate",
               "scenario_vi": "Kể về sở thích và thói quen hằng tuần.",
-              "target_words": ["hobby", "singing", "yes", "young"]
+              "target_words": ["hobby", "singing", "yes", "young"],
+              "dialogue": [
+                {
+                  "role": "partner",
+                  "text": "Do you have a hobby?",
+                  "vi": "Bạn có sở thích gì không?"
+                },
+                {
+                  "role": "you",
+                  "text": "Yes, I love singing.",
+                  "vi": "Có, mình rất thích hát."
+                },
+                {
+                  "role": "partner",
+                  "text": "Since when?",
+                  "vi": "Từ khi nào vậy?"
+                },
+                {
+                  "role": "you",
+                  "text": "Since I was young.",
+                  "vi": "Từ hồi nhỏ."
+                },
+                {
+                  "role": "partner",
+                  "text": "Do you sing in a group?",
+                  "vi": "Bạn có hát trong nhóm nào không?"
+                },
+                {
+                  "role": "you",
+                  "text": "Yes, it's my favorite hobby.",
+                  "vi": "Có, đó là sở thích lớn nhất của mình."
+                }
+              ]
             }
           ]
         },
@@ -1545,7 +2249,39 @@
             {
               "kind": "communicate",
               "scenario_vi": "Shadowing đoạn mô tả buổi sáng của bạn rồi tự nói lại không nhìn chữ.",
-              "target_words": ["every morning", "then", "before", "usually"]
+              "target_words": ["every morning", "then", "before", "usually"],
+              "dialogue": [
+                {
+                  "role": "partner",
+                  "text": "What do you usually do in the morning?",
+                  "vi": "Buổi sáng bạn thường làm gì?"
+                },
+                {
+                  "role": "you",
+                  "text": "Every morning, I get up at six.",
+                  "vi": "Sáng nào mình cũng dậy lúc sáu giờ."
+                },
+                {
+                  "role": "partner",
+                  "text": "What do you do first?",
+                  "vi": "Việc đầu tiên bạn làm là gì?"
+                },
+                {
+                  "role": "you",
+                  "text": "I usually drink water, then I run.",
+                  "vi": "Mình thường uống nước, rồi chạy bộ."
+                },
+                {
+                  "role": "partner",
+                  "text": "Do you eat breakfast?",
+                  "vi": "Bạn có ăn sáng không?"
+                },
+                {
+                  "role": "you",
+                  "text": "Yes, I eat before I go to work.",
+                  "vi": "Có, mình ăn trước khi đi làm."
+                }
+              ]
             }
           ]
         },
@@ -1591,7 +2327,39 @@
             {
               "kind": "communicate",
               "scenario_vi": "Nói một phút về quê hương của bạn rồi trả lời câu hỏi của gia sư AI.",
-              "target_words": ["hometown", "because", "favorite", "people"]
+              "target_words": ["hometown", "because", "favorite", "people"],
+              "dialogue": [
+                {
+                  "role": "partner",
+                  "text": "Where is your hometown?",
+                  "vi": "Quê bạn ở đâu?"
+                },
+                {
+                  "role": "you",
+                  "text": "My hometown is a small city by the sea.",
+                  "vi": "Quê mình là một thành phố nhỏ ven biển."
+                },
+                {
+                  "role": "partner",
+                  "text": "What do you love about it?",
+                  "vi": "Bạn yêu điều gì ở đó?"
+                },
+                {
+                  "role": "you",
+                  "text": "I love it because the people are friendly.",
+                  "vi": "Mình yêu nơi đó vì mọi người rất thân thiện."
+                },
+                {
+                  "role": "partner",
+                  "text": "What's your favorite place there?",
+                  "vi": "Nơi bạn thích nhất ở đó là đâu?"
+                },
+                {
+                  "role": "you",
+                  "text": "My favorite place is the night market.",
+                  "vi": "Nơi mình thích nhất là chợ đêm."
+                }
+              ]
             }
           ]
         }
