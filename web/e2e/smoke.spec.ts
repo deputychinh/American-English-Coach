@@ -32,7 +32,7 @@ test('home stays quiet when the API is ready and shows quick entries', async ({ 
   await expect(page.locator('.week-strip__day')).toHaveCount(7);
   await expect(page.locator('.home-screen__continue')).toHaveAttribute(
     'href',
-    /listen\/?\?unit=u01/,
+    /lesson\/?\?unit=u01/,
   );
   await expect(page.locator('.home-screen__tile')).toHaveCount(4);
   await expect(page.getByRole('link', { name: 'Cài đặt' })).toBeVisible();
