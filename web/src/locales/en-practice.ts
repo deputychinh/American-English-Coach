@@ -1,7 +1,7 @@
 import type { Copy } from '@/interfaces/copy.interface';
 
 /** English practice, verdict and prosody copy. */
-export const enPractice: Pick<Copy, 'practice' | 'verdict' | 'prosody'> = {
+export const enPractice: Pick<Copy, 'practice' | 'verdict' | 'prosody' | 'contour'> = {
   practice: {
     title: 'Practice',
     pairs: 'Minimal pairs',
@@ -110,6 +110,22 @@ export const enPractice: Pick<Copy, 'practice' | 'verdict' | 'prosody'> = {
     ok: 'on target',
     check: 'listen again',
     error: 'wrong',
+  },
+  contour: {
+    title: 'Intonation contour',
+    model: 'Model',
+    you: 'You',
+    loading: 'Drawing the contour…',
+    rise: 'rises',
+    fall: 'falls',
+    level: 'stays level',
+    compare: (model: string, you: string): string => `At the end: the model ${model}, you ${you}.`,
+    youOnly: (you: string): string =>
+      `At the end your voice ${you}. No model voice to compare yet.`,
+    match: 'Your ending has the same shape as the model.',
+    mismatch: 'Your ending has a different shape: listen again and copy it.',
+    hint: 'Compare the shapes; your voice does not need to be as high as the model.',
+    unclear: 'No pitch found: speak a little louder and clearer.',
   },
   prosody: {
     word_stress: 'Word stress',

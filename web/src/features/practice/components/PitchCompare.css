@@ -1,0 +1,70 @@
+.pitch-compare {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin: 0;
+}
+
+.pitch-compare__title {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+}
+
+.pitch-compare__chart {
+  inline-size: 100%;
+  block-size: 96px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.pitch-compare__axis {
+  stroke: var(--color-border);
+  stroke-dasharray: 2 4;
+}
+
+.pitch-compare__line {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 3;
+  vector-effect: non-scaling-stroke;
+}
+
+.pitch-compare__line--model {
+  stroke: var(--color-text-muted);
+  stroke-dasharray: 6 4;
+}
+
+.pitch-compare__line--you {
+  stroke: var(--color-primary);
+}
+
+.pitch-compare__legend {
+  display: flex;
+  gap: var(--space-3);
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+}
+
+.pitch-compare__key::before {
+  display: inline-block;
+  inline-size: 16px;
+  border-block-start: 3px solid var(--color-primary);
+  content: '';
+  margin-inline-end: var(--space-1);
+  vertical-align: middle;
+}
+
+.pitch-compare__key--model::before {
+  border-block-start: 3px dashed var(--color-text-muted);
+}
+
+.pitch-compare__text {
+  font-size: var(--text-sm);
+}
+
+.pitch-compare__hint {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+}

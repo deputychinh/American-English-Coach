@@ -119,6 +119,7 @@ export const en: Copy = {
   practice: enPractice.practice,
   verdict: enPractice.verdict,
   prosody: enPractice.prosody,
+  contour: enPractice.contour,
   mirror: {
     title: 'Mouth mirror',
     pickSound: 'Choose a sound',

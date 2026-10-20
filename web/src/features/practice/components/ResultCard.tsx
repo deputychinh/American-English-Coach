@@ -7,6 +7,7 @@ import { Button } from '@/components/Button/Button';
 import { VerdictChip } from '@/components/VerdictChip/VerdictChip';
 import { ButtonVariant } from '@/enums/button-variant.enum';
 import { PhoneDetail } from '@/features/practice/components/PhoneDetail';
+import { PitchCompare } from '@/features/practice/components/PitchCompare';
 import { ProsodyList } from '@/features/practice/components/ProsodyList';
 import { ScoreRing } from '@/features/practice/components/ScoreRing';
 import { disputeRun } from '@/features/progress/services/progress.service';
@@ -125,6 +126,9 @@ export const ResultCard = ({
         </div>
       ) : null}
 
+      {recording && result.words.length > 1 ? (
+        <PitchCompare text={result.text} recording={recording.blob} />
+      ) : null}
       <ProsodyList findings={result.prosody} />
 
       {tutor.isAvailable ? (

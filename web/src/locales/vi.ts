@@ -113,6 +113,7 @@ export const vi = {
   practice: viPractice.practice,
   verdict: viPractice.verdict,
   prosody: viPractice.prosody,
+  contour: viPractice.contour,
   mirror: {
     title: 'Gương khẩu hình',
     pickSound: 'Chọn âm',
