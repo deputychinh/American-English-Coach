@@ -1,7 +1,9 @@
 import createClient, { type Client } from 'openapi-fetch';
 
+import { handleLocally } from '@/features/offline/services/local-api.service';
 import type { ApiClientOptions } from '@/interfaces/api-client-options.interface';
 import {
+  isLocalMode,
   noteUnauthorized,
   redirectToApiBase,
   storedApiBaseUrl,
@@ -11,6 +13,10 @@ import {
 const fetchWithTimeout =
   (timeoutMs: number) =>
   async (request: Request): Promise<Response> => {
+    if (isLocalMode()) {
+      const local = await handleLocally(request);
+      if (local) return local;
+    }
     const target = withClientHeaders(await redirectToApiBase(request, storedApiBaseUrl()));
     const response = await fetch(target, {
       signal: AbortSignal.any([request.signal, AbortSignal.timeout(timeoutMs)]),

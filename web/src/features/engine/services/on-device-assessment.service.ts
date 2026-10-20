@@ -3,21 +3,20 @@ import {
   ENGINE_MODEL_VERSION,
   ENGINE_THREADS,
 } from '@/constants/engine.constant';
-import { StorageKey } from '@/enums/storage-key.enum';
 import { isEngineAvailable, PhonemeEngine } from '@/features/engine/services/engine.service';
+import { saveLocalRun } from '@/features/offline/services/local-api.service';
 import { assessLocally } from '@/features/scoring/services/local-assessment.service';
 import { scoringData } from '@/features/scoring/services/scoring-data';
 import type { AssessRequest } from '@/interfaces/hooks.interface';
 import type { AssessmentResponse } from '@/interfaces/practice.interface';
+import { activeProfileId, isLocalMode } from '@/utils/api-base.util';
 import { base64ToFloat32, float32ToBase64 } from '@/utils/float32-base64.util';
-import { readStorage } from '@/utils/storage.util';
 import { decodeWav } from '@/utils/wav-encoder.util';
 
 let loading: Promise<void> | null = null;
 
-/** The learner turned on on-device scoring (Settings) and this is the iOS app. */
-export const isOnDevicePreferred = (): boolean =>
-  isEngineAvailable() && readStorage<boolean>(StorageKey.OnDeviceScoring, false);
+/** iOS app, model downloaded and the learner did not switch to a scoring server. */
+export const isOnDevicePreferred = (): boolean => isEngineAvailable() && isLocalMode();
 
 /** Load the model once per app run (≈1–2 s); a failure lets the next attempt retry. */
 const ensureLoaded = (): Promise<void> => {
@@ -44,7 +43,7 @@ export const assessOnDevice = async (request: AssessRequest): Promise<Assessment
   await ensureLoaded();
   const samples = decodeWav(await request.audio.arrayBuffer());
   const output = await PhonemeEngine.posteriors({ samples: float32ToBase64(samples) });
-  return assessLocally(
+  const result = assessLocally(
     {
       itemId: request.item.id,
       text: request.item.text,
@@ -65,4 +64,15 @@ export const assessOnDevice = async (request: AssessRequest): Promise<Assessment
     },
     scoringData(),
   );
+  await saveLocalRun({
+    id: result.id,
+    profileId: activeProfileId(),
+    itemId: result.item_id,
+    text: result.text,
+    modelVersion: result.model_version,
+    createdAt: new Date().toISOString(),
+    disputed: false,
+    result,
+  });
+  return result;
 };

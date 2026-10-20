@@ -162,3 +162,30 @@ export interface GoldenProsodyCase {
   nuclei: SyllableNucleus[];
   prosody: { aspect: string; verdict: string; detail_vi: string; word_index: number | null }[];
 }
+
+/** Weekly plan inputs and outputs (dates are local `YYYY-MM-DD`). */
+export interface SoundHistory {
+  phoneme: string;
+  total: number;
+  ok: number;
+  lastDay: string;
+}
+
+export interface RunDay {
+  day: string;
+  ok: number;
+  check: number;
+  error: number;
+}
+
+export interface DaySummary extends RunDay {
+  runs: number;
+}
+
+export interface FocusPick {
+  phoneme: string;
+  reason: 'weak' | 'review' | 'new';
+  total: number;
+  okRate: number | null;
+  daysSince: number | null;
+}

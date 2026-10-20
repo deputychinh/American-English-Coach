@@ -16,6 +16,7 @@ import { modelSource, PhonemeEngine } from '@/features/engine/services/engine.se
 import { useAsync } from '@/hooks/useAsync';
 import { useCopy } from '@/hooks/useCopy';
 import { useStoredState } from '@/hooks/useStoredState';
+import { writeStorage } from '@/utils/storage.util';
 
 import './EngineCard.css';
 
@@ -30,13 +31,18 @@ const median = (values: number[]): number => {
  */
 export const EngineCard = (): ReactElement => {
   const copy = useCopy();
-  const loadStatus = useCallback(() => PhonemeEngine.status({ name: ENGINE_MODEL_NAME }), []);
+  const loadStatus = useCallback(async () => {
+    const current = await PhonemeEngine.status({ name: ENGINE_MODEL_NAME });
+    // Local mode switches on once the model is on the device (api-base.util isLocalMode).
+    writeStorage(StorageKey.EngineReady, current.downloaded);
+    return current;
+  }, []);
   const engineStatus = useAsync(loadStatus);
   const status = engineStatus.data;
   const [percent, setPercent] = useState<number | null>(null);
   const [lines, setLines] = useState<string[]>([]);
   const [isBusy, setIsBusy] = useState(false);
-  const [isPreferred, setIsPreferred] = useStoredState<boolean>(StorageKey.OnDeviceScoring, false);
+  const [isPreferred, setIsPreferred] = useStoredState<boolean>(StorageKey.OnDeviceScoring, true);
 
   const report = (line: string): void => {
     setLines((previous) => [...previous, line]);

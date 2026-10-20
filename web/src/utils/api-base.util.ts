@@ -13,6 +13,17 @@ import { readStorage } from '@/utils/storage.util';
 export const isNativeShell = (): boolean =>
   typeof window !== 'undefined' && /^(capacitor|ionic):$/.test(window.location.protocol);
 
+/**
+ * The app answers its own API (content, progress, plan, profiles) and scores on the device:
+ * the iOS app once the model is downloaded, unless the learner chose a scoring server. Tests and
+ * development can force it with `coach.forceLocalMode`.
+ */
+export const isLocalMode = (): boolean =>
+  readStorage<boolean>(StorageKey.ForceLocalMode, false) ||
+  (isNativeShell() &&
+    readStorage<boolean>(StorageKey.OnDeviceScoring, true) &&
+    readStorage<boolean>(StorageKey.EngineReady, false));
+
 /** Normalises a learner-typed server address: scheme added, trailing slash removed. */
 export const normaliseBaseUrl = (value: string): string => {
   const trimmed = value.trim().replace(/\/+$/, '');

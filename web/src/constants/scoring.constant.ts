@@ -44,3 +44,12 @@ export const RISE_BY_KIND: Record<string, boolean | null> = {
   wh_question: false,
   word: null,
 };
+
+/** Weekly plan rules (backend/app/domain/planner.py). */
+export const PLAN_MIN_SAMPLES = 3;
+export const PLAN_WEAK_OK_RATE = 0.7;
+export const PLAN_REVIEW_AFTER_DAYS = 3;
+export const PLAN_FOCUS_LIMIT = 3;
+export const PLAN_WEAK_LIMIT = 2;
+export const PLAN_WEEK_DAYS = 7;
+export const PLAN_STREAK_LOOKBACK_DAYS = 400;

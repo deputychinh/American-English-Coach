@@ -88,10 +88,13 @@ describe('EngineCard preference', () => {
     localStorage.clear();
   });
 
-  it('remembers that the learner wants on-device scoring', async () => {
+  it('turns on-device scoring on by default and marks the downloaded model ready', async () => {
     engine.status.mockResolvedValue(status(true));
     render(<EngineCard />);
-    await userEvent.click(await screen.findByRole('checkbox', { name: /Dùng chấm trên máy/ }));
-    expect(localStorage.getItem('coach.onDeviceScoring')).toBe('true');
+    const toggle = await screen.findByRole('checkbox', { name: /Dùng chấm trên máy/ });
+    expect(toggle).toBeChecked();
+    expect(localStorage.getItem('coach.engineReady')).toBe('true');
+    await userEvent.click(toggle);
+    expect(localStorage.getItem('coach.onDeviceScoring')).toBe('false');
   });
 });

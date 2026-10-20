@@ -1,4 +1,5 @@
 import { StorageKey } from '@/enums/storage-key.enum';
+import { resetRunsStore, runsStore } from '@/utils/local-store.util';
 import { encodeWav } from '@/utils/wav-encoder.util';
 
 const { engine, assessLocally, isNative } = vi.hoisted(() => ({
@@ -33,11 +34,12 @@ describe('on-device assessment', () => {
   beforeEach(() => {
     vi.clearAllMocks();
     localStorage.clear();
+    resetRunsStore();
   });
 
-  it('is used only in the iOS app and only when the learner turned it on', () => {
+  it('needs the native engine and local mode', () => {
     expect(isOnDevicePreferred()).toBe(false);
-    localStorage.setItem(StorageKey.OnDeviceScoring, 'true');
+    localStorage.setItem(StorageKey.ForceLocalMode, 'true');
     expect(isOnDevicePreferred()).toBe(true);
     isNative.value = false;
     expect(isOnDevicePreferred()).toBe(false);
@@ -53,10 +55,22 @@ describe('on-device assessment', () => {
       data: 'AAAAAAAAAAA=',
       milliseconds: 12,
     });
-    assessLocally.mockReturnValue({ id: 'r1' });
-    expect(await assessOnDevice(request)).toEqual({ id: 'r1' });
+    let call = 0;
+    assessLocally.mockImplementation(() => {
+      call += 1;
+      return {
+        id: `r${String(call)}`,
+        item_id: 'sound:v01:mirror:see',
+        text: 'see',
+        model_version: 'w2v.mm8@ios',
+        words: [],
+      };
+    });
+    expect((await assessOnDevice(request)).id).toBe('r1');
     await assessOnDevice(request);
     expect(engine.load).toHaveBeenCalledTimes(1);
+    // Each take is kept on the device for Progress and the weekly plan.
+    expect((await runsStore().list('default')).map((r) => r.id).sort()).toEqual(['r1', 'r2']);
     const [input] = assessLocally.mock.calls[0] as [
       { text: string; posteriors: { frames: number } },
     ];

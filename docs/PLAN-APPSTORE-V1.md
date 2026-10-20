@@ -177,6 +177,15 @@ Mỗi hạng mục: nhánh/commit theo Conventional Commits, `make ci` xanh, e2e
 - Năng lượng khớp librosa đến 5 chữ số thập phân.
 - YIN thay pYIN: 97,9% khung chung lệch < nửa cung, **25/25 nhận định khớp** (cổng: ≥ 90% và ≥ 95%).
 
+### A6 · Chạy không cần máy chủ: **XONG** (20/10)
+
+- "Máy chủ cục bộ" trong client API (`features/offline`):
+  - Nội dung tĩnh lấy từ bản chụp do backend xuất (`build_content_snapshot.py`, có test báo khi cũ).
+  - Lượt chấm lưu trong IndexedDB.
+  - Tiến độ, kế hoạch tuần (planner chuyển sang TypeScript), lộ trình, khóa học, hồ sơ và xuất/nhập `aec-profile/1` đều tính trên máy.
+- Bật tự động trong app iOS khi mô hình đã tải và người học không chọn máy chấm riêng.
+- e2e chặn mọi request `/api/v1` mà mọi màn vẫn chạy.
+
 ### A0 · Plugin chấm trên máy: đang làm
 
 - Plugin `web/plugins/phoneme-engine` (Swift, ONNX Runtime 1.24.2 qua SPM) đã build được cho simulator.
