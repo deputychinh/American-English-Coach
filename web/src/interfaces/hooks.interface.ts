@@ -42,6 +42,8 @@ export interface RecorderSession {
 
 export interface ReferenceAudio {
   play: (text: string) => void;
+  /** Silences the clip and drops one still downloading (before recording, leaving a step). */
+  stop: () => void;
   isPlaying: boolean;
   error: string | null;
 }

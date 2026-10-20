@@ -74,5 +74,11 @@ export const useReferenceAudio = (): ReferenceAudio => {
       );
   }, []);
 
-  return { play, isPlaying, error };
+  const stop = useCallback(() => {
+    requestRef.current += 1;
+    audioRef.current?.pause();
+    setIsPlaying(false);
+  }, []);
+
+  return { play, stop, isPlaying, error };
 };

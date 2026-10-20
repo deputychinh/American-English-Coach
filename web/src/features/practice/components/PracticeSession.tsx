@@ -25,7 +25,7 @@ import { useFocusMode, useImmersive } from '@/hooks/useImmersive';
 import { useKeepAwake } from '@/hooks/useKeepAwake';
 import { useStoredState } from '@/hooks/useStoredState';
 import { useSwipe } from '@/hooks/useSwipe';
-import type { MouthFrame, Point2 } from '@/interfaces/mouth.interface';
+import type { Point2 } from '@/interfaces/mouth.interface';
 import type {
   AssessmentResponse,
   PracticeItem,
@@ -35,6 +35,7 @@ import type {
 import type { AutoStopReason } from '@/interfaces/vad.interface';
 import { cx } from '@/utils/cx.util';
 import { medianOutline } from '@/utils/lip-outline.util';
+import { toMouthPayload } from '@/utils/mouth-payload.util';
 
 import './PracticeSession.css';
 
@@ -56,9 +57,6 @@ interface PracticeSessionProps {
   /** Close link: the practice list, or the course from a lesson. */
   closeHref?: string;
 }
-
-/** The fields the scorer reads from a tracked frame (the outline stays on the device). */
-const toPayload = ({ t, features, quality }: MouthFrame): MouthFrame => ({ t, features, quality });
 
 /** One screen: bar, prompt (optional inset camera), record control; the result is a sheet. */
 export const PracticeSession = ({
@@ -89,18 +87,19 @@ export const PracticeSession = ({
   useKeepAwake();
   useImmersive();
   useFocusMode();
-  const reference = useReferenceAudio();
+  const { stop: stopReference, ...reference } = useReferenceAudio();
   const calibration = useCalibration();
   const tracker = useMouthTracker({ enabled: cameraOn, calibration: calibration.value });
 
   const begin = useCallback(async () => {
+    stopReference(); // the model voice would be cancelled out of the take as echo
     setResult(null);
     setIsResultOpen(false);
     setError(null);
     setIsSilent(false);
     await recorder.start();
     setStatus(PracticeStatus.Recording);
-  }, [recorder]);
+  }, [recorder, stopReference]);
 
   const finish = useCallback(async () => {
     const captured = await recorder.stop();
@@ -109,7 +108,7 @@ export const PracticeSession = ({
     setStatus(PracticeStatus.Scoring);
     const endedAt = captured.startedAt + captured.durationSeconds;
     const frames = cameraOn
-      ? tracker.framesBetween(captured.startedAt, endedAt).map(toPayload)
+      ? tracker.framesBetween(captured.startedAt, endedAt).map(toMouthPayload)
       : [];
     try {
       const response = await assess({

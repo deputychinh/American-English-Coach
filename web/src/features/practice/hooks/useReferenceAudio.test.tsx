@@ -91,4 +91,19 @@ describe('useReferenceAudio', () => {
     expect(fetchMock.mock.calls.some(([u]) => urlOf(u).includes('/api/v1/audio'))).toBe(false);
     expect(result.current.error).toBeNull();
   });
+
+  it('stop drops a clip that is still downloading, so it never plays over a recording', async () => {
+    let answer: (response: Response) => void = () => undefined;
+    serve(() => new Promise<Response>((resolve) => (answer = resolve)));
+    const { result } = renderHook(() => useReferenceAudio());
+    act(() => result.current.play('ship'));
+    await waitFor(() =>
+      expect(fetchMock.mock.calls.some(([u]) => urlOf(u).includes('/api/v1/audio'))).toBe(true),
+    );
+    act(() => result.current.stop());
+    expect(result.current.isPlaying).toBe(false);
+    answer(new Response(new Blob(['RIFF']), { status: 200 }));
+    await new Promise((resolve) => setTimeout(resolve, 20));
+    expect(played.some((src) => src.startsWith('blob:'))).toBe(false);
+  });
 });
