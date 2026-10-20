@@ -11,6 +11,8 @@ export interface VadOptions {
   hangoverMs: number;
   /** Silence after speech that ends the utterance. */
   silenceMs: number;
+  /** A voiced stretch shorter than this before the silence is a noise, not the answer. */
+  minSpeechMs: number;
   /** Give up when nothing was said for this long. */
   noSpeechMs: number;
   /** Opening window that only measures the background noise. */

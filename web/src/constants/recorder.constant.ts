@@ -13,6 +13,8 @@ export const VAD_DEFAULTS: VadOptions = {
   speechMs: 120,
   hangoverMs: 150,
   silenceMs: 750,
+  // The scorer rejects less than 0.25 s of speech (backend MIN_SPEECH_SECONDS).
+  minSpeechMs: 250,
   noSpeechMs: 5000,
   calibrationMs: 250,
 };

@@ -161,7 +161,12 @@ export const useRecorder = ({ onAutoStop, silenceMs }: RecorderOptions = {}): Re
       };
       sessionRef.current = session;
       session.node = await attachNode(context, source);
-      session.timer = setTimeout(() => void stopRef.current(), MAX_RECORD_SECONDS * 1000);
+      // At the cap the take is scored like a normal end (it used to be dropped without a word).
+      session.timer = setTimeout(() => {
+        session.isAutoStopped = true;
+        if (onAutoStopRef.current) onAutoStopRef.current('end');
+        else void stopRef.current();
+      }, MAX_RECORD_SECONDS * 1000);
       setStatus(RecorderStatus.Recording);
       void nativeHaptic('light');
     } catch (cause) {

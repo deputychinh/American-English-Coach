@@ -29,6 +29,20 @@ describe('vadStep', () => {
     expect(state.hasSpeech).toBe(false);
   });
 
+  it('keeps listening after a voiced blip too short to score, then hears the word', () => {
+    const quiet = Array<number>(6).fill(0.003);
+    const blip = Array<number>(4).fill(0.12); // 350–500 ms: past the onset, under 250 ms voiced
+    const pause = Array<number>(16).fill(0.004); // longer than the 750 ms end-of-speech window
+    const word = Array<number>(8).fill(0.12); // 1350–1700 ms
+    const { events } = run([...quiet, ...blip, ...pause, ...word, ...pause, ...pause]);
+    // The recorder stops at the first "end"; the bare state machine keeps reporting it.
+    expect(events.slice(0, 3)).toEqual([
+      'speech@500',
+      'speech@1500',
+      `end@${String(1700 + VAD_DEFAULTS.silenceMs)}`,
+    ]);
+  });
+
   it('keeps digital silence as the room when speech starts during calibration', () => {
     // 50 ms chunks: 0 then voice inside the 250 ms window; the floor must stay 0, not jump to 0.12.
     const { state } = run([0, 0.12, 0.12]);

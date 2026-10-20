@@ -46,8 +46,18 @@ export const vadStep = (
       state.hasSpeech &&
       state.lastVoiceAt !== null &&
       now - state.lastVoiceAt >= options.silenceMs
-    )
+    ) {
+      // A tap, a cough or the tail of a word caught at the start: keep listening for the answer
+      // instead of sending a take the scorer would reject as too short.
+      const voicedMs = state.lastVoiceAt - (state.speechSince ?? state.lastVoiceAt);
+      if (voicedMs < options.minSpeechMs) {
+        return {
+          state: { ...next, hasSpeech: false, speechSince: null, lastVoiceAt: null },
+          event: 'none',
+        };
+      }
       return { state: next, event: 'end' };
+    }
     if (!state.hasSpeech && now - state.startedAt >= options.noSpeechMs)
       return { state: next, event: 'no-speech' };
     return { state: next, event: 'none' };
