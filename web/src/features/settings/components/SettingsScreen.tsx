@@ -14,6 +14,7 @@ import { ButtonVariant } from '@/enums/button-variant.enum';
 import { Language } from '@/enums/language.enum';
 import { StorageKey } from '@/enums/storage-key.enum';
 import { Theme } from '@/enums/theme.enum';
+import { EngineCard } from '@/features/engine/components/EngineCard';
 import { getHealth } from '@/features/health/services/health.service';
 import { clearCalibration } from '@/features/mirror/services/calibration.service';
 import { GoalCard } from '@/features/settings/components/GoalCard';
@@ -230,6 +231,16 @@ export const SettingsScreen = (): ReactElement => {
               </p>
             ) : null}
           </SettingsRow>
+          {isPairingFirst ? (
+            <SettingsRow
+              label={copy.engine.title}
+              isOpen={openRow === 'engine'}
+              onOpen={() => setChosenRow('engine')}
+              onClose={() => setChosenRow(null)}
+            >
+              <EngineCard />
+            </SettingsRow>
+          ) : null}
           {isPairingFirst ? null : (
             <SettingsRow
               label={copy.settings.pairingTitle}

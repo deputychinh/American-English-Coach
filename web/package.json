@@ -19,6 +19,7 @@
     "gen:api": "openapi-typescript ../backend/openapi.json -o src/api/coach.schema.ts --enum"
   },
   "dependencies": {
+    "@aec/phoneme-engine": "file:plugins/phoneme-engine",
     "@capacitor-community/keep-awake": "^8.0.1",
     "@capacitor/app": "^8.1.2",
     "@capacitor/core": "^8.5.3",

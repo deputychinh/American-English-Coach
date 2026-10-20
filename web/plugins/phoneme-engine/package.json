@@ -1,0 +1,16 @@
+{
+  "name": "@aec/phoneme-engine",
+  "version": "0.1.0",
+  "private": true,
+  "description": "On-device wav2vec2 phoneme posteriors for the iOS app (ONNX Runtime), with a verified model download",
+  "license": "UNLICENSED",
+  "capacitor": {
+    "ios": {
+      "src": "ios"
+    }
+  },
+  "files": [
+    "ios/Sources",
+    "Package.swift"
+  ]
+}

@@ -1,6 +1,7 @@
 import type { Copy } from '@/interfaces/copy.interface';
 
 import { enCourse } from './en-course';
+import { enEngine } from './en-engine';
 import { enHome } from './en-home';
 import { enListen } from './en-listen';
 import { enPractice } from './en-practice';
@@ -241,6 +242,7 @@ export const en: Copy = {
     openSettings: 'Open settings',
   },
   settings: enSettings.settings,
+  engine: enEngine.engine,
   unauthorized: {
     message: 'The scoring server requires this device to be paired.',
     action: 'Open settings',
