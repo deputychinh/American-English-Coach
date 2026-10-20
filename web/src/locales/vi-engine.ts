@@ -1,8 +1,20 @@
 /** On-device scoring copy (split from `vi.ts` to keep files short). */
 export const viEngine = {
   engine: {
-    title: 'Chấm trên máy (thử nghiệm)',
-    lead: 'Tải mô hình chấm về iPhone để chấm không cần máy tính. Bản thử: đo tốc độ trên máy này.',
+    advancedGroup: 'Nâng cao',
+    serverRow: 'Máy chấm riêng (lớp học, phát triển)',
+    packTitle: 'Tải gói chấm điểm',
+    packBody: (megabytes: number): string =>
+      `${megabytes} MB, chỉ tải một lần, nên dùng Wi-Fi. Sau đó app chấm ngay trên iPhone, không cần mạng. Trong lúc chờ, bạn vẫn nghe, soi gương và học bài.`,
+    packStart: 'Tải ngay',
+    packProgress: (percent: number): string => `Đang tải gói chấm điểm… ${percent}%`,
+    packRetry: 'Thử lại',
+    packFailed: (reason: string): string => `Chưa tải xong: ${reason}`,
+    packReady: 'Gói chấm điểm đã sẵn sàng trên máy.',
+    needModel: 'Cần tải gói chấm điểm trước (Trang chủ hoặc Cài đặt → Chấm trên máy).',
+    advanced: 'Đo tốc độ (dành cho kiểm thử)',
+    title: 'Chấm trên máy',
+    lead: 'Chấm phát âm ngay trên iPhone: giọng nói của bạn không rời khỏi máy.',
     rowReady: 'Đã tải',
     rowMissing: 'Chưa tải',
     download: (megabytes: number): string => `Tải mô hình (${megabytes} MB)`,

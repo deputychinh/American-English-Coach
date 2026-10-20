@@ -1,0 +1,42 @@
+.model-download-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  align-items: flex-start;
+  padding: var(--padding-card);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.model-download-card__title {
+  font-size: var(--text-base);
+  font-weight: var(--weight-semibold);
+}
+
+.model-download-card__body,
+.model-download-card__ready {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+.model-download-card__error {
+  font-size: var(--text-sm);
+  color: var(--color-danger);
+}
+
+.model-download-card__bar {
+  overflow: hidden;
+  inline-size: 100%;
+  block-size: 6px;
+  background: var(--color-bg);
+  border-radius: var(--radius-full);
+}
+
+.model-download-card__fill {
+  display: block;
+  block-size: 100%;
+  background: var(--color-primary);
+  border-radius: var(--radius-full);
+  transition: width 200ms ease-out;
+}

@@ -3,8 +3,20 @@ import type { Copy } from '@/interfaces/copy.interface';
 /** On-device scoring copy (split from `en.ts` to keep files short). */
 export const enEngine: Pick<Copy, 'engine'> = {
   engine: {
-    title: 'On-device scoring (preview)',
-    lead: 'Download the scoring model to this iPhone so it can score without a computer. Preview: measures speed on this device.',
+    advancedGroup: 'Advanced',
+    serverRow: 'Own scoring server (classroom, development)',
+    packTitle: 'Download the scoring pack',
+    packBody: (megabytes: number): string =>
+      `${megabytes} MB, downloaded once; Wi-Fi recommended. Then the app scores on this iPhone without a connection. Meanwhile you can listen, use the mirror and study.`,
+    packStart: 'Download now',
+    packProgress: (percent: number): string => `Downloading the scoring pack… ${percent}%`,
+    packRetry: 'Try again',
+    packFailed: (reason: string): string => `Not finished: ${reason}`,
+    packReady: 'The scoring pack is ready on this device.',
+    needModel: 'Download the scoring pack first (Home or Settings → On-device scoring).',
+    advanced: 'Measure speed (for testing)',
+    title: 'On-device scoring',
+    lead: 'Pronunciation is scored on this iPhone: your voice never leaves the device.',
     rowReady: 'Downloaded',
     rowMissing: 'Not downloaded',
     download: (megabytes: number): string => `Download the model (${megabytes} MB)`,

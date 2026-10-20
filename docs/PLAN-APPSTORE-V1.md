@@ -186,6 +186,17 @@ Mỗi hạng mục: nhánh/commit theo Conventional Commits, `make ci` xanh, e2e
 - Bật tự động trong app iOS khi mô hình đã tải và người học không chọn máy chấm riêng.
 - e2e chặn mọi request `/api/v1` mà mọi màn vẫn chạy.
 
+### A4 · Tải mô hình lần đầu: **XONG** (20/10)
+
+- Mô hình đặt trên GitHub Release `model-v1` (công khai, kèm NOTICE Apache-2.0). Tải lại từ link công khai rồi kiểm SHA-256: khớp; mất 41 s qua mạng gia đình.
+- Thẻ "Tải gói chấm điểm (357 MB)" trên Trang chủ và trong Cài đặt: nêu dung lượng trước khi tải (4.2.3(ii)), có tiến độ, hủy, thử lại.
+- Trạng thái tải dùng chung giữa các màn; việc tải tiếp tục khi chuyển màn.
+
+### A7 · Máy chấm riêng thành "Nâng cao": **XONG** (20/10)
+
+- App iOS chạy cục bộ ngay từ lần mở đầu: nội dung, tiến độ và gương không cần máy chủ; chỉ chấm điểm mới cần gói.
+- Cài đặt: "Chấm trên máy" nằm trong nhóm Học tập; địa chỉ máy chủ và ghép nối nằm trong "Nâng cao → Máy chấm riêng".
+
 ### A0 · Plugin chấm trên máy: đang làm
 
 - Plugin `web/plugins/phoneme-engine` (Swift, ONNX Runtime 1.24.2 qua SPM) đã build được cho simulator.

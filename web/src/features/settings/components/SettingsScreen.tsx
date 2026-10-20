@@ -15,6 +15,7 @@ import { Language } from '@/enums/language.enum';
 import { StorageKey } from '@/enums/storage-key.enum';
 import { Theme } from '@/enums/theme.enum';
 import { EngineCard } from '@/features/engine/components/EngineCard';
+import { useModelDownload } from '@/features/engine/hooks/useModelDownload';
 import { getHealth } from '@/features/health/services/health.service';
 import { clearCalibration } from '@/features/mirror/services/calibration.service';
 import { GoalCard } from '@/features/settings/components/GoalCard';
@@ -52,7 +53,9 @@ export const SettingsScreen = (): ReactElement => {
   const theme = useSyncExternalStore(subscribeTheme, readTheme, () => Theme.Light);
   // Inside the iOS shell pairing is the first thing a new phone needs, so the card leads.
   // External-store read: the static HTML says false, the shell flips it after hydration.
-  const isPairingFirst = useSyncExternalStore(subscribeNever, isNativeShell, () => false);
+  // The iOS app: on-device scoring first, the classroom server under Advanced.
+  const isNative = useSyncExternalStore(subscribeNever, isNativeShell, () => false);
+  const download = useModelDownload();
 
   const [cameraDefault, setCameraDefault] = useStoredState<boolean>(StorageKey.CameraDefault, true);
   const [muted, setMuted] = useStoredState<boolean>(StorageKey.Muted, false);
@@ -96,6 +99,40 @@ export const SettingsScreen = (): ReactElement => {
     toast.show(copy.settings.dataCleared, 'success');
   };
 
+  const serverForm = (
+    <>
+      <SectionHeader
+        id="settings-server"
+        title={copy.settings.server}
+        hint={copy.progress.serverHelp}
+      />
+      <label className="settings-screen__label" htmlFor="server-address">
+        {copy.progress.serverTitle}
+      </label>
+      <div className="settings-screen__row">
+        <input
+          id="server-address"
+          className="settings-screen__input"
+          type="url"
+          inputMode="url"
+          autoCapitalize="none"
+          autoCorrect="off"
+          placeholder={copy.progress.serverPlaceholder}
+          value={draft ?? server}
+          onChange={(event) => setDraft(event.target.value)}
+        />
+        <Button variant={ButtonVariant.Secondary} isSmall onClick={() => void checkServer()}>
+          {copy.progress.serverSave}
+        </Button>
+      </div>
+      {serverStatus ? (
+        <p className="settings-screen__status" role="status">
+          {serverStatus}
+        </p>
+      ) : null}
+    </>
+  );
+
   return (
     <div className="settings-screen">
       <PageIntro title={copy.settings.title} />
@@ -132,15 +169,15 @@ export const SettingsScreen = (): ReactElement => {
           {copy.settings.rows.groupLearning}
         </h2>
         <ul className="settings-screen__rows">
-          {isPairingFirst ? (
+          {isNative ? (
             <SettingsRow
-              label={copy.settings.pairingTitle}
-              value={paired ? copy.settings.rows.pairedValue : copy.settings.rows.notPaired}
-              isOpen={openRow === 'pairing'}
-              onOpen={() => setChosenRow('pairing')}
+              label={copy.engine.title}
+              value={download.phase === 'ready' ? copy.engine.rowReady : copy.engine.rowMissing}
+              isOpen={openRow === 'engine'}
+              onOpen={() => setChosenRow('engine')}
               onClose={() => setChosenRow(null)}
             >
-              <PairingCard />
+              <EngineCard />
             </SettingsRow>
           ) : null}
           <SettingsRow
@@ -191,66 +228,42 @@ export const SettingsScreen = (): ReactElement => {
 
       <section className="settings-screen__group" aria-labelledby="settings-group-server">
         <h2 id="settings-group-server" className="settings-screen__group-title">
-          {copy.settings.rows.groupServer}
+          {isNative ? copy.engine.advancedGroup : copy.settings.rows.groupServer}
         </h2>
         <ul className="settings-screen__rows">
-          <SettingsRow
-            label={copy.progress.serverTitle}
-            value={server || copy.settings.rows.serverLocal}
-            isOpen={openRow === 'server'}
-            onOpen={() => setChosenRow('server')}
-            onClose={() => setChosenRow(null)}
-          >
-            <SectionHeader
-              id="settings-server"
-              title={copy.settings.server}
-              hint={copy.progress.serverHelp}
-            />
-            <label className="settings-screen__label" htmlFor="server-address">
-              {copy.progress.serverTitle}
-            </label>
-            <div className="settings-screen__row">
-              <input
-                id="server-address"
-                className="settings-screen__input"
-                type="url"
-                inputMode="url"
-                autoCapitalize="none"
-                autoCorrect="off"
-                placeholder={copy.progress.serverPlaceholder}
-                value={draft ?? server}
-                onChange={(event) => setDraft(event.target.value)}
-              />
-              <Button variant={ButtonVariant.Secondary} isSmall onClick={() => void checkServer()}>
-                {copy.progress.serverSave}
-              </Button>
-            </div>
-            {serverStatus ? (
-              <p className="settings-screen__status" role="status">
-                {serverStatus}
-              </p>
-            ) : null}
-          </SettingsRow>
-          {isPairingFirst ? (
+          {isNative ? (
+            // The App Store build scores on the device; a classroom server stays one tap deeper.
             <SettingsRow
-              label={copy.engine.title}
-              isOpen={openRow === 'engine'}
-              onOpen={() => setChosenRow('engine')}
+              label={copy.engine.serverRow}
+              value={paired ? copy.settings.rows.pairedValue : undefined}
+              isOpen={openRow === 'server'}
+              onOpen={() => setChosenRow('server')}
               onClose={() => setChosenRow(null)}
             >
-              <EngineCard />
-            </SettingsRow>
-          ) : null}
-          {isPairingFirst ? null : (
-            <SettingsRow
-              label={copy.settings.pairingTitle}
-              value={paired ? copy.settings.rows.pairedValue : copy.settings.rows.notPaired}
-              isOpen={openRow === 'pairing'}
-              onOpen={() => setChosenRow('pairing')}
-              onClose={() => setChosenRow(null)}
-            >
+              {serverForm}
               <PairingCard />
             </SettingsRow>
+          ) : (
+            <>
+              <SettingsRow
+                label={copy.progress.serverTitle}
+                value={server || copy.settings.rows.serverLocal}
+                isOpen={openRow === 'server'}
+                onOpen={() => setChosenRow('server')}
+                onClose={() => setChosenRow(null)}
+              >
+                {serverForm}
+              </SettingsRow>
+              <SettingsRow
+                label={copy.settings.pairingTitle}
+                value={paired ? copy.settings.rows.pairedValue : copy.settings.rows.notPaired}
+                isOpen={openRow === 'pairing'}
+                onOpen={() => setChosenRow('pairing')}
+                onClose={() => setChosenRow(null)}
+              >
+                <PairingCard />
+              </SettingsRow>
+            </>
           )}
         </ul>
       </section>

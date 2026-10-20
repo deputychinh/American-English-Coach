@@ -16,6 +16,7 @@ import {
   getCurriculum,
   nextStepOf,
 } from '@/features/curriculum/services/curriculum.service';
+import { ModelDownloadCard } from '@/features/engine/components/ModelDownloadCard';
 import { ApiStatusBanner } from '@/features/health/components/ApiStatusBanner';
 import { listenAccuracy, readListenResults } from '@/features/listen/services/listen.service';
 import { isOnboarded } from '@/features/onboarding/services/onboarding.service';
@@ -99,6 +100,7 @@ export const HomeScreen = (): ReactElement => {
       </header>
 
       <ApiStatusBanner isQuietWhenReady />
+      <ModelDownloadCard />
 
       <section className="home-screen__goal" aria-labelledby="today-title">
         <span className="home-screen__ring-box" aria-hidden="true">

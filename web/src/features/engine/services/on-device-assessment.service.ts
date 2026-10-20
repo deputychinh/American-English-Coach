@@ -9,6 +9,7 @@ import { assessLocally } from '@/features/scoring/services/local-assessment.serv
 import { scoringData } from '@/features/scoring/services/scoring-data';
 import type { AssessRequest } from '@/interfaces/hooks.interface';
 import type { AssessmentResponse } from '@/interfaces/practice.interface';
+import { getCopy } from '@/locales';
 import { activeProfileId, isLocalMode } from '@/utils/api-base.util';
 import { base64ToFloat32, float32ToBase64 } from '@/utils/float32-base64.util';
 import { decodeWav } from '@/utils/wav-encoder.util';
@@ -22,7 +23,7 @@ export const isOnDevicePreferred = (): boolean => isEngineAvailable() && isLocal
 const ensureLoaded = (): Promise<void> => {
   loading ??= PhonemeEngine.status({ name: ENGINE_MODEL_NAME })
     .then(async (status) => {
-      if (!status.downloaded) throw new Error('model not downloaded');
+      if (!status.downloaded) throw new Error(getCopy().engine.needModel);
       if (!status.loaded) {
         await PhonemeEngine.load({
           name: ENGINE_MODEL_NAME,

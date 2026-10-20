@@ -14,15 +14,17 @@ export const isNativeShell = (): boolean =>
   typeof window !== 'undefined' && /^(capacitor|ionic):$/.test(window.location.protocol);
 
 /**
- * The app answers its own API (content, progress, plan, profiles) and scores on the device:
- * the iOS app once the model is downloaded, unless the learner chose a scoring server. Tests and
- * development can force it with `coach.forceLocalMode`.
+ * The app answers its own API (content, progress, plan, profiles) and scores on the device. In
+ * the iOS app that is the default from the first launch; a learner paired with their own scoring
+ * server keeps using it until the model is downloaded or they switch back. Tests and development
+ * can force it with `coach.forceLocalMode`.
  */
-export const isLocalMode = (): boolean =>
-  readStorage<boolean>(StorageKey.ForceLocalMode, false) ||
-  (isNativeShell() &&
-    readStorage<boolean>(StorageKey.OnDeviceScoring, true) &&
-    readStorage<boolean>(StorageKey.EngineReady, false));
+export const isLocalMode = (): boolean => {
+  if (readStorage<boolean>(StorageKey.ForceLocalMode, false)) return true;
+  if (!isNativeShell() || !readStorage<boolean>(StorageKey.OnDeviceScoring, true)) return false;
+  const isPaired = readStorage<string>(StorageKey.DeviceToken, '') !== '';
+  return !isPaired || readStorage<boolean>(StorageKey.EngineReady, false);
+};
 
 /** Normalises a learner-typed server address: scheme added, trailing slash removed. */
 export const normaliseBaseUrl = (value: string): string => {

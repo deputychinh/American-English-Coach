@@ -38,3 +38,10 @@
   flex-direction: column;
   gap: var(--space-0-5);
 }
+
+.engine-card__advanced {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+}
