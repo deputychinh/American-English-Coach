@@ -1,7 +1,10 @@
 import type { Copy } from '@/interfaces/copy.interface';
 
 /** English practice, verdict and prosody copy. */
-export const enPractice: Pick<Copy, 'practice' | 'verdict' | 'prosody' | 'contour'> = {
+export const enPractice: Pick<
+  Copy,
+  'practice' | 'verdict' | 'prosody' | 'contour' | 'articulation'
+> = {
   practice: {
     title: 'Practice',
     pairs: 'Minimal pairs',
@@ -110,6 +113,46 @@ export const enPractice: Pick<Copy, 'practice' | 'verdict' | 'prosody' | 'contou
     ok: 'on target',
     check: 'listen again',
     error: 'wrong',
+  },
+  articulation: {
+    side: 'Side view of the mouth',
+    front: 'Lips from the front',
+    voiced: 'voiced',
+    voiceless: 'voiceless',
+    glide: 'Tongue and lips glide from the start (filled) to the end (dashed).',
+    legend: 'Filled: start · dashed: end.',
+    height: { high: 'Tongue high', mid: 'Tongue mid', low: 'Tongue low, jaw open' },
+    backness: {
+      front: 'front of the tongue',
+      central: 'centre of the tongue',
+      back: 'back of the tongue',
+    },
+    lips: {
+      closed: 'lips closed',
+      spread: 'lips spread',
+      neutral: 'lips relaxed',
+      rounded: 'lips rounded and pushed out',
+      labiodental: 'lower lip on the upper teeth',
+    },
+    place: {
+      bilabial: 'Both lips touch',
+      labiodental: 'Lower lip touches the upper teeth',
+      dental: 'Tongue tip between the teeth',
+      alveolar: 'Tongue tip on the ridge behind the upper teeth',
+      lateral: 'Tongue tip on the ridge, air along the sides',
+      postalveolar: 'Tongue blade just behind the ridge, lips pushed out',
+      retroflex: 'Tongue tip curled up without touching, lips slightly round',
+      palatal: 'Tongue body raised towards the hard palate',
+      velar: 'Back of the tongue against the soft palate',
+      labiovelar: 'Lips rounded, back of the tongue raised',
+      glottal: 'Air straight from the throat, mouth already open',
+    },
+    airflow: {
+      mouth: 'air flows out freely',
+      nose: 'air flows through the nose',
+      burst: 'air stopped, then released',
+      friction: 'air hisses through a narrow gap',
+    },
   },
   contour: {
     title: 'Intonation contour',

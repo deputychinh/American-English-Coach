@@ -275,3 +275,12 @@ Mỗi hạng mục: nhánh/commit theo Conventional Commits, `make ci` xanh, e2e
 - "3 điều nên luyện trước": các lỗi lặp lại nhiều nhất trong phần nói, mỗi lỗi kèm lời giải thích dễ hiểu và nút mở bài luyện âm tương ứng.
 - Ước tính thời gian: nghe 12 câu khoảng 70 giây, nói 8 câu khoảng 80 giây, tổng dưới 3 phút.
 - **Lỗi thật lộ ra khi viết e2e:** câu nghe cuối còn đang tải vẫn phát đè lên lúc người học bắt đầu nói, và bộ khử vọng của micro xóa luôn giọng người học. Giờ phần phát giọng mẫu có `stop()`; app gọi nó khi rời phần nghe và mỗi khi bắt đầu thu âm.
+
+### B5 · Hình miệng và lưỡi cho 44 âm: **XONG** (20/10)
+
+- Hình SVG vẽ theo tham số (`components/ArticulationDiagram`):
+  - **Mặt cắt nhìn ngang:** môi, răng, lợi, ngạc cứng, ngạc mềm (hạ xuống với âm mũi), lưỡi, hàm, dây thanh (rung hay không), luồng hơi (qua miệng hay qua mũi), điểm tiếp xúc.
+  - **Môi nhìn thẳng.**
+- Mỗi âm là một bộ tham số trong `constants/articulation.constant.ts`, theo mô tả cấu âm chuẩn (vị trí, cách phát âm, rung dây thanh; độ cao, độ trước–sau của lưỡi và độ tròn môi). Nguyên âm đôi, /tʃ dʒ/, /j w/ có hai khung: đầu (tô màu) và cuối (nét đứt).
+- Mỗi hình có câu mô tả bằng chữ, đồng thời là nhãn cho trình đọc màn hình.
+- Hiện ở bước "Làm quen âm" của bài học và trong sheet chi tiết của Bảng 44 âm. Thẻ nhỏ trong bảng không có hình, để bảng dễ đọc.

@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { type ReactElement, useCallback } from 'react';
 
+import { ArticulationDiagram } from '@/components/ArticulationDiagram/ArticulationDiagram';
 import { Button } from '@/components/Button/Button';
 import { ConfidenceBadge } from '@/components/ConfidenceBadge/ConfidenceBadge';
 import { ButtonVariant } from '@/enums/button-variant.enum';
@@ -41,6 +42,7 @@ export const SoundDetail = ({ card }: SoundDetailProps): ReactElement => {
         <dt>{copy.sounds.contrast}</dt>
         <dd>{card.contrast}</dd>
       </dl>
+      <ArticulationDiagram soundId={card.id} />
       <p>{card.tip}</p>
       {card.note ? <p className="sound-detail__muted">{card.note}</p> : null}
       <p>

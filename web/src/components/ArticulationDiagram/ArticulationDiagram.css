@@ -1,0 +1,118 @@
+.articulation-diagram {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin: 0;
+}
+
+.articulation-diagram__views {
+  display: flex;
+  gap: var(--space-2);
+  align-items: flex-end;
+}
+
+.articulation-diagram__side {
+  inline-size: 160px;
+  block-size: 160px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+
+.articulation-diagram__front {
+  inline-size: 80px;
+  block-size: 56px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+
+.articulation-diagram--compact .articulation-diagram__side {
+  inline-size: 112px;
+  block-size: 112px;
+}
+
+.articulation-diagram__line,
+.articulation-diagram__palate,
+.articulation-diagram__velum,
+.articulation-diagram__lip {
+  fill: none;
+  stroke: var(--color-text);
+  stroke-linecap: round;
+  stroke-width: 2;
+}
+
+.articulation-diagram__palate {
+  stroke-width: 3;
+}
+
+.articulation-diagram__lip {
+  stroke-width: 3;
+}
+
+.articulation-diagram__teeth {
+  fill: var(--color-surface);
+  stroke: var(--color-text);
+  stroke-width: 1.5;
+}
+
+.articulation-diagram__tongue {
+  fill: var(--color-primary);
+  fill-opacity: 0.35;
+  stroke: var(--color-primary);
+  stroke-width: 2;
+}
+
+.articulation-diagram__frame--end .articulation-diagram__tongue {
+  fill: none;
+  stroke-dasharray: 4 3;
+}
+
+.articulation-diagram__frame--end .articulation-diagram__lip,
+.articulation-diagram__frame--end .articulation-diagram__line,
+.articulation-diagram__frame--end .articulation-diagram__teeth,
+.articulation-diagram__frame--end .articulation-diagram__velum {
+  opacity: 0;
+}
+
+.articulation-diagram__air {
+  fill: none;
+  stroke: var(--color-text-muted);
+  stroke-dasharray: 3 4;
+  stroke-width: 1.5;
+}
+
+.articulation-diagram__arrowhead {
+  fill: var(--color-text-muted);
+}
+
+.articulation-diagram__contact {
+  fill: var(--color-danger);
+}
+
+.articulation-diagram__glottis {
+  fill: none;
+  stroke: var(--color-text-muted);
+  stroke-width: 2;
+}
+
+.articulation-diagram__glottis--voiced {
+  stroke: var(--color-primary);
+}
+
+.articulation-diagram__mouth {
+  fill: var(--color-text);
+  fill-opacity: 0.8;
+  stroke: var(--color-primary);
+  stroke-width: 3;
+}
+
+.articulation-diagram__mouth--end {
+  fill: none;
+  stroke-dasharray: 3 3;
+}
+
+.articulation-diagram__caption {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}

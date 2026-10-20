@@ -2,6 +2,7 @@
 
 import type { ReactElement } from 'react';
 
+import { ArticulationDiagram } from '@/components/ArticulationDiagram/ArticulationDiagram';
 import { Button } from '@/components/Button/Button';
 import { ButtonVariant } from '@/enums/button-variant.enum';
 import { useReferenceAudio } from '@/features/practice/hooks/useReferenceAudio';
@@ -26,6 +27,7 @@ export const LessonDescribe = ({ step, onNext }: LessonDescribeProps): ReactElem
         {step.cards.map((card) => (
           <li key={card.id} className="lesson-describe__card">
             <p className="lesson-describe__ipa">/{card.us}/</p>
+            <ArticulationDiagram soundId={card.id} isCompact />
             <p className="lesson-describe__tip">{card.tip}</p>
             <div className="lesson-describe__listen">
               <Button
