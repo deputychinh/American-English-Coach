@@ -11,9 +11,11 @@ import {
   ENGINE_THREADS,
 } from '@/constants/engine.constant';
 import { ButtonVariant } from '@/enums/button-variant.enum';
+import { StorageKey } from '@/enums/storage-key.enum';
 import { modelSource, PhonemeEngine } from '@/features/engine/services/engine.service';
 import { useAsync } from '@/hooks/useAsync';
 import { useCopy } from '@/hooks/useCopy';
+import { useStoredState } from '@/hooks/useStoredState';
 
 import './EngineCard.css';
 
@@ -34,6 +36,7 @@ export const EngineCard = (): ReactElement => {
   const [percent, setPercent] = useState<number | null>(null);
   const [lines, setLines] = useState<string[]>([]);
   const [isBusy, setIsBusy] = useState(false);
+  const [isPreferred, setIsPreferred] = useStoredState<boolean>(StorageKey.OnDeviceScoring, false);
 
   const report = (line: string): void => {
     setLines((previous) => [...previous, line]);
@@ -139,6 +142,19 @@ export const EngineCard = (): ReactElement => {
           </Button>
         ) : null}
       </div>
+      {status?.downloaded ? (
+        <label className="engine-card__toggle">
+          <input
+            type="checkbox"
+            checked={isPreferred}
+            onChange={(event) => setIsPreferred(event.target.checked)}
+          />
+          <span className="engine-card__toggle-text">
+            {copy.engine.usePreference}
+            <small className="engine-card__meta">{copy.engine.usePreferenceHint}</small>
+          </span>
+        </label>
+      ) : null}
       {isBusy && percent === null ? <p role="status">{copy.engine.working}</p> : null}
       {lines.length > 0 ? (
         <ul className="engine-card__log" aria-live="polite">

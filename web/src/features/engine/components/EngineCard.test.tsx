@@ -81,3 +81,17 @@ describe('EngineCard', () => {
     expect(await screen.findByText('Không thực hiện được: out of memory')).toBeInTheDocument();
   });
 });
+
+describe('EngineCard preference', () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+    localStorage.clear();
+  });
+
+  it('remembers that the learner wants on-device scoring', async () => {
+    engine.status.mockResolvedValue(status(true));
+    render(<EngineCard />);
+    await userEvent.click(await screen.findByRole('checkbox', { name: /Dùng chấm trên máy/ }));
+    expect(localStorage.getItem('coach.onDeviceScoring')).toBe('true');
+  });
+});

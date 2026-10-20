@@ -71,3 +71,31 @@ export const rmsLevel = (chunk: Float32Array): number => {
   for (const sample of chunk) sum += sample * sample;
   return Math.sqrt(sum / chunk.length);
 };
+
+/**
+ * 16-bit PCM WAV → samples in [-1, 1), divided by 32768 like the server's decoder (soundfile),
+ * so a take scored on the device sees the same numbers as one scored by the API.
+ */
+export const decodeWav = (buffer: ArrayBuffer): Float32Array => {
+  const view = new DataView(buffer);
+  let offset = 12;
+  while (offset + 8 <= view.byteLength) {
+    const id = String.fromCharCode(
+      view.getUint8(offset),
+      view.getUint8(offset + 1),
+      view.getUint8(offset + 2),
+      view.getUint8(offset + 3),
+    );
+    const size = view.getUint32(offset + 4, true);
+    if (id === 'data') {
+      const count = Math.floor(Math.min(size, view.byteLength - offset - 8) / 2);
+      const samples = new Float32Array(count);
+      for (let index = 0; index < count; index += 1) {
+        samples[index] = view.getInt16(offset + 8 + index * 2, true) / 0x8000;
+      }
+      return samples;
+    }
+    offset += 8 + size + (size % 2);
+  }
+  return new Float32Array(0);
+};

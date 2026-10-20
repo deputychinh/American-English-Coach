@@ -1,4 +1,8 @@
 import { env } from '@/config/env';
+import {
+  assessOnDevice,
+  isOnDevicePreferred,
+} from '@/features/engine/services/on-device-assessment.service';
 import type { AssessRequest } from '@/interfaces/hooks.interface';
 import type { AssessmentResponse } from '@/interfaces/practice.interface';
 import { getCopy } from '@/locales';
@@ -12,6 +16,8 @@ export const assess = async ({
   mouthFrames,
   audioStartedAt,
 }: AssessRequest): Promise<AssessmentResponse> => {
+  // On-device scoring (iOS, opted in): no network, same response shape.
+  if (isOnDevicePreferred()) return assessOnDevice({ item, audio, mouthFrames, audioStartedAt });
   const form = new FormData();
   form.append('audio', audio, 'recording.wav');
   form.append('text', item.text);

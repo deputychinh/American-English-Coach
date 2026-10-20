@@ -20,6 +20,8 @@ export const enEngine: Pick<Copy, 'engine'> = {
       `${seconds} s of audio: median ${median} ms, best ${best} ms`,
     noServer: 'Pair with a scoring server to download the preview.',
     failed: (reason: string): string => `Could not do that: ${reason}`,
+    usePreference: 'Score on this iPhone while practising',
+    usePreferenceHint: 'Preview: works offline; results are not saved to Progress yet.',
     memory: (gigabytes: number): string => `Device RAM: ${gigabytes} GB`,
   },
 };

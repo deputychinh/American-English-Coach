@@ -26,3 +26,15 @@
   background: var(--color-bg);
   border-radius: var(--radius-md);
 }
+
+.engine-card__toggle {
+  display: flex;
+  gap: var(--space-2);
+  align-items: flex-start;
+}
+
+.engine-card__toggle-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-0-5);
+}

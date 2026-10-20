@@ -1,6 +1,9 @@
 /** Quantized model file (per-channel int8 MatMul; see backend/scripts/export_onnx.py). */
 export const ENGINE_MODEL_NAME = 'w2v.mm8.onnx';
 
+/** Stored with each on-device result so scores from different models are never mixed. */
+export const ENGINE_MODEL_VERSION = 'w2v.mm8@ios';
+
 /** Shown before the download (App Store 4.2.3(ii)); the manifest has the exact byte count. */
 export const ENGINE_MODEL_MEGABYTES = 357;
 

@@ -1,4 +1,4 @@
-import { concatChunks, encodeWav, resample, rmsLevel } from './wav-encoder.util';
+import { concatChunks, decodeWav, encodeWav, resample, rmsLevel } from './wav-encoder.util';
 
 const header = async (blob: Blob): Promise<DataView> => new DataView(await blob.arrayBuffer());
 
@@ -33,5 +33,20 @@ describe('wav encoder', () => {
     expect(Array.from(joined)).toEqual([1, 1, -1]);
     expect(rmsLevel(joined)).toBeCloseTo(1);
     expect(rmsLevel(new Float32Array(0))).toBe(0);
+  });
+});
+
+describe('decodeWav', () => {
+  it('reads back what encodeWav wrote, scaled like the server decoder', async () => {
+    const samples = new Float32Array([0, 0.5, -0.5, -1]);
+    const decoded = decodeWav(await encodeWav(samples).arrayBuffer());
+    expect(decoded.length).toBe(4);
+    expect(decoded[0]).toBe(0);
+    expect(decoded[1]).toBeCloseTo(16384 / 32768, 6);
+    expect(decoded[3]).toBe(-1);
+  });
+
+  it('returns no samples when there is no data chunk', () => {
+    expect(decodeWav(new ArrayBuffer(12)).length).toBe(0);
   });
 });

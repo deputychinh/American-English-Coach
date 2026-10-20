@@ -18,6 +18,8 @@ export const viEngine = {
       `${seconds} giây âm thanh: trung vị ${median} ms, nhanh nhất ${best} ms`,
     noServer: 'Cần ghép nối với máy chấm để tải bản thử nghiệm.',
     failed: (reason: string): string => `Không thực hiện được: ${reason}`,
+    usePreference: 'Dùng chấm trên máy khi luyện tập',
+    usePreferenceHint: 'Bản thử: chấm không cần mạng; kết quả chưa lưu vào Tiến độ.',
     memory: (gigabytes: number): string => `RAM máy: ${gigabytes} GB`,
   },
 };
