@@ -1,6 +1,8 @@
+import { ReviewMode } from '@/enums/review.enum';
 import type { StoredRun } from '@/interfaces/local-store.interface';
 import type { AssessmentResponse } from '@/interfaces/practice.interface';
-import { resetRunsStore } from '@/utils/local-store.util';
+import { resetRunsStore, reviewStore } from '@/utils/local-store.util';
+import { newCard } from '@/utils/srs.util';
 
 import { handleLocally, saveLocalRun } from './local-api.service';
 
@@ -166,19 +168,27 @@ describe('local API', () => {
     });
     expect((await call('profiles/default', { method: 'DELETE' })).status).toBe(400);
     await saveLocalRun(take(['r9', 'sentence:s1', '2026-10-20T01:00:00.000Z'], [['IY', 'ok']]));
+    const word = { itemId: 'w.u02.cup', mode: ReviewMode.Listen };
+    await reviewStore().putCards([newCard({ ...word, profileId: 'default' }, new Date())]);
+    await reviewStore().putCards([newCard({ ...word, profileId: created.id }, new Date())]);
     const exported = (await call('profiles/default/export')).body as {
       format: string;
       runs: unknown[];
+      review_cards: unknown[];
     };
     expect(exported.format).toBe('aec-profile/1');
     expect(exported.runs).toHaveLength(1);
+    expect(exported.review_cards).toHaveLength(1);
     const imported = await call('profiles/import?name=Copy', {
       method: 'POST',
       body: JSON.stringify(exported),
     });
     expect(imported.status).toBe(201);
     expect(imported.body).toMatchObject({ imported_runs: 0, skipped_runs: 1 });
+    const copyId = (imported.body as { profile: { id: string } }).profile.id;
+    expect((await reviewStore().listCards(copyId))[0]?.itemId).toBe('w.u02.cup');
     expect((await call(`profiles/${created.id}`, { method: 'DELETE' })).status).toBe(204);
+    expect(await reviewStore().listCards(created.id)).toEqual([]);
     const names = ((await call('profiles')).body as { name: string }[]).map((p) => p.name);
     expect(names).toEqual(['Người học', 'Copy']);
   });

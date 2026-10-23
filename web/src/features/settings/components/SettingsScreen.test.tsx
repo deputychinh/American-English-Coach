@@ -4,11 +4,13 @@ import type { ReactElement } from 'react';
 
 import { ToastProvider } from '@/components/Toast/Toast';
 import { Language } from '@/enums/language.enum';
+import { ReviewMode } from '@/enums/review.enum';
 import { StorageKey } from '@/enums/storage-key.enum';
 import type { StoredRun } from '@/interfaces/local-store.interface';
 import { setLanguage } from '@/locales';
 import { jsonResponse, mockApi } from '@/test-utils/api-mock';
-import { runsStore } from '@/utils/local-store.util';
+import { reviewStore, runsStore } from '@/utils/local-store.util';
+import { newCard } from '@/utils/srs.util';
 
 import { SettingsScreen } from './SettingsScreen';
 
@@ -113,6 +115,9 @@ describe('SettingsScreen', () => {
     localStorage.setItem(StorageKey.Lesson, JSON.stringify({ u01: { step: 2 } }));
     localStorage.setItem(StorageKey.Theme, JSON.stringify('dark'));
     await runsStore().put({ id: 'r1', profileId: 'default' } as StoredRun);
+    await reviewStore().putCards([
+      newCard({ profileId: 'default', itemId: 'w.u02.cup', mode: ReviewMode.Listen }, new Date()),
+    ]);
     const confirm = vi
       .spyOn(window, 'confirm')
       .mockReturnValueOnce(false)
@@ -129,5 +134,6 @@ describe('SettingsScreen', () => {
     expect(localStorage.getItem(StorageKey.Lesson)).toBeNull();
     expect(localStorage.getItem(StorageKey.Theme)).not.toBeNull();
     expect(await runsStore().get('r1')).toBeNull();
+    expect(await reviewStore().listCards('default')).toEqual([]);
   });
 });

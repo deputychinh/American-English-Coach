@@ -261,4 +261,11 @@ Màn “Giấy phép” hiện có cần thêm NGSL và Tatoeba. Ghi checksum v�
 - `web/src/utils/srs.util.ts` bọc `ts-fsrs` 5.4.2 (MIT, FSRS-6, tắt fuzz để lịch tái lập được). Phần còn lại của app chỉ thấy thẻ `ReviewCard` dạng JSON thuần (giờ ISO-8601 UTC), nên lưu thẳng vào IndexedDB và đổi thư viện không ảnh hưởng dữ liệu đã lưu.
 - Có: tạo thẻ, áp một câu trả lời (kèm sự kiện ôn để sau này tối ưu tham số theo người học), xác suất nhớ, thẻ đến hạn, phiên ôn (đến hạn trước, thẻ mới theo giới hạn ngày, dừng thẻ mới khi tồn quá nhiều), mở kiểu thẻ theo thứ tự Nghe → Nói → Điền câu, quy đổi kết quả máy chấm (`ok`/`check`/`error`) thành mức đánh giá, danh sách mục đã nhớ.
 - 20 unit test, coverage `srs.util.ts` 100 % dòng. `make ci` phần web xanh (73 file, 315 test).
-- Chưa có: kho thẻ IndexedDB (V2a), kho từ (V2b), giao diện (V2c).
+- Chưa có: kho từ (V2b), giao diện (V2c).
+
+### V2a · Kho thẻ trên máy: **XONG** (23/10)
+
+- IndexedDB `coach` lên phiên bản 2: thêm store `cards` và `reviews`, khóa ghép (hồ sơ, mã) vì mã thẻ chỉ duy nhất trong một hồ sơ. Nâng cấp chỉ thêm store, nên `runs` của bản cũ giữ nguyên (có test mở DB v1 rồi nâng cấp).
+- Lưu một câu trả lời ghi thẻ và sự kiện ôn trong cùng một transaction.
+- Có memory store tương đương cho nơi không có IndexedDB. Xóa hồ sơ thì xóa thẻ của hồ sơ đó; "Xóa dữ liệu trên thiết bị" xóa cả thẻ.
+- Bản sao lưu hồ sơ `aec-profile/1` thêm hai trường tùy chọn `review_cards`, `review_events`. Bản cũ không có vẫn nhập được; máy chủ bỏ qua trường lạ.

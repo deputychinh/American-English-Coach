@@ -14,13 +14,14 @@ import {
 import { planOf, progressOf } from '@/features/offline/services/local-progress.service';
 import type { LocalProfile, StoredRun } from '@/interfaces/local-store.interface';
 import type { ProfileExport } from '@/interfaces/practice.interface';
+import type { ReviewBackup } from '@/interfaces/srs.interface';
 import { activeProfileId } from '@/utils/api-base.util';
 import {
   itemCounts,
   withCourseProgress,
   withCurriculumProgress,
 } from '@/utils/course-progress.util';
-import { runsStore } from '@/utils/local-store.util';
+import { reviewStore, runsStore } from '@/utils/local-store.util';
 
 /**
  * The scoring server's API answered inside the app (plan A6): content from the bundled
@@ -58,6 +59,8 @@ const profileModel = async (profile: LocalProfile): Promise<Record<string, unkno
 
 const exportProfile = async (profile: LocalProfile): Promise<ProfileExport> =>
   ({
+    review_cards: await reviewStore().listCards(profile.id),
+    review_events: await reviewStore().listReviews(profile.id),
     format: 'aec-profile/1',
     exported_at: new Date().toISOString(),
     profile: await profileModel(profile),
@@ -83,8 +86,19 @@ const exportProfile = async (profile: LocalProfile): Promise<ProfileExport> =>
     })),
   }) as unknown as ProfileExport;
 
-const importProfile = async (snapshot: ProfileExport, name: string | null): Promise<Response> => {
+const importReviews = async (backup: ReviewBackup, profileId: string): Promise<void> => {
+  await reviewStore().putCards((backup.review_cards ?? []).map((card) => ({ ...card, profileId })));
+  await reviewStore().putReviews(
+    (backup.review_events ?? []).map((event) => ({ ...event, profileId })),
+  );
+};
+
+const importProfile = async (
+  snapshot: ProfileExport & ReviewBackup,
+  name: string | null,
+): Promise<Response> => {
   const profile = createLocalProfile(name ?? snapshot.profile.name);
+  await importReviews(snapshot, profile.id);
   let imported = 0;
   let skipped = 0;
   for (const run of snapshot.runs) {
@@ -136,7 +150,7 @@ const profiles = async (request: Request, rest: string[]): Promise<Response> => 
     if (!deleteLocalProfile(id)) {
       return problem(400, 'VALIDATION', 'the default profile cannot be deleted; rename it instead');
     }
-    await runsStore().removeProfile(id);
+    await Promise.all([runsStore().removeProfile(id), reviewStore().removeProfile(id)]);
     return empty();
   }
   return problem(405, 'VALIDATION', 'method not allowed');

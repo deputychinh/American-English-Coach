@@ -64,3 +64,9 @@ export interface ReviewSession {
   /** True when new cards are held back because too many reviews are due. */
   newPaused: boolean;
 }
+
+/** Device-only additions to a profile backup (`aec-profile/1`); older backups have neither. */
+export interface ReviewBackup {
+  review_cards?: ReviewCard[];
+  review_events?: ReviewEvent[];
+}

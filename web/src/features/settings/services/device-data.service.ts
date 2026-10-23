@@ -1,7 +1,7 @@
 import { StorageKey } from '@/enums/storage-key.enum';
 import { clearCalibration } from '@/features/mirror/services/calibration.service';
 import { getCopy } from '@/locales';
-import { runsStore } from '@/utils/local-store.util';
+import { reviewStore, runsStore } from '@/utils/local-store.util';
 import { nativeScheduleDailyReminder } from '@/utils/native.util';
 import { removeStorage } from '@/utils/storage.util';
 
@@ -23,7 +23,7 @@ const LEARNER_KEYS: StorageKey[] = [
 ];
 
 /**
- * Settings → "clear the data on this device": scored runs, profiles, lesson places, listening
+ * Settings → "clear the data on this device": scored runs, review cards, profiles, lesson places, listening
  * and placement results, calibration, the reminder and the server pairing. A classroom server
  * keeps its own copy (the privacy page says so).
  */
@@ -33,6 +33,7 @@ export const clearDeviceData = async (): Promise<void> => {
   const copy = getCopy().settings;
   await Promise.all([
     runsStore().clear(),
+    reviewStore().clear(),
     nativeScheduleDailyReminder(
       null,
       copy.reminderNotificationTitle,
