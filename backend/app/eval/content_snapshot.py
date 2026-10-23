@@ -45,7 +45,8 @@ def build() -> dict[str, Any]:
                 for summary in files["sounds.json"]
             }
     # Device-only content (no API route): copied as is.
-    files["vocab.json"] = json.loads((ROOT / "content" / "vocab.json").read_text(encoding="utf-8"))
+    for name in ("vocab.json", "talk.json"):
+        files[name] = json.loads((ROOT / "content" / name).read_text(encoding="utf-8"))
     return files
 
 

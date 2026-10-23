@@ -1,0 +1,1267 @@
+{
+  "schema": "aec-talk/1",
+  "functions": [
+    {
+      "id": "f.greet",
+      "title_vi": "Chào và giới thiệu",
+      "title_en": "Greeting and introducing",
+      "units": ["u01", "u12"],
+      "phrases": {
+        "casual": { "en": "Hey, I'm Minh.", "vi": "Chào, mình là Minh." },
+        "neutral": {
+          "en": "Hi, I'm Minh. Nice to meet you.",
+          "vi": "Chào bạn, mình là Minh. Rất vui được gặp bạn."
+        },
+        "formal": {
+          "en": "Good morning. My name is Minh. It's a pleasure to meet you.",
+          "vi": "Xin chào. Tôi tên là Minh. Rất hân hạnh được gặp anh chị."
+        }
+      },
+      "situations": {
+        "casual": "Bạn thân giới thiệu bạn với em họ của cậu ấy ở tiệc sinh nhật.",
+        "neutral": "Bạn gặp một bạn học mới trong lớp tiếng Anh.",
+        "formal": "Bạn gặp giám đốc công ty đối tác trong một cuộc họp."
+      }
+    },
+    {
+      "id": "f.apologize",
+      "title_vi": "Xin lỗi",
+      "title_en": "Apologizing",
+      "units": ["u02", "u20"],
+      "phrases": {
+        "casual": { "en": "Sorry, my bad!", "vi": "Xin lỗi, lỗi tại mình!" },
+        "neutral": { "en": "Sorry I'm late.", "vi": "Xin lỗi mình đến muộn." },
+        "formal": { "en": "I apologize for being late.", "vi": "Tôi xin lỗi vì đã đến muộn." }
+      },
+      "situations": {
+        "casual": "Bạn đến muộn năm phút khi đi cà phê với bạn thân.",
+        "neutral": "Bạn vào lớp học muộn vài phút.",
+        "formal": "Bạn đến muộn buổi phỏng vấn xin việc."
+      }
+    },
+    {
+      "id": "f.thank",
+      "title_vi": "Cảm ơn",
+      "title_en": "Thanking",
+      "units": ["u03", "u22"],
+      "phrases": {
+        "casual": { "en": "Thanks a lot!", "vi": "Cảm ơn nhiều nha!" },
+        "neutral": { "en": "Thank you so much.", "vi": "Cảm ơn bạn rất nhiều." },
+        "formal": {
+          "en": "Thank you very much for your help. I really appreciate it.",
+          "vi": "Cảm ơn anh chị rất nhiều vì đã giúp đỡ. Tôi thật sự trân trọng điều đó."
+        }
+      },
+      "situations": {
+        "casual": "Em trai đưa cho bạn một chai nước.",
+        "neutral": "Một người lạ chỉ đường cho bạn.",
+        "formal": "Thầy giáo dành cả buổi chiều đọc bài luận của bạn."
+      }
+    },
+    {
+      "id": "f.decline",
+      "title_vi": "Đồng ý và từ chối lịch sự",
+      "title_en": "Accepting and declining",
+      "units": ["u04", "u13"],
+      "phrases": {
+        "casual": {
+          "en": "Nah, I can't. Maybe next time.",
+          "vi": "Thôi, tớ không đi được. Để lần sau nhé."
+        },
+        "neutral": {
+          "en": "Sorry, I can't make it. Maybe next time?",
+          "vi": "Xin lỗi, mình không đến được. Để lần sau nhé?"
+        },
+        "formal": {
+          "en": "Thank you for the invitation, but I'm afraid I can't attend.",
+          "vi": "Cảm ơn lời mời, nhưng e rằng tôi không thể tham dự."
+        }
+      },
+      "situations": {
+        "casual": "Bạn thân rủ đi xem phim tối nay nhưng bạn bận.",
+        "neutral": "Một bạn cùng lớp rủ bạn ăn trưa nhưng bạn đã có hẹn.",
+        "formal": "Giám đốc mời bạn dự tiệc của công ty nhưng hôm đó bạn đi công tác."
+      }
+    },
+    {
+      "id": "f.opinion",
+      "title_vi": "Đưa ý kiến",
+      "title_en": "Giving an opinion",
+      "units": ["u05", "u16"],
+      "phrases": {
+        "casual": { "en": "It's awesome!", "vi": "Đỉnh thật!" },
+        "neutral": { "en": "I think it's really good.", "vi": "Mình thấy nó rất hay." },
+        "formal": { "en": "In my opinion, it's excellent.", "vi": "Theo tôi, nó rất xuất sắc." }
+      },
+      "situations": {
+        "casual": "Bạn thân hỏi bạn thấy bộ phim mới thế nào.",
+        "neutral": "Bạn cùng lớp hỏi bạn thấy quán ăn mới thế nào.",
+        "formal": "Trong cuộc họp, trưởng phòng hỏi ý kiến bạn về kế hoạch mới."
+      }
+    },
+    {
+      "id": "f.sequence",
+      "title_vi": "Kể chuyện theo trình tự",
+      "title_en": "Telling events in order",
+      "units": ["u09", "u19"],
+      "phrases": {
+        "casual": {
+          "en": "So I ate, then I just watched TV.",
+          "vi": "Thì mình ăn xong rồi nằm xem TV thôi."
+        },
+        "neutral": {
+          "en": "First I had dinner, then I studied.",
+          "vi": "Đầu tiên mình ăn tối, sau đó mình học bài."
+        },
+        "formal": {
+          "en": "First, I finished the report. After that, I called the client.",
+          "vi": "Trước tiên, tôi hoàn thành báo cáo. Sau đó, tôi gọi cho khách hàng."
+        }
+      },
+      "situations": {
+        "casual": "Bạn cùng phòng hỏi tối qua bạn làm gì.",
+        "neutral": "Bạn kể cho bạn học nghe buổi tối hôm qua của mình.",
+        "formal": "Bạn báo cáo với quản lý những việc đã làm hôm qua."
+      }
+    },
+    {
+      "id": "f.invite",
+      "title_vi": "Đề nghị và rủ rê",
+      "title_en": "Inviting and suggesting",
+      "units": ["u07", "u21"],
+      "phrases": {
+        "casual": { "en": "Wanna grab a coffee?", "vi": "Đi cà phê không?" },
+        "neutral": {
+          "en": "Do you want to get a coffee?",
+          "vi": "Bạn có muốn đi uống cà phê không?"
+        },
+        "formal": {
+          "en": "Would you like to join us for coffee?",
+          "vi": "Anh chị có muốn uống cà phê cùng chúng tôi không?"
+        }
+      },
+      "situations": {
+        "casual": "Rủ bạn thân đi uống cà phê sau giờ học.",
+        "neutral": "Rủ một bạn cùng lớp mới quen đi uống cà phê.",
+        "formal": "Mời một khách hàng uống cà phê sau buổi họp."
+      }
+    },
+    {
+      "id": "f.compare",
+      "title_vi": "So sánh",
+      "title_en": "Comparing",
+      "units": ["u11", "u17"],
+      "phrases": {
+        "casual": { "en": "This one is way better.", "vi": "Cái này hơn hẳn luôn." },
+        "neutral": {
+          "en": "I think this one is better than that one.",
+          "vi": "Mình nghĩ cái này tốt hơn cái kia."
+        },
+        "formal": {
+          "en": "This option is more suitable than the other one.",
+          "vi": "Phương án này phù hợp hơn phương án còn lại."
+        }
+      },
+      "situations": {
+        "casual": "Bạn và bạn thân chọn áo ở cửa hàng.",
+        "neutral": "Bạn giúp bạn cùng lớp chọn giữa hai cuốn sách.",
+        "formal": "Bạn so sánh hai nhà cung cấp trong báo cáo gửi sếp."
+      }
+    },
+    {
+      "id": "f.instruct",
+      "title_vi": "Hướng dẫn",
+      "title_en": "Giving directions",
+      "units": ["u10", "u14"],
+      "phrases": {
+        "casual": {
+          "en": "Just turn left. You can't miss it.",
+          "vi": "Cứ rẽ trái là thấy, không lạc được đâu."
+        },
+        "neutral": {
+          "en": "Go straight and turn left at the light.",
+          "vi": "Đi thẳng rồi rẽ trái ở đèn giao thông."
+        },
+        "formal": {
+          "en": "Please go straight ahead and take the first turn on the left.",
+          "vi": "Xin mời đi thẳng và rẽ vào lối đầu tiên bên trái."
+        }
+      },
+      "situations": {
+        "casual": "Em gái hỏi đường tới quán trà sữa gần nhà.",
+        "neutral": "Một người đi đường hỏi bạn đường tới bưu điện.",
+        "formal": "Một vị khách lớn tuổi ở khách sạn hỏi đường tới phòng hội nghị."
+      }
+    },
+    {
+      "id": "f.complain",
+      "title_vi": "Phàn nàn nhẹ nhàng",
+      "title_en": "Complaining politely",
+      "units": ["u06", "u15"],
+      "phrases": {
+        "casual": { "en": "Come on, it's too loud!", "vi": "Thôi mà, ồn quá!" },
+        "neutral": { "en": "Excuse me, it's a bit loud in here.", "vi": "Xin lỗi, ở đây hơi ồn." },
+        "formal": {
+          "en": "I'm sorry to bother you, but could you please keep the noise down?",
+          "vi": "Xin lỗi đã làm phiền, nhưng anh chị có thể giữ yên lặng hơn được không?"
+        }
+      },
+      "situations": {
+        "casual": "Em trai mở nhạc quá to khi bạn đang học.",
+        "neutral": "Bàn bên cạnh trong quán cà phê nói chuyện khá to.",
+        "formal": "Phòng bên cạnh ở khách sạn ồn ào lúc nửa đêm, bạn gọi cho lễ tân."
+      }
+    },
+    {
+      "id": "f.clarify",
+      "title_vi": "Hỏi lại khi không nghe rõ",
+      "title_en": "Asking someone to repeat",
+      "units": ["u08", "u18"],
+      "phrases": {
+        "casual": { "en": "What?", "vi": "Gì cơ?" },
+        "neutral": { "en": "Sorry, what did you say?", "vi": "Xin lỗi, bạn vừa nói gì?" },
+        "formal": {
+          "en": "I'm sorry, could you say that again, please?",
+          "vi": "Xin lỗi, anh chị có thể nói lại được không ạ?"
+        }
+      },
+      "situations": {
+        "casual": "Bạn thân nói gì đó lúc nhạc đang to.",
+        "neutral": "Người phục vụ quán cà phê hỏi bạn nhưng bạn không nghe rõ.",
+        "formal": "Bạn không nghe rõ câu hỏi của người phỏng vấn."
+      }
+    },
+    {
+      "id": "f.close",
+      "title_vi": "Kết thúc hội thoại",
+      "title_en": "Ending a conversation",
+      "units": ["u23", "u24"],
+      "phrases": {
+        "casual": { "en": "Okay, see you later!", "vi": "Ok, gặp lại sau nhé!" },
+        "neutral": {
+          "en": "It was nice talking to you. See you soon.",
+          "vi": "Nói chuyện với bạn vui lắm. Hẹn sớm gặp lại."
+        },
+        "formal": {
+          "en": "It was a pleasure speaking with you. I look forward to our next meeting.",
+          "vi": "Rất hân hạnh được trò chuyện với anh chị. Mong đến buổi gặp tới."
+        }
+      },
+      "situations": {
+        "casual": "Bạn chào bạn thân sau khi đi chơi về.",
+        "neutral": "Bạn kết thúc cuộc trò chuyện với một người hàng xóm.",
+        "formal": "Bạn chào đối tác sau buổi họp đầu tiên."
+      }
+    }
+  ],
+  "patterns": [
+    {
+      "id": "p.be",
+      "unit": "u01",
+      "title_vi": "Động từ to be: am, is, are",
+      "title_en": "The verb be",
+      "rule_vi": "I đi với am; he, she, it đi với is; you, we, they đi với are.",
+      "ending": null,
+      "drills": [
+        {
+          "id": "p.be.1",
+          "prompt": "I am happy.",
+          "cue": "She",
+          "answer": "She is happy.",
+          "target": "is",
+          "vi": "Cô ấy vui."
+        },
+        {
+          "id": "p.be.2",
+          "prompt": "I am a student.",
+          "cue": "They",
+          "answer": "They are students.",
+          "target": "are",
+          "vi": "Họ là sinh viên."
+        },
+        {
+          "id": "p.be.3",
+          "prompt": "You are late.",
+          "cue": "He",
+          "answer": "He is late.",
+          "target": "is",
+          "vi": "Anh ấy đến muộn."
+        },
+        {
+          "id": "p.be.4",
+          "prompt": "We are from Vietnam.",
+          "cue": "My friend",
+          "answer": "My friend is from Vietnam.",
+          "target": "is",
+          "vi": "Bạn mình đến từ Việt Nam."
+        }
+      ]
+    },
+    {
+      "id": "p.there-are",
+      "unit": "u02",
+      "title_vi": "There is, there are và danh từ số nhiều",
+      "title_en": "There is, there are and plurals",
+      "rule_vi": "Nhiều hơn một thì dùng there are và thêm -s vào danh từ. Nói rõ âm /s/ hoặc /z/ ở cuối.",
+      "ending": "s",
+      "drills": [
+        {
+          "id": "p.there-are.1",
+          "prompt": "There is a cup on my desk.",
+          "cue": "two",
+          "answer": "There are two cups on my desk.",
+          "target": "cups",
+          "vi": "Có hai cái cốc trên bàn mình."
+        },
+        {
+          "id": "p.there-are.2",
+          "prompt": "There is a book next to my laptop.",
+          "cue": "three",
+          "answer": "There are three books next to my laptop.",
+          "target": "books",
+          "vi": "Có ba cuốn sách cạnh máy tính của mình."
+        },
+        {
+          "id": "p.there-are.3",
+          "prompt": "There is a map on the wall.",
+          "cue": "two",
+          "answer": "There are two maps on the wall.",
+          "target": "maps",
+          "vi": "Có hai tấm bản đồ trên tường."
+        },
+        {
+          "id": "p.there-are.4",
+          "prompt": "There is a pen in my bag.",
+          "cue": "some",
+          "answer": "There are some pens in my bag.",
+          "target": "pens",
+          "vi": "Có vài cây bút trong túi mình."
+        }
+      ]
+    },
+    {
+      "id": "p.have-has",
+      "unit": "u03",
+      "title_vi": "have và has",
+      "title_en": "Have and has",
+      "rule_vi": "He, she, it và một người dùng has; các ngôi khác dùng have.",
+      "ending": null,
+      "drills": [
+        {
+          "id": "p.have-has.1",
+          "prompt": "I have three brothers.",
+          "cue": "She",
+          "answer": "She has three brothers.",
+          "target": "has",
+          "vi": "Cô ấy có ba anh em trai."
+        },
+        {
+          "id": "p.have-has.2",
+          "prompt": "We have a big family.",
+          "cue": "My aunt",
+          "answer": "My aunt has a big family.",
+          "target": "has",
+          "vi": "Dì mình có một gia đình đông người."
+        },
+        {
+          "id": "p.have-has.3",
+          "prompt": "They have a party on Thursday.",
+          "cue": "Tom",
+          "answer": "Tom has a party on Thursday.",
+          "target": "has",
+          "vi": "Tom có một bữa tiệc vào thứ Năm."
+        },
+        {
+          "id": "p.have-has.4",
+          "prompt": "I have a brother.",
+          "cue": "My father",
+          "answer": "My father has a brother.",
+          "target": "has",
+          "vi": "Bố mình có một người anh em trai."
+        }
+      ]
+    },
+    {
+      "id": "p.do-you",
+      "unit": "u04",
+      "title_vi": "Câu hỏi Do you…?",
+      "title_en": "Do you…? questions",
+      "rule_vi": "Thêm do trước chủ ngữ, động từ giữ nguyên, lên giọng ở cuối câu.",
+      "ending": null,
+      "drills": [
+        {
+          "id": "p.do-you.1",
+          "prompt": "You like chicken soup.",
+          "cue": "?",
+          "answer": "Do you like chicken soup?",
+          "target": "do you",
+          "vi": "Bạn có thích súp gà không?"
+        },
+        {
+          "id": "p.do-you.2",
+          "prompt": "You eat breakfast.",
+          "cue": "?",
+          "answer": "Do you eat breakfast?",
+          "target": "do you",
+          "vi": "Bạn có ăn sáng không?"
+        },
+        {
+          "id": "p.do-you.3",
+          "prompt": "You cook at home.",
+          "cue": "?",
+          "answer": "Do you cook at home?",
+          "target": "do you",
+          "vi": "Bạn có nấu ăn ở nhà không?"
+        },
+        {
+          "id": "p.do-you.4",
+          "prompt": "They want some rice.",
+          "cue": "?",
+          "answer": "Do they want some rice?",
+          "target": "do they",
+          "vi": "Họ có muốn ăn cơm không?"
+        }
+      ]
+    },
+    {
+      "id": "p.was-were",
+      "unit": "u05",
+      "title_vi": "Quá khứ của be: was, were",
+      "title_en": "Was and were",
+      "rule_vi": "I, he, she, it dùng was; you, we, they dùng were.",
+      "ending": null,
+      "drills": [
+        {
+          "id": "p.was-were.1",
+          "prompt": "The morning is bad.",
+          "cue": "yesterday",
+          "answer": "The morning was bad yesterday.",
+          "target": "was",
+          "vi": "Buổi sáng hôm qua thật tệ."
+        },
+        {
+          "id": "p.was-were.2",
+          "prompt": "We are happy.",
+          "cue": "last night",
+          "answer": "We were happy last night.",
+          "target": "were",
+          "vi": "Tối qua chúng mình rất vui."
+        },
+        {
+          "id": "p.was-were.3",
+          "prompt": "My friend is busy.",
+          "cue": "yesterday",
+          "answer": "My friend was busy yesterday.",
+          "target": "was",
+          "vi": "Hôm qua bạn mình bận."
+        },
+        {
+          "id": "p.was-were.4",
+          "prompt": "The movies are great.",
+          "cue": "last week",
+          "answer": "The movies were great last week.",
+          "target": "were",
+          "vi": "Mấy bộ phim tuần trước rất hay."
+        }
+      ]
+    },
+    {
+      "id": "p.present-s",
+      "unit": "u06",
+      "title_vi": "Hiện tại đơn ngôi ba: động từ thêm -s",
+      "title_en": "Third person -s",
+      "rule_vi": "He, she, it thì động từ thêm -s hoặc -es, đọc là /s/, /z/ hoặc /ɪz/. Đừng nuốt âm cuối này.",
+      "ending": "s",
+      "drills": [
+        {
+          "id": "p.present-s.1",
+          "prompt": "I wash the dishes.",
+          "cue": "My brother",
+          "answer": "My brother washes the dishes.",
+          "target": "washes",
+          "vi": "Anh trai mình rửa bát."
+        },
+        {
+          "id": "p.present-s.2",
+          "prompt": "I clean my shoes every Sunday.",
+          "cue": "She",
+          "answer": "She cleans her shoes every Sunday.",
+          "target": "cleans",
+          "vi": "Cô ấy lau giày vào mỗi Chủ nhật."
+        },
+        {
+          "id": "p.present-s.3",
+          "prompt": "We watch the news on TV.",
+          "cue": "He",
+          "answer": "He watches the news on TV.",
+          "target": "watches",
+          "vi": "Anh ấy xem thời sự trên TV."
+        },
+        {
+          "id": "p.present-s.4",
+          "prompt": "They cook dinner.",
+          "cue": "My mother",
+          "answer": "My mother cooks dinner.",
+          "target": "cooks",
+          "vi": "Mẹ mình nấu bữa tối."
+        }
+      ]
+    },
+    {
+      "id": "p.lets",
+      "unit": "u07",
+      "title_vi": "Rủ cùng làm: Let's + động từ",
+      "title_en": "Let's + verb",
+      "rule_vi": "Let's và động từ nguyên mẫu để rủ mọi người cùng làm.",
+      "ending": null,
+      "drills": [
+        {
+          "id": "p.lets.1",
+          "prompt": "We go to the park.",
+          "cue": "Let's",
+          "answer": "Let's go to the park.",
+          "target": "let's go",
+          "vi": "Mình đi công viên đi."
+        },
+        {
+          "id": "p.lets.2",
+          "prompt": "We see a movie.",
+          "cue": "Let's",
+          "answer": "Let's see a movie.",
+          "target": "let's see",
+          "vi": "Mình đi xem phim đi."
+        },
+        {
+          "id": "p.lets.3",
+          "prompt": "We bring our friends.",
+          "cue": "Let's",
+          "answer": "Let's bring our friends.",
+          "target": "let's bring",
+          "vi": "Mình rủ bạn bè đi cùng đi."
+        },
+        {
+          "id": "p.lets.4",
+          "prompt": "We meet at the store.",
+          "cue": "Let's",
+          "answer": "Let's meet at the store.",
+          "target": "let's meet",
+          "vi": "Mình gặp nhau ở cửa hàng nhé."
+        }
+      ]
+    },
+    {
+      "id": "p.when-do",
+      "unit": "u08",
+      "title_vi": "Hỏi giờ: When do, when does",
+      "title_en": "When do, when does",
+      "rule_vi": "When + do hoặc does + chủ ngữ + động từ nguyên mẫu. Sau does, động từ không thêm -s.",
+      "ending": null,
+      "drills": [
+        {
+          "id": "p.when-do.1",
+          "prompt": "Classes start at eight.",
+          "cue": "When",
+          "answer": "When do classes start?",
+          "target": "do",
+          "vi": "Lớp học bắt đầu lúc mấy giờ?"
+        },
+        {
+          "id": "p.when-do.2",
+          "prompt": "You study at home.",
+          "cue": "When",
+          "answer": "When do you study at home?",
+          "target": "do",
+          "vi": "Bạn học ở nhà lúc nào?"
+        },
+        {
+          "id": "p.when-do.3",
+          "prompt": "She starts work at nine.",
+          "cue": "When",
+          "answer": "When does she start work?",
+          "target": "does",
+          "vi": "Cô ấy bắt đầu làm việc lúc mấy giờ?"
+        },
+        {
+          "id": "p.when-do.4",
+          "prompt": "He goes to school.",
+          "cue": "When",
+          "answer": "When does he go to school?",
+          "target": "does",
+          "vi": "Cậu ấy đi học lúc mấy giờ?"
+        }
+      ]
+    },
+    {
+      "id": "p.past-ed",
+      "unit": "u09",
+      "title_vi": "Quá khứ có đuôi -ed",
+      "title_en": "Past tense -ed",
+      "rule_vi": "Đuôi -ed đọc /t/ sau âm vô thanh (worked), /d/ sau âm hữu thanh (played), /ɪd/ sau t và d (wanted).",
+      "ending": "ed",
+      "drills": [
+        {
+          "id": "p.past-ed.1",
+          "prompt": "I work until five.",
+          "cue": "yesterday",
+          "answer": "I worked until five yesterday.",
+          "target": "worked",
+          "vi": "Hôm qua mình làm việc tới năm giờ."
+        },
+        {
+          "id": "p.past-ed.2",
+          "prompt": "I play soccer with my friends.",
+          "cue": "yesterday",
+          "answer": "I played soccer with my friends yesterday.",
+          "target": "played",
+          "vi": "Hôm qua mình đá bóng với bạn."
+        },
+        {
+          "id": "p.past-ed.3",
+          "prompt": "We watch a movie.",
+          "cue": "last night",
+          "answer": "We watched a movie last night.",
+          "target": "watched",
+          "vi": "Tối qua chúng mình xem một bộ phim."
+        },
+        {
+          "id": "p.past-ed.4",
+          "prompt": "She wants to see it.",
+          "cue": "last week",
+          "answer": "She wanted to see it last week.",
+          "target": "wanted",
+          "vi": "Tuần trước cô ấy muốn xem nó."
+        }
+      ]
+    },
+    {
+      "id": "p.imperative",
+      "unit": "u10",
+      "title_vi": "Câu mệnh lệnh để chỉ đường",
+      "title_en": "Imperatives for directions",
+      "rule_vi": "Bỏ chủ ngữ, bắt đầu câu bằng động từ: go, turn, take, cross.",
+      "ending": null,
+      "drills": [
+        {
+          "id": "p.imperative.1",
+          "prompt": "You go straight down this road.",
+          "cue": "!",
+          "answer": "Go straight down this road.",
+          "target": "go straight",
+          "vi": "Đi thẳng theo con đường này."
+        },
+        {
+          "id": "p.imperative.2",
+          "prompt": "You turn left at the light.",
+          "cue": "!",
+          "answer": "Turn left at the light.",
+          "target": "turn left",
+          "vi": "Rẽ trái ở đèn giao thông."
+        },
+        {
+          "id": "p.imperative.3",
+          "prompt": "You take the first street on the right.",
+          "cue": "!",
+          "answer": "Take the first street on the right.",
+          "target": "take",
+          "vi": "Rẽ vào phố đầu tiên bên phải."
+        },
+        {
+          "id": "p.imperative.4",
+          "prompt": "You cross the road at the corner.",
+          "cue": "!",
+          "answer": "Cross the road at the corner.",
+          "target": "cross",
+          "vi": "Qua đường ở góc phố."
+        }
+      ]
+    },
+    {
+      "id": "p.comparative",
+      "unit": "u11",
+      "title_vi": "So sánh hơn: -er than",
+      "title_en": "Comparatives with -er than",
+      "rule_vi": "Tính từ ngắn thêm -er rồi than. Đọc than nhẹ /ðən/.",
+      "ending": null,
+      "drills": [
+        {
+          "id": "p.comparative.1",
+          "prompt": "My room is small.",
+          "cue": "your room",
+          "answer": "My room is smaller than your room.",
+          "target": "smaller than",
+          "vi": "Phòng mình nhỏ hơn phòng bạn."
+        },
+        {
+          "id": "p.comparative.2",
+          "prompt": "This window is big.",
+          "cue": "that one",
+          "answer": "This window is bigger than that one.",
+          "target": "bigger than",
+          "vi": "Cửa sổ này to hơn cái kia."
+        },
+        {
+          "id": "p.comparative.3",
+          "prompt": "My room is bright.",
+          "cue": "the kitchen",
+          "answer": "My room is brighter than the kitchen.",
+          "target": "brighter than",
+          "vi": "Phòng mình sáng hơn nhà bếp."
+        },
+        {
+          "id": "p.comparative.4",
+          "prompt": "This map is old.",
+          "cue": "that map",
+          "answer": "This map is older than that map.",
+          "target": "older than",
+          "vi": "Tấm bản đồ này cũ hơn tấm kia."
+        }
+      ]
+    },
+    {
+      "id": "p.where-do",
+      "unit": "u12",
+      "title_vi": "Hỏi nơi chốn: Where do, where does",
+      "title_en": "Where do, where does",
+      "rule_vi": "Where + do hoặc does + chủ ngữ + động từ nguyên mẫu, xuống giọng ở cuối.",
+      "ending": null,
+      "drills": [
+        {
+          "id": "p.where-do.1",
+          "prompt": "You live near the river.",
+          "cue": "Where",
+          "answer": "Where do you live?",
+          "target": "do you live",
+          "vi": "Bạn sống ở đâu?"
+        },
+        {
+          "id": "p.where-do.2",
+          "prompt": "She lives downtown.",
+          "cue": "Where",
+          "answer": "Where does she live?",
+          "target": "does she live",
+          "vi": "Cô ấy sống ở đâu?"
+        },
+        {
+          "id": "p.where-do.3",
+          "prompt": "They work in the city.",
+          "cue": "Where",
+          "answer": "Where do they work?",
+          "target": "do they work",
+          "vi": "Họ làm việc ở đâu?"
+        },
+        {
+          "id": "p.where-do.4",
+          "prompt": "He works at a bank.",
+          "cue": "Where",
+          "answer": "Where does he work?",
+          "target": "does he work",
+          "vi": "Anh ấy làm việc ở đâu?"
+        }
+      ]
+    },
+    {
+      "id": "p.can",
+      "unit": "u13",
+      "title_vi": "can và can't",
+      "title_en": "Can and can't",
+      "rule_vi": "can trong câu đọc nhẹ /kən/; can't giữ nguyên âm /æ/ mạnh. Người nghe phân biệt nhờ nguyên âm.",
+      "ending": null,
+      "drills": [
+        {
+          "id": "p.can.1",
+          "prompt": "I can make banana bread.",
+          "cue": "not",
+          "answer": "I can't make banana bread.",
+          "target": "can't",
+          "vi": "Mình không làm được bánh mì chuối."
+        },
+        {
+          "id": "p.can.2",
+          "prompt": "She can cook noodle soup.",
+          "cue": "not",
+          "answer": "She can't cook noodle soup.",
+          "target": "can't",
+          "vi": "Cô ấy không nấu được mì nước."
+        },
+        {
+          "id": "p.can.3",
+          "prompt": "We can learn together.",
+          "cue": "?",
+          "answer": "Can we learn together?",
+          "target": "can we",
+          "vi": "Chúng mình học cùng nhau được không?"
+        },
+        {
+          "id": "p.can.4",
+          "prompt": "He can swim.",
+          "cue": "not",
+          "answer": "He can't swim.",
+          "target": "can't",
+          "vi": "Anh ấy không biết bơi."
+        }
+      ]
+    },
+    {
+      "id": "p.phrasal-it",
+      "unit": "u14",
+      "title_vi": "Cụm động từ với it: turn it on",
+      "title_en": "Phrasal verbs with it",
+      "rule_vi": "it đứng giữa động từ và on, off, up, down. Nối âm: turn it on nghe như tur-ni-ton.",
+      "ending": null,
+      "drills": [
+        {
+          "id": "p.phrasal-it.1",
+          "prompt": "Turn on the stove.",
+          "cue": "it",
+          "answer": "Turn it on.",
+          "target": "turn it on",
+          "vi": "Bật nó lên."
+        },
+        {
+          "id": "p.phrasal-it.2",
+          "prompt": "Pick up the kettle.",
+          "cue": "it",
+          "answer": "Pick it up.",
+          "target": "pick it up",
+          "vi": "Nhấc nó lên."
+        },
+        {
+          "id": "p.phrasal-it.3",
+          "prompt": "Turn off the light.",
+          "cue": "it",
+          "answer": "Turn it off.",
+          "target": "turn it off",
+          "vi": "Tắt nó đi."
+        },
+        {
+          "id": "p.phrasal-it.4",
+          "prompt": "Put down the cup.",
+          "cue": "it",
+          "answer": "Put it down.",
+          "target": "put it down",
+          "vi": "Đặt nó xuống."
+        }
+      ]
+    },
+    {
+      "id": "p.past-irregular",
+      "unit": "u15",
+      "title_vi": "Quá khứ bất quy tắc",
+      "title_en": "Irregular past",
+      "rule_vi": "Nhiều động từ hay dùng có dạng quá khứ riêng: take thành took, have thành had, go thành went, see thành saw.",
+      "ending": null,
+      "drills": [
+        {
+          "id": "p.past-irregular.1",
+          "prompt": "We take a boat to an island.",
+          "cue": "last summer",
+          "answer": "We took a boat to an island last summer.",
+          "target": "took",
+          "vi": "Mùa hè năm ngoái chúng mình đi thuyền ra đảo."
+        },
+        {
+          "id": "p.past-irregular.2",
+          "prompt": "We have a great time.",
+          "cue": "last summer",
+          "answer": "We had a great time last summer.",
+          "target": "had",
+          "vi": "Mùa hè năm ngoái chúng mình rất vui."
+        },
+        {
+          "id": "p.past-irregular.3",
+          "prompt": "I go to the sea.",
+          "cue": "last year",
+          "answer": "I went to the sea last year.",
+          "target": "went",
+          "vi": "Năm ngoái mình đi biển."
+        },
+        {
+          "id": "p.past-irregular.4",
+          "prompt": "We see a small town.",
+          "cue": "yesterday",
+          "answer": "We saw a small town yesterday.",
+          "target": "saw",
+          "vi": "Hôm qua chúng mình thấy một thị trấn nhỏ."
+        }
+      ]
+    },
+    {
+      "id": "p.continuous",
+      "unit": "u16",
+      "title_vi": "Đang làm: am, is, are + V-ing",
+      "title_en": "Present continuous",
+      "rule_vi": "Việc đang diễn ra bây giờ: be + động từ thêm -ing. Giữ âm /ŋ/ cuối, không đọc thành /n/.",
+      "ending": null,
+      "drills": [
+        {
+          "id": "p.continuous.1",
+          "prompt": "She works at the hospital.",
+          "cue": "now",
+          "answer": "She is working at the hospital now.",
+          "target": "is working",
+          "vi": "Bây giờ cô ấy đang làm việc ở bệnh viện."
+        },
+        {
+          "id": "p.continuous.2",
+          "prompt": "I read the news.",
+          "cue": "now",
+          "answer": "I am reading the news now.",
+          "target": "am reading",
+          "vi": "Mình đang đọc tin tức."
+        },
+        {
+          "id": "p.continuous.3",
+          "prompt": "They play in the park.",
+          "cue": "now",
+          "answer": "They are playing in the park now.",
+          "target": "are playing",
+          "vi": "Bây giờ họ đang chơi trong công viên."
+        },
+        {
+          "id": "p.continuous.4",
+          "prompt": "He cooks dinner.",
+          "cue": "now",
+          "answer": "He is cooking dinner now.",
+          "target": "is cooking",
+          "vi": "Anh ấy đang nấu bữa tối."
+        }
+      ]
+    },
+    {
+      "id": "p.did-you",
+      "unit": "u17",
+      "title_vi": "Câu hỏi quá khứ: Did + động từ nguyên mẫu",
+      "title_en": "Did…? questions",
+      "rule_vi": "Sau did, động từ không có -ed: nói Did you study?, không nói Did you studied?",
+      "ending": null,
+      "drills": [
+        {
+          "id": "p.did-you.1",
+          "prompt": "You studied business.",
+          "cue": "?",
+          "answer": "Did you study business?",
+          "target": "did you study",
+          "vi": "Bạn đã học kinh doanh à?"
+        },
+        {
+          "id": "p.did-you.2",
+          "prompt": "She worked at a newspaper.",
+          "cue": "?",
+          "answer": "Did she work at a newspaper?",
+          "target": "did she work",
+          "vi": "Cô ấy từng làm ở một tờ báo à?"
+        },
+        {
+          "id": "p.did-you.3",
+          "prompt": "They visited the university.",
+          "cue": "?",
+          "answer": "Did they visit the university?",
+          "target": "did they visit",
+          "vi": "Họ đã đến thăm trường đại học à?"
+        },
+        {
+          "id": "p.did-you.4",
+          "prompt": "He took photos.",
+          "cue": "?",
+          "answer": "Did he take photos?",
+          "target": "did he take",
+          "vi": "Anh ấy có chụp ảnh không?"
+        }
+      ]
+    },
+    {
+      "id": "p.could-i",
+      "unit": "u18",
+      "title_vi": "Xin lịch sự: Could I have…, please?",
+      "title_en": "Could I have…, please?",
+      "rule_vi": "Thay I want bằng Could I have… please? để lịch sự hơn khi gọi món hay nhờ vả.",
+      "ending": null,
+      "drills": [
+        {
+          "id": "p.could-i.1",
+          "prompt": "I want a coffee.",
+          "cue": "please",
+          "answer": "Could I have a coffee, please?",
+          "target": "could i have",
+          "vi": "Cho mình một ly cà phê được không?"
+        },
+        {
+          "id": "p.could-i.2",
+          "prompt": "I want some water.",
+          "cue": "please",
+          "answer": "Could I have some water, please?",
+          "target": "could i have",
+          "vi": "Cho mình xin ít nước được không?"
+        },
+        {
+          "id": "p.could-i.3",
+          "prompt": "I want the menu.",
+          "cue": "please",
+          "answer": "Could I have the menu, please?",
+          "target": "could i have",
+          "vi": "Cho mình xem thực đơn được không?"
+        },
+        {
+          "id": "p.could-i.4",
+          "prompt": "I want an iced tea.",
+          "cue": "please",
+          "answer": "Could I have an iced tea, please?",
+          "target": "could i have",
+          "vi": "Cho mình một ly trà đá được không?"
+        }
+      ]
+    },
+    {
+      "id": "p.when-clause",
+      "unit": "u19",
+      "title_vi": "Kể theo thời gian: When I…, I…",
+      "title_en": "When I…, I…",
+      "rule_vi": "Ghép hai việc nối tiếp bằng when, ngắt nhẹ ở dấu phẩy. Cả hai động từ ở quá khứ, giữ đuôi -ed.",
+      "ending": "ed",
+      "drills": [
+        {
+          "id": "p.when-clause.1",
+          "prompt": "I get home. I cook dinner.",
+          "cue": "yesterday",
+          "answer": "When I got home, I cooked dinner.",
+          "target": "cooked",
+          "vi": "Khi về đến nhà, mình nấu bữa tối."
+        },
+        {
+          "id": "p.when-clause.2",
+          "prompt": "I finish work. I call my mom.",
+          "cue": "yesterday",
+          "answer": "When I finished work, I called my mom.",
+          "target": "called",
+          "vi": "Khi xong việc, mình gọi cho mẹ."
+        },
+        {
+          "id": "p.when-clause.3",
+          "prompt": "I arrive. I check my email.",
+          "cue": "yesterday",
+          "answer": "When I arrived, I checked my email.",
+          "target": "checked",
+          "vi": "Khi đến nơi, mình kiểm tra email."
+        },
+        {
+          "id": "p.when-clause.4",
+          "prompt": "I wake up. I open the window.",
+          "cue": "yesterday",
+          "answer": "When I woke up, I opened the window.",
+          "target": "opened",
+          "vi": "Khi thức dậy, mình mở cửa sổ."
+        }
+      ]
+    },
+    {
+      "id": "p.correction",
+      "unit": "u20",
+      "title_vi": "Sửa thông tin: It's…, not…",
+      "title_en": "Correcting: it's…, not…",
+      "rule_vi": "Nhấn mạnh vào thông tin đúng và thông tin bị sửa.",
+      "ending": null,
+      "drills": [
+        {
+          "id": "p.correction.1",
+          "prompt": "The meeting is at three fifty.",
+          "cue": "fifteen",
+          "answer": "No, it's at three fifteen, not fifty.",
+          "target": "fifteen",
+          "vi": "Không, lúc ba giờ mười lăm, không phải năm mươi."
+        },
+        {
+          "id": "p.correction.2",
+          "prompt": "Your room is fifty.",
+          "cue": "fifteen",
+          "answer": "No, it's room fifteen, not fifty.",
+          "target": "fifteen",
+          "vi": "Không, phòng mười lăm, không phải năm mươi."
+        },
+        {
+          "id": "p.correction.3",
+          "prompt": "The class is on Monday.",
+          "cue": "Tuesday",
+          "answer": "No, it's on Tuesday, not Monday.",
+          "target": "tuesday",
+          "vi": "Không, vào thứ Ba, không phải thứ Hai."
+        },
+        {
+          "id": "p.correction.4",
+          "prompt": "Your number is thirty.",
+          "cue": "thirteen",
+          "answer": "No, it's thirteen, not thirty.",
+          "target": "thirteen",
+          "vi": "Không, mười ba, không phải ba mươi."
+        }
+      ]
+    },
+    {
+      "id": "p.going-to",
+      "unit": "u21",
+      "title_vi": "Kế hoạch: be going to + động từ",
+      "title_en": "Going to",
+      "rule_vi": "Kế hoạch đã định: am, is, are + going to + động từ nguyên mẫu.",
+      "ending": null,
+      "drills": [
+        {
+          "id": "p.going-to.1",
+          "prompt": "I visit my parents.",
+          "cue": "this weekend",
+          "answer": "I'm going to visit my parents this weekend.",
+          "target": "going to visit",
+          "vi": "Cuối tuần này mình sẽ về thăm bố mẹ."
+        },
+        {
+          "id": "p.going-to.2",
+          "prompt": "We see a movie.",
+          "cue": "on Sunday",
+          "answer": "We're going to see a movie on Sunday.",
+          "target": "going to see",
+          "vi": "Chủ nhật chúng mình sẽ đi xem phim."
+        },
+        {
+          "id": "p.going-to.3",
+          "prompt": "She studies.",
+          "cue": "tonight",
+          "answer": "She's going to study tonight.",
+          "target": "going to study",
+          "vi": "Tối nay cô ấy sẽ học bài."
+        },
+        {
+          "id": "p.going-to.4",
+          "prompt": "They travel.",
+          "cue": "next month",
+          "answer": "They're going to travel next month.",
+          "target": "going to travel",
+          "vi": "Tháng sau họ sẽ đi du lịch."
+        }
+      ]
+    },
+    {
+      "id": "p.present-perfect",
+      "unit": "u22",
+      "title_vi": "Hiện tại hoàn thành với for, since",
+      "title_en": "Present perfect with for and since",
+      "rule_vi": "Việc bắt đầu từ trước và còn tiếp: have hoặc has + quá khứ phân từ. Giữ đuôi -ed.",
+      "ending": "ed",
+      "drills": [
+        {
+          "id": "p.present-perfect.1",
+          "prompt": "I live here.",
+          "cue": "for ten years",
+          "answer": "I have lived here for ten years.",
+          "target": "lived",
+          "vi": "Mình đã sống ở đây mười năm."
+        },
+        {
+          "id": "p.present-perfect.2",
+          "prompt": "I love singing.",
+          "cue": "since I was young",
+          "answer": "I have loved singing since I was young.",
+          "target": "loved",
+          "vi": "Mình mê hát từ hồi còn nhỏ."
+        },
+        {
+          "id": "p.present-perfect.3",
+          "prompt": "We play in a band.",
+          "cue": "for two years",
+          "answer": "We have played in a band for two years.",
+          "target": "played",
+          "vi": "Chúng mình chơi trong một ban nhạc được hai năm rồi."
+        },
+        {
+          "id": "p.present-perfect.4",
+          "prompt": "She works here.",
+          "cue": "since May",
+          "answer": "She has worked here since May.",
+          "target": "worked",
+          "vi": "Cô ấy làm ở đây từ tháng Năm."
+        }
+      ]
+    },
+    {
+      "id": "p.frequency",
+      "unit": "u23",
+      "title_vi": "Trạng từ tần suất: always, usually, often",
+      "title_en": "Adverbs of frequency",
+      "rule_vi": "Đặt trạng từ tần suất trước động từ thường, sau động từ be.",
+      "ending": null,
+      "drills": [
+        {
+          "id": "p.frequency.1",
+          "prompt": "I get up at six.",
+          "cue": "usually",
+          "answer": "I usually get up at six.",
+          "target": "usually",
+          "vi": "Mình thường dậy lúc sáu giờ."
+        },
+        {
+          "id": "p.frequency.2",
+          "prompt": "I drink water first.",
+          "cue": "always",
+          "answer": "I always drink water first.",
+          "target": "always",
+          "vi": "Mình luôn uống nước trước tiên."
+        },
+        {
+          "id": "p.frequency.3",
+          "prompt": "She runs in the morning.",
+          "cue": "often",
+          "answer": "She often runs in the morning.",
+          "target": "often",
+          "vi": "Cô ấy hay chạy bộ vào buổi sáng."
+        },
+        {
+          "id": "p.frequency.4",
+          "prompt": "He eats breakfast.",
+          "cue": "never",
+          "answer": "He never eats breakfast.",
+          "target": "never",
+          "vi": "Anh ấy không bao giờ ăn sáng."
+        }
+      ]
+    },
+    {
+      "id": "p.because",
+      "unit": "u24",
+      "title_vi": "Nêu lý do với because",
+      "title_en": "Giving reasons with because",
+      "rule_vi": "Nối ý kiến và lý do bằng because, đọc nhẹ /bɪˈkəz/, không ngắt giữa hai vế.",
+      "ending": null,
+      "drills": [
+        {
+          "id": "p.because.1",
+          "prompt": "I love my hometown. The people are friendly.",
+          "cue": "because",
+          "answer": "I love my hometown because the people are friendly.",
+          "target": "because",
+          "vi": "Mình yêu quê vì người dân thân thiện."
+        },
+        {
+          "id": "p.because.2",
+          "prompt": "I like the night market. The food is cheap.",
+          "cue": "because",
+          "answer": "I like the night market because the food is cheap.",
+          "target": "because",
+          "vi": "Mình thích chợ đêm vì đồ ăn rẻ."
+        },
+        {
+          "id": "p.because.3",
+          "prompt": "My city is beautiful. It is by the sea.",
+          "cue": "because",
+          "answer": "My city is beautiful because it is by the sea.",
+          "target": "because",
+          "vi": "Thành phố mình đẹp vì nằm cạnh biển."
+        },
+        {
+          "id": "p.because.4",
+          "prompt": "I go home often. My family lives there.",
+          "cue": "because",
+          "answer": "I go home often because my family lives there.",
+          "target": "because",
+          "vi": "Mình hay về nhà vì gia đình sống ở đó."
+        }
+      ]
+    }
+  ]
+}

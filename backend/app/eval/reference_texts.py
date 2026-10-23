@@ -2,8 +2,8 @@
 
 Words of the 44-sound chart (example and contrast), drill words, pairs and sentences, minimal
 pairs, practice sentences, the listening material of the curriculum (pairs, stress words,
-focus sentences) and both sides of each unit's role-play, and
-every vocabulary item with its example. The voice builder renders exactly
+focus sentences) and both sides of each unit's role-play, every vocabulary item with its
+example, and the functional phrases and pattern drills. The voice builder renders exactly
 this list; a test keeps it in step with the content.
 """
 
@@ -26,6 +26,15 @@ def _vocab_texts() -> set[str]:
         texts.add(item["text"])
         if item["example"]:
             texts.add(item["example"]["en"])
+    return texts
+
+
+def _talk_texts() -> set[str]:
+    """Phrases of each register and both sides of each pattern drill (content/talk.json)."""
+    talk = _json("talk.json")
+    texts = {p["en"] for f in talk["functions"] for p in f["phrases"].values()}
+    for pattern in talk["patterns"]:
+        texts.update(t for d in pattern["drills"] for t in (d["prompt"], d["answer"]))
     return texts
 
 
@@ -56,4 +65,5 @@ def reference_texts() -> list[str]:
                 texts.update(item["word"] for item in step["stress"])
                 texts.update(sentences[item["sentence"]] for item in step["focus"])
     texts.update(_vocab_texts())
+    texts.update(_talk_texts())
     return sorted(t.strip() for t in texts if t.strip())
