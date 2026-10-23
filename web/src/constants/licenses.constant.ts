@@ -44,6 +44,13 @@ export const THIRD_PARTY_NOTICES: ThirdPartyNotice[] = [
     use: { vi: 'Vỏ ứng dụng iOS.', en: 'The iOS app shell.' },
   },
   {
+    name: 'ts-fsrs',
+    author: 'Open Spaced Repetition',
+    license: 'MIT License',
+    url: 'https://github.com/open-spaced-repetition/ts-fsrs',
+    use: { vi: 'Lịch ôn từ vựng giãn cách.', en: 'Spaced review schedule for vocabulary.' },
+  },
+  {
     name: 'Next.js, React',
     author: 'Vercel, Meta',
     license: 'MIT License',

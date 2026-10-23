@@ -6,6 +6,7 @@ Theo [Keep a Changelog](https://keepachangelog.com/vi/1.1.0/); phiên bản theo
 
 ### Thêm
 
+- Plan v2 mở rộng từ phát âm sang từ vựng, cách nói chuyện, cấu trúc nói và độ trôi chảy (`docs/PLAN-V2-SPEAKING-AND-VOCABULARY.md`); lõi lịch ôn giãn cách FSRS chạy trên máy (`web/src/utils/srs.util.ts`), chưa có giao diện.
 - Trải nghiệm di động làm lại (`docs/design/mobile-ux-overhaul.md`): chạm kiểu app (trạng thái nhấn, không trễ, vùng chạm 44 px, rung nhẹ trong app iOS); bỏ thanh thương hiệu trên điện thoại; trình phát bài học toàn màn có nút đóng cho Luyện tập, Nghe, Hiệu chỉnh, màn bắt đầu; trang chủ "Hôm nay" vừa một màn; danh sách dày với sheet cho 44 âm, lộ trình, khóa 14 ngày, cài đặt và tiến độ.
 - Chấm nhanh hơn: máy chấm nạp sẵn mô hình, từ điển và bộ đo cao độ ngay khi khởi động, nên lần chấm đầu không còn chờ 6 giây; với một từ, app kết thúc lượt nói sau 0,45 giây im lặng thay vì 0,9 giây (câu giữ 0,75 giây để không cắt giữa chừng).
 - Camera luyện tập bật sẵn; khung hình giữ đúng tỉ lệ camera nên đường viền môi và môi mẫu luôn nằm đúng miệng, khung nhỏ tự phóng to vào miệng khi thấy mặt; gợi ý "Đưa mặt vào khung" gọn một dòng.
