@@ -286,3 +286,21 @@ Màn “Giấy phép” hiện có cần thêm NGSL và Tatoeba. Ghi checksum v�
 - Nghĩa → nói và Điền câu: máy chấm âm vị chấm **chỉ các âm của mục** (`targetVerdicts`). `ok` → nhớ tốt, `check` → khó, sai hoặc im lặng → quên. Người học có nút "Mình nói đúng, máy chấm sai". Khi không chấm được (offline, không có máy chấm), người học tự đánh giá. Thẻ Điền câu chỉ có khi câu ví dụ chứa mục và khác chính mục.
 - Lượt nói cũng được lưu như một lần chấm (`vocab:<id>:<kiểu>`), nên vẫn tính vào tiến độ âm.
 - Test: `vocab.util.test.ts` (kế hoạch phiên, cloze, đáp án nhiễu, kiểm tra kho từ), `VocabScreen.test.tsx` (nghe, nói có chấm + sửa đánh giá, tự đánh giá, hết thẻ). E2E `e2e/vocab.spec.ts`: 10 thẻ nghe, tải lại, rồi một thẻ nói chấm bằng máy chấm thật trên desktop và điện thoại. `/vocab/` có trong kiểm tra axe.
+
+### V3 · Cụm giao tiếp và cấu trúc nói: **XONG** (23/10)
+
+- `content/talk.json` (`aec-talk/1`, do AI soạn, chưa có người duyệt):
+  - 12 chức năng theo §5.1, mỗi chức năng một câu ở ba mức (thân mật, trung tính, trang trọng) kèm bản dịch và một tình huống cho từng mức. Mỗi chức năng gắn với 2 đơn vị nên đơn vị nào cũng có ít nhất một chức năng.
+  - 24 mẫu câu, mỗi đơn vị một mẫu, mỗi mẫu 4 câu biến đổi (câu gốc, gợi ý, đáp án, từ mang ngữ pháp, bản dịch).
+  - 5 mẫu đánh dấu đuôi cần chấm: số nhiều (u02), ngôi ba -s (u06), -ed (u09), When I…, I… (u19), hiện tại hoàn thành (u22).
+  - Test backend: đủ 12 × 3, mỗi đơn vị có chức năng và đúng một mẫu, mọi từ có trong CMUdict, từ mang đuôi kết thúc bằng /s z/ hoặc /t d/ theo CMUdict.
+- Trang `/talk` và thẻ "Luyện cách nói" trên Trang chủ. Hai kiểu thẻ (`ReviewMode.Register`, `ReviewMode.Transform`) dùng chung lõi FSRS với Từ vựng; 10 thẻ mới mỗi ngày.
+  - **Chọn câu hợp ngữ cảnh:** đọc tình huống, chọn 1 trong 3 câu, rồi nói câu đúng. Chọn sai là quên (Again). Chọn đúng nhưng phát âm có lỗi chỉ thành khó (Hard), vì thứ đang học là mức lịch sự.
+  - **Biến đổi câu bằng giọng:** nghe câu gốc, xem gợi ý, nói câu mới. Máy chấm chỉ chấm các âm của từ mang ngữ pháp. Với mẫu có đuôi, âm cuối của từ đó là âm của đuôi: `ok` thì báo đuôi rõ, `check` thì báo chưa rõ, `error` hoặc không thấy từ thì báo bị nuốt. Có nút "Mình nói đúng, máy chấm sai", "Mình chưa biết", và tự đánh giá khi không chấm được.
+  - `?unit=u06` luyện mọi thẻ của một đơn vị, bất kể lịch. Sheet đơn vị trong Lộ trình hiện chức năng và mẫu của đơn vị kèm nút luyện.
+- Bộ lập lịch tách thành `review-plan.util.ts` dùng chung. Nó chỉ tính thẻ của chính bộ đó, nên Từ vựng và Cách nói có giới hạn thẻ mới riêng, và thẻ của mục đã bỏ khỏi bộ không còn chặn thẻ mới. Thu âm rồi chấm tách thành `useScoredTake`, thẻ nói của Từ vựng cũng dùng.
+- Test: `talk.util.test.ts`, `TalkScreen.test.tsx`, `TalkTransformCard.test.tsx`, `TalkLinks.test.tsx`. E2E `e2e/talk.spec.ts`: chọn câu rồi nói, và đi từ sheet đơn vị sang biến đổi câu -ed, cả hai chấm bằng máy chấm thật trên desktop và điện thoại. `/talk/` có trong kiểm tra axe.
+- Giới hạn:
+  - Chỉ chấm câu có đáp án biết trước (§5.2). Máy chấm không biết người học có nói sai cấu trúc khác hay không, chỉ biết các âm của đáp án có được nói ra không.
+  - Nội dung do AI soạn: cần giáo viên duyệt như nghĩa từ vựng.
+  - Câu mới chưa có giọng mẫu đóng gói sẵn. Lần dựng giọng tới sẽ có, vì `reference_texts` đã gồm chúng; trước đó app lấy giọng từ máy chấm.
