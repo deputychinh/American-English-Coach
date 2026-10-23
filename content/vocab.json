@@ -1,0 +1,3725 @@
+{
+  "schema": "aec-vocab/1",
+  "items": [
+    {
+      "id": "w.today",
+      "kind": "word",
+      "text": "today",
+      "ipa": "təˈdeɪ",
+      "pos": "adverb",
+      "meaning_vi": "hôm nay",
+      "example": {
+        "en": "Nice to meet you too. What are you doing today?",
+        "vi": "Mình cũng rất vui. Hôm nay bạn làm gì?"
+      },
+      "level": 1,
+      "source": {
+        "list": "curriculum",
+        "meaning": "authored",
+        "ipa": "cmudict"
+      },
+      "review": "draft",
+      "units": ["u01"]
+    },
+    {
+      "id": "w.happy",
+      "kind": "word",
+      "text": "happy",
+      "ipa": "ˈhæpi",
+      "pos": "adjective",
+      "meaning_vi": "vui, vui vẻ",
+      "example": {
+        "en": "Hi, I'm Minh. I'm happy to meet you.",
+        "vi": "Chào, mình là Minh. Rất vui được gặp bạn."
+      },
+      "level": 1,
+      "source": {
+        "list": "curriculum",
+        "meaning": "authored",
+        "ipa": "cmudict"
+      },
+      "review": "draft",
+      "units": ["u01", "u05"]
+    },
+    {
+      "id": "w.about",
+      "kind": "word",
+      "text": "about",
+      "ipa": "əˈbaʊt",
+      "pos": "preposition",
+      "meaning_vi": "về (chủ đề gì)",
+      "example": {
+        "en": "Great! What is it about?",
+        "vi": "Tuyệt! Lớp học về gì vậy?"
+      },
+      "level": 1,
+      "source": {
+        "list": "curriculum",
+        "meaning": "authored",
+        "ipa": "cmudict"
+      },
+      "review": "draft",
+      "units": ["u01", "u13"]
+    },
+    {
+      "id": "w.begin",
+      "kind": "word",
+      "text": "begin",
+      "ipa": "bɪˈɡɪn",
+      "pos": "verb",
+      "meaning_vi": "bắt đầu",
+      "example": {
+        "en": "Today I begin my English class.",
+        "vi": "Hôm nay mình bắt đầu lớp tiếng Anh."
+      },
+      "level": 1,
+      "source": {
+        "list": "curriculum",
+        "meaning": "authored",
+        "ipa": "cmudict"
+      },
+      "review": "draft",
+      "units": ["u01"]
+    },
+    {
+      "id": "c.hi-im-anna-whats-your-name",
+      "kind": "chunk",
+      "text": "Hi! I'm Anna. What's your name?",
+      "ipa": "haɪ aɪm ˈænə wʌts jɔɹ neɪm",
+      "pos": "phrase",
+      "meaning_vi": "Chào bạn! Mình là Anna. Bạn tên gì?",
+      "example": {
+        "en": "Hi! I'm Anna. What's your name?",
+        "vi": "Chào bạn! Mình là Anna. Bạn tên gì?"
+      },
+      "level": 1,
+      "source": {
+        "list": "curriculum",
+        "meaning": "curriculum",
+        "ipa": "cmudict"
+      },
+      "review": "approved",
+      "units": ["u01"]
+    },
+    {
+      "id": "c.today-i-begin-my-english-class",
+      "kind": "chunk",
+      "text": "Today I begin my English class.",
+      "ipa": "təˈdeɪ aɪ bɪˈɡɪn maɪ ˈɪŋɡlɪʃ klæs",
+      "pos": "phrase",
+      "meaning_vi": "Hôm nay mình bắt đầu lớp tiếng Anh.",
+      "example": {
+        "en": "Today I begin my English class.",
+        "vi": "Hôm nay mình bắt đầu lớp tiếng Anh."
+      },
+      "level": 1,
+      "source": {
+        "list": "curriculum",
+        "meaning": "curriculum",
+        "ipa": "cmudict"
+      },
+      "review": "approved",
+      "units": ["u01"]
+    },
+    {
+      "id": "c.great-what-is-it-about",
+      "kind": "chunk",
+      "text": "Great! What is it about?",
+      "ipa": "ɡɹeɪt wʌt ɪz ɪt əˈbaʊt",
+      "pos": "phrase",
+      "meaning_vi": "Tuyệt! Lớp học về gì vậy?",
+      "example": {
+        "en": "Great! What is it about?",
+        "vi": "Tuyệt! Lớp học về gì vậy?"
+      },
+      "level": 1,
+      "source": {
+        "list": "curriculum",
+        "meaning": "curriculum",
+        "ipa": "cmudict"
+      },
+      "review": "approved",
+      "units": ["u01"]
+    },
+    {
+      "id": "c.its-about-speaking-clearly",
+      "kind": "chunk",
+      "text": "It's about speaking clearly.",
+      "ipa": "ɪts əˈbaʊt ˈspikɪŋ ˈklɪɹli",
+      "pos": "phrase",
+      "meaning_vi": "Về cách nói cho rõ ràng.",
+      "example": {
+        "en": "It's about speaking clearly.",
+        "vi": "Về cách nói cho rõ ràng."
+      },
+      "level": 1,
+      "source": {
+        "list": "curriculum",
+        "meaning": "curriculum",
+        "ipa": "cmudict"
+      },
+      "review": "approved",
+      "units": ["u01"]
+    },
+    {
+      "id": "w.cup",
+      "kind": "word",
+      "text": "cup",
+      "ipa": "kʌp",
+      "pos": "noun",
+      "meaning_vi": "cái cốc, tách",
+      "example": {
+        "en": "A laptop and a cup of coffee.",
+        "vi": "Một cái laptop và một cốc cà phê."
+      },
+      "level": 1,
+      "source": {
+        "list": "curriculum",
+        "meaning": "authored",
+        "ipa": "cmudict"
+      },
+      "review": "draft",
+      "units": ["u02"]
+    },
+    {
+      "id": "w.desk",
+      "kind": "word",
+      "text": "desk",
+      "ipa": "dɛsk",
+      "pos": "noun",
+      "meaning_vi": "bàn làm việc, bàn học",
+      "example": {
+        "en": "What's on your desk right now?",
+        "vi": "Trên bàn làm việc của bạn đang có gì?"
+      },
+      "level": 1,
+      "source": {
+        "list": "curriculum",
+        "meaning": "authored",
+        "ipa": "cmudict"
+      },
+      "review": "draft",
+      "units": ["u02"]
+    },
+    {
+      "id": "w.book",
+      "kind": "word",
+      "text": "book",
+      "ipa": "bʊk",
+      "pos": "noun",
+      "meaning_vi": "quyển sách",
+      "example": {
+        "en": "There's a book next to my laptop.",
+        "vi": "Có một cuốn sách cạnh laptop."
+      },
+      "level": 1,
+      "source": {
+        "list": "curriculum",
+        "meaning": "authored",
+        "ipa": "cmudict"
+      },
+      "review": "draft",
+      "units": ["u02"]
+    },
+    {
+      "id": "w.laptop",
+      "kind": "word",
+      "text": "laptop",
+      "ipa": "ˈlæptɑp",
+      "pos": "noun",
+      "meaning_vi": "máy tính xách tay",
+      "example": {
+        "en": "A laptop and a cup of coffee.",
+        "vi": "Một cái laptop và một cốc cà phê."
+      },
+      "level": 1,
+      "source": {
+        "list": "curriculum",
+        "meaning": "authored",
+        "ipa": "cmudict"
+      },
+      "review": "draft",
+      "units": ["u02"]
+    },
+    {
+      "id": "c.whats-on-your-desk-right-now",
+      "kind": "chunk",
+      "text": "What's on your desk right now?",
+      "ipa": "wʌts ɑn jɔɹ dɛsk ɹaɪt naʊ",
+      "pos": "phrase",
+      "meaning_vi": "Trên bàn làm việc của bạn đang có gì?",
+      "example": {
+        "en": "What's on your desk right now?",
+        "vi": "Trên bàn làm việc của bạn đang có gì?"
+      },
+      "level": 1,
+      "source": {
+        "list": "curriculum",
+        "meaning": "curriculum",
+        "ipa": "cmudict"
+      },
+      "review": "approved",
+      "units": ["u02"]
+    },
+    {
+      "id": "c.anything-else",
+      "kind": "chunk",
+      "text": "Anything else?",
+      "ipa": "ˈɛniθɪŋ ɛls",
+      "pos": "phrase",
+      "meaning_vi": "Còn gì nữa không?",
+      "example": {
+        "en": "Anything else?",
+        "vi": "Còn gì nữa không?"
+      },
+      "level": 1,
+      "source": {
+        "list": "curriculum",
+        "meaning": "curriculum",
+        "ipa": "cmudict"
+      },
+      "review": "approved",
+      "units": ["u02"]
+    },
+    {
+      "id": "c.is-your-desk-always-that-tidy",
+      "kind": "chunk",
+      "text": "Is your desk always that tidy?",
+      "ipa": "ɪz jɔɹ dɛsk ˈɔlweɪz ðæt ˈtaɪdi",
+      "pos": "phrase",
+      "meaning_vi": "Bàn của bạn lúc nào cũng gọn vậy à?",
+      "example": {
+        "en": "Is your desk always that tidy?",
+        "vi": "Bàn của bạn lúc nào cũng gọn vậy à?"
+      },
+      "level": 1,
+      "source": {
+        "list": "curriculum",
+        "meaning": "curriculum",
+        "ipa": "cmudict"
+      },
+      "review": "approved",
+      "units": ["u02"]
+    },
+    {
+      "id": "w.mother",
+      "kind": "word",
+      "text": "mother",
+      "ipa": "ˈmʌðɚ",
+      "pos": "noun",
+      "meaning_vi": "mẹ",
+      "example": {
+        "en": "I live with my mother and father.",
+        "vi": "Mình sống với bố mẹ."
+      },
+      "level": 1,
+      "source": {
+        "list": "curriculum",
+        "meaning": "authored",
+        "ipa": "cmudict"
+      },
+      "review": "draft",
+      "units": ["u03"]
+    },
+    {
+      "id": "w.father",
+      "kind": "word",
+      "text": "father",
+      "ipa": "ˈfɑðɚ",
+      "pos": "noun",
+      "meaning_vi": "bố, cha",
+      "example": {
+        "en": "I live with my mother and father.",
+        "vi": "Mình sống với bố mẹ."
+      },
+      "level": 1,
+      "source": {
+        "list": "curriculum",
+        "meaning": "authored",
+        "ipa": "cmudict"
+      },
+      "review": "draft",
+      "units": ["u03"]
+    },
+    {
+      "id": "w.brother",
+      "kind": "word",
+      "text": "brother",
+      "ipa": "ˈbɹʌðɚ",
+      "pos": "noun",
+      "meaning_vi": "anh trai, em trai",
+      "example": {
+        "en": "My brother washes the dishes.",
+        "vi": "Anh trai mình rửa bát."
+      },
+      "level": 1,
+      "source": {
+        "list": "curriculum",
+        "meaning": "authored",
+        "ipa": "cmudict"
+      },
+      "review": "draft",
+      "units": ["u03"]
+    },
+    {
+      "id": "w.three",
+      "kind": "word",
+      "text": "three",
+      "ipa": "θɹi",
+      "pos": "number",
+      "meaning_vi": "số ba",
+      "example": {
+        "en": "I have three brothers.",
+        "vi": "Mình có ba anh em trai."
+      },
+      "level": 1,
+      "source": {
+        "list": "curriculum",
+        "meaning": "authored",
+        "ipa": "cmudict"
+      },
+      "review": "draft",
+      "units": ["u03"]
+    },
+    {
+      "id": "w.birthday",
+      "kind": "word",
+      "text": "birthday",
+      "ipa": "ˈbɝθdeɪ",
+      "pos": "noun",
+      "meaning_vi": "sinh nhật",
+      "example": {
+        "en": "Wow, a big family! When is your birthday?",
+        "vi": "Ồ, gia đình đông thật! Sinh nhật bạn khi nào?"
+      },
+      "level": 1,
+      "source": {
+        "list": "curriculum",
+        "meaning": "authored",
+        "ipa": "cmudict"
+      },
+      "review": "draft",
+      "units": ["u03"]
+    },
+    {
+      "id": "c.tell-me-about-your-family",
+      "kind": "chunk",
+      "text": "Tell me about your family.",
+      "ipa": "tɛl mi əˈbaʊt jɔɹ ˈfæməli",
+      "pos": "phrase",
+      "meaning_vi": "Kể cho mình nghe về gia đình bạn đi.",
+      "example": {
+        "en": "Tell me about your family.",
+        "vi": "Kể cho mình nghe về gia đình bạn đi."
+      },
+      "level": 1,
+      "source": {
+        "list": "curriculum",
+        "meaning": "curriculum",
+        "ipa": "cmudict"
+      },
+      "review": "approved",
+      "units": ["u03"]
+    },
+    {
+      "id": "c.i-have-three-brothers",
+      "kind": "chunk",
+      "text": "I have three brothers.",
+      "ipa": "aɪ hæv θɹi ˈbɹʌðɚz",
+      "pos": "phrase",
+      "meaning_vi": "Mình có ba anh em trai.",
+      "example": {
+        "en": "I have three brothers.",
+        "vi": "Mình có ba anh em trai."
+      },
+      "level": 1,
+      "source": {
+        "list": "curriculum",
+        "meaning": "curriculum",
+        "ipa": "cmudict"
+      },
+      "review": "approved",
+      "units": ["u03"]
+    },
+    {
+      "id": "w.eat",
+      "kind": "word",
+      "text": "eat",
+      "ipa": "it",
+      "pos": "verb",
+      "meaning_vi": "ăn",
+      "example": {
+        "en": "What do you like to eat for dinner?",
+        "vi": "Bạn thích ăn gì vào bữa tối?"
+      },
+      "level": 1,
+      "source": {
+        "list": "curriculum",
+        "meaning": "authored",
+        "ipa": "cmudict"
+      },
+      "review": "draft",
+      "units": ["u04"]
+    },
+    {
+      "id": "w.chicken",
+      "kind": "word",
+      "text": "chicken",
+      "ipa": "ˈtʃɪkən",
+      "pos": "noun",
+      "meaning_vi": "thịt gà, con gà",
+      "example": {
+        "en": "I like to eat chicken soup.",
+        "vi": "Mình thích ăn súp gà."
+      },
+      "level": 1,
+      "source": {
+        "list": "curriculum",
+        "meaning": "authored",
+        "ipa": "cmudict"
+      },
+      "review": "draft",
+      "units": ["u04"]
+    },
+    {
+      "id": "w.soup",
+      "kind": "word",
+      "text": "soup",
+      "ipa": "sup",
+      "pos": "noun",
+      "meaning_vi": "món súp, canh",
+      "example": {
+        "en": "I like to eat chicken soup.",
+        "vi": "Mình thích ăn súp gà."
+      },
+      "level": 1,
+      "source": {
+        "list": "curriculum",
+        "meaning": "authored",
+        "ipa": "cmudict"
+      },
+      "review": "draft",
+      "units": ["u04"]
+    },
+    {
+      "id": "w.good",
+      "kind": "word",
+      "text": "good",
+      "ipa": "ɡʊd",
+      "pos": "adjective",
+      "meaning_vi": "tốt; ngon",
+      "example": {
+        "en": "No, it's easy and very good.",
+        "vi": "Không, dễ mà ngon lắm."
+      },
+      "level": 1,
+      "source": {
+        "list": "curriculum",
+        "meaning": "authored",
+        "ipa": "cmudict"
+      },
+      "review": "draft",
+      "units": ["u04"]
+    },
+    {
+      "id": "c.i-like-to-eat-chicken-soup",
+      "kind": "chunk",
+      "text": "I like to eat chicken soup.",
+      "ipa": "aɪ laɪk tu it ˈtʃɪkən sup",
+      "pos": "phrase",
+      "meaning_vi": "Mình thích ăn súp gà.",
+      "example": {
+        "en": "I like to eat chicken soup.",
+        "vi": "Mình thích ăn súp gà."
+      },
+      "level": 1,
+      "source": {
+        "list": "curriculum",
+        "meaning": "curriculum",
+        "ipa": "cmudict"
+      },
+      "review": "approved",
+      "units": ["u04"]
+    },
+    {
+      "id": "c.is-it-hard-to-make",
+      "kind": "chunk",
+      "text": "Is it hard to make?",
+      "ipa": "ɪz ɪt hɑɹd tu meɪk",
+      "pos": "phrase",
+      "meaning_vi": "Món đó có khó nấu không?",
+      "example": {
+        "en": "Is it hard to make?",
+        "vi": "Món đó có khó nấu không?"
+      },
+      "level": 1,
+      "source": {
+        "list": "curriculum",
+        "meaning": "curriculum",
+        "ipa": "cmudict"
+      },
+      "review": "approved",
+      "units": ["u04"]
+    },
+    {
+      "id": "c.no-its-easy-and-very-good",
+      "kind": "chunk",
+      "text": "No, it's easy and very good.",
+      "ipa": "noʊ ɪts ˈizi ənd ˈvɛɹi ɡʊd",
+      "pos": "phrase",
+      "meaning_vi": "Không, dễ mà ngon lắm.",
+      "example": {
+        "en": "No, it's easy and very good.",
+        "vi": "Không, dễ mà ngon lắm."
+      },
+      "level": 1,
+      "source": {
+        "list": "curriculum",
+        "meaning": "curriculum",
+        "ipa": "cmudict"
+      },
+      "review": "approved",
+      "units": ["u04"]
+    },
+    {
+      "id": "w.bad",
+      "kind": "word",
+      "text": "bad",
+      "ipa": "bæd",
+      "pos": "adjective",
+      "meaning_vi": "tệ, xấu",
+      "example": {
+        "en": "The morning was bad.",
+        "vi": "Buổi sáng tệ lắm."
+      },
+      "level": 1,
+      "source": {
+        "list": "curriculum",
+        "meaning": "authored",
+        "ipa": "cmudict"
+      },
+      "review": "draft",
+      "units": ["u05"]
+    },
+    {
+      "id": "w.lunch",
+      "kind": "word",
+      "text": "lunch",
+      "ipa": "lʌntʃ",
+      "pos": "noun",
+      "meaning_vi": "bữa trưa",
+      "example": {
+        "en": "Yes, I had lunch with a friend.",
+        "vi": "Có, mình ăn trưa với một người bạn."
+      },
+      "level": 1,
+      "source": {
+        "list": "curriculum",
+        "meaning": "authored",
+        "ipa": "cmudict"
+      },
+      "review": "draft",
+      "units": ["u05"]
+    },
+    {
+      "id": "w.friend",
+      "kind": "word",
+      "text": "friend",
+      "ipa": "fɹɛnd",
+      "pos": "noun",
+      "meaning_vi": "người bạn",
+      "example": {
+        "en": "Yes, I had lunch with a friend.",
+        "vi": "Có, mình ăn trưa với một người bạn."
+      },
+      "level": 1,
+      "source": {
+        "list": "curriculum",
+        "meaning": "authored",
+        "ipa": "cmudict"
+      },
+      "review": "draft",
+      "units": ["u05"]
+    },
+    {
+      "id": "c.how-was-your-day",
+      "kind": "chunk",
+      "text": "How was your day?",
+      "ipa": "haʊ wɑz jɔɹ deɪ",
+      "pos": "phrase",
+      "meaning_vi": "Hôm nay của bạn thế nào?",
+      "example": {
+        "en": "How was your day?",
+        "vi": "Hôm nay của bạn thế nào?"
+      },
+      "level": 1,
+      "source": {
+        "list": "curriculum",
+        "meaning": "curriculum",
+        "ipa": "cmudict"
+      },
+      "review": "approved",
+      "units": ["u05"]
+    },
+    {
+      "id": "c.the-morning-was-bad",
+      "kind": "chunk",
+      "text": "The morning was bad.",
+      "ipa": "ðə ˈmɔɹnɪŋ wɑz bæd",
+      "pos": "phrase",
+      "meaning_vi": "Buổi sáng tệ lắm.",
+      "example": {
+        "en": "The morning was bad.",
+        "vi": "Buổi sáng tệ lắm."
+      },
+      "level": 1,
+      "source": {
+        "list": "curriculum",
+        "meaning": "curriculum",
+        "ipa": "cmudict"
+      },
+      "review": "approved",
+      "units": ["u05"]
+    },
+    {
+      "id": "c.oh-no-did-it-get-better",
+      "kind": "chunk",
+      "text": "Oh no. Did it get better?",
+      "ipa": "oʊ noʊ dɪd ɪt ɡɛt ˈbɛtɚ",
+      "pos": "phrase",
+      "meaning_vi": "Ôi. Sau đó có khá hơn không?",
+      "example": {
+        "en": "Oh no. Did it get better?",
+        "vi": "Ôi. Sau đó có khá hơn không?"
+      },
+      "level": 1,
+      "source": {
+        "list": "curriculum",
+        "meaning": "curriculum",
+        "ipa": "cmudict"
+      },
+      "review": "approved",
+      "units": ["u05"]
+    },
+    {
+      "id": "c.thats-good-to-hear",
+      "kind": "chunk",
+      "text": "That's good to hear.",
+      "ipa": "ðæts ɡʊd tu hiɹ",
+      "pos": "phrase",
+      "meaning_vi": "Nghe vậy mừng quá.",
+      "example": {
+        "en": "That's good to hear.",
+        "vi": "Nghe vậy mừng quá."
+      },
+      "level": 1,
+      "source": {
+        "list": "curriculum",
+        "meaning": "curriculum",
+        "ipa": "cmudict"
+      },
+      "review": "approved",
+      "units": ["u05"]
+    },
+    {
+      "id": "c.now-i-feel-happy-again",
+      "kind": "chunk",
+      "text": "Now I feel happy again.",
+      "ipa": "naʊ aɪ fil ˈhæpi əˈɡɛn",
+      "pos": "phrase",
+      "meaning_vi": "Giờ mình thấy vui trở lại rồi.",
+      "example": {
+        "en": "Now I feel happy again.",
+        "vi": "Giờ mình thấy vui trở lại rồi."
+      },
+      "level": 1,
+      "source": {
+        "list": "curriculum",
+        "meaning": "curriculum",
+        "ipa": "cmudict"
+      },
+      "review": "approved",
+      "units": ["u05"]
+    },
+    {
+      "id": "w.washes",
+      "kind": "word",
+      "text": "washes",
+      "ipa": "ˈwɑʃɪz",
+      "pos": "verb",
+      "meaning_vi": "rửa, giặt (ngôi thứ ba số ít)",
+      "example": {
+        "en": "My brother washes the dishes.",
+        "vi": "Anh trai mình rửa bát."
+      },
+      "level": 1,
+      "source": {
+        "list": "curriculum",
+        "meaning": "authored",
+        "ipa": "cmudict"
+      },
+      "review": "draft",
+      "units": ["u06"]
+    },
+    {
+      "id": "w.watches",
+      "kind": "word",
+      "text": "watches",
+      "ipa": "ˈwɑtʃəz",
+      "pos": "verb",
+      "meaning_vi": "xem, theo dõi (ngôi thứ ba số ít)",
+      "example": {
+        "en": "He watches the news on TV.",
+        "vi": "Bố xem thời sự trên ti vi."
+      },
+      "level": 1,
+      "source": {
+        "list": "curriculum",
+        "meaning": "authored",
+        "ipa": "cmudict"
+      },
+      "review": "draft",
+      "units": ["u06"]
+    },
+    {
+      "id": "w.dishes",
+      "kind": "word",
+      "text": "dishes",
+      "ipa": "ˈdɪʃəz",
+      "pos": "noun",
+      "meaning_vi": "bát đĩa",
+      "example": {
+        "en": "My brother washes the dishes.",
+        "vi": "Anh trai mình rửa bát."
+      },
+      "level": 1,
+      "source": {
+        "list": "curriculum",
+        "meaning": "authored",
+        "ipa": "cmudict"
+      },
+      "review": "draft",
+      "units": ["u06"]
+    },
+    {
+      "id": "w.shoes",
+      "kind": "word",
+      "text": "shoes",
+      "ipa": "ʃuz",
+      "pos": "noun",
+      "meaning_vi": "đôi giày",
+      "example": {
+        "en": "She cleans our shoes every Sunday.",
+        "vi": "Chị ấy lau giày cho cả nhà mỗi Chủ nhật."
+      },
+      "level": 1,
+      "source": {
+        "list": "curriculum",
+        "meaning": "authored",
+        "ipa": "cmudict"
+      },
+      "review": "draft",
+      "units": ["u06"]
+    },
+    {
+      "id": "c.my-brother-washes-the-dishes",
+      "kind": "chunk",
+      "text": "My brother washes the dishes.",
+      "ipa": "maɪ ˈbɹʌðɚ ˈwɑʃɪz ðə ˈdɪʃəz",
+      "pos": "phrase",
+      "meaning_vi": "Anh trai mình rửa bát.",
+      "example": {
+        "en": "My brother washes the dishes.",
+        "vi": "Anh trai mình rửa bát."
+      },
+      "level": 1,
+      "source": {
+        "list": "curriculum",
+        "meaning": "curriculum",
+        "ipa": "cmudict"
+      },
+      "review": "approved",
+      "units": ["u06"]
+    },
+    {
+      "id": "c.and-what-does-your-sister-do",
+      "kind": "chunk",
+      "text": "And what does your sister do?",
+      "ipa": "ənd wʌt dʌz jɔɹ ˈsɪstɚ du",
+      "pos": "phrase",
+      "meaning_vi": "Còn chị gái bạn làm gì?",
+      "example": {
+        "en": "And what does your sister do?",
+        "vi": "Còn chị gái bạn làm gì?"
+      },
+      "level": 1,
+      "source": {
+        "list": "curriculum",
+        "meaning": "curriculum",
+        "ipa": "cmudict"
+      },
+      "review": "approved",
+      "units": ["u06"]
+    },
+    {
+      "id": "c.she-cleans-our-shoes-every-sunday",
+      "kind": "chunk",
+      "text": "She cleans our shoes every Sunday.",
+      "ipa": "ʃi klinz ˈaʊɚ ʃuz ˈɛvɚi ˈsʌndeɪ",
+      "pos": "phrase",
+      "meaning_vi": "Chị ấy lau giày cho cả nhà mỗi Chủ nhật.",
+      "example": {
+        "en": "She cleans our shoes every Sunday.",
+        "vi": "Chị ấy lau giày cho cả nhà mỗi Chủ nhật."
+      },
+      "level": 1,
+      "source": {
+        "list": "curriculum",
+        "meaning": "curriculum",
+        "ipa": "cmudict"
+      },
+      "review": "approved",
+      "units": ["u06"]
+    },
+    {
+      "id": "c.he-watches-the-news-on-tv",
+      "kind": "chunk",
+      "text": "He watches the news on TV.",
+      "ipa": "hi ˈwɑtʃəz ðə nuz ɑn ˈtivi",
+      "pos": "phrase",
+      "meaning_vi": "Bố xem thời sự trên ti vi.",
+      "example": {
+        "en": "He watches the news on TV.",
+        "vi": "Bố xem thời sự trên ti vi."
+      },
+      "level": 1,
+      "source": {
+        "list": "curriculum",
+        "meaning": "curriculum",
+        "ipa": "cmudict"
+      },
+      "review": "approved",
+      "units": ["u06"]
+    },
+    {
+      "id": "w.want",
+      "kind": "word",
+      "text": "want",
+      "ipa": "wɑnt",
+      "pos": "verb",
+      "meaning_vi": "muốn",
+      "example": {
+        "en": "I want to go to the new store.",
+        "vi": "Mình muốn đi cửa hàng mới mở."
+      },
+      "level": 2,
+      "source": {
+        "list": "curriculum",
+        "meaning": "authored",
+        "ipa": "cmudict"
+      },
+      "review": "draft",
+      "units": ["u07"]
+    },
+    {
+      "id": "w.store",
+      "kind": "word",
+      "text": "store",
+      "ipa": "stɔɹ",
+      "pos": "noun",
+      "meaning_vi": "cửa hàng",
+      "example": {
+        "en": "I want to go to the new store.",
+        "vi": "Mình muốn đi cửa hàng mới mở."
+      },
+      "level": 2,
+      "source": {
+        "list": "curriculum",
+        "meaning": "authored",
+        "ipa": "cmudict"
+      },
+      "review": "draft",
+      "units": ["u07"]
+    },
+    {
+      "id": "w.weekend",
+      "kind": "word",
+      "text": "weekend",
+      "ipa": "ˈwikɛnd",
+      "pos": "noun",
+      "meaning_vi": "cuối tuần",
+      "example": {
+        "en": "What are you doing this weekend?",
+        "vi": "Cuối tuần này bạn làm gì?"
+      },
+      "level": 2,
+      "source": {
+        "list": "curriculum",
+        "meaning": "authored",
+        "ipa": "cmudict"
+      },
+      "review": "draft",
+      "units": ["u07"]
+    },
+    {
+      "id": "w.friends",
+      "kind": "word",
+      "text": "friends",
+      "ipa": "fɹɛndz",
+      "pos": "noun",
+      "meaning_vi": "những người bạn, bạn bè",
+      "example": {
+        "en": "Sure! Can I bring my friends?",
+        "vi": "Có chứ! Mình rủ thêm bạn được không?"
+      },
+      "level": 2,
+      "source": {
+        "list": "curriculum",
+        "meaning": "authored",
+        "ipa": "cmudict"
+      },
+      "review": "draft",
+      "units": ["u07"]
+    },
+    {
+      "id": "c.what-are-you-doing-this-weekend",
+      "kind": "chunk",
+      "text": "What are you doing this weekend?",
+      "ipa": "wʌt ɑɹ ju ˈduɪŋ ðɪs ˈwikɛnd",
+      "pos": "phrase",
+      "meaning_vi": "Cuối tuần này bạn làm gì?",
+      "example": {
+        "en": "What are you doing this weekend?",
+        "vi": "Cuối tuần này bạn làm gì?"
+      },
+      "level": 2,
+      "source": {
+        "list": "curriculum",
+        "meaning": "curriculum",
+        "ipa": "cmudict"
+      },
+      "review": "approved",
+      "units": ["u07"]
+    },
+    {
+      "id": "c.oh-the-one-near-the-park",
+      "kind": "chunk",
+      "text": "Oh, the one near the park?",
+      "ipa": "oʊ ðə wʌn nɪɹ ðə pɑɹk",
+      "pos": "phrase",
+      "meaning_vi": "À, cái gần công viên hả?",
+      "example": {
+        "en": "Oh, the one near the park?",
+        "vi": "À, cái gần công viên hả?"
+      },
+      "level": 2,
+      "source": {
+        "list": "curriculum",
+        "meaning": "curriculum",
+        "ipa": "cmudict"
+      },
+      "review": "approved",
+      "units": ["u07"]
+    },
+    {
+      "id": "c.yes-do-you-want-to-come",
+      "kind": "chunk",
+      "text": "Yes. Do you want to come?",
+      "ipa": "jɛs du ju wɑnt tu kʌm",
+      "pos": "phrase",
+      "meaning_vi": "Ừ. Bạn có muốn đi cùng không?",
+      "example": {
+        "en": "Yes. Do you want to come?",
+        "vi": "Ừ. Bạn có muốn đi cùng không?"
+      },
+      "level": 2,
+      "source": {
+        "list": "curriculum",
+        "meaning": "curriculum",
+        "ipa": "cmudict"
+      },
+      "review": "approved",
+      "units": ["u07"]
+    },
+    {
+      "id": "c.sure-can-i-bring-my-friends",
+      "kind": "chunk",
+      "text": "Sure! Can I bring my friends?",
+      "ipa": "ʃʊɹ kæn aɪ bɹɪŋ maɪ fɹɛndz",
+      "pos": "phrase",
+      "meaning_vi": "Có chứ! Mình rủ thêm bạn được không?",
+      "example": {
+        "en": "Sure! Can I bring my friends?",
+        "vi": "Có chứ! Mình rủ thêm bạn được không?"
+      },
+      "level": 2,
+      "source": {
+        "list": "curriculum",
+        "meaning": "curriculum",
+        "ipa": "cmudict"
+      },
+      "review": "approved",
+      "units": ["u07"]
+    },
+    {
+      "id": "c.of-course-bring-your-friends",
+      "kind": "chunk",
+      "text": "Of course. Bring your friends.",
+      "ipa": "ʌv kɔɹs bɹɪŋ jɔɹ fɹɛndz",
+      "pos": "phrase",
+      "meaning_vi": "Tất nhiên. Rủ bạn bè đi cùng nhé.",
+      "example": {
+        "en": "Of course. Bring your friends.",
+        "vi": "Tất nhiên. Rủ bạn bè đi cùng nhé."
+      },
+      "level": 2,
+      "source": {
+        "list": "curriculum",
+        "meaning": "curriculum",
+        "ipa": "cmudict"
+      },
+      "review": "approved",
+      "units": ["u07"]
+    },
+    {
+      "id": "w.student",
+      "kind": "word",
+      "text": "student",
+      "ipa": "ˈstudənt",
+      "pos": "noun",
+      "meaning_vi": "học sinh, sinh viên",
+      "example": {
+        "en": "Are you a student?",
+        "vi": "Bạn là sinh viên à?"
+      },
+      "level": 2,
+      "source": {
+        "list": "curriculum",
+        "meaning": "authored",
+        "ipa": "cmudict"
+      },
+      "review": "draft",
+      "units": ["u08"]
+    },
+    {
+      "id": "w.study",
+      "kind": "word",
+      "text": "study",
+      "ipa": "ˈstʌdi",
+      "pos": "verb",
+      "meaning_vi": "học, học bài",
+      "example": {
+        "en": "When do you study at home?",
+        "vi": "Bạn học ở nhà lúc nào?"
+      },
+      "level": 2,
+      "source": {
+        "list": "curriculum",
+        "meaning": "authored",
+        "ipa": "cmudict"
+      },
+      "review": "draft",
+      "units": ["u08"]
+    },
+    {
+      "id": "w.school",
+      "kind": "word",
+      "text": "school",
+      "ipa": "skul",
+      "pos": "noun",
+      "meaning_vi": "trường học",
+      "example": {
+        "en": "Yes, I'm a student at a language school.",
+        "vi": "Đúng, mình học ở một trường ngoại ngữ."
+      },
+      "level": 2,
+      "source": {
+        "list": "curriculum",
+        "meaning": "authored",
+        "ipa": "cmudict"
+      },
+      "review": "draft",
+      "units": ["u08"]
+    },
+    {
+      "id": "w.start",
+      "kind": "word",
+      "text": "start",
+      "ipa": "stɑɹt",
+      "pos": "verb",
+      "meaning_vi": "bắt đầu",
+      "example": {
+        "en": "When do your classes start?",
+        "vi": "Lớp của bạn bắt đầu lúc mấy giờ?"
+      },
+      "level": 2,
+      "source": {
+        "list": "curriculum",
+        "meaning": "authored",
+        "ipa": "cmudict"
+      },
+      "review": "draft",
+      "units": ["u08"]
+    },
+    {
+      "id": "c.are-you-a-student",
+      "kind": "chunk",
+      "text": "Are you a student?",
+      "ipa": "ɑɹ ju ə ˈstudənt",
+      "pos": "phrase",
+      "meaning_vi": "Bạn là sinh viên à?",
+      "example": {
+        "en": "Are you a student?",
+        "vi": "Bạn là sinh viên à?"
+      },
+      "level": 2,
+      "source": {
+        "list": "curriculum",
+        "meaning": "curriculum",
+        "ipa": "cmudict"
+      },
+      "review": "approved",
+      "units": ["u08"]
+    },
+    {
+      "id": "c.when-do-your-classes-start",
+      "kind": "chunk",
+      "text": "When do your classes start?",
+      "ipa": "wɛn du jɔɹ ˈklæsəz stɑɹt",
+      "pos": "phrase",
+      "meaning_vi": "Lớp của bạn bắt đầu lúc mấy giờ?",
+      "example": {
+        "en": "When do your classes start?",
+        "vi": "Lớp của bạn bắt đầu lúc mấy giờ?"
+      },
+      "level": 2,
+      "source": {
+        "list": "curriculum",
+        "meaning": "curriculum",
+        "ipa": "cmudict"
+      },
+      "review": "approved",
+      "units": ["u08"]
+    },
+    {
+      "id": "c.they-start-at-eight-every-morning",
+      "kind": "chunk",
+      "text": "They start at eight every morning.",
+      "ipa": "ðeɪ stɑɹt æt eɪt ˈɛvɚi ˈmɔɹnɪŋ",
+      "pos": "phrase",
+      "meaning_vi": "Tám giờ mỗi sáng.",
+      "example": {
+        "en": "They start at eight every morning.",
+        "vi": "Tám giờ mỗi sáng."
+      },
+      "level": 2,
+      "source": {
+        "list": "curriculum",
+        "meaning": "curriculum",
+        "ipa": "cmudict"
+      },
+      "review": "approved",
+      "units": ["u08"]
+    },
+    {
+      "id": "c.when-do-you-study-at-home",
+      "kind": "chunk",
+      "text": "When do you study at home?",
+      "ipa": "wɛn du ju ˈstʌdi æt hoʊm",
+      "pos": "phrase",
+      "meaning_vi": "Bạn học ở nhà lúc nào?",
+      "example": {
+        "en": "When do you study at home?",
+        "vi": "Bạn học ở nhà lúc nào?"
+      },
+      "level": 2,
+      "source": {
+        "list": "curriculum",
+        "meaning": "curriculum",
+        "ipa": "cmudict"
+      },
+      "review": "approved",
+      "units": ["u08"]
+    },
+    {
+      "id": "w.worked",
+      "kind": "word",
+      "text": "worked",
+      "ipa": "wɝkt",
+      "pos": "verb",
+      "meaning_vi": "đã làm việc (quá khứ của work)",
+      "example": {
+        "en": "I worked until five.",
+        "vi": "Mình làm việc đến năm giờ."
+      },
+      "level": 2,
+      "source": {
+        "list": "curriculum",
+        "meaning": "authored",
+        "ipa": "cmudict"
+      },
+      "review": "draft",
+      "units": ["u09"]
+    },
+    {
+      "id": "w.played",
+      "kind": "word",
+      "text": "played",
+      "ipa": "pleɪd",
+      "pos": "verb",
+      "meaning_vi": "đã chơi (quá khứ của play)",
+      "example": {
+        "en": "I played soccer with my friends.",
+        "vi": "Mình đá bóng với bạn bè."
+      },
+      "level": 2,
+      "source": {
+        "list": "curriculum",
+        "meaning": "authored",
+        "ipa": "cmudict"
+      },
+      "review": "draft",
+      "units": ["u09"]
+    },
+    {
+      "id": "w.watched",
+      "kind": "word",
+      "text": "watched",
+      "ipa": "wɑtʃt",
+      "pos": "verb",
+      "meaning_vi": "đã xem (quá khứ của watch)",
+      "example": {
+        "en": "Yes, I watched the movie I wanted to see.",
+        "vi": "Có, mình xem bộ phim mình muốn xem."
+      },
+      "level": 2,
+      "source": {
+        "list": "curriculum",
+        "meaning": "authored",
+        "ipa": "cmudict"
+      },
+      "review": "draft",
+      "units": ["u09"]
+    },
+    {
+      "id": "w.wanted",
+      "kind": "word",
+      "text": "wanted",
+      "ipa": "ˈwɔntɪd",
+      "pos": "verb",
+      "meaning_vi": "đã muốn (quá khứ của want)",
+      "example": {
+        "en": "Yes, I watched the movie I wanted to see.",
+        "vi": "Có, mình xem bộ phim mình muốn xem."
+      },
+      "level": 2,
+      "source": {
+        "list": "curriculum",
+        "meaning": "authored",
+        "ipa": "cmudict"
+      },
+      "review": "draft",
+      "units": ["u09"]
+    },
+    {
+      "id": "c.what-did-you-do-yesterday",
+      "kind": "chunk",
+      "text": "What did you do yesterday?",
+      "ipa": "wʌt dɪd ju du ˈjɛstɚdeɪ",
+      "pos": "phrase",
+      "meaning_vi": "Hôm qua bạn làm gì?",
+      "example": {
+        "en": "What did you do yesterday?",
+        "vi": "Hôm qua bạn làm gì?"
+      },
+      "level": 2,
+      "source": {
+        "list": "curriculum",
+        "meaning": "curriculum",
+        "ipa": "cmudict"
+      },
+      "review": "approved",
+      "units": ["u09"]
+    },
+    {
+      "id": "c.i-worked-until-five",
+      "kind": "chunk",
+      "text": "I worked until five.",
+      "ipa": "aɪ wɝkt ənˈtɪl faɪv",
+      "pos": "phrase",
+      "meaning_vi": "Mình làm việc đến năm giờ.",
+      "example": {
+        "en": "I worked until five.",
+        "vi": "Mình làm việc đến năm giờ."
+      },
+      "level": 2,
+      "source": {
+        "list": "curriculum",
+        "meaning": "curriculum",
+        "ipa": "cmudict"
+      },
+      "review": "approved",
+      "units": ["u09"]
+    },
+    {
+      "id": "c.and-after-work",
+      "kind": "chunk",
+      "text": "And after work?",
+      "ipa": "ənd ˈæftɚ wɝk",
+      "pos": "phrase",
+      "meaning_vi": "Còn sau giờ làm?",
+      "example": {
+        "en": "And after work?",
+        "vi": "Còn sau giờ làm?"
+      },
+      "level": 2,
+      "source": {
+        "list": "curriculum",
+        "meaning": "curriculum",
+        "ipa": "cmudict"
+      },
+      "review": "approved",
+      "units": ["u09"]
+    },
+    {
+      "id": "c.i-played-soccer-with-my-friends",
+      "kind": "chunk",
+      "text": "I played soccer with my friends.",
+      "ipa": "aɪ pleɪd ˈsɑkɚ wɪð maɪ fɹɛndz",
+      "pos": "phrase",
+      "meaning_vi": "Mình đá bóng với bạn bè.",
+      "example": {
+        "en": "I played soccer with my friends.",
+        "vi": "Mình đá bóng với bạn bè."
+      },
+      "level": 2,
+      "source": {
+        "list": "curriculum",
+        "meaning": "curriculum",
+        "ipa": "cmudict"
+      },
+      "review": "approved",
+      "units": ["u09"]
+    },
+    {
+      "id": "c.did-you-watch-anything-last-night",
+      "kind": "chunk",
+      "text": "Did you watch anything last night?",
+      "ipa": "dɪd ju wɑtʃ ˈɛniθɪŋ læst naɪt",
+      "pos": "phrase",
+      "meaning_vi": "Tối qua bạn có xem gì không?",
+      "example": {
+        "en": "Did you watch anything last night?",
+        "vi": "Tối qua bạn có xem gì không?"
+      },
+      "level": 2,
+      "source": {
+        "list": "curriculum",
+        "meaning": "curriculum",
+        "ipa": "cmudict"
+      },
+      "review": "approved",
+      "units": ["u09"]
+    },
+    {
+      "id": "w.left",
+      "kind": "word",
+      "text": "left",
+      "ipa": "lɛft",
+      "pos": "noun",
+      "meaning_vi": "bên trái; rẽ trái",
+      "example": {
+        "en": "Turn left at the traffic light.",
+        "vi": "Đến đèn giao thông thì rẽ trái."
+      },
+      "level": 2,
+      "source": {
+        "list": "curriculum",
+        "meaning": "authored",
+        "ipa": "cmudict"
+      },
+      "review": "draft",
+      "units": ["u10"]
+    },
+    {
+      "id": "w.right",
+      "kind": "word",
+      "text": "right",
+      "ipa": "ɹaɪt",
+      "pos": "adjective",
+      "meaning_vi": "bên phải; đúng; ngay (right on the corner)",
+      "example": {
+        "en": "No, it's right on the corner.",
+        "vi": "Không, nó ở ngay góc đường."
+      },
+      "level": 2,
+      "source": {
+        "list": "curriculum",
+        "meaning": "authored",
+        "ipa": "cmudict"
+      },
+      "review": "draft",
+      "units": ["u10"]
+    },
+    {
+      "id": "w.road",
+      "kind": "word",
+      "text": "road",
+      "ipa": "ɹoʊd",
+      "pos": "noun",
+      "meaning_vi": "con đường",
+      "example": {
+        "en": "Go straight down this road.",
+        "vi": "Đi thẳng con đường này."
+      },
+      "level": 2,
+      "source": {
+        "list": "curriculum",
+        "meaning": "authored",
+        "ipa": "cmudict"
+      },
+      "review": "draft",
+      "units": ["u10"]
+    },
+    {
+      "id": "w.light",
+      "kind": "word",
+      "text": "light",
+      "ipa": "laɪt",
+      "pos": "noun",
+      "meaning_vi": "đèn; ánh sáng",
+      "example": {
+        "en": "Turn left at the traffic light.",
+        "vi": "Đến đèn giao thông thì rẽ trái."
+      },
+      "level": 2,
+      "source": {
+        "list": "curriculum",
+        "meaning": "authored",
+        "ipa": "cmudict"
+      },
+      "review": "draft",
+      "units": ["u10"]
+    },
+    {
+      "id": "c.go-straight-down-this-road",
+      "kind": "chunk",
+      "text": "Go straight down this road.",
+      "ipa": "ɡoʊ stɹeɪt daʊn ðɪs ɹoʊd",
+      "pos": "phrase",
+      "meaning_vi": "Đi thẳng con đường này.",
+      "example": {
+        "en": "Go straight down this road.",
+        "vi": "Đi thẳng con đường này."
+      },
+      "level": 2,
+      "source": {
+        "list": "curriculum",
+        "meaning": "curriculum",
+        "ipa": "cmudict"
+      },
+      "review": "approved",
+      "units": ["u10"]
+    },
+    {
+      "id": "c.and-then",
+      "kind": "chunk",
+      "text": "And then?",
+      "ipa": "ənd ðɛn",
+      "pos": "phrase",
+      "meaning_vi": "Rồi sao nữa?",
+      "example": {
+        "en": "And then?",
+        "vi": "Rồi sao nữa?"
+      },
+      "level": 2,
+      "source": {
+        "list": "curriculum",
+        "meaning": "curriculum",
+        "ipa": "cmudict"
+      },
+      "review": "approved",
+      "units": ["u10", "u19"]
+    },
+    {
+      "id": "c.turn-left-at-the-traffic-light",
+      "kind": "chunk",
+      "text": "Turn left at the traffic light.",
+      "ipa": "tɝn lɛft æt ðə ˈtɹæfɪk laɪt",
+      "pos": "phrase",
+      "meaning_vi": "Đến đèn giao thông thì rẽ trái.",
+      "example": {
+        "en": "Turn left at the traffic light.",
+        "vi": "Đến đèn giao thông thì rẽ trái."
+      },
+      "level": 2,
+      "source": {
+        "list": "curriculum",
+        "meaning": "curriculum",
+        "ipa": "cmudict"
+      },
+      "review": "approved",
+      "units": ["u10"]
+    },
+    {
+      "id": "c.is-it-far-from-there",
+      "kind": "chunk",
+      "text": "Is it far from there?",
+      "ipa": "ɪz ɪt fɑɹ fɹʌm ðɛɹ",
+      "pos": "phrase",
+      "meaning_vi": "Từ đó có xa không?",
+      "example": {
+        "en": "Is it far from there?",
+        "vi": "Từ đó có xa không?"
+      },
+      "level": 2,
+      "source": {
+        "list": "curriculum",
+        "meaning": "curriculum",
+        "ipa": "cmudict"
+      },
+      "review": "approved",
+      "units": ["u10"]
+    },
+    {
+      "id": "c.no-its-right-on-the-corner",
+      "kind": "chunk",
+      "text": "No, it's right on the corner.",
+      "ipa": "noʊ ɪts ɹaɪt ɑn ðə ˈkɔɹnɚ",
+      "pos": "phrase",
+      "meaning_vi": "Không, nó ở ngay góc đường.",
+      "example": {
+        "en": "No, it's right on the corner.",
+        "vi": "Không, nó ở ngay góc đường."
+      },
+      "level": 2,
+      "source": {
+        "list": "curriculum",
+        "meaning": "curriculum",
+        "ipa": "cmudict"
+      },
+      "review": "approved",
+      "units": ["u10"]
+    },
+    {
+      "id": "w.window",
+      "kind": "word",
+      "text": "window",
+      "ipa": "ˈwɪndoʊ",
+      "pos": "noun",
+      "meaning_vi": "cửa sổ",
+      "example": {
+        "en": "Does it have a window?",
+        "vi": "Có cửa sổ không?"
+      },
+      "level": 2,
+      "source": {
+        "list": "curriculum",
+        "meaning": "authored",
+        "ipa": "cmudict"
+      },
+      "review": "draft",
+      "units": ["u11"]
+    },
+    {
+      "id": "w.view",
+      "kind": "word",
+      "text": "view",
+      "ipa": "vju",
+      "pos": "noun",
+      "meaning_vi": "cảnh nhìn ra, quang cảnh",
+      "example": {
+        "en": "Yes, a big window with a nice view.",
+        "vi": "Có, một cửa sổ lớn nhìn ra cảnh đẹp."
+      },
+      "level": 2,
+      "source": {
+        "list": "curriculum",
+        "meaning": "authored",
+        "ipa": "cmudict"
+      },
+      "review": "draft",
+      "units": ["u11"]
+    },
+    {
+      "id": "w.wall",
+      "kind": "word",
+      "text": "wall",
+      "ipa": "wɔl",
+      "pos": "noun",
+      "meaning_vi": "bức tường",
+      "example": {
+        "en": "There's a world map on one wall.",
+        "vi": "Có một tấm bản đồ thế giới trên một bức tường."
+      },
+      "level": 2,
+      "source": {
+        "list": "curriculum",
+        "meaning": "authored",
+        "ipa": "cmudict"
+      },
+      "review": "draft",
+      "units": ["u11"]
+    },
+    {
+      "id": "w.very",
+      "kind": "word",
+      "text": "very",
+      "ipa": "ˈvɛɹi",
+      "pos": "adverb",
+      "meaning_vi": "rất",
+      "example": {
+        "en": "It's small but very bright.",
+        "vi": "Nhỏ nhưng rất sáng."
+      },
+      "level": 2,
+      "source": {
+        "list": "curriculum",
+        "meaning": "authored",
+        "ipa": "cmudict"
+      },
+      "review": "draft",
+      "units": ["u11"]
+    },
+    {
+      "id": "c.whats-your-room-like",
+      "kind": "chunk",
+      "text": "What's your room like?",
+      "ipa": "wʌts jɔɹ ɹum laɪk",
+      "pos": "phrase",
+      "meaning_vi": "Phòng bạn trông thế nào?",
+      "example": {
+        "en": "What's your room like?",
+        "vi": "Phòng bạn trông thế nào?"
+      },
+      "level": 2,
+      "source": {
+        "list": "curriculum",
+        "meaning": "curriculum",
+        "ipa": "cmudict"
+      },
+      "review": "approved",
+      "units": ["u11"]
+    },
+    {
+      "id": "c.its-small-but-very-bright",
+      "kind": "chunk",
+      "text": "It's small but very bright.",
+      "ipa": "ɪts smɔl bʌt ˈvɛɹi bɹaɪt",
+      "pos": "phrase",
+      "meaning_vi": "Nhỏ nhưng rất sáng.",
+      "example": {
+        "en": "It's small but very bright.",
+        "vi": "Nhỏ nhưng rất sáng."
+      },
+      "level": 2,
+      "source": {
+        "list": "curriculum",
+        "meaning": "curriculum",
+        "ipa": "cmudict"
+      },
+      "review": "approved",
+      "units": ["u11"]
+    },
+    {
+      "id": "c.does-it-have-a-window",
+      "kind": "chunk",
+      "text": "Does it have a window?",
+      "ipa": "dʌz ɪt hæv ə ˈwɪndoʊ",
+      "pos": "phrase",
+      "meaning_vi": "Có cửa sổ không?",
+      "example": {
+        "en": "Does it have a window?",
+        "vi": "Có cửa sổ không?"
+      },
+      "level": 2,
+      "source": {
+        "list": "curriculum",
+        "meaning": "curriculum",
+        "ipa": "cmudict"
+      },
+      "review": "approved",
+      "units": ["u11"]
+    },
+    {
+      "id": "c.whats-on-the-walls",
+      "kind": "chunk",
+      "text": "What's on the walls?",
+      "ipa": "wʌts ɑn ðə wɔlz",
+      "pos": "phrase",
+      "meaning_vi": "Trên tường có gì?",
+      "example": {
+        "en": "What's on the walls?",
+        "vi": "Trên tường có gì?"
+      },
+      "level": 2,
+      "source": {
+        "list": "curriculum",
+        "meaning": "curriculum",
+        "ipa": "cmudict"
+      },
+      "review": "approved",
+      "units": ["u11"]
+    },
+    {
+      "id": "w.where",
+      "kind": "word",
+      "text": "where",
+      "ipa": "wɛɹ",
+      "pos": "adverb",
+      "meaning_vi": "ở đâu",
+      "example": {
+        "en": "Where do you live now?",
+        "vi": "Giờ bạn sống ở đâu?"
+      },
+      "level": 2,
+      "source": {
+        "list": "curriculum",
+        "meaning": "authored",
+        "ipa": "cmudict"
+      },
+      "review": "draft",
+      "units": ["u12"]
+    },
+    {
+      "id": "w.live",
+      "kind": "word",
+      "text": "live",
+      "ipa": "laɪv",
+      "pos": "verb",
+      "meaning_vi": "sống, ở",
+      "example": {
+        "en": "Where do you live now?",
+        "vi": "Giờ bạn sống ở đâu?"
+      },
+      "level": 2,
+      "source": {
+        "list": "curriculum",
+        "meaning": "authored",
+        "ipa": "cmudict"
+      },
+      "review": "draft",
+      "units": ["u12"]
+    },
+    {
+      "id": "w.work",
+      "kind": "word",
+      "text": "work",
+      "ipa": "wɝk",
+      "pos": "verb",
+      "meaning_vi": "làm việc; công việc",
+      "example": {
+        "en": "I live and work downtown.",
+        "vi": "Mình sống và làm việc ở trung tâm."
+      },
+      "level": 2,
+      "source": {
+        "list": "curriculum",
+        "meaning": "authored",
+        "ipa": "cmudict"
+      },
+      "review": "draft",
+      "units": ["u12", "u16"]
+    },
+    {
+      "id": "w.name",
+      "kind": "word",
+      "text": "name",
+      "ipa": "neɪm",
+      "pos": "noun",
+      "meaning_vi": "tên",
+      "example": {
+        "en": "Welcome! What's your name?",
+        "vi": "Chào mừng bạn! Bạn tên gì?"
+      },
+      "level": 2,
+      "source": {
+        "list": "curriculum",
+        "meaning": "authored",
+        "ipa": "cmudict"
+      },
+      "review": "draft",
+      "units": ["u12"]
+    },
+    {
+      "id": "c.hi-there-im-new-here",
+      "kind": "chunk",
+      "text": "Hi there! I'm new here.",
+      "ipa": "haɪ ðɛɹ aɪm nu hiɹ",
+      "pos": "phrase",
+      "meaning_vi": "Chào bạn! Mình mới đến đây.",
+      "example": {
+        "en": "Hi there! I'm new here.",
+        "vi": "Chào bạn! Mình mới đến đây."
+      },
+      "level": 2,
+      "source": {
+        "list": "curriculum",
+        "meaning": "curriculum",
+        "ipa": "cmudict"
+      },
+      "review": "approved",
+      "units": ["u12"]
+    },
+    {
+      "id": "c.welcome-whats-your-name",
+      "kind": "chunk",
+      "text": "Welcome! What's your name?",
+      "ipa": "ˈwɛlkəm wʌts jɔɹ neɪm",
+      "pos": "phrase",
+      "meaning_vi": "Chào mừng bạn! Bạn tên gì?",
+      "example": {
+        "en": "Welcome! What's your name?",
+        "vi": "Chào mừng bạn! Bạn tên gì?"
+      },
+      "level": 2,
+      "source": {
+        "list": "curriculum",
+        "meaning": "curriculum",
+        "ipa": "cmudict"
+      },
+      "review": "approved",
+      "units": ["u12"]
+    },
+    {
+      "id": "c.where-do-you-live-now",
+      "kind": "chunk",
+      "text": "Where do you live now?",
+      "ipa": "wɛɹ du ju laɪv naʊ",
+      "pos": "phrase",
+      "meaning_vi": "Giờ bạn sống ở đâu?",
+      "example": {
+        "en": "Where do you live now?",
+        "vi": "Giờ bạn sống ở đâu?"
+      },
+      "level": 2,
+      "source": {
+        "list": "curriculum",
+        "meaning": "curriculum",
+        "ipa": "cmudict"
+      },
+      "review": "approved",
+      "units": ["u12"]
+    },
+    {
+      "id": "c.near-the-river-what-about-you",
+      "kind": "chunk",
+      "text": "Near the river. What about you?",
+      "ipa": "nɪɹ ðə ˈɹɪvɚ wʌt əˈbaʊt ju",
+      "pos": "phrase",
+      "meaning_vi": "Gần bờ sông. Còn bạn?",
+      "example": {
+        "en": "Near the river. What about you?",
+        "vi": "Gần bờ sông. Còn bạn?"
+      },
+      "level": 2,
+      "source": {
+        "list": "curriculum",
+        "meaning": "curriculum",
+        "ipa": "cmudict"
+      },
+      "review": "approved",
+      "units": ["u12"]
+    },
+    {
+      "id": "c.i-live-and-work-downtown",
+      "kind": "chunk",
+      "text": "I live and work downtown.",
+      "ipa": "aɪ laɪv ənd wɝk ˈdaʊntaʊn",
+      "pos": "phrase",
+      "meaning_vi": "Mình sống và làm việc ở trung tâm.",
+      "example": {
+        "en": "I live and work downtown.",
+        "vi": "Mình sống và làm việc ở trung tâm."
+      },
+      "level": 2,
+      "source": {
+        "list": "curriculum",
+        "meaning": "curriculum",
+        "ipa": "cmudict"
+      },
+      "review": "approved",
+      "units": ["u12"]
+    },
+    {
+      "id": "w.can",
+      "kind": "word",
+      "text": "can",
+      "ipa": "kæn",
+      "pos": "modal",
+      "meaning_vi": "có thể, biết (làm gì)",
+      "example": {
+        "en": "What can you cook?",
+        "vi": "Bạn nấu được món gì?"
+      },
+      "level": 3,
+      "source": {
+        "list": "curriculum",
+        "meaning": "authored",
+        "ipa": "cmudict"
+      },
+      "review": "draft",
+      "units": ["u13"]
+    },
+    {
+      "id": "w.cant",
+      "kind": "word",
+      "text": "can't",
+      "ipa": "kænt",
+      "pos": "modal",
+      "meaning_vi": "không thể, không biết (làm gì)",
+      "example": {
+        "en": "No, I can't make it yet.",
+        "vi": "Không, mình chưa nấu được."
+      },
+      "level": 3,
+      "source": {
+        "list": "curriculum",
+        "meaning": "authored",
+        "ipa": "cmudict"
+      },
+      "review": "draft",
+      "units": ["u13"]
+    },
+    {
+      "id": "w.banana",
+      "kind": "word",
+      "text": "banana",
+      "ipa": "bəˈnænə",
+      "pos": "noun",
+      "meaning_vi": "quả chuối",
+      "example": {
+        "en": "I can make banana bread.",
+        "vi": "Mình làm được bánh mì chuối."
+      },
+      "level": 3,
+      "source": {
+        "list": "curriculum",
+        "meaning": "authored",
+        "ipa": "cmudict"
+      },
+      "review": "draft",
+      "units": ["u13"]
+    },
+    {
+      "id": "c.what-can-you-cook",
+      "kind": "chunk",
+      "text": "What can you cook?",
+      "ipa": "wʌt kæn ju kʊk",
+      "pos": "phrase",
+      "meaning_vi": "Bạn nấu được món gì?",
+      "example": {
+        "en": "What can you cook?",
+        "vi": "Bạn nấu được món gì?"
+      },
+      "level": 3,
+      "source": {
+        "list": "curriculum",
+        "meaning": "curriculum",
+        "ipa": "cmudict"
+      },
+      "review": "approved",
+      "units": ["u13"]
+    },
+    {
+      "id": "c.i-can-make-banana-bread",
+      "kind": "chunk",
+      "text": "I can make banana bread.",
+      "ipa": "aɪ kæn meɪk bəˈnænə bɹɛd",
+      "pos": "phrase",
+      "meaning_vi": "Mình làm được bánh mì chuối.",
+      "example": {
+        "en": "I can make banana bread.",
+        "vi": "Mình làm được bánh mì chuối."
+      },
+      "level": 3,
+      "source": {
+        "list": "curriculum",
+        "meaning": "curriculum",
+        "ipa": "cmudict"
+      },
+      "review": "approved",
+      "units": ["u13"]
+    },
+    {
+      "id": "c.no-i-cant-make-it-yet",
+      "kind": "chunk",
+      "text": "No, I can't make it yet.",
+      "ipa": "noʊ aɪ kænt meɪk ɪt jɛt",
+      "pos": "phrase",
+      "meaning_vi": "Không, mình chưa nấu được.",
+      "example": {
+        "en": "No, I can't make it yet.",
+        "vi": "Không, mình chưa nấu được."
+      },
+      "level": 3,
+      "source": {
+        "list": "curriculum",
+        "meaning": "curriculum",
+        "ipa": "cmudict"
+      },
+      "review": "approved",
+      "units": ["u13"]
+    },
+    {
+      "id": "c.maybe-we-can-learn-together",
+      "kind": "chunk",
+      "text": "Maybe we can learn together.",
+      "ipa": "ˈmeɪbi wi kæn lɝn təˈɡɛðɚ",
+      "pos": "phrase",
+      "meaning_vi": "Hay là mình cùng học nhé.",
+      "example": {
+        "en": "Maybe we can learn together.",
+        "vi": "Hay là mình cùng học nhé."
+      },
+      "level": 3,
+      "source": {
+        "list": "curriculum",
+        "meaning": "curriculum",
+        "ipa": "cmudict"
+      },
+      "review": "approved",
+      "units": ["u13"]
+    },
+    {
+      "id": "c.put-it",
+      "kind": "chunk",
+      "text": "put it",
+      "ipa": "pʊt ɪt",
+      "pos": "phrase",
+      "meaning_vi": "đặt nó (lên/vào đâu)",
+      "example": {
+        "en": "Put it on the stove and turn it on.",
+        "vi": "Đặt lên bếp rồi bật lửa."
+      },
+      "level": 3,
+      "source": {
+        "list": "curriculum",
+        "meaning": "authored",
+        "ipa": "cmudict"
+      },
+      "review": "draft",
+      "units": ["u14"]
+    },
+    {
+      "id": "c.turn-it-on",
+      "kind": "chunk",
+      "text": "turn it on",
+      "ipa": "tɝn ɪt ɑn",
+      "pos": "phrase",
+      "meaning_vi": "bật nó lên",
+      "example": {
+        "en": "Put it on the stove and turn it on.",
+        "vi": "Đặt lên bếp rồi bật lửa."
+      },
+      "level": 3,
+      "source": {
+        "list": "curriculum",
+        "meaning": "authored",
+        "ipa": "cmudict"
+      },
+      "review": "draft",
+      "units": ["u14"]
+    },
+    {
+      "id": "c.pick-it-up",
+      "kind": "chunk",
+      "text": "pick it up",
+      "ipa": "pɪk ɪt ʌp",
+      "pos": "phrase",
+      "meaning_vi": "nhấc nó lên",
+      "example": {
+        "en": "Pick it up and pour it slowly.",
+        "vi": "Nhấc ấm lên và rót từ từ."
+      },
+      "level": 3,
+      "source": {
+        "list": "curriculum",
+        "meaning": "authored",
+        "ipa": "cmudict"
+      },
+      "review": "draft",
+      "units": ["u14"]
+    },
+    {
+      "id": "w.water",
+      "kind": "word",
+      "text": "water",
+      "ipa": "ˈwɔtɚ",
+      "pos": "noun",
+      "meaning_vi": "nước",
+      "example": {
+        "en": "Sure. First, boil some water.",
+        "vi": "Được. Đầu tiên, đun ít nước."
+      },
+      "level": 3,
+      "source": {
+        "list": "curriculum",
+        "meaning": "authored",
+        "ipa": "cmudict"
+      },
+      "review": "draft",
+      "units": ["u14"]
+    },
+    {
+      "id": "c.sure-first-boil-some-water",
+      "kind": "chunk",
+      "text": "Sure. First, boil some water.",
+      "ipa": "ʃʊɹ fɝst bɔɪl sʌm ˈwɔtɚ",
+      "pos": "phrase",
+      "meaning_vi": "Được. Đầu tiên, đun ít nước.",
+      "example": {
+        "en": "Sure. First, boil some water.",
+        "vi": "Được. Đầu tiên, đun ít nước."
+      },
+      "level": 3,
+      "source": {
+        "list": "curriculum",
+        "meaning": "curriculum",
+        "ipa": "cmudict"
+      },
+      "review": "approved",
+      "units": ["u14"]
+    },
+    {
+      "id": "c.okay-the-kettle-is-full",
+      "kind": "chunk",
+      "text": "Okay, the kettle is full.",
+      "ipa": "oʊˈkeɪ ðə ˈkɛtəl ɪz fʊl",
+      "pos": "phrase",
+      "meaning_vi": "Rồi, ấm đầy nước rồi.",
+      "example": {
+        "en": "Okay, the kettle is full.",
+        "vi": "Rồi, ấm đầy nước rồi."
+      },
+      "level": 3,
+      "source": {
+        "list": "curriculum",
+        "meaning": "curriculum",
+        "ipa": "cmudict"
+      },
+      "review": "approved",
+      "units": ["u14"]
+    },
+    {
+      "id": "c.its-boiling-now",
+      "kind": "chunk",
+      "text": "It's boiling now.",
+      "ipa": "ɪts ˈbɔɪlɪŋ naʊ",
+      "pos": "phrase",
+      "meaning_vi": "Nước sôi rồi.",
+      "example": {
+        "en": "It's boiling now.",
+        "vi": "Nước sôi rồi."
+      },
+      "level": 3,
+      "source": {
+        "list": "curriculum",
+        "meaning": "curriculum",
+        "ipa": "cmudict"
+      },
+      "review": "approved",
+      "units": ["u14"]
+    },
+    {
+      "id": "w.day",
+      "kind": "word",
+      "text": "day",
+      "ipa": "deɪ",
+      "pos": "noun",
+      "meaning_vi": "ngày",
+      "example": {
+        "en": "Yes, we had a great time every day.",
+        "vi": "Đúng vậy, ngày nào cũng vui."
+      },
+      "level": 3,
+      "source": {
+        "list": "curriculum",
+        "meaning": "authored",
+        "ipa": "cmudict"
+      },
+      "review": "draft",
+      "units": ["u15"]
+    },
+    {
+      "id": "w.time",
+      "kind": "word",
+      "text": "time",
+      "ipa": "taɪm",
+      "pos": "noun",
+      "meaning_vi": "thời gian; lần; khoảng thời gian (have a great time: chơi rất vui)",
+      "example": {
+        "en": "Yes, we had a great time every day.",
+        "vi": "Đúng vậy, ngày nào cũng vui."
+      },
+      "level": 3,
+      "source": {
+        "list": "curriculum",
+        "meaning": "authored",
+        "ipa": "cmudict"
+      },
+      "review": "draft",
+      "units": ["u15"]
+    },
+    {
+      "id": "w.boat",
+      "kind": "word",
+      "text": "boat",
+      "ipa": "boʊt",
+      "pos": "noun",
+      "meaning_vi": "con thuyền",
+      "example": {
+        "en": "We took a boat to an island.",
+        "vi": "Bọn mình đi thuyền ra một hòn đảo."
+      },
+      "level": 3,
+      "source": {
+        "list": "curriculum",
+        "meaning": "authored",
+        "ipa": "cmudict"
+      },
+      "review": "draft",
+      "units": ["u15"]
+    },
+    {
+      "id": "w.town",
+      "kind": "word",
+      "text": "town",
+      "ipa": "taʊn",
+      "pos": "noun",
+      "meaning_vi": "thị trấn",
+      "example": {
+        "en": "We visited a small town by the sea.",
+        "vi": "Bọn mình đến một thị trấn nhỏ ven biển."
+      },
+      "level": 3,
+      "source": {
+        "list": "curriculum",
+        "meaning": "authored",
+        "ipa": "cmudict"
+      },
+      "review": "draft",
+      "units": ["u15"]
+    },
+    {
+      "id": "c.what-was-your-favorite-trip",
+      "kind": "chunk",
+      "text": "What was your favorite trip?",
+      "ipa": "wʌt wɑz jɔɹ ˈfeɪvɚɪt tɹɪp",
+      "pos": "phrase",
+      "meaning_vi": "Chuyến đi bạn thích nhất là chuyến nào?",
+      "example": {
+        "en": "What was your favorite trip?",
+        "vi": "Chuyến đi bạn thích nhất là chuyến nào?"
+      },
+      "level": 3,
+      "source": {
+        "list": "curriculum",
+        "meaning": "curriculum",
+        "ipa": "cmudict"
+      },
+      "review": "approved",
+      "units": ["u15"]
+    },
+    {
+      "id": "c.what-did-you-do-there",
+      "kind": "chunk",
+      "text": "What did you do there?",
+      "ipa": "wʌt dɪd ju du ðɛɹ",
+      "pos": "phrase",
+      "meaning_vi": "Ở đó bạn làm gì?",
+      "example": {
+        "en": "What did you do there?",
+        "vi": "Ở đó bạn làm gì?"
+      },
+      "level": 3,
+      "source": {
+        "list": "curriculum",
+        "meaning": "curriculum",
+        "ipa": "cmudict"
+      },
+      "review": "approved",
+      "units": ["u15"]
+    },
+    {
+      "id": "c.sounds-lovely",
+      "kind": "chunk",
+      "text": "Sounds lovely.",
+      "ipa": "saʊndz ˈlʌvli",
+      "pos": "phrase",
+      "meaning_vi": "Nghe thích quá.",
+      "example": {
+        "en": "Sounds lovely.",
+        "vi": "Nghe thích quá."
+      },
+      "level": 3,
+      "source": {
+        "list": "curriculum",
+        "meaning": "curriculum",
+        "ipa": "cmudict"
+      },
+      "review": "approved",
+      "units": ["u15"]
+    },
+    {
+      "id": "w.first",
+      "kind": "word",
+      "text": "first",
+      "ipa": "fɝst",
+      "pos": "adjective",
+      "meaning_vi": "đầu tiên, thứ nhất",
+      "example": {
+        "en": "Is it her first job?",
+        "vi": "Đó là công việc đầu tiên của chị à?"
+      },
+      "level": 3,
+      "source": {
+        "list": "curriculum",
+        "meaning": "authored",
+        "ipa": "cmudict"
+      },
+      "review": "draft",
+      "units": ["u16"]
+    },
+    {
+      "id": "w.hot",
+      "kind": "word",
+      "text": "hot",
+      "ipa": "hɑt",
+      "pos": "adjective",
+      "meaning_vi": "nóng",
+      "example": {
+        "en": "It's hot and busy in the summer.",
+        "vi": "Mùa hè thì nóng và bận lắm."
+      },
+      "level": 3,
+      "source": {
+        "list": "curriculum",
+        "meaning": "authored",
+        "ipa": "cmudict"
+      },
+      "review": "draft",
+      "units": ["u16"]
+    },
+    {
+      "id": "w.talk",
+      "kind": "word",
+      "text": "talk",
+      "ipa": "tɔk",
+      "pos": "verb",
+      "meaning_vi": "nói chuyện, bàn bạc",
+      "example": {
+        "en": "Sounds good. Let's talk about it later.",
+        "vi": "Hay đấy. Để lúc khác mình bàn tiếp."
+      },
+      "level": 3,
+      "source": {
+        "list": "curriculum",
+        "meaning": "authored",
+        "ipa": "cmudict"
+      },
+      "review": "draft",
+      "units": ["u16"]
+    },
+    {
+      "id": "c.what-does-your-sister-do",
+      "kind": "chunk",
+      "text": "What does your sister do?",
+      "ipa": "wʌt dʌz jɔɹ ˈsɪstɚ du",
+      "pos": "phrase",
+      "meaning_vi": "Chị gái bạn làm nghề gì?",
+      "example": {
+        "en": "What does your sister do?",
+        "vi": "Chị gái bạn làm nghề gì?"
+      },
+      "level": 3,
+      "source": {
+        "list": "curriculum",
+        "meaning": "curriculum",
+        "ipa": "cmudict"
+      },
+      "review": "approved",
+      "units": ["u16"]
+    },
+    {
+      "id": "c.is-it-her-first-job",
+      "kind": "chunk",
+      "text": "Is it her first job?",
+      "ipa": "ɪz ɪt hɝ fɝst dʒɑb",
+      "pos": "phrase",
+      "meaning_vi": "Đó là công việc đầu tiên của chị à?",
+      "example": {
+        "en": "Is it her first job?",
+        "vi": "Đó là công việc đầu tiên của chị à?"
+      },
+      "level": 3,
+      "source": {
+        "list": "curriculum",
+        "meaning": "curriculum",
+        "ipa": "cmudict"
+      },
+      "review": "approved",
+      "units": ["u16"]
+    },
+    {
+      "id": "c.yes-its-her-first-job",
+      "kind": "chunk",
+      "text": "Yes, it's her first job.",
+      "ipa": "jɛs ɪts hɝ fɝst dʒɑb",
+      "pos": "phrase",
+      "meaning_vi": "Đúng, công việc đầu tiên.",
+      "example": {
+        "en": "Yes, it's her first job.",
+        "vi": "Đúng, công việc đầu tiên."
+      },
+      "level": 3,
+      "source": {
+        "list": "curriculum",
+        "meaning": "curriculum",
+        "ipa": "cmudict"
+      },
+      "review": "approved",
+      "units": ["u16"]
+    },
+    {
+      "id": "c.is-the-work-hard",
+      "kind": "chunk",
+      "text": "Is the work hard?",
+      "ipa": "ɪz ðə wɝk hɑɹd",
+      "pos": "phrase",
+      "meaning_vi": "Công việc có vất vả không?",
+      "example": {
+        "en": "Is the work hard?",
+        "vi": "Công việc có vất vả không?"
+      },
+      "level": 3,
+      "source": {
+        "list": "curriculum",
+        "meaning": "curriculum",
+        "ipa": "cmudict"
+      },
+      "review": "approved",
+      "units": ["u16"]
+    },
+    {
+      "id": "w.photographer",
+      "kind": "word",
+      "text": "photographer",
+      "ipa": "fəˈtɑɡɹəfɚ",
+      "pos": "noun",
+      "meaning_vi": "nhiếp ảnh gia, thợ chụp ảnh",
+      "example": {
+        "en": "I'm a photographer at a newspaper.",
+        "vi": "Mình là nhiếp ảnh gia ở một tờ báo."
+      },
+      "level": 3,
+      "source": {
+        "list": "curriculum",
+        "meaning": "authored",
+        "ipa": "cmudict"
+      },
+      "review": "draft",
+      "units": ["u17"]
+    },
+    {
+      "id": "w.economy",
+      "kind": "word",
+      "text": "economy",
+      "ipa": "ɪˈkɑnəmi",
+      "pos": "noun",
+      "meaning_vi": "nền kinh tế",
+      "example": {
+        "en": "Yes, I often take photos about the economy.",
+        "vi": "Có, mình hay chụp ảnh về kinh tế."
+      },
+      "level": 3,
+      "source": {
+        "list": "curriculum",
+        "meaning": "authored",
+        "ipa": "cmudict"
+      },
+      "review": "draft",
+      "units": ["u17"]
+    },
+    {
+      "id": "w.information",
+      "kind": "word",
+      "text": "information",
+      "ipa": "ɪnfɚˈmeɪʃən",
+      "pos": "noun",
+      "meaning_vi": "thông tin",
+      "example": {
+        "en": "Where can I get more information?",
+        "vi": "Mình có thể hỏi thêm thông tin ở đâu?"
+      },
+      "level": 3,
+      "source": {
+        "list": "curriculum",
+        "meaning": "authored",
+        "ipa": "cmudict"
+      },
+      "review": "draft",
+      "units": ["u17"]
+    },
+    {
+      "id": "w.university",
+      "kind": "word",
+      "text": "university",
+      "ipa": "junəˈvɝsəti",
+      "pos": "noun",
+      "meaning_vi": "trường đại học",
+      "example": {
+        "en": "No, I studied business at the university.",
+        "vi": "Không, mình học kinh doanh ở đại học."
+      },
+      "level": 3,
+      "source": {
+        "list": "curriculum",
+        "meaning": "authored",
+        "ipa": "cmudict"
+      },
+      "review": "draft",
+      "units": ["u17"]
+    },
+    {
+      "id": "c.what-do-you-do",
+      "kind": "chunk",
+      "text": "What do you do?",
+      "ipa": "wʌt du ju du",
+      "pos": "phrase",
+      "meaning_vi": "Bạn làm nghề gì?",
+      "example": {
+        "en": "What do you do?",
+        "vi": "Bạn làm nghề gì?"
+      },
+      "level": 3,
+      "source": {
+        "list": "curriculum",
+        "meaning": "curriculum",
+        "ipa": "cmudict"
+      },
+      "review": "approved",
+      "units": ["u17"]
+    },
+    {
+      "id": "c.im-a-photographer-at-a-newspaper",
+      "kind": "chunk",
+      "text": "I'm a photographer at a newspaper.",
+      "ipa": "aɪm ə fəˈtɑɡɹəfɚ æt ə ˈnuzpeɪpɚ",
+      "pos": "phrase",
+      "meaning_vi": "Mình là nhiếp ảnh gia ở một tờ báo.",
+      "example": {
+        "en": "I'm a photographer at a newspaper.",
+        "vi": "Mình là nhiếp ảnh gia ở một tờ báo."
+      },
+      "level": 3,
+      "source": {
+        "list": "curriculum",
+        "meaning": "curriculum",
+        "ipa": "cmudict"
+      },
+      "review": "approved",
+      "units": ["u17"]
+    },
+    {
+      "id": "c.did-you-study-photography",
+      "kind": "chunk",
+      "text": "Did you study photography?",
+      "ipa": "dɪd ju ˈstʌdi fəˈtɑɡɹəfi",
+      "pos": "phrase",
+      "meaning_vi": "Bạn học nhiếp ảnh à?",
+      "example": {
+        "en": "Did you study photography?",
+        "vi": "Bạn học nhiếp ảnh à?"
+      },
+      "level": 3,
+      "source": {
+        "list": "curriculum",
+        "meaning": "curriculum",
+        "ipa": "cmudict"
+      },
+      "review": "approved",
+      "units": ["u17"]
+    },
+    {
+      "id": "c.does-that-help-in-your-job",
+      "kind": "chunk",
+      "text": "Does that help in your job?",
+      "ipa": "dʌz ðæt hɛlp ɪn jɔɹ dʒɑb",
+      "pos": "phrase",
+      "meaning_vi": "Điều đó có giúp ích cho công việc không?",
+      "example": {
+        "en": "Does that help in your job?",
+        "vi": "Điều đó có giúp ích cho công việc không?"
+      },
+      "level": 3,
+      "source": {
+        "list": "curriculum",
+        "meaning": "curriculum",
+        "ipa": "cmudict"
+      },
+      "review": "approved",
+      "units": ["u17"]
+    },
+    {
+      "id": "w.coffee",
+      "kind": "word",
+      "text": "coffee",
+      "ipa": "ˈkɑfi",
+      "pos": "noun",
+      "meaning_vi": "cà phê",
+      "example": {
+        "en": "Can I have a coffee, please?",
+        "vi": "Cho mình một cà phê nhé?"
+      },
+      "level": 3,
+      "source": {
+        "list": "curriculum",
+        "meaning": "authored",
+        "ipa": "cmudict"
+      },
+      "review": "draft",
+      "units": ["u18"]
+    },
+    {
+      "id": "w.tea",
+      "kind": "word",
+      "text": "tea",
+      "ipa": "ti",
+      "pos": "noun",
+      "meaning_vi": "trà",
+      "example": {
+        "en": "Orange, please. And one green tea.",
+        "vi": "Cho mình cam. Thêm một trà xanh nữa."
+      },
+      "level": 3,
+      "source": {
+        "list": "curriculum",
+        "meaning": "authored",
+        "ipa": "cmudict"
+      },
+      "review": "draft",
+      "units": ["u18"]
+    },
+    {
+      "id": "w.juice",
+      "kind": "word",
+      "text": "juice",
+      "ipa": "dʒus",
+      "pos": "noun",
+      "meaning_vi": "nước ép",
+      "example": {
+        "en": "Iced, please. Do you have juice?",
+        "vi": "Đá nhé. Quán có nước ép không?"
+      },
+      "level": 3,
+      "source": {
+        "list": "curriculum",
+        "meaning": "authored",
+        "ipa": "cmudict"
+      },
+      "review": "draft",
+      "units": ["u18"]
+    },
+    {
+      "id": "w.please",
+      "kind": "word",
+      "text": "please",
+      "ipa": "pliz",
+      "pos": "adverb",
+      "meaning_vi": "làm ơn, nhé (lời lịch sự)",
+      "example": {
+        "en": "Can I have a coffee, please?",
+        "vi": "Cho mình một cà phê nhé?"
+      },
+      "level": 3,
+      "source": {
+        "list": "curriculum",
+        "meaning": "authored",
+        "ipa": "cmudict"
+      },
+      "review": "draft",
+      "units": ["u18"]
+    },
+    {
+      "id": "c.hi-what-can-i-get-you",
+      "kind": "chunk",
+      "text": "Hi! What can I get you?",
+      "ipa": "haɪ wʌt kæn aɪ ɡɛt ju",
+      "pos": "phrase",
+      "meaning_vi": "Chào bạn! Bạn dùng gì ạ?",
+      "example": {
+        "en": "Hi! What can I get you?",
+        "vi": "Chào bạn! Bạn dùng gì ạ?"
+      },
+      "level": 3,
+      "source": {
+        "list": "curriculum",
+        "meaning": "curriculum",
+        "ipa": "cmudict"
+      },
+      "review": "approved",
+      "units": ["u18"]
+    },
+    {
+      "id": "c.can-i-have-a-coffee-please",
+      "kind": "chunk",
+      "text": "Can I have a coffee, please?",
+      "ipa": "kæn aɪ hæv ə ˈkɑfi pliz",
+      "pos": "phrase",
+      "meaning_vi": "Cho mình một cà phê nhé?",
+      "example": {
+        "en": "Can I have a coffee, please?",
+        "vi": "Cho mình một cà phê nhé?"
+      },
+      "level": 3,
+      "source": {
+        "list": "curriculum",
+        "meaning": "curriculum",
+        "ipa": "cmudict"
+      },
+      "review": "approved",
+      "units": ["u18"]
+    },
+    {
+      "id": "c.sure-hot-or-iced",
+      "kind": "chunk",
+      "text": "Sure. Hot or iced?",
+      "ipa": "ʃʊɹ hɑt ɔɹ aɪst",
+      "pos": "phrase",
+      "meaning_vi": "Vâng. Nóng hay đá ạ?",
+      "example": {
+        "en": "Sure. Hot or iced?",
+        "vi": "Vâng. Nóng hay đá ạ?"
+      },
+      "level": 3,
+      "source": {
+        "list": "curriculum",
+        "meaning": "curriculum",
+        "ipa": "cmudict"
+      },
+      "review": "approved",
+      "units": ["u18"]
+    },
+    {
+      "id": "c.iced-please-do-you-have-juice",
+      "kind": "chunk",
+      "text": "Iced, please. Do you have juice?",
+      "ipa": "aɪst pliz du ju hæv dʒus",
+      "pos": "phrase",
+      "meaning_vi": "Đá nhé. Quán có nước ép không?",
+      "example": {
+        "en": "Iced, please. Do you have juice?",
+        "vi": "Đá nhé. Quán có nước ép không?"
+      },
+      "level": 3,
+      "source": {
+        "list": "curriculum",
+        "meaning": "curriculum",
+        "ipa": "cmudict"
+      },
+      "review": "approved",
+      "units": ["u18"]
+    },
+    {
+      "id": "c.yes-we-have-orange-and-apple",
+      "kind": "chunk",
+      "text": "Yes, we have orange and apple.",
+      "ipa": "jɛs wi hæv ˈɔɹəndʒ ənd ˈæpəl",
+      "pos": "phrase",
+      "meaning_vi": "Có ạ, có cam và táo.",
+      "example": {
+        "en": "Yes, we have orange and apple.",
+        "vi": "Có ạ, có cam và táo."
+      },
+      "level": 3,
+      "source": {
+        "list": "curriculum",
+        "meaning": "curriculum",
+        "ipa": "cmudict"
+      },
+      "review": "approved",
+      "units": ["u18"]
+    },
+    {
+      "id": "c.orange-please-and-one-green-tea",
+      "kind": "chunk",
+      "text": "Orange, please. And one green tea.",
+      "ipa": "ˈɔɹəndʒ pliz ənd wʌn ɡɹin ti",
+      "pos": "phrase",
+      "meaning_vi": "Cho mình cam. Thêm một trà xanh nữa.",
+      "example": {
+        "en": "Orange, please. And one green tea.",
+        "vi": "Cho mình cam. Thêm một trà xanh nữa."
+      },
+      "level": 3,
+      "source": {
+        "list": "curriculum",
+        "meaning": "curriculum",
+        "ipa": "cmudict"
+      },
+      "review": "approved",
+      "units": ["u18"]
+    },
+    {
+      "id": "w.when",
+      "kind": "word",
+      "text": "when",
+      "ipa": "wɛn",
+      "pos": "conjunction",
+      "meaning_vi": "khi; khi nào",
+      "example": {
+        "en": "When I got home, I cooked dinner.",
+        "vi": "Về đến nhà, mình nấu bữa tối."
+      },
+      "level": 4,
+      "source": {
+        "list": "curriculum",
+        "meaning": "authored",
+        "ipa": "cmudict"
+      },
+      "review": "draft",
+      "units": ["u19"]
+    },
+    {
+      "id": "w.then",
+      "kind": "word",
+      "text": "then",
+      "ipa": "ðɛn",
+      "pos": "adverb",
+      "meaning_vi": "rồi, sau đó; lúc đó",
+      "example": {
+        "en": "And then?",
+        "vi": "Rồi sao nữa?"
+      },
+      "level": 4,
+      "source": {
+        "list": "curriculum",
+        "meaning": "authored",
+        "ipa": "cmudict"
+      },
+      "review": "draft",
+      "units": ["u19", "u23"]
+    },
+    {
+      "id": "w.after",
+      "kind": "word",
+      "text": "after",
+      "ipa": "ˈæftɚ",
+      "pos": "preposition",
+      "meaning_vi": "sau, sau khi",
+      "example": {
+        "en": "After a long shower, I finally went to sleep.",
+        "vi": "Tắm một lúc lâu xong, cuối cùng mình đi ngủ."
+      },
+      "level": 4,
+      "source": {
+        "list": "curriculum",
+        "meaning": "authored",
+        "ipa": "cmudict"
+      },
+      "review": "draft",
+      "units": ["u19"]
+    },
+    {
+      "id": "w.finally",
+      "kind": "word",
+      "text": "finally",
+      "ipa": "ˈfaɪnəli",
+      "pos": "adverb",
+      "meaning_vi": "cuối cùng",
+      "example": {
+        "en": "After a long shower, I finally went to sleep.",
+        "vi": "Tắm một lúc lâu xong, cuối cùng mình đi ngủ."
+      },
+      "level": 4,
+      "source": {
+        "list": "curriculum",
+        "meaning": "authored",
+        "ipa": "cmudict"
+      },
+      "review": "draft",
+      "units": ["u19"]
+    },
+    {
+      "id": "c.what-did-you-do-last-night",
+      "kind": "chunk",
+      "text": "What did you do last night?",
+      "ipa": "wʌt dɪd ju du læst naɪt",
+      "pos": "phrase",
+      "meaning_vi": "Tối qua bạn làm gì?",
+      "example": {
+        "en": "What did you do last night?",
+        "vi": "Tối qua bạn làm gì?"
+      },
+      "level": 4,
+      "source": {
+        "list": "curriculum",
+        "meaning": "curriculum",
+        "ipa": "cmudict"
+      },
+      "review": "approved",
+      "units": ["u19"]
+    },
+    {
+      "id": "c.then-i-called-my-mom",
+      "kind": "chunk",
+      "text": "Then I called my mom.",
+      "ipa": "ðɛn aɪ kɔld maɪ mɑm",
+      "pos": "phrase",
+      "meaning_vi": "Rồi mình gọi điện cho mẹ.",
+      "example": {
+        "en": "Then I called my mom.",
+        "vi": "Rồi mình gọi điện cho mẹ."
+      },
+      "level": 4,
+      "source": {
+        "list": "curriculum",
+        "meaning": "curriculum",
+        "ipa": "cmudict"
+      },
+      "review": "approved",
+      "units": ["u19"]
+    },
+    {
+      "id": "c.did-you-go-to-bed-early",
+      "kind": "chunk",
+      "text": "Did you go to bed early?",
+      "ipa": "dɪd ju ɡoʊ tu bɛd ˈɝli",
+      "pos": "phrase",
+      "meaning_vi": "Bạn có đi ngủ sớm không?",
+      "example": {
+        "en": "Did you go to bed early?",
+        "vi": "Bạn có đi ngủ sớm không?"
+      },
+      "level": 4,
+      "source": {
+        "list": "curriculum",
+        "meaning": "curriculum",
+        "ipa": "cmudict"
+      },
+      "review": "approved",
+      "units": ["u19"]
+    },
+    {
+      "id": "w.fifteen",
+      "kind": "word",
+      "text": "fifteen",
+      "ipa": "fɪfˈtin",
+      "pos": "number",
+      "meaning_vi": "mười lăm",
+      "example": {
+        "en": "Actually, it's three fifteen, not fifty.",
+        "vi": "Thật ra là ba giờ mười lăm, không phải năm mươi."
+      },
+      "level": 4,
+      "source": {
+        "list": "curriculum",
+        "meaning": "authored",
+        "ipa": "cmudict"
+      },
+      "review": "draft",
+      "units": ["u20"]
+    },
+    {
+      "id": "w.fifty",
+      "kind": "word",
+      "text": "fifty",
+      "ipa": "ˈfɪfti",
+      "pos": "number",
+      "meaning_vi": "năm mươi",
+      "example": {
+        "en": "So we're meeting at three fifty, right?",
+        "vi": "Vậy mình gặp nhau lúc ba giờ năm mươi nhé?"
+      },
+      "level": 4,
+      "source": {
+        "list": "curriculum",
+        "meaning": "authored",
+        "ipa": "cmudict"
+      },
+      "review": "draft",
+      "units": ["u20"]
+    },
+    {
+      "id": "w.not",
+      "kind": "word",
+      "text": "not",
+      "ipa": "nɑt",
+      "pos": "adverb",
+      "meaning_vi": "không (phủ định)",
+      "example": {
+        "en": "Actually, it's three fifteen, not fifty.",
+        "vi": "Thật ra là ba giờ mười lăm, không phải năm mươi."
+      },
+      "level": 4,
+      "source": {
+        "list": "curriculum",
+        "meaning": "authored",
+        "ipa": "cmudict"
+      },
+      "review": "draft",
+      "units": ["u20"]
+    },
+    {
+      "id": "w.actually",
+      "kind": "word",
+      "text": "actually",
+      "ipa": "ˈæktʃuəli",
+      "pos": "adverb",
+      "meaning_vi": "thật ra",
+      "example": {
+        "en": "Actually, it's three fifteen, not fifty.",
+        "vi": "Thật ra là ba giờ mười lăm, không phải năm mươi."
+      },
+      "level": 4,
+      "source": {
+        "list": "curriculum",
+        "meaning": "authored",
+        "ipa": "cmudict"
+      },
+      "review": "draft",
+      "units": ["u20"]
+    },
+    {
+      "id": "c.actually-its-three-fifteen-not-fifty",
+      "kind": "chunk",
+      "text": "Actually, it's three fifteen, not fifty.",
+      "ipa": "ˈæktʃuəli ɪts θɹi fɪfˈtin nɑt ˈfɪfti",
+      "pos": "phrase",
+      "meaning_vi": "Thật ra là ba giờ mười lăm, không phải năm mươi.",
+      "example": {
+        "en": "Actually, it's three fifteen, not fifty.",
+        "vi": "Thật ra là ba giờ mười lăm, không phải năm mươi."
+      },
+      "level": 4,
+      "source": {
+        "list": "curriculum",
+        "meaning": "curriculum",
+        "ipa": "cmudict"
+      },
+      "review": "approved",
+      "units": ["u20"]
+    },
+    {
+      "id": "c.no-room-fifteen-one-five",
+      "kind": "chunk",
+      "text": "No, room fifteen. One five.",
+      "ipa": "noʊ ɹum fɪfˈtin wʌn faɪv",
+      "pos": "phrase",
+      "meaning_vi": "Không, phòng mười lăm. Một năm.",
+      "example": {
+        "en": "No, room fifteen. One five.",
+        "vi": "Không, phòng mười lăm. Một năm."
+      },
+      "level": 4,
+      "source": {
+        "list": "curriculum",
+        "meaning": "curriculum",
+        "ipa": "cmudict"
+      },
+      "review": "approved",
+      "units": ["u20"]
+    },
+    {
+      "id": "c.got-it-three-fifteen-room-fifteen",
+      "kind": "chunk",
+      "text": "Got it. Three fifteen, room fifteen.",
+      "ipa": "ɡɑt ɪt θɹi fɪfˈtin ɹum fɪfˈtin",
+      "pos": "phrase",
+      "meaning_vi": "Rõ rồi. Ba giờ mười lăm, phòng mười lăm.",
+      "example": {
+        "en": "Got it. Three fifteen, room fifteen.",
+        "vi": "Rõ rồi. Ba giờ mười lăm, phòng mười lăm."
+      },
+      "level": 4,
+      "source": {
+        "list": "curriculum",
+        "meaning": "curriculum",
+        "ipa": "cmudict"
+      },
+      "review": "approved",
+      "units": ["u20"]
+    },
+    {
+      "id": "c.thats-right-see-you-then",
+      "kind": "chunk",
+      "text": "That's right. See you then.",
+      "ipa": "ðæts ɹaɪt si ju ðɛn",
+      "pos": "phrase",
+      "meaning_vi": "Đúng rồi. Hẹn gặp bạn.",
+      "example": {
+        "en": "That's right. See you then.",
+        "vi": "Đúng rồi. Hẹn gặp bạn."
+      },
+      "level": 4,
+      "source": {
+        "list": "curriculum",
+        "meaning": "curriculum",
+        "ipa": "cmudict"
+      },
+      "review": "approved",
+      "units": ["u20"]
+    },
+    {
+      "id": "c.going-to",
+      "kind": "chunk",
+      "text": "going to",
+      "ipa": "ˈɡoʊɪŋ tu",
+      "pos": "phrase",
+      "meaning_vi": "sẽ, định (làm gì)",
+      "example": {
+        "en": "What are you going to do this weekend?",
+        "vi": "Cuối tuần này bạn định làm gì?"
+      },
+      "level": 4,
+      "source": {
+        "list": "curriculum",
+        "meaning": "authored",
+        "ipa": "cmudict"
+      },
+      "review": "draft",
+      "units": ["u21"]
+    },
+    {
+      "id": "c.want-to",
+      "kind": "chunk",
+      "text": "want to",
+      "ipa": "wɑnt tu",
+      "pos": "phrase",
+      "meaning_vi": "muốn (làm gì)",
+      "example": {
+        "en": "Do you want to see a movie on Sunday?",
+        "vi": "Chủ nhật bạn có muốn đi xem phim không?"
+      },
+      "level": 4,
+      "source": {
+        "list": "curriculum",
+        "meaning": "authored",
+        "ipa": "cmudict"
+      },
+      "review": "draft",
+      "units": ["u21"]
+    },
+    {
+      "id": "c.have-to",
+      "kind": "chunk",
+      "text": "have to",
+      "ipa": "hæv tu",
+      "pos": "phrase",
+      "meaning_vi": "phải (làm gì)",
+      "example": {
+        "en": "I want to, but I have to study.",
+        "vi": "Mình muốn lắm, nhưng mình phải học."
+      },
+      "level": 4,
+      "source": {
+        "list": "curriculum",
+        "meaning": "authored",
+        "ipa": "cmudict"
+      },
+      "review": "draft",
+      "units": ["u21"]
+    },
+    {
+      "id": "c.got-to",
+      "kind": "chunk",
+      "text": "got to",
+      "ipa": "ɡɑt tu",
+      "pos": "phrase",
+      "meaning_vi": "phải (làm gì), dùng trong \"I've got to\"",
+      "example": {
+        "en": "Sure. I've got to go now. Bye!",
+        "vi": "Ừ. Giờ mình phải đi rồi. Tạm biệt!"
+      },
+      "level": 4,
+      "source": {
+        "list": "curriculum",
+        "meaning": "authored",
+        "ipa": "cmudict"
+      },
+      "review": "draft",
+      "units": ["u21"]
+    },
+    {
+      "id": "c.im-going-to-visit-my-parents",
+      "kind": "chunk",
+      "text": "I'm going to visit my parents.",
+      "ipa": "aɪm ˈɡoʊɪŋ tu ˈvɪzɪt maɪ ˈpɛɹənts",
+      "pos": "phrase",
+      "meaning_vi": "Mình sẽ về thăm bố mẹ.",
+      "example": {
+        "en": "I'm going to visit my parents.",
+        "vi": "Mình sẽ về thăm bố mẹ."
+      },
+      "level": 4,
+      "source": {
+        "list": "curriculum",
+        "meaning": "curriculum",
+        "ipa": "cmudict"
+      },
+      "review": "approved",
+      "units": ["u21"]
+    },
+    {
+      "id": "c.too-bad-maybe-next-week",
+      "kind": "chunk",
+      "text": "Too bad. Maybe next week?",
+      "ipa": "tu bæd ˈmeɪbi nɛkst wik",
+      "pos": "phrase",
+      "meaning_vi": "Tiếc quá. Tuần sau nhé?",
+      "example": {
+        "en": "Too bad. Maybe next week?",
+        "vi": "Tiếc quá. Tuần sau nhé?"
+      },
+      "level": 4,
+      "source": {
+        "list": "curriculum",
+        "meaning": "curriculum",
+        "ipa": "cmudict"
+      },
+      "review": "approved",
+      "units": ["u21"]
+    },
+    {
+      "id": "w.hobby",
+      "kind": "word",
+      "text": "hobby",
+      "ipa": "ˈhɑbi",
+      "pos": "noun",
+      "meaning_vi": "sở thích",
+      "example": {
+        "en": "Do you have a hobby?",
+        "vi": "Bạn có sở thích gì không?"
+      },
+      "level": 4,
+      "source": {
+        "list": "curriculum",
+        "meaning": "authored",
+        "ipa": "cmudict"
+      },
+      "review": "draft",
+      "units": ["u22"]
+    },
+    {
+      "id": "w.singing",
+      "kind": "word",
+      "text": "singing",
+      "ipa": "ˈsɪŋɪŋ",
+      "pos": "noun",
+      "meaning_vi": "việc ca hát",
+      "example": {
+        "en": "Yes, I love singing.",
+        "vi": "Có, mình rất thích hát."
+      },
+      "level": 4,
+      "source": {
+        "list": "curriculum",
+        "meaning": "authored",
+        "ipa": "cmudict"
+      },
+      "review": "draft",
+      "units": ["u22"]
+    },
+    {
+      "id": "w.yes",
+      "kind": "word",
+      "text": "yes",
+      "ipa": "jɛs",
+      "pos": "adverb",
+      "meaning_vi": "có, vâng",
+      "example": {
+        "en": "Yes, I love singing.",
+        "vi": "Có, mình rất thích hát."
+      },
+      "level": 4,
+      "source": {
+        "list": "curriculum",
+        "meaning": "authored",
+        "ipa": "cmudict"
+      },
+      "review": "draft",
+      "units": ["u22"]
+    },
+    {
+      "id": "w.young",
+      "kind": "word",
+      "text": "young",
+      "ipa": "jʌŋ",
+      "pos": "adjective",
+      "meaning_vi": "trẻ, nhỏ tuổi",
+      "example": {
+        "en": "Since I was young.",
+        "vi": "Từ hồi nhỏ."
+      },
+      "level": 4,
+      "source": {
+        "list": "curriculum",
+        "meaning": "authored",
+        "ipa": "cmudict"
+      },
+      "review": "draft",
+      "units": ["u22"]
+    },
+    {
+      "id": "c.do-you-have-a-hobby",
+      "kind": "chunk",
+      "text": "Do you have a hobby?",
+      "ipa": "du ju hæv ə ˈhɑbi",
+      "pos": "phrase",
+      "meaning_vi": "Bạn có sở thích gì không?",
+      "example": {
+        "en": "Do you have a hobby?",
+        "vi": "Bạn có sở thích gì không?"
+      },
+      "level": 4,
+      "source": {
+        "list": "curriculum",
+        "meaning": "curriculum",
+        "ipa": "cmudict"
+      },
+      "review": "approved",
+      "units": ["u22"]
+    },
+    {
+      "id": "c.yes-i-love-singing",
+      "kind": "chunk",
+      "text": "Yes, I love singing.",
+      "ipa": "jɛs aɪ lʌv ˈsɪŋɪŋ",
+      "pos": "phrase",
+      "meaning_vi": "Có, mình rất thích hát.",
+      "example": {
+        "en": "Yes, I love singing.",
+        "vi": "Có, mình rất thích hát."
+      },
+      "level": 4,
+      "source": {
+        "list": "curriculum",
+        "meaning": "curriculum",
+        "ipa": "cmudict"
+      },
+      "review": "approved",
+      "units": ["u22"]
+    },
+    {
+      "id": "c.since-when",
+      "kind": "chunk",
+      "text": "Since when?",
+      "ipa": "sɪns wɛn",
+      "pos": "phrase",
+      "meaning_vi": "Từ khi nào vậy?",
+      "example": {
+        "en": "Since when?",
+        "vi": "Từ khi nào vậy?"
+      },
+      "level": 4,
+      "source": {
+        "list": "curriculum",
+        "meaning": "curriculum",
+        "ipa": "cmudict"
+      },
+      "review": "approved",
+      "units": ["u22"]
+    },
+    {
+      "id": "c.since-i-was-young",
+      "kind": "chunk",
+      "text": "Since I was young.",
+      "ipa": "sɪns aɪ wɑz jʌŋ",
+      "pos": "phrase",
+      "meaning_vi": "Từ hồi nhỏ.",
+      "example": {
+        "en": "Since I was young.",
+        "vi": "Từ hồi nhỏ."
+      },
+      "level": 4,
+      "source": {
+        "list": "curriculum",
+        "meaning": "curriculum",
+        "ipa": "cmudict"
+      },
+      "review": "approved",
+      "units": ["u22"]
+    },
+    {
+      "id": "c.do-you-sing-in-a-group",
+      "kind": "chunk",
+      "text": "Do you sing in a group?",
+      "ipa": "du ju sɪŋ ɪn ə ɡɹup",
+      "pos": "phrase",
+      "meaning_vi": "Bạn có hát trong nhóm nào không?",
+      "example": {
+        "en": "Do you sing in a group?",
+        "vi": "Bạn có hát trong nhóm nào không?"
+      },
+      "level": 4,
+      "source": {
+        "list": "curriculum",
+        "meaning": "curriculum",
+        "ipa": "cmudict"
+      },
+      "review": "approved",
+      "units": ["u22"]
+    },
+    {
+      "id": "c.yes-its-my-favorite-hobby",
+      "kind": "chunk",
+      "text": "Yes, it's my favorite hobby.",
+      "ipa": "jɛs ɪts maɪ ˈfeɪvɚɪt ˈhɑbi",
+      "pos": "phrase",
+      "meaning_vi": "Có, đó là sở thích lớn nhất của mình.",
+      "example": {
+        "en": "Yes, it's my favorite hobby.",
+        "vi": "Có, đó là sở thích lớn nhất của mình."
+      },
+      "level": 4,
+      "source": {
+        "list": "curriculum",
+        "meaning": "curriculum",
+        "ipa": "cmudict"
+      },
+      "review": "approved",
+      "units": ["u22"]
+    },
+    {
+      "id": "c.every-morning",
+      "kind": "chunk",
+      "text": "every morning",
+      "ipa": "ˈɛvɚi ˈmɔɹnɪŋ",
+      "pos": "phrase",
+      "meaning_vi": "mỗi sáng, sáng nào cũng",
+      "example": {
+        "en": "Every morning, I get up at six.",
+        "vi": "Sáng nào mình cũng dậy lúc sáu giờ."
+      },
+      "level": 4,
+      "source": {
+        "list": "curriculum",
+        "meaning": "authored",
+        "ipa": "cmudict"
+      },
+      "review": "draft",
+      "units": ["u23"]
+    },
+    {
+      "id": "w.before",
+      "kind": "word",
+      "text": "before",
+      "ipa": "bɪˈfɔɹ",
+      "pos": "conjunction",
+      "meaning_vi": "trước, trước khi",
+      "example": {
+        "en": "Yes, I eat before I go to work.",
+        "vi": "Có, mình ăn trước khi đi làm."
+      },
+      "level": 4,
+      "source": {
+        "list": "curriculum",
+        "meaning": "authored",
+        "ipa": "cmudict"
+      },
+      "review": "draft",
+      "units": ["u23"]
+    },
+    {
+      "id": "w.usually",
+      "kind": "word",
+      "text": "usually",
+      "ipa": "ˈjuʒəwəli",
+      "pos": "adverb",
+      "meaning_vi": "thường, thường xuyên",
+      "example": {
+        "en": "What do you usually do in the morning?",
+        "vi": "Buổi sáng bạn thường làm gì?"
+      },
+      "level": 4,
+      "source": {
+        "list": "curriculum",
+        "meaning": "authored",
+        "ipa": "cmudict"
+      },
+      "review": "draft",
+      "units": ["u23"]
+    },
+    {
+      "id": "c.what-do-you-do-first",
+      "kind": "chunk",
+      "text": "What do you do first?",
+      "ipa": "wʌt du ju du fɝst",
+      "pos": "phrase",
+      "meaning_vi": "Việc đầu tiên bạn làm là gì?",
+      "example": {
+        "en": "What do you do first?",
+        "vi": "Việc đầu tiên bạn làm là gì?"
+      },
+      "level": 4,
+      "source": {
+        "list": "curriculum",
+        "meaning": "curriculum",
+        "ipa": "cmudict"
+      },
+      "review": "approved",
+      "units": ["u23"]
+    },
+    {
+      "id": "c.do-you-eat-breakfast",
+      "kind": "chunk",
+      "text": "Do you eat breakfast?",
+      "ipa": "du ju it ˈbɹɛkfəst",
+      "pos": "phrase",
+      "meaning_vi": "Bạn có ăn sáng không?",
+      "example": {
+        "en": "Do you eat breakfast?",
+        "vi": "Bạn có ăn sáng không?"
+      },
+      "level": 4,
+      "source": {
+        "list": "curriculum",
+        "meaning": "curriculum",
+        "ipa": "cmudict"
+      },
+      "review": "approved",
+      "units": ["u23"]
+    },
+    {
+      "id": "w.hometown",
+      "kind": "word",
+      "text": "hometown",
+      "ipa": "ˈhoʊmtaʊn",
+      "pos": "noun",
+      "meaning_vi": "quê nhà, quê hương",
+      "example": {
+        "en": "Where is your hometown?",
+        "vi": "Quê bạn ở đâu?"
+      },
+      "level": 4,
+      "source": {
+        "list": "curriculum",
+        "meaning": "authored",
+        "ipa": "cmudict"
+      },
+      "review": "draft",
+      "units": ["u24"]
+    },
+    {
+      "id": "w.because",
+      "kind": "word",
+      "text": "because",
+      "ipa": "bɪˈkɔz",
+      "pos": "conjunction",
+      "meaning_vi": "vì, bởi vì",
+      "example": {
+        "en": "I love it because the people are friendly.",
+        "vi": "Mình yêu nơi đó vì mọi người rất thân thiện."
+      },
+      "level": 4,
+      "source": {
+        "list": "curriculum",
+        "meaning": "authored",
+        "ipa": "cmudict"
+      },
+      "review": "draft",
+      "units": ["u24"]
+    },
+    {
+      "id": "w.favorite",
+      "kind": "word",
+      "text": "favorite",
+      "ipa": "ˈfeɪvɚɪt",
+      "pos": "adjective",
+      "meaning_vi": "yêu thích nhất",
+      "example": {
+        "en": "What's your favorite place there?",
+        "vi": "Nơi bạn thích nhất ở đó là đâu?"
+      },
+      "level": 4,
+      "source": {
+        "list": "curriculum",
+        "meaning": "authored",
+        "ipa": "cmudict"
+      },
+      "review": "draft",
+      "units": ["u24"]
+    },
+    {
+      "id": "w.people",
+      "kind": "word",
+      "text": "people",
+      "ipa": "ˈpipəl",
+      "pos": "noun",
+      "meaning_vi": "mọi người, người ta",
+      "example": {
+        "en": "I love it because the people are friendly.",
+        "vi": "Mình yêu nơi đó vì mọi người rất thân thiện."
+      },
+      "level": 4,
+      "source": {
+        "list": "curriculum",
+        "meaning": "authored",
+        "ipa": "cmudict"
+      },
+      "review": "draft",
+      "units": ["u24"]
+    },
+    {
+      "id": "c.where-is-your-hometown",
+      "kind": "chunk",
+      "text": "Where is your hometown?",
+      "ipa": "wɛɹ ɪz jɔɹ ˈhoʊmtaʊn",
+      "pos": "phrase",
+      "meaning_vi": "Quê bạn ở đâu?",
+      "example": {
+        "en": "Where is your hometown?",
+        "vi": "Quê bạn ở đâu?"
+      },
+      "level": 4,
+      "source": {
+        "list": "curriculum",
+        "meaning": "curriculum",
+        "ipa": "cmudict"
+      },
+      "review": "approved",
+      "units": ["u24"]
+    },
+    {
+      "id": "c.what-do-you-love-about-it",
+      "kind": "chunk",
+      "text": "What do you love about it?",
+      "ipa": "wʌt du ju lʌv əˈbaʊt ɪt",
+      "pos": "phrase",
+      "meaning_vi": "Bạn yêu điều gì ở đó?",
+      "example": {
+        "en": "What do you love about it?",
+        "vi": "Bạn yêu điều gì ở đó?"
+      },
+      "level": 4,
+      "source": {
+        "list": "curriculum",
+        "meaning": "curriculum",
+        "ipa": "cmudict"
+      },
+      "review": "approved",
+      "units": ["u24"]
+    },
+    {
+      "id": "c.whats-your-favorite-place-there",
+      "kind": "chunk",
+      "text": "What's your favorite place there?",
+      "ipa": "wʌts jɔɹ ˈfeɪvɚɪt pleɪs ðɛɹ",
+      "pos": "phrase",
+      "meaning_vi": "Nơi bạn thích nhất ở đó là đâu?",
+      "example": {
+        "en": "What's your favorite place there?",
+        "vi": "Nơi bạn thích nhất ở đó là đâu?"
+      },
+      "level": 4,
+      "source": {
+        "list": "curriculum",
+        "meaning": "curriculum",
+        "ipa": "cmudict"
+      },
+      "review": "approved",
+      "units": ["u24"]
+    }
+  ]
+}

@@ -2,7 +2,8 @@
 
 Words of the 44-sound chart (example and contrast), drill words, pairs and sentences, minimal
 pairs, practice sentences, the listening material of the curriculum (pairs, stress words,
-focus sentences) and both sides of each unit's role-play. The voice builder renders exactly
+focus sentences) and both sides of each unit's role-play, and
+every vocabulary item with its example. The voice builder renders exactly
 this list; a test keeps it in step with the content.
 """
 
@@ -16,6 +17,16 @@ CONTENT = ROOT / "content"
 
 def _json(name: str) -> Any:  # noqa: ANN401 - content files are plain JSON
     return json.loads((CONTENT / name).read_text(encoding="utf-8"))
+
+
+def _vocab_texts() -> set[str]:
+    """Vocabulary items and their examples (content/vocab.json)."""
+    texts: set[str] = set()
+    for item in _json("vocab.json")["items"]:
+        texts.add(item["text"])
+        if item["example"]:
+            texts.add(item["example"]["en"])
+    return texts
 
 
 def reference_texts() -> list[str]:
@@ -44,4 +55,5 @@ def reference_texts() -> list[str]:
                 texts.update(word for pair_id in step["pairs"] for word in pairs[pair_id])
                 texts.update(item["word"] for item in step["stress"])
                 texts.update(sentences[item["sentence"]] for item in step["focus"])
+    texts.update(_vocab_texts())
     return sorted(t.strip() for t in texts if t.strip())
