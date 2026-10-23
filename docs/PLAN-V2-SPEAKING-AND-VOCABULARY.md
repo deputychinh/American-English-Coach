@@ -261,7 +261,7 @@ Màn “Giấy phép” hiện có cần thêm NGSL và Tatoeba. Ghi checksum v�
 - `web/src/utils/srs.util.ts` bọc `ts-fsrs` 5.4.2 (MIT, FSRS-6, tắt fuzz để lịch tái lập được). Phần còn lại của app chỉ thấy thẻ `ReviewCard` dạng JSON thuần (giờ ISO-8601 UTC), nên lưu thẳng vào IndexedDB và đổi thư viện không ảnh hưởng dữ liệu đã lưu.
 - Có: tạo thẻ, áp một câu trả lời (kèm sự kiện ôn để sau này tối ưu tham số theo người học), xác suất nhớ, thẻ đến hạn, phiên ôn (đến hạn trước, thẻ mới theo giới hạn ngày, dừng thẻ mới khi tồn quá nhiều), mở kiểu thẻ theo thứ tự Nghe → Nói → Điền câu, quy đổi kết quả máy chấm (`ok`/`check`/`error`) thành mức đánh giá, danh sách mục đã nhớ.
 - 20 unit test, coverage `srs.util.ts` 100 % dòng. `make ci` phần web xanh (73 file, 315 test).
-- Chưa có: kho từ (V2b), giao diện (V2c).
+- Kho từ (V2b) và giao diện (V2c): xem bên dưới.
 
 ### V2a · Kho thẻ trên máy: **XONG** (23/10)
 
@@ -269,3 +269,20 @@ Màn “Giấy phép” hiện có cần thêm NGSL và Tatoeba. Ghi checksum v�
 - Lưu một câu trả lời ghi thẻ và sự kiện ôn trong cùng một transaction.
 - Có memory store tương đương cho nơi không có IndexedDB. Xóa hồ sơ thì xóa thẻ của hồ sơ đó; "Xóa dữ liệu trên thiết bị" xóa cả thẻ.
 - Bản sao lưu hồ sơ `aec-profile/1` thêm hai trường tùy chọn `review_cards`, `review_events`. Bản cũ không có vẫn nhập được; máy chủ bỏ qua trường lạ.
+
+### V2b · Kho từ: **XONG bản đầu, chờ duyệt nghĩa** (23/10)
+
+- `content/vocab.json` (`aec-vocab/1`, 186 mục) sinh bằng `backend/scripts/build_vocab_draft.py` từ hội thoại nhập vai của 24 đơn vị: 93 từ/cụm trọng tâm (`target_words`) và 93 câu ngắn (≤ 6 từ) trong hội thoại. Ví dụ lấy từ chính hội thoại đó nên người học gặp từ trong ngữ cảnh đã học.
+- IPA sinh từ CMUdict, có dấu trọng âm chính. Câu hội thoại dùng bản dịch sẵn có của lộ trình nên là `approved`. **93 mục từ có nghĩa do AI viết, để `draft`**: app vẫn hiện nhưng gắn nhãn "Nghĩa chờ duyệt". Người duyệt sửa `meaning_vi`/`pos` rồi đổi `review` sang `approved`; chạy lại script giữ nguyên các sửa đó.
+- Chưa dùng NGSL: danh sách NGSL là CC BY-SA, vẫn chờ quyết định ở §10.4. Bản này chỉ dùng nội dung của chính dự án.
+- Bản chụp offline chép `vocab.json` vào `web/src/data/content/`. Từ điển máy chấm trên máy (`lexicon.json`) đã có mọi từ trong kho (có test). `reference_texts` thêm mục và câu ví dụ, nên lần dựng giọng mẫu tới sẽ có tiếng cho chúng. Trước khi dựng lại, app lấy giọng từ máy chấm như các văn bản chưa có clip.
+- Theo cấp: 45 mục cấp 1, 52 cấp 2, 46 cấp 3, 43 cấp 4. Mục tiêu "≥ 120 mục cấp 1 đã duyệt" **chưa đạt**: cần thêm mục cấp 1 và người duyệt.
+
+### V2c · Màn Từ vựng: **XONG** (23/10)
+
+- Trang `/vocab` và thẻ "Ôn từ vựng" trên Trang chủ. Thanh tab giữ 5 mục như cũ; sắp lại tab theo §3.1 để cho V5.
+- Phiên ôn: thẻ đến hạn trước, sau đó thẻ mới (20/ngày, tính theo thẻ tạo trong ngày). Với mục đã học, mở kiểu thẻ kế tiếp trước; rồi mới đến mục mới theo thứ tự đơn vị.
+- Nghe → hiểu: phát âm mục, chọn 1 trong 4 nghĩa cùng loại (từ/cụm).
+- Nghĩa → nói và Điền câu: máy chấm âm vị chấm **chỉ các âm của mục** (`targetVerdicts`). `ok` → nhớ tốt, `check` → khó, sai hoặc im lặng → quên. Người học có nút "Mình nói đúng, máy chấm sai". Khi không chấm được (offline, không có máy chấm), người học tự đánh giá. Thẻ Điền câu chỉ có khi câu ví dụ chứa mục và khác chính mục.
+- Lượt nói cũng được lưu như một lần chấm (`vocab:<id>:<kiểu>`), nên vẫn tính vào tiến độ âm.
+- Test: `vocab.util.test.ts` (kế hoạch phiên, cloze, đáp án nhiễu, kiểm tra kho từ), `VocabScreen.test.tsx` (nghe, nói có chấm + sửa đánh giá, tự đánh giá, hết thẻ). E2E `e2e/vocab.spec.ts`: 10 thẻ nghe, tải lại, rồi một thẻ nói chấm bằng máy chấm thật trên desktop và điện thoại. `/vocab/` có trong kiểm tra axe.

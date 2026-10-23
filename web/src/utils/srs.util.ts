@@ -173,14 +173,18 @@ export const buildSession = (
 
 /**
  * Modes of one item that should get a card now. The first mode always opens; each later
- * mode opens once the previous mode's card is in review and stable enough.
+ * mode opens once the previous mode's card is in review and stable enough. `modes` is the
+ * item's own order when it cannot be asked every way (a chunk without a separate example).
  */
-export const modesToOpen = (itemCards: readonly ReviewCard[]): ReviewMode[] => {
+export const modesToOpen = (
+  itemCards: readonly ReviewCard[],
+  modes: readonly ReviewMode[] = SRS_MODE_ORDER,
+): ReviewMode[] => {
   const byMode = new Map(itemCards.map((card) => [card.mode, card]));
-  return SRS_MODE_ORDER.filter((mode, index) => {
+  return modes.filter((mode, index) => {
     if (byMode.has(mode)) return false;
     if (index === 0) return true;
-    const previousMode = SRS_MODE_ORDER[index - 1];
+    const previousMode = modes[index - 1];
     const previous = previousMode === undefined ? undefined : byMode.get(previousMode);
     return (
       previous !== undefined &&

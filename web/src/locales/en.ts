@@ -8,6 +8,7 @@ import { enListen } from './en-listen';
 import { enPractice } from './en-practice';
 import { enSettings } from './en-settings';
 import { enSpeak } from './en-speak';
+import { enVocab } from './en-vocab';
 
 /**
  * English interface copy. Lesson content, mouth-shape tips and the scorer's remarks come from
@@ -120,6 +121,7 @@ export const en: Copy = {
   course: enCourse.course,
   curriculum: enCourse.curriculum,
   listen: enListen.listen,
+  vocab: enVocab.vocab,
   today: enHome.today,
   placement: enHome.placement,
   speak: enSpeak.speak,

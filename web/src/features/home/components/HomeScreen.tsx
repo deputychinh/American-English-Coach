@@ -22,6 +22,7 @@ import { listenAccuracy, readListenResults } from '@/features/listen/services/li
 import { isOnboarded } from '@/features/onboarding/services/onboarding.service';
 import { continueUnit, readPlacement } from '@/features/placement/services/placement.service';
 import { getPlan } from '@/features/plan/services/plan.service';
+import { VocabHomeCard } from '@/features/vocab/components/VocabHomeCard';
 import { useActiveProfile } from '@/hooks/useActiveProfile';
 import { useAsync } from '@/hooks/useAsync';
 import { useCopy, useLanguage } from '@/hooks/useCopy';
@@ -196,6 +197,8 @@ export const HomeScreen = (): ReactElement => {
           </span>
         </Link>
       ) : null}
+
+      <VocabHomeCard />
 
       <section className="home-screen__focus" aria-labelledby="focus-title">
         <h2 id="focus-title" className="home-screen__section-title">

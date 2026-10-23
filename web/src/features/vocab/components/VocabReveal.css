@@ -1,0 +1,44 @@
+.vocab-reveal {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.vocab-reveal__text {
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-bold);
+}
+
+.vocab-reveal__ipa {
+  font-family: var(--font-ipa);
+  color: var(--color-text-muted);
+}
+
+.vocab-reveal__meaning {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  align-items: center;
+  justify-content: center;
+  font-weight: var(--weight-medium);
+}
+
+.vocab-reveal__draft {
+  padding: 0 var(--space-2);
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-full);
+}
+
+.vocab-reveal__example {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  margin-block-start: var(--space-2);
+}
+
+.vocab-reveal__example-vi {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}

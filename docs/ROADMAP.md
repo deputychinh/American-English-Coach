@@ -59,11 +59,11 @@ Nguyên tắc không đổi: local-first (video không rời thiết bị), ba m
 
 Chi tiết, nguồn và quyết định cần chốt: [`docs/PLAN-V2-SPEAKING-AND-VOCABULARY.md`](PLAN-V2-SPEAKING-AND-VOCABULARY.md).
 
-| #   | Trạng thái | Hạng mục                                           | Tiêu chí nghiệm thu                                                          |
-| --- | ---------- | -------------------------------------------------- | ---------------------------------------------------------------------------- |
-| V1  | ◐          | Lõi ôn giãn cách FSRS trên máy                     | ☑ `srs.util.ts` + 20 unit test; còn chờ dùng trong giao diện                 |
-| V2  | ☐          | Kho thẻ IndexedDB, kho từ theo đơn vị, tab Từ vựng | ≥ 120 mục cấp 1 đã duyệt; e2e phiên ôn 10 thẻ có chấm nói; chạy offline      |
-| V3  | ☐          | Cụm giao tiếp theo chức năng và cấu trúc nói       | Mỗi đơn vị ≥ 1 chức năng và 1 mẫu câu; chấm đuôi -s/-ed bằng máy chấm âm vị  |
-| V4  | ☐          | Độ trôi chảy và bài Nói 3 lần                      | Tốc độ nói, đoạn nói liền, ngắt nghỉ đo trên máy; chỉ so với chính người học |
-| V5  | ☐          | Phiên "Hôm nay 15 phút" gộp mọi mạch               | e2e hành trình; tiếp tục đúng chỗ                                            |
-| V6  | ☐          | Phản hồi nội dung bằng AI (v1.1)                   | Precision ≥ 0,8 trên 50 câu có lỗi gán nhãn; AI không nêu lỗi phát âm        |
+| #   | Trạng thái | Hạng mục                                           | Tiêu chí nghiệm thu                                                                     |
+| --- | ---------- | -------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| V1  | ☑          | Lõi ôn giãn cách FSRS trên máy                     | ☑ `srs.util.ts` + unit test; dùng trong màn Từ vựng                                     |
+| V2  | ◐          | Kho thẻ IndexedDB, kho từ theo đơn vị, tab Từ vựng | ☐ ≥ 120 mục cấp 1 đã duyệt (có 45, 93 từ chờ duyệt); ☑ e2e 10 thẻ + chấm nói; ☑ offline |
+| V3  | ☐          | Cụm giao tiếp theo chức năng và cấu trúc nói       | Mỗi đơn vị ≥ 1 chức năng và 1 mẫu câu; chấm đuôi -s/-ed bằng máy chấm âm vị             |
+| V4  | ☐          | Độ trôi chảy và bài Nói 3 lần                      | Tốc độ nói, đoạn nói liền, ngắt nghỉ đo trên máy; chỉ so với chính người học            |
+| V5  | ☐          | Phiên "Hôm nay 15 phút" gộp mọi mạch               | e2e hành trình; tiếp tục đúng chỗ                                                       |
+| V6  | ☐          | Phản hồi nội dung bằng AI (v1.1)                   | Precision ≥ 0,8 trên 50 câu có lỗi gán nhãn; AI không nêu lỗi phát âm                   |
