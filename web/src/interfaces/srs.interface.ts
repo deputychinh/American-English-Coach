@@ -65,6 +65,33 @@ export interface ReviewSession {
   newPaused: boolean;
 }
 
+/** What a deck needs to plan a session on top of the FSRS core. */
+export interface ReviewPlanInput<T extends { id: string }> {
+  items: readonly T[];
+  /** The profile's cards; cards of other decks are ignored. */
+  cards: readonly ReviewCard[];
+  profileId: string;
+  now: Date;
+  /** The ways an item can be asked, in opening order. */
+  modesOf: (item: T) => readonly ReviewMode[];
+  newPerDay: number;
+}
+
+/** One card to ask now and the item it asks about. */
+export interface ReviewTurn<T> {
+  item: T;
+  card: ReviewCard;
+  isNew: boolean;
+}
+
+export interface ReviewPlan<T> {
+  turns: ReviewTurn<T>[];
+  due: number;
+  fresh: number;
+  /** New cards are held back because too many reviews are due. */
+  newPaused: boolean;
+}
+
 /** Device-only additions to a profile backup (`aec-profile/1`); older backups have neither. */
 export interface ReviewBackup {
   review_cards?: ReviewCard[];

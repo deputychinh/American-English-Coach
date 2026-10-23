@@ -1,0 +1,203 @@
+.talk-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  align-items: center;
+  padding: var(--space-5) var(--space-4);
+  text-align: center;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-sm);
+}
+
+.talk-card__eyebrow {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  color: var(--color-primary);
+}
+
+.talk-card__situation {
+  font-size: var(--text-xl);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-normal);
+}
+
+.talk-card__rule,
+.talk-card__hint {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+.talk-card__question {
+  font-size: var(--text-lg);
+  font-weight: var(--weight-semibold);
+}
+
+.talk-card__prompt {
+  display: flex;
+  gap: var(--space-3);
+  align-items: center;
+  justify-content: center;
+}
+
+.talk-card__play {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  inline-size: 48px;
+  block-size: 48px;
+  font-size: var(--text-xl);
+  color: var(--color-on-primary);
+  background: var(--color-primary);
+  border: 0;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+}
+
+.talk-card__play.is-playing {
+  transform: scale(1.06);
+}
+
+.talk-card__sentence {
+  font-size: var(--text-xl);
+  line-height: var(--leading-normal);
+}
+
+.talk-card__cue {
+  padding: var(--space-1) var(--space-3);
+  font-weight: var(--weight-semibold);
+  background: var(--color-bg);
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-full);
+}
+
+.talk-card__choices {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  inline-size: 100%;
+}
+
+.talk-card__choice {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  min-block-size: 56px;
+  padding: var(--space-3);
+  font-size: var(--text-md);
+  font-weight: var(--weight-medium);
+  text-align: start;
+  color: var(--color-text);
+  background: var(--color-bg);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+}
+
+.talk-card__choice:disabled {
+  cursor: default;
+}
+
+.talk-card__choice.is-correct {
+  color: var(--color-on-success-subtle);
+  background: var(--color-success-subtle);
+  border-color: var(--color-success);
+}
+
+.talk-card__choice.is-wrong {
+  color: var(--color-on-danger-subtle);
+  background: var(--color-danger-subtle);
+  border-color: var(--color-danger);
+}
+
+.talk-card__register {
+  font-size: var(--text-xs);
+  font-weight: var(--weight-regular);
+}
+
+.talk-card__actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  align-items: stretch;
+  inline-size: 100%;
+}
+
+.talk-card__mic {
+  display: inline-flex;
+  gap: var(--space-2);
+  align-items: center;
+  justify-content: center;
+  min-block-size: 64px;
+  font-size: var(--text-lg);
+  font-weight: var(--weight-semibold);
+  color: var(--color-on-primary);
+  background: var(--color-primary);
+  border: 0;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+}
+
+.talk-card__mic.is-recording {
+  background: var(--color-danger);
+}
+
+.talk-card__mic:disabled {
+  opacity: 0.7;
+  cursor: progress;
+}
+
+.talk-card__verdict {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  font-weight: var(--weight-semibold);
+}
+
+.talk-card__verdict.is-good,
+.talk-card__feedback.is-good,
+.talk-card__ending.is-good {
+  color: var(--color-success);
+}
+
+.talk-card__verdict.is-hard,
+.talk-card__feedback.is-hard,
+.talk-card__ending.is-hard {
+  color: var(--color-warning);
+}
+
+.talk-card__verdict.is-again,
+.talk-card__ending.is-again {
+  color: var(--color-danger);
+}
+
+.talk-card__ending {
+  font-size: var(--text-sm);
+}
+
+.talk-card__answer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.talk-card__label {
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.talk-card__target {
+  padding-inline: var(--space-1);
+  font-weight: var(--weight-bold);
+  color: var(--color-primary);
+  background: transparent;
+}
+
+.talk-card__error {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-regular);
+  color: var(--color-danger);
+}

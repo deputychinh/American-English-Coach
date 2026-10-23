@@ -1,8 +1,9 @@
 import type { AsyncStatus } from '@/enums/async-status.enum';
 import type { RecorderStatus } from '@/enums/recorder-status.enum';
+import type { TakePhase } from '@/enums/take-phase.enum';
 import type { TrackerStatus } from '@/enums/tracker-status.enum';
 import type { Calibration, MouthFeatures, TrackedFrame } from '@/interfaces/mouth.interface';
-import type { PracticeItem, Recording } from '@/interfaces/practice.interface';
+import type { AssessmentResponse, PracticeItem, Recording } from '@/interfaces/practice.interface';
 import type { VadState } from '@/interfaces/vad.interface';
 
 export interface AsyncState<T> {
@@ -38,6 +39,19 @@ export interface RecorderSession {
   /** Milliseconds of audio received so far: the voice-activity clock. */
   audioMs: number;
   isAutoStopped: boolean;
+}
+
+/** Record one answer and score it (`useScoredTake`). */
+export interface ScoredTake {
+  phase: TakePhase;
+  result: AssessmentResponse | null;
+  /** Why the take could not be scored. */
+  error: string | null;
+  /** Microphone problem (permission, device). */
+  recorderError: string | null;
+  isRecording: boolean;
+  /** Starts recording `item`, or stops and scores the take under way. */
+  toggle: (item: PracticeItem) => void;
 }
 
 export interface ReferenceAudio {

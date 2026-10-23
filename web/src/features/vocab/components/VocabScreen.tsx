@@ -11,9 +11,10 @@ import { Stat } from '@/components/Stat/Stat';
 import { AsyncStatus } from '@/enums/async-status.enum';
 import { ReviewGrade, ReviewMode } from '@/enums/review.enum';
 import { VocabReview } from '@/enums/vocab.enum';
+import { answerCard } from '@/features/review/services/review.service';
 import { VocabListenCard } from '@/features/vocab/components/VocabListenCard';
 import { VocabSpeakCard } from '@/features/vocab/components/VocabSpeakCard';
-import { answerVocab, loadVocabState } from '@/features/vocab/services/vocab.service';
+import { loadVocabState } from '@/features/vocab/services/vocab.service';
 import { useAsync } from '@/hooks/useAsync';
 import { useCopy } from '@/hooks/useCopy';
 import { useFocusMode, useImmersive } from '@/hooks/useImmersive';
@@ -56,7 +57,7 @@ export const VocabScreen = (): ReactElement => {
     const turn = turns?.[index];
     if (!turn) return;
     setSaveError(null);
-    answerVocab(turn.card, grade)
+    answerCard(turn.card, grade)
       .then(() => {
         if (grade >= ReviewGrade.Good) setGood((count) => count + 1);
         setIndex((value) => value + 1);
@@ -89,7 +90,7 @@ export const VocabScreen = (): ReactElement => {
                 <VocabSpeakCard
                   key={turn.card.id}
                   item={turn.item}
-                  mode={turn.card.mode}
+                  mode={turn.card.mode === ReviewMode.Cloze ? ReviewMode.Cloze : ReviewMode.Speak}
                   onAnswer={answer}
                 />
               )}

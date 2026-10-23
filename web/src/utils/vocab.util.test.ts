@@ -111,23 +111,27 @@ describe('planVocab', () => {
     expect(firstNew).toMatchObject({ item: { id: 'w.i5' }, card: { mode: ReviewMode.Speak } });
   });
 
-  it('ignores cards of items no longer in the deck and pauses new cards on a backlog', () => {
+  it('ignores cards of other decks and pauses new cards on a backlog', () => {
     const old = new Date(NOW.getTime() - 30 * DAY);
-    const cards = Array.from(
-      { length: 101 },
-      (_, index) =>
-        reviewCard({
-          card: newCard(
-            { profileId: 'p', itemId: `gone${String(index)}`, mode: ReviewMode.Listen },
-            old,
-          ),
-          grade: ReviewGrade.Good,
-          now: old,
-        }).card,
-    );
-    const plan = planVocab({ items, cards, profileId: 'p', now: NOW });
-    expect(plan.newPaused).toBe(true);
-    expect(plan.turns).toEqual([]);
+    const learnt = (itemId: string): ReviewCard =>
+      reviewCard({
+        card: newCard({ profileId: 'p', itemId, mode: ReviewMode.Listen }, old),
+        grade: ReviewGrade.Good,
+        now: old,
+      }).card;
+    const others = Array.from({ length: 101 }, (_, index) => learnt(`gone${String(index)}`));
+    expect(planVocab({ items, cards: others, profileId: 'p', now: NOW })).toMatchObject({
+      due: 0,
+      newPaused: false,
+    });
+    const deck = Array.from({ length: 101 }, (_, index) => item(`w.${String(index)}`, 'x'));
+    const plan = planVocab({
+      items: deck,
+      cards: deck.map((entry) => learnt(entry.id)),
+      profileId: 'p',
+      now: NOW,
+    });
+    expect(plan).toMatchObject({ due: 101, fresh: 0, newPaused: true });
   });
 });
 

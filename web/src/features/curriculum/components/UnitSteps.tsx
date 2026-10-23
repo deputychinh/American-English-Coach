@@ -6,6 +6,7 @@ import type { ReactElement } from 'react';
 import { ConfidenceBadge } from '@/components/ConfidenceBadge/ConfidenceBadge';
 import { courseItemHref } from '@/features/course/services/course.service';
 import { listenAccuracy, readListenResults } from '@/features/listen/services/listen.service';
+import { UnitTalkLinks } from '@/features/talk/components/UnitTalkLinks';
 import { useCopy } from '@/hooks/useCopy';
 import type { CurriculumStep, CurriculumUnit } from '@/interfaces/practice.interface';
 import { cx } from '@/utils/cx.util';
@@ -117,6 +118,7 @@ export const UnitSteps = ({ unit, labels = {} }: UnitStepsProps): ReactElement =
                 <p className="unit-steps__muted">
                   {copy.curriculum.targetWords}: {step.target_words.join(', ')}
                 </p>
+                <UnitTalkLinks unitId={unit.id} />
               </>
             ) : null}
           </div>

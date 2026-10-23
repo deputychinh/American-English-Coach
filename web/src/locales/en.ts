@@ -8,6 +8,7 @@ import { enListen } from './en-listen';
 import { enPractice } from './en-practice';
 import { enSettings } from './en-settings';
 import { enSpeak } from './en-speak';
+import { enTalk } from './en-talk';
 import { enVocab } from './en-vocab';
 
 /**
@@ -122,6 +123,7 @@ export const en: Copy = {
   curriculum: enCourse.curriculum,
   listen: enListen.listen,
   vocab: enVocab.vocab,
+  talk: enTalk.talk,
   today: enHome.today,
   placement: enHome.placement,
   speak: enSpeak.speak,

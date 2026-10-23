@@ -1,5 +1,5 @@
 import type { VocabKind, VocabReview } from '@/enums/vocab.enum';
-import type { ReviewCard } from '@/interfaces/srs.interface';
+import type { ReviewCard, ReviewPlan, ReviewTurn } from '@/interfaces/srs.interface';
 
 export interface VocabExample {
   en: string;
@@ -32,11 +32,7 @@ export interface Cloze {
 }
 
 /** One card to ask now and the item it asks about. */
-export interface VocabTurn {
-  item: VocabItem;
-  card: ReviewCard;
-  isNew: boolean;
-}
+export type VocabTurn = ReviewTurn<VocabItem>;
 
 export interface VocabPlanInput {
   items: readonly VocabItem[];
@@ -45,13 +41,7 @@ export interface VocabPlanInput {
   now: Date;
 }
 
-export interface VocabPlan {
-  turns: VocabTurn[];
-  due: number;
-  fresh: number;
-  /** New cards are held back because too many reviews are due. */
-  newPaused: boolean;
-}
+export type VocabPlan = ReviewPlan<VocabItem>;
 
 export interface VocabOverview extends VocabPlan {
   /** Items with at least one answered card. */

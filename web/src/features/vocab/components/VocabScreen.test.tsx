@@ -1,9 +1,11 @@
 import { act, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
+import deckJson from '@/data/content/vocab.json';
 import { RecorderStatus } from '@/enums/recorder-status.enum';
 import { CardPhase, ReviewGrade, ReviewMode } from '@/enums/review.enum';
 import type { RecorderOptions } from '@/interfaces/vad.interface';
+import type { VocabDeck } from '@/interfaces/vocab.interface';
 import { resetRunsStore, reviewStore } from '@/utils/local-store.util';
 import { newCard, reviewCard } from '@/utils/srs.util';
 
@@ -136,12 +138,12 @@ describe('VocabScreen', () => {
   });
 
   it('says when nothing is left for today', async () => {
-    const cards = Array.from(
-      { length: 20 },
-      (_, index) =>
+    const { items } = deckJson as unknown as VocabDeck;
+    const cards = items.slice(0, 20).map(
+      (entry) =>
         reviewCard({
           card: newCard(
-            { profileId: 'default', itemId: `gone${String(index)}`, mode: ReviewMode.Listen },
+            { profileId: 'default', itemId: entry.id, mode: ReviewMode.Listen },
             new Date(),
           ),
           grade: ReviewGrade.Easy,

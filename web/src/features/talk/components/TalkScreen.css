@@ -1,0 +1,66 @@
+.talk-screen {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  max-inline-size: 560px;
+  margin-inline: auto;
+}
+
+.talk-screen__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding-inline: var(--padding-page-x);
+}
+
+.talk-screen__lead {
+  color: var(--color-text-muted);
+}
+
+.talk-screen__stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-3);
+}
+
+.talk-screen__note,
+.talk-screen__done {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+.talk-screen__done {
+  font-size: var(--text-md);
+  text-align: center;
+}
+
+.talk-screen__new {
+  align-self: flex-start;
+  padding: var(--space-1) var(--space-3);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  color: var(--color-on-primary);
+  background: var(--color-primary);
+  border-radius: var(--radius-full);
+}
+
+.talk-screen__error {
+  font-size: var(--text-sm);
+  color: var(--color-danger);
+}
+
+.talk-screen__summary {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--space-5) var(--space-4);
+  text-align: center;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+}
+
+.talk-screen__title {
+  font-size: var(--text-xl);
+  font-weight: var(--weight-semibold);
+}

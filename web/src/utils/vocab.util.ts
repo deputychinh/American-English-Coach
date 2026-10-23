@@ -1,19 +1,18 @@
-import { SRS_BACKLOG_PAUSE, SRS_MODE_ORDER, SRS_NEW_PER_DAY } from '@/constants/srs.constant';
+import { SRS_MODE_ORDER, SRS_NEW_PER_DAY } from '@/constants/srs.constant';
 import { ReviewMode } from '@/enums/review.enum';
 import type { PhoneResult, AssessmentResponse } from '@/interfaces/practice.interface';
 import type { ScoreVerdict } from '@/interfaces/scoring.interface';
-import type { ReviewCard } from '@/interfaces/srs.interface';
 import type {
   Cloze,
   VocabItem,
   VocabOverview,
   VocabPlan,
   VocabPlanInput,
-  VocabTurn,
 } from '@/interfaces/vocab.interface';
 import { tokenizeWords } from '@/utils/lexicon.util';
+import { planReviews } from '@/utils/review-plan.util';
 import { seedFrom, shuffleSeeded } from '@/utils/shuffle.util';
-import { buildSession, modesToOpen, newCard, rememberedItems } from '@/utils/srs.util';
+import { rememberedItems } from '@/utils/srs.util';
 
 /** Vocabulary review on top of the FSRS core (docs/PLAN-V2-SPEAKING-AND-VOCABULARY.md §4). */
 
@@ -37,60 +36,11 @@ export const clozeOf = (item: VocabItem): Cloze | null => {
 export const modesOf = (item: VocabItem): ReviewMode[] =>
   SRS_MODE_ORDER.filter((mode) => mode !== ReviewMode.Cloze || clozeOf(item) !== null);
 
-/** Local midnight of the day containing `now`. */
-export const startOfLocalDay = (now: Date): Date => {
-  const start = new Date(now);
-  start.setHours(0, 0, 0, 0);
-  return start;
-};
+export { startOfLocalDay } from '@/utils/review-plan.util';
 
-const cardsByItem = (cards: readonly ReviewCard[]): Map<string, ReviewCard[]> => {
-  const grouped = new Map<string, ReviewCard[]>();
-  for (const card of cards) grouped.set(card.itemId, [...(grouped.get(card.itemId) ?? []), card]);
-  return grouped;
-};
-
-/**
- * What to study now: due reviews (most overdue first), then new cards up to today's allowance.
- * A card is stored only once answered, so new cards are made here: first the next mode of items
- * already started, then the next items in course order.
- */
-export const planVocab = ({ items, cards, profileId, now }: VocabPlanInput): VocabPlan => {
-  const byId = new Map(items.map((item) => [item.id, item]));
-  const dayStart = startOfLocalDay(now).getTime();
-  const introducedToday = cards.filter((card) => Date.parse(card.createdAt) >= dayStart).length;
-  const session = buildSession(cards, now, {
-    newPerDay: SRS_NEW_PER_DAY,
-    newIntroducedToday: introducedToday,
-    backlogPause: SRS_BACKLOG_PAUSE,
-  });
-  const allowance = session.newPaused ? 0 : Math.max(0, SRS_NEW_PER_DAY - introducedToday);
-  const grouped = cardsByItem(cards);
-  const fresh: VocabTurn[] = [];
-  const open = (item: VocabItem, modes: ReviewMode[]): void => {
-    for (const mode of modes) {
-      if (fresh.length >= allowance) return;
-      fresh.push({ item, card: newCard({ profileId, itemId: item.id, mode }, now), isNew: true });
-    }
-  };
-  for (const item of items) {
-    const itemCards = grouped.get(item.id);
-    if (itemCards) open(item, modesToOpen(itemCards, modesOf(item)));
-  }
-  for (const item of items) {
-    if (!grouped.has(item.id)) open(item, modesToOpen([], modesOf(item)));
-  }
-  const due = session.due.flatMap((card) => {
-    const item = byId.get(card.itemId);
-    return item ? [{ item, card, isNew: false }] : [];
-  });
-  return {
-    turns: [...due, ...fresh],
-    due: due.length,
-    fresh: fresh.length,
-    newPaused: session.newPaused,
-  };
-};
+/** What to study now (see `planReviews`); words open Listen → Speak → Cloze. */
+export const planVocab = ({ items, cards, profileId, now }: VocabPlanInput): VocabPlan =>
+  planReviews({ items, cards, profileId, now, modesOf, newPerDay: SRS_NEW_PER_DAY });
 
 /** The plan plus how much of the deck the learner has met and remembers. */
 export const vocabOverview = (input: VocabPlanInput): VocabOverview => {

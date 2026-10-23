@@ -1,18 +1,17 @@
 'use client';
 
-import { type ReactElement, useCallback, useEffect, useRef, useState } from 'react';
+import { type ReactElement, useState } from 'react';
 
 import { Button } from '@/components/Button/Button';
 import { Icon } from '@/components/Icon/Icon';
 import { SILENCE_MS_SENTENCE, SILENCE_MS_WORD } from '@/constants/recorder.constant';
 import { ButtonVariant } from '@/enums/button-variant.enum';
 import { IconName } from '@/enums/icon-name.enum';
-import { RecorderStatus } from '@/enums/recorder-status.enum';
 import { ReviewGrade, ReviewMode } from '@/enums/review.enum';
+import { TakePhase } from '@/enums/take-phase.enum';
 import { VocabKind } from '@/enums/vocab.enum';
-import { useRecorder } from '@/features/practice/hooks/useRecorder';
 import { useReferenceAudio } from '@/features/practice/hooks/useReferenceAudio';
-import { assess } from '@/features/practice/services/assessment.service';
+import { useScoredTake } from '@/features/practice/hooks/useScoredTake';
 import { VocabReveal } from '@/features/vocab/components/VocabReveal';
 import { useCopy } from '@/hooks/useCopy';
 import type { PracticeItem } from '@/interfaces/practice.interface';
@@ -30,6 +29,14 @@ interface VocabSpeakCardProps {
 }
 
 type Phase = 'ask' | 'recording' | 'scoring' | 'graded' | 'failed' | 'forgot';
+
+const PHASE_OF_TAKE: Record<TakePhase, Phase> = {
+  [TakePhase.Idle]: 'ask',
+  [TakePhase.Recording]: 'recording',
+  [TakePhase.Scoring]: 'scoring',
+  [TakePhase.Scored]: 'graded',
+  [TakePhase.Failed]: 'failed',
+};
 
 const practiceItem = (item: VocabItem, mode: ReviewMode, text: string): PracticeItem => ({
   id: `vocab:${item.id}:${mode}`,
@@ -54,57 +61,20 @@ export const VocabSpeakCard = ({ item, mode, onAnswer }: VocabSpeakCardProps): R
   const reference = useReferenceAudio();
   const cloze = mode === ReviewMode.Cloze ? clozeOf(item) : null;
   const spoken = cloze ? item.example.en : item.text;
-  const [phase, setPhase] = useState<Phase>('ask');
-  const [grade, setGrade] = useState<ReviewGrade | null>(null);
-  const [error, setError] = useState<string | null>(null);
-  const finishingRef = useRef(false);
-  const autoStopRef = useRef<() => void>(() => undefined);
-  const recorder = useRecorder({
-    onAutoStop: () => autoStopRef.current(),
-    silenceMs: cloze || item.kind === VocabKind.Chunk ? SILENCE_MS_SENTENCE : SILENCE_MS_WORD,
-  });
-
-  const finish = useCallback(async () => {
-    if (finishingRef.current) return;
-    finishingRef.current = true;
-    const captured = await recorder.stop().finally(() => {
-      finishingRef.current = false;
-    });
-    if (!captured) {
-      setPhase('ask');
-      return;
-    }
-    setPhase('scoring');
-    try {
-      const result = await assess({
-        item: practiceItem(item, mode, spoken),
-        audio: captured.blob,
-        mouthFrames: [],
-        audioStartedAt: null,
-      });
-      setGrade(gradeFromVerdicts(targetVerdicts(result, item.text)));
-      setPhase('graded');
-    } catch (cause) {
-      setError(cause instanceof Error ? cause.message : String(cause));
-      setPhase('failed');
-    }
-  }, [item, mode, recorder, spoken]);
-
-  useEffect(() => {
-    autoStopRef.current = () => void finish();
-  }, [finish]);
-
-  const isRecording = recorder.status === RecorderStatus.Recording;
+  const take = useScoredTake(
+    cloze || item.kind === VocabKind.Chunk ? SILENCE_MS_SENTENCE : SILENCE_MS_WORD,
+  );
+  const [hasForgotten, setHasForgotten] = useState(false);
+  const phase: Phase = hasForgotten ? 'forgot' : PHASE_OF_TAKE[take.phase];
+  const grade = hasForgotten
+    ? ReviewGrade.Again
+    : take.result
+      ? gradeFromVerdicts(targetVerdicts(take.result, item.text))
+      : null;
+  const { error, isRecording } = take;
   const onMic = (): void => {
-    if (phase === 'scoring') return;
-    if (isRecording) {
-      void finish();
-      return;
-    }
-    reference.stop();
-    setError(null);
-    setPhase('recording');
-    void recorder.start();
+    if (!isRecording) reference.stop();
+    take.toggle(practiceItem(item, mode, spoken));
   };
   const isOpen = phase === 'ask' || phase === 'recording' || phase === 'scoring';
   const verdict =
@@ -152,14 +122,11 @@ export const VocabSpeakCard = ({ item, mode, onAnswer }: VocabSpeakCardProps): R
           <Button
             variant={ButtonVariant.Ghost}
             disabled={phase !== 'ask'}
-            onClick={() => {
-              setGrade(ReviewGrade.Again);
-              setPhase('forgot');
-            }}
+            onClick={() => setHasForgotten(true)}
           >
             {copy.vocab.forgot}
           </Button>
-          {recorder.error ? <p className="vocab-card__error">{recorder.error}</p> : null}
+          {take.recorderError ? <p className="vocab-card__error">{take.recorderError}</p> : null}
         </div>
       ) : (
         <>

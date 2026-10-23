@@ -6,6 +6,7 @@ import { viListen } from './vi-listen';
 import { viPractice } from './vi-practice';
 import { viSettings } from './vi-settings';
 import { viSpeak } from './vi-speak';
+import { viTalk } from './vi-talk';
 import { viVocab } from './vi-vocab';
 
 /** All learner-facing copy, Vietnamese. One dictionary; components read it through `useCopy()`. */
@@ -116,6 +117,7 @@ export const vi = {
   curriculum: viCourse.curriculum,
   listen: viListen.listen,
   vocab: viVocab.vocab,
+  talk: viTalk.talk,
   today: viHome.today,
   placement: viHome.placement,
   speak: viSpeak.speak,

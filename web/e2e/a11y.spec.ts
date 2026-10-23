@@ -16,6 +16,7 @@ const ROUTES = [
   '/listen/?unit=u03',
   '/placement/',
   '/vocab/',
+  '/talk/',
   '/privacy/',
   '/licenses/',
   '/lesson/?unit=u09',
