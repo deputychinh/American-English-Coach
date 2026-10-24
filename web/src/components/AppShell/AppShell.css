@@ -4,6 +4,18 @@
   min-block-size: 100dvh;
 }
 
+/* Phones hide the header: this strip keeps scrolled content from running under the clock. */
+.app-shell::before {
+  position: fixed;
+  z-index: var(--z-sticky);
+  block-size: var(--safe-top);
+  background: var(--color-bg);
+  content: '';
+  inset-block-start: 0;
+  inset-inline: 0;
+  pointer-events: none;
+}
+
 .app-shell__header {
   position: sticky;
   top: 0;

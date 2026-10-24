@@ -97,10 +97,10 @@ export const viCourse = {
     stepsAria: 'Các bước bắt đầu',
     steps: { intro: 'Quyền truy cập', profile: 'Hồ sơ', calibrate: 'Hiệu chỉnh' },
     introTitle: 'Ứng dụng cần gì và vì sao',
-    introMic: 'Micro để thu âm bạn đọc từ và câu; máy chấm từng âm trên máy tính của bạn.',
+    introMic: 'Micro để thu âm bạn đọc từ và câu; app chấm từng âm bạn nói.',
     introCamera: 'Camera để soi môi, hàm, răng và lưỡi lộ ra theo thời gian thực.',
     introPrivacy:
-      'Video không rời thiết bị. Chỉ các số đo khẩu hình và bản ghi âm được gửi tới máy chấm local.',
+      'Video không rời thiết bị. Khi chấm trên máy, giọng nói cũng không rời thiết bị; nếu bạn ghép nối máy chấm riêng, bản ghi âm chỉ gửi tới máy chấm đó.',
     allow: 'Cho phép micro và camera',
     asking: 'Đang hỏi quyền…',
     later: 'Để sau',

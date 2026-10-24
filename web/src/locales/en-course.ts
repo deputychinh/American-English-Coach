@@ -99,10 +99,10 @@ export const enCourse: Pick<Copy, 'privacy' | 'course' | 'onboarding' | 'curricu
     steps: { intro: 'Permissions', profile: 'Profile', calibrate: 'Calibration' },
     introTitle: 'What the app needs and why',
     introMic:
-      'The microphone records you reading words and sentences; every sound is scored on your computer.',
+      'The microphone records you reading words and sentences; the app scores every sound you say.',
     introCamera: 'The camera follows lips, jaw, and visible teeth and tongue in real time.',
     introPrivacy:
-      'Video never leaves the device. Only mouth measurements and recordings go to the local scoring server.',
+      'Video never leaves the device. When scoring on the device your voice stays too; with your own scoring server paired, recordings go only to that server.',
     allow: 'Allow microphone and camera',
     asking: 'Asking for permission…',
     later: 'Later',
