@@ -69,6 +69,8 @@ test.describe('on an iPhone', () => {
 
   test('home explains how to add the app to the home screen until "Not now"', async ({ page }) => {
     await page.goto('/');
+    // Safari drops a site's storage after 7 days unused: install before the 357 MB download.
+    await expect(page.locator('.model-download-card__note')).toContainText('màn hình chính');
     const card = page.locator('.install-app-card');
     await expect(card.getByRole('heading', { name: 'Cài app lên màn hình chính' })).toBeVisible();
     await expect(card.getByRole('listitem')).toHaveCount(3);

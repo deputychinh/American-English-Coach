@@ -5,11 +5,13 @@ import type { ReactElement } from 'react';
 import { Button } from '@/components/Button/Button';
 import { ENGINE_MODEL_MEGABYTES } from '@/constants/engine.constant';
 import { ButtonVariant } from '@/enums/button-variant.enum';
+import { InstallPlatform } from '@/enums/install-platform.enum';
 import { useModelDownload } from '@/features/engine/hooks/useModelDownload';
 import {
   cancelModelDownload,
   startModelDownload,
 } from '@/features/engine/services/model-download.service';
+import { useInstallOffer } from '@/features/install/hooks/useInstallOffer';
 import { useCopy } from '@/hooks/useCopy';
 import { cx } from '@/utils/cx.util';
 
@@ -29,6 +31,8 @@ export const ModelDownloadCard = ({
 }: ModelDownloadCardProps): ReactElement | null => {
   const copy = useCopy();
   const download = useModelDownload();
+  // Safari drops a site's storage after 7 days unused unless it is on the home screen.
+  const isIosTab = useInstallOffer() === InstallPlatform.Ios;
   if (download.phase === 'unknown') return null;
   if (download.phase === 'ready') {
     return isReadyShown ? (
@@ -67,6 +71,9 @@ export const ModelDownloadCard = ({
           <p className="model-download-card__body">
             {copy.engine.packBody(ENGINE_MODEL_MEGABYTES)}
           </p>
+          {isIosTab ? (
+            <p className="model-download-card__note">{copy.engine.packInstallFirst}</p>
+          ) : null}
           {download.phase === 'error' && download.error ? (
             <p className="model-download-card__error" role="alert">
               {copy.engine.packFailed(download.error)}

@@ -6,6 +6,8 @@ export const viEngine = {
     packTitle: 'Tải gói chấm điểm',
     packBody: (megabytes: number): string =>
       `${megabytes} MB, chỉ tải một lần, nên dùng Wi-Fi. Sau đó app chấm ngay trên máy này, không cần mạng. Trong lúc chờ, bạn vẫn nghe, soi gương và học bài.`,
+    packInstallFirst:
+      'Trên iPhone, hãy thêm app vào màn hình chính rồi mở từ đó để tải. Safari có thể xóa gói của trang chưa cài nếu 7 ngày không mở.',
     packStart: 'Tải ngay',
     packProgress: (percent: number): string => `Đang tải gói chấm điểm… ${percent}%`,
     packRetry: 'Thử lại',

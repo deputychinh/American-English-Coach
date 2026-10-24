@@ -28,6 +28,8 @@ export const viPractice = {
       'Chưa có quyền micro. Vào Cài đặt iPhone → American English Coach → bật Micro.',
     cameraDeniedNative:
       'Chưa có quyền camera. Vào Cài đặt iPhone → American English Coach → bật Camera, rồi bấm Thử lại.',
+    cameraMissing: 'Không tìm thấy camera dùng được trên máy này.',
+    cameraBusy: 'Camera đang được app khác dùng. Đóng app đó rồi bấm Thử lại.',
     cameraErrorTitle: 'Chưa bật được camera',
     cameraErrorHint: 'Vẫn nói thử được: app chấm âm, phần khẩu hình sẽ bỏ qua.',
     resultTitle: 'Kết quả',

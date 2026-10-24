@@ -33,6 +33,8 @@ export const enPractice: Pick<
       'No microphone permission. Open iPhone Settings → American English Coach → turn on Microphone.',
     cameraDeniedNative:
       'No camera permission. Open iPhone Settings → American English Coach → turn on Camera, then tap Try again.',
+    cameraMissing: 'No usable camera was found on this device.',
+    cameraBusy: 'Another app is using the camera. Close it, then tap Try again.',
     cameraErrorTitle: 'The camera is not on',
     cameraErrorHint:
       'You can still try speaking: the sound is scored and the mouth part is skipped.',

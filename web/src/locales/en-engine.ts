@@ -8,6 +8,8 @@ export const enEngine: Pick<Copy, 'engine'> = {
     packTitle: 'Download the scoring pack',
     packBody: (megabytes: number): string =>
       `${megabytes} MB, downloaded once; Wi-Fi recommended. Then the app scores on this device without a connection. Meanwhile you can listen, use the mirror and study.`,
+    packInstallFirst:
+      'On iPhone, add the app to the home screen and download from there. Safari may delete the pack of a site that is not installed after 7 days unused.',
     packStart: 'Download now',
     packProgress: (percent: number): string => `Downloading the scoring pack… ${percent}%`,
     packRetry: 'Try again',

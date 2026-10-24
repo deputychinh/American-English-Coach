@@ -15,9 +15,8 @@ import { useFaceLandmarker } from '@/features/mirror/hooks/useFaceLandmarker';
 import type { BufferedFrame, MouthTrackerOptions } from '@/interfaces/hooks.interface';
 import type { MouthFeatures, Point2, TrackedFrame } from '@/interfaces/mouth.interface';
 import type { MouthTracker, TrackedSample } from '@/interfaces/tracker.interface';
-import { getCopy } from '@/locales';
-import { isNativeShell } from '@/utils/api-base.util';
 import { normaliseFeatures } from '@/utils/calibration.util';
+import { cameraMessage } from '@/utils/camera-error.util';
 import { lipOutline, lipPolygons } from '@/utils/lip-outline.util';
 import { poseFromMatrix, poseQuality, rawMouthFeatures } from '@/utils/mouth-features.util';
 import { sampleMouthPixels } from '@/utils/mouth-pixels.util';
@@ -73,14 +72,6 @@ const snapshotFromVideo = (
   if (!context) return Promise.resolve(null);
   context.drawImage(video, sx, sy, sw, sh, 0, 0, canvas.width, canvas.height);
   return new Promise((resolve) => canvas.toBlob(resolve, 'image/jpeg', 0.85));
-};
-
-const cameraMessage = (error: unknown): string => {
-  if (error instanceof DOMException && error.name === 'NotAllowedError')
-    return isNativeShell()
-      ? getCopy().practice.cameraDeniedNative
-      : getCopy().practice.cameraDenied;
-  return error instanceof Error ? error.message : getCopy().practice.noMedia;
 };
 
 /** Camera + FaceLandmarker loop; keeps a 20 s ring buffer of features and lip outlines (no pixels). */
