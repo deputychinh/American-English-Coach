@@ -21,4 +21,6 @@ export enum StorageKey {
   Placement = 'coach.placement',
   Lesson = 'coach.lesson',
   InstallDismissed = 'coach.installDismissed',
+  Fluency = 'coach.fluency',
+  FluencyHidden = 'coach.fluencyHidden',
 }

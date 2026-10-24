@@ -14,7 +14,7 @@ interface UnitTalkLinksProps {
   unitId: string;
 }
 
-/** A unit's functions and spoken pattern, with a link to practise them (plan v2 §5). */
+/** A unit's functions and spoken pattern, with links to practise them and to talk about its topic. */
 export const UnitTalkLinks = ({ unitId }: UnitTalkLinksProps): ReactElement | null => {
   const copy = useCopy();
   const load = useCallback(() => loadTalkDeck(), []);
@@ -35,6 +35,12 @@ export const UnitTalkLinks = ({ unitId }: UnitTalkLinksProps): ReactElement | nu
       ) : null}
       <Link href={{ pathname: '/talk', query: { unit: unitId } }} className="unit-talk-links__link">
         {copy.talk.unitPractice}
+      </Link>
+      <Link
+        href={{ pathname: '/fluency', query: { unit: unitId } }}
+        className="unit-talk-links__link"
+      >
+        {copy.fluency.unitPractice}
       </Link>
     </div>
   );

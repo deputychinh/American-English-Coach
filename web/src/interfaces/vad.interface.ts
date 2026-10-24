@@ -38,4 +38,8 @@ export interface RecorderOptions {
   onAutoStop?: (reason: AutoStopReason) => void;
   /** Silence that ends the take; shorter for single words (defaults to `VAD_DEFAULTS`). */
   silenceMs?: number;
+  /** False for free speech: pauses are part of it, only the time limit ends the take. */
+  endsOnSilence?: boolean;
+  /** Longest take in seconds (defaults to `MAX_RECORD_SECONDS`). */
+  maxSeconds?: number;
 }

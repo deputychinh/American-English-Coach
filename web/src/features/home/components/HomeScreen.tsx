@@ -17,6 +17,7 @@ import {
   nextStepOf,
 } from '@/features/curriculum/services/curriculum.service';
 import { ModelDownloadCard } from '@/features/engine/components/ModelDownloadCard';
+import { FluencyHomeCard } from '@/features/fluency/components/FluencyHomeCard';
 import { ApiStatusBanner } from '@/features/health/components/ApiStatusBanner';
 import { InstallAppCard } from '@/features/install/components/InstallAppCard';
 import { listenAccuracy, readListenResults } from '@/features/listen/services/listen.service';
@@ -203,6 +204,7 @@ export const HomeScreen = (): ReactElement => {
 
       <VocabHomeCard />
       <TalkHomeCard />
+      <FluencyHomeCard />
 
       <section className="home-screen__focus" aria-labelledby="focus-title">
         <h2 id="focus-title" className="home-screen__section-title">

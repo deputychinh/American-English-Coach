@@ -123,7 +123,7 @@ export const en: Copy = {
   curriculum: enCourse.curriculum,
   listen: enListen.listen,
   vocab: enVocab.vocab,
-  talk: enTalk.talk,
+  ...enTalk,
   ...enHome,
   speak: enSpeak.speak,
   onboarding: enCourse.onboarding,

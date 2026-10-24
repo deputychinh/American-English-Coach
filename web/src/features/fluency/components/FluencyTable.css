@@ -1,0 +1,40 @@
+.fluency-table {
+  inline-size: 100%;
+  font-size: var(--text-sm);
+  font-variant-numeric: tabular-nums;
+  border-collapse: collapse;
+}
+
+.fluency-table__head,
+.fluency-table__label,
+.fluency-table__cell {
+  padding: var(--space-2);
+  text-align: end;
+  border-block-end: 1px solid var(--color-border);
+}
+
+.fluency-table__head {
+  font-weight: var(--weight-semibold);
+  color: var(--color-text-muted);
+}
+
+.fluency-table__head--label,
+.fluency-table__label {
+  text-align: start;
+}
+
+.fluency-table__label {
+  font-weight: var(--weight-semibold);
+}
+
+.fluency-table__cell {
+  font-size: var(--text-md);
+  font-weight: var(--weight-semibold);
+}
+
+.fluency-table__unit {
+  display: block;
+  font-size: var(--text-xs);
+  font-weight: var(--weight-regular);
+  color: var(--color-text-muted);
+}

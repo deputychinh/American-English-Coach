@@ -1,4 +1,4 @@
-/** Functional phrases and spoken patterns copy (split from `vi.ts` to keep files short). */
+/** Functional phrases, spoken patterns and fluency ("Nói 3 lần") copy (split from `vi.ts` to keep files short). */
 export const viTalk = {
   talk: {
     title: 'Cách nói',
@@ -57,5 +57,58 @@ export const viTalk = {
     unitFunction: 'Cụm giao tiếp',
     unitPattern: 'Mẫu câu',
     unitPractice: 'Luyện cách nói của đơn vị này',
+  },
+  fluency: {
+    title: 'Nói trôi chảy',
+    lead: 'Nói 3 lần về cùng một chủ đề: 60 giây, rồi 45, rồi 30. Thời gian ngắn dần nên bạn phải nói nhanh và liền mạch hơn. App đo ngay trên máy và chỉ so bạn với chính bạn.',
+    topic: 'Chủ đề',
+    changeTopic: 'Đổi chủ đề',
+    topicOption: (unit: string, title: string): string => `${unit} · ${title}`,
+    ideas: 'Gợi ý ý chính',
+    phrases: 'Cụm từ giúp nói tiếp',
+    listen: (phrase: string): string => `Nghe “${phrase}”`,
+    round: (index: number, total: number): string => `Lần ${index} / ${total}`,
+    start: (index: number, seconds: number): string => `Bắt đầu lần ${index} · ${seconds} giây`,
+    secondsLeft: (seconds: number): string => `Còn ${seconds} giây`,
+    speakNow: 'Nói đi, đừng dừng lại để sửa lỗi.',
+    finish: 'Xong sớm',
+    analyzing: 'Đang đo…',
+    noSpeech: 'Chưa nghe thấy giọng nói. Nói to hơn hoặc lại gần micro rồi thử lại lần này.',
+    retry: 'Thử lại lần này',
+    next: (index: number, seconds: number): string => `Tiếp: lần ${index} · ${seconds} giây`,
+    showSummary: 'Xem kết quả',
+    roundDone: (index: number): string => `Xong lần ${index}.`,
+    column: (index: number, seconds: number): string => `Lần ${index} · ${seconds}s`,
+    metric: 'Chỉ số',
+    rate: 'Tốc độ nói',
+    rateUnit: 'âm tiết/phút',
+    run: 'Đoạn nói liền',
+    runUnit: 'âm tiết mỗi đoạn',
+    pauses: 'Ngắt nghỉ',
+    pausesUnit: 'lần/phút',
+    explain:
+      'Tốc độ nói đếm âm tiết trên phút. Đoạn nói liền là số âm tiết giữa hai lần ngắt từ 0,25 giây trở lên. Số đo là ước lượng từ âm thanh: hãy xem nó tăng hay giảm qua các lần, đừng xem như điểm.',
+    summaryTitle: 'Xong 3 lần!',
+    compareLead: 'Lần cuối so với lần đầu:',
+    changeRate: (delta: number): string =>
+      delta >= 0 ? `nhanh hơn ${delta} âm tiết/phút` : `chậm hơn ${-delta} âm tiết/phút`,
+    changeRun: (delta: number): string =>
+      delta >= 0
+        ? `đoạn nói liền dài hơn ${delta} âm tiết`
+        : `đoạn nói liền ngắn hơn ${-delta} âm tiết`,
+    changePauses: (delta: number): string =>
+      delta <= 0 ? `ít ngắt hơn ${-delta} lần/phút` : `ngắt nhiều hơn ${delta} lần/phút`,
+    again: 'Nói lại chủ đề này',
+    hideNumbers: 'Ẩn số đo trong lúc luyện',
+    hiddenDone: 'Đã ghi xong cả 3 lần. Số đo đang ẩn, bỏ chọn ô bên dưới để xem.',
+    trendTitle: 'Xu hướng của bạn',
+    trendEmpty: 'Làm xong một lượt Nói 3 lần để thấy xu hướng.',
+    trendNote: 'Lần cuối của mỗi lượt, cũ đến mới. Chỉ so với chính bạn, không phải điểm trình độ.',
+    trendRow: (date: string, topic: string): string => `${date} · ${topic}`,
+    homeTitle: 'Nói trôi chảy',
+    homeLine: (topic: string): string => `Nói 3 lần: ${topic}`,
+    unitPractice: 'Nói 3 lần về chủ đề của đơn vị này',
+    saveFailed: 'Không lưu được kết quả trên máy này.',
+    backHome: 'Về trang chủ',
   },
 };

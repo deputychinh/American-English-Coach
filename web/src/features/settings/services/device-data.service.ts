@@ -20,11 +20,12 @@ const LEARNER_KEYS: StorageKey[] = [
   StorageKey.Listening,
   StorageKey.Placement,
   StorageKey.Lesson,
+  StorageKey.Fluency,
 ];
 
 /**
  * Settings → "clear the data on this device": scored runs, review cards, profiles, lesson places, listening
- * and placement results, calibration, the reminder and the server pairing. A classroom server
+ * and placement results, fluency sessions, calibration, the reminder and the server pairing. A classroom server
  * keeps its own copy (the privacy page says so).
  */
 export const clearDeviceData = async (): Promise<void> => {

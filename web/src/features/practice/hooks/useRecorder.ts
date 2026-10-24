@@ -36,7 +36,12 @@ const openContext = (): AudioContext => {
 };
 
 /** Captures mono PCM through an AudioWorklet (ScriptProcessor fallback) and encodes 16 kHz WAV. */
-export const useRecorder = ({ onAutoStop, silenceMs }: RecorderOptions = {}): Recorder => {
+export const useRecorder = ({
+  onAutoStop,
+  silenceMs,
+  endsOnSilence = true,
+  maxSeconds = MAX_RECORD_SECONDS,
+}: RecorderOptions = {}): Recorder => {
   const [status, setStatus] = useState(RecorderStatus.Idle);
   const [level, setLevel] = useState(0);
   const [seconds, setSeconds] = useState(0);
@@ -45,6 +50,7 @@ export const useRecorder = ({ onAutoStop, silenceMs }: RecorderOptions = {}): Re
   const onAutoStopRef = useRef(onAutoStop);
 
   const vadOptionsRef = useRef(VAD_DEFAULTS);
+  const limitsRef = useRef({ endsOnSilence, maxSeconds });
 
   useEffect(() => {
     onAutoStopRef.current = onAutoStop;
@@ -52,6 +58,9 @@ export const useRecorder = ({ onAutoStop, silenceMs }: RecorderOptions = {}): Re
   useEffect(() => {
     vadOptionsRef.current = { ...VAD_DEFAULTS, silenceMs: silenceMs ?? VAD_DEFAULTS.silenceMs };
   }, [silenceMs]);
+  useEffect(() => {
+    limitsRef.current = { endsOnSilence, maxSeconds };
+  }, [endsOnSilence, maxSeconds]);
   const sessionRef = useRef<RecorderSession | null>(null);
   const stopRef = useRef<() => Promise<Recording | null>>(() => Promise.resolve(null));
 
@@ -155,7 +164,7 @@ export const useRecorder = ({ onAutoStop, silenceMs }: RecorderOptions = {}): Re
         chunks: [],
         startedAt: null,
         timer: null,
-        vad: onAutoStopRef.current ? initialVad(0) : null,
+        vad: onAutoStopRef.current && limitsRef.current.endsOnSilence ? initialVad(0) : null,
         audioMs: 0,
         isAutoStopped: false,
       };
@@ -166,7 +175,7 @@ export const useRecorder = ({ onAutoStop, silenceMs }: RecorderOptions = {}): Re
         session.isAutoStopped = true;
         if (onAutoStopRef.current) onAutoStopRef.current('end');
         else void stopRef.current();
-      }, MAX_RECORD_SECONDS * 1000);
+      }, limitsRef.current.maxSeconds * 1000);
       setStatus(RecorderStatus.Recording);
       void nativeHaptic('light');
     } catch (cause) {

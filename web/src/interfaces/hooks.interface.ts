@@ -2,6 +2,7 @@ import type { AsyncStatus } from '@/enums/async-status.enum';
 import type { RecorderStatus } from '@/enums/recorder-status.enum';
 import type { TakePhase } from '@/enums/take-phase.enum';
 import type { TrackerStatus } from '@/enums/tracker-status.enum';
+import type { FluencyMetrics } from '@/interfaces/fluency.interface';
 import type { Calibration, MouthFeatures, TrackedFrame } from '@/interfaces/mouth.interface';
 import type { AssessmentResponse, PracticeItem, Recording } from '@/interfaces/practice.interface';
 import type { VadState } from '@/interfaces/vad.interface';
@@ -52,6 +53,20 @@ export interface ScoredTake {
   isRecording: boolean;
   /** Starts recording `item`, or stops and scores the take under way. */
   toggle: (item: PracticeItem) => void;
+}
+
+/** One timed free-speech take measured for fluency (`useFluencyTake`). */
+export interface FluencyTake {
+  phase: TakePhase;
+  metrics: FluencyMetrics | null;
+  /** Microphone problem (permission, device). */
+  recorderError: string | null;
+  isRecording: boolean;
+  secondsLeft: number;
+  level: number;
+  start: () => void;
+  finish: () => void;
+  reset: () => void;
 }
 
 export interface ReferenceAudio {

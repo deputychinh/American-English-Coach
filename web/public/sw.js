@@ -30,6 +30,7 @@ const SHELL = [
   '/placement/',
   '/vocab/',
   '/talk/',
+  '/fluency/',
   '/lesson/',
   '/licenses/',
   '/manifest.webmanifest',

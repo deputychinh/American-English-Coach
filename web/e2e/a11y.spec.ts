@@ -17,6 +17,7 @@ const ROUTES = [
   '/placement/',
   '/vocab/',
   '/talk/',
+  '/fluency/',
   '/privacy/',
   '/licenses/',
   '/lesson/?unit=u09',
