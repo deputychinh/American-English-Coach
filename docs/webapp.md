@@ -56,9 +56,29 @@ Muốn để gói chấm điểm trên CDN thay vì đặt cùng chỗ với app
 ## Kiểm thử
 
 - `make e2e-webapp` (cần chạy `make build-webapp` trước): Chromium tải thật 15 mảnh, chấm từ "think" bằng micro giả ngay trong trình duyệt, rồi ngắt mạng và chấm lại. Bài này cũng kiểm tra rằng không có request nào tới `/api/`, và kiểm tra thẻ cài đặt với user agent iPhone kèm axe.
+- Cùng lệnh đó chạy thêm hành trình trên WebKit (lõi của Safari, trình duyệt duy nhất trên iPhone): tải gói, chấm hai lần, ngắt mạng rồi chấm lại. WebKit không có micro giả như Chromium, nên `e2e/webapp/fake-mic.ts` thay `getUserMedia` bằng một luồng phát `think.wav` qua Web Audio. Bài ghi thời gian tải và thời gian chấm vào annotation của báo cáo.
 - Unit test: kho mảnh mô hình (tải tiếp, mảnh hỏng, mảnh thiếu), engine qua worker giả, service worker (script worker giữ nguyên URL có `#params`, không cache `/models/`), thẻ cài đặt và giọng hệ thống.
 
 Số đo trên Mac (Apple Silicon): mô hình chạy khoảng 2,1 giây cho 3 giây âm thanh với 1 luồng. Trong Chromium có 4 luồng, lần chấm đầu (gồm cả nạp mô hình) xong trong khoảng 2 giây.
+
+## Chạy thử trước W5 (2026-10-24)
+
+Chưa có iPhone thật, nên đã thử trên Safari của máy ảo iPhone 17 (iOS 27) với `make serve-webapp`, và trên WebKit của Playwright.
+
+| Kiểm tra                                          | Kết quả                                                                                                                           |
+| ------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| Mở trang, onboarding, Trang chủ                   | Đúng. `crossOriginIsolated` bật, AudioWorklet có.                                                                                 |
+| Hỏi quyền micro                                   | Hộp thoại của Safari hiện. Trong tab Safari, quyền **hỏi lại mỗi lần tải trang**; cần xem trên máy thật app cài có hỏi lại không. |
+| Tải gói 357 MB vào Cache Storage                  | Đủ 15 mảnh, dùng 379 MB, hạn mức báo khoảng 41 GB. `persist()` bị từ chối trong tab thường (đúng như dự kiến).                    |
+| Thu âm (giữ để nói và bấm một lần)                | Thu được, hiện "Đang nghe…". Micro của máy ảo không nhận tiếng từ loa Mac nên không chấm được trên máy ảo.                        |
+| Chấm trong WebKit (Playwright, Mac Apple Silicon) | Lần đầu 1,5 giây kể từ lúc dừng thu (gồm nạp mô hình), các lần sau khoảng 1,5 giây, chấm khi mất mạng cũng 1,5 giây.              |
+
+Sửa sau lần chạy thử:
+
+- Khi máy không có camera trước, Safari báo `OverconstrainedError` với chữ "Invalid constraint". Trước đây màn luyện tập hiện nguyên chữ tiếng Anh đó. Giờ app báo "Không tìm thấy camera dùng được trên máy này." Nếu camera đang bị app khác dùng, app báo riêng (`camera-error.util.ts`).
+- Trong tab Safari trên iPhone, thẻ tải gói nhắc thêm app vào màn hình chính trước khi tải, vì Safari có thể xóa gói của trang chưa cài.
+
+Phần còn lại của W5 phải làm trên máy thật: RAM khi nạp mô hình, thời gian chấm trên chip điện thoại, và app cài lên màn hình chính có giữ quyền micro không.
 
 ## Giới hạn đã biết
 

@@ -6,6 +6,7 @@ Theo [Keep a Changelog](https://keepachangelog.com/vi/1.1.0/); phiên bản theo
 
 ### Thêm
 
+- Hành trình web app trên WebKit (lõi của Safari) trong `make e2e-webapp`: tải gói, chấm trong trình duyệt và chấm khi mất mạng, với micro giả phát qua Web Audio. Kết quả chạy thử trên Safari của máy ảo iPhone ghi trong `docs/webapp.md`.
 - Kết quả luyện tập kiểu app (E3): đầu sheet là vòng điểm và một câu nhận xét ("Rất tốt!", "Gần được rồi", "Luyện thêm chút nữa"). Câu nói hiện thành các từ bấm được, mỗi từ mang màu và dấu của âm yếu nhất. Từ cần sửa đầu tiên mở sẵn ở âm yếu nhất của nó, nên lời khuyên và khẩu hình hiện ngay mà không cần bấm. Nút thu âm thành giữ để nói: giữ để nói, thả ra để chấm. Bấm một lần hoặc dùng bàn phím vẫn thu âm và tự dừng khi im lặng.
 - Trang chủ và điều hướng (E4): thẻ "Hôm nay 15 phút" là thẻ chính, chạm vào bất kỳ đâu trên thẻ để bắt đầu. Mục tiêu ngày nằm phẳng bên dưới. Đơn vị đang học, Từ vựng, Cách nói và Nói trôi chảy gộp thành một danh sách "Luyện thêm" kiểu iOS. Trang chủ và các trang tab có tiêu đề lớn, khi cuộn qua thì thu nhỏ lên một thanh ở đầu màn.
 - Plan v2 mở rộng từ phát âm sang từ vựng, cách nói chuyện, cấu trúc nói và độ trôi chảy (`docs/PLAN-V2-SPEAKING-AND-VOCABULARY.md`); lõi lịch ôn giãn cách FSRS chạy trên máy (`web/src/utils/srs.util.ts`), chưa có giao diện. Thẻ ôn và lịch sử ôn lưu trong IndexedDB theo hồ sơ (DB phiên bản 2, giữ nguyên kết quả chấm cũ), đi cùng bản sao lưu hồ sơ và bị xóa khi xóa dữ liệu trên thiết bị.
@@ -33,6 +34,8 @@ Theo [Keep a Changelog](https://keepachangelog.com/vi/1.1.0/); phiên bản theo
 
 ### Sửa
 
+- Màn luyện tập không còn hiện lỗi camera thô bằng tiếng Anh của trình duyệt ("Invalid constraint" khi máy không có camera trước). App báo không tìm thấy camera, camera đang bị app khác dùng, hoặc chưa cho phép camera.
+- Trong tab Safari trên iPhone, thẻ "Tải gói chấm điểm" nhắc thêm app vào màn hình chính trước khi tải, vì Safari có thể xóa gói 357 MB của trang chưa cài sau 7 ngày không mở.
 - App iOS: nội dung cuộn không còn chạy dưới đồng hồ trên thanh trạng thái; màn chào mừng mô tả đúng việc chấm ngay trên máy.
 - Service worker: precache thêm `/vocab/`, `/talk/`, `/lesson/`, `/licenses/` để các màn này mở được khi offline; không precache bản sao ONNX Runtime (14 MB) mà bundler tạo ra.
 - Máy chấm: hai lượt chấm đầu tiên chạy cùng lúc có thể lỗi "compilation disabled" của numba; lần biên dịch đầu giờ được tuần tự hóa.
