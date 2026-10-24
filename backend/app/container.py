@@ -30,6 +30,7 @@ from app.services.audio_service import AudioService
 from app.services.content_service import ContentService
 from app.services.course_service import CourseService
 from app.services.curriculum_service import CurriculumService
+from app.services.feedback_service import ContentFeedbackService
 from app.services.plan_service import PlanService
 from app.services.profile_service import ProfileService
 from app.services.progress_service import ProgressService
@@ -196,22 +197,33 @@ class AppContainer:
         return TutorRateLimiter(self.settings.tutor_rate_limit_per_minute)
 
     @cached_property
-    def tutor(self) -> TutorService:
-        """LLM tutor; raises a typed error when no provider is configured."""
-        if not self.settings.tutor_enabled and self.chat_client_override is None:
+    def chat_client(self) -> ChatClient:
+        """The configured chat model; raises a typed error when no provider is set."""
+        if self.chat_client_override is not None:
+            return self.chat_client_override
+        if not self.settings.tutor_enabled:
             raise TutorUnavailableError(
                 "tutor is off: set COACH_LLM_PROVIDER and COACH_LLM_API_KEY"
             )
-        client = self.chat_client_override or ChatClient(
+        return ChatClient(
             self.settings.llm_base_url,
             self.settings.llm_api_key.get_secret_value(),
             self.settings.llm_timeout_seconds,
             max_tokens=self.settings.llm_max_tokens,
             provider=self.settings.llm_provider,
         )
+
+    @cached_property
+    def tutor(self) -> TutorService:
+        """LLM tutor; raises a typed error when no provider is configured."""
         return TutorService(
-            client, self.results, self.settings.llm_model, self.settings.llm_vision_model
+            self.chat_client, self.results, self.settings.llm_model, self.settings.llm_vision_model
         )
+
+    @cached_property
+    def content_feedback(self) -> ContentFeedbackService:
+        """Grammar and word-choice feedback on a transcript (plan v2 V6); same provider."""
+        return ContentFeedbackService(self.chat_client, self.settings.llm_model)
 
     def warm_up(self) -> None:
         """Loads the phoneme model and runs one silent inference (first device kernels included).

@@ -8,6 +8,7 @@ from pydantic import BaseModel
 from app.container import AppContainer
 from app.dependencies import get_container
 from app.errors import DomainError, RateLimitedError
+from app.schemas.feedback import ContentFeedback, FeedbackRequest
 
 router = APIRouter(prefix="/tutor", tags=["tutor"])
 MAX_IMAGE_BYTES = 2 * 1024 * 1024
@@ -60,3 +61,18 @@ async def mouth(
         raise DomainError("image must be a JPEG under 2 MB")
     text = container.tutor.mouth(payload, sound_ipa, target_vi)
     return TutorReply(text_vi=text, model=container.settings.llm_vision_model)
+
+
+@router.post("/feedback", response_model=ContentFeedback)
+def feedback(
+    body: FeedbackRequest,
+    request: Request,
+    container: AppContainer = Depends(get_container),
+) -> ContentFeedback:
+    """Grammar, word choice and register of what the learner said, sent as text only.
+
+    Pronunciation is never discussed here: the phoneme scorer owns it, and items about it are
+    dropped even when the model offers them (plan v2 V6).
+    """
+    _throttle(request, container)
+    return container.content_feedback.feedback(body.transcript, body.task_vi)

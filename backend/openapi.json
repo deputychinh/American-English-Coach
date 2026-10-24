@@ -212,6 +212,84 @@
         "title": "CommunicateStep",
         "type": "object"
       },
+      "ContentFeedback": {
+        "description": "Grammar and word choice only: the phoneme scorer owns pronunciation.",
+        "properties": {
+          "better_version": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Better Version"
+          },
+          "focus": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/FeedbackIssue"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "formality": {
+            "anyOf": [
+              {
+                "enum": ["casual", "neutral", "formal"],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Formality"
+          },
+          "formality_note_vi": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Formality Note Vi"
+          },
+          "grammar": {
+            "items": {
+              "$ref": "#/components/schemas/FeedbackIssue"
+            },
+            "title": "Grammar",
+            "type": "array"
+          },
+          "model": {
+            "title": "Model",
+            "type": "string"
+          },
+          "word_choice": {
+            "items": {
+              "$ref": "#/components/schemas/FeedbackIssue"
+            },
+            "title": "Word Choice",
+            "type": "array"
+          }
+        },
+        "required": [
+          "grammar",
+          "word_choice",
+          "formality",
+          "formality_note_vi",
+          "better_version",
+          "focus",
+          "model"
+        ],
+        "title": "ContentFeedback",
+        "type": "object"
+      },
       "ControlledStep": {
         "description": "Step 3: scored repetition of words, pairs and sentences.",
         "properties": {
@@ -617,6 +695,57 @@
           "phonemes"
         ],
         "title": "ExportedRunModel",
+        "type": "object"
+      },
+      "FeedbackIssue": {
+        "description": "One thing to say differently.",
+        "properties": {
+          "explain_vi": {
+            "title": "Explain Vi",
+            "type": "string"
+          },
+          "kind": {
+            "enum": ["grammar", "word_choice"],
+            "title": "Kind",
+            "type": "string"
+          },
+          "right": {
+            "title": "Right",
+            "type": "string"
+          },
+          "wrong": {
+            "title": "Wrong",
+            "type": "string"
+          }
+        },
+        "required": ["kind", "wrong", "right", "explain_vi"],
+        "title": "FeedbackIssue",
+        "type": "object"
+      },
+      "FeedbackRequest": {
+        "description": "The learner's words as text (typed or dictated); audio is never sent.",
+        "properties": {
+          "task_vi": {
+            "anyOf": [
+              {
+                "maxLength": 300,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Task Vi"
+          },
+          "transcript": {
+            "maxLength": 800,
+            "minLength": 1,
+            "title": "Transcript",
+            "type": "string"
+          }
+        },
+        "required": ["transcript"],
+        "title": "FeedbackRequest",
         "type": "object"
       },
       "FocusItem": {
@@ -3208,6 +3337,46 @@
           }
         },
         "summary": "Explain",
+        "tags": ["tutor"]
+      }
+    },
+    "/api/v1/tutor/feedback": {
+      "post": {
+        "description": "Grammar, word choice and register of what the learner said, sent as text only.\n\nPronunciation is never discussed here: the phoneme scorer owns it, and items about it are\ndropped even when the model offers them (plan v2 V6).",
+        "operationId": "feedback_api_v1_tutor_feedback_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FeedbackRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContentFeedback"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Feedback",
         "tags": ["tutor"]
       }
     },

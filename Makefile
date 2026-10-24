@@ -1,7 +1,7 @@
 # American English Coach — one command per task. `make help` lists them.
 .DEFAULT_GOAL := help
 # `web` and others are also directory names; declare every target phony so make never skips them.
-.PHONY: help install vendor-web models migrate doctor api api-lan web build-web serve build-webapp serve-webapp e2e-webapp lint format test test-legacy bench eval sweep pilot-export pilot-report openapi e2e ci up down ios-assets ios-sync ios-build ios-run ios-device ios-open
+.PHONY: help install vendor-web models migrate doctor api api-lan web build-web serve build-webapp serve-webapp e2e-webapp lint format test test-legacy bench eval eval-feedback sweep pilot-export pilot-report openapi e2e ci up down ios-assets ios-sync ios-build ios-run ios-device ios-open
 SHELL := /bin/bash
 BACKEND := cd backend &&
 WEB := cd web &&
@@ -77,6 +77,9 @@ bench: ## Latency benchmark of the phoneme recognizer on this machine
 
 eval: ## Mispronunciation-detection evaluation on speechocean762 (needs data/datasets)
 	$(BACKEND) uv run python -m app.eval.speechocean
+
+eval-feedback: ## AI content feedback on 50 labelled learner sentences (needs COACH_LLM_*; plan v2 V6: precision >= 0.8)
+	$(BACKEND) uv run python scripts/eval_content_feedback.py
 
 sweep: ## Score every drill word with native macOS voices; false alarms per sound in data/eval/sound_sweep.json (~11 min)
 	$(BACKEND) uv run python -m app.eval.sound_sweep --write-content

@@ -1,0 +1,290 @@
+{
+  "schema": "aec-feedback-eval/1",
+  "note": "Sentences in the style of Vietnamese learners, each with one labelled content error (or none). AI-drafted; a teacher should confirm the labels. Used by scripts/eval_content_feedback.py (plan v2 V6: precision >= 0.8, no pronunciation remarks).",
+  "items": [
+    {
+      "id": "e01",
+      "text": "My mother work at a hospital.",
+      "errors": [{ "kind": "grammar", "wrong": "work", "right": "works" }]
+    },
+    {
+      "id": "e02",
+      "text": "Yesterday I go to the market with my sister.",
+      "errors": [{ "kind": "grammar", "wrong": "go", "right": "went" }]
+    },
+    {
+      "id": "e03",
+      "text": "I very like Vietnamese food.",
+      "errors": [{ "kind": "grammar", "wrong": "very like", "right": "really like" }]
+    },
+    {
+      "id": "e04",
+      "text": "She has two brother.",
+      "errors": [{ "kind": "grammar", "wrong": "brother", "right": "brothers" }]
+    },
+    {
+      "id": "e05",
+      "text": "I am student at a university in Hanoi.",
+      "errors": [{ "kind": "grammar", "wrong": "am student", "right": "am a student" }]
+    },
+    {
+      "id": "e06",
+      "text": "Can you open the light, please?",
+      "errors": [{ "kind": "word_choice", "wrong": "open the light", "right": "turn on the light" }]
+    },
+    {
+      "id": "e07",
+      "text": "I have been to Da Lat last year.",
+      "errors": [{ "kind": "grammar", "wrong": "have been", "right": "went" }]
+    },
+    {
+      "id": "e08",
+      "text": "He don't like coffee.",
+      "errors": [{ "kind": "grammar", "wrong": "don't", "right": "doesn't" }]
+    },
+    {
+      "id": "e09",
+      "text": "I am interesting in learning English.",
+      "errors": [{ "kind": "grammar", "wrong": "interesting", "right": "interested" }]
+    },
+    {
+      "id": "e10",
+      "text": "We discussed about the plan for the weekend.",
+      "errors": [{ "kind": "grammar", "wrong": "discussed about", "right": "discussed" }]
+    },
+    {
+      "id": "e11",
+      "text": "There is many people in my city.",
+      "errors": [{ "kind": "grammar", "wrong": "is", "right": "are" }]
+    },
+    {
+      "id": "e12",
+      "text": "I usually play with my friends at the weekend, we drink coffee and talk.",
+      "errors": [{ "kind": "word_choice", "wrong": "play with", "right": "hang out with" }]
+    },
+    {
+      "id": "e13",
+      "text": "My room is very large and it has a beautiful view to the river.",
+      "errors": [{ "kind": "grammar", "wrong": "view to", "right": "view of" }]
+    },
+    {
+      "id": "e14",
+      "text": "I arrived to the airport at six.",
+      "errors": [{ "kind": "grammar", "wrong": "arrived to", "right": "arrived at" }]
+    },
+    {
+      "id": "e15",
+      "text": "She is married with a doctor.",
+      "errors": [{ "kind": "grammar", "wrong": "married with", "right": "married to" }]
+    },
+    {
+      "id": "e16",
+      "text": "I didn't went to class yesterday.",
+      "errors": [{ "kind": "grammar", "wrong": "went", "right": "go" }]
+    },
+    {
+      "id": "e17",
+      "text": "Every morning I drink a milk.",
+      "errors": [{ "kind": "grammar", "wrong": "a milk", "right": "milk" }]
+    },
+    {
+      "id": "e18",
+      "text": "I want to learn more knowledges about computers.",
+      "errors": [{ "kind": "grammar", "wrong": "knowledges", "right": "knowledge" }]
+    },
+    {
+      "id": "e19",
+      "text": "My father is a engineer.",
+      "errors": [{ "kind": "grammar", "wrong": "a engineer", "right": "an engineer" }]
+    },
+    {
+      "id": "e20",
+      "text": "I will call you when I will arrive.",
+      "errors": [{ "kind": "grammar", "wrong": "will arrive", "right": "arrive" }]
+    },
+    {
+      "id": "e21",
+      "text": "I am living in Saigon since 2020.",
+      "errors": [{ "kind": "grammar", "wrong": "am living", "right": "have lived" }]
+    },
+    {
+      "id": "e22",
+      "text": "The weather today is very hot, so I feel boring.",
+      "errors": [{ "kind": "grammar", "wrong": "boring", "right": "bored" }]
+    },
+    {
+      "id": "e23",
+      "text": "Please borrow me your pen.",
+      "errors": [{ "kind": "word_choice", "wrong": "borrow me", "right": "lend me" }]
+    },
+    {
+      "id": "e24",
+      "text": "I have a cold, so I went to the hospital to see the doctor.",
+      "errors": [
+        { "kind": "word_choice", "wrong": "went to the hospital", "right": "went to the doctor" }
+      ]
+    },
+    {
+      "id": "e25",
+      "text": "It is too expensive for me, can you make it more cheap?",
+      "errors": [{ "kind": "grammar", "wrong": "more cheap", "right": "cheaper" }]
+    },
+    {
+      "id": "e26",
+      "text": "My sister is more taller than me.",
+      "errors": [{ "kind": "grammar", "wrong": "more taller", "right": "taller" }]
+    },
+    {
+      "id": "e27",
+      "text": "I go to work by motorbike every days.",
+      "errors": [{ "kind": "grammar", "wrong": "every days", "right": "every day" }]
+    },
+    {
+      "id": "e28",
+      "text": "Last night I watched a film and then I sleep.",
+      "errors": [{ "kind": "grammar", "wrong": "sleep", "right": "slept" }]
+    },
+    {
+      "id": "e29",
+      "text": "If I have more money, I would travel to Japan.",
+      "errors": [{ "kind": "grammar", "wrong": "have", "right": "had" }]
+    },
+    {
+      "id": "e30",
+      "text": "I'm agree with you.",
+      "errors": [{ "kind": "grammar", "wrong": "I'm agree", "right": "I agree" }]
+    },
+    {
+      "id": "e31",
+      "text": "She said me that she was tired.",
+      "errors": [{ "kind": "grammar", "wrong": "said me", "right": "told me" }]
+    },
+    {
+      "id": "e32",
+      "text": "I look forward to see you soon.",
+      "errors": [{ "kind": "grammar", "wrong": "to see", "right": "to seeing" }]
+    },
+    {
+      "id": "e33",
+      "text": "The children is playing in the yard.",
+      "errors": [{ "kind": "grammar", "wrong": "is", "right": "are" }]
+    },
+    {
+      "id": "e34",
+      "text": "I have never eat sushi.",
+      "errors": [{ "kind": "grammar", "wrong": "eat", "right": "eaten" }]
+    },
+    {
+      "id": "e35",
+      "text": "Could you say again the address?",
+      "errors": [
+        { "kind": "grammar", "wrong": "say again the address", "right": "say the address again" }
+      ]
+    },
+    {
+      "id": "e36",
+      "text": "I need to make my homework tonight.",
+      "errors": [{ "kind": "word_choice", "wrong": "make my homework", "right": "do my homework" }]
+    },
+    {
+      "id": "e37",
+      "text": "My hobby is listen to music.",
+      "errors": [{ "kind": "grammar", "wrong": "listen", "right": "listening" }]
+    },
+    {
+      "id": "e38",
+      "text": "We have a meeting in Monday morning.",
+      "errors": [{ "kind": "grammar", "wrong": "in Monday", "right": "on Monday" }]
+    },
+    {
+      "id": "e39",
+      "text": "I can speak English a little bit good.",
+      "errors": [{ "kind": "grammar", "wrong": "a little bit good", "right": "a little" }]
+    },
+    {
+      "id": "e40",
+      "text": "He is my close friend since high school.",
+      "errors": [{ "kind": "grammar", "wrong": "is", "right": "has been" }]
+    },
+    {
+      "id": "e41",
+      "text": "There are a lot of traffic in the morning.",
+      "errors": [{ "kind": "grammar", "wrong": "are", "right": "is" }]
+    },
+    {
+      "id": "e42",
+      "text": "I'm going to visit my grandparents in the next weekend.",
+      "errors": [{ "kind": "grammar", "wrong": "in the next weekend", "right": "next weekend" }]
+    },
+    {
+      "id": "e43",
+      "text": "First, you put the eggs into the pan, then you mix it.",
+      "errors": [{ "kind": "grammar", "wrong": "it", "right": "them" }]
+    },
+    {
+      "id": "e44",
+      "text": "The bus was late, so I came late to class.",
+      "errors": [
+        { "kind": "word_choice", "wrong": "came late to class", "right": "was late for class" }
+      ]
+    },
+    {
+      "id": "e45",
+      "text": "My job is very busy, I work from eight until six every day.",
+      "errors": [
+        { "kind": "word_choice", "wrong": "My job is very busy", "right": "I'm very busy at work" }
+      ]
+    },
+    {
+      "id": "e46",
+      "text": "I want to become a teacher because I like teach children.",
+      "errors": [{ "kind": "grammar", "wrong": "like teach", "right": "like teaching" }]
+    },
+    {
+      "id": "e47",
+      "text": "Hey boss, give me the report now.",
+      "errors": [
+        {
+          "kind": "word_choice",
+          "wrong": "give me the report now",
+          "right": "could you send me the report"
+        }
+      ]
+    },
+    {
+      "id": "e48",
+      "text": "I'm sorry for late.",
+      "errors": [{ "kind": "grammar", "wrong": "for late", "right": "for being late" }]
+    },
+    {
+      "id": "e49",
+      "text": "It's raining, so we can't go to outside.",
+      "errors": [{ "kind": "grammar", "wrong": "go to outside", "right": "go outside" }]
+    },
+    {
+      "id": "e50",
+      "text": "My mom cooks very delicious, everyone likes her food.",
+      "errors": [
+        { "kind": "grammar", "wrong": "cooks very delicious", "right": "is a very good cook" }
+      ]
+    },
+    { "id": "c01", "text": "I work at a small company in Da Nang.", "errors": [] },
+    {
+      "id": "c02",
+      "text": "Yesterday I walked to the market and bought some fruit.",
+      "errors": []
+    },
+    { "id": "c03", "text": "Could you say that again, please?", "errors": [] },
+    { "id": "c04", "text": "My brother is two years older than me.", "errors": [] },
+    { "id": "c05", "text": "I've been learning English for three years.", "errors": [] },
+    { "id": "c06", "text": "We usually have dinner together on Sundays.", "errors": [] },
+    {
+      "id": "c07",
+      "text": "If it rains tomorrow, we'll stay home and watch a movie.",
+      "errors": []
+    },
+    { "id": "c08", "text": "First, boil some water. Then add the noodles.", "errors": [] },
+    { "id": "c09", "text": "I'm sorry I'm late. The traffic was terrible.", "errors": [] },
+    { "id": "c10", "text": "My hometown is famous for its beaches and seafood.", "errors": [] }
+  ]
+}
