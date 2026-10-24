@@ -1,7 +1,7 @@
 import type { Copy } from '@/interfaces/copy.interface';
 
 /** English functional phrases, spoken patterns and fluency ("three rounds") copy. */
-export const enTalk: Pick<Copy, 'talk' | 'fluency'> = {
+export const enTalk: Pick<Copy, 'talk' | 'fluency' | 'feedback'> = {
   talk: {
     title: 'Speaking style',
     lead: 'Pick the phrase that fits the listener, then change sentences by voice. The scorer listens for the -s and -ed endings that are easy to drop.',
@@ -94,11 +94,23 @@ export const enTalk: Pick<Copy, 'talk' | 'fluency'> = {
     summaryTitle: 'Three rounds done!',
     compareLead: 'Last round against the first:',
     changeRate: (delta: number): string =>
-      delta >= 0 ? `${delta} syllables/min faster` : `${-delta} syllables/min slower`,
+      delta === 0
+        ? 'the same speed'
+        : delta > 0
+          ? `${delta} syllables/min faster`
+          : `${-delta} syllables/min slower`,
     changeRun: (delta: number): string =>
-      delta >= 0 ? `runs ${delta} syllables longer` : `runs ${-delta} syllables shorter`,
+      delta === 0
+        ? 'runs as long as before'
+        : delta > 0
+          ? `runs ${delta} syllables longer`
+          : `runs ${-delta} syllables shorter`,
     changePauses: (delta: number): string =>
-      delta <= 0 ? `${-delta} fewer pauses per minute` : `${delta} more pauses per minute`,
+      delta === 0
+        ? 'as many pauses as before'
+        : delta < 0
+          ? `${-delta} fewer pauses per minute`
+          : `${delta} more pauses per minute`,
     again: 'Talk about this topic again',
     hideNumbers: 'Hide the numbers while practising',
     hiddenDone:
@@ -116,5 +128,26 @@ export const enTalk: Pick<Copy, 'talk' | 'fluency'> = {
     progressTitle: 'Vocabulary and fluency',
     remembered: (count: number, total: number): string => `Words remembered: ${count} / ${total}`,
     rememberedHint: 'Words you would recall with a probability of 90 % or more, every way asked.',
+  },
+  feedback: {
+    title: 'Content feedback (AI)',
+    lead: 'Type or dictate what you just said. The AI tutor gets only the text, never the audio, and comments only on grammar, word choice and formality. The scorer already handles pronunciation.',
+    unavailable:
+      'Content feedback needs a scoring server with the AI tutor turned on (Settings → Own scoring server). Only the text you enter is sent, never audio.',
+    label: 'What did you say?',
+    placeholder: 'For example: Yesterday I go to the market with my sister.',
+    dictate: 'Dictate',
+    stopDictate: 'Stop dictating',
+    dictateNote: 'Speech recognition is done by your browser or operating system.',
+    ask: 'Get feedback',
+    asking: 'The tutor is reading…',
+    focusTitle: 'Worth fixing',
+    kind: { grammar: 'Grammar', word_choice: 'Word choice' },
+    noIssue: 'No grammar or word-choice problems found. Well done!',
+    formality: (level: string): string => `Formality: ${level}`,
+    levels: { casual: 'casual', neutral: 'neutral', formal: 'formal' },
+    better: 'A more natural way to say it',
+    listenBetter: 'Listen to it',
+    more: (count: number): string => `See ${count} more`,
   },
 };

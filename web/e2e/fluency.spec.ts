@@ -35,6 +35,9 @@ test('a learner talks about a topic three times and sees the rounds side by side
   await expect(page.getByRole('heading', { name: 'Xong 3 lần!' })).toBeVisible();
   await expect(page.locator('.fluency-table__cell')).toHaveCount(9);
   await expect(page.getByText(/Lần cuối so với lần đầu:/)).toBeVisible();
+  // Content feedback (V6) sits under the rounds; whether the server has an AI tutor depends on
+  // its .env, and the test never sends text to it.
+  await expect(page.getByRole('region', { name: 'Góp ý nội dung (AI)' })).toBeVisible();
   const trend = page.getByRole('region', { name: 'Xu hướng của bạn' });
   await expect(trend.getByRole('listitem')).toHaveCount(1);
 

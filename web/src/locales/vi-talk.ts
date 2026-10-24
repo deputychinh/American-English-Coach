@@ -91,13 +91,23 @@ export const viTalk = {
     summaryTitle: 'Xong 3 lần!',
     compareLead: 'Lần cuối so với lần đầu:',
     changeRate: (delta: number): string =>
-      delta >= 0 ? `nhanh hơn ${delta} âm tiết/phút` : `chậm hơn ${-delta} âm tiết/phút`,
+      delta === 0
+        ? 'tốc độ như cũ'
+        : delta > 0
+          ? `nhanh hơn ${delta} âm tiết/phút`
+          : `chậm hơn ${-delta} âm tiết/phút`,
     changeRun: (delta: number): string =>
-      delta >= 0
-        ? `đoạn nói liền dài hơn ${delta} âm tiết`
-        : `đoạn nói liền ngắn hơn ${-delta} âm tiết`,
+      delta === 0
+        ? 'đoạn nói liền như cũ'
+        : delta > 0
+          ? `đoạn nói liền dài hơn ${delta} âm tiết`
+          : `đoạn nói liền ngắn hơn ${-delta} âm tiết`,
     changePauses: (delta: number): string =>
-      delta <= 0 ? `ít ngắt hơn ${-delta} lần/phút` : `ngắt nhiều hơn ${delta} lần/phút`,
+      delta === 0
+        ? 'số lần ngắt như cũ'
+        : delta < 0
+          ? `ít ngắt hơn ${-delta} lần/phút`
+          : `ngắt nhiều hơn ${delta} lần/phút`,
     again: 'Nói lại chủ đề này',
     hideNumbers: 'Ẩn số đo trong lúc luyện',
     hiddenDone: 'Đã ghi xong cả 3 lần. Số đo đang ẩn, bỏ chọn ô bên dưới để xem.',
@@ -113,5 +123,26 @@ export const viTalk = {
     progressTitle: 'Từ vựng và độ trôi chảy',
     remembered: (count: number, total: number): string => `Từ đã nhớ: ${count} / ${total}`,
     rememberedHint: 'Từ mà khả năng bạn nhớ ra được từ 90 % trở lên, ở mọi cách hỏi.',
+  },
+  feedback: {
+    title: 'Góp ý nội dung (AI)',
+    lead: 'Gõ lại hoặc đọc chính tả điều bạn vừa nói. Gia sư AI chỉ nhận chữ, không nhận âm thanh, và chỉ góp ý ngữ pháp, cách dùng từ, mức lịch sự. Phát âm đã có máy chấm lo.',
+    unavailable:
+      'Góp ý nội dung cần một máy chấm có bật gia sư AI (Cài đặt → Máy chấm riêng). Chỉ chữ bạn nhập được gửi đi, âm thanh thì không.',
+    label: 'Bạn đã nói gì?',
+    placeholder: 'Ví dụ: Yesterday I go to the market with my sister.',
+    dictate: 'Đọc chính tả',
+    stopDictate: 'Dừng đọc',
+    dictateNote: 'Nhận dạng giọng nói do trình duyệt hoặc hệ điều hành thực hiện.',
+    ask: 'Nhận góp ý',
+    asking: 'Gia sư đang đọc…',
+    focusTitle: 'Nên sửa',
+    kind: { grammar: 'Ngữ pháp', word_choice: 'Dùng từ' },
+    noIssue: 'Không thấy lỗi ngữ pháp hay dùng từ. Tốt lắm!',
+    formality: (level: string): string => `Mức lịch sự: ${level}`,
+    levels: { casual: 'thân mật', neutral: 'trung tính', formal: 'trang trọng' },
+    better: 'Cách nói tự nhiên hơn',
+    listenBetter: 'Nghe câu này',
+    more: (count: number): string => `Xem thêm ${count} góp ý`,
   },
 };

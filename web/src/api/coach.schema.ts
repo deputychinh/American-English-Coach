@@ -536,6 +536,29 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  '/api/v1/tutor/feedback': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    /**
+     * Feedback
+     * @description Grammar, word choice and register of what the learner said, sent as text only.
+     *
+     *     Pronunciation is never discussed here: the phoneme scorer owns it, and items about it are
+     *     dropped even when the model offers them (plan v2 V6).
+     */
+    post: operations['feedback_api_v1_tutor_feedback_post'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   '/api/v1/tutor/mouth': {
     parameters: {
       query?: never;
@@ -665,6 +688,25 @@ export interface components {
       scenario_vi: string;
       /** Target Words */
       target_words: string[];
+    };
+    /**
+     * ContentFeedback
+     * @description Grammar and word choice only: the phoneme scorer owns pronunciation.
+     */
+    ContentFeedback: {
+      /** Better Version */
+      better_version: string | null;
+      focus: components['schemas']['FeedbackIssue'] | null;
+      /** Formality */
+      formality: ContentFeedbackFormalityAnyOf0 | null;
+      /** Formality Note Vi */
+      formality_note_vi: string | null;
+      /** Grammar */
+      grammar: components['schemas']['FeedbackIssue'][];
+      /** Model */
+      model: string;
+      /** Word Choice */
+      word_choice: components['schemas']['FeedbackIssue'][];
     };
     /**
      * ControlledStep
@@ -887,6 +929,33 @@ export interface components {
       };
       /** Text */
       text: string;
+    };
+    /**
+     * FeedbackIssue
+     * @description One thing to say differently.
+     */
+    FeedbackIssue: {
+      /** Explain Vi */
+      explain_vi: string;
+      /**
+       * Kind
+       * @enum {string}
+       */
+      kind: FeedbackIssueKind;
+      /** Right */
+      right: string;
+      /** Wrong */
+      wrong: string;
+    };
+    /**
+     * FeedbackRequest
+     * @description The learner's words as text (typed or dictated); audio is never sent.
+     */
+    FeedbackRequest: {
+      /** Task Vi */
+      task_vi?: string | null;
+      /** Transcript */
+      transcript: string;
     };
     /**
      * FocusItem
@@ -2370,6 +2439,39 @@ export interface operations {
       };
     };
   };
+  feedback_api_v1_tutor_feedback_post: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['FeedbackRequest'];
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['ContentFeedback'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
   mouth_api_v1_tutor_mouth_post: {
     parameters: {
       query?: never;
@@ -2407,6 +2509,11 @@ export interface operations {
 export enum CommunicateStepKind {
   communicate = 'communicate',
 }
+export enum ContentFeedbackFormalityAnyOf0 {
+  casual = 'casual',
+  neutral = 'neutral',
+  formal = 'formal',
+}
 export enum ControlledStepKind {
   controlled = 'controlled',
 }
@@ -2429,6 +2536,10 @@ export enum DialogueTurnRole {
 }
 export enum DiscriminateStepKind {
   discriminate = 'discriminate',
+}
+export enum FeedbackIssueKind {
+  grammar = 'grammar',
+  word_choice = 'word_choice',
 }
 export enum FocusReason {
   weak = 'weak',

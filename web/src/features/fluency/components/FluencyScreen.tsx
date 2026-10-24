@@ -26,6 +26,7 @@ import {
 } from '@/features/fluency/services/fluency.service';
 import { useReferenceAudio } from '@/features/practice/hooks/useReferenceAudio';
 import { TodaySessionLink } from '@/features/today/components/TodaySessionLink';
+import { ContentFeedbackPanel } from '@/features/tutor/components/ContentFeedbackPanel';
 import { useAsync } from '@/hooks/useAsync';
 import { useCopy } from '@/hooks/useCopy';
 import { useFocusMode, useImmersive } from '@/hooks/useImmersive';
@@ -156,6 +157,7 @@ export const FluencyScreen = (): ReactElement => {
                 <p className="fluency-screen__note">{copy.explain}</p>
               </>
             )}
+            <ContentFeedbackPanel taskVi={prompt.title_vi} />
             <TodaySessionLink />
             <Button isFullWidth onClick={() => setRounds([])}>
               {copy.again}
