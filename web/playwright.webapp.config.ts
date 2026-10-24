@@ -32,6 +32,7 @@ export default defineConfig({
   projects: [
     {
       name: 'webapp-mobile',
+      testIgnore: /webkit\.spec\.ts/,
       use: {
         ...devices['Desktop Chrome'],
         viewport: { width: 390, height: 844 },
@@ -39,6 +40,12 @@ export default defineConfig({
         hasTouch: true,
         launchOptions: { args: fakeMedia },
       },
+    },
+    {
+      // Safari's engine: iPhones have no other. The microphone is faked in the page (fake-mic.ts).
+      name: 'webapp-iphone-webkit',
+      testMatch: /webkit\.spec\.ts/,
+      use: { ...devices['iPhone 15'], permissions: [] },
     },
   ],
 });
