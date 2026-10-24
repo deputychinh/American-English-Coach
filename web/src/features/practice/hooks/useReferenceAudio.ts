@@ -4,9 +4,15 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { REFERENCE_CACHE_LIMIT, SILENT_WAV_DATA_URI } from '@/constants/recorder.constant';
 import { fetchReferenceAudio } from '@/features/practice/services/assessment.service';
+import {
+  primeSystemVoice,
+  speakWithSystemVoice,
+  stopSystemVoice,
+} from '@/features/practice/services/system-voice.service';
 import { bundledClipUrl } from '@/features/practice/services/voice-library.service';
 import type { ReferenceAudio } from '@/interfaces/hooks.interface';
 import { getCopy } from '@/locales';
+import { isLocalMode } from '@/utils/api-base.util';
 
 /** Object URLs of clips already downloaded this session, oldest first. */
 const clipUrls = new Map<string, string>();
@@ -40,6 +46,7 @@ export const useReferenceAudio = (): ReferenceAudio => {
     return () => {
       requestRef.current += 1;
       audio.pause();
+      stopSystemVoice();
       audioRef.current = null;
     };
   }, []);
@@ -56,8 +63,12 @@ export const useReferenceAudio = (): ReferenceAudio => {
       audio.src = SILENT_WAV_DATA_URI;
       audio.play().catch(() => undefined);
     }
+    // Without a scoring server (web app, iOS app) the browser's own voice is the last resort.
+    const hasSystemVoiceFallback = isLocalMode();
+    if (hasSystemVoiceFallback) primeSystemVoice();
     const fail = (message: string): void => {
       if (request !== requestRef.current) return;
+      if (hasSystemVoiceFallback && speakWithSystemVoice(text, () => setIsPlaying(false))) return;
       setIsPlaying(false);
       setError(message);
     };
@@ -77,6 +88,7 @@ export const useReferenceAudio = (): ReferenceAudio => {
   const stop = useCallback(() => {
     requestRef.current += 1;
     audioRef.current?.pause();
+    stopSystemVoice();
     setIsPlaying(false);
   }, []);
 
