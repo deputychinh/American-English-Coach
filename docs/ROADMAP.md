@@ -28,8 +28,8 @@ Nguyên tắc không đổi: local-first (video không rời thiết bị), ba m
 | --- | ---------- | --------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | E1  | ☑          | Gương khẩu hình kiểu camera       | Camera toàn màn, bóng mờ mẫu môi căn theo miệng, vòng điểm khớp + một gợi ý, chip đặc trưng, sheet chọn âm; unit + e2e; thiết kế trong `docs/design/mobile-mirror.md` |
 | E2  | ☑          | Chạy trên iPhone thật             | `make ios-device` cài và mở app; địa chỉ Mac nhúng sẵn; ghép nối hoạt động (sửa lỗi POST qua địa chỉ máy chấm)                                                        |
-| E3  | ☐          | Màn Luyện tập và kết quả kiểu app | Thẻ kết quả từng âm theo mẫu BoldVoice (điểm tổng, bấm từ xem âm), nút thu âm giữ-để-nói, phản hồi khẩu hình gộp với âm                                               |
-| E4  | ☐          | Trang chủ và điều hướng           | Bỏ hero kiểu web, lời chào + mục tiêu ngày + "luyện tiếp" một chạm; tiêu đề lớn theo iOS                                                                              |
+| E3  | ☑          | Màn Luyện tập và kết quả kiểu app | Thẻ kết quả từng âm theo mẫu BoldVoice (điểm tổng, bấm từ xem âm), nút thu âm giữ-để-nói, phản hồi khẩu hình gộp với âm                                               |
+| E4  | ☑          | Trang chủ và điều hướng           | Bỏ hero kiểu web, lời chào + mục tiêu ngày + "luyện tiếp" một chạm; tiêu đề lớn theo iOS                                                                              |
 
 ## Giai đoạn C — Chất lượng chấm và nội dung
 

@@ -49,3 +49,14 @@ Ngày 2026-10-18. Phản hồi của chủ dự án sau khi dùng trên iPhone: 
 Gương có ghi âm: một lần chỉ đạt khi âm đích đúng **và** (với âm camera thấy được) khẩu hình được nhìn thấy và nằm trong vùng mục tiêu ≥ 30 % thời gian nói; 3 lần đạt liên tiếp là "đã nắm được âm". Kiểm chứng: `make ci` (backend 113 test, web 118 test), e2e 60/60 gồm axe.
 
 Còn lại cần kiểm tra trên iPhone thật: cảm giác rung khi chạm, độ trùng của bóng mờ, ngưỡng 30 % khẩu hình.
+
+## Bổ sung E3, E4 (2026-10-24)
+
+| Mẫu (nguồn)                                     | Áp dụng                                                                                                                                                                         |
+| ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| BoldVoice, ELSA: điểm tổng + câu tô màu theo từ | Đầu sheet kết quả: vòng điểm + một câu nhận xét; các từ của câu là nút, mỗi từ mang màu và dấu của âm yếu nhất; mở sẵn từ cần sửa đầu tiên và âm yếu nhất của nó, kèm khẩu hình |
+| Bộ đàm, ghi âm tin nhắn: giữ để nói             | Nút thu: giữ ≥ 0,35 giây rồi thả ra để chấm; bấm nhanh vẫn thu âm và tự dừng khi im lặng; bàn phím dùng lệnh bấm; chặn menu khi nhấn giữ trên iOS                               |
+| iOS large title                                 | Trang chủ và các trang tab: tiêu đề lớn khi cuộn qua thì hiện nhỏ trên thanh mờ ở đầu màn (`LargeTitleBar`, `useScrolledPast`)                                                  |
+| Duolingo, ELSA "Today": một thẻ chính           | "Hôm nay 15 phút" là thẻ chính, chạm cả thẻ; mục tiêu ngày phẳng; các lối luyện khác gộp thành danh sách nhóm "Luyện thêm"                                                      |
+
+Kiểm chứng: `make ci` (backend 173 test, web 432 test), e2e 102/102 (có thêm bài giữ để nói), xem trên máy ảo iPhone 17. Còn cần thử trên iPhone thật: cảm giác giữ để nói và ngưỡng 0,35 giây.
