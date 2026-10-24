@@ -15,6 +15,7 @@ import { TodayStep } from '@/enums/today-step.enum';
 import { loadToday, startUnitStep } from '@/features/today/services/today.service';
 import { useAsync } from '@/hooks/useAsync';
 import { useCopy } from '@/hooks/useCopy';
+import { useFocusMode, useImmersive } from '@/hooks/useImmersive';
 import type { TodayHref, TodayInput } from '@/interfaces/today.interface';
 import { cx } from '@/utils/cx.util';
 
@@ -39,6 +40,9 @@ export const todayHref = (step: TodayStep, input: TodayInput): TodayHref => {
 export const TodayScreen = (): ReactElement => {
   const copy = useCopy().session;
   const state = useAsync(loadToday);
+  // A session player like the lesson: its own close button, no tab bar or second safe-area gap.
+  useFocusMode();
+  useImmersive();
 
   if (state.status === AsyncStatus.Error) {
     return <ErrorState message={state.error ?? ''} onRetry={state.reload} />;
