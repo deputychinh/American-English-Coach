@@ -12,6 +12,7 @@ import { AsyncStatus } from '@/enums/async-status.enum';
 import { ReviewGrade, ReviewMode } from '@/enums/review.enum';
 import { VocabReview } from '@/enums/vocab.enum';
 import { answerCard } from '@/features/review/services/review.service';
+import { TodaySessionLink } from '@/features/today/components/TodaySessionLink';
 import { VocabListenCard } from '@/features/vocab/components/VocabListenCard';
 import { VocabSpeakCard } from '@/features/vocab/components/VocabSpeakCard';
 import { loadVocabState } from '@/features/vocab/services/vocab.service';
@@ -102,6 +103,7 @@ export const VocabScreen = (): ReactElement => {
                 {copy.vocab.summaryTitle}
               </h2>
               <p className="vocab-screen__lead">{copy.vocab.summaryLine(good, turns.length)}</p>
+              <TodaySessionLink />
               <Button isFullWidth onClick={close}>
                 {copy.vocab.summaryMore}
               </Button>
@@ -142,6 +144,7 @@ export const VocabScreen = (): ReactElement => {
             {copy.vocab.allDone}
           </p>
         )}
+        {overview.turns.length === 0 ? <TodaySessionLink /> : null}
         {hasDrafts ? <p className="vocab-screen__note">{copy.vocab.draftNote}</p> : null}
         <Link href="/" className="button button--ghost">
           {copy.vocab.backHome}

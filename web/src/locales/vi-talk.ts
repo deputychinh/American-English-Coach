@@ -110,5 +110,8 @@ export const viTalk = {
     unitPractice: 'Nói 3 lần về chủ đề của đơn vị này',
     saveFailed: 'Không lưu được kết quả trên máy này.',
     backHome: 'Về trang chủ',
+    progressTitle: 'Từ vựng và độ trôi chảy',
+    remembered: (count: number, total: number): string => `Từ đã nhớ: ${count} / ${total}`,
+    rememberedHint: 'Từ mà khả năng bạn nhớ ra được từ 90 % trở lên, ở mọi cách hỏi.',
   },
 };

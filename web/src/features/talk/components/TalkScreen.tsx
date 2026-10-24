@@ -16,6 +16,7 @@ import { answerCard } from '@/features/review/services/review.service';
 import { TalkSituationCard } from '@/features/talk/components/TalkSituationCard';
 import { TalkTransformCard } from '@/features/talk/components/TalkTransformCard';
 import { loadTalkState } from '@/features/talk/services/talk.service';
+import { TodaySessionLink } from '@/features/today/components/TodaySessionLink';
 import { useAsync } from '@/hooks/useAsync';
 import { useCopy } from '@/hooks/useCopy';
 import { useFocusMode, useImmersive } from '@/hooks/useImmersive';
@@ -95,6 +96,7 @@ export const TalkScreen = (): ReactElement => {
                 {copy.talk.summaryTitle}
               </h2>
               <p className="talk-screen__lead">{copy.talk.summaryLine(good, turns.length)}</p>
+              <TodaySessionLink />
               <Button isFullWidth onClick={close}>
                 {copy.talk.summaryMore}
               </Button>
@@ -139,6 +141,7 @@ export const TalkScreen = (): ReactElement => {
             {copy.talk.allDone}
           </p>
         )}
+        {available.length === 0 ? <TodaySessionLink /> : null}
         <Link href="/" className="button button--ghost">
           {copy.talk.backHome}
         </Link>

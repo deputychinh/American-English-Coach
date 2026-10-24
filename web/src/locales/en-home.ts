@@ -1,7 +1,7 @@
 import type { Copy } from '@/interfaces/copy.interface';
 
 /** English "Today" home copy, with the "add to home screen" card. */
-export const enHome: Pick<Copy, 'today' | 'placement' | 'install'> = {
+export const enHome: Pick<Copy, 'today' | 'placement' | 'install' | 'session'> = {
   placement: {
     title: 'Placement check',
     lead: 'About 3 minutes: 12 listening questions, then 8 short sentences to read aloud, to find your starting level.',
@@ -65,5 +65,31 @@ export const enHome: Pick<Copy, 'today' | 'placement' | 'install'> = {
       'Scroll down and choose “Add to Home Screen”.',
       'Tap “Add”. The app icon appears on your home screen.',
     ],
+  },
+  session: {
+    title: 'Today in 15 minutes',
+    lead: "Review what is due, take the unit's next step, then speak once. Closing the app is fine: next time it picks up where you left off.",
+    progress: (done: number, total: number): string => `${done}/${total} parts`,
+    start: 'Start 15 minutes',
+    resume: (step: string): string => `Continue: ${step}`,
+    allDone: "Today's session is done. See you tomorrow!",
+    minutes: (minutes: number): string => `~${minutes} min`,
+    status: { done: 'Done', next: 'Next', waiting: 'Later' },
+    steps: {
+      vocab: 'Review words',
+      talk: 'Speaking style',
+      unit: "Unit's next step",
+      speak: 'Three rounds',
+    },
+    vocabLine: (left: number): string => (left > 0 ? `${left} cards today` : 'Nothing left today'),
+    talkLine: (left: number): string => (left > 0 ? `${left} cards today` : 'Nothing left today'),
+    unitLine: (title: string): string => title,
+    unitNone: 'The whole path is done',
+    speakLine: (topic: string): string => `Topic: ${topic}`,
+    backToSession: "Back to today's session",
+    homeTitle: 'Today in 15 minutes',
+    homeLine: (done: number, total: number): string =>
+      done === 0 ? 'Review, a unit step, one speaking task' : `${done}/${total} parts done`,
+    homeDone: "Today's session is done",
   },
 };

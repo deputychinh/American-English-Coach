@@ -41,6 +41,7 @@ import {
 } from '@/features/lesson/services/lesson-position.service';
 import { saveListenResult } from '@/features/listen/services/listen.service';
 import { PracticeSession } from '@/features/practice/components/PracticeSession';
+import { TodaySessionLink, useIsFromToday } from '@/features/today/components/TodaySessionLink';
 import { useAsync } from '@/hooks/useAsync';
 import { useCopy } from '@/hooks/useCopy';
 import { useFocusMode, useImmersive } from '@/hooks/useImmersive';
@@ -86,6 +87,8 @@ export const LessonPlayer = (): ReactElement => {
   const content = useAsync(load);
   const [stored, setStored] = useState<LessonPosition | null>(null);
   const [isRetrying, setIsRetrying] = useState(false);
+  // Opened from today's session: closing goes back to it (the session sees the step moved on).
+  const closeHref = useIsFromToday() ? '/today' : CLOSE_HREF;
   useFocusMode();
   useImmersive();
   useKeepAwake();
@@ -120,7 +123,7 @@ export const LessonPlayer = (): ReactElement => {
   const progress = lessonProgress(plan, position);
   const header = (subtitle: string): ReactElement => (
     <LessonHeader
-      closeHref={CLOSE_HREF}
+      closeHref={closeHref}
       title={plan.title}
       subtitle={subtitle}
       progress={progress}
@@ -151,6 +154,7 @@ export const LessonPlayer = (): ReactElement => {
         {header(copy.lesson.title)}
         <div className="lesson-player__body">
           <LessonSummary title={copy.lesson.doneTitle} lines={lines}>
+            <TodaySessionLink />
             <Link href={CLOSE_HREF} className="button button--primary">
               {copy.lesson.backToCourse}
             </Link>
@@ -228,6 +232,7 @@ export const LessonPlayer = (): ReactElement => {
                 : copy.lesson.gateShort(passed, size, need),
             ]}
           >
+            <TodaySessionLink />
             {isEnough ? (
               <Button onClick={nextStep}>{copy.lesson.nextStep}</Button>
             ) : (

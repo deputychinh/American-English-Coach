@@ -11,6 +11,11 @@ import { newCard, reviewCard } from '@/utils/srs.util';
 
 import { VocabScreen } from './VocabScreen';
 
+// Opened on its own, not from today's session.
+vi.mock('next/navigation', () => ({
+  useSearchParams: () => new URLSearchParams(''),
+}));
+
 const play = vi.fn();
 vi.mock('@/features/practice/hooks/useReferenceAudio', () => ({
   useReferenceAudio: () => ({ play, stop: vi.fn(), isPlaying: false, error: null }),

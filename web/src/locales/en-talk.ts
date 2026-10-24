@@ -113,5 +113,8 @@ export const enTalk: Pick<Copy, 'talk' | 'fluency'> = {
     unitPractice: "Three rounds on this unit's topic",
     saveFailed: 'Could not save the results on this device.',
     backHome: 'Back to home',
+    progressTitle: 'Vocabulary and fluency',
+    remembered: (count: number, total: number): string => `Words remembered: ${count} / ${total}`,
+    rememberedHint: 'Words you would recall with a probability of 90 % or more, every way asked.',
   },
 };

@@ -1,0 +1,110 @@
+.today-screen {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  max-inline-size: 560px;
+  margin-inline: auto;
+}
+
+.today-screen__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding-inline: var(--padding-page-x);
+  padding-block-end: var(--space-6);
+}
+
+.today-screen__lead {
+  color: var(--color-text-muted);
+}
+
+.today-screen__steps {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: 0;
+  list-style: none;
+}
+
+.today-screen__step {
+  display: flex;
+  gap: var(--space-3);
+  align-items: center;
+  min-block-size: 64px;
+  padding: var(--space-3) var(--space-4);
+  text-decoration: none;
+  color: var(--color-text);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+
+.today-screen__step.is-next {
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-sm);
+}
+
+.today-screen__step.is-done {
+  opacity: 0.75;
+}
+
+.today-screen__mark {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  inline-size: 28px;
+  block-size: 28px;
+  color: var(--color-on-primary);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-full);
+}
+
+.today-screen__step.is-done .today-screen__mark {
+  background: var(--color-success);
+  border-color: var(--color-success);
+}
+
+.today-screen__step.is-next .today-screen__mark {
+  border-color: var(--color-primary);
+}
+
+.today-screen__text {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--space-1);
+  min-inline-size: 0;
+}
+
+.today-screen__name {
+  font-weight: var(--weight-semibold);
+}
+
+.today-screen__detail,
+.today-screen__meta {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+.today-screen__meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: end;
+}
+
+.today-screen__status {
+  font-weight: var(--weight-semibold);
+}
+
+.today-screen__step.is-next .today-screen__status {
+  color: var(--color-primary);
+}
+
+.today-screen__done {
+  font-size: var(--text-md);
+  font-weight: var(--weight-semibold);
+  text-align: center;
+  color: var(--color-success);
+}

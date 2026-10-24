@@ -25,6 +25,7 @@ import {
   trendSessions,
 } from '@/features/fluency/services/fluency.service';
 import { useReferenceAudio } from '@/features/practice/hooks/useReferenceAudio';
+import { TodaySessionLink } from '@/features/today/components/TodaySessionLink';
 import { useAsync } from '@/hooks/useAsync';
 import { useCopy } from '@/hooks/useCopy';
 import { useFocusMode, useImmersive } from '@/hooks/useImmersive';
@@ -155,6 +156,7 @@ export const FluencyScreen = (): ReactElement => {
                 <p className="fluency-screen__note">{copy.explain}</p>
               </>
             )}
+            <TodaySessionLink />
             <Button isFullWidth onClick={() => setRounds([])}>
               {copy.again}
             </Button>

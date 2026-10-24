@@ -63,4 +63,32 @@ export const viHome = {
       'Bấm “Thêm”. Biểu tượng app hiện trên màn hình chính.',
     ],
   },
+  session: {
+    title: 'Hôm nay 15 phút',
+    lead: 'Ôn thẻ đến hạn, học bước tiếp của đơn vị, rồi nói một bài. Tắt app giữa chừng cũng không sao: lần sau app tiếp đúng chỗ.',
+    progress: (done: number, total: number): string => `${done}/${total} phần`,
+    start: 'Bắt đầu 15 phút',
+    resume: (step: string): string => `Tiếp tục: ${step}`,
+    allDone: 'Xong phiên hôm nay. Mai gặp lại nhé!',
+    minutes: (minutes: number): string => `~${minutes} phút`,
+    status: { done: 'Xong', next: 'Tiếp theo', waiting: 'Chờ' },
+    steps: {
+      vocab: 'Ôn từ vựng',
+      talk: 'Luyện cách nói',
+      unit: 'Bước tiếp của đơn vị',
+      speak: 'Nói 3 lần',
+    },
+    vocabLine: (left: number): string =>
+      left > 0 ? `${left} thẻ hôm nay` : 'Không còn thẻ nào hôm nay',
+    talkLine: (left: number): string =>
+      left > 0 ? `${left} thẻ hôm nay` : 'Không còn thẻ nào hôm nay',
+    unitLine: (title: string): string => title,
+    unitNone: 'Đã xong cả lộ trình',
+    speakLine: (topic: string): string => `Chủ đề: ${topic}`,
+    backToSession: 'Tiếp tục phiên hôm nay',
+    homeTitle: 'Hôm nay 15 phút',
+    homeLine: (done: number, total: number): string =>
+      done === 0 ? 'Ôn thẻ, học đơn vị, nói một bài' : `Đã xong ${done}/${total} phần`,
+    homeDone: 'Xong phiên hôm nay',
+  },
 };

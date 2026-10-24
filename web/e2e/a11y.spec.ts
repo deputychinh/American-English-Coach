@@ -18,6 +18,7 @@ const ROUTES = [
   '/vocab/',
   '/talk/',
   '/fluency/',
+  '/today/',
   '/privacy/',
   '/licenses/',
   '/lesson/?unit=u09',

@@ -1,0 +1,16 @@
+.progress-speaking {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.progress-speaking__words {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.progress-speaking__hint {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}

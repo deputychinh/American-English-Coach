@@ -25,6 +25,7 @@ import { isOnboarded } from '@/features/onboarding/services/onboarding.service';
 import { continueUnit, readPlacement } from '@/features/placement/services/placement.service';
 import { getPlan } from '@/features/plan/services/plan.service';
 import { TalkHomeCard } from '@/features/talk/components/TalkHomeCard';
+import { TodayHomeCard } from '@/features/today/components/TodayHomeCard';
 import { VocabHomeCard } from '@/features/vocab/components/VocabHomeCard';
 import { useActiveProfile } from '@/hooks/useActiveProfile';
 import { useAsync } from '@/hooks/useAsync';
@@ -106,6 +107,7 @@ export const HomeScreen = (): ReactElement => {
       <ApiStatusBanner isQuietWhenReady />
       <ModelDownloadCard />
       <InstallAppCard />
+      <TodayHomeCard />
 
       <section className="home-screen__goal" aria-labelledby="today-title">
         <span className="home-screen__ring-box" aria-hidden="true">

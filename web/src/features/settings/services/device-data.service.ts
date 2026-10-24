@@ -21,6 +21,7 @@ const LEARNER_KEYS: StorageKey[] = [
   StorageKey.Placement,
   StorageKey.Lesson,
   StorageKey.Fluency,
+  StorageKey.Today,
 ];
 
 /**

@@ -17,6 +17,7 @@ import { AsyncStatus } from '@/enums/async-status.enum';
 import { IconName } from '@/enums/icon-name.enum';
 import { getSounds } from '@/features/content/services/content.service';
 import { PlanCard } from '@/features/plan/components/PlanCard';
+import { ProgressSpeaking } from '@/features/progress/components/ProgressSpeaking';
 import { getProgress } from '@/features/progress/services/progress.service';
 import { useAsync } from '@/hooks/useAsync';
 import { useCopy } from '@/hooks/useCopy';
@@ -75,6 +76,8 @@ export const ProgressDashboard = (): ReactElement => {
           </div>
 
           <PlanCard headingId="week" showFocus={false} />
+
+          <ProgressSpeaking />
 
           <Tabs
             label={copy.progress.title}
