@@ -6,12 +6,17 @@ import { dirname, join, relative, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = dirname(dirname(fileURLToPath(import.meta.url)));
+// `out` for the export the API serves; `out-webapp` for the web app (make build-webapp).
+const OUT = join(ROOT, process.env.WEB_OUT_DIR ?? 'out');
 const SOURCE = join(ROOT, 'public', 'sw.js');
-const TARGET = join(ROOT, 'out', 'sw.js');
+const TARGET = join(OUT, 'sw.js');
 const BUILD_ID = join(ROOT, '.next', 'BUILD_ID');
-const STATIC_DIR = join(ROOT, 'out', '_next', 'static');
+const STATIC_DIR = join(OUT, '_next', 'static');
 const MARKER = /^const BUILD = .*; \/\/ __AEC_BUILD__$/m;
-const SKIPPED = /\.map$/;
+// Source maps, and the copies Turbopack emits of ONNX Runtime's own files and of the worker's
+// source: the app loads the runtime from /vendor/onnxruntime and the compiled worker chunk, so
+// precaching these would cost every learner 14 MB for nothing.
+const SKIPPED = /\.map$|^ort[.-].*\.(wasm|mjs)$|\.ts$/;
 
 const listAssets = async () => {
   const entries = await readdir(STATIC_DIR, { recursive: true, withFileTypes: true });

@@ -1,5 +1,10 @@
 import type { ServiceWorkerRoute } from '@/interfaces/service-worker.interface';
-import { loadServiceWorker, navigationRequest, pageRequest } from '@/test-utils/service-worker';
+import {
+  loadServiceWorker,
+  navigationRequest,
+  pageRequest,
+  workerRequest,
+} from '@/test-utils/service-worker';
 
 const ORIGIN = 'http://127.0.0.1:8765';
 const SHELL_CACHE = 'coach-shell-dev';
@@ -17,6 +22,10 @@ const ROUTES = [
   '/curriculum/',
   '/listen/',
   '/placement/',
+  '/vocab/',
+  '/talk/',
+  '/lesson/',
+  '/licenses/',
 ];
 const FILES = [
   '/manifest.webmanifest',
@@ -90,6 +99,24 @@ describe('service worker: app shell', () => {
     expect(await worker.cachedUrls(SHELL_CACHE)).toEqual([`${ORIGIN}${chunk}`]);
   });
 
+  it('answers a worker script with a fresh response that keeps its headers', async () => {
+    const bootstrap = '/_next/static/chunks/turbopack-worker-x.js';
+    const worker = loadServiceWorker({
+      [bootstrap]: () =>
+        new Response('importScripts()', {
+          status: 200,
+          headers: { 'Cross-Origin-Embedder-Policy': 'require-corp' },
+        }),
+    });
+    for (const attempt of [1, 2]) {
+      const response = await worker.respond(workerRequest(`${bootstrap}#params=%5B%5D`));
+      expect(await response?.text(), String(attempt)).toBe('importScripts()');
+      expect(response?.url).toBe('');
+      expect(response?.headers.get('Cross-Origin-Embedder-Policy')).toBe('require-corp');
+    }
+    expect(worker.fetchMock).toHaveBeenCalledOnce();
+  });
+
   it('returns but never caches a non-200 response', async () => {
     const missing = '/_next/static/chunks/gone.js';
     const worker = loadServiceWorker({ [missing]: () => new Response('nope', { status: 404 }) });
@@ -98,7 +125,7 @@ describe('service worker: app shell', () => {
     expect(await worker.cachedUrls(SHELL_CACHE)).toEqual([]);
   });
 
-  it('lets non-GET, cross-origin and live-status requests pass through untouched', async () => {
+  it('lets non-GET, cross-origin, live-status and model requests pass through untouched', async () => {
     const worker = loadServiceWorker();
     expect(await worker.respond(pageRequest('/api/v1/assess', { method: 'POST' }))).toBeNull();
     expect(
@@ -107,6 +134,8 @@ describe('service worker: app shell', () => {
     expect(await worker.respond(pageRequest('/api/v1/health'))).toBeNull();
     expect(await worker.respond(pageRequest('/api/v1/ready'))).toBeNull();
     expect(await worker.respond(pageRequest('/api/v1/pair', { method: 'POST' }))).toBeNull();
+    // The web app's model parts live in the engine's own cache, not twice in the shell cache.
+    expect(await worker.respond(pageRequest('/models/w2v.mm8/part-00.bin'))).toBeNull();
     expect(worker.fetchMock).not.toHaveBeenCalled();
   });
 

@@ -32,6 +32,8 @@ export default defineConfig({
         'src/**/*.interface.ts',
         'src/test-utils/**',
         'src/components/RegisterServiceWorker/**',
+        // ONNX Runtime Web in a worker: covered by the web app e2e with the real model.
+        'src/features/engine/workers/**',
         'src/features/mirror/hooks/useMouthTracker.ts',
         'src/features/mirror/hooks/useFaceLandmarker.ts',
         'src/features/mirror/hooks/useSuccessChime.ts',

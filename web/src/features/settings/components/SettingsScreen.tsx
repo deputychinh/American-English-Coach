@@ -8,6 +8,7 @@ import { PageIntro } from '@/components/PageIntro/PageIntro';
 import { SectionHeader } from '@/components/SectionHeader/SectionHeader';
 import { Tabs } from '@/components/Tabs/Tabs';
 import { useToast } from '@/components/Toast/Toast';
+import { env } from '@/config/env';
 import { DEFAULT_DAILY_GOAL } from '@/constants/plan.constant';
 import { APP_VERSION } from '@/constants/ui.constant';
 import { ButtonVariant } from '@/enums/button-variant.enum';
@@ -27,7 +28,7 @@ import { useActiveProfile } from '@/hooks/useActiveProfile';
 import { useCopy, useLanguage } from '@/hooks/useCopy';
 import { useStoredState } from '@/hooks/useStoredState';
 import { setLanguage } from '@/locales';
-import { normaliseBaseUrl, isNativeShell } from '@/utils/api-base.util';
+import { isDeviceFirst, normaliseBaseUrl } from '@/utils/api-base.util';
 import { writeStorage } from '@/utils/storage.util';
 
 import './SettingsScreen.css';
@@ -53,8 +54,9 @@ export const SettingsScreen = (): ReactElement => {
   const theme = useSyncExternalStore(subscribeTheme, readTheme, () => Theme.Light);
   // Inside the iOS shell pairing is the first thing a new phone needs, so the card leads.
   // External-store read: the static HTML says false, the shell flips it after hydration.
-  // The iOS app: on-device scoring first, the classroom server under Advanced.
-  const isNative = useSyncExternalStore(subscribeNever, isNativeShell, () => false);
+  // The iOS app and the web app: on-device scoring first, the classroom server under Advanced.
+  // The web app knows it at build time, so its static HTML already says so.
+  const isNative = useSyncExternalStore(subscribeNever, isDeviceFirst, () => env.isStandaloneWeb);
   const download = useModelDownload();
 
   const [cameraDefault, setCameraDefault] = useStoredState<boolean>(StorageKey.CameraDefault, true);

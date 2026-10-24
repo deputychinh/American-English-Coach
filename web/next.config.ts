@@ -4,10 +4,14 @@ import type { NextConfig } from 'next';
 // In development `next dev` proxies /api to the backend so browser calls stay same-origin.
 const apiBaseUrl = process.env.API_BASE_URL ?? 'http://127.0.0.1:8765';
 const isDevelopment = process.env.NODE_ENV === 'development';
+// The web app for static hosting (`make build-webapp`) exports to its own folder, so building it
+// never replaces the export the API serves from web/out.
+const isStandaloneWeb = process.env.NEXT_PUBLIC_STANDALONE_WEB === '1';
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
   output: isDevelopment ? undefined : 'export',
+  ...(isStandaloneWeb && !isDevelopment ? { distDir: 'out-webapp' } : {}),
   trailingSlash: true,
   images: { unoptimized: true },
   typedRoutes: true,

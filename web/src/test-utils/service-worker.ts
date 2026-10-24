@@ -124,6 +124,13 @@ export const loadServiceWorker = (
 export const pageRequest = (path: string, init?: RequestInit): Request =>
   new Request(`${ORIGIN}${path}`, init);
 
+/** A request for a worker script (`destination` is read-only, so it is set afterwards). */
+export const workerRequest = (path: string): Request => {
+  const request = new Request(`${ORIGIN}${path}`);
+  Object.defineProperty(request, 'destination', { value: 'worker' });
+  return request;
+};
+
 /** A navigation to a route (`new Request` refuses `mode: 'navigate'`, so it is set afterwards). */
 export const navigationRequest = (path: string): Request => {
   const request = new Request(`${ORIGIN}${path}`);

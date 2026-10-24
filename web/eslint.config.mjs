@@ -56,6 +56,7 @@ export default defineConfig(
     'ios/**',
     'assets/**',
     'out/**',
+    'out-webapp/**',
     '.next/**',
     'coverage/**',
     'node_modules/**',
@@ -64,6 +65,7 @@ export default defineConfig(
     '**/*.mjs',
     'public/**',
     'out/**',
+    'out-webapp/**',
     'playwright-report/**',
     'test-results/**',
   ]),
@@ -136,11 +138,17 @@ export default defineConfig(
     rules: { 'no-restricted-syntax': restrictAllExcept('constant') },
   },
   {
-    files: ['src/config/**/*.ts', 'next.config.ts', 'playwright.config.ts', 'e2e/env.ts'],
+    files: [
+      'src/config/**/*.ts',
+      'next.config.ts',
+      'playwright.config.ts',
+      'playwright.webapp.config.ts',
+      'e2e/env.ts',
+    ],
     rules: { 'no-restricted-properties': 'off' },
   },
   {
-    files: ['**/*.test.{ts,tsx}', 'vitest.*.ts', 'e2e/**/*.ts', 'playwright.config.ts'],
+    files: ['**/*.test.{ts,tsx}', 'vitest.*.ts', 'e2e/**/*.ts', 'playwright*.config.ts'],
     rules: {
       'max-lines': 'off',
       '@typescript-eslint/no-non-null-assertion': 'off',

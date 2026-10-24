@@ -13,15 +13,18 @@ import { readStorage } from '@/utils/storage.util';
 export const isNativeShell = (): boolean =>
   typeof window !== 'undefined' && /^(capacitor|ionic):$/.test(window.location.protocol);
 
+/** Builds that run without a scoring server: the iOS app and the web app for static hosting. */
+export const isDeviceFirst = (): boolean => isNativeShell() || env.isStandaloneWeb;
+
 /**
  * The app answers its own API (content, progress, plan, profiles) and scores on the device. In
- * the iOS app that is the default from the first launch; a learner paired with their own scoring
- * server keeps using it until the model is downloaded or they switch back. Tests and development
- * can force it with `coach.forceLocalMode`.
+ * the iOS app and the web app that is the default from the first launch; a learner paired with
+ * their own scoring server keeps using it until the model is downloaded or they switch back.
+ * Tests and development can force it with `coach.forceLocalMode`.
  */
 export const isLocalMode = (): boolean => {
   if (readStorage<boolean>(StorageKey.ForceLocalMode, false)) return true;
-  if (!isNativeShell() || !readStorage<boolean>(StorageKey.OnDeviceScoring, true)) return false;
+  if (!isDeviceFirst() || !readStorage<boolean>(StorageKey.OnDeviceScoring, true)) return false;
   const isPaired = readStorage<string>(StorageKey.DeviceToken, '') !== '';
   return !isPaired || readStorage<boolean>(StorageKey.EngineReady, false);
 };

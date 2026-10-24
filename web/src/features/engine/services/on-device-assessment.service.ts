@@ -1,9 +1,9 @@
+import { ENGINE_MODEL_NAME, ENGINE_THREADS } from '@/constants/engine.constant';
 import {
-  ENGINE_MODEL_NAME,
-  ENGINE_MODEL_VERSION,
-  ENGINE_THREADS,
-} from '@/constants/engine.constant';
-import { isEngineAvailable, PhonemeEngine } from '@/features/engine/services/engine.service';
+  engineModelVersion,
+  isEngineAvailable,
+  PhonemeEngine,
+} from '@/features/engine/services/engine.service';
 import { saveLocalRun } from '@/features/offline/services/local-api.service';
 import { assessLocally } from '@/features/scoring/services/local-assessment.service';
 import { scoringData } from '@/features/scoring/services/scoring-data';
@@ -16,7 +16,7 @@ import { decodeWav } from '@/utils/wav-encoder.util';
 
 let loading: Promise<void> | null = null;
 
-/** iOS app, model downloaded and the learner did not switch to a scoring server. */
+/** iOS or web app, model downloaded and the learner did not switch to a scoring server. */
 export const isOnDevicePreferred = (): boolean => isEngineAvailable() && isLocalMode();
 
 /** Load the model once per app run (≈1–2 s); a failure lets the next attempt retry. */
@@ -39,7 +39,7 @@ const ensureLoaded = (): Promise<void> => {
   return loading;
 };
 
-/** Score a take on the iPhone: native model → posteriors → the TypeScript scorer. */
+/** Score a take on the device: phoneme model → posteriors → the TypeScript scorer. */
 export const assessOnDevice = async (request: AssessRequest): Promise<AssessmentResponse> => {
   await ensureLoaded();
   const samples = decodeWav(await request.audio.arrayBuffer());
@@ -60,7 +60,7 @@ export const assessOnDevice = async (request: AssessRequest): Promise<Assessment
         quality,
       })),
       audioStartedAt: request.audioStartedAt,
-      modelVersion: ENGINE_MODEL_VERSION,
+      modelVersion: engineModelVersion(),
       samples,
     },
     scoringData(),

@@ -10,6 +10,7 @@
   "scripts": {
     "dev": "next dev -p 3200",
     "build": "next build && node scripts/build-sw.mjs",
+    "build:webapp": "node scripts/vendor-onnxruntime.mjs && NEXT_PUBLIC_STANDALONE_WEB=1 next build && WEB_OUT_DIR=out-webapp node scripts/build-sw.mjs && node scripts/finish-webapp.mjs",
     "start": "npx serve out -l 3200",
     "lint": "next typegen && eslint . --max-warnings 0 && stylelint \"src/**/*.css\"",
     "typecheck": "next typegen && tsc --noEmit",
@@ -35,6 +36,7 @@
     "@fontsource-variable/noto-sans": "5.3.0",
     "@mediapipe/tasks-vision": "1.1.1",
     "next": "16.4.2",
+    "onnxruntime-web": "1.30.0",
     "openapi-fetch": "0.17.0",
     "react": "19.3.0",
     "react-dom": "19.3.0",

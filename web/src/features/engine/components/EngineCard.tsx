@@ -13,7 +13,7 @@ import { ButtonVariant } from '@/enums/button-variant.enum';
 import { StorageKey } from '@/enums/storage-key.enum';
 import { ModelDownloadCard } from '@/features/engine/components/ModelDownloadCard';
 import { useModelDownload } from '@/features/engine/hooks/useModelDownload';
-import { PhonemeEngine } from '@/features/engine/services/engine.service';
+import { isNativeEngine, PhonemeEngine } from '@/features/engine/services/engine.service';
 import { useCopy } from '@/hooks/useCopy';
 import { useStoredState } from '@/hooks/useStoredState';
 
@@ -89,14 +89,17 @@ export const EngineCard = (): ReactElement => {
               <Button isSmall disabled={isBusy} onClick={() => void benchmark(false)}>
                 {copy.engine.benchmarkCpu}
               </Button>
-              <Button
-                isSmall
-                variant={ButtonVariant.Secondary}
-                disabled={isBusy}
-                onClick={() => void benchmark(true)}
-              >
-                {copy.engine.benchmarkCoreML}
-              </Button>
+              {isNativeEngine() ? (
+                // The Neural Engine is an iOS option; the web app runs on the CPU only.
+                <Button
+                  isSmall
+                  variant={ButtonVariant.Secondary}
+                  disabled={isBusy}
+                  onClick={() => void benchmark(true)}
+                >
+                  {copy.engine.benchmarkCoreML}
+                </Button>
+              ) : null}
             </div>
             {isBusy ? <p role="status">{copy.engine.working}</p> : null}
             {lines.length > 0 ? (

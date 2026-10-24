@@ -10,6 +10,8 @@ const fakeMedia = [
 
 export default defineConfig({
   testDir: './e2e',
+  // The web app journey runs against its own static build: playwright.webapp.config.ts.
+  testIgnore: ['webapp/**'],
   globalSetup: './e2e/global-setup.ts',
   timeout: 90_000,
   expect: { timeout: 15_000 },

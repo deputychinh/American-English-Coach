@@ -10,6 +10,7 @@ const { engine, assessLocally, isNative } = vi.hoisted(() => ({
 vi.mock('@/features/engine/services/engine.service', () => ({
   PhonemeEngine: engine,
   isEngineAvailable: () => isNative.value,
+  engineModelVersion: () => 'w2v.mm8@ios',
 }));
 vi.mock('@/features/scoring/services/local-assessment.service', () => ({
   assessLocally: (...args: unknown[]) => assessLocally(...args) as unknown,

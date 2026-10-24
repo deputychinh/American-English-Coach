@@ -8,7 +8,9 @@
 //     reference audio): network first; the last good response is kept in a cache that survives
 //     deploys, keyed by URL + learner profile + voice, so lessons, history and the mirror guide
 //     stay readable without the API;
-//   - everything else (health/ready, assess, pairing, mutations, cross-origin): never touched.
+//   - everything else (health/ready, assess, pairing, mutations, cross-origin): never touched;
+//   - the web app's phoneme model (/models/) is kept by the engine in its own cache; going
+//     through the shell cache would store 357 MB twice.
 const BUILD = { version: 'dev', assets: [] }; // __AEC_BUILD__
 const SHELL_CACHE = `coach-shell-${BUILD.version}`;
 const API_CACHE = 'coach-api-v1';
@@ -26,6 +28,10 @@ const SHELL = [
   '/curriculum/',
   '/listen/',
   '/placement/',
+  '/vocab/',
+  '/talk/',
+  '/lesson/',
+  '/licenses/',
   '/manifest.webmanifest',
   '/theme.js',
   '/icons/icon.svg',
@@ -115,15 +121,29 @@ const networkFirst = async (request) => {
   }
 };
 
+/**
+ * A worker takes its URL from the response, and a cached or fetched response has lost the
+ * `#params=` fragment the Turbopack worker bootstrap reads its chunk list from. A constructed
+ * response has no URL, so the worker keeps the one it was created with.
+ */
+const forDestination = (request, response) =>
+  request.destination === 'worker'
+    ? new Response(response.body, {
+        status: response.status,
+        statusText: response.statusText,
+        headers: response.headers,
+      })
+    : response;
+
 const cacheFirst = async (request, isNavigation) => {
   const cache = await caches.open(SHELL_CACHE);
   const key = isNavigation ? new URL(request.url).pathname : request;
   const cached = await cache.match(key, { ignoreSearch: isNavigation });
-  if (cached) return cached;
+  if (cached) return forDestination(request, cached);
   try {
     const response = await fetch(request);
     if (response.status === 200) await cache.put(key, response.clone()).catch(() => undefined);
-    return response;
+    return forDestination(request, response);
   } catch (error) {
     const home = isNavigation ? await cache.match('/') : undefined;
     if (!home) throw error;
@@ -145,6 +165,7 @@ self.addEventListener('fetch', (event) => {
   const { request } = event;
   const url = new URL(request.url);
   if (request.method !== 'GET' || url.origin !== self.location.origin) return;
+  if (url.pathname.startsWith('/models/')) return;
   if (url.pathname.startsWith('/api/')) {
     if (isOfflineApi(url.pathname)) event.respondWith(networkFirst(request));
     return;

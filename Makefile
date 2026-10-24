@@ -1,12 +1,13 @@
 # American English Coach — one command per task. `make help` lists them.
 .DEFAULT_GOAL := help
 # `web` and others are also directory names; declare every target phony so make never skips them.
-.PHONY: help install vendor-web models migrate doctor api api-lan web build-web serve lint format test test-legacy bench eval sweep pilot-export pilot-report openapi e2e ci up down ios-assets ios-sync ios-build ios-run ios-device ios-open
+.PHONY: help install vendor-web models migrate doctor api api-lan web build-web serve build-webapp serve-webapp e2e-webapp lint format test test-legacy bench eval sweep pilot-export pilot-report openapi e2e ci up down ios-assets ios-sync ios-build ios-run ios-device ios-open
 SHELL := /bin/bash
 BACKEND := cd backend &&
 WEB := cd web &&
 API_PORT ?= 8765
 WEB_PORT ?= 3200
+WEBAPP_PORT ?= 3300
 
 help: ## Show this help
 	@grep -E '^[a-z0-9-]+:.*## ' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*## "} {printf "  \033[36m%-16s\033[0m %s\n", $$1, $$2}'
@@ -18,8 +19,9 @@ install: ## Install repo tooling, backend (uv) and web (npm) dependencies, vendo
 	$(WEB) npm install
 	$(MAKE) --no-print-directory vendor-web
 
-vendor-web: ## Copy the MediaPipe WASM runtime and download the face model into web/public (not in git)
+vendor-web: ## Copy the MediaPipe and ONNX Runtime WASM runtimes and download the face model into web/public (not in git)
 	$(WEB) node scripts/vendor-mediapipe.mjs
+	$(WEB) node scripts/vendor-onnxruntime.mjs
 
 models: ## Download the phoneme model into data/models (checksums in docs/DATA-MANIFEST.json)
 	$(BACKEND) uv run python -m app.ml.model_download
@@ -46,6 +48,12 @@ build-web: ## Build the static web export into web/out (served by the API in pro
 
 serve: build-web ## Production mode on one port: API + static web on :$(API_PORT)
 	$(BACKEND) COACH_WEB_DIST_DIR=../web/out uv run uvicorn app.main:app --host 127.0.0.1 --port $(API_PORT)
+
+build-webapp: ## Build the installable web app (no server: scores in the browser) into web/out-webapp
+	$(WEB) npm run build:webapp
+
+serve-webapp: ## Preview the web app with its host headers on :$(WEBAPP_PORT) (localhost counts as HTTPS)
+	$(WEB) node scripts/serve-webapp.mjs $(WEBAPP_PORT)
 
 # --- quality -----------------------------------------------------------------
 lint: ## Lint and typecheck backend and web
@@ -116,6 +124,9 @@ ios-open: ios-sync ## Open the Xcode project (sign with your team to run on a re
 
 e2e: ## Browser journey with fake camera and microphone (Playwright, needs `make serve`)
 	$(WEB) npx playwright test
+
+e2e-webapp: ## Web app journey: download the model, score in the browser, offline (needs `make build-webapp`)
+	$(WEB) npx playwright test -c playwright.webapp.config.ts
 
 ci: lint test ## Everything CI runs
 

@@ -5,7 +5,8 @@ import { resetModelDownload } from '@/features/engine/services/model-download.se
 
 import { EngineCard } from './EngineCard';
 
-const { engine } = vi.hoisted(() => ({
+const { engine, native } = vi.hoisted(() => ({
+  native: { value: true },
   engine: {
     status: vi.fn(),
     download: vi.fn(),
@@ -18,6 +19,7 @@ const { engine } = vi.hoisted(() => ({
 vi.mock('@/features/engine/services/engine.service', () => ({
   PhonemeEngine: engine,
   isEngineAvailable: () => true,
+  isNativeEngine: () => native.value,
 }));
 
 const status = (downloaded: boolean) => ({
@@ -33,6 +35,16 @@ describe('EngineCard', () => {
     vi.clearAllMocks();
     localStorage.clear();
     resetModelDownload();
+    native.value = true;
+  });
+
+  it('offers only the CPU benchmark in the web app', async () => {
+    native.value = false;
+    engine.status.mockResolvedValue(status(true));
+    render(<EngineCard />);
+    await userEvent.click(await screen.findByText('Đo tốc độ (dành cho kiểm thử)'));
+    expect(screen.getByRole('button', { name: 'Đo tốc độ (CPU)' })).toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: 'Đo tốc độ (Neural Engine)' })).toBeNull();
   });
 
   it('downloads the scoring pack from the public release with its checksum', async () => {
