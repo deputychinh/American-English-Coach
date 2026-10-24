@@ -67,3 +67,15 @@ Chi tiết, nguồn và quyết định cần chốt: [`docs/PLAN-V2-SPEAKING-AN
 | V4  | ☐          | Độ trôi chảy và bài Nói 3 lần                      | Tốc độ nói, đoạn nói liền, ngắt nghỉ đo trên máy; chỉ so với chính người học            |
 | V5  | ☐          | Phiên "Hôm nay 15 phút" gộp mọi mạch               | e2e hành trình; tiếp tục đúng chỗ                                                       |
 | V6  | ☐          | Phản hồi nội dung bằng AI (v1.1)                   | Precision ≥ 0,8 trên 50 câu có lỗi gán nhãn; AI không nêu lỗi phát âm                   |
+
+## Giai đoạn W — Web app cài lên màn hình chính
+
+Chi tiết: [`docs/webapp.md`](webapp.md), quyết định: [ADR 0004](adr/0004-web-app-scores-in-the-browser.md).
+
+| #   | Trạng thái | Hạng mục                        | Tiêu chí nghiệm thu                                                                                                     |
+| --- | ---------- | ------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| W1  | ☑          | Chấm phát âm trong trình duyệt  | ONNX Runtime Web trong worker; mô hình chia mảnh có SHA-256, tải tiếp được; e2e tải thật, chấm và chấm khi ngắt mạng    |
+| W2  | ☑          | Build tĩnh không cần máy chấm   | `make build-webapp` → `web/out-webapp` với `_headers` COOP/COEP; không request nào tới `/api/` (e2e)                    |
+| W3  | ☑          | Thêm vào màn hình chính         | Manifest có icon maskable, icon Apple tràn viền, lối tắt; thẻ cài trên Trang chủ (nút cài Chromium, hướng dẫn iOS); axe |
+| W4  | ☐          | Đưa lên host HTTPS công khai    | Chủ dự án chọn host và tên miền (Cloudflare Pages hoặc Netlify khuyên dùng)                                             |
+| W5  | ☐          | Thử trên iPhone và Android thật | Tải gói, chấm, ngắt mạng, cài lên màn hình chính; ghi RAM và thời gian chấm                                             |
