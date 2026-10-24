@@ -1,7 +1,7 @@
 import type { Copy } from '@/interfaces/copy.interface';
 
-/** English "Today" home copy. */
-export const enHome: Pick<Copy, 'today' | 'placement'> = {
+/** English "Today" home copy, with the "add to home screen" card. */
+export const enHome: Pick<Copy, 'today' | 'placement' | 'install'> = {
   placement: {
     title: 'Placement check',
     lead: 'About 3 minutes: 12 listening questions, then 8 short sentences to read aloud, to find your starting level.',
@@ -54,5 +54,16 @@ export const enHome: Pick<Copy, 'today' | 'placement'> = {
       chart: '44 sounds',
       path: 'Path',
     },
+  },
+  install: {
+    title: 'Add the app to your home screen',
+    body: 'Opens like an app, full screen, and works offline too. No App Store and nothing extra to install.',
+    action: 'Install',
+    later: 'Not now',
+    iosSteps: [
+      'Tap the Share button (a square with an arrow pointing up) in the Safari toolbar.',
+      'Scroll down and choose “Add to Home Screen”.',
+      'Tap “Add”. The app icon appears on your home screen.',
+    ],
   },
 };

@@ -1,4 +1,4 @@
-/** "Today" home copy (split from `vi.ts` to keep files short). */
+/** "Today" home copy with the "add to home screen" card (split from `vi.ts` to keep files short). */
 export const viHome = {
   placement: {
     title: 'Kiểm tra trình độ',
@@ -51,5 +51,16 @@ export const viHome = {
       chart: '44 âm',
       path: 'Lộ trình',
     },
+  },
+  install: {
+    title: 'Cài app lên màn hình chính',
+    body: 'Mở như một app, toàn màn hình, dùng được cả khi không có mạng. Không cần App Store, không tốn thêm dung lượng cài đặt.',
+    action: 'Cài đặt',
+    later: 'Để sau',
+    iosSteps: [
+      'Bấm nút Chia sẻ (ô vuông có mũi tên hướng lên) trên thanh công cụ của Safari.',
+      'Kéo xuống, chọn “Thêm vào MH chính”.',
+      'Bấm “Thêm”. Biểu tượng app hiện trên màn hình chính.',
+    ],
   },
 };

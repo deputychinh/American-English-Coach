@@ -18,6 +18,7 @@ import {
 } from '@/features/curriculum/services/curriculum.service';
 import { ModelDownloadCard } from '@/features/engine/components/ModelDownloadCard';
 import { ApiStatusBanner } from '@/features/health/components/ApiStatusBanner';
+import { InstallAppCard } from '@/features/install/components/InstallAppCard';
 import { listenAccuracy, readListenResults } from '@/features/listen/services/listen.service';
 import { isOnboarded } from '@/features/onboarding/services/onboarding.service';
 import { continueUnit, readPlacement } from '@/features/placement/services/placement.service';
@@ -103,6 +104,7 @@ export const HomeScreen = (): ReactElement => {
 
       <ApiStatusBanner isQuietWhenReady />
       <ModelDownloadCard />
+      <InstallAppCard />
 
       <section className="home-screen__goal" aria-labelledby="today-title">
         <span className="home-screen__ring-box" aria-hidden="true">

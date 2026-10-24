@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   title: { default: COPY.appName, template: `%s · ${COPY.appName}` },
   description: COPY.tagline,
   manifest: '/manifest.webmanifest',
-  icons: { icon: '/icons/icon.svg', apple: '/icons/icon-192.png' },
+  icons: { icon: '/icons/icon.svg', apple: '/icons/apple-touch-icon.png' },
   appleWebApp: { capable: true, title: COPY.appName, statusBarStyle: 'default' },
 };
 
