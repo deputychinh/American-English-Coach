@@ -25,6 +25,9 @@ export const SILENCE_MS_WORD = 450;
 /** Sentences keep the longer default so a pause between thought groups does not end the take. */
 export const SILENCE_MS_SENTENCE = VAD_DEFAULTS.silenceMs;
 
+/** A press on the record button held this long is push-to-talk: letting go ends the take. */
+export const HOLD_TO_TALK_MS = 350;
+
 /** Reference clips kept as object URLs per session (a unit uses a few dozen words). */
 export const REFERENCE_CACHE_LIMIT = 48;
 

@@ -1,6 +1,6 @@
 'use client';
 
-import { type ReactElement, type ReactNode, useCallback, useEffect, useRef, useState } from 'react';
+import { type ReactElement, useCallback, useEffect, useRef, useState } from 'react';
 
 import { ErrorState } from '@/components/ErrorState/ErrorState';
 import { Icon } from '@/components/Icon/Icon';
@@ -16,6 +16,7 @@ import { MirrorGuide } from '@/features/mirror/components/MirrorGuide';
 import { useCalibration } from '@/features/mirror/hooks/useCalibration';
 import { useMouthTracker } from '@/features/mirror/hooks/useMouthTracker';
 import { ResultCard } from '@/features/practice/components/ResultCard';
+import { usePressToTalk } from '@/features/practice/hooks/usePressToTalk';
 import { useRecorder } from '@/features/practice/hooks/useRecorder';
 import { useReferenceAudio } from '@/features/practice/hooks/useReferenceAudio';
 import { assess } from '@/features/practice/services/assessment.service';
@@ -26,37 +27,14 @@ import { useKeepAwake } from '@/hooks/useKeepAwake';
 import { useStoredState } from '@/hooks/useStoredState';
 import { useSwipe } from '@/hooks/useSwipe';
 import type { Point2 } from '@/interfaces/mouth.interface';
-import type {
-  AssessmentResponse,
-  PracticeItem,
-  Recording,
-  VisemeTargetCard,
-} from '@/interfaces/practice.interface';
+import type { PracticeSessionProps } from '@/interfaces/practice-session.interface';
+import type { AssessmentResponse, Recording } from '@/interfaces/practice.interface';
 import type { AutoStopReason } from '@/interfaces/vad.interface';
 import { cx } from '@/utils/cx.util';
 import { medianOutline } from '@/utils/lip-outline.util';
 import { toMouthPayload } from '@/utils/mouth-payload.util';
 
 import './PracticeSession.css';
-
-interface PracticeSessionProps {
-  item: PracticeItem;
-  /** Viseme target of the drill's sound, drawn as ghost lips over the inset camera. */
-  targetGroup?: VisemeTargetCard | null;
-  targetIpa?: string;
-  transitionVi?: string | null;
-  onResult?: (result: AssessmentResponse) => void;
-  /** Drill navigation (next / skip): in the bar while recording, in the result sheet after. */
-  extraActions?: ReactNode;
-  /** Drill progress line shown under the top bar, inside the one-screen layout. */
-  banner?: ReactNode;
-  /** 0..1 position in a drill, drawn as the lesson progress bar. */
-  progress?: number;
-  /** Swipe left on the prompt to move on (drills); off while recording or scoring. */
-  onSwipeNext?: () => void;
-  /** Close link: the practice list, or the course from a lesson. */
-  closeHref?: string;
-}
 
 /** One screen: bar, prompt (optional inset camera), record control; the result is a sheet. */
 export const PracticeSession = ({
@@ -150,6 +128,8 @@ export const PracticeSession = ({
 
   const isRecording = recorder.status === RecorderStatus.Recording;
   const isScoring = status === PracticeStatus.Scoring;
+
+  const press = usePressToTalk({ isBusy: isScoring, isRecording, start: begin, stop: finish });
   const swipe = useSwipe({
     onLeft: onSwipeNext,
     isEnabled: Boolean(onSwipeNext) && !isRecording && !isScoring,
@@ -237,7 +217,7 @@ export const PracticeSession = ({
             </button>
           ) : (
             <p className="practice-session__line practice-session__line--idle">
-              {copy.speak.idleHint}
+              {copy.practice.holdHint}
             </p>
           )}
         </div>
@@ -257,7 +237,7 @@ export const PracticeSession = ({
           <button
             type="button"
             className={cx('practice-session__record', isRecording && 'is-recording')}
-            onClick={() => void (isRecording ? finish() : begin())}
+            {...press}
             disabled={isScoring}
             aria-label={
               isRecording

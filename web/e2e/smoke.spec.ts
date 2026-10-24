@@ -93,6 +93,27 @@ test('a sound drill records, scores the target phone and advances', async ({ pag
   await expect(page.locator('.drill-session__progress')).toContainText(/Bài 3 \//);
 });
 
+test('holding the mic records until it is let go, then the result opens on the weakest sound', async ({
+  page,
+}) => {
+  // E3: push-to-talk on the record button (a tap still works, as the test below shows).
+  await page.goto('/practice/?item=pair:think-sink:0');
+  const record = page.getByRole('button', { name: 'Thu âm' });
+  await expect(record).toBeVisible();
+  await expect(page.getByText('Giữ mic để nói, thả ra để chấm')).toBeVisible();
+  await record.hover();
+  await page.mouse.down();
+  await expect(page.getByRole('button', { name: /Dừng/ })).toBeVisible();
+  await page.waitForTimeout(1500);
+  await page.mouse.up();
+  await expect(page.locator('.verdict-chip').first()).toBeVisible({ timeout: 60_000 });
+  await expect(page.locator('.result-card__headline')).toHaveText(
+    /Rất tốt!|Gần được rồi|Luyện thêm chút nữa/,
+  );
+  // The weakest sound is explained without a tap.
+  await expect(page.locator('.phone-detail')).toBeVisible();
+});
+
 test('practice records with the fake microphone and shows a result card', async ({
   page,
 }, info) => {

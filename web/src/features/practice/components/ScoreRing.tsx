@@ -2,9 +2,9 @@
 
 import type { ReactElement } from 'react';
 
-import { CHECK_CREDIT } from '@/constants/score.constant';
 import { useCopy } from '@/hooks/useCopy';
 import { cx } from '@/utils/cx.util';
+import { scorePercent, scoreTone } from '@/utils/score.util';
 
 import './ScoreRing.css';
 
@@ -23,8 +23,8 @@ const CIRCUMFERENCE = 2 * Math.PI * 30;
  */
 export const ScoreRing = ({ ok, check = 0, total }: ScoreRingProps): ReactElement => {
   const copy = useCopy();
-  const percent = total > 0 ? Math.round(((ok + check * CHECK_CREDIT) / total) * 100) : 0;
-  const tone = percent >= 80 ? 'good' : percent >= 50 ? 'fair' : 'low';
+  const percent = scorePercent(ok, check, total);
+  const tone = scoreTone(percent);
   return (
     <div
       className={cx('score-ring', `score-ring--${tone}`)}

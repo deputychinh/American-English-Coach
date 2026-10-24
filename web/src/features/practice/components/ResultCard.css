@@ -121,3 +121,66 @@
   gap: var(--gap-inline);
   align-items: center;
 }
+
+.result-card__headline {
+  font-size: var(--text-xl);
+  font-weight: var(--weight-bold);
+  letter-spacing: -0.01em;
+}
+
+.result-card__headline--good {
+  color: var(--color-on-success-subtle);
+}
+
+.result-card__headline--fair {
+  color: var(--color-on-warning-subtle);
+}
+
+.result-card__headline--low {
+  color: var(--color-on-danger-subtle);
+}
+
+/* The sentence as tappable words, each in the colour of its weakest sound (plus a glyph). */
+.result-card__sentence {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.result-card__word-chip {
+  display: inline-flex;
+  gap: var(--space-1);
+  align-items: center;
+  min-block-size: var(--size-touch-target);
+  padding: var(--space-1) var(--space-3);
+  font-size: var(--text-lg);
+  font-weight: var(--weight-semibold);
+  color: var(--color-text);
+  background: var(--color-surface);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+}
+
+.result-card__word-chip.is-ok {
+  color: var(--color-on-success-subtle);
+  background: var(--color-success-subtle);
+}
+
+.result-card__word-chip.is-check {
+  color: var(--color-on-warning-subtle);
+  background: var(--color-warning-subtle);
+}
+
+.result-card__word-chip.is-error {
+  color: var(--color-on-danger-subtle);
+  background: var(--color-danger-subtle);
+}
+
+.result-card__word-chip.is-selected {
+  border-color: currentcolor;
+}
+
+.result-card__word-mark {
+  font-size: var(--text-sm);
+}

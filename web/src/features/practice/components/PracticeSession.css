@@ -197,6 +197,9 @@
   border-radius: var(--radius-full);
   box-shadow: var(--shadow-md);
   cursor: pointer;
+  touch-action: none;
+  -webkit-touch-callout: none;
+  user-select: none;
 }
 
 .practice-session__record:disabled {

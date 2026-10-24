@@ -16,8 +16,16 @@ import { useTutorAvailability } from '@/features/tutor/hooks/useTutorAvailabilit
 import { explainRun } from '@/features/tutor/services/tutor.service';
 import { useCopy } from '@/hooks/useCopy';
 import type { Point2 } from '@/interfaces/mouth.interface';
-import type { AssessmentResponse, PhoneResult, Recording } from '@/interfaces/practice.interface';
+import type { AssessmentResponse, Recording } from '@/interfaces/practice.interface';
 import { cx } from '@/utils/cx.util';
+import { scorePercent, scoreTone } from '@/utils/score.util';
+import {
+  firstWorstIndex,
+  verdictGlyph,
+  verdictLabel,
+  verdictModifier,
+  worstVerdict,
+} from '@/utils/verdict.util';
 
 import './ResultCard.css';
 
@@ -41,10 +49,21 @@ export const ResultCard = ({
   extraActions,
 }: ResultCardProps): ReactElement => {
   const copy = useCopy();
-  const [selected, setSelected] = useState<PhoneResult | null>(null);
+  const { words } = result;
+  const wordVerdicts = words.map((word) => worstVerdict(word.phones.map((phone) => phone.verdict)));
+  // Open on the first word that needs work, and inside it on its weakest sound (BoldVoice style).
+  const [wordIndex, setWordIndex] = useState(() => firstWorstIndex(wordVerdicts));
+  const [phoneIndex, setPhoneIndex] = useState<number | null>(null);
   const [disputed, setDisputed] = useState(false);
   const [disputeError, setDisputeError] = useState<string | null>(null);
   const { summary } = result;
+  const total = summary.ok + summary.check + summary.error;
+  const tone = scoreTone(scorePercent(summary.ok, summary.check, total));
+  const word = words[wordIndex] ?? null;
+  const shownPhoneIndex = word
+    ? (phoneIndex ?? firstWorstIndex(word.phones.map((phone) => phone.verdict)))
+    : 0;
+  const selected = word?.phones[shownPhoneIndex] ?? null;
   const tutor = useTutorAvailability();
 
   const dispute = (): void => {
@@ -61,15 +80,14 @@ export const ResultCard = ({
       aria-labelledby="result-title"
     >
       <div className="result-card__head">
-        <ScoreRing
-          ok={summary.ok}
-          check={summary.check}
-          total={summary.ok + summary.check + summary.error}
-        />
+        <ScoreRing ok={summary.ok} check={summary.check} total={total} />
         <div className="result-card__head-text">
           <h2 id="result-title" className="result-card__title visually-hidden">
             {copy.practice.resultTitle}
           </h2>
+          <p className={cx('result-card__headline', `result-card__headline--${tone}`)}>
+            {copy.practice.headline[tone]}
+          </p>
           <p className="result-card__summary">
             {copy.practice.summary(summary.ok, summary.check, summary.error)} ·{' '}
             {summary.camera_used ? copy.practice.cameraUsed : copy.practice.cameraUnused}
@@ -78,26 +96,58 @@ export const ResultCard = ({
       </div>
       {extraActions ? <div className="result-card__next">{extraActions}</div> : null}
 
-      <div className="result-card__words">
-        {result.words.map((word) => (
-          <div key={`${word.word}-${word.ipa}`} className="result-card__word">
-            <span className="result-card__word-text">{word.word}</span>
-            <span className="result-card__word-ipa">/{word.ipa}/</span>
-            <div className="result-card__phones">
-              {word.phones.map((phone, index) => (
-                <VerdictChip
-                  key={`${word.word}-${String(index)}-${phone.symbol}`}
-                  ipa={phone.ipa}
-                  verdict={phone.verdict}
-                  isSelected={selected === phone}
-                  onSelect={() => setSelected(selected === phone ? null : phone)}
-                />
-              ))}
-            </div>
+      {words.length > 1 ? (
+        <div className="result-card__sentence" role="group" aria-label={copy.practice.wordsAria}>
+          {words.map((item, index) => {
+            const verdict = wordVerdicts[index] ?? item.phones[0]?.verdict;
+            return (
+              <button
+                key={`${item.word}-${String(index)}`}
+                type="button"
+                className={cx(
+                  'result-card__word-chip',
+                  verdict && verdictModifier(verdict),
+                  index === wordIndex && 'is-selected',
+                )}
+                aria-pressed={index === wordIndex}
+                aria-label={copy.practice.wordAria(item.word, verdict ? verdictLabel(verdict) : '')}
+                onClick={() => {
+                  setWordIndex(index);
+                  setPhoneIndex(null);
+                }}
+              >
+                {item.word}
+                {verdict ? (
+                  <span className="result-card__word-mark" aria-hidden="true">
+                    {verdictGlyph(verdict)}
+                  </span>
+                ) : null}
+              </button>
+            );
+          })}
+        </div>
+      ) : null}
+
+      {word ? (
+        <div className="result-card__word">
+          <span className="result-card__word-text">{word.word}</span>
+          <span className="result-card__word-ipa">/{word.ipa}/</span>
+          <div className="result-card__phones">
+            {word.phones.map((phone, index) => (
+              <VerdictChip
+                key={`${word.word}-${String(index)}-${phone.symbol}`}
+                ipa={phone.ipa}
+                verdict={phone.verdict}
+                isSelected={index === shownPhoneIndex}
+                onSelect={() => setPhoneIndex(index)}
+              />
+            ))}
           </div>
-        ))}
-      </div>
-      <p className="result-card__muted">{copy.practice.phoneDetailHint}</p>
+        </div>
+      ) : null}
+      <p className="result-card__muted">
+        {words.length > 1 ? copy.practice.wordHint : copy.practice.phoneDetailHint}
+      </p>
 
       {selected ? (
         <PhoneDetail phone={selected} outline={outlineAt(selected.start, selected.end)} />
