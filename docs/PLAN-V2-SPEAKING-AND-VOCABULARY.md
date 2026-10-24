@@ -304,3 +304,31 @@ Màn “Giấy phép” hiện có cần thêm NGSL và Tatoeba. Ghi checksum v�
   - Chỉ chấm câu có đáp án biết trước (§5.2). Máy chấm không biết người học có nói sai cấu trúc khác hay không, chỉ biết các âm của đáp án có được nói ra không.
   - Nội dung do AI soạn: cần giáo viên duyệt như nghĩa từ vựng.
   - Câu mới chưa có giọng mẫu đóng gói sẵn. Lần dựng giọng tới sẽ có, vì `reference_texts` đã gồm chúng; trước đó app lấy giọng từ máy chấm.
+
+### V4 · Độ trôi chảy và bài Nói 3 lần: **XONG** (24/10)
+
+- **Đo từ âm thanh, trên máy** (`web/src/utils/fluency.util.ts`): đếm nhân âm tiết theo de Jong & Wempe (2009).
+  - Cường độ mỗi 10 ms trên cửa sổ 25 ms. Âm tiết là đỉnh cường độ nằm trên ngưỡng (mức to nhất trừ 25 dB), có chỗ trũng ít nhất 2 dB với đỉnh trước, và có thanh (tự tương quan ở 75–400 Hz từ 0,45 trở lên, nên tiếng xì /s/ không bị đếm).
+  - Ngắt nghỉ là đoạn lặng từ 0,25 giây trở lên. Khoảng lặng trước và sau khi nói không tính vào thời gian nói.
+  - Chỉ số: tốc độ nói (âm tiết/phút), tốc độ phát âm (âm tiết/giây có tiếng), đoạn nói liền trung bình, ngắt nghỉ mỗi phút, độ dài ngắt trung bình.
+  - Không cần văn bản hay mô hình, nên chạy được ở cả bản web có máy chấm, web app và app iOS.
+  - Thử với giọng `say` của macOS: câu 24 âm tiết đếm được 19–20 âm tiết và đúng 2 chỗ ngắt. Phương pháp này đếm hụt khi nói liền, nên số đo chỉ dùng để so người học với chính họ.
+- **`content/fluency.json`** (`aec-fluency/1`, AI soạn, chưa duyệt): mỗi đơn vị một đề theo chủ đề hội thoại của đơn vị, mỗi đề 3 ý gợi ý và 3 cụm từ giúp nói tiếp (kèm nghĩa). Ba lần nói 60, 45 rồi 30 giây. Test backend kiểm tra mỗi đơn vị có đúng một đề, đủ ý và cụm, mọi từ có trong CMUdict. Các cụm từ đã có trong `reference_texts` để dựng giọng mẫu.
+- **Trang `/fluency`** và thẻ "Nói trôi chảy" trên Trang chủ (đề của đơn vị theo kết quả kiểm tra trình độ). Sheet đơn vị trong Lộ trình có thêm nút "Nói 3 lần về chủ đề của đơn vị này".
+  - Mỗi lần nói có đồng hồ đếm ngược và nút "Xong sớm". Ngắt nghỉ không làm dừng ghi âm: `useRecorder` có thêm `endsOnSilence: false` và `maxSeconds`.
+  - Sau mỗi lần nói, app hiện bảng chỉ số. Sau lần 3, bảng đặt ba lần cạnh nhau, kèm một câu so lần cuối với lần đầu và lời giải thích rằng đây là ước lượng, không phải điểm.
+  - Có ô "Ẩn số đo trong lúc luyện" (§9: chỉ số có thể làm người học lo lắng).
+  - "Xu hướng của bạn" hiện lần cuối của 6 lượt gần nhất. Mỗi hồ sơ lưu tối đa 60 lượt trong localStorage, và các lượt này bị xóa cùng "Xóa dữ liệu trên thiết bị". Âm thanh bị bỏ ngay sau khi đo, chỉ giữ lại các con số.
+- Sửa thêm trong đợt này:
+  - Thanh trạng thái iOS có nền riêng, nên nội dung cuộn không còn chạy dưới đồng hồ.
+  - Màn chào mừng không còn nói "chấm trên máy tính / gửi tới máy chấm local", vì app iOS và web app chấm ngay trên máy.
+  - Service worker cache sẵn `/fluency/`.
+- **Test:**
+  - Unit: `fluency.util.test.ts` dùng âm thanh tổng hợp biết trước số âm tiết và chỗ ngắt (13 âm tiết, 2 ngắt; tiếng xì không bị đếm; nói nhanh hơn thì tốc độ cao hơn).
+  - `FluencyScreen.test.tsx` cho 3 lần nói, lưu lượt, ẩn số đo và trường hợp không nghe thấy tiếng. Thêm test cho service và thẻ Trang chủ.
+  - E2E `e2e/fluency.spec.ts` dùng micro giả trên desktop và điện thoại. `/fluency/` có trong kiểm tra axe.
+  - Đã chạy thử trong iOS Simulator (iPhone 17) bằng micro thật.
+- **Giới hạn:**
+  - Chưa đo tỷ lệ ngắt giữa câu so với ngắt giữa cụm từ (§6), vì cần biết ranh giới cụm trong lời nói tự do (cần nhận dạng giọng nói, để V6).
+  - Shadowing có đo (so tốc độ và chỗ ngắt với giọng mẫu) chưa làm.
+  - Đề do AI soạn, cần giáo viên duyệt.
