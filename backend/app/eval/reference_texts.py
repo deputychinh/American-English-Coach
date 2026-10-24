@@ -3,7 +3,8 @@
 Words of the 44-sound chart (example and contrast), drill words, pairs and sentences, minimal
 pairs, practice sentences, the listening material of the curriculum (pairs, stress words,
 focus sentences) and both sides of each unit's role-play, every vocabulary item with its
-example, and the functional phrases and pattern drills. The voice builder renders exactly
+example, the functional phrases and pattern drills, and the phrases offered with each
+fluency prompt. The voice builder renders exactly
 this list; a test keeps it in step with the content.
 """
 
@@ -27,6 +28,11 @@ def _vocab_texts() -> set[str]:
         if item["example"]:
             texts.add(item["example"]["en"])
     return texts
+
+
+def _fluency_texts() -> set[str]:
+    """Helpful phrases offered with each "Nói 3 lần" prompt (content/fluency.json)."""
+    return {p["en"] for prompt in _json("fluency.json")["prompts"] for p in prompt["phrases"]}
 
 
 def _talk_texts() -> set[str]:
@@ -66,4 +72,5 @@ def reference_texts() -> list[str]:
                 texts.update(sentences[item["sentence"]] for item in step["focus"])
     texts.update(_vocab_texts())
     texts.update(_talk_texts())
+    texts.update(_fluency_texts())
     return sorted(t.strip() for t in texts if t.strip())

@@ -1,0 +1,396 @@
+{
+  "schema": "aec-fluency/1",
+  "note": "AI-drafted prompts for the 'Nói 3 lần' (4/3/2) fluency task, one per unit; a teacher has not reviewed them yet.",
+  "rounds": [60, 45, 30],
+  "prompts": [
+    {
+      "id": "fl.u01",
+      "unit": "u01",
+      "title_vi": "Giới thiệu bản thân",
+      "title_en": "Introduce yourself",
+      "ideas_vi": ["Tên và bạn đến từ đâu", "Bạn làm gì hoặc học gì", "Một điều bạn thích"],
+      "phrases": [
+        { "en": "Let me tell you a bit about myself.", "vi": "Để mình kể một chút về bản thân." },
+        {
+          "en": "I'm from a small city near the sea.",
+          "vi": "Mình đến từ một thành phố nhỏ gần biển."
+        },
+        { "en": "In my free time, I like to read.", "vi": "Lúc rảnh, mình thích đọc sách." }
+      ]
+    },
+    {
+      "id": "fl.u02",
+      "unit": "u02",
+      "title_vi": "Bàn làm việc của bạn",
+      "title_en": "Your desk",
+      "ideas_vi": ["Trên bàn có những gì", "Bạn dùng món nào nhiều nhất", "Bàn gọn hay bừa"],
+      "phrases": [
+        {
+          "en": "On my desk, there is a laptop and a cup.",
+          "vi": "Trên bàn mình có một cái laptop và một cái cốc."
+        },
+        { "en": "I use it every day.", "vi": "Mình dùng nó mỗi ngày." },
+        { "en": "To be honest, it's a bit messy.", "vi": "Nói thật thì nó hơi bừa." }
+      ]
+    },
+    {
+      "id": "fl.u03",
+      "unit": "u03",
+      "title_vi": "Gia đình bạn",
+      "title_en": "Your family",
+      "ideas_vi": [
+        "Gia đình có mấy người",
+        "Mỗi người làm gì",
+        "Một việc cả nhà hay làm cùng nhau"
+      ],
+      "phrases": [
+        { "en": "There are four people in my family.", "vi": "Nhà mình có bốn người." },
+        { "en": "My mother works at a hospital.", "vi": "Mẹ mình làm ở bệnh viện." },
+        {
+          "en": "On weekends, we usually eat together.",
+          "vi": "Cuối tuần cả nhà thường ăn cùng nhau."
+        }
+      ]
+    },
+    {
+      "id": "fl.u04",
+      "unit": "u04",
+      "title_vi": "Bữa ăn bạn thích",
+      "title_en": "A meal you like",
+      "ideas_vi": ["Món đó là gì", "Ăn ở đâu, với ai", "Vì sao bạn thích"],
+      "phrases": [
+        { "en": "My favorite meal is beef noodle soup.", "vi": "Món mình thích nhất là phở bò." },
+        { "en": "I usually eat it for breakfast.", "vi": "Mình thường ăn nó vào bữa sáng." },
+        { "en": "I like it because it's hot and fresh.", "vi": "Mình thích vì nó nóng và tươi." }
+      ]
+    },
+    {
+      "id": "fl.u05",
+      "unit": "u05",
+      "title_vi": "Một ngày vui hoặc tệ",
+      "title_en": "A good or bad day",
+      "ideas_vi": ["Hôm đó là khi nào", "Chuyện gì đã xảy ra", "Bạn cảm thấy thế nào"],
+      "phrases": [
+        { "en": "Let me tell you about a really bad day.", "vi": "Để mình kể về một ngày rất tệ." },
+        { "en": "First, I missed the bus.", "vi": "Đầu tiên, mình lỡ xe buýt." },
+        { "en": "In the end, it was not so bad.", "vi": "Cuối cùng thì cũng không tệ lắm." }
+      ]
+    },
+    {
+      "id": "fl.u06",
+      "unit": "u06",
+      "title_vi": "Việc nhà hằng ngày",
+      "title_en": "Daily chores",
+      "ideas_vi": [
+        "Ai trong nhà làm việc gì",
+        "Việc bạn thích và không thích",
+        "Mất bao lâu mỗi ngày"
+      ],
+      "phrases": [
+        { "en": "My brother washes the dishes.", "vi": "Em trai mình rửa bát." },
+        { "en": "My mother cooks dinner every evening.", "vi": "Mẹ mình nấu bữa tối mỗi tối." },
+        {
+          "en": "I don't mind cleaning, but I hate ironing.",
+          "vi": "Mình không ngại dọn dẹp nhưng ghét ủi đồ."
+        }
+      ]
+    },
+    {
+      "id": "fl.u07",
+      "unit": "u07",
+      "title_vi": "Rủ bạn đi cuối tuần",
+      "title_en": "Invite a friend for the weekend",
+      "ideas_vi": ["Đi đâu, làm gì", "Khi nào và gặp ở đâu", "Vì sao sẽ vui"],
+      "phrases": [
+        {
+          "en": "Do you want to see a movie on Saturday?",
+          "vi": "Thứ bảy bạn muốn đi xem phim không?"
+        },
+        { "en": "We could meet at the station at six.", "vi": "Mình có thể gặp ở ga lúc sáu giờ." },
+        { "en": "It's going to be fun.", "vi": "Sẽ vui lắm đấy." }
+      ]
+    },
+    {
+      "id": "fl.u08",
+      "unit": "u08",
+      "title_vi": "Lịch trong tuần",
+      "title_en": "Your weekly schedule",
+      "ideas_vi": ["Ngày bận nhất", "Ngày rảnh nhất", "Bạn muốn thay đổi gì"],
+      "phrases": [
+        {
+          "en": "On Mondays, I start school at seven.",
+          "vi": "Thứ hai, mình bắt đầu học lúc bảy giờ."
+        },
+        { "en": "My busiest day is Thursday.", "vi": "Ngày bận nhất của mình là thứ năm." },
+        { "en": "I wish I had more free time.", "vi": "Ước gì mình có nhiều thời gian rảnh hơn." }
+      ]
+    },
+    {
+      "id": "fl.u09",
+      "unit": "u09",
+      "title_vi": "Hôm qua bạn đã làm gì",
+      "title_en": "What you did yesterday",
+      "ideas_vi": ["Buổi sáng", "Buổi chiều", "Buổi tối"],
+      "phrases": [
+        { "en": "Yesterday, I worked until five.", "vi": "Hôm qua mình làm đến năm giờ." },
+        { "en": "After that, I walked to the market.", "vi": "Sau đó, mình đi bộ ra chợ." },
+        { "en": "Then I watched a movie and relaxed.", "vi": "Rồi mình xem phim và nghỉ ngơi." }
+      ]
+    },
+    {
+      "id": "fl.u10",
+      "unit": "u10",
+      "title_vi": "Đường tới một nơi quen",
+      "title_en": "The way to a place you know",
+      "ideas_vi": ["Nơi đó là đâu", "Đi đường nào, rẽ ở đâu", "Mất bao lâu"],
+      "phrases": [
+        {
+          "en": "Go straight and turn left at the light.",
+          "vi": "Đi thẳng rồi rẽ trái ở đèn giao thông."
+        },
+        { "en": "It's right next to a big park.", "vi": "Nó ở ngay cạnh một công viên lớn." },
+        { "en": "It takes about ten minutes.", "vi": "Mất khoảng mười phút." }
+      ]
+    },
+    {
+      "id": "fl.u11",
+      "unit": "u11",
+      "title_vi": "Căn phòng của bạn",
+      "title_en": "Your room",
+      "ideas_vi": ["Phòng to hay nhỏ", "Có đồ đạc gì", "Góc bạn thích nhất"],
+      "phrases": [
+        { "en": "My room is small but very bright.", "vi": "Phòng mình nhỏ nhưng rất sáng." },
+        { "en": "There's a window over my bed.", "vi": "Có một cửa sổ phía trên giường mình." },
+        {
+          "en": "My favorite place is the desk by the window.",
+          "vi": "Chỗ mình thích nhất là cái bàn cạnh cửa sổ."
+        }
+      ]
+    },
+    {
+      "id": "fl.u12",
+      "unit": "u12",
+      "title_vi": "Làm quen người mới",
+      "title_en": "Meeting someone new",
+      "ideas_vi": ["Chào và giới thiệu", "Hỏi họ vài câu", "Kể một điều về bạn"],
+      "phrases": [
+        {
+          "en": "Nice to meet you. Where are you from?",
+          "vi": "Rất vui được gặp bạn. Bạn đến từ đâu?"
+        },
+        { "en": "What do you do for fun?", "vi": "Bạn thường làm gì cho vui?" },
+        { "en": "Oh, really? Me too.", "vi": "Ồ, thật à? Mình cũng vậy." }
+      ]
+    },
+    {
+      "id": "fl.u13",
+      "unit": "u13",
+      "title_vi": "Việc bạn làm được và chưa làm được",
+      "title_en": "What you can and can't do",
+      "ideas_vi": ["Ba việc bạn làm tốt", "Ba việc bạn chưa làm được", "Việc bạn muốn học"],
+      "phrases": [
+        {
+          "en": "I can swim, but I can't drive yet.",
+          "vi": "Mình bơi được nhưng chưa lái xe được."
+        },
+        { "en": "I'm pretty good at cooking.", "vi": "Mình nấu ăn khá giỏi." },
+        {
+          "en": "One day, I'd like to learn the guitar.",
+          "vi": "Một ngày nào đó, mình muốn học đàn ghi-ta."
+        }
+      ]
+    },
+    {
+      "id": "fl.u14",
+      "unit": "u14",
+      "title_vi": "Hướng dẫn nấu một món",
+      "title_en": "How to cook a simple dish",
+      "ideas_vi": ["Cần nguyên liệu gì", "Các bước theo thứ tự", "Mẹo để món ngon hơn"],
+      "phrases": [
+        { "en": "First, put some oil in a pan.", "vi": "Đầu tiên, cho một ít dầu vào chảo." },
+        { "en": "Next, add the eggs and stir.", "vi": "Tiếp theo, cho trứng vào và đảo." },
+        { "en": "Finally, add a little salt.", "vi": "Cuối cùng, thêm một chút muối." }
+      ]
+    },
+    {
+      "id": "fl.u15",
+      "unit": "u15",
+      "title_vi": "Một chuyến đi bạn thích",
+      "title_en": "A trip you enjoyed",
+      "ideas_vi": ["Đi đâu, với ai", "Đã làm gì ở đó", "Điều bạn nhớ nhất"],
+      "phrases": [
+        {
+          "en": "Last year, I went to Da Lat with my friends.",
+          "vi": "Năm ngoái, mình đi Đà Lạt với bạn."
+        },
+        { "en": "We stayed in a small hotel.", "vi": "Bọn mình ở một khách sạn nhỏ." },
+        { "en": "The best part was the weather.", "vi": "Điều tuyệt nhất là thời tiết." }
+      ]
+    },
+    {
+      "id": "fl.u16",
+      "unit": "u16",
+      "title_vi": "Công việc của bạn hoặc người thân",
+      "title_en": "Your job or a family member's job",
+      "ideas_vi": ["Công việc là gì", "Một ngày làm việc ra sao", "Điều hay và điều khó"],
+      "phrases": [
+        { "en": "My father works as an engineer.", "vi": "Bố mình làm kỹ sư." },
+        { "en": "He usually starts work at eight.", "vi": "Ông thường bắt đầu làm lúc tám giờ." },
+        { "en": "The hardest part is the long hours.", "vi": "Khó nhất là phải làm nhiều giờ." }
+      ]
+    },
+    {
+      "id": "fl.u17",
+      "unit": "u17",
+      "title_vi": "Nghề nghiệp và ngành học",
+      "title_en": "Your career and studies",
+      "ideas_vi": ["Bạn học hoặc làm ngành gì", "Vì sao chọn ngành đó", "Kế hoạch sau này"],
+      "phrases": [
+        {
+          "en": "I'm studying information technology.",
+          "vi": "Mình đang học công nghệ thông tin."
+        },
+        {
+          "en": "I chose it because I enjoy solving problems.",
+          "vi": "Mình chọn vì thích giải quyết vấn đề."
+        },
+        {
+          "en": "In the future, I hope to work abroad.",
+          "vi": "Sau này, mình mong được làm ở nước ngoài."
+        }
+      ]
+    },
+    {
+      "id": "fl.u18",
+      "unit": "u18",
+      "title_vi": "Gọi đồ cho cả nhóm bạn",
+      "title_en": "Order drinks for your group",
+      "ideas_vi": ["Mỗi người muốn uống gì", "Hỏi lại người phục vụ", "Hỏi giá và thanh toán"],
+      "phrases": [
+        {
+          "en": "Can we get two coffees and a tea, please?",
+          "vi": "Cho bọn mình hai cà phê và một trà nhé."
+        },
+        { "en": "Sorry, could you say that again?", "vi": "Xin lỗi, bạn nói lại được không?" },
+        { "en": "How much is that altogether?", "vi": "Tất cả bao nhiêu tiền?" }
+      ]
+    },
+    {
+      "id": "fl.u19",
+      "unit": "u19",
+      "title_vi": "Kể lại buổi tối hôm qua",
+      "title_en": "Tell the story of last night",
+      "ideas_vi": ["Bắt đầu thế nào", "Chuyện gì xảy ra ở giữa", "Kết thúc ra sao"],
+      "phrases": [
+        {
+          "en": "When I got home, it was already dark.",
+          "vi": "Khi mình về đến nhà, trời đã tối."
+        },
+        {
+          "en": "While I was cooking, my friend called.",
+          "vi": "Trong lúc mình nấu ăn, bạn mình gọi."
+        },
+        {
+          "en": "In the end, we talked for an hour.",
+          "vi": "Cuối cùng, bọn mình nói chuyện cả tiếng."
+        }
+      ]
+    },
+    {
+      "id": "fl.u20",
+      "unit": "u20",
+      "title_vi": "Sửa lại một cuộc hẹn",
+      "title_en": "Fix the details of a meeting",
+      "ideas_vi": ["Thông tin nào bị sai", "Thông tin đúng là gì", "Xác nhận lại với người kia"],
+      "phrases": [
+        {
+          "en": "Sorry, the meeting is at four, not at two.",
+          "vi": "Xin lỗi, cuộc họp lúc bốn giờ, không phải hai giờ."
+        },
+        { "en": "Let me check my number again.", "vi": "Để mình kiểm tra lại số điện thoại." },
+        {
+          "en": "So we're meeting on Friday, right?",
+          "vi": "Vậy mình gặp vào thứ sáu, đúng không?"
+        }
+      ]
+    },
+    {
+      "id": "fl.u21",
+      "unit": "u21",
+      "title_vi": "Kế hoạch cuối tuần",
+      "title_en": "Weekend plans",
+      "ideas_vi": ["Bạn định làm gì", "Đi với ai", "Hỏi lại kế hoạch của bạn bè"],
+      "phrases": [
+        { "en": "I'm going to visit my grandparents.", "vi": "Mình sẽ đi thăm ông bà." },
+        { "en": "What are you gonna do this weekend?", "vi": "Cuối tuần này bạn định làm gì?" },
+        {
+          "en": "Maybe we can grab a coffee on Sunday.",
+          "vi": "Có lẽ chủ nhật mình đi cà phê nhé."
+        }
+      ]
+    },
+    {
+      "id": "fl.u22",
+      "unit": "u22",
+      "title_vi": "Sở thích và thói quen",
+      "title_en": "Hobbies and habits",
+      "ideas_vi": [
+        "Sở thích chính của bạn",
+        "Bạn làm nó bao lâu một lần",
+        "Bạn bắt đầu từ khi nào"
+      ],
+      "phrases": [
+        {
+          "en": "I've been playing badminton for three years.",
+          "vi": "Mình chơi cầu lông được ba năm rồi."
+        },
+        {
+          "en": "I usually go running in the morning.",
+          "vi": "Mình thường chạy bộ vào buổi sáng."
+        },
+        { "en": "It helps me feel less stressed.", "vi": "Nó giúp mình bớt căng thẳng." }
+      ]
+    },
+    {
+      "id": "fl.u23",
+      "unit": "u23",
+      "title_vi": "Buổi sáng của bạn",
+      "title_en": "Your morning",
+      "ideas_vi": [
+        "Mấy giờ bạn dậy",
+        "Bạn làm gì trước khi đi học hoặc đi làm",
+        "Buổi sáng lý tưởng"
+      ],
+      "phrases": [
+        { "en": "I usually wake up at six thirty.", "vi": "Mình thường dậy lúc sáu rưỡi." },
+        {
+          "en": "I have a quick breakfast and check my phone.",
+          "vi": "Mình ăn sáng nhanh và xem điện thoại."
+        },
+        {
+          "en": "My perfect morning starts slowly.",
+          "vi": "Buổi sáng lý tưởng của mình bắt đầu thong thả."
+        }
+      ]
+    },
+    {
+      "id": "fl.u24",
+      "unit": "u24",
+      "title_vi": "Quê hương của bạn",
+      "title_en": "Your hometown",
+      "ideas_vi": [
+        "Quê bạn ở đâu, có gì đặc biệt",
+        "Món ăn hoặc nơi nên ghé",
+        "Bạn thích hay muốn thay đổi điều gì"
+      ],
+      "phrases": [
+        { "en": "My hometown is famous for its food.", "vi": "Quê mình nổi tiếng về đồ ăn." },
+        {
+          "en": "If you visit, you should try the street food.",
+          "vi": "Nếu bạn ghé, nên thử đồ ăn đường phố."
+        },
+        { "en": "What I love most is the people.", "vi": "Điều mình yêu nhất là con người." }
+      ]
+    }
+  ]
+}
