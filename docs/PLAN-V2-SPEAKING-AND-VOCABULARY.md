@@ -332,3 +332,24 @@ Màn “Giấy phép” hiện có cần thêm NGSL và Tatoeba. Ghi checksum v�
   - Chưa đo tỷ lệ ngắt giữa câu so với ngắt giữa cụm từ (§6), vì cần biết ranh giới cụm trong lời nói tự do (cần nhận dạng giọng nói, để V6).
   - Shadowing có đo (so tốc độ và chỗ ngắt với giọng mẫu) chưa làm.
   - Đề do AI soạn, cần giáo viên duyệt.
+
+### V5 · Phiên "Hôm nay 15 phút": **XONG** (24/10)
+
+- **Trang `/today`** và thẻ "Hôm nay 15 phút" ở đầu Trang chủ (thanh tiến độ, nút "Bắt đầu 15 phút" hoặc "Tiếp tục: …").
+  - Phiên có bốn phần theo §3.1: ôn từ vựng (~4 phút), luyện cách nói (~3), bước tiếp của đơn vị đang học (~5), Nói 3 lần về chủ đề của đơn vị (~3).
+  - Mỗi phần mở màn có sẵn với `?from=today`. Khi xong, màn đó có nút "Tiếp tục phiên hôm nay"; nút đóng của bài học quay về phiên.
+- **Trạng thái suy ra từ dữ liệu, không đánh dấu tay** (`today.util.ts`, `today.service.ts`):
+  - Ôn từ vựng và cách nói xong khi hôm nay không còn thẻ.
+  - Bước đơn vị xong khi bài học đã tiến thêm so với lúc phiên mở nó. Vị trí bắt đầu được ghi một lần mỗi ngày vào `coach.today` (ngày, hồ sơ, đơn vị, bước).
+  - Bài nói xong khi hôm nay có một lượt Nói 3 lần.
+  - Vì đọc thẳng từ kho thẻ, vị trí bài học và các lượt nói, tắt app rồi mở lại vẫn đúng chỗ. Bài học tự nhớ vị trí như trước.
+- **Tiến độ** có thêm khối "Từ vựng và độ trôi chảy": số từ đã nhớ (khả năng nhớ ≥ 90 % ở mọi cách hỏi) và xu hướng Nói 3 lần.
+- Service worker cache sẵn `/today/`. "Xóa dữ liệu trên thiết bị" xóa cả `coach.today`.
+- **Test:**
+  - `today.util.test.ts`: thứ tự, tổng 15 phút, điều kiện xong của từng phần.
+  - `today.service.test.ts`: ghi vị trí một lần mỗi ngày, ngày mới bắt đầu lại.
+  - `TodayScreen.test.tsx`: danh sách, liên kết `from=today`, ghi vị trí trước khi mở bài học, trạng thái xong cả phiên, thẻ Trang chủ.
+  - E2E `e2e/today.spec.ts`: Trang chủ → phiên → Nói 3 lần → quay lại phiên (1/4) → bước đơn vị → đóng (2/4) → tải lại trang vẫn 2/4, Trang chủ ghi "Đã xong 2/4 phần". `/today/` có trong kiểm tra axe.
+- **Chưa làm:**
+  - Sắp xếp lại 5 tab theo §3.1 (Hôm nay / Học / Từ vựng / Âm / Tiến độ). Đây là thay đổi điều hướng lớn, nên để chủ dự án quyết.
+  - Phiên chưa giới hạn số thẻ cho vừa 15 phút: nếu hôm nay có nhiều thẻ đến hạn, phần ôn sẽ dài hơn ước lượng.
