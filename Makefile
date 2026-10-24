@@ -108,7 +108,7 @@ ios-build: ios-sync ## Build the iOS app for the simulator (Xcode required)
 
 ios-run: ios-build ## Boot the simulator, install and launch the app
 	$(XCODE) xcrun simctl boot "$(IOS_SIM)" 2>/dev/null || true
-	@open -a Simulator 2>/dev/null || echo "(Mở Simulator bằng Xcode → Open Developer Tool → Simulator nếu cửa sổ chưa hiện; app vẫn được cài và chạy)"
+	@open -a "$$(xcode-select -p 2>/dev/null | sed 's#/Contents/Developer##')/Contents/Applications/DeviceHub.app" 2>/dev/null || open -a /Applications/Xcode.app/Contents/Applications/DeviceHub.app 2>/dev/null || open -a Simulator 2>/dev/null || echo "(Mở cửa sổ máy ảo bằng Xcode → Open Developer Tool → DeviceHub/Simulator; app vẫn được cài và chạy)"
 	$(XCODE) xcrun simctl install booted web/ios/App/build/Build/Products/Debug-iphonesimulator/App.app
 	$(XCODE) xcrun simctl launch booted com.deputychinh.americanenglishcoach
 
