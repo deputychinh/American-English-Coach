@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { type ReactElement, useCallback, useEffect, useMemo } from 'react';
 
 import { Icon } from '@/components/Icon/Icon';
+import { LargeTitleBar } from '@/components/LargeTitleBar/LargeTitleBar';
 import { WeekStrip } from '@/components/WeekStrip/WeekStrip';
 import { DEFAULT_DAILY_GOAL } from '@/constants/plan.constant';
 import { AsyncStatus } from '@/enums/async-status.enum';
@@ -30,6 +31,7 @@ import { VocabHomeCard } from '@/features/vocab/components/VocabHomeCard';
 import { useActiveProfile } from '@/hooks/useActiveProfile';
 import { useAsync } from '@/hooks/useAsync';
 import { useCopy, useLanguage } from '@/hooks/useCopy';
+import { useScrolledPast } from '@/hooks/useScrolledPast';
 import { useStoredState } from '@/hooks/useStoredState';
 
 import './HomeScreen.css';
@@ -43,12 +45,13 @@ const TILES = [
 
 const RING = 2 * Math.PI * 26;
 
-/** "Today": greeting and streak, the daily goal, one big continue card, focus sounds, shortcuts. */
+/** "Today": large-title greeting, today's session as the one-tap hero, the daily goal, more practice rows, focus sounds, shortcuts. */
 export const HomeScreen = (): ReactElement => {
   const copy = useCopy();
   const language = useLanguage();
   const router = useRouter();
   const profile = useActiveProfile();
+  const [titleRef, isTitleScrolledPast] = useScrolledPast<HTMLHeadingElement>();
   const [goal] = useStoredState<number>(StorageKey.DailyGoal, DEFAULT_DAILY_GOAL);
   useEffect(() => {
     if (!isOnboarded()) router.replace('/welcome');
@@ -85,12 +88,15 @@ export const HomeScreen = (): ReactElement => {
   const share = target > 0 ? Math.min(1, done / target) : 0;
   const name = profile.name && profile.name !== 'default' ? profile.name : null;
 
+  const greeting = name ? copy.today.greeting(name) : copy.today.greetingNoName;
+
   return (
     <div className="home-screen">
+      <LargeTitleBar title={greeting} isShown={isTitleScrolledPast} />
       <header className="home-screen__top">
         <div className="home-screen__hello">
-          <h1 className="home-screen__title">
-            {name ? copy.today.greeting(name) : copy.today.greetingNoName}
+          <h1 ref={titleRef} className="home-screen__title">
+            {greeting}
           </h1>
           {plan.data && plan.data.streak_days > 0 ? (
             <span className="home-screen__streak">
@@ -105,9 +111,9 @@ export const HomeScreen = (): ReactElement => {
       </header>
 
       <ApiStatusBanner isQuietWhenReady />
+      <TodayHomeCard />
       <ModelDownloadCard />
       <InstallAppCard />
-      <TodayHomeCard />
 
       <section className="home-screen__goal" aria-labelledby="today-title">
         <span className="home-screen__ring-box" aria-hidden="true">
@@ -145,68 +151,73 @@ export const HomeScreen = (): ReactElement => {
         </div>
       </section>
 
-      {curriculum.status === AsyncStatus.Error ? (
-        <Link href="/practice" className="home-screen__continue">
-          <span className="home-screen__continue-label">{copy.today.continueLabel}</span>
-          <span className="home-screen__continue-title">{copy.home.sounds}</span>
-          <span className="home-screen__continue-step">{copy.home.soundsHint}</span>
-          <span className="home-screen__continue-cta">
-            {copy.home.heroCta}
-            <Icon name={IconName.ArrowRight} />
-          </span>
-        </Link>
-      ) : null}
-      {current && next ? (
-        <Link href={next.href} className="home-screen__continue">
-          <span className="home-screen__continue-label">{copy.today.continueLabel}</span>
-          <span className="home-screen__continue-title">
-            {copy.today.unitLine(
-              current.index,
-              language === Language.En ? current.title_en : current.title_vi,
-            )}
-          </span>
-          <span className="home-screen__continue-step">{copy.today.next[next.kind]}</span>
-          <span className="home-screen__continue-footer">
-            {level ? (
-              <span className="home-screen__continue-level">
-                <span className="home-screen__continue-level-text">
-                  {copy.today.levelLine(
-                    (curriculum.data?.levels.indexOf(level) ?? 0) + 1,
-                    level.done_units,
-                    level.units.length,
+      <section className="home-screen__more" aria-labelledby="more-title">
+        <h2 id="more-title" className="home-screen__section-title">
+          {copy.today.moreTitle}
+        </h2>
+        <div className="home-screen__group">
+          {curriculum.status === AsyncStatus.Error ? (
+            <Link href="/practice" className="home-screen__continue">
+              <span className="home-screen__continue-icon" aria-hidden="true">
+                <Icon name={IconName.Sounds} />
+              </span>
+              <span className="home-screen__continue-text">
+                <span className="home-screen__continue-title">{copy.home.sounds}</span>
+                <span className="home-screen__continue-step">{copy.home.soundsHint}</span>
+              </span>
+              <Icon name={IconName.ArrowRight} className="home-screen__chevron" />
+            </Link>
+          ) : null}
+          {current && next ? (
+            <Link href={next.href} className="home-screen__continue">
+              <span className="home-screen__continue-icon" aria-hidden="true">
+                <Icon name={IconName.Sparkles} />
+              </span>
+              <span className="home-screen__continue-text">
+                <span className="home-screen__continue-title">
+                  {copy.today.unitLine(
+                    current.index,
+                    language === Language.En ? current.title_en : current.title_vi,
                   )}
                 </span>
-                <span className="home-screen__continue-bar" aria-hidden="true">
-                  <span
-                    className="home-screen__continue-fill"
-                    style={{
-                      inlineSize: `${String(Math.round((level.done_units / Math.max(1, level.units.length)) * 100))}%`,
-                    }}
-                  />
-                </span>
+                <span className="home-screen__continue-step">{copy.today.next[next.kind]}</span>
+                {level ? (
+                  <span className="home-screen__continue-level">
+                    <span className="home-screen__continue-level-text">
+                      {copy.today.levelLine(
+                        (curriculum.data?.levels.indexOf(level) ?? 0) + 1,
+                        level.done_units,
+                        level.units.length,
+                      )}
+                    </span>
+                    <span className="home-screen__continue-bar" aria-hidden="true">
+                      <span
+                        className="home-screen__continue-fill"
+                        style={{
+                          inlineSize: `${String(Math.round((level.done_units / Math.max(1, level.units.length)) * 100))}%`,
+                        }}
+                      />
+                    </span>
+                  </span>
+                ) : null}
               </span>
-            ) : null}
-            <span className="home-screen__continue-cta">
-              {copy.home.heroCta}
-              <Icon name={IconName.ArrowRight} />
-            </span>
-          </span>
-        </Link>
-      ) : null}
-
-      {isNewLearner ? (
-        <Link href="/placement" className="home-screen__placement">
-          <span className="home-screen__placement-title">{copy.placement.homeTitle}</span>
-          <span className="home-screen__placement-cta">
-            {copy.placement.homeCta}
-            <Icon name={IconName.ArrowRight} />
-          </span>
-        </Link>
-      ) : null}
-
-      <VocabHomeCard />
-      <TalkHomeCard />
-      <FluencyHomeCard />
+              <Icon name={IconName.ArrowRight} className="home-screen__chevron" />
+            </Link>
+          ) : null}
+          {isNewLearner ? (
+            <Link href="/placement" className="home-screen__placement">
+              <span className="home-screen__placement-title">{copy.placement.homeTitle}</span>
+              <span className="home-screen__placement-cta">
+                {copy.placement.homeCta}
+                <Icon name={IconName.ArrowRight} />
+              </span>
+            </Link>
+          ) : null}
+          <VocabHomeCard />
+          <TalkHomeCard />
+          <FluencyHomeCard />
+        </div>
+      </section>
 
       <section className="home-screen__focus" aria-labelledby="focus-title">
         <h2 id="focus-title" className="home-screen__section-title">

@@ -3,13 +3,16 @@
 import Link from 'next/link';
 import type { ReactElement } from 'react';
 
+import { Icon } from '@/components/Icon/Icon';
+import { IconName } from '@/enums/icon-name.enum';
 import { loadToday } from '@/features/today/services/today.service';
 import { useAsync } from '@/hooks/useAsync';
 import { useCopy } from '@/hooks/useCopy';
+import { cx } from '@/utils/cx.util';
 
 import './TodayHomeCard.css';
 
-/** Home's one tap into today's 15 minutes, with how much of it is done. */
+/** Home's hero: one tap anywhere on it opens today's 15 minutes, with how much of it is done. */
 export const TodayHomeCard = (): ReactElement | null => {
   const copy = useCopy().session;
   const today = useAsync(loadToday).data;
@@ -17,7 +20,10 @@ export const TodayHomeCard = (): ReactElement | null => {
   const total = today.steps.length;
   const { next, done } = today;
   return (
-    <section className="today-home-card" aria-labelledby="today-home-title">
+    <section
+      className={cx('today-home-card', !next && 'today-home-card--done')}
+      aria-labelledby="today-home-title"
+    >
       <div className="today-home-card__text">
         <h2 id="today-home-title" className="today-home-card__title">
           {copy.homeTitle}
@@ -37,8 +43,10 @@ export const TodayHomeCard = (): ReactElement | null => {
           />
         </div>
       </div>
-      <Link href="/today" className="button button--primary">
-        {next && done > 0 ? copy.resume(copy.steps[next.step]) : copy.start}
+      {/* The link stretches over the whole card; its name stays the short call to action. */}
+      <Link href="/today" className="today-home-card__cta">
+        {next ? (done > 0 ? copy.resume(copy.steps[next.step]) : copy.start) : copy.homeReview}
+        <Icon name={IconName.ArrowRight} />
       </Link>
     </section>
   );

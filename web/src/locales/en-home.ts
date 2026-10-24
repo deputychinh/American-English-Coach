@@ -47,6 +47,7 @@ export const enHome: Pick<Copy, 'today' | 'placement' | 'install' | 'session'> =
     },
     start: 'Start',
     focusTitle: 'Sounds to practise',
+    moreTitle: 'More practice',
     focusEmpty: 'Do a few exercises so the app knows what to review.',
     tiles: {
       mirror: 'Mirror',
@@ -91,5 +92,6 @@ export const enHome: Pick<Copy, 'today' | 'placement' | 'install' | 'session'> =
     homeLine: (done: number, total: number): string =>
       done === 0 ? 'Review, a unit step, one speaking task' : `${done}/${total} parts done`,
     homeDone: "Today's session is done",
+    homeReview: "Look back at today's session",
   },
 };

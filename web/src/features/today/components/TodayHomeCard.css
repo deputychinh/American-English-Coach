@@ -1,43 +1,101 @@
 .today-home-card {
+  position: relative;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   gap: var(--space-3);
-  align-items: center;
-  justify-content: space-between;
-  padding: var(--padding-card);
+  padding: var(--space-4) var(--space-5);
+  color: var(--color-on-brand);
+  background: linear-gradient(135deg, var(--color-brand-from), var(--color-brand-to));
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-md);
+  transition: transform var(--duration-fast) var(--ease-standard);
+}
+
+.today-home-card:active {
+  transform: scale(0.98);
+}
+
+/* Done for today: still one tap to look back, but quiet so the rest of home leads. */
+.today-home-card--done {
+  color: var(--color-text);
   background: var(--color-surface);
-  border: 2px solid var(--color-primary);
-  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  box-shadow: none;
 }
 
 .today-home-card__text {
   display: flex;
-  flex: 1 1 200px;
   flex-direction: column;
   gap: var(--space-1);
 }
 
 .today-home-card__title {
-  font-size: var(--text-md);
-  font-weight: var(--weight-semibold);
+  font-size: var(--text-xl);
+  font-weight: var(--weight-bold);
+  letter-spacing: -0.01em;
 }
 
 .today-home-card__line {
   font-size: var(--text-sm);
+  color: var(--color-on-brand-muted);
+}
+
+.today-home-card--done .today-home-card__line {
   color: var(--color-text-muted);
 }
 
 .today-home-card__bar {
   overflow: hidden;
   block-size: 6px;
-  background: var(--color-bg);
+  background: rgb(255 255 255 / 25%);
   border-radius: var(--radius-full);
-  margin-block-start: var(--space-1);
+  margin-block-start: var(--space-2);
+}
+
+.today-home-card--done .today-home-card__bar {
+  background: var(--color-bg);
 }
 
 .today-home-card__fill {
   display: block;
   block-size: 100%;
-  background: var(--color-primary);
+  background: var(--color-on-brand);
   border-radius: var(--radius-full);
+}
+
+.today-home-card--done .today-home-card__fill {
+  background: var(--color-success);
+}
+
+.today-home-card__cta {
+  display: inline-flex;
+  gap: var(--space-2);
+  align-items: center;
+  align-self: flex-start;
+  min-block-size: var(--size-touch-target);
+  padding: var(--space-2) var(--space-5);
+  font-weight: var(--weight-semibold);
+  text-decoration: none;
+  color: var(--color-primary);
+  background: var(--color-on-brand);
+  border-radius: var(--radius-full);
+}
+
+.today-home-card--done .today-home-card__cta {
+  color: var(--color-on-primary-subtle);
+  background: var(--color-primary-subtle);
+}
+
+/* Stretched link: the whole card is the tap target. */
+.today-home-card__cta::after {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-xl);
+  content: '';
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .today-home-card {
+    transition: none;
+  }
 }

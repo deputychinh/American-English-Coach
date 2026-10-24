@@ -44,6 +44,7 @@ export const viHome = {
     },
     start: 'Bắt đầu',
     focusTitle: 'Âm cần luyện',
+    moreTitle: 'Luyện thêm',
     focusEmpty: 'Luyện vài bài để app biết âm nào cần ôn.',
     tiles: {
       mirror: 'Gương',
@@ -90,5 +91,6 @@ export const viHome = {
     homeLine: (done: number, total: number): string =>
       done === 0 ? 'Ôn thẻ, học đơn vị, nói một bài' : `Đã xong ${done}/${total} phần`,
     homeDone: 'Xong phiên hôm nay',
+    homeReview: 'Xem lại phiên hôm nay',
   },
 };

@@ -1,9 +1,8 @@
 'use client';
 
-import Link from 'next/link';
 import { type ReactElement, useCallback, useSyncExternalStore } from 'react';
 
-import { Icon } from '@/components/Icon/Icon';
+import { ListRow } from '@/components/ListRow/ListRow';
 import { IconName } from '@/enums/icon-name.enum';
 import {
   loadFluencyDeck,
@@ -12,8 +11,6 @@ import {
 } from '@/features/fluency/services/fluency.service';
 import { useAsync } from '@/hooks/useAsync';
 import { useCopy } from '@/hooks/useCopy';
-
-import './FluencyHomeCard.css';
 
 const subscribeNever = (): (() => void) => () => undefined;
 
@@ -26,15 +23,11 @@ export const FluencyHomeCard = (): ReactElement | null => {
   const prompt = deck ? promptFor(deck.prompts, unitId) : null;
   if (!prompt) return null;
   return (
-    <Link
+    <ListRow
       href={{ pathname: '/fluency', query: { unit: prompt.unit } }}
-      className="fluency-home-card"
-    >
-      <span className="fluency-home-card__text">
-        <span className="fluency-home-card__title">{copy.homeTitle}</span>
-        <span className="fluency-home-card__line">{copy.homeLine(prompt.title_vi)}</span>
-      </span>
-      <Icon name={IconName.ArrowRight} />
-    </Link>
+      icon={IconName.Replay}
+      title={copy.homeTitle}
+      subtitle={copy.homeLine(prompt.title_vi)}
+    />
   );
 };

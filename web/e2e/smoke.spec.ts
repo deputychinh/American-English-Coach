@@ -26,8 +26,12 @@ test('home stays quiet when the API is ready and shows quick entries', async ({ 
   await expect(page.getByRole('heading', { name: 'Hôm nay luyện gì' })).toBeVisible();
   await expect(page.locator('.api-status-banner')).toHaveCount(0);
   await expect(page.locator('.home-screen__continue-level')).toContainText(/Cấp 1 · \d+\/6 đơn vị/);
-  await expect(page.getByRole('link', { name: /Luyện ngay/ }).first()).toBeVisible();
-  await expect(page.getByRole('heading', { name: 'Hôm nay luyện gì' })).toBeVisible();
+  // E4: today's session is the one-tap hero; the unit and the other practice are rows below it.
+  await expect(page.locator('.today-home-card').getByRole('link')).toHaveAttribute(
+    'href',
+    /\/today\/?$/,
+  );
+  await expect(page.getByRole('heading', { name: 'Luyện thêm' })).toBeVisible();
   await expect(page.getByRole('progressbar', { name: 'Tiến độ mục tiêu hôm nay' })).toBeVisible();
   await expect(page.locator('.week-strip__day')).toHaveCount(7);
   await expect(page.locator('.home-screen__continue')).toHaveAttribute(
@@ -306,7 +310,7 @@ test('the interface switches to English and back from settings', async ({ page }
   await expect(page.getByRole('heading', { name: 'Settings', level: 1 })).toBeVisible();
   await expect(page.locator('html')).toHaveAttribute('lang', 'en');
   await page.goto('/');
-  await expect(page.getByRole('link', { name: /Practise now/ }).first()).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'More practice' })).toBeVisible();
   await page.goto('/settings/');
   await page.getByRole('tab', { name: 'Tiếng Việt' }).click();
   await expect(page.getByRole('heading', { name: 'Cài đặt', level: 1 })).toBeVisible();

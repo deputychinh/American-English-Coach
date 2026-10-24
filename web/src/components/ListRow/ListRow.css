@@ -29,6 +29,19 @@
   font-size: var(--text-xl);
 }
 
+.list-row__icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  inline-size: 36px;
+  block-size: 36px;
+  font-size: var(--text-lg);
+  color: var(--color-primary);
+  background: var(--color-primary-subtle);
+  border-radius: var(--radius-md);
+}
+
 .list-row__text {
   display: flex;
   flex: 1;

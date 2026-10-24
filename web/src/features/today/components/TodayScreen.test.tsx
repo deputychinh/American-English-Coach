@@ -81,4 +81,12 @@ describe('TodayScreen', () => {
     expect(await screen.findByRole('link', { name: 'Tiếp tục: Luyện cách nói' })).toBeVisible();
     expect(screen.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '1');
   });
+
+  it('turns quiet on home once the session is done, still one tap to look back', async () => {
+    service.loadToday.mockResolvedValue(state({ talkLeft: 0, unit: null, spokeToday: true }));
+    const { container } = render(<TodayHomeCard />);
+    expect(await screen.findByRole('link', { name: 'Xem lại phiên hôm nay' })).toBeVisible();
+    expect(screen.getByText('Xong phiên hôm nay')).toBeVisible();
+    expect(container.querySelector('.today-home-card--done')).not.toBeNull();
+  });
 });
