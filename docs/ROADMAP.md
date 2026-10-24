@@ -66,7 +66,7 @@ Chi tiết, nguồn và quyết định cần chốt: [`docs/PLAN-V2-SPEAKING-AN
 | V3  | ☑          | Cụm giao tiếp theo chức năng và cấu trúc nói       | ☑ Mỗi đơn vị ≥ 1 chức năng và 1 mẫu câu; ☑ chấm đuôi -s/-ed bằng máy chấm âm vị; ☑ e2e  |
 | V4  | ☑          | Độ trôi chảy và bài Nói 3 lần                      | ☑ Tốc độ nói, đoạn nói liền, ngắt nghỉ đo trên máy; ☑ chỉ so với chính người học; ☑ e2e |
 | V5  | ☑          | Phiên "Hôm nay 15 phút" gộp mọi mạch               | ☑ e2e hành trình; ☑ tiếp tục đúng chỗ sau khi tải lại; ☑ tiến độ có từ đã nhớ           |
-| V6  | ☐          | Phản hồi nội dung bằng AI (v1.1)                   | Precision ≥ 0,8 trên 50 câu có lỗi gán nhãn; AI không nêu lỗi phát âm                   |
+| V6  | ◐          | Phản hồi nội dung bằng AI (v1.1)                   | ☐ Precision ≥ 0,8 (`make eval-feedback`, cần key mới); ☑ AI không nêu lỗi phát âm (lọc) |
 
 ## Giai đoạn W — Web app cài lên màn hình chính
 

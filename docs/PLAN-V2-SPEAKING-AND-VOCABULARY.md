@@ -353,3 +353,31 @@ Màn “Giấy phép” hiện có cần thêm NGSL và Tatoeba. Ghi checksum v�
 - **Chưa làm:**
   - Sắp xếp lại 5 tab theo §3.1 (Hôm nay / Học / Từ vựng / Âm / Tiến độ). Đây là thay đổi điều hướng lớn, nên để chủ dự án quyết.
   - Phiên chưa giới hạn số thẻ cho vừa 15 phút: nếu hôm nay có nhiều thẻ đến hạn, phần ôn sẽ dài hơn ước lượng.
+
+### V6 · Góp ý nội dung bằng AI: **XONG PHẦN MÃ, CHƯA ĐO NGƯỠNG** (24/10)
+
+- **Quyết định:** [ADR 0005](adr/0005-content-feedback-sends-text-only.md).
+- **API:** `POST /api/v1/tutor/feedback` nhận `{transcript, task_vi}` và trả `{grammar[], word_choice[], formality, formality_note_vi, better_version, focus, model}`. Route dùng chung nhà cung cấp, key và giới hạn tần suất với gia sư AI, và trả 503 `TUTOR_UNAVAILABLE` khi chưa cấu hình.
+- **`feedback_service.py`:**
+  - Prompt yêu cầu AI trả về đúng một đối tượng JSON, chỉ nêu lỗi thật, bỏ qua viết hoa và dấu câu, và không bao giờ nhận xét phát âm.
+  - Phần đọc JSON chịu được code fence và chữ thừa xung quanh.
+  - Code tự lọc mục có lời giải thích nói về phát âm, giọng, trọng âm, ngữ điệu hoặc IPA. Mỗi danh sách giữ tối đa 3 mục, và `focus` là mục đầu tiên.
+  - Trường `register` được đổi tên thành `formality`, vì tên cũ trùng thuộc tính của Pydantic.
+- **Bộ đánh giá:**
+  - `backend/app/resources/feedback_eval.json`: 50 câu kiểu người Việt, mỗi câu một lỗi gán nhãn (ngữ pháp hoặc dùng từ), cộng 10 câu đúng. File đặt ngoài `content/` để từ sai cố ý không lọt vào lexicon.
+  - `app/eval/feedback_eval.py` tính precision trên phần người học thực sự thấy, recall, số báo động giả trên câu đúng, và số lần AI nhắc phát âm trong câu trả lời gốc.
+  - `make eval-feedback` chạy với AI thật và thoát mã 1 khi precision dưới 0,8.
+- **Web:** khung "Góp ý nội dung (AI)" ở màn tổng kết Nói 3 lần.
+  - Người học gõ lại hoặc đọc chính tả câu đã nói (`useDictation`: Web Speech API, en-US), rồi bấm "Nhận góp ý".
+  - App hiện một điểm cần sửa (sai → đúng, kèm giải thích tiếng Việt), mức lịch sự, và câu viết lại tự nhiên hơn có nút nghe. Các góp ý khác nằm trong "Xem thêm".
+  - Khi máy chấm không có gia sư AI (gồm app iOS và web app chạy trên máy), khung chỉ hiện dòng giải thích.
+- **Sửa thêm:** câu so sánh lần cuối với lần đầu nói "như cũ" khi chỉ số không đổi, thay vì "dài hơn 0 âm tiết".
+- **Test:**
+  - Unit backend: đọc JSON, bộ lọc phát âm, cắt còn 3 mục, chọn trọng tâm, bộ đánh giá đủ 50 + 10 câu, cách chấm, và một "AI giả" trả lời đúng nhãn thì đạt precision 1,0.
+  - API: chưa cấu hình thì 503; khi bật thì chỉ gửi chữ kèm đề, lọc mục phát âm, và báo lỗi khi đầu vào không hợp lệ hoặc AI trả lời không phải JSON.
+  - Web: khung khi chưa có gia sư, gửi chữ và hiển thị, câu đúng, lỗi, đọc chính tả.
+  - E2E: màn tổng kết Nói 3 lần có khung góp ý; test không gửi gì tới AI.
+- **Chưa làm:**
+  - Chưa chạy `make eval-feedback`, nên precision chưa đo được. Cần key mới thay hai key đã lộ.
+  - Nhãn đánh giá do AI soạn.
+  - Chưa thử Apple Foundation Models trên máy (§10.3).
